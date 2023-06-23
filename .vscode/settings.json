@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "cstdio": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "functional": "cpp",
+        "cmath": "cpp"
+    },
+    "cmake.sourceDirectory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src"
+}
