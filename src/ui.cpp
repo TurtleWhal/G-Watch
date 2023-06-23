@@ -1208,7 +1208,7 @@ void ToggleBT(lv_event_t *e)
     BTon = 1;
     SerialBT.begin("Garrett's Watch"); // Bluetooth device name
   }
-  if (BTon) //TEST LINE
+  if (BTon)
   {
     BTon = 0;
     SerialBT.disconnect();
