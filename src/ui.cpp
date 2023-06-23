@@ -1212,7 +1212,6 @@ void ToggleBT(lv_event_t *e)
   {
     BTon = 0;
     SerialBT.disconnect();
-    // SerialBT.end();
   }
 }
 
