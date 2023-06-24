@@ -659,7 +659,7 @@ void ui_event_Clock(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
         lv_indev_wait_release(lv_indev_get_act());
-        _ui_screen_change(ui_Stopwatch, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0);
+        _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0);
     }
     if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
         lv_indev_wait_release(lv_indev_get_act());
@@ -836,7 +836,7 @@ void ui_event_Alarm_Going_Off_Stop_Button(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
+        _ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
     }
 }
 void ui_event_Stopwatch(lv_event_t * e)

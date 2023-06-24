@@ -20,8 +20,6 @@ void ui_Clock_screen_init(void)
     lv_obj_set_y(ui_Time, 35);
     lv_obj_set_align(ui_Time, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Time, "12:00");
-    lv_obj_set_style_text_color(ui_Time, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Time, 200, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Time, &ui_font_Monoton_48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Date_Numerical = lv_label_create(ui_Clock);
@@ -31,8 +29,8 @@ void ui_Clock_screen_init(void)
     lv_obj_set_y(ui_Date_Numerical, 70);
     lv_obj_set_align(ui_Date_Numerical, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Date_Numerical, "01/01/70");
-    lv_obj_set_style_text_color(ui_Date_Numerical, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Date_Numerical, 200, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_Date_Numerical, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_Date_Numerical, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Date_Numerical, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Arc_Battery_Charge = lv_arc_create(ui_Clock);
@@ -118,8 +116,6 @@ void ui_Clock_screen_init(void)
     lv_obj_set_align(ui_Now_Playing_Label, LV_ALIGN_CENTER);
     lv_label_set_long_mode(ui_Now_Playing_Label, LV_LABEL_LONG_SCROLL_CIRCULAR);
     lv_label_set_text(ui_Now_Playing_Label, "♪ Safe and Sound by Capitol Cities ♪");
-    lv_obj_set_style_text_color(ui_Now_Playing_Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Now_Playing_Label, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Now_Playing_Label, &ui_font_Music_14, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_radius(ui_Now_Playing_Label, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_clip_corner(ui_Now_Playing_Label, false, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -140,8 +136,8 @@ void ui_Clock_screen_init(void)
     lv_obj_set_width(ui_Step_Counter_Text, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Step_Counter_Text, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_Step_Counter_Text, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Step_Counter_Text, "6500");
-    lv_obj_set_style_text_color(ui_Step_Counter_Text, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_label_set_text(ui_Step_Counter_Text, "6500 Steps");
+    lv_obj_set_style_text_color(ui_Step_Counter_Text, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Step_Counter_Text, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Step_Counter_Text, &ui_font_Music_14, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_left(ui_Step_Counter_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
