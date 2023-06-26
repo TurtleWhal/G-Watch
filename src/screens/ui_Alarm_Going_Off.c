@@ -78,6 +78,8 @@ void ui_Alarm_Going_Off_screen_init(void)
     lv_obj_set_align(ui_Alarm_Going_Off_Stop_Button, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Alarm_Going_Off_Stop_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_Alarm_Going_Off_Stop_Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_Alarm_Going_Off_Stop_Button, lv_color_hex(0xFF2020), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Alarm_Going_Off_Stop_Button, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Alarm_Going_Off_Stop_Button_Text = lv_label_create(ui_Alarm_Going_Off_Stop_Button);
     lv_obj_set_width(ui_Alarm_Going_Off_Stop_Button_Text, LV_SIZE_CONTENT);   /// 1

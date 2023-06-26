@@ -25,6 +25,15 @@ void Sleephandle()
       sleeptimer = millis();
       Serial.println("Im Touched!");
     }
+
+    /*if (BMA423_WRIST_WEAR)
+    {
+      Wakeup("Shook");
+      sleeptimer = millis();
+      Serial.println("Im Shooken!");
+    }*/
+    
+
     if ((millis() - sleeptimer) >= Sleeptimeout * 1000)
       Sleep();
   }
@@ -33,6 +42,7 @@ void Sleephandle()
     Ticklesleep();
     if (Sleeping)
       Wakeup("Plugged In");
+      //Serial.println(BMA423_WRIST_WEAR);
   }
 }
 
@@ -45,15 +55,16 @@ void Wakeup(String Wakeup_reason)
     lv_timer_handler();
     writetime();
     Serial.println("IM AWAKE!");
-    //dad hid this comment here because I'm like that.
-    //A few moments later...
-    //Garrett found this comment because dad didn't go to a different line
+    // dad hid this comment here because I'm like that.
+    // A few moments later...
+    // Garrett found this comment because dad didn't go to a different line
     sleeptimer = millis();
     Sleeping = 0;
     twatch->backlight_set_value(lv_slider_get_value(ui_Brightness_Slider));
     Serial.println(Wakeup_reason);
   }
-  else Ticklesleep();
+  else
+    Ticklesleep();
 }
 
 void Sleep()
@@ -67,10 +78,12 @@ void Sleep()
   }
 }
 
-void Ticklesleep(){
-sleeptimer = millis();
+void Ticklesleep()
+{
+  sleeptimer = millis();
 }
 
-bool isSleeping(){
-return Sleeping;
+bool isSleeping()
+{
+  return Sleeping;
 }

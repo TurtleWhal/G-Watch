@@ -12,36 +12,11 @@ void ui_Settings_screen_init(void)
     lv_obj_set_style_bg_color(ui_Settings, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Settings, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Settings_Label = lv_label_create(ui_Settings);
-    lv_obj_set_width(ui_Settings_Label, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Settings_Label, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Settings_Label, 0);
-    lv_obj_set_y(ui_Settings_Label, 8);
-    lv_obj_set_align(ui_Settings_Label, LV_ALIGN_TOP_MID);
-    lv_obj_set_flex_flow(ui_Settings_Label, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Settings_Label, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
-    lv_label_set_text(ui_Settings_Label, "Settings");
-    lv_obj_set_style_text_color(ui_Settings_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Settings_Label, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Settings_Label, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Settings_Label_Underline = lv_obj_create(ui_Settings);
-    lv_obj_set_width(ui_Settings_Label_Underline, 100);
-    lv_obj_set_height(ui_Settings_Label_Underline, 3);
-    lv_obj_set_x(ui_Settings_Label_Underline, 0);
-    lv_obj_set_y(ui_Settings_Label_Underline, -90);
-    lv_obj_set_align(ui_Settings_Label_Underline, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Settings_Label_Underline, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Settings_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_color(ui_Settings_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-
     ui_Settings_Panel = lv_obj_create(ui_Settings);
     lv_obj_set_width(ui_Settings_Panel, 235);
     lv_obj_set_height(ui_Settings_Panel, 214);
     lv_obj_set_x(ui_Settings_Panel, 0);
-    lv_obj_set_y(ui_Settings_Panel, 15);
+    lv_obj_set_y(ui_Settings_Panel, 22);
     lv_obj_set_align(ui_Settings_Panel, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_Settings_Panel, LV_FLEX_FLOW_COLUMN);
     lv_obj_set_flex_align(ui_Settings_Panel, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
@@ -53,8 +28,8 @@ void ui_Settings_screen_init(void)
 
     lv_obj_set_style_pad_left(ui_Settings_Panel, 0, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui_Settings_Panel, 7, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_top(ui_Settings_Panel, 50, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_bottom(ui_Settings_Panel, 80, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_top(ui_Settings_Panel, 45, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_bottom(ui_Settings_Panel, 85, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
 
     ui_Brightness_Slider = lv_slider_create(ui_Settings_Panel);
     lv_slider_set_range(ui_Brightness_Slider, -20, 100);
@@ -67,6 +42,9 @@ void ui_Settings_screen_init(void)
     lv_obj_set_y(ui_Brightness_Slider, -320);
     lv_obj_set_align(ui_Brightness_Slider, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Brightness_Slider, LV_OBJ_FLAG_GESTURE_BUBBLE);      /// Flags
+
+    lv_obj_set_style_bg_color(ui_Brightness_Slider, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Brightness_Slider, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
 
     lv_obj_set_style_bg_color(ui_Brightness_Slider, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Brightness_Slider, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
@@ -98,6 +76,8 @@ void ui_Settings_screen_init(void)
                     LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_IGNORE_LAYOUT | LV_OBJ_FLAG_SCROLL_ON_FOCUS);   /// Flags
     lv_obj_clear_flag(ui_Bluetooth_Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_radius(ui_Bluetooth_Button, 175, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Bluetooth_Button, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Bluetooth_Button, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Power_Button_Image = lv_img_create(ui_Bluetooth_Button);
     lv_img_set_src(ui_Power_Button_Image, &ui_img_bluetooth_small_nobackground_png);
@@ -118,6 +98,8 @@ void ui_Settings_screen_init(void)
                     LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_IGNORE_LAYOUT | LV_OBJ_FLAG_SCROLL_ON_FOCUS);    /// Flags
     lv_obj_clear_flag(ui_Do_Not_Disturb_Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_radius(ui_Do_Not_Disturb_Button, 175, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Do_Not_Disturb_Button, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Do_Not_Disturb_Button, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Do_Not_Disturb_Button_Image = lv_img_create(ui_Do_Not_Disturb_Button);
     lv_img_set_src(ui_Do_Not_Disturb_Button_Image, &ui_img_bellnobackground_png);
@@ -212,6 +194,8 @@ void ui_Settings_screen_init(void)
     lv_obj_add_flag(ui_Power_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_Power_Button1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_radius(ui_Power_Button1, 175, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Power_Button1, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Power_Button1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Power_Button_Image1 = lv_img_create(ui_Power_Button1);
     lv_img_set_src(ui_Power_Button_Image1, &ui_img_power_icon_png);
@@ -221,6 +205,33 @@ void ui_Settings_screen_init(void)
     lv_obj_add_flag(ui_Power_Button_Image1, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_Power_Button_Image1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_img_set_zoom(ui_Power_Button_Image1, 115);
+
+    ui_Settings_Label_Underline = lv_obj_create(ui_Settings);
+    lv_obj_set_width(ui_Settings_Label_Underline, 100);
+    lv_obj_set_height(ui_Settings_Label_Underline, 3);
+    lv_obj_set_x(ui_Settings_Label_Underline, 0);
+    lv_obj_set_y(ui_Settings_Label_Underline, -90);
+    lv_obj_set_align(ui_Settings_Label_Underline, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Settings_Label_Underline, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_Settings_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_Settings_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui_Settings_Label_Underline, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_spread(ui_Settings_Label_Underline, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Settings_Label = lv_label_create(ui_Settings);
+    lv_obj_set_width(ui_Settings_Label, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Settings_Label, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Settings_Label, 0);
+    lv_obj_set_y(ui_Settings_Label, 8);
+    lv_obj_set_align(ui_Settings_Label, LV_ALIGN_TOP_MID);
+    lv_obj_set_flex_flow(ui_Settings_Label, LV_FLEX_FLOW_ROW);
+    lv_obj_set_flex_align(ui_Settings_Label, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
+    lv_label_set_text(ui_Settings_Label, "Settings");
+    lv_obj_set_style_text_color(ui_Settings_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_Settings_Label, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Settings_Label, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Brightness_Slider, ui_event_Brightness_Slider, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Bluetooth_Button, ui_event_Bluetooth_Button, LV_EVENT_ALL, NULL);

@@ -142,6 +142,8 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_align(ui_Stopwatch_Reset_Button, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Stopwatch_Reset_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_Stopwatch_Reset_Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_Stopwatch_Reset_Button, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Stopwatch_Reset_Button, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Reset_Image = lv_img_create(ui_Stopwatch_Reset_Button);
     lv_img_set_src(ui_Stopwatch_Reset_Image, &ui_img_restart_button_png);
@@ -161,6 +163,8 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_align(ui_Stopwatch_Play_Pause_Button, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Stopwatch_Play_Pause_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_Stopwatch_Play_Pause_Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_Stopwatch_Play_Pause_Button, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Stopwatch_Play_Pause_Button, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Play_Pause_Image = lv_img_create(ui_Stopwatch_Play_Pause_Button);
     lv_img_set_src(ui_Stopwatch_Play_Pause_Image, &ui_img_playpause_button_png);

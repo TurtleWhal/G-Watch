@@ -1,4 +1,4 @@
-#include <TWatch_hal.h>
+#include "TWatch_hal.h"
 
 #include <BluetoothSerial.h>
 
@@ -172,6 +172,8 @@ void btn2_click(void *param)
   // twatch->motor_shake(1, 60);
   if (lv_scr_act() == ui_Stopwatch)
     ToggleStopwatch(nullptr);
+    if (lv_scr_act() == ui_Timers)
+    ToggleTimer(nullptr);
   Serial.println(twatch->power_get_volt());
   SerialBT.println(twatch->power_get_volt());
   Wakeup("Button 2 Pressed");
@@ -208,6 +210,7 @@ void btn3_held(void *param)
   Serial.println("BTN3 Held");
   twatch->motor_shake(1, 60);
   Wakeup("Button 3 Held");
+  _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
 }
 
 void setup()
@@ -844,7 +847,7 @@ void shownotification()
   NotificationShow_Animation(ui_Notification_Popup, 0);
   notificationtime = millis();
   notificationshowing = 1;
-  if (Donotdisturb == 0)
+  if (!Donotdisturb)
     twatch->motor_shake(2, 90);
 }
 
@@ -1189,7 +1192,7 @@ void Brightness(lv_event_t *e)
 
 void ToggleDoNotDisturb(lv_event_t *e)
 {
-  if (!Donotdisturb)
+  /*if (!Donotdisturb)
   {
     Donotdisturb = 1;
     // lv_obj_set_style_bg_color(ui_Do_Not_Disturb_Button, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1198,7 +1201,10 @@ void ToggleDoNotDisturb(lv_event_t *e)
   {
     Donotdisturb = 0;
     // lv_obj_set_style_bg_color(ui_Do_Not_Disturb_Button, lv_color_hex(0x2095F6), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
+  }*/
+
+  Donotdisturb = !Donotdisturb;
+  //erial.println(Donotdisturb);
 }
 
 void ToggleBT(lv_event_t *e)

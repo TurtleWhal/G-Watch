@@ -48,6 +48,9 @@ void ui_Alarms_screen_init(void)
     lv_obj_set_y(ui_Alarm_1_Switch, 0);
     lv_obj_set_align(ui_Alarm_1_Switch, LV_ALIGN_CENTER);
 
+    lv_obj_set_style_bg_color(ui_Alarm_1_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_Alarm_1_Switch, 255, LV_PART_INDICATOR | LV_STATE_CHECKED);
+
     ui_Alarm_1_Name = lv_label_create(ui_Alarm_1);
     lv_obj_set_width(ui_Alarm_1_Name, 115);
     lv_obj_set_height(ui_Alarm_1_Name, LV_SIZE_CONTENT);    /// 1
@@ -106,6 +109,9 @@ void ui_Alarms_screen_init(void)
     lv_obj_set_x(ui_Alarm_2_Switch, 60);
     lv_obj_set_y(ui_Alarm_2_Switch, 0);
     lv_obj_set_align(ui_Alarm_2_Switch, LV_ALIGN_CENTER);
+
+    lv_obj_set_style_bg_color(ui_Alarm_2_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_Alarm_2_Switch, 255, LV_PART_INDICATOR | LV_STATE_CHECKED);
 
     ui_Alarm_2_Name = lv_label_create(ui_Alarm_2);
     lv_obj_set_width(ui_Alarm_2_Name, 115);
@@ -166,6 +172,9 @@ void ui_Alarms_screen_init(void)
     lv_obj_set_y(ui_Alarm_3_Switch, 0);
     lv_obj_set_align(ui_Alarm_3_Switch, LV_ALIGN_CENTER);
 
+    lv_obj_set_style_bg_color(ui_Alarm_3_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_Alarm_3_Switch, 255, LV_PART_INDICATOR | LV_STATE_CHECKED);
+
     ui_Alarm_3_Name = lv_label_create(ui_Alarm_3);
     lv_obj_set_width(ui_Alarm_3_Name, 115);
     lv_obj_set_height(ui_Alarm_3_Name, LV_SIZE_CONTENT);    /// 1
@@ -224,6 +233,9 @@ void ui_Alarms_screen_init(void)
     lv_obj_set_x(ui_Alarm_4_Switch, 60);
     lv_obj_set_y(ui_Alarm_4_Switch, 0);
     lv_obj_set_align(ui_Alarm_4_Switch, LV_ALIGN_CENTER);
+
+    lv_obj_set_style_bg_color(ui_Alarm_4_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_Alarm_4_Switch, 255, LV_PART_INDICATOR | LV_STATE_CHECKED);
 
     ui_Alarm_4_Name = lv_label_create(ui_Alarm_4);
     lv_obj_set_width(ui_Alarm_4_Name, 115);

@@ -11,7 +11,6 @@ void ui_Clock_screen_init(void)
     lv_obj_clear_flag(ui_Clock, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_Clock, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Clock, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_clip_corner(ui_Clock, false, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Time = lv_label_create(ui_Clock);
     lv_obj_set_width(ui_Time, LV_SIZE_CONTENT);   /// 1
@@ -114,28 +113,16 @@ void ui_Clock_screen_init(void)
     lv_obj_set_x(ui_Now_Playing_Label, 0);
     lv_obj_set_y(ui_Now_Playing_Label, -30);
     lv_obj_set_align(ui_Now_Playing_Label, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Now_Playing_Label, LV_LABEL_LONG_SCROLL_CIRCULAR);
+    lv_label_set_long_mode(ui_Now_Playing_Label, LV_LABEL_LONG_SCROLL);
     lv_label_set_text(ui_Now_Playing_Label, "♪ Safe and Sound by Capitol Cities ♪");
     lv_obj_set_style_text_font(ui_Now_Playing_Label, &ui_font_Music_14, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_radius(ui_Now_Playing_Label, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_clip_corner(ui_Now_Playing_Label, false, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Step_Counter_Panel = lv_obj_create(ui_Clock);
-    lv_obj_set_width(ui_Step_Counter_Panel, 108);
-    lv_obj_set_height(ui_Step_Counter_Panel, 17);
-    lv_obj_set_x(ui_Step_Counter_Panel, 0);
-    lv_obj_set_y(ui_Step_Counter_Panel, -75);
-    lv_obj_set_align(ui_Step_Counter_Panel, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Step_Counter_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Step_Counter_Panel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Step_Counter_Panel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_color(ui_Step_Counter_Panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(ui_Step_Counter_Panel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Step_Counter_Text = lv_label_create(ui_Step_Counter_Panel);
+    ui_Step_Counter_Text = lv_label_create(ui_Clock);
     lv_obj_set_width(ui_Step_Counter_Text, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Step_Counter_Text, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Step_Counter_Text, LV_ALIGN_CENTER);
+    lv_obj_set_x(ui_Step_Counter_Text, 0);
+    lv_obj_set_y(ui_Step_Counter_Text, 50);
+    lv_obj_set_align(ui_Step_Counter_Text, LV_ALIGN_TOP_MID);
     lv_label_set_text(ui_Step_Counter_Text, "6500 Steps");
     lv_obj_set_style_text_color(ui_Step_Counter_Text, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Step_Counter_Text, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -144,17 +131,6 @@ void ui_Clock_screen_init(void)
     lv_obj_set_style_pad_right(ui_Step_Counter_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_top(ui_Step_Counter_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_bottom(ui_Step_Counter_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Step_Counter_Image = lv_img_create(ui_Step_Counter_Panel);
-    lv_img_set_src(ui_Step_Counter_Image, &ui_img_4809254_png);
-    lv_obj_set_width(ui_Step_Counter_Image, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Step_Counter_Image, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Step_Counter_Image, LV_ALIGN_LEFT_MID);
-    lv_obj_add_flag(ui_Step_Counter_Image, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Step_Counter_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_zoom(ui_Step_Counter_Image, 50);
-    lv_obj_set_style_img_recolor(ui_Step_Counter_Image, lv_color_hex(0x707270), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_img_recolor_opa(ui_Step_Counter_Image, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Minute_Hand = lv_img_create(ui_Clock);
     lv_img_set_src(ui_Minute_Hand, &ui_img_minutehand_png);

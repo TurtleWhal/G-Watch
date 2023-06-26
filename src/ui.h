@@ -52,9 +52,7 @@ extern lv_obj_t * ui_Arc_Right;
 extern lv_obj_t * ui_Tick_Dashes;
 extern lv_obj_t * ui_Tick_Dots;
 extern lv_obj_t * ui_Now_Playing_Label;
-extern lv_obj_t * ui_Step_Counter_Panel;
 extern lv_obj_t * ui_Step_Counter_Text;
-extern lv_obj_t * ui_Step_Counter_Image;
 extern lv_obj_t * ui_Minute_Hand;
 extern lv_obj_t * ui_Hour_Hand;
 extern lv_obj_t * ui_Second_Hand;
@@ -222,8 +220,6 @@ extern lv_obj_t * ui_Timer_Colin_Right;
 void ui_Settings_screen_init(void);
 void ui_event_Settings(lv_event_t * e);
 extern lv_obj_t * ui_Settings;
-extern lv_obj_t * ui_Settings_Label;
-extern lv_obj_t * ui_Settings_Label_Underline;
 extern lv_obj_t * ui_Settings_Panel;
 void ui_event_Brightness_Slider(lv_event_t * e);
 extern lv_obj_t * ui_Brightness_Slider;
@@ -242,6 +238,8 @@ extern lv_obj_t * ui_Display_Settings3;
 void ui_event_Power_Button1(lv_event_t * e);
 extern lv_obj_t * ui_Power_Button1;
 extern lv_obj_t * ui_Power_Button_Image1;
+extern lv_obj_t * ui_Settings_Label_Underline;
+extern lv_obj_t * ui_Settings_Label;
 // SCREEN: ui_Schedule
 void ui_Schedule_screen_init(void);
 void ui_event_Schedule(lv_event_t * e);
@@ -293,7 +291,6 @@ extern lv_obj_t * ui____initial_actions0;
 
 LV_IMG_DECLARE(ui_img_tick_dashes_png);    // assets\Tick Dashes.png
 LV_IMG_DECLARE(ui_img_tick_dots_png);    // assets\Tick Dots.png
-LV_IMG_DECLARE(ui_img_4809254_png);    // assets\4809254.png
 LV_IMG_DECLARE(ui_img_minutehand_png);    // assets\MinuteHand.png
 LV_IMG_DECLARE(ui_img_hourhand_png);    // assets\HourHand.png
 LV_IMG_DECLARE(ui_img_secondhand_png);    // assets\SecondHand.png
@@ -308,6 +305,7 @@ LV_IMG_DECLARE(ui_img_brightness_png);    // assets\brightness.png
 LV_IMG_DECLARE(ui_img_bluetooth_small_nobackground_png);    // assets\Bluetooth_Small_nobackground.png
 LV_IMG_DECLARE(ui_img_power_icon_png);    // assets\Power Icon.png
 LV_IMG_DECLARE(ui_img_play_button_png);    // assets\Play Button.png
+LV_IMG_DECLARE(ui_img_4809254_png);    // assets\4809254.png
 
 LV_FONT_DECLARE(ui_font_Monoton_48);
 LV_FONT_DECLARE(ui_font_Righteous_16);

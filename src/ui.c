@@ -34,9 +34,7 @@ lv_obj_t * ui_Arc_Right;
 lv_obj_t * ui_Tick_Dashes;
 lv_obj_t * ui_Tick_Dots;
 lv_obj_t * ui_Now_Playing_Label;
-lv_obj_t * ui_Step_Counter_Panel;
 lv_obj_t * ui_Step_Counter_Text;
-lv_obj_t * ui_Step_Counter_Image;
 lv_obj_t * ui_Minute_Hand;
 lv_obj_t * ui_Hour_Hand;
 lv_obj_t * ui_Second_Hand;
@@ -211,8 +209,6 @@ lv_obj_t * ui_Timer_Colin_Right;
 void ui_Settings_screen_init(void);
 void ui_event_Settings(lv_event_t * e);
 lv_obj_t * ui_Settings;
-lv_obj_t * ui_Settings_Label;
-lv_obj_t * ui_Settings_Label_Underline;
 lv_obj_t * ui_Settings_Panel;
 void ui_event_Brightness_Slider(lv_event_t * e);
 lv_obj_t * ui_Brightness_Slider;
@@ -231,6 +227,8 @@ lv_obj_t * ui_Display_Settings3;
 void ui_event_Power_Button1(lv_event_t * e);
 lv_obj_t * ui_Power_Button1;
 lv_obj_t * ui_Power_Button_Image1;
+lv_obj_t * ui_Settings_Label_Underline;
+lv_obj_t * ui_Settings_Label;
 
 // SCREEN: ui_Schedule
 void ui_Schedule_screen_init(void);

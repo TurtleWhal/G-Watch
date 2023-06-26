@@ -15,7 +15,6 @@ SET(SOURCES components/ui_comp_notification_widget.c
     ui_helpers.c
     images/ui_img_tick_dashes_png.c
     images/ui_img_tick_dots_png.c
-    images/ui_img_4809254_png.c
     images/ui_img_minutehand_png.c
     images/ui_img_hourhand_png.c
     images/ui_img_secondhand_png.c
@@ -30,6 +29,7 @@ SET(SOURCES components/ui_comp_notification_widget.c
     images/ui_img_bluetooth_small_nobackground_png.c
     images/ui_img_power_icon_png.c
     images/ui_img_play_button_png.c
+    images/ui_img_4809254_png.c
     fonts/ui_font_Monoton_48.c
     fonts/ui_font_Righteous_16.c
     fonts/ui_font_Righteous_38.c
