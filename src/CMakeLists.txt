@@ -31,8 +31,8 @@ SET(SOURCES components/ui_comp_notification_widget.c
     images/ui_img_play_button_png.c
     images/ui_img_4809254_png.c
     fonts/ui_font_Monoton_48.c
+    fonts/ui_font_Music_14.c
     fonts/ui_font_Righteous_16.c
-    fonts/ui_font_Righteous_38.c
-    fonts/ui_font_Music_14.c)
+    fonts/ui_font_Righteous_38.c)
 
 add_library(ui ${SOURCES})

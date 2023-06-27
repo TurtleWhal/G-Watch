@@ -31,6 +31,6 @@ images/ui_img_power_icon_png.c
 images/ui_img_play_button_png.c
 images/ui_img_4809254_png.c
 fonts/ui_font_Monoton_48.c
+fonts/ui_font_Music_14.c
 fonts/ui_font_Righteous_16.c
 fonts/ui_font_Righteous_38.c
-fonts/ui_font_Music_14.c

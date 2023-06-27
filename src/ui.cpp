@@ -183,7 +183,7 @@ void btn3_click(void *param)
   Serial.println("BTN3 Click");
   // twatch->motor_shake(1, 60);
   if (lv_scr_act() != ui_Clock)
-    _ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_FADE_IN, 150, 0);
+    _ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
   Wakeup("Button 3 Pressed");
   if (notificationshowing == 1)
     notificationdismiss(nullptr);
@@ -358,6 +358,7 @@ void loop()
   if (!isSleeping())
   {
     lv_timer_handler(); /* let the GUI do its work */
+    //xTaskCreatePinnedToCore();
     delay(5);
     writetime();
     Powerhandle();

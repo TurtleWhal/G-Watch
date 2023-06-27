@@ -70,6 +70,7 @@ extern lv_obj_t * ui_Notification_Popup_Mask;
 extern lv_obj_t * ui_Notification_Image;
 extern lv_obj_t * ui_Notification_Text;
 extern lv_obj_t * ui_Notification_Title;
+extern lv_obj_t * ui_Arc_Battery_Charge1;
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);
 void ui_event_Notifications(lv_event_t * e);
@@ -77,8 +78,7 @@ extern lv_obj_t * ui_Notifications;
 extern lv_obj_t * ui_Notifications_Label_Underline;
 extern lv_obj_t * ui_Notifications_Label;
 extern lv_obj_t * ui_Notification_Panel;
-extern lv_obj_t * ui_Test_Notification;
-extern lv_obj_t * ui_Test_Notification1;
+extern lv_obj_t * ui_Notification_Widget2;
 extern lv_obj_t * ui_Panel1;
 // SCREEN: ui_Alarms
 void ui_Alarms_screen_init(void);
@@ -308,9 +308,9 @@ LV_IMG_DECLARE(ui_img_play_button_png);    // assets\Play Button.png
 LV_IMG_DECLARE(ui_img_4809254_png);    // assets\4809254.png
 
 LV_FONT_DECLARE(ui_font_Monoton_48);
+LV_FONT_DECLARE(ui_font_Music_14);
 LV_FONT_DECLARE(ui_font_Righteous_16);
 LV_FONT_DECLARE(ui_font_Righteous_38);
-LV_FONT_DECLARE(ui_font_Music_14);
 
 void ui_init(void);
 

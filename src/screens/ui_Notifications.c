@@ -39,7 +39,7 @@ void ui_Notifications_screen_init(void)
     lv_obj_set_height(ui_Notification_Panel, 171);
     lv_obj_set_align(ui_Notification_Panel, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_Notification_Panel, LV_FLEX_FLOW_COLUMN);
-    lv_obj_set_flex_align(ui_Notification_Panel, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
+    lv_obj_set_flex_align(ui_Notification_Panel, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Notification_Panel, LV_OBJ_FLAG_GESTURE_BUBBLE);      /// Flags
     lv_obj_set_scrollbar_mode(ui_Notification_Panel, LV_SCROLLBAR_MODE_ON);
     lv_obj_set_scroll_dir(ui_Notification_Panel, LV_DIR_VER);
@@ -54,13 +54,10 @@ void ui_Notifications_screen_init(void)
     lv_obj_set_style_pad_top(ui_Notification_Panel, 22, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_bottom(ui_Notification_Panel, 22, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
 
-    ui_Test_Notification = ui_Notification_Widget_create(ui_Notification_Panel);
-    lv_obj_set_x(ui_Test_Notification, 0);
-    lv_obj_set_y(ui_Test_Notification, -50);
-
-    ui_Test_Notification1 = ui_Notification_Widget_create(ui_Notification_Panel);
-    lv_obj_set_x(ui_Test_Notification1, 0);
-    lv_obj_set_y(ui_Test_Notification1, 10);
+    ui_Notification_Widget2 = ui_Notification_Widget_create(ui_Notification_Panel);
+    lv_obj_set_x(ui_Notification_Widget2, 0);
+    lv_obj_set_y(ui_Notification_Widget2, -43);
+    lv_obj_add_flag(ui_Notification_Widget2, LV_OBJ_FLAG_FLOATING);     /// Flags
 
     ui_Panel1 = lv_obj_create(ui_Notifications);
     lv_obj_set_width(ui_Panel1, 267);

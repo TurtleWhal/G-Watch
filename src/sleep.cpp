@@ -26,6 +26,7 @@ void Sleephandle()
       Serial.println("Im Touched!");
     }
 
+    twatch->bma423_feature_int(BMA423_WRIST_WEAR, 1);
     /*if (BMA423_WRIST_WEAR)
     {
       Wakeup("Shook");

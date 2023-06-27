@@ -298,6 +298,26 @@ void ui_Clock_screen_init(void)
     lv_label_set_text(ui_Notification_Title, "Dad");
     lv_obj_set_style_text_font(ui_Notification_Title, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_Arc_Battery_Charge1 = lv_arc_create(ui_Clock);
+    lv_obj_set_width(ui_Arc_Battery_Charge1, 234);
+    lv_obj_set_height(ui_Arc_Battery_Charge1, 234);
+    lv_obj_set_align(ui_Arc_Battery_Charge1, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Arc_Battery_Charge1, LV_OBJ_FLAG_HIDDEN);     /// Flags
+    lv_obj_clear_flag(ui_Arc_Battery_Charge1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_CLICK_FOCUSABLE);      /// Flags
+    lv_arc_set_range(ui_Arc_Battery_Charge1, 0, 250);
+    lv_arc_set_bg_angles(ui_Arc_Battery_Charge1, 300, 60);
+    lv_arc_set_rotation(ui_Arc_Battery_Charge1, 180);
+    lv_obj_set_style_arc_color(ui_Arc_Battery_Charge1, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_Arc_Battery_Charge1, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_width(ui_Arc_Battery_Charge1, 16, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_arc_color(ui_Arc_Battery_Charge1, lv_color_hex(0xF0FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_Arc_Battery_Charge1, 200, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_width(ui_Arc_Battery_Charge1, 16, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_bg_color(ui_Arc_Battery_Charge1, lv_color_hex(0xFFFF00), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Arc_Battery_Charge1, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_Notification_Popup_Mask, ui_event_Notification_Popup_Mask, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Notification_Popup, ui_event_Notification_Popup, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Clock, ui_event_Clock, LV_EVENT_ALL, NULL);

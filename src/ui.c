@@ -52,6 +52,7 @@ lv_obj_t * ui_Notification_Popup_Mask;
 lv_obj_t * ui_Notification_Image;
 lv_obj_t * ui_Notification_Text;
 lv_obj_t * ui_Notification_Title;
+lv_obj_t * ui_Arc_Battery_Charge1;
 
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);
@@ -60,8 +61,7 @@ lv_obj_t * ui_Notifications;
 lv_obj_t * ui_Notifications_Label_Underline;
 lv_obj_t * ui_Notifications_Label;
 lv_obj_t * ui_Notification_Panel;
-lv_obj_t * ui_Test_Notification;
-lv_obj_t * ui_Test_Notification1;
+lv_obj_t * ui_Notification_Widget2;
 lv_obj_t * ui_Panel1;
 
 // SCREEN: ui_Alarms

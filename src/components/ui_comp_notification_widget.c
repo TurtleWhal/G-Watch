@@ -28,7 +28,8 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
     lv_obj_set_x(cui_Notification_Widget, 0);
     lv_obj_set_y(cui_Notification_Widget, -50);
     lv_obj_set_align(cui_Notification_Widget, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(cui_Notification_Widget, LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(cui_Notification_Widget,
+                      LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);    /// Flags
     lv_obj_set_style_radius(cui_Notification_Widget, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_t * cui_Notification_Image;
@@ -39,8 +40,8 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
     lv_obj_set_x(cui_Notification_Image, -57);
     lv_obj_set_y(cui_Notification_Image, 0);
     lv_obj_set_align(cui_Notification_Image, LV_ALIGN_CENTER);
-    lv_obj_add_flag(cui_Notification_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(cui_Notification_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(cui_Notification_Image,
+                      LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);     /// Flags
     lv_img_set_zoom(cui_Notification_Image, 170);
 
     lv_obj_t * cui_Notification_Title;
@@ -52,6 +53,7 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
     lv_obj_set_align(cui_Notification_Title, LV_ALIGN_TOP_RIGHT);
     lv_label_set_long_mode(cui_Notification_Title, LV_LABEL_LONG_DOT);
     lv_label_set_text(cui_Notification_Title, "Dad");
+    lv_obj_clear_flag(cui_Notification_Title, LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE);      /// Flags
 
     lv_obj_t * cui_Notification_Text;
     cui_Notification_Text = lv_label_create(cui_Notification_Widget);
@@ -62,6 +64,7 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
     lv_obj_set_align(cui_Notification_Text, LV_ALIGN_TOP_RIGHT);
     lv_label_set_long_mode(cui_Notification_Text, LV_LABEL_LONG_DOT);
     lv_label_set_text(cui_Notification_Text, "Daddddddddddddddddddddddddddddddddddddddddddddddd");
+    lv_obj_clear_flag(cui_Notification_Text, LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE);      /// Flags
     lv_obj_set_style_text_font(cui_Notification_Text, &lv_font_montserrat_10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_t ** children = lv_mem_alloc(sizeof(lv_obj_t *) * _UI_COMP_NOTIFICATION_WIDGET_NUM);
