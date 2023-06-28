@@ -852,12 +852,13 @@ void shownotification()
   notificationtime = millis();
   notificationshowing = 1;
   if (!Donotdisturb)
-    twatch->motor_shake(2, 90);
+    twatch->motor_shake(2, 30);
 
     //Create the widget in the notifications screen
 
     lv_obj_t * NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), "TexT");
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
 }
 
 void notificationdismiss(lv_event_t *e)
