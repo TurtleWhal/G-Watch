@@ -222,13 +222,13 @@ void ui_Clock_screen_init(void)
     lv_obj_set_style_text_font(ui_Notification_Amount_Number, &lv_font_montserrat_12, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Notification_Popup = lv_obj_create(ui_Clock);
-    lv_obj_set_width(ui_Notification_Popup, 170);
+    lv_obj_set_width(ui_Notification_Popup, 190);
     lv_obj_set_height(ui_Notification_Popup, 55);
     lv_obj_set_x(ui_Notification_Popup, 0);
     lv_obj_set_y(ui_Notification_Popup, -160);
     lv_obj_set_align(ui_Notification_Popup, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Notification_Popup, LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_radius(ui_Notification_Popup, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui_Notification_Popup, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_clip_corner(ui_Notification_Popup, true, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui_Notification_Popup, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_spread(ui_Notification_Popup, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -236,12 +236,12 @@ void ui_Clock_screen_init(void)
     lv_obj_set_style_shadow_ofs_y(ui_Notification_Popup, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Notification_Timer = lv_arc_create(ui_Notification_Popup);
-    lv_obj_set_width(ui_Notification_Timer, 180);
-    lv_obj_set_height(ui_Notification_Timer, 180);
+    lv_obj_set_width(ui_Notification_Timer, 200);
+    lv_obj_set_height(ui_Notification_Timer, 200);
     lv_obj_set_align(ui_Notification_Timer, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Notification_Timer, LV_OBJ_FLAG_CLICKABLE);      /// Flags
     lv_arc_set_range(ui_Notification_Timer, 0, 1000);
-    lv_arc_set_value(ui_Notification_Timer, 50);
+    lv_arc_set_value(ui_Notification_Timer, 1000);
     lv_arc_set_bg_angles(ui_Notification_Timer, 90, 449);
     lv_arc_set_rotation(ui_Notification_Timer, 180);
     lv_obj_set_style_arc_color(ui_Notification_Timer, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -255,28 +255,24 @@ void ui_Clock_screen_init(void)
     lv_obj_set_style_bg_color(ui_Notification_Timer, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Notification_Timer, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 
+    ui_Notification_Source = lv_label_create(ui_Notification_Popup);
+    lv_obj_set_width(ui_Notification_Source, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Notification_Source, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_Notification_Source, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Notification_Source, "com.android.messages");
+
     ui_Notification_Popup_Mask = lv_obj_create(ui_Notification_Popup);
-    lv_obj_set_width(ui_Notification_Popup_Mask, 164);
+    lv_obj_set_width(ui_Notification_Popup_Mask, 184);
     lv_obj_set_height(ui_Notification_Popup_Mask, 49);
     lv_obj_set_align(ui_Notification_Popup_Mask, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Notification_Popup_Mask,
                       LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);     /// Flags
-
-    ui_Notification_Image = lv_img_create(ui_Notification_Popup);
-    lv_img_set_src(ui_Notification_Image, &ui_img_dad_png);
-    lv_obj_set_width(ui_Notification_Image, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Notification_Image, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Notification_Image, -26);
-    lv_obj_set_y(ui_Notification_Image, 0);
-    lv_obj_set_align(ui_Notification_Image, LV_ALIGN_LEFT_MID);
-    lv_obj_add_flag(ui_Notification_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Notification_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_zoom(ui_Notification_Image, 130);
+    lv_obj_set_style_radius(ui_Notification_Popup_Mask, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Notification_Text = lv_label_create(ui_Notification_Popup);
-    lv_obj_set_width(ui_Notification_Text, 120);
+    lv_obj_set_width(ui_Notification_Text, 130);
     lv_obj_set_height(ui_Notification_Text, 30);
-    lv_obj_set_x(ui_Notification_Text, 22);
+    lv_obj_set_x(ui_Notification_Text, 20);
     lv_obj_set_y(ui_Notification_Text, 7);
     lv_obj_set_align(ui_Notification_Text, LV_ALIGN_CENTER);
     lv_label_set_long_mode(ui_Notification_Text, LV_LABEL_LONG_DOT);
@@ -287,34 +283,36 @@ void ui_Clock_screen_init(void)
     lv_obj_set_style_text_font(ui_Notification_Text, &lv_font_montserrat_10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Notification_Title = lv_label_create(ui_Notification_Popup);
-    lv_obj_set_width(ui_Notification_Title, 120);
+    lv_obj_set_width(ui_Notification_Title, 130);
     lv_obj_set_height(ui_Notification_Title, 29);
-    lv_obj_set_x(ui_Notification_Title, 22);
+    lv_obj_set_x(ui_Notification_Title, 20);
     lv_obj_set_y(ui_Notification_Title, -11);
     lv_obj_set_align(ui_Notification_Title, LV_ALIGN_TOP_MID);
     lv_label_set_long_mode(ui_Notification_Title, LV_LABEL_LONG_SCROLL_CIRCULAR);
     lv_label_set_text(ui_Notification_Title, "Dad");
     lv_obj_set_style_text_font(ui_Notification_Title, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Arc_Battery_Charge1 = lv_arc_create(ui_Clock);
-    lv_obj_set_width(ui_Arc_Battery_Charge1, 234);
-    lv_obj_set_height(ui_Arc_Battery_Charge1, 234);
-    lv_obj_set_align(ui_Arc_Battery_Charge1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Arc_Battery_Charge1, LV_OBJ_FLAG_HIDDEN);     /// Flags
-    lv_obj_clear_flag(ui_Arc_Battery_Charge1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_CLICK_FOCUSABLE);      /// Flags
-    lv_arc_set_range(ui_Arc_Battery_Charge1, 0, 250);
-    lv_arc_set_bg_angles(ui_Arc_Battery_Charge1, 300, 60);
-    lv_arc_set_rotation(ui_Arc_Battery_Charge1, 180);
-    lv_obj_set_style_arc_color(ui_Arc_Battery_Charge1, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_opa(ui_Arc_Battery_Charge1, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_width(ui_Arc_Battery_Charge1, 16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Notification_Image_Panel = lv_obj_create(ui_Notification_Popup);
+    lv_obj_set_width(ui_Notification_Image_Panel, 42);
+    lv_obj_set_height(ui_Notification_Image_Panel, 42);
+    lv_obj_set_x(ui_Notification_Image_Panel, -68);
+    lv_obj_set_y(ui_Notification_Image_Panel, 0);
+    lv_obj_set_align(ui_Notification_Image_Panel, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Notification_Image_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_Notification_Image_Panel, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Notification_Image_Panel, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Notification_Image_Panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_set_style_arc_color(ui_Arc_Battery_Charge1, lv_color_hex(0xF0FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_opa(ui_Arc_Battery_Charge1, 200, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_width(ui_Arc_Battery_Charge1, 16, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-
-    lv_obj_set_style_bg_color(ui_Arc_Battery_Charge1, lv_color_hex(0xFFFF00), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Arc_Battery_Charge1, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+    ui_Notification_Image = lv_img_create(ui_Notification_Image_Panel);
+    lv_img_set_src(ui_Notification_Image, &ui_img_bellnobackground_png);
+    lv_obj_set_width(ui_Notification_Image, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Notification_Image, LV_SIZE_CONTENT);    /// 11
+    lv_obj_set_x(ui_Notification_Image, -25);
+    lv_obj_set_y(ui_Notification_Image, -2);
+    lv_obj_set_align(ui_Notification_Image, LV_ALIGN_LEFT_MID);
+    lv_obj_add_flag(ui_Notification_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_Notification_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_img_set_zoom(ui_Notification_Image, 120);
 
     lv_obj_add_event_cb(ui_Notification_Popup_Mask, ui_event_Notification_Popup_Mask, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Notification_Popup, ui_event_Notification_Popup, LV_EVENT_ALL, NULL);

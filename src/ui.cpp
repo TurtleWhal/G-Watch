@@ -859,6 +859,7 @@ void shownotification()
     lv_obj_t * NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
     lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
     lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
 }
 
 void notificationdismiss(lv_event_t *e)
@@ -1097,9 +1098,17 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         lv_label_set_text(ui_Notification_Text, input.c_str());
-        shownotification();
       }
       if (input.charAt(0) == 4)
+      {
+        Serial.print("Notification Source: ");
+        input.remove(0, 1);
+        input.remove(input.length() - 1, 1);
+        Serial.println(input);
+        lv_label_set_text(ui_Notification_Source, input.c_str());
+        shownotification();
+      }
+      if (input.charAt(0) == 5)
       {
         Serial.print("Now Playing: ");
         input.remove(0, 1);

@@ -47,12 +47,13 @@ lv_obj_t * ui_Notification_Amount_Number;
 void ui_event_Notification_Popup(lv_event_t * e);
 lv_obj_t * ui_Notification_Popup;
 lv_obj_t * ui_Notification_Timer;
+lv_obj_t * ui_Notification_Source;
 void ui_event_Notification_Popup_Mask(lv_event_t * e);
 lv_obj_t * ui_Notification_Popup_Mask;
-lv_obj_t * ui_Notification_Image;
 lv_obj_t * ui_Notification_Text;
 lv_obj_t * ui_Notification_Title;
-lv_obj_t * ui_Arc_Battery_Charge1;
+lv_obj_t * ui_Notification_Image_Panel;
+lv_obj_t * ui_Notification_Image;
 
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);

@@ -65,12 +65,13 @@ extern lv_obj_t * ui_Notification_Amount_Number;
 void ui_event_Notification_Popup(lv_event_t * e);
 extern lv_obj_t * ui_Notification_Popup;
 extern lv_obj_t * ui_Notification_Timer;
+extern lv_obj_t * ui_Notification_Source;
 void ui_event_Notification_Popup_Mask(lv_event_t * e);
 extern lv_obj_t * ui_Notification_Popup_Mask;
-extern lv_obj_t * ui_Notification_Image;
 extern lv_obj_t * ui_Notification_Text;
 extern lv_obj_t * ui_Notification_Title;
-extern lv_obj_t * ui_Arc_Battery_Charge1;
+extern lv_obj_t * ui_Notification_Image_Panel;
+extern lv_obj_t * ui_Notification_Image;
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);
 void ui_event_Notifications(lv_event_t * e);
@@ -297,7 +298,6 @@ LV_IMG_DECLARE(ui_img_secondhand_png);    // assets\SecondHand.png
 LV_IMG_DECLARE(ui_img_seconddot_png);    // assets\SecondDot.png
 LV_IMG_DECLARE(ui_img_no_bluetooth_small_png);    // assets\No Bluetooth_Small.png
 LV_IMG_DECLARE(ui_img_bellnobackground_png);    // assets\BellNobackground.png
-LV_IMG_DECLARE(ui_img_dad_png);    // assets\Dad.png
 LV_IMG_DECLARE(ui_img_bell_png);    // assets\Bell.png
 LV_IMG_DECLARE(ui_img_restart_button_png);    // assets\Restart Button.png
 LV_IMG_DECLARE(ui_img_playpause_button_png);    // assets\PlayPause Button.png
