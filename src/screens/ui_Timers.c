@@ -9,8 +9,6 @@ void ui_Timers_screen_init(void)
 {
     ui_Timers = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Timers, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Timers, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Timers, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Timer_Label = lv_label_create(ui_Timers);
     lv_obj_set_width(ui_Timer_Label, LV_SIZE_CONTENT);   /// 1

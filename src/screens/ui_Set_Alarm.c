@@ -9,8 +9,6 @@ void ui_Set_Alarm_screen_init(void)
 {
     ui_Set_Alarm = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Set_Alarm, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Set_Alarm, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Set_Alarm, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Set_Alarm_Label_Underline = lv_obj_create(ui_Set_Alarm);
     lv_obj_set_width(ui_Set_Alarm_Label_Underline, 128);

@@ -9,8 +9,6 @@ void ui_Notifications_screen_init(void)
 {
     ui_Notifications = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Notifications, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Notifications, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Notifications, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Notifications_Label_Underline = lv_obj_create(ui_Notifications);
     lv_obj_set_width(ui_Notifications_Label_Underline, 128);
@@ -54,22 +52,29 @@ void ui_Notifications_screen_init(void)
     lv_obj_set_style_pad_top(ui_Notification_Panel, 22, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_bottom(ui_Notification_Panel, 22, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
 
-    ui_Notification_Widget2 = ui_Notification_Widget_create(ui_Notification_Panel);
-    lv_obj_set_x(ui_Notification_Widget2, 0);
-    lv_obj_set_y(ui_Notification_Widget2, -43);
-    lv_obj_add_flag(ui_Notification_Widget2, LV_OBJ_FLAG_FLOATING);     /// Flags
+    ui_No_New_Notifications_Label = lv_label_create(ui_Notification_Panel);
+    lv_obj_set_width(ui_No_New_Notifications_Label, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_No_New_Notifications_Label, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_No_New_Notifications_Label, 0);
+    lv_obj_set_y(ui_No_New_Notifications_Label, -63);
+    lv_obj_set_align(ui_No_New_Notifications_Label, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_No_New_Notifications_Label, "No New Notifications");
+    lv_obj_add_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_IGNORE_LAYOUT | LV_OBJ_FLAG_FLOATING);     /// Flags
+    lv_obj_set_style_text_color(ui_No_New_Notifications_Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_No_New_Notifications_Label, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_No_New_Notifications_Label, &ui_font_Music_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Panel1 = lv_obj_create(ui_Notifications);
-    lv_obj_set_width(ui_Panel1, 267);
-    lv_obj_set_height(ui_Panel1, 50);
-    lv_obj_set_x(ui_Panel1, -1);
-    lv_obj_set_y(ui_Panel1, 93);
-    lv_obj_set_align(ui_Panel1, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Panel1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Panel1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Panel1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_color(ui_Panel1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(ui_Panel1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Notifications_Gesture_Panel = lv_obj_create(ui_Notifications);
+    lv_obj_set_width(ui_Notifications_Gesture_Panel, 267);
+    lv_obj_set_height(ui_Notifications_Gesture_Panel, 50);
+    lv_obj_set_x(ui_Notifications_Gesture_Panel, -1);
+    lv_obj_set_y(ui_Notifications_Gesture_Panel, 93);
+    lv_obj_set_align(ui_Notifications_Gesture_Panel, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Notifications_Gesture_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_Notifications_Gesture_Panel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Notifications_Gesture_Panel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_Notifications_Gesture_Panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_Notifications_Gesture_Panel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Notifications, ui_event_Notifications, LV_EVENT_ALL, NULL);
 

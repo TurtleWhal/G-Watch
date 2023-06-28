@@ -9,8 +9,6 @@ void ui_Stopwatch_screen_init(void)
 {
     ui_Stopwatch = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Stopwatch, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Stopwatch, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Stopwatch, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Label_Underline = lv_obj_create(ui_Stopwatch);
     lv_obj_set_width(ui_Stopwatch_Label_Underline, 128);
@@ -128,7 +126,7 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_y(ui_Stopwatch_Time_Underline_Black, 8);
     lv_obj_set_align(ui_Stopwatch_Time_Underline_Black, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Stopwatch_Time_Underline_Black, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Stopwatch_Time_Underline_Black, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0x000000),
                                   LV_PART_MAIN | LV_STATE_DEFAULT);

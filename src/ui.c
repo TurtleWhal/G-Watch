@@ -61,8 +61,8 @@ lv_obj_t * ui_Notifications;
 lv_obj_t * ui_Notifications_Label_Underline;
 lv_obj_t * ui_Notifications_Label;
 lv_obj_t * ui_Notification_Panel;
-lv_obj_t * ui_Notification_Widget2;
-lv_obj_t * ui_Panel1;
+lv_obj_t * ui_No_New_Notifications_Label;
+lv_obj_t * ui_Notifications_Gesture_Panel;
 
 // SCREEN: ui_Alarms
 void ui_Alarms_screen_init(void);

@@ -78,8 +78,8 @@ extern lv_obj_t * ui_Notifications;
 extern lv_obj_t * ui_Notifications_Label_Underline;
 extern lv_obj_t * ui_Notifications_Label;
 extern lv_obj_t * ui_Notification_Panel;
-extern lv_obj_t * ui_Notification_Widget2;
-extern lv_obj_t * ui_Panel1;
+extern lv_obj_t * ui_No_New_Notifications_Label;
+extern lv_obj_t * ui_Notifications_Gesture_Panel;
 // SCREEN: ui_Alarms
 void ui_Alarms_screen_init(void);
 void ui_event_Alarms(lv_event_t * e);

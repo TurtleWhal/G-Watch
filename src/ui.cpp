@@ -327,6 +327,8 @@ void setup()
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
     lastpercent = 0;
 
+    //lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
+
   Serial.println("Setup done");
 }
 
@@ -842,6 +844,7 @@ void toggleampm(lv_event_t *e)
 
 void shownotification()
 {
+  //Create the widget in the Clock screen
   Wakeup("Notification Received");
   lv_obj_set_x(ui_Notification_Popup, 0);
   lv_obj_set_y(ui_Notification_Popup, -160);
@@ -850,6 +853,11 @@ void shownotification()
   notificationshowing = 1;
   if (!Donotdisturb)
     twatch->motor_shake(2, 90);
+
+    //Create the widget in the notifications screen
+
+    lv_obj_t * NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), "TexT");
 }
 
 void notificationdismiss(lv_event_t *e)

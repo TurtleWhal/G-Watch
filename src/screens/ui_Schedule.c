@@ -9,8 +9,6 @@ void ui_Schedule_screen_init(void)
 {
     ui_Schedule = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Schedule, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Schedule, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Schedule, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Schedule_Label = lv_label_create(ui_Schedule);
     lv_obj_set_width(ui_Schedule_Label, LV_SIZE_CONTENT);   /// 1

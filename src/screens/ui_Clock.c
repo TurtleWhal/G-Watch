@@ -9,8 +9,6 @@ void ui_Clock_screen_init(void)
 {
     ui_Clock = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Clock, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Clock, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Clock, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Time = lv_label_create(ui_Clock);
     lv_obj_set_width(ui_Time, LV_SIZE_CONTENT);   /// 1
@@ -113,7 +111,7 @@ void ui_Clock_screen_init(void)
     lv_obj_set_x(ui_Now_Playing_Label, 0);
     lv_obj_set_y(ui_Now_Playing_Label, -30);
     lv_obj_set_align(ui_Now_Playing_Label, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Now_Playing_Label, LV_LABEL_LONG_SCROLL);
+    lv_label_set_long_mode(ui_Now_Playing_Label, LV_LABEL_LONG_SCROLL_CIRCULAR);
     lv_label_set_text(ui_Now_Playing_Label, "♪ Safe and Sound by Capitol Cities ♪");
     lv_obj_set_style_text_font(ui_Now_Playing_Label, &ui_font_Music_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 

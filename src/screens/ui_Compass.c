@@ -9,8 +9,6 @@ void ui_Compass_screen_init(void)
 {
     ui_Compass = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Compass, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Compass, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Compass, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Compass_Arrow = lv_img_create(ui_Compass);
     lv_img_set_src(ui_Compass_Arrow, &ui_img_play_button_png);

@@ -12,7 +12,7 @@ void ui_event_comp_Notification_Widget_Notification_Widget(lv_event_t * e)
     lv_obj_t ** comp_Notification_Widget = lv_event_get_user_data(e);
     if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
         lv_indev_wait_release(lv_indev_get_act());
-        NotificationDismiss_Animation(comp_Notification_Widget[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET], 0);
+        NotificationDismiss_Animation(comp_Notification_Widget[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE], 0);
     }
 }
 
@@ -26,14 +26,25 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
     lv_obj_set_width(cui_Notification_Widget, 170);
     lv_obj_set_height(cui_Notification_Widget, 55);
     lv_obj_set_x(cui_Notification_Widget, 0);
-    lv_obj_set_y(cui_Notification_Widget, -50);
+    lv_obj_set_y(cui_Notification_Widget, -43);
     lv_obj_set_align(cui_Notification_Widget, LV_ALIGN_CENTER);
     lv_obj_clear_flag(cui_Notification_Widget,
                       LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);    /// Flags
-    lv_obj_set_style_radius(cui_Notification_Widget, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(cui_Notification_Widget, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(cui_Notification_Widget, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(cui_Notification_Widget, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(cui_Notification_Widget, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_t * cui_Notification_Widget_Visible;
+    cui_Notification_Widget_Visible = lv_obj_create(cui_Notification_Widget);
+    lv_obj_set_width(cui_Notification_Widget_Visible, 170);
+    lv_obj_set_height(cui_Notification_Widget_Visible, 55);
+    lv_obj_set_align(cui_Notification_Widget_Visible, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(cui_Notification_Widget_Visible, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(cui_Notification_Widget_Visible, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_t * cui_Notification_Image;
-    cui_Notification_Image = lv_img_create(cui_Notification_Widget);
+    cui_Notification_Image = lv_img_create(cui_Notification_Widget_Visible);
     lv_img_set_src(cui_Notification_Image, &ui_img_dad_png);
     lv_obj_set_width(cui_Notification_Image, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(cui_Notification_Image, LV_SIZE_CONTENT);    /// 1
@@ -45,7 +56,7 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
     lv_img_set_zoom(cui_Notification_Image, 170);
 
     lv_obj_t * cui_Notification_Title;
-    cui_Notification_Title = lv_label_create(cui_Notification_Widget);
+    cui_Notification_Title = lv_label_create(cui_Notification_Widget_Visible);
     lv_obj_set_width(cui_Notification_Title, 112);
     lv_obj_set_height(cui_Notification_Title, 10);
     lv_obj_set_x(cui_Notification_Title, 10);
@@ -56,7 +67,7 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
     lv_obj_clear_flag(cui_Notification_Title, LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE);      /// Flags
 
     lv_obj_t * cui_Notification_Text;
-    cui_Notification_Text = lv_label_create(cui_Notification_Widget);
+    cui_Notification_Text = lv_label_create(cui_Notification_Widget_Visible);
     lv_obj_set_width(cui_Notification_Text, 112);
     lv_obj_set_height(cui_Notification_Text, 35);
     lv_obj_set_x(cui_Notification_Text, 10);
@@ -69,9 +80,10 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
 
     lv_obj_t ** children = lv_mem_alloc(sizeof(lv_obj_t *) * _UI_COMP_NOTIFICATION_WIDGET_NUM);
     children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET] = cui_Notification_Widget;
-    children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_IMAGE] = cui_Notification_Image;
-    children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_TITLE] = cui_Notification_Title;
-    children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_TEXT] = cui_Notification_Text;
+    children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE] = cui_Notification_Widget_Visible;
+    children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE] = cui_Notification_Image;
+    children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE] = cui_Notification_Title;
+    children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT] = cui_Notification_Text;
     lv_obj_add_event_cb(cui_Notification_Widget, get_component_child_event_cb, LV_EVENT_GET_COMP_CHILD, children);
     lv_obj_add_event_cb(cui_Notification_Widget, del_component_child_event_cb, LV_EVENT_DELETE, children);
     lv_obj_add_event_cb(cui_Notification_Widget, ui_event_comp_Notification_Widget_Notification_Widget, LV_EVENT_ALL,
