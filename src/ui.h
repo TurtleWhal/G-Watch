@@ -40,6 +40,7 @@ void StopwatchClear_Animation(lv_obj_t * TargetObject, int delay);
 void PlayToPause_Animation(lv_obj_t * TargetObject, int delay);
 void PauseToPlay_Animation(lv_obj_t * TargetObject, int delay);
 void notificationstack_Animation(lv_obj_t * TargetObject, int delay);
+void CompassArrowWiggle_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Clock
 void ui_Clock_screen_init(void);
 void ui_event_Clock(lv_event_t * e);
@@ -81,6 +82,7 @@ extern lv_obj_t * ui_Notifications_Label;
 extern lv_obj_t * ui_Notification_Panel;
 extern lv_obj_t * ui_No_New_Notifications_Label;
 extern lv_obj_t * ui_Notifications_Gesture_Panel;
+extern lv_obj_t * ui_Notification_Widget2;
 // SCREEN: ui_Alarms
 void ui_Alarms_screen_init(void);
 void ui_event_Alarms(lv_event_t * e);
@@ -288,6 +290,17 @@ extern lv_obj_t * ui_Compass_NE;
 extern lv_obj_t * ui_Compass_SE;
 extern lv_obj_t * ui_Compass_SW;
 extern lv_obj_t * ui_Compass_NW;
+// SCREEN: ui_Apps
+void ui_Apps_screen_init(void);
+void ui_event_Apps(lv_event_t * e);
+extern lv_obj_t * ui_Apps;
+extern lv_obj_t * ui_Apps_Panel;
+void ui_event_Compass_App_Button_App_Button(lv_event_t * e);
+extern lv_obj_t * ui_Compass_App_Button;
+void ui_event_Settings_App_Button_App_Button(lv_event_t * e);
+extern lv_obj_t * ui_Settings_App_Button;
+extern lv_obj_t * ui_Apps_Label_Underline;
+extern lv_obj_t * ui_Apps_Label;
 extern lv_obj_t * ui____initial_actions0;
 
 LV_IMG_DECLARE(ui_img_tick_dashes_png);    // assets\Tick Dashes.png
@@ -305,12 +318,14 @@ LV_IMG_DECLARE(ui_img_brightness_png);    // assets\brightness.png
 LV_IMG_DECLARE(ui_img_bluetooth_small_nobackground_png);    // assets\Bluetooth_Small_nobackground.png
 LV_IMG_DECLARE(ui_img_power_icon_png);    // assets\Power Icon.png
 LV_IMG_DECLARE(ui_img_play_button_png);    // assets\Play Button.png
+LV_IMG_DECLARE(ui_img_compass_png);    // assets\Compass.png
+LV_IMG_DECLARE(ui_img_settings_gear_png);    // assets\Settings Gear.png
 LV_IMG_DECLARE(ui_img_4809254_png);    // assets\4809254.png
 
 LV_FONT_DECLARE(ui_font_Monoton_48);
 LV_FONT_DECLARE(ui_font_Music_14);
-LV_FONT_DECLARE(ui_font_Righteous_16);
-LV_FONT_DECLARE(ui_font_Righteous_38);
+LV_FONT_DECLARE(ui_font_Comfortaa_16);
+LV_FONT_DECLARE(ui_font_Comfortaa_30);
 
 void ui_init(void);
 

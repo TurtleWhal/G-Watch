@@ -41,12 +41,12 @@ void ui_Alarm_Going_Off_screen_init(void)
     lv_obj_set_width(ui_Alarm_Going_Off_Name, 215);
     lv_obj_set_height(ui_Alarm_Going_Off_Name, 45);
     lv_obj_set_x(ui_Alarm_Going_Off_Name, 0);
-    lv_obj_set_y(ui_Alarm_Going_Off_Name, -22);
+    lv_obj_set_y(ui_Alarm_Going_Off_Name, -18);
     lv_obj_set_align(ui_Alarm_Going_Off_Name, LV_ALIGN_CENTER);
     lv_label_set_long_mode(ui_Alarm_Going_Off_Name, LV_LABEL_LONG_SCROLL);
     lv_label_set_text(ui_Alarm_Going_Off_Name, "Lunch");
     lv_obj_set_style_text_align(ui_Alarm_Going_Off_Name, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Alarm_Going_Off_Name, &ui_font_Righteous_38, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Alarm_Going_Off_Name, &ui_font_Comfortaa_30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Alarm_Going_Off_Name_Underline = lv_obj_create(ui_Alarm_Going_Off);
     lv_obj_set_width(ui_Alarm_Going_Off_Name_Underline, 200);

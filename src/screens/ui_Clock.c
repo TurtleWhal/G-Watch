@@ -28,7 +28,7 @@ void ui_Clock_screen_init(void)
     lv_label_set_text(ui_Date_Numerical, "01/01/70");
     lv_obj_set_style_text_color(ui_Date_Numerical, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Date_Numerical, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Date_Numerical, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Date_Numerical, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Arc_Battery_Charge = lv_arc_create(ui_Clock);
     lv_obj_set_width(ui_Arc_Battery_Charge, 234);
@@ -124,7 +124,7 @@ void ui_Clock_screen_init(void)
     lv_label_set_text(ui_Step_Counter_Text, "6500 Steps");
     lv_obj_set_style_text_color(ui_Step_Counter_Text, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Step_Counter_Text, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Step_Counter_Text, &ui_font_Music_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Step_Counter_Text, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_left(ui_Step_Counter_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui_Step_Counter_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_top(ui_Step_Counter_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -179,7 +179,7 @@ void ui_Clock_screen_init(void)
     lv_obj_set_align(ui_Date, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Date, "Mon Jan 1");
     lv_obj_add_flag(ui_Date, LV_OBJ_FLAG_CLICKABLE);     /// Flags
-    lv_obj_set_style_text_font(ui_Date, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Date, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Battery_Percentage = lv_label_create(ui_Clock);
     lv_obj_set_width(ui_Battery_Percentage, LV_SIZE_CONTENT);   /// 1
@@ -188,7 +188,7 @@ void ui_Clock_screen_init(void)
     lv_obj_set_y(ui_Battery_Percentage, -106);
     lv_obj_set_align(ui_Battery_Percentage, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Battery_Percentage, "100%");
-    lv_obj_set_style_text_font(ui_Battery_Percentage, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Battery_Percentage, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Bluetooth_Indicator = lv_img_create(ui_Clock);
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
@@ -300,8 +300,6 @@ void ui_Clock_screen_init(void)
     lv_obj_set_align(ui_Notification_Image_Panel, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Notification_Image_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_radius(ui_Notification_Image_Panel, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_Notification_Image_Panel, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Notification_Image_Panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Notification_Image = lv_img_create(ui_Notification_Image_Panel);
     lv_img_set_src(ui_Notification_Image, &ui_img_bellnobackground_png);

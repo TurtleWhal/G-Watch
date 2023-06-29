@@ -17,7 +17,7 @@ void ui_Timers_screen_init(void)
     lv_obj_set_y(ui_Timer_Label, 20);
     lv_obj_set_align(ui_Timer_Label, LV_ALIGN_TOP_MID);
     lv_label_set_text(ui_Timer_Label, "Timer");
-    lv_obj_set_style_text_font(ui_Timer_Label, &ui_font_Righteous_38, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Timer_Label, &ui_font_Comfortaa_30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Timer_Label_Underline = lv_obj_create(ui_Timers);
     lv_obj_set_width(ui_Timer_Label_Underline, 163);

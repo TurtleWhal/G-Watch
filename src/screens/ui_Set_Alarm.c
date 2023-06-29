@@ -29,7 +29,7 @@ void ui_Set_Alarm_screen_init(void)
     lv_obj_set_y(ui_Alarm_set_Label, 8);
     lv_obj_set_align(ui_Alarm_set_Label, LV_ALIGN_TOP_MID);
     lv_label_set_text(ui_Alarm_set_Label, "Set Alarm");
-    lv_obj_set_style_text_font(ui_Alarm_set_Label, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Alarm_set_Label, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Hour_Roller = lv_roller_create(ui_Set_Alarm);
     lv_roller_set_options(ui_Hour_Roller, "12\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11", LV_ROLLER_MODE_INFINITE);

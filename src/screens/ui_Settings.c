@@ -215,6 +215,8 @@ void ui_Settings_screen_init(void)
     lv_obj_set_style_bg_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_Settings_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(ui_Settings_Label_Underline, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui_Settings_Label_Underline, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_spread(ui_Settings_Label_Underline, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -229,7 +231,7 @@ void ui_Settings_screen_init(void)
     lv_label_set_text(ui_Settings_Label, "Settings");
     lv_obj_set_style_text_color(ui_Settings_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Settings_Label, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Settings_Label, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Settings_Label, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Brightness_Slider, ui_event_Brightness_Slider, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Bluetooth_Button, ui_event_Bluetooth_Button, LV_EVENT_ALL, NULL);

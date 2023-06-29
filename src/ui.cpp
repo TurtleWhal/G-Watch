@@ -77,7 +77,7 @@ const char compile_date[] = __DATE__;
 
 long int notificationtime;
 bool notificationshowing = 0;
-int NotificationLength = 30; // amount of time notification is displayed in seconds
+int NotificationLength = 20; // amount of time notification is displayed in seconds
 int notificationid = 1;
 
 int stopwatchtime = 0;
@@ -172,7 +172,7 @@ void btn2_click(void *param)
   // twatch->motor_shake(1, 60);
   if (lv_scr_act() == ui_Stopwatch)
     ToggleStopwatch(nullptr);
-    if (lv_scr_act() == ui_Timers)
+  if (lv_scr_act() == ui_Timers)
     ToggleTimer(nullptr);
   Serial.println(twatch->power_get_volt());
   SerialBT.println(twatch->power_get_volt());
@@ -192,7 +192,8 @@ void btn1_held(void *param)
 {
   Serial.println("BTN1 Held");
   twatch->motor_shake(1, 60);
-  _ui_screen_change(ui_Compass, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
+  if (lv_scr_act() != ui_Settings)
+  _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
   Wakeup("Button 1 Held");
 }
 
@@ -327,7 +328,7 @@ void setup()
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
     lastpercent = 0;
 
-    //lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
+  // lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
 
   Serial.println("Setup done");
 }
@@ -360,7 +361,7 @@ void loop()
   if (!isSleeping())
   {
     lv_timer_handler(); /* let the GUI do its work */
-    //xTaskCreatePinnedToCore();
+    // xTaskCreatePinnedToCore();
     delay(5);
     writetime();
     Powerhandle();
@@ -844,7 +845,7 @@ void toggleampm(lv_event_t *e)
 
 void shownotification()
 {
-  //Create the widget in the Clock screen
+  // Create the widget in the Clock screen
   Wakeup("Notification Received");
   lv_obj_set_x(ui_Notification_Popup, 0);
   lv_obj_set_y(ui_Notification_Popup, -160);
@@ -854,12 +855,12 @@ void shownotification()
   if (!Donotdisturb)
     twatch->motor_shake(2, 30);
 
-    //Create the widget in the notifications screen
+  // Create the widget in the notifications screen
 
-    lv_obj_t * NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
+  lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
+  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
+  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
 }
 
 void notificationdismiss(lv_event_t *e)
@@ -869,6 +870,15 @@ void notificationdismiss(lv_event_t *e)
   NotificationDismiss_Animation(ui_Notification_Popup, 0);
   notificationtime = 0;
   notificationshowing = 0;
+}
+
+void DeleteNotification(lv_event_t *e)
+{
+   //lv_obj_del(ui_comp_get_child(lv_event_get_target(e), UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET));
+   //lv_obj_del(lv_event_get_current_target(e));
+   //lv_group_del(lv_obj_get_group(lv_event_get_target(e)));
+  //_lv_obj_destruct(lv_event_get_target(e));
+  //_ui_flag_modify(lv_event_get_target(e), LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 
 void ToggleStopwatch(lv_event_t *e)
@@ -899,7 +909,7 @@ void resetstopwatch(lv_event_t *e)
 {
   stopwatchmoving = 0;
   PauseToPlay_Animation(ui_Stopwatch_Play_Pause_Image, 0);
-  
+
   stopwatchtimestarted = 0;
   lv_label_set_text(ui_Stopwatch_Milliseconds, "00");
   lv_label_set_text(ui_Stopwatch_Seconds, "00");
@@ -1223,7 +1233,7 @@ void ToggleDoNotDisturb(lv_event_t *e)
   }*/
 
   Donotdisturb = !Donotdisturb;
-  //erial.println(Donotdisturb);
+  // erial.println(Donotdisturb);
 }
 
 void ToggleBT(lv_event_t *e)

@@ -13,6 +13,7 @@ void ui_event_comp_Notification_Widget_Notification_Widget(lv_event_t * e)
     if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
         lv_indev_wait_release(lv_indev_get_act());
         NotificationDismiss_Animation(comp_Notification_Widget[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE], 0);
+        DeleteNotification(e);
     }
 }
 

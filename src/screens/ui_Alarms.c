@@ -17,7 +17,7 @@ void ui_Alarms_screen_init(void)
     lv_obj_set_y(ui_Alarms_Label, 8);
     lv_obj_set_align(ui_Alarms_Label, LV_ALIGN_TOP_MID);
     lv_label_set_text(ui_Alarms_Label, "Alarms");
-    lv_obj_set_style_text_font(ui_Alarms_Label, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Alarms_Label, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Alarms_Label_Underline = lv_obj_create(ui_Alarms);
     lv_obj_set_width(ui_Alarms_Label_Underline, 128);

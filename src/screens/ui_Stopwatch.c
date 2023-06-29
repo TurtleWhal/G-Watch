@@ -29,7 +29,7 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_y(ui_Stopwatch_Label, 8);
     lv_obj_set_align(ui_Stopwatch_Label, LV_ALIGN_TOP_MID);
     lv_label_set_text(ui_Stopwatch_Label, "Stopwatch");
-    lv_obj_set_style_text_font(ui_Stopwatch_Label, &ui_font_Righteous_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Stopwatch_Label, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Time_Long = lv_label_create(ui_Stopwatch);
     lv_obj_set_width(ui_Stopwatch_Time_Long, LV_SIZE_CONTENT);   /// 1
@@ -48,7 +48,7 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_y(ui_Stopwatch_Milliseconds, -30);
     lv_obj_set_align(ui_Stopwatch_Milliseconds, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Stopwatch_Milliseconds, "00");
-    lv_obj_set_style_text_font(ui_Stopwatch_Milliseconds, &ui_font_Righteous_38, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Stopwatch_Milliseconds, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Dot = lv_label_create(ui_Stopwatch);
     lv_obj_set_width(ui_Stopwatch_Dot, LV_SIZE_CONTENT);   /// 1
@@ -57,7 +57,7 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_y(ui_Stopwatch_Dot, -30);
     lv_obj_set_align(ui_Stopwatch_Dot, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Stopwatch_Dot, ".");
-    lv_obj_set_style_text_font(ui_Stopwatch_Dot, &ui_font_Righteous_38, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Stopwatch_Dot, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Seconds = lv_label_create(ui_Stopwatch);
     lv_obj_set_width(ui_Stopwatch_Seconds, LV_SIZE_CONTENT);   /// 1
@@ -66,7 +66,7 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_y(ui_Stopwatch_Seconds, -30);
     lv_obj_set_align(ui_Stopwatch_Seconds, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Stopwatch_Seconds, "00");
-    lv_obj_set_style_text_font(ui_Stopwatch_Seconds, &ui_font_Righteous_38, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Stopwatch_Seconds, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Colin_Right = lv_label_create(ui_Stopwatch);
     lv_obj_set_width(ui_Stopwatch_Colin_Right, LV_SIZE_CONTENT);   /// 1
@@ -75,7 +75,7 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_y(ui_Stopwatch_Colin_Right, -30);
     lv_obj_set_align(ui_Stopwatch_Colin_Right, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Stopwatch_Colin_Right, ":");
-    lv_obj_set_style_text_font(ui_Stopwatch_Colin_Right, &ui_font_Righteous_38, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Stopwatch_Colin_Right, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Minutes = lv_label_create(ui_Stopwatch);
     lv_obj_set_width(ui_Stopwatch_Minutes, LV_SIZE_CONTENT);   /// 1
@@ -84,7 +84,7 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_y(ui_Stopwatch_Minutes, -30);
     lv_obj_set_align(ui_Stopwatch_Minutes, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Stopwatch_Minutes, "00");
-    lv_obj_set_style_text_font(ui_Stopwatch_Minutes, &ui_font_Righteous_38, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Stopwatch_Minutes, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Colin_Left = lv_label_create(ui_Stopwatch);
     lv_obj_set_width(ui_Stopwatch_Colin_Left, LV_SIZE_CONTENT);   /// 1
@@ -93,7 +93,7 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_y(ui_Stopwatch_Colin_Left, -30);
     lv_obj_set_align(ui_Stopwatch_Colin_Left, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Stopwatch_Colin_Left, ":");
-    lv_obj_set_style_text_font(ui_Stopwatch_Colin_Left, &ui_font_Righteous_38, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Stopwatch_Colin_Left, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Hours = lv_label_create(ui_Stopwatch);
     lv_obj_set_width(ui_Stopwatch_Hours, LV_SIZE_CONTENT);   /// 1
@@ -102,7 +102,7 @@ void ui_Stopwatch_screen_init(void)
     lv_obj_set_y(ui_Stopwatch_Hours, -30);
     lv_obj_set_align(ui_Stopwatch_Hours, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Stopwatch_Hours, "00");
-    lv_obj_set_style_text_font(ui_Stopwatch_Hours, &ui_font_Righteous_38, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Stopwatch_Hours, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Stopwatch_Time_Underline = lv_obj_create(ui_Stopwatch);
     lv_obj_set_width(ui_Stopwatch_Time_Underline, 224);

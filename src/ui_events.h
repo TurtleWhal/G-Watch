@@ -12,6 +12,7 @@ extern "C" {
 
 void notificationdismiss(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
+void DeleteNotification(lv_event_t * e);
 void setalarm1(lv_event_t * e);
 void togglealarm1(lv_event_t * e);
 void setalarm2(lv_event_t * e);
