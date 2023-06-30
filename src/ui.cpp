@@ -105,6 +105,8 @@ int lastpercent = 100;
 
 bool charging;
 
+int StepGoal = 6500;
+
 lv_obj_t *ui_Notification_Widgets[1];
 
 LV_IMG_DECLARE(ui_img_bluetooth_small_png);
@@ -218,8 +220,8 @@ void btn3_held(void *param)
 void setup()
 {
   setCpuFrequencyMhz(240);
- 
-//lv_obj_del(ui_Calculator);
+
+  // lv_obj_del(ui_Calculator);
 
   Serial.begin(115200);              /* prepare for possible serial debug */
   SerialBT.begin("Garrett's Watch"); // Bluetooth device name
@@ -1265,8 +1267,9 @@ void Compass()
   }
 }
 
-void StepHandle(){
-  lv_arc_set_value(ui_Arc_Right, (twatch->bma423_get_step() / 30) * 250);
+void StepHandle()
+{
+  lv_arc_set_value(ui_Arc_Right, ((float)twatch->bma423_get_step() / StepGoal) * 250);
   char steps[32];
   sprintf(steps, "%i Steps", twatch->bma423_get_step());
   lv_label_set_text(ui_Step_Counter_Text, steps);
