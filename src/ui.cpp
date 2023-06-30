@@ -1269,8 +1269,8 @@ void Compass()
 
 void StepHandle()
 {
-  lv_arc_set_value(ui_Arc_Right, ((float)twatch->bma423_get_step() / StepGoal) * 250);
   char steps[32];
   sprintf(steps, "%i Steps", twatch->bma423_get_step());
   lv_label_set_text(ui_Step_Counter_Text, steps);
+  lv_arc_set_value(ui_Arc_Right, ((float)twatch->bma423_get_step() / StepGoal) * 250);
 }
