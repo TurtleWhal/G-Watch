@@ -53,6 +53,7 @@ void istimernegative();
 void Powerhandle();
 void Sleephandle();
 void Compass();
+void StepHandle();
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -217,6 +218,9 @@ void btn3_held(void *param)
 void setup()
 {
   setCpuFrequencyMhz(240);
+ 
+//lv_obj_del(ui_Calculator);
+
   Serial.begin(115200);              /* prepare for possible serial debug */
   SerialBT.begin("Garrett's Watch"); // Bluetooth device name
 
@@ -366,16 +370,13 @@ void loop()
     writetime();
     Powerhandle();
     Compass();
+    StepHandle();
   }
   else
     delay(5);
   // alarmhandle();
   BThandle();
   Sleephandle();
-
-  char steps[32];
-  sprintf(steps, "%i Steps", twatch->bma423_get_step());
-  lv_label_set_text(ui_Step_Counter_Text, steps);
 
   /*if (digitalRead(TWATCH_CHARGING) == 1 and twatch->power_get_volt() < 3800)
     Sleephandle();*/
@@ -1262,4 +1263,11 @@ void Compass()
     // lv_obj_set_x(ui_Compass_N, 0);
     // lv_obj_set_y(ui_Compass_N, -100);
   }
+}
+
+void StepHandle(){
+  lv_arc_set_value(ui_Arc_Right, (twatch->bma423_get_step() / 30) * 250);
+  char steps[32];
+  sprintf(steps, "%i Steps", twatch->bma423_get_step());
+  lv_label_set_text(ui_Step_Counter_Text, steps);
 }
