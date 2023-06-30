@@ -29,6 +29,16 @@ void ui_Apps_screen_init(void)
     lv_obj_set_style_pad_top(ui_Apps_Panel, 45, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_bottom(ui_Apps_Panel, 85, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
 
+    ui_Calculator_App_Button = ui_App_Button_create(ui_Apps_Panel);
+    lv_obj_set_x(ui_Calculator_App_Button, 0);
+    lv_obj_set_y(ui_Calculator_App_Button, 0);
+
+    lv_label_set_text(ui_comp_get_child(ui_Calculator_App_Button, UI_COMP_APP_BUTTON_APP_LABEL), "Calculator");
+
+    lv_img_set_src(ui_comp_get_child(ui_Calculator_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),
+                   &ui_img_calculator_icon_png);
+    lv_img_set_zoom(ui_comp_get_child(ui_Calculator_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 115);
+
     ui_Compass_App_Button = ui_App_Button_create(ui_Apps_Panel);
     lv_obj_set_x(ui_Compass_App_Button, 0);
     lv_obj_set_y(ui_Compass_App_Button, 0);
@@ -84,6 +94,7 @@ void ui_Apps_screen_init(void)
     lv_obj_set_style_text_opa(ui_Apps_Label, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Apps_Label, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    lv_obj_add_event_cb(ui_Calculator_App_Button, ui_event_Calculator_App_Button_App_Button, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Compass_App_Button, ui_event_Compass_App_Button_App_Button, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Settings_App_Button, ui_event_Settings_App_Button_App_Button, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Apps, ui_event_Apps, LV_EVENT_ALL, NULL);

@@ -12,6 +12,7 @@ SET(SOURCES components/ui_comp_app_button.c
     screens/ui_Schedule.c
     screens/ui_Compass.c
     screens/ui_Apps.c
+    screens/ui_Calculator.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
@@ -30,12 +31,14 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_bluetooth_small_nobackground_png.c
     images/ui_img_power_icon_png.c
     images/ui_img_play_button_png.c
+    images/ui_img_calculator_icon_png.c
     images/ui_img_compass_png.c
     images/ui_img_settings_gear_png.c
     images/ui_img_4809254_png.c
     fonts/ui_font_Monoton_48.c
     fonts/ui_font_Music_14.c
     fonts/ui_font_Comfortaa_16.c
-    fonts/ui_font_Comfortaa_30.c)
+    fonts/ui_font_Comfortaa_30.c
+    fonts/ui_font_Comfortaa_26.c)
 
 add_library(ui ${SOURCES})

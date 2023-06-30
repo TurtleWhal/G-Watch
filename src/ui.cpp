@@ -193,7 +193,7 @@ void btn1_held(void *param)
   Serial.println("BTN1 Held");
   twatch->motor_shake(1, 60);
   if (lv_scr_act() != ui_Settings)
-  _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
+    _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
   Wakeup("Button 1 Held");
 }
 
@@ -874,9 +874,9 @@ void notificationdismiss(lv_event_t *e)
 
 void DeleteNotification(lv_event_t *e)
 {
-   //lv_obj_del(ui_comp_get_child(lv_event_get_target(e), UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET));
-   //lv_obj_del(lv_event_get_current_target(e));
-   //lv_group_del(lv_obj_get_group(lv_event_get_target(e)));
+  // lv_obj_del(ui_comp_get_child(lv_event_get_target(e), UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET));
+  // lv_obj_del(lv_event_get_current_target(e));
+  // lv_group_del(lv_obj_get_group(lv_event_get_target(e)));
   //_lv_obj_destruct(lv_event_get_target(e));
   //_ui_flag_modify(lv_event_get_target(e), LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }

@@ -22,6 +22,7 @@ void PlayToPause_Animation(lv_obj_t * TargetObject, int delay);
 void PauseToPlay_Animation(lv_obj_t * TargetObject, int delay);
 void notificationstack_Animation(lv_obj_t * TargetObject, int delay);
 void CompassArrowWiggle_Animation(lv_obj_t * TargetObject, int delay);
+void CalculatorEquationFocus_Animation(lv_obj_t * TargetObject, int delay);
 
 // SCREEN: ui_Clock
 void ui_Clock_screen_init(void);
@@ -287,12 +288,53 @@ void ui_Apps_screen_init(void);
 void ui_event_Apps(lv_event_t * e);
 lv_obj_t * ui_Apps;
 lv_obj_t * ui_Apps_Panel;
+void ui_event_Calculator_App_Button_App_Button(lv_event_t * e);
+lv_obj_t * ui_Calculator_App_Button;
 void ui_event_Compass_App_Button_App_Button(lv_event_t * e);
 lv_obj_t * ui_Compass_App_Button;
 void ui_event_Settings_App_Button_App_Button(lv_event_t * e);
 lv_obj_t * ui_Settings_App_Button;
 lv_obj_t * ui_Apps_Label_Underline;
 lv_obj_t * ui_Apps_Label;
+
+// SCREEN: ui_Calculator
+void ui_Calculator_screen_init(void);
+lv_obj_t * ui_Calculator;
+lv_obj_t * ui_Calculator_Plus_Button;
+lv_obj_t * ui_Calculator_Plus_Label;
+lv_obj_t * ui_Calculator_Minus_Button;
+lv_obj_t * ui_Calculator_Minus_Label;
+lv_obj_t * ui_Calculator_Times_Button;
+lv_obj_t * ui_Calculator_Times_Label;
+lv_obj_t * ui_Calculator_Divide_Button;
+lv_obj_t * ui_Calculator_Divide_Label;
+lv_obj_t * ui_Calculator_Equals_Button;
+lv_obj_t * ui_Calculator_Equals_Label;
+lv_obj_t * ui_Calculator_3_Button;
+lv_obj_t * ui_Calculator_3_Label;
+lv_obj_t * ui_Calculator_6_Button;
+lv_obj_t * ui_Calculator_6_Label;
+lv_obj_t * ui_Calculator_9_Button;
+lv_obj_t * ui_Calculator_9_Label;
+lv_obj_t * ui_Calculator_8_Button;
+lv_obj_t * ui_Calculator_8_Label;
+lv_obj_t * ui_Calculator_5_Button;
+lv_obj_t * ui_Calculator_5_Label;
+lv_obj_t * ui_Calculator_2_Button;
+lv_obj_t * ui_Calculator_2_Label;
+lv_obj_t * ui_Calculator_0_Button;
+lv_obj_t * ui_Calculator_0_Label;
+lv_obj_t * ui_Calculator_Decimal_Button;
+lv_obj_t * ui_Calculator_Decimal_Label;
+lv_obj_t * ui_Calculator_1_Button;
+lv_obj_t * ui_Calculator_1_Label;
+lv_obj_t * ui_Calculator_4_Button;
+lv_obj_t * ui_Calculator_4_Label;
+lv_obj_t * ui_Calculator_7_Button;
+lv_obj_t * ui_Calculator_7_Label;
+void ui_event_Calculator_Equation_Panel(lv_event_t * e);
+lv_obj_t * ui_Calculator_Equation_Panel;
+lv_obj_t * ui_Calculator_Equation_Label;
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_[1] = {&ui_img_4809254_png};
 
@@ -687,6 +729,73 @@ void CompassArrowWiggle_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_set_early_apply(&PropertyAnimation_0, false);
     lv_anim_set_get_value_cb(&PropertyAnimation_0, &_ui_anim_callback_get_image_angle);
     lv_anim_start(&PropertyAnimation_0);
+
+}
+void CalculatorEquationFocus_Animation(lv_obj_t * TargetObject, int delay)
+{
+    ui_anim_user_data_t * PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
+    PropertyAnimation_0_user_data->target = TargetObject;
+    PropertyAnimation_0_user_data->imgset = ui_imgset_;
+    PropertyAnimation_0_user_data->imgset_size = sizeof(ui_imgset_) / (sizeof(lv_img_dsc_t *));
+    PropertyAnimation_0_user_data->val = -1;
+    lv_anim_t PropertyAnimation_0;
+    lv_anim_init(&PropertyAnimation_0);
+    lv_anim_set_time(&PropertyAnimation_0, 200);
+    lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
+    lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_width);
+    lv_anim_set_values(&PropertyAnimation_0, 0, 70);
+    lv_anim_set_path_cb(&PropertyAnimation_0, lv_anim_path_overshoot);
+    lv_anim_set_delay(&PropertyAnimation_0, delay + 0);
+    lv_anim_set_deleted_cb(&PropertyAnimation_0, _ui_anim_callback_free_user_data);
+    lv_anim_set_playback_time(&PropertyAnimation_0, 0);
+    lv_anim_set_playback_delay(&PropertyAnimation_0, 0);
+    lv_anim_set_repeat_count(&PropertyAnimation_0, 0);
+    lv_anim_set_repeat_delay(&PropertyAnimation_0, 0);
+    lv_anim_set_early_apply(&PropertyAnimation_0, false);
+    lv_anim_set_get_value_cb(&PropertyAnimation_0, &_ui_anim_callback_get_width);
+    lv_anim_start(&PropertyAnimation_0);
+    ui_anim_user_data_t * PropertyAnimation_1_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
+    PropertyAnimation_1_user_data->target = TargetObject;
+    PropertyAnimation_1_user_data->imgset = ui_imgset_;
+    PropertyAnimation_1_user_data->imgset_size = sizeof(ui_imgset_) / (sizeof(lv_img_dsc_t *));
+    PropertyAnimation_1_user_data->val = -1;
+    lv_anim_t PropertyAnimation_1;
+    lv_anim_init(&PropertyAnimation_1);
+    lv_anim_set_time(&PropertyAnimation_1, 200);
+    lv_anim_set_user_data(&PropertyAnimation_1, PropertyAnimation_1_user_data);
+    lv_anim_set_custom_exec_cb(&PropertyAnimation_1, _ui_anim_callback_set_height);
+    lv_anim_set_values(&PropertyAnimation_1, 0, 20);
+    lv_anim_set_path_cb(&PropertyAnimation_1, lv_anim_path_overshoot);
+    lv_anim_set_delay(&PropertyAnimation_1, delay + 0);
+    lv_anim_set_deleted_cb(&PropertyAnimation_1, _ui_anim_callback_free_user_data);
+    lv_anim_set_playback_time(&PropertyAnimation_1, 0);
+    lv_anim_set_playback_delay(&PropertyAnimation_1, 0);
+    lv_anim_set_repeat_count(&PropertyAnimation_1, 0);
+    lv_anim_set_repeat_delay(&PropertyAnimation_1, 0);
+    lv_anim_set_early_apply(&PropertyAnimation_1, false);
+    lv_anim_set_get_value_cb(&PropertyAnimation_1, &_ui_anim_callback_get_height);
+    lv_anim_start(&PropertyAnimation_1);
+    ui_anim_user_data_t * PropertyAnimation_2_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
+    PropertyAnimation_2_user_data->target = TargetObject;
+    PropertyAnimation_2_user_data->imgset = ui_imgset_;
+    PropertyAnimation_2_user_data->imgset_size = sizeof(ui_imgset_) / (sizeof(lv_img_dsc_t *));
+    PropertyAnimation_2_user_data->val = -1;
+    lv_anim_t PropertyAnimation_2;
+    lv_anim_init(&PropertyAnimation_2);
+    lv_anim_set_time(&PropertyAnimation_2, 200);
+    lv_anim_set_user_data(&PropertyAnimation_2, PropertyAnimation_2_user_data);
+    lv_anim_set_custom_exec_cb(&PropertyAnimation_2, _ui_anim_callback_set_y);
+    lv_anim_set_values(&PropertyAnimation_2, 0, 40);
+    lv_anim_set_path_cb(&PropertyAnimation_2, lv_anim_path_overshoot);
+    lv_anim_set_delay(&PropertyAnimation_2, delay + 0);
+    lv_anim_set_deleted_cb(&PropertyAnimation_2, _ui_anim_callback_free_user_data);
+    lv_anim_set_playback_time(&PropertyAnimation_2, 0);
+    lv_anim_set_playback_delay(&PropertyAnimation_2, 0);
+    lv_anim_set_repeat_count(&PropertyAnimation_2, 0);
+    lv_anim_set_repeat_delay(&PropertyAnimation_2, 0);
+    lv_anim_set_early_apply(&PropertyAnimation_2, false);
+    lv_anim_set_get_value_cb(&PropertyAnimation_2, &_ui_anim_callback_get_y);
+    lv_anim_start(&PropertyAnimation_2);
 
 }
 
@@ -1099,6 +1208,14 @@ void ui_event_Apps(lv_event_t * e)
         CompassArrowWiggle_Animation(ui_comp_get_child(ui_Compass_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 0);
     }
 }
+void ui_event_Calculator_App_Button_App_Button(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(ui_Calculator, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
+    }
+}
 void ui_event_Compass_App_Button_App_Button(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -1113,6 +1230,14 @@ void ui_event_Settings_App_Button_App_Button(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
+    }
+}
+void ui_event_Calculator_Equation_Panel(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        CalculatorEquationFocus_Animation(ui_Calculator_Equation_Panel, 0);
     }
 }
 
@@ -1137,6 +1262,7 @@ void ui_init(void)
     ui_Schedule_screen_init();
     ui_Compass_screen_init();
     ui_Apps_screen_init();
+    //ui_Calculator_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Clock);
 }
