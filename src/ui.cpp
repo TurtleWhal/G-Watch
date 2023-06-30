@@ -76,10 +76,9 @@ int selectedalarm = 0;
 const char compile_time[] = __TIME__;
 const char compile_date[] = __DATE__;
 
-long int notificationtime;
 bool notificationshowing = 0;
-int NotificationLength = 20; // amount of time notification is displayed in seconds
 int notificationid = 1;
+int notificationtime;
 
 int stopwatchtime = 0;
 int stopwatchtimestarted = 0;
@@ -105,7 +104,12 @@ int lastpercent = 100;
 
 bool charging;
 
-int StepGoal = 6500;
+
+////////////////////Settings////////////////////
+RTC_DATA_ATTR int StepGoal; //= 6500; // Step Goal
+RTC_DATA_ATTR int NotificationLength = 20; // Amount of time notifications are displayed in seconds
+RTC_DATA_ATTR int VibrationStrength = 30; // Strength of button vibrations
+////////////////////////////////////////////////
 
 lv_obj_t *ui_Notification_Widgets[1];
 
@@ -194,16 +198,14 @@ void btn3_click(void *param)
 void btn1_held(void *param)
 {
   Serial.println("BTN1 Held");
-  twatch->motor_shake(1, 60);
   if (lv_scr_act() != ui_Settings)
-    _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
+    _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_NONE, 150, 0);
   Wakeup("Button 1 Held");
 }
 
 void btn2_held(void *param)
 {
   Serial.println("BTN2 Held");
-  twatch->motor_shake(1, 60);
   Wakeup("Button 2 Held");
   if (lv_scr_act() == ui_Stopwatch)
     resetstopwatch(nullptr);
@@ -212,9 +214,8 @@ void btn2_held(void *param)
 void btn3_held(void *param)
 {
   Serial.println("BTN3 Held");
-  twatch->motor_shake(1, 60);
   Wakeup("Button 3 Held");
-  _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
+  _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_NONE, 150, 0);
 }
 
 void setup()
@@ -1273,4 +1274,9 @@ void StepHandle()
   sprintf(steps, "%i Steps", twatch->bma423_get_step());
   lv_label_set_text(ui_Step_Counter_Text, steps);
   lv_arc_set_value(ui_Arc_Right, ((float)twatch->bma423_get_step() / StepGoal) * 250);
+}
+
+void UpdateSettings(lv_event_t * e)
+{
+  StepGoal = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
 }
