@@ -1,0 +1,14 @@
+{
+  "codename": "Number_big",
+  "ttf_path": "\\assets\\fonts\\Montserrat-Light.ttf",
+  "bin_path": "\\assets\\fonts\\ui_font_Number_big.bin",
+  "c_path": "\\assets\\fonts\\ui_font_Number_big.c",
+  "cfg_path": "\\assets\\fonts\\ui_font_Number_big.fcfg",
+  "size": 110,
+  "bpp": 8,
+  "letters": 0,
+  "ranges": [],
+  "symbols": "0123456789.,:°",
+  "customparams": "--no-compress --no-prefilter",
+  "uploaded": false
+}

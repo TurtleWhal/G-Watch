@@ -122,7 +122,3 @@ def ToggleDoNotDisturb(event_struct):
 def PowerOff(event_struct):
     return
 
-
-def UpdateSettings(event_struct):
-    return
-

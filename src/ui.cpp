@@ -14,8 +14,8 @@
 
 #include "sleep.h"
 #include "time.h"
-
-#include "Preferences.h"
+#include "sntp.h"
+#include <WiFi.h>
 
 // #include "Functions.c"
 
@@ -45,11 +45,9 @@ TWatchClass *twatch = nullptr;
 
 BluetoothSerial SerialBT;
 
-Preferences Storage;
-
 // functions
 void writetimertime();
-void shownotification(bool Store);
+void shownotification();
 void notificationdismiss();
 void alarmhandle();
 void BThandle();
@@ -57,7 +55,6 @@ void istimernegative();
 void Powerhandle();
 void Sleephandle();
 void Compass();
-void StepHandle();
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -77,12 +74,13 @@ typedef struct
 Alarm alarms[4];
 int selectedalarm = 0;
 
-const char compile_time[] = __TIME__;
-const char compile_date[] = __DATE__;
+// const char compile_time[] = __TIME__;
+// const char compile_date[] = __DATE__;
 
+long int notificationtime;
 bool notificationshowing = 0;
+int NotificationLength = 20; // amount of time notification is displayed in seconds
 int notificationid = 1;
-int notificationtime;
 
 int stopwatchtime = 0;
 int stopwatchtimestarted = 0;
@@ -108,15 +106,16 @@ int lastpercent = 100;
 
 bool charging;
 
-////////////////////Settings////////////////////
-int StepGoal;               // Step Goal
-int NotificationLength;     // Amount of time notifications are displayed in seconds
-int VibrationStrength = 30; // Strength of button vibrations
-////////////////////////////////////////////////
+const char* ssid       = "IT-Test";
+const char* password   = "";
+//const char* ssid       = "NetworkOfIOT";
+//const char* password   = "40961024";
+const char* ntpServer1 = "pool.ntp.org";
+const char* ntpServer2 = "time.nist.gov";
 
-int Steps;
-int LastSteps;
-int StepDay;
+const long  gmtOffset_sec = 3600*(-8);
+const int   daylightOffset_sec = 3600;
+const char* time_zone = "CET-1CEST,M3.5.0,M10.5.0/3"; // TimeZone rule for Europe/Rome including daylight adjustment rules (optional)
 
 lv_obj_t *ui_Notification_Widgets[1];
 
@@ -205,14 +204,16 @@ void btn3_click(void *param)
 void btn1_held(void *param)
 {
   Serial.println("BTN1 Held");
+  twatch->motor_shake(1, 60);
   if (lv_scr_act() != ui_Settings)
-    _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_NONE, 150, 0);
+    _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
   Wakeup("Button 1 Held");
 }
 
 void btn2_held(void *param)
 {
   Serial.println("BTN2 Held");
+  twatch->motor_shake(1, 60);
   Wakeup("Button 2 Held");
   if (lv_scr_act() == ui_Stopwatch)
     resetstopwatch(nullptr);
@@ -221,32 +222,16 @@ void btn2_held(void *param)
 void btn3_held(void *param)
 {
   Serial.println("BTN3 Held");
+  twatch->motor_shake(1, 60);
   Wakeup("Button 3 Held");
-  _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_NONE, 150, 0);
+  _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
 }
 
 void setup()
 {
   setCpuFrequencyMhz(240);
-
-  Storage.begin("Settings", false);
-
-  Serial.begin(115200); /* prepare for possible serial debug */
-
-  if (Storage.isKey("BTname"))
-  {
-    char BTnamechar[17];
-    Storage.getBytes("BTname", BTnamechar, 17);
-    SerialBT.begin((String)BTnamechar);
-    Serial.print("BT Name: ");
-    Serial.println(BTnamechar);
-  }
-  else
-    SerialBT.begin("Unnamed Watch"); /*
-     char BTnamechar[17];
-     Storage.getBytes("BTname", BTnamechar, 17);
-     Serial.println(BTnamechar);
-     Serial.println(Storage.isKey("BTname"));*/
+  Serial.begin(115200);              /* prepare for possible serial debug */
+  SerialBT.begin("Kiefer's Watch"); // Bluetooth device name
 
   twatch = TWatchClass::getWatch();
 
@@ -300,34 +285,40 @@ void setup()
   lv_indev_drv_register(&indev_drv);
 
   // rtc.adjust(1, 26, 21, 2022, 6, 3); // 01:26:21 03 Jun 2022
-  String Month = compile_date;
-  Month.remove(3, 8);
-  char MonthNum;
-  if (Month == "Jan")
-    MonthNum = 1;
-  else if (Month == "Feb")
-    MonthNum = 2;
-  else if (Month == "Mar")
-    MonthNum = 3;
-  else if (Month == "Apr")
-    MonthNum = 4;
-  else if (Month == "May")
-    MonthNum = 5;
-  else if (Month == "Jun")
-    MonthNum = 6;
-  else if (Month == "Jul")
-    MonthNum = 7;
-  else if (Month == "Aug")
-    MonthNum = 8;
-  else if (Month == "Sep")
-    MonthNum = 9;
-  else if (Month == "Oct")
-    MonthNum = 10;
-  else if (Month == "Nov")
-    MonthNum = 11;
-  else if (Month == "Dec")
-    MonthNum = 12;
+  // String Month = compile_date;
+  // Month.remove(3, 8);
+  // char MonthNum;
+  // if (Month == "Jan")
+  //   MonthNum = 1;
+  // else if (Month == "Feb")
+  //   MonthNum = 2;
+  // else if (Month == "Mar")
+  //   MonthNum = 3;
+  // else if (Month == "Apr")
+  //   MonthNum = 4;
+  // else if (Month == "May")
+  //   MonthNum = 5;
+  // else if (Month == "Jun")
+  //   MonthNum = 6;
+  // else if (Month == "Jul")
+  //   MonthNum = 7;
+  // else if (Month == "Aug")
+  //   MonthNum = 8;
+  // else if (Month == "Sep")
+  //   MonthNum = 9;
+  // else if (Month == "Oct")
+  //   MonthNum = 10;
+  // else if (Month == "Nov")
+  //   MonthNum = 11;
+  // else if (Month == "Dec")
+  //   MonthNum = 12;
   // rtc.adjust(atoi(compile_time), atoi(compile_time + 3), atoi(compile_time + 6) + 35, atoi(compile_date + 7), MonthNum, atoi(compile_date + 4));
+  
+  // Set time
+  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer1, ntpServer2);
+
+  //Connect to WiFi
+  WiFi.begin(ssid, password);
 
   alarms[0].state = 0;
   alarms[1].state = 0;
@@ -356,29 +347,8 @@ void setup()
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
     lastpercent = 0;
 
-  StepGoal = Storage.getInt("StepGoal");
-  char StepGoalChar[6];
-  sprintf(StepGoalChar, "%i", StepGoal);
-  lv_textarea_set_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), StepGoalChar);
-
-  char BTnamechar[17];
-  Storage.getBytes("BTname", BTnamechar, 17);
-  lv_textarea_set_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), BTnamechar);
-
-  NotificationLength = Storage.getInt("NotifLength");
-  char NotificationLengthChar[4];
-  sprintf(NotificationLengthChar, "%i", NotificationLength);
-  lv_textarea_set_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), NotificationLengthChar);
-
   // lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
 
-  if (Storage.getInt("StepDay") == GetDay())
-    LastSteps = Storage.getInt("Steps");
-  else
-  {
-    Storage.putInt("StepDay", GetDay());
-    Storage.putBool("StepReach", 0);
-  }
   Serial.println("Setup done");
 }
 
@@ -415,13 +385,16 @@ void loop()
     writetime();
     Powerhandle();
     Compass();
-    StepHandle();
   }
   else
     delay(5);
   // alarmhandle();
   BThandle();
   Sleephandle();
+
+  char steps[32];
+  sprintf(steps, "%i Steps", twatch->bma423_get_step());
+  lv_label_set_text(ui_Step_Counter_Text, steps);
 
   /*if (digitalRead(TWATCH_CHARGING) == 1 and twatch->power_get_volt() < 3800)
     Sleephandle();*/
@@ -889,7 +862,7 @@ void toggleampm(lv_event_t *e)
   }
 }*/
 
-void shownotification(bool Store)
+void shownotification()
 {
   // Create the widget in the Clock screen
   Wakeup("Notification Received");
@@ -902,13 +875,11 @@ void shownotification(bool Store)
     twatch->motor_shake(2, 30);
 
   // Create the widget in the notifications screen
-  if (Store)
-  {
-    lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
-  }
+
+  lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
+  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
+  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
 }
 
 void notificationdismiss(lv_event_t *e)
@@ -1140,7 +1111,7 @@ void BThandle()
         Serial.print((int)((input.charAt(6) + 2000)));
         Serial.println("year");
         // rtc.adjust(input.charAt(1), input.charAt(2), input.charAt(3), input.charAt(6) + 2000, input.charAt(4), input.charAt(5));
-        twatch->rtc_set_time(input.charAt(6) + 2000, input.charAt(4), input.charAt(5), input.charAt(1), input.charAt(2), input.charAt(3));
+        //twatch->rtc_set_time(input.charAt(6) + 2000, input.charAt(4), input.charAt(5), input.charAt(1), input.charAt(2), input.charAt(3));
       }
       if (input.charAt(0) == 2)
       {
@@ -1165,7 +1136,7 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         lv_label_set_text(ui_Notification_Source, input.c_str());
-        shownotification(1);
+        shownotification();
       }
       if (input.charAt(0) == 5)
       {
@@ -1238,8 +1209,14 @@ void Powerhandle()
     char percentchar[] = "179&";
     sprintf(percentchar, "%.0f%%", (twatch->power_get_percent()));
     lv_label_set_text(ui_Battery_Percentage, percentchar);
-    lv_arc_set_value(ui_Arc_Battery, (twatch->power_get_percent() / 100) * 250);
+    lv_bar_set_value(ui_Battery_Percent_Bar, twatch->power_get_percent(), LV_ANIM_OFF);
     lastpercent = twatch->power_get_percent();
+  }
+
+  if (charging == 1) {
+    lv_img_set_src(ui_Battery_Indicator, &ui_img_batterycharging_png);
+  } else if (charging == 0) {
+    lv_img_set_src(ui_Battery_Indicator, &ui_img_batterynormal_png);
   }
 }
 
@@ -1310,37 +1287,4 @@ void Compass()
     // lv_obj_set_x(ui_Compass_N, 0);
     // lv_obj_set_y(ui_Compass_N, -100);
   }
-}
-
-void StepHandle()
-{
-  Steps = twatch->bma423_get_step() + LastSteps;
-  char StepChar[32];
-  sprintf(StepChar, "%i Steps", Steps);
-  lv_label_set_text(ui_Step_Counter_Text, StepChar);
-  lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
-  Storage.putInt("Steps", Steps);
-  StepDay = GetDay();
-  Storage.putInt("StepsDay", StepDay);
-  if (Steps >= StepGoal and !Storage.getBool("StepReach"))
-  {
-    lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
-    char StepGoalText[50];
-    sprintf(StepGoalText, "You have reached your step goal of %i Steps!", StepGoal);
-    lv_label_set_text(ui_Notification_Text, StepGoalText);
-    shownotification(0);
-    Storage.putBool("StepReach", 1);
-  }
-}
-
-void UpdateSettings(lv_event_t *e)
-{
-  StepGoal = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
-  Storage.putInt("StepGoal", StepGoal);
-
-  NotificationLength = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
-  Storage.putInt("NotifLength", NotificationLength);
-
-  Storage.putBytes("BTname", lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)), 17);
-  // Serial.println(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
 }

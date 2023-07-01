@@ -1,0 +1,16 @@
+{
+  "codename": "Subtitle",
+  "ttf_path": "\\assets\\fonts\\Montserrat-Bold.ttf",
+  "bin_path": "\\assets\\fonts\\ui_font_Subtitle.bin",
+  "c_path": "\\assets\\fonts\\ui_font_Subtitle.c",
+  "cfg_path": "\\assets\\fonts\\ui_font_Subtitle.fcfg",
+  "size": 20,
+  "bpp": 8,
+  "letters": 3,
+  "ranges": [
+    "0x20-0xff"
+  ],
+  "symbols": "",
+  "customparams": "--no-compress --no-prefilter",
+  "uploaded": false
+}

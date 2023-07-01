@@ -52,10 +52,3 @@ void writetime()
     snprintf(numdate, sizeof(numdate), "%02d/%02d/%02d", rtc.month, rtc.day, rtc.year - 2000);
     lv_label_set_text(ui_Date_Numerical, numdate);
 }
-
-int GetDay()
-{
-    PCF = twatch->rtc_get_instance();
-    RTC_Date rtc = PCF->getDateTime();
-    return (rtc.day);
-}
