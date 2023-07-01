@@ -55,7 +55,6 @@ extern lv_obj_t *ui_Weather_Image;
 extern lv_obj_t *ui_Temperature;
 extern lv_obj_t *ui_Alarm_Text;
 extern lv_obj_t *ui_Alarm_Image;
-extern lv_obj_t *ui_Arc_Battery_Charge;
 extern lv_obj_t *ui_Arc_Left;
 extern lv_obj_t *ui_Arc_Left_Text;
 extern lv_obj_t *ui_Arc_Left_Image;
@@ -354,7 +353,7 @@ extern lv_obj_t *ui_Calculator_Equation_Panel;
 extern lv_obj_t *ui_Calculator_Equation_Label;
 extern lv_obj_t *ui____initial_actions0;
 
-LV_IMG_DECLARE( ui_img_bg3_png);   // assets/bg3.png
+LV_IMG_DECLARE( ui_img_background_png);   // assets/Background.png
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
 LV_IMG_DECLARE( ui_img_tick_dots_png);   // assets/Tick Dots.png
 LV_IMG_DECLARE( ui_img_weather_png);   // assets/weather.png
@@ -365,40 +364,19 @@ LV_IMG_DECLARE( ui_img_clockwise_min_png);   // assets/clockwise_min.png
 LV_IMG_DECLARE( ui_img_clockwise_hour_png);   // assets/clockwise_hour.png
 LV_IMG_DECLARE( ui_img_clockwise_sec_png);   // assets/clockwise_sec.png
 LV_IMG_DECLARE( ui_img_seconddot_png);   // assets/SecondDot.png
-LV_IMG_DECLARE( ui_img_battery_png);   // assets/Battery.png
 LV_IMG_DECLARE( ui_img_batterynormal_png);   // assets/BatteryNormal.png
 LV_IMG_DECLARE( ui_img_batterycharging_png);   // assets/BatteryCharging.png
 LV_IMG_DECLARE( ui_img_no_bluetooth_small_png);   // assets/No Bluetooth_Small.png
 LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
-LV_IMG_DECLARE( ui_img_bell_png);   // assets/Bell.png
+LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
 LV_IMG_DECLARE( ui_img_restart_button_png);   // assets/Restart Button.png
-LV_IMG_DECLARE( ui_img_playpause_button_png);   // assets/PlayPause Button.png
 LV_IMG_DECLARE( ui_img_brightness_png);   // assets/brightness.png
 LV_IMG_DECLARE( ui_img_bluetooth_small_nobackground_png);   // assets/Bluetooth_Small_nobackground.png
 LV_IMG_DECLARE( ui_img_power_icon_png);   // assets/Power Icon.png
 LV_IMG_DECLARE( ui_img_play_button_png);   // assets/Play Button.png
-LV_IMG_DECLARE( ui_img_calculator_icon_png);   // assets/Calculator Icon.png
-LV_IMG_DECLARE( ui_img_compass_png);   // assets/Compass.png
 LV_IMG_DECLARE( ui_img_settings_gear_png);   // assets/Settings Gear.png
-LV_IMG_DECLARE( ui_img_bg1_png);   // assets/bg1.png
-LV_IMG_DECLARE( ui_img_bg2_png);   // assets/bg2.png
-LV_IMG_DECLARE( ui_img_btn_bg_1_png);   // assets/btn_bg_1.png
-LV_IMG_DECLARE( ui_img_btn_bg_2_png);   // assets/btn_bg_2.png
-LV_IMG_DECLARE( ui_img_btn_bg_3_png);   // assets/btn_bg_3.png
 LV_IMG_DECLARE( ui_img_call1_png);   // assets/call1.png
 LV_IMG_DECLARE( ui_img_call2_png);   // assets/call2.png
-LV_IMG_DECLARE( ui_img_heart2_png);   // assets/heart2.png
-LV_IMG_DECLARE( ui_img_s1_png);   // assets/s1.png
-LV_IMG_DECLARE( ui_img_s2_png);   // assets/s2.png
-LV_IMG_DECLARE( ui_img_s3_png);   // assets/s3.png
-LV_IMG_DECLARE( ui_img_s4_png);   // assets/s4.png
-LV_IMG_DECLARE( ui_img_s5_png);   // assets/s5.png
-LV_IMG_DECLARE( ui_img_s6_png);   // assets/s6.png
-LV_IMG_DECLARE( ui_img_s7_png);   // assets/s7.png
-LV_IMG_DECLARE( ui_img_s8_png);   // assets/s8.png
-LV_IMG_DECLARE( ui_img_s9_png);   // assets/s9.png
-LV_IMG_DECLARE( ui_img_wave1_png);   // assets/wave1.png
-LV_IMG_DECLARE( ui_img_wave2_png);   // assets/wave2.png
 
 LV_FONT_DECLARE( ui_font_Comfortaa_16);
 LV_FONT_DECLARE( ui_font_Comfortaa_26);

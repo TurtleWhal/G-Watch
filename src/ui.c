@@ -37,7 +37,6 @@ lv_obj_t *ui_Weather_Image;
 lv_obj_t *ui_Temperature;
 lv_obj_t *ui_Alarm_Text;
 lv_obj_t *ui_Alarm_Image;
-lv_obj_t *ui_Arc_Battery_Charge;
 lv_obj_t *ui_Arc_Left;
 lv_obj_t *ui_Arc_Left_Text;
 lv_obj_t *ui_Arc_Left_Image;
@@ -346,12 +345,7 @@ void ui_event_Calculator_Equation_Panel( lv_event_t * e);
 lv_obj_t *ui_Calculator_Equation_Panel;
 lv_obj_t *ui_Calculator_Equation_Label;
 lv_obj_t *ui____initial_actions0;
-const lv_img_dsc_t *ui_imgset_bg[3] = {&ui_img_bg1_png, &ui_img_bg2_png, &ui_img_bg3_png};
-const lv_img_dsc_t *ui_imgset_btn_bg_[3] = {&ui_img_btn_bg_1_png, &ui_img_btn_bg_2_png, &ui_img_btn_bg_3_png};
 const lv_img_dsc_t *ui_imgset_call[2] = {&ui_img_call1_png, &ui_img_call2_png};
-const lv_img_dsc_t *ui_imgset_heart[1] = {&ui_img_heart2_png};
-const lv_img_dsc_t *ui_imgset_s[9] = {&ui_img_s1_png, &ui_img_s2_png, &ui_img_s3_png, &ui_img_s4_png, &ui_img_s5_png, &ui_img_s6_png, &ui_img_s7_png, &ui_img_s8_png, &ui_img_s9_png};
-const lv_img_dsc_t *ui_imgset_wave[2] = {&ui_img_wave1_png, &ui_img_wave2_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16

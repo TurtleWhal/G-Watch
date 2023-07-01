@@ -16,7 +16,7 @@ SET(SOURCES components/ui_comp_app_button.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
-    images/ui_img_bg3_png.c
+    images/ui_img_background_png.c
     images/ui_img_tick_dashes_png.c
     images/ui_img_tick_dots_png.c
     images/ui_img_weather_png.c
@@ -27,39 +27,18 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_clockwise_hour_png.c
     images/ui_img_clockwise_sec_png.c
     images/ui_img_seconddot_png.c
-    images/ui_img_battery_png.c
     images/ui_img_batterynormal_png.c
     images/ui_img_no_bluetooth_small_png.c
     images/ui_img_bellnobackground_png.c
-    images/ui_img_bell_png.c
+    images/ui_img_bellnobackground_png.c
     images/ui_img_restart_button_png.c
-    images/ui_img_playpause_button_png.c
     images/ui_img_brightness_png.c
     images/ui_img_bluetooth_small_nobackground_png.c
     images/ui_img_power_icon_png.c
     images/ui_img_play_button_png.c
-    images/ui_img_calculator_icon_png.c
-    images/ui_img_compass_png.c
     images/ui_img_settings_gear_png.c
-    images/ui_img_bg1_png.c
-    images/ui_img_bg2_png.c
-    images/ui_img_btn_bg_1_png.c
-    images/ui_img_btn_bg_2_png.c
-    images/ui_img_btn_bg_3_png.c
     images/ui_img_call1_png.c
     images/ui_img_call2_png.c
-    images/ui_img_heart2_png.c
-    images/ui_img_s1_png.c
-    images/ui_img_s2_png.c
-    images/ui_img_s3_png.c
-    images/ui_img_s4_png.c
-    images/ui_img_s5_png.c
-    images/ui_img_s6_png.c
-    images/ui_img_s7_png.c
-    images/ui_img_s8_png.c
-    images/ui_img_s9_png.c
-    images/ui_img_wave1_png.c
-    images/ui_img_wave2_png.c
     fonts/ui_font_Comfortaa_16.c
     fonts/ui_font_Comfortaa_26.c
     fonts/ui_font_Comfortaa_30.c

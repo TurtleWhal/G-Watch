@@ -164,7 +164,6 @@ lv_obj_set_style_bg_color(ui_Stopwatch_Play_Pause_Button, lv_color_hex(0xFF7D00)
 lv_obj_set_style_bg_opa(ui_Stopwatch_Play_Pause_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Stopwatch_Play_Pause_Image = lv_img_create(ui_Stopwatch_Play_Pause_Button);
-lv_img_set_src(ui_Stopwatch_Play_Pause_Image, &ui_img_playpause_button_png);
 lv_obj_set_width( ui_Stopwatch_Play_Pause_Image, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Stopwatch_Play_Pause_Image, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Stopwatch_Play_Pause_Image, 0 );
