@@ -15,6 +15,8 @@
 #include "sleep.h"
 #include "time.h"
 
+#include "Preferences.h"
+
 // #include "Functions.c"
 
 // #include "watch.h"
@@ -42,6 +44,8 @@ TWatchClass *twatch = nullptr;
 // PicoEspTime rtc;
 
 BluetoothSerial SerialBT;
+
+Preferences Storage;
 
 // functions
 void writetimertime();
@@ -104,11 +108,10 @@ int lastpercent = 100;
 
 bool charging;
 
-
 ////////////////////Settings////////////////////
-RTC_DATA_ATTR int StepGoal; //= 6500; // Step Goal
-RTC_DATA_ATTR int NotificationLength = 20; // Amount of time notifications are displayed in seconds
-RTC_DATA_ATTR int VibrationStrength = 30; // Strength of button vibrations
+int StepGoal;               // Step Goal
+int NotificationLength;     // Amount of time notifications are displayed in seconds
+int VibrationStrength = 30; // Strength of button vibrations
 ////////////////////////////////////////////////
 
 lv_obj_t *ui_Notification_Widgets[1];
@@ -222,10 +225,24 @@ void setup()
 {
   setCpuFrequencyMhz(240);
 
-  // lv_obj_del(ui_Calculator);
+  Storage.begin("Settings", false);
 
-  Serial.begin(115200);              /* prepare for possible serial debug */
-  SerialBT.begin("Garrett's Watch"); // Bluetooth device name
+  Serial.begin(115200); /* prepare for possible serial debug */
+
+  if (Storage.isKey("BTname"))
+  {
+    char BTnamechar[17];
+    Storage.getBytes("BTname", BTnamechar, 17);
+    SerialBT.begin((String)BTnamechar);
+    Serial.print("BT Name: ");
+    Serial.println(BTnamechar);
+  }
+  else
+    SerialBT.begin("Unnamed Watch"); /*
+     char BTnamechar[17];
+     Storage.getBytes("BTname", BTnamechar, 17);
+     Serial.println(BTnamechar);
+     Serial.println(Storage.isKey("BTname"));*/
 
   twatch = TWatchClass::getWatch();
 
@@ -334,6 +351,20 @@ void setup()
 
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
     lastpercent = 0;
+
+  StepGoal = Storage.getInt("StepGoal");
+  char StepGoalChar[6];
+  sprintf(StepGoalChar, "%i", StepGoal);
+  lv_textarea_set_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), StepGoalChar);
+
+  char BTnamechar[17];
+  Storage.getBytes("BTname", BTnamechar, 17);
+  lv_textarea_set_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), BTnamechar);
+
+  NotificationLength = Storage.getInt("NotifLength");
+  char NotificationLengthChar[4];
+  sprintf(NotificationLengthChar, "%i", NotificationLength);
+  lv_textarea_set_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), NotificationLengthChar);
 
   // lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
 
@@ -1276,7 +1307,14 @@ void StepHandle()
   lv_arc_set_value(ui_Arc_Right, ((float)twatch->bma423_get_step() / StepGoal) * 250);
 }
 
-void UpdateSettings(lv_event_t * e)
+void UpdateSettings(lv_event_t *e)
 {
   StepGoal = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
+  Storage.putInt("StepGoal", StepGoal);
+
+  NotificationLength = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
+  Storage.putInt("NotifLength", NotificationLength);
+  
+  Storage.putBytes("BTname", lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)), 17);
+  // Serial.println(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
 }

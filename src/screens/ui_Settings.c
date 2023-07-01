@@ -114,6 +114,35 @@ lv_label_set_text(ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_
 
 lv_textarea_set_placeholder_text(ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),"Goal");
 
+ui_Notification_Time_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
+lv_obj_set_x( ui_Notification_Time_Setting_Panel, 200 );
+lv_obj_set_y( ui_Notification_Time_Setting_Panel, 35 );
+
+lv_label_set_text(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Notification\nTime (Seconds)");
+lv_obj_set_style_text_font(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_textarea_set_max_length(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),3);
+lv_textarea_set_placeholder_text(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),"Time");
+
+ui_BTname_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
+lv_obj_set_x( ui_BTname_Setting_Panel, 200 );
+lv_obj_set_y( ui_BTname_Setting_Panel, 35 );
+
+lv_label_set_text(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Bluetooth\nName");
+lv_obj_set_style_text_font(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_width( ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 115);
+lv_obj_set_height( ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), LV_SIZE_CONTENT);   /// 29
+if (""=="") lv_textarea_set_accepted_chars(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), NULL);
+else lv_textarea_set_accepted_chars(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), "");
+lv_textarea_set_max_length(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),16);
+lv_textarea_set_placeholder_text(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),"Name");
+lv_obj_set_style_text_font(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_left(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 5, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 2, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+
 ui_Power_Button1 = lv_btn_create(ui_Settings_Panel);
 lv_obj_set_width( ui_Power_Button1, 200);
 lv_obj_set_height( ui_Power_Button1, 35);
@@ -179,14 +208,29 @@ lv_obj_set_style_shadow_width(ui_Settings_Numberpad, 20, LV_PART_MAIN| LV_STATE_
 lv_obj_set_style_shadow_spread(ui_Settings_Numberpad, 7, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_set_style_radius(ui_Settings_Numberpad, 10, LV_PART_ITEMS| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Settings_Numberpad, lv_color_hex(0xFF7D00), LV_PART_ITEMS | LV_STATE_PRESSED );
+lv_obj_set_style_bg_opa(ui_Settings_Numberpad, 255, LV_PART_ITEMS| LV_STATE_PRESSED);
+
+ui_Settings_Keyboard = lv_keyboard_create(ui_Settings);
+lv_keyboard_set_mode(ui_Settings_Keyboard,LV_KEYBOARD_MODE_TEXT_UPPER);
+lv_obj_set_width( ui_Settings_Keyboard, 243);
+lv_obj_set_height( ui_Settings_Keyboard, 105);
+lv_obj_set_align( ui_Settings_Keyboard, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Settings_Keyboard, LV_OBJ_FLAG_HIDDEN );   /// Flags
+
+lv_obj_set_style_bg_color(ui_Settings_Keyboard, lv_color_hex(0xFF7D00), LV_PART_ITEMS | LV_STATE_PRESSED );
+lv_obj_set_style_bg_opa(ui_Settings_Keyboard, 255, LV_PART_ITEMS| LV_STATE_PRESSED);
 
 lv_obj_add_event_cb(ui_Brightness_Slider, ui_event_Brightness_Slider, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Bluetooth_Button, ui_event_Bluetooth_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Do_Not_Disturb_Button, ui_event_Do_Not_Disturb_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), ui_event_BTname_Setting_Panel_BTname_Setting_Value, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Power_Button1, ui_event_Power_Button1, LV_EVENT_ALL, NULL);
 lv_keyboard_set_textarea(ui_Settings_Numberpad,ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE));
 lv_obj_add_event_cb(ui_Settings_Numberpad, ui_event_Settings_Numberpad, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Settings_Keyboard, ui_event_Settings_Keyboard, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Settings, ui_event_Settings, LV_EVENT_ALL, NULL);
 
 }

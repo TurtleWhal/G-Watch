@@ -40,6 +40,7 @@ SET(SOURCES components/ui_comp_app_button.c
     fonts/ui_font_Comfortaa_26.c
     fonts/ui_font_Comfortaa_30.c
     fonts/ui_font_Monoton_48.c
-    fonts/ui_font_Music_14.c)
+    fonts/ui_font_Music_14.c
+    fonts/ui_font_Comfortaa_12.c)
 
 add_library(ui ${SOURCES})

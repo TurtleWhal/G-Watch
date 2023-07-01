@@ -43,6 +43,7 @@ void ToggleBT(lv_event_t * e);
 void ToggleDoNotDisturb(lv_event_t * e);
 void PowerOff(lv_event_t * e);
 void UpdateSettings(lv_event_t * e);
+void UpdateSettings(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

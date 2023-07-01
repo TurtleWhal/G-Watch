@@ -236,6 +236,10 @@ extern lv_obj_t *ui_Do_Not_Disturb_Button;
 extern lv_obj_t *ui_Do_Not_Disturb_Button_Image;
 extern lv_obj_t *ui_Step_goal_Setting_Panel;
 void ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value( lv_event_t * e);
+extern lv_obj_t *ui_Notification_Time_Setting_Panel;
+void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e);
+extern lv_obj_t *ui_BTname_Setting_Panel;
+void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e);
 void ui_event_Power_Button1( lv_event_t * e);
 extern lv_obj_t *ui_Power_Button1;
 extern lv_obj_t *ui_Power_Button_Image1;
@@ -243,6 +247,8 @@ extern lv_obj_t *ui_Settings_Label_Underline;
 extern lv_obj_t *ui_Settings_Label;
 void ui_event_Settings_Numberpad( lv_event_t * e);
 extern lv_obj_t *ui_Settings_Numberpad;
+void ui_event_Settings_Keyboard( lv_event_t * e);
+extern lv_obj_t *ui_Settings_Keyboard;
 // SCREEN: ui_Schedule
 void ui_Schedule_screen_init(void);
 void ui_event_Schedule( lv_event_t * e);
@@ -368,6 +374,7 @@ LV_FONT_DECLARE( ui_font_Comfortaa_26);
 LV_FONT_DECLARE( ui_font_Comfortaa_30);
 LV_FONT_DECLARE( ui_font_Monoton_48);
 LV_FONT_DECLARE( ui_font_Music_14);
+LV_FONT_DECLARE( ui_font_Comfortaa_12);
 
 void ui_init(void);
 
