@@ -7,286 +7,286 @@
 
 void ui_Alarms_screen_init(void)
 {
-ui_Alarms = lv_obj_create(NULL);
-lv_obj_clear_flag( ui_Alarms, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    ui_Alarms = lv_obj_create(NULL);
+    lv_obj_clear_flag(ui_Alarms, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-ui_Alarms_Label = lv_label_create(ui_Alarms);
-lv_obj_set_width( ui_Alarms_Label, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarms_Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarms_Label, 0 );
-lv_obj_set_y( ui_Alarms_Label, 8 );
-lv_obj_set_align( ui_Alarms_Label, LV_ALIGN_TOP_MID );
-lv_label_set_text(ui_Alarms_Label,"Alarms");
-lv_obj_set_style_text_font(ui_Alarms_Label, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarms_Label = lv_label_create(ui_Alarms);
+    lv_obj_set_width(ui_Alarms_Label, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarms_Label, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarms_Label, 0);
+    lv_obj_set_y(ui_Alarms_Label, 8);
+    lv_obj_set_align(ui_Alarms_Label, LV_ALIGN_TOP_MID);
+    lv_label_set_text(ui_Alarms_Label, "Alarms");
+    lv_obj_set_style_text_font(ui_Alarms_Label, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarms_Label_Underline = lv_obj_create(ui_Alarms);
-lv_obj_set_width( ui_Alarms_Label_Underline, 128);
-lv_obj_set_height( ui_Alarms_Label_Underline, 3);
-lv_obj_set_x( ui_Alarms_Label_Underline, 0 );
-lv_obj_set_y( ui_Alarms_Label_Underline, -90 );
-lv_obj_set_align( ui_Alarms_Label_Underline, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Alarms_Label_Underline, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_bg_color(ui_Alarms_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Alarms_Label_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_Alarms_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_border_opa(ui_Alarms_Label_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarms_Label_Underline = lv_obj_create(ui_Alarms);
+    lv_obj_set_width(ui_Alarms_Label_Underline, 128);
+    lv_obj_set_height(ui_Alarms_Label_Underline, 3);
+    lv_obj_set_x(ui_Alarms_Label_Underline, 0);
+    lv_obj_set_y(ui_Alarms_Label_Underline, -90);
+    lv_obj_set_align(ui_Alarms_Label_Underline, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Alarms_Label_Underline, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_Alarms_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Alarms_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_Alarms_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_Alarms_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarm_1 = lv_obj_create(ui_Alarms);
-lv_obj_set_width( ui_Alarm_1, 180);
-lv_obj_set_height( ui_Alarm_1, 35);
-lv_obj_set_x( ui_Alarm_1, 0 );
-lv_obj_set_y( ui_Alarm_1, -60 );
-lv_obj_set_align( ui_Alarm_1, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Alarm_1, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    ui_Alarm_1 = lv_obj_create(ui_Alarms);
+    lv_obj_set_width(ui_Alarm_1, 180);
+    lv_obj_set_height(ui_Alarm_1, 35);
+    lv_obj_set_x(ui_Alarm_1, 0);
+    lv_obj_set_y(ui_Alarm_1, -60);
+    lv_obj_set_align(ui_Alarm_1, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Alarm_1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-ui_Alarm_1_Switch = lv_switch_create(ui_Alarm_1);
-lv_obj_set_width( ui_Alarm_1_Switch, 50);
-lv_obj_set_height( ui_Alarm_1_Switch, 25);
-lv_obj_set_x( ui_Alarm_1_Switch, 60 );
-lv_obj_set_y( ui_Alarm_1_Switch, 0 );
-lv_obj_set_align( ui_Alarm_1_Switch, LV_ALIGN_CENTER );
+    ui_Alarm_1_Switch = lv_switch_create(ui_Alarm_1);
+    lv_obj_set_width(ui_Alarm_1_Switch, 50);
+    lv_obj_set_height(ui_Alarm_1_Switch, 25);
+    lv_obj_set_x(ui_Alarm_1_Switch, 60);
+    lv_obj_set_y(ui_Alarm_1_Switch, 0);
+    lv_obj_set_align(ui_Alarm_1_Switch, LV_ALIGN_CENTER);
 
-lv_obj_set_style_bg_color(ui_Alarm_1_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED );
-lv_obj_set_style_bg_opa(ui_Alarm_1_Switch, 255, LV_PART_INDICATOR| LV_STATE_CHECKED);
+    lv_obj_set_style_bg_color(ui_Alarm_1_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_Alarm_1_Switch, 255, LV_PART_INDICATOR | LV_STATE_CHECKED);
 
-ui_Alarm_1_Name = lv_label_create(ui_Alarm_1);
-lv_obj_set_width( ui_Alarm_1_Name, 115);
-lv_obj_set_height( ui_Alarm_1_Name, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_1_Name, -25 );
-lv_obj_set_y( ui_Alarm_1_Name, -7 );
-lv_obj_set_align( ui_Alarm_1_Name, LV_ALIGN_CENTER );
-lv_label_set_long_mode(ui_Alarm_1_Name,LV_LABEL_LONG_SCROLL);
-lv_label_set_text(ui_Alarm_1_Name,"Alarm 1");
-lv_obj_set_style_text_align(ui_Alarm_1_Name, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Alarm_1_Name, &lv_font_montserrat_10, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarm_1_Name = lv_label_create(ui_Alarm_1);
+    lv_obj_set_width(ui_Alarm_1_Name, 115);
+    lv_obj_set_height(ui_Alarm_1_Name, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_1_Name, -25);
+    lv_obj_set_y(ui_Alarm_1_Name, -7);
+    lv_obj_set_align(ui_Alarm_1_Name, LV_ALIGN_CENTER);
+    lv_label_set_long_mode(ui_Alarm_1_Name, LV_LABEL_LONG_SCROLL);
+    lv_label_set_text(ui_Alarm_1_Name, "Alarm 1");
+    lv_obj_set_style_text_align(ui_Alarm_1_Name, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Alarm_1_Name, &lv_font_montserrat_10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarm_1_Hour = lv_label_create(ui_Alarm_1);
-lv_obj_set_width( ui_Alarm_1_Hour, 16);
-lv_obj_set_height( ui_Alarm_1_Hour, 16);
-lv_obj_set_x( ui_Alarm_1_Hour, -76 );
-lv_obj_set_y( ui_Alarm_1_Hour, 6 );
-lv_obj_set_align( ui_Alarm_1_Hour, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_1_Hour,"12");
-lv_obj_set_style_text_align(ui_Alarm_1_Hour, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarm_1_Hour = lv_label_create(ui_Alarm_1);
+    lv_obj_set_width(ui_Alarm_1_Hour, 16);
+    lv_obj_set_height(ui_Alarm_1_Hour, 16);
+    lv_obj_set_x(ui_Alarm_1_Hour, -76);
+    lv_obj_set_y(ui_Alarm_1_Hour, 6);
+    lv_obj_set_align(ui_Alarm_1_Hour, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_1_Hour, "12");
+    lv_obj_set_style_text_align(ui_Alarm_1_Hour, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarm_1_Colin = lv_label_create(ui_Alarm_1);
-lv_obj_set_width( ui_Alarm_1_Colin, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_1_Colin, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_1_Colin, -66 );
-lv_obj_set_y( ui_Alarm_1_Colin, 6 );
-lv_obj_set_align( ui_Alarm_1_Colin, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_1_Colin,":");
+    ui_Alarm_1_Colin = lv_label_create(ui_Alarm_1);
+    lv_obj_set_width(ui_Alarm_1_Colin, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_1_Colin, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_1_Colin, -66);
+    lv_obj_set_y(ui_Alarm_1_Colin, 6);
+    lv_obj_set_align(ui_Alarm_1_Colin, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_1_Colin, ":");
 
-ui_Alarm_1_Minute = lv_label_create(ui_Alarm_1);
-lv_obj_set_width( ui_Alarm_1_Minute, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_1_Minute, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_1_Minute, -54 );
-lv_obj_set_y( ui_Alarm_1_Minute, 6 );
-lv_obj_set_align( ui_Alarm_1_Minute, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_1_Minute,"00");
+    ui_Alarm_1_Minute = lv_label_create(ui_Alarm_1);
+    lv_obj_set_width(ui_Alarm_1_Minute, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_1_Minute, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_1_Minute, -54);
+    lv_obj_set_y(ui_Alarm_1_Minute, 6);
+    lv_obj_set_align(ui_Alarm_1_Minute, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_1_Minute, "00");
 
-ui_Alarm_1_AMPM = lv_label_create(ui_Alarm_1);
-lv_obj_set_width( ui_Alarm_1_AMPM, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_1_AMPM, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_1_AMPM, -28 );
-lv_obj_set_y( ui_Alarm_1_AMPM, 6 );
-lv_obj_set_align( ui_Alarm_1_AMPM, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_1_AMPM,"AM");
+    ui_Alarm_1_AMPM = lv_label_create(ui_Alarm_1);
+    lv_obj_set_width(ui_Alarm_1_AMPM, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_1_AMPM, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_1_AMPM, -28);
+    lv_obj_set_y(ui_Alarm_1_AMPM, 6);
+    lv_obj_set_align(ui_Alarm_1_AMPM, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_1_AMPM, "AM");
 
-ui_Alarm_2 = lv_obj_create(ui_Alarms);
-lv_obj_set_width( ui_Alarm_2, 180);
-lv_obj_set_height( ui_Alarm_2, 35);
-lv_obj_set_x( ui_Alarm_2, 0 );
-lv_obj_set_y( ui_Alarm_2, -20 );
-lv_obj_set_align( ui_Alarm_2, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Alarm_2, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    ui_Alarm_2 = lv_obj_create(ui_Alarms);
+    lv_obj_set_width(ui_Alarm_2, 180);
+    lv_obj_set_height(ui_Alarm_2, 35);
+    lv_obj_set_x(ui_Alarm_2, 0);
+    lv_obj_set_y(ui_Alarm_2, -20);
+    lv_obj_set_align(ui_Alarm_2, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Alarm_2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-ui_Alarm_2_Switch = lv_switch_create(ui_Alarm_2);
-lv_obj_set_width( ui_Alarm_2_Switch, 50);
-lv_obj_set_height( ui_Alarm_2_Switch, 25);
-lv_obj_set_x( ui_Alarm_2_Switch, 60 );
-lv_obj_set_y( ui_Alarm_2_Switch, 0 );
-lv_obj_set_align( ui_Alarm_2_Switch, LV_ALIGN_CENTER );
+    ui_Alarm_2_Switch = lv_switch_create(ui_Alarm_2);
+    lv_obj_set_width(ui_Alarm_2_Switch, 50);
+    lv_obj_set_height(ui_Alarm_2_Switch, 25);
+    lv_obj_set_x(ui_Alarm_2_Switch, 60);
+    lv_obj_set_y(ui_Alarm_2_Switch, 0);
+    lv_obj_set_align(ui_Alarm_2_Switch, LV_ALIGN_CENTER);
 
-lv_obj_set_style_bg_color(ui_Alarm_2_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED );
-lv_obj_set_style_bg_opa(ui_Alarm_2_Switch, 255, LV_PART_INDICATOR| LV_STATE_CHECKED);
+    lv_obj_set_style_bg_color(ui_Alarm_2_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_Alarm_2_Switch, 255, LV_PART_INDICATOR | LV_STATE_CHECKED);
 
-ui_Alarm_2_Name = lv_label_create(ui_Alarm_2);
-lv_obj_set_width( ui_Alarm_2_Name, 115);
-lv_obj_set_height( ui_Alarm_2_Name, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_2_Name, -25 );
-lv_obj_set_y( ui_Alarm_2_Name, -7 );
-lv_obj_set_align( ui_Alarm_2_Name, LV_ALIGN_CENTER );
-lv_label_set_long_mode(ui_Alarm_2_Name,LV_LABEL_LONG_SCROLL);
-lv_label_set_text(ui_Alarm_2_Name,"Alarm 2");
-lv_obj_set_style_text_align(ui_Alarm_2_Name, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Alarm_2_Name, &lv_font_montserrat_10, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarm_2_Name = lv_label_create(ui_Alarm_2);
+    lv_obj_set_width(ui_Alarm_2_Name, 115);
+    lv_obj_set_height(ui_Alarm_2_Name, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_2_Name, -25);
+    lv_obj_set_y(ui_Alarm_2_Name, -7);
+    lv_obj_set_align(ui_Alarm_2_Name, LV_ALIGN_CENTER);
+    lv_label_set_long_mode(ui_Alarm_2_Name, LV_LABEL_LONG_SCROLL);
+    lv_label_set_text(ui_Alarm_2_Name, "Alarm 2");
+    lv_obj_set_style_text_align(ui_Alarm_2_Name, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Alarm_2_Name, &lv_font_montserrat_10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarm_2_Hour = lv_label_create(ui_Alarm_2);
-lv_obj_set_width( ui_Alarm_2_Hour, 16);
-lv_obj_set_height( ui_Alarm_2_Hour, 16);
-lv_obj_set_x( ui_Alarm_2_Hour, -76 );
-lv_obj_set_y( ui_Alarm_2_Hour, 6 );
-lv_obj_set_align( ui_Alarm_2_Hour, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_2_Hour,"12");
-lv_obj_set_style_text_align(ui_Alarm_2_Hour, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarm_2_Hour = lv_label_create(ui_Alarm_2);
+    lv_obj_set_width(ui_Alarm_2_Hour, 16);
+    lv_obj_set_height(ui_Alarm_2_Hour, 16);
+    lv_obj_set_x(ui_Alarm_2_Hour, -76);
+    lv_obj_set_y(ui_Alarm_2_Hour, 6);
+    lv_obj_set_align(ui_Alarm_2_Hour, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_2_Hour, "12");
+    lv_obj_set_style_text_align(ui_Alarm_2_Hour, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarm_2_Colin = lv_label_create(ui_Alarm_2);
-lv_obj_set_width( ui_Alarm_2_Colin, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_2_Colin, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_2_Colin, -66 );
-lv_obj_set_y( ui_Alarm_2_Colin, 6 );
-lv_obj_set_align( ui_Alarm_2_Colin, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_2_Colin,":");
+    ui_Alarm_2_Colin = lv_label_create(ui_Alarm_2);
+    lv_obj_set_width(ui_Alarm_2_Colin, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_2_Colin, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_2_Colin, -66);
+    lv_obj_set_y(ui_Alarm_2_Colin, 6);
+    lv_obj_set_align(ui_Alarm_2_Colin, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_2_Colin, ":");
 
-ui_Alarm_2_Minute = lv_label_create(ui_Alarm_2);
-lv_obj_set_width( ui_Alarm_2_Minute, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_2_Minute, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_2_Minute, -54 );
-lv_obj_set_y( ui_Alarm_2_Minute, 6 );
-lv_obj_set_align( ui_Alarm_2_Minute, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_2_Minute,"00");
+    ui_Alarm_2_Minute = lv_label_create(ui_Alarm_2);
+    lv_obj_set_width(ui_Alarm_2_Minute, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_2_Minute, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_2_Minute, -54);
+    lv_obj_set_y(ui_Alarm_2_Minute, 6);
+    lv_obj_set_align(ui_Alarm_2_Minute, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_2_Minute, "00");
 
-ui_Alarm_2_AMPM = lv_label_create(ui_Alarm_2);
-lv_obj_set_width( ui_Alarm_2_AMPM, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_2_AMPM, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_2_AMPM, -28 );
-lv_obj_set_y( ui_Alarm_2_AMPM, 6 );
-lv_obj_set_align( ui_Alarm_2_AMPM, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_2_AMPM,"AM");
+    ui_Alarm_2_AMPM = lv_label_create(ui_Alarm_2);
+    lv_obj_set_width(ui_Alarm_2_AMPM, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_2_AMPM, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_2_AMPM, -28);
+    lv_obj_set_y(ui_Alarm_2_AMPM, 6);
+    lv_obj_set_align(ui_Alarm_2_AMPM, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_2_AMPM, "AM");
 
-ui_Alarm_3 = lv_obj_create(ui_Alarms);
-lv_obj_set_width( ui_Alarm_3, 180);
-lv_obj_set_height( ui_Alarm_3, 35);
-lv_obj_set_x( ui_Alarm_3, 0 );
-lv_obj_set_y( ui_Alarm_3, 20 );
-lv_obj_set_align( ui_Alarm_3, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Alarm_3, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    ui_Alarm_3 = lv_obj_create(ui_Alarms);
+    lv_obj_set_width(ui_Alarm_3, 180);
+    lv_obj_set_height(ui_Alarm_3, 35);
+    lv_obj_set_x(ui_Alarm_3, 0);
+    lv_obj_set_y(ui_Alarm_3, 20);
+    lv_obj_set_align(ui_Alarm_3, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Alarm_3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-ui_Alarm_3_Switch = lv_switch_create(ui_Alarm_3);
-lv_obj_set_width( ui_Alarm_3_Switch, 50);
-lv_obj_set_height( ui_Alarm_3_Switch, 25);
-lv_obj_set_x( ui_Alarm_3_Switch, 60 );
-lv_obj_set_y( ui_Alarm_3_Switch, 0 );
-lv_obj_set_align( ui_Alarm_3_Switch, LV_ALIGN_CENTER );
+    ui_Alarm_3_Switch = lv_switch_create(ui_Alarm_3);
+    lv_obj_set_width(ui_Alarm_3_Switch, 50);
+    lv_obj_set_height(ui_Alarm_3_Switch, 25);
+    lv_obj_set_x(ui_Alarm_3_Switch, 60);
+    lv_obj_set_y(ui_Alarm_3_Switch, 0);
+    lv_obj_set_align(ui_Alarm_3_Switch, LV_ALIGN_CENTER);
 
-lv_obj_set_style_bg_color(ui_Alarm_3_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED );
-lv_obj_set_style_bg_opa(ui_Alarm_3_Switch, 255, LV_PART_INDICATOR| LV_STATE_CHECKED);
+    lv_obj_set_style_bg_color(ui_Alarm_3_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_Alarm_3_Switch, 255, LV_PART_INDICATOR | LV_STATE_CHECKED);
 
-ui_Alarm_3_Name = lv_label_create(ui_Alarm_3);
-lv_obj_set_width( ui_Alarm_3_Name, 115);
-lv_obj_set_height( ui_Alarm_3_Name, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_3_Name, -25 );
-lv_obj_set_y( ui_Alarm_3_Name, -7 );
-lv_obj_set_align( ui_Alarm_3_Name, LV_ALIGN_CENTER );
-lv_label_set_long_mode(ui_Alarm_3_Name,LV_LABEL_LONG_SCROLL);
-lv_label_set_text(ui_Alarm_3_Name,"Alarm 3");
-lv_obj_set_style_text_align(ui_Alarm_3_Name, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Alarm_3_Name, &lv_font_montserrat_10, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarm_3_Name = lv_label_create(ui_Alarm_3);
+    lv_obj_set_width(ui_Alarm_3_Name, 115);
+    lv_obj_set_height(ui_Alarm_3_Name, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_3_Name, -25);
+    lv_obj_set_y(ui_Alarm_3_Name, -7);
+    lv_obj_set_align(ui_Alarm_3_Name, LV_ALIGN_CENTER);
+    lv_label_set_long_mode(ui_Alarm_3_Name, LV_LABEL_LONG_SCROLL);
+    lv_label_set_text(ui_Alarm_3_Name, "Alarm 3");
+    lv_obj_set_style_text_align(ui_Alarm_3_Name, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Alarm_3_Name, &lv_font_montserrat_10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarm_3_Hour = lv_label_create(ui_Alarm_3);
-lv_obj_set_width( ui_Alarm_3_Hour, 16);
-lv_obj_set_height( ui_Alarm_3_Hour, 16);
-lv_obj_set_x( ui_Alarm_3_Hour, -76 );
-lv_obj_set_y( ui_Alarm_3_Hour, 6 );
-lv_obj_set_align( ui_Alarm_3_Hour, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_3_Hour,"12");
-lv_obj_set_style_text_align(ui_Alarm_3_Hour, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarm_3_Hour = lv_label_create(ui_Alarm_3);
+    lv_obj_set_width(ui_Alarm_3_Hour, 16);
+    lv_obj_set_height(ui_Alarm_3_Hour, 16);
+    lv_obj_set_x(ui_Alarm_3_Hour, -76);
+    lv_obj_set_y(ui_Alarm_3_Hour, 6);
+    lv_obj_set_align(ui_Alarm_3_Hour, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_3_Hour, "12");
+    lv_obj_set_style_text_align(ui_Alarm_3_Hour, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarm_3_Colin = lv_label_create(ui_Alarm_3);
-lv_obj_set_width( ui_Alarm_3_Colin, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_3_Colin, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_3_Colin, -66 );
-lv_obj_set_y( ui_Alarm_3_Colin, 6 );
-lv_obj_set_align( ui_Alarm_3_Colin, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_3_Colin,":");
+    ui_Alarm_3_Colin = lv_label_create(ui_Alarm_3);
+    lv_obj_set_width(ui_Alarm_3_Colin, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_3_Colin, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_3_Colin, -66);
+    lv_obj_set_y(ui_Alarm_3_Colin, 6);
+    lv_obj_set_align(ui_Alarm_3_Colin, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_3_Colin, ":");
 
-ui_Alarm_3_Minute = lv_label_create(ui_Alarm_3);
-lv_obj_set_width( ui_Alarm_3_Minute, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_3_Minute, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_3_Minute, -54 );
-lv_obj_set_y( ui_Alarm_3_Minute, 6 );
-lv_obj_set_align( ui_Alarm_3_Minute, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_3_Minute,"00");
+    ui_Alarm_3_Minute = lv_label_create(ui_Alarm_3);
+    lv_obj_set_width(ui_Alarm_3_Minute, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_3_Minute, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_3_Minute, -54);
+    lv_obj_set_y(ui_Alarm_3_Minute, 6);
+    lv_obj_set_align(ui_Alarm_3_Minute, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_3_Minute, "00");
 
-ui_Alarm_3_AMPM = lv_label_create(ui_Alarm_3);
-lv_obj_set_width( ui_Alarm_3_AMPM, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_3_AMPM, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_3_AMPM, -28 );
-lv_obj_set_y( ui_Alarm_3_AMPM, 6 );
-lv_obj_set_align( ui_Alarm_3_AMPM, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_3_AMPM,"AM");
+    ui_Alarm_3_AMPM = lv_label_create(ui_Alarm_3);
+    lv_obj_set_width(ui_Alarm_3_AMPM, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_3_AMPM, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_3_AMPM, -28);
+    lv_obj_set_y(ui_Alarm_3_AMPM, 6);
+    lv_obj_set_align(ui_Alarm_3_AMPM, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_3_AMPM, "AM");
 
-ui_Alarm_4 = lv_obj_create(ui_Alarms);
-lv_obj_set_width( ui_Alarm_4, 180);
-lv_obj_set_height( ui_Alarm_4, 35);
-lv_obj_set_x( ui_Alarm_4, 0 );
-lv_obj_set_y( ui_Alarm_4, 60 );
-lv_obj_set_align( ui_Alarm_4, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Alarm_4, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    ui_Alarm_4 = lv_obj_create(ui_Alarms);
+    lv_obj_set_width(ui_Alarm_4, 180);
+    lv_obj_set_height(ui_Alarm_4, 35);
+    lv_obj_set_x(ui_Alarm_4, 0);
+    lv_obj_set_y(ui_Alarm_4, 60);
+    lv_obj_set_align(ui_Alarm_4, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Alarm_4, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-ui_Alarm_4_Switch = lv_switch_create(ui_Alarm_4);
-lv_obj_set_width( ui_Alarm_4_Switch, 50);
-lv_obj_set_height( ui_Alarm_4_Switch, 25);
-lv_obj_set_x( ui_Alarm_4_Switch, 60 );
-lv_obj_set_y( ui_Alarm_4_Switch, 0 );
-lv_obj_set_align( ui_Alarm_4_Switch, LV_ALIGN_CENTER );
+    ui_Alarm_4_Switch = lv_switch_create(ui_Alarm_4);
+    lv_obj_set_width(ui_Alarm_4_Switch, 50);
+    lv_obj_set_height(ui_Alarm_4_Switch, 25);
+    lv_obj_set_x(ui_Alarm_4_Switch, 60);
+    lv_obj_set_y(ui_Alarm_4_Switch, 0);
+    lv_obj_set_align(ui_Alarm_4_Switch, LV_ALIGN_CENTER);
 
-lv_obj_set_style_bg_color(ui_Alarm_4_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED );
-lv_obj_set_style_bg_opa(ui_Alarm_4_Switch, 255, LV_PART_INDICATOR| LV_STATE_CHECKED);
+    lv_obj_set_style_bg_color(ui_Alarm_4_Switch, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_Alarm_4_Switch, 255, LV_PART_INDICATOR | LV_STATE_CHECKED);
 
-ui_Alarm_4_Name = lv_label_create(ui_Alarm_4);
-lv_obj_set_width( ui_Alarm_4_Name, 115);
-lv_obj_set_height( ui_Alarm_4_Name, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_4_Name, -25 );
-lv_obj_set_y( ui_Alarm_4_Name, -7 );
-lv_obj_set_align( ui_Alarm_4_Name, LV_ALIGN_CENTER );
-lv_label_set_long_mode(ui_Alarm_4_Name,LV_LABEL_LONG_SCROLL);
-lv_label_set_text(ui_Alarm_4_Name,"Alarm 4");
-lv_obj_set_style_text_align(ui_Alarm_4_Name, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Alarm_4_Name, &lv_font_montserrat_10, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarm_4_Name = lv_label_create(ui_Alarm_4);
+    lv_obj_set_width(ui_Alarm_4_Name, 115);
+    lv_obj_set_height(ui_Alarm_4_Name, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_4_Name, -25);
+    lv_obj_set_y(ui_Alarm_4_Name, -7);
+    lv_obj_set_align(ui_Alarm_4_Name, LV_ALIGN_CENTER);
+    lv_label_set_long_mode(ui_Alarm_4_Name, LV_LABEL_LONG_SCROLL);
+    lv_label_set_text(ui_Alarm_4_Name, "Alarm 4");
+    lv_obj_set_style_text_align(ui_Alarm_4_Name, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Alarm_4_Name, &lv_font_montserrat_10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarm_4_Hour = lv_label_create(ui_Alarm_4);
-lv_obj_set_width( ui_Alarm_4_Hour, 16);
-lv_obj_set_height( ui_Alarm_4_Hour, 16);
-lv_obj_set_x( ui_Alarm_4_Hour, -76 );
-lv_obj_set_y( ui_Alarm_4_Hour, 6 );
-lv_obj_set_align( ui_Alarm_4_Hour, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_4_Hour,"12");
-lv_obj_set_style_text_align(ui_Alarm_4_Hour, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Alarm_4_Hour = lv_label_create(ui_Alarm_4);
+    lv_obj_set_width(ui_Alarm_4_Hour, 16);
+    lv_obj_set_height(ui_Alarm_4_Hour, 16);
+    lv_obj_set_x(ui_Alarm_4_Hour, -76);
+    lv_obj_set_y(ui_Alarm_4_Hour, 6);
+    lv_obj_set_align(ui_Alarm_4_Hour, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_4_Hour, "12");
+    lv_obj_set_style_text_align(ui_Alarm_4_Hour, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Alarm_4_Colin = lv_label_create(ui_Alarm_4);
-lv_obj_set_width( ui_Alarm_4_Colin, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_4_Colin, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_4_Colin, -66 );
-lv_obj_set_y( ui_Alarm_4_Colin, 6 );
-lv_obj_set_align( ui_Alarm_4_Colin, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_4_Colin,":");
+    ui_Alarm_4_Colin = lv_label_create(ui_Alarm_4);
+    lv_obj_set_width(ui_Alarm_4_Colin, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_4_Colin, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_4_Colin, -66);
+    lv_obj_set_y(ui_Alarm_4_Colin, 6);
+    lv_obj_set_align(ui_Alarm_4_Colin, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_4_Colin, ":");
 
-ui_Alarm_4_Minute = lv_label_create(ui_Alarm_4);
-lv_obj_set_width( ui_Alarm_4_Minute, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_4_Minute, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_4_Minute, -54 );
-lv_obj_set_y( ui_Alarm_4_Minute, 6 );
-lv_obj_set_align( ui_Alarm_4_Minute, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_4_Minute,"00");
+    ui_Alarm_4_Minute = lv_label_create(ui_Alarm_4);
+    lv_obj_set_width(ui_Alarm_4_Minute, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_4_Minute, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_4_Minute, -54);
+    lv_obj_set_y(ui_Alarm_4_Minute, 6);
+    lv_obj_set_align(ui_Alarm_4_Minute, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_4_Minute, "00");
 
-ui_Alarm_4_AMPM = lv_label_create(ui_Alarm_4);
-lv_obj_set_width( ui_Alarm_4_AMPM, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Alarm_4_AMPM, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Alarm_4_AMPM, -28 );
-lv_obj_set_y( ui_Alarm_4_AMPM, 6 );
-lv_obj_set_align( ui_Alarm_4_AMPM, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Alarm_4_AMPM,"AM");
+    ui_Alarm_4_AMPM = lv_label_create(ui_Alarm_4);
+    lv_obj_set_width(ui_Alarm_4_AMPM, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Alarm_4_AMPM, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Alarm_4_AMPM, -28);
+    lv_obj_set_y(ui_Alarm_4_AMPM, 6);
+    lv_obj_set_align(ui_Alarm_4_AMPM, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Alarm_4_AMPM, "AM");
 
-lv_obj_add_event_cb(ui_Alarm_1_Switch, ui_event_Alarm_1_Switch, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Alarm_1, ui_event_Alarm_1, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Alarm_2_Switch, ui_event_Alarm_2_Switch, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Alarm_2, ui_event_Alarm_2, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Alarm_3_Switch, ui_event_Alarm_3_Switch, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Alarm_3, ui_event_Alarm_3, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Alarm_4_Switch, ui_event_Alarm_4_Switch, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Alarm_4, ui_event_Alarm_4, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Alarms, ui_event_Alarms, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Alarm_1_Switch, ui_event_Alarm_1_Switch, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Alarm_1, ui_event_Alarm_1, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Alarm_2_Switch, ui_event_Alarm_2_Switch, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Alarm_2, ui_event_Alarm_2, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Alarm_3_Switch, ui_event_Alarm_3_Switch, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Alarm_3, ui_event_Alarm_3, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Alarm_4_Switch, ui_event_Alarm_4_Switch, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Alarm_4, ui_event_Alarm_4, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Alarms, ui_event_Alarms, LV_EVENT_ALL, NULL);
 
 }

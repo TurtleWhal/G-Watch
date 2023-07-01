@@ -49,7 +49,7 @@ Preferences Storage;
 
 // functions
 void writetimertime();
-void shownotification();
+void shownotification(bool Store);
 void notificationdismiss();
 void alarmhandle();
 void BThandle();
@@ -373,11 +373,12 @@ void setup()
   // lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
 
   if (Storage.getInt("StepDay") == GetDay())
-  LastSteps = Storage.getInt("Steps");
+    LastSteps = Storage.getInt("Steps");
   else
-  Storage.putInt("StepDay", GetDay());
-
-
+  {
+    Storage.putInt("StepDay", GetDay());
+    Storage.putBool("StepReach", 0);
+  }
   Serial.println("Setup done");
 }
 
@@ -888,7 +889,7 @@ void toggleampm(lv_event_t *e)
   }
 }*/
 
-void shownotification()
+void shownotification(bool Store)
 {
   // Create the widget in the Clock screen
   Wakeup("Notification Received");
@@ -901,11 +902,13 @@ void shownotification()
     twatch->motor_shake(2, 30);
 
   // Create the widget in the notifications screen
-
-  lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
-  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
-  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
-  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
+  if (Store)
+  {
+    lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
+  }
 }
 
 void notificationdismiss(lv_event_t *e)
@@ -1162,7 +1165,7 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         lv_label_set_text(ui_Notification_Source, input.c_str());
-        shownotification();
+        shownotification(1);
       }
       if (input.charAt(0) == 5)
       {
@@ -1319,6 +1322,15 @@ void StepHandle()
   Storage.putInt("Steps", Steps);
   StepDay = GetDay();
   Storage.putInt("StepsDay", StepDay);
+  if (Steps >= StepGoal and !Storage.getBool("StepReach"))
+  {
+    lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
+    char StepGoalText[50];
+    sprintf(StepGoalText, "You have reached your step goal of %i Steps!", StepGoal);
+    lv_label_set_text(ui_Notification_Text, StepGoalText);
+    shownotification(0);
+    Storage.putBool("StepReach", 1);
+  }
 }
 
 void UpdateSettings(lv_event_t *e)
