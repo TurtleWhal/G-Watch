@@ -114,6 +114,10 @@ int NotificationLength;     // Amount of time notifications are displayed in sec
 int VibrationStrength = 30; // Strength of button vibrations
 ////////////////////////////////////////////////
 
+int Steps;
+int LastSteps;
+int StepDay;
+
 lv_obj_t *ui_Notification_Widgets[1];
 
 LV_IMG_DECLARE(ui_img_bluetooth_small_png);
@@ -367,6 +371,12 @@ void setup()
   lv_textarea_set_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), NotificationLengthChar);
 
   // lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
+
+  if (Storage.getInt("StepDay") == GetDay())
+  LastSteps = Storage.getInt("Steps");
+  else
+  Storage.putInt("StepDay", GetDay());
+
 
   Serial.println("Setup done");
 }
@@ -1301,10 +1311,14 @@ void Compass()
 
 void StepHandle()
 {
-  char steps[32];
-  sprintf(steps, "%i Steps", twatch->bma423_get_step());
-  lv_label_set_text(ui_Step_Counter_Text, steps);
-  lv_arc_set_value(ui_Arc_Right, ((float)twatch->bma423_get_step() / StepGoal) * 250);
+  Steps = twatch->bma423_get_step() + LastSteps;
+  char StepChar[32];
+  sprintf(StepChar, "%i Steps", Steps);
+  lv_label_set_text(ui_Step_Counter_Text, StepChar);
+  lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
+  Storage.putInt("Steps", Steps);
+  StepDay = GetDay();
+  Storage.putInt("StepsDay", StepDay);
 }
 
 void UpdateSettings(lv_event_t *e)
@@ -1314,7 +1328,7 @@ void UpdateSettings(lv_event_t *e)
 
   NotificationLength = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
   Storage.putInt("NotifLength", NotificationLength);
-  
+
   Storage.putBytes("BTname", lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)), 17);
   // Serial.println(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
 }
