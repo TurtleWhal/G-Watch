@@ -2,7 +2,7 @@
 extern "C" {
 #endif
 
-void writetime();
+void WriteTime();
 int GetDay();
 
 #ifdef __cplusplus

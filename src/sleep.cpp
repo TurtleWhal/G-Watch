@@ -1,9 +1,7 @@
 #include <TWatch_hal.h>
-
 #include "lvgl.h"
 #include "ui.h"
-
-#include "time.h"
+#include "timestuff.h"
 #include "sleep.h"
 
 extern TWatchClass *twatch;
@@ -54,7 +52,7 @@ void Wakeup(String Wakeup_reason)
     // setCpuFrequencyMhz(240);
     _ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
     lv_timer_handler();
-    writetime();
+    WriteTime();
     Serial.println("IM AWAKE!");
     // dad hid this comment here because I'm like that.
     // A few moments later...

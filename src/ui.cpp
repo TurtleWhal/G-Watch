@@ -1,30 +1,20 @@
 #include "TWatch_hal.h"
-
 #include <BluetoothSerial.h>
-
+#include <TFT_eSPI.h>
 // #include <CST816S.h>
 
-// #include <PicoEspTime.h>
-
 #include <lvgl.h>
-#include <TFT_eSPI.h>
 #include "ui.h"
-
 #include "ui_helpers.h"
 
 #include "sleep.h"
-#include "time.h"
+#include "timestuff.h"
 
 #include "Preferences.h"
 
 // #include "Functions.c"
 
 // #include "watch.h"
-/*If you want to use the LVGL examples,
-  make sure to install the lv_examples Arduino library
-  and uncomment the following line.
-#include <lv_examples.h>
-*/
 
 /*Change to your screen resolution*/
 static const uint16_t screenWidth = 240;
@@ -35,16 +25,11 @@ static lv_color_t buf[screenWidth * screenHeight / 10];
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 
-PCF8563_Class *PCF = nullptr;
-
 TWatchClass *twatch = nullptr;
 
 // CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
 
-// PicoEspTime rtc;
-
 BluetoothSerial SerialBT;
-
 Preferences Storage;
 
 // functions
@@ -58,6 +43,7 @@ void Powerhandle();
 void Sleephandle();
 void Compass();
 void StepHandle();
+void Timer0Handle();
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -113,10 +99,6 @@ int StepGoal;               // Step Goal
 int NotificationLength;     // Amount of time notifications are displayed in seconds
 int VibrationStrength = 30; // Strength of button vibrations
 ////////////////////////////////////////////////
-
-int Steps;
-int LastSteps;
-int StepDay;
 
 lv_obj_t *ui_Notification_Widgets[1];
 
@@ -299,7 +281,9 @@ void setup()
   indev_drv.read_cb = my_touchpad_read;
   lv_indev_drv_register(&indev_drv);
 
-  // rtc.adjust(1, 26, 21, 2022, 6, 3); // 01:26:21 03 Jun 2022
+  // This all was here to use the compile date for initial time.
+  //  rtc.adjust(1, 26, 21, 2022, 6, 3); // 01:26:21 03 Jun 2022
+  /*
   String Month = compile_date;
   Month.remove(3, 8);
   char MonthNum;
@@ -328,6 +312,7 @@ void setup()
   else if (Month == "Dec")
     MonthNum = 12;
   // rtc.adjust(atoi(compile_time), atoi(compile_time + 3), atoi(compile_time + 6) + 35, atoi(compile_date + 7), MonthNum, atoi(compile_date + 4));
+*/
 
   alarms[0].state = 0;
   alarms[1].state = 0;
@@ -340,18 +325,16 @@ void setup()
   alarms[3].am = 1;
 
   ui_init();
-  // writetime();
+  // WriteTime();
 
   twatch->backlight_init();
   twatch->backlight_set_value(100);
 
-  PCF = twatch->rtc_get_instance();
-
   twatch->qmc5883l_init();
-  // twatch->rtc_init();
+  twatch->rtc_init();
 
   lv_label_set_text(ui_Now_Playing_Label, "");
-  lv_label_set_text(ui_Date, PCF->formatDateTime(PCF_TIMEFORMAT_DOM_MM_DD));
+  // lv_label_set_text(ui_Date, PCF->formatDateTime(PCF_TIMEFORMAT_DOM_MM_DD));
 
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
     lastpercent = 0;
@@ -372,13 +355,14 @@ void setup()
 
   // lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
 
-  if (Storage.getInt("StepDay") == GetDay())
-    LastSteps = Storage.getInt("Steps");
-  else
-  {
-    Storage.putInt("StepDay", GetDay());
-    Storage.putBool("StepReach", 0);
-  }
+  // xTaskCreatePinnedToCore(StepHandle, "StepCounter", 2048, NULL, 0, NULL, 1);
+
+  hw_timer_t *timer = NULL;
+  timer = timerBegin(0, 80, true);
+  timerAttachInterrupt(timer, Timer0Handle, true);
+  timerAlarmWrite(timer, 1000000, true);
+  timerAlarmEnable(timer);
+
   Serial.println("Setup done");
 }
 
@@ -404,6 +388,8 @@ bool readStringUntil(String &input, size_t char_limit)
 char terminatingChar = '\n';
 int timestart;
 
+bool Timer0Triggered;
+
 void loop()
 {
 
@@ -412,16 +398,32 @@ void loop()
     lv_timer_handler(); /* let the GUI do its work */
     // xTaskCreatePinnedToCore();
     delay(5);
-    writetime();
-    Powerhandle();
+
+    if (lv_scr_act() == ui_Clock)
+    {
+      WriteTime();
+    }
     Compass();
-    StepHandle();
+    // StepHandle();
   }
   else
     delay(5);
   // alarmhandle();
   BThandle();
   Sleephandle();
+
+  // This stuff runs every X seconds
+  if (Timer0Triggered)
+  {
+    Timer0Triggered = 0;
+    // GetTime();
+    Powerhandle();
+    StepHandle();
+  }
+
+  // StepHandle();
+
+  // Serial.println(ESP.getPsramSize());
 
   /*if (digitalRead(TWATCH_CHARGING) == 1 and twatch->power_get_volt() < 3800)
     Sleephandle();*/
@@ -1126,7 +1128,7 @@ void BThandle()
       // Serial.print(F(" got a line of input '")); Serial.print(input); Serial.println("'");
       if (input.charAt(0) == 1)
       {
-        Serial.print("Geting Time: ");
+        Serial.print("Getting Time From Phone: ");
         Serial.print((int)(input.charAt(1)));
         Serial.print("h ");
         Serial.print((int)(input.charAt(2)));
@@ -1312,24 +1314,79 @@ void Compass()
   }
 }
 
+/*void StepHandleIan()
+{
+  static int Steps=-1;
+
+  if steps == -1
+  initalize and set steps = 0
+  Draw first time
+
+  if previos steps != current Steps
+  process Steps
+
+  if minutes = mod 10
+  save Steps
+  reset steps if time is > midnight
+  }*/
+
+void Timer0Handle()
+{
+  Serial.println("Timer0");
+  Timer0Triggered = 1;
+}
+
 void StepHandle()
 {
-  Steps = twatch->bma423_get_step() + LastSteps;
-  char StepChar[32];
-  sprintf(StepChar, "%i Steps", Steps);
-  lv_label_set_text(ui_Step_Counter_Text, StepChar);
-  lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
-  Storage.putInt("Steps", Steps);
-  StepDay = GetDay();
-  Storage.putInt("StepsDay", StepDay);
-  if (Steps >= StepGoal and !Storage.getBool("StepReach"))
+  int Steps;
+  static int StepDay;
+  static int LastSteps = -1;
+  static int StepOffset = -1;
+  char StepChar[12];
+
+  if (StepOffset == -1)
   {
-    lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
-    char StepGoalText[50];
-    sprintf(StepGoalText, "You have reached your step goal of %i Steps!", StepGoal);
-    lv_label_set_text(ui_Notification_Text, StepGoalText);
-    shownotification(0);
-    Storage.putBool("StepReach", 1);
+    if (Storage.getInt("StepDay") == GetDay())
+      StepOffset = Storage.getInt("Steps");
+    else
+    {
+      Storage.putInt("StepDay", GetDay());
+      Storage.putBool("StepReach", 0);
+    }
+  }
+
+  int GetStep = twatch->bma423_get_step();
+
+  if (LastSteps != GetStep)
+  {
+    LastSteps = GetStep;
+    Steps = GetStep + StepOffset;
+    sprintf(StepChar, "%i Steps", Steps);
+    lv_label_set_text(ui_Step_Counter_Text, StepChar);
+    lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
+
+    if (Steps >= StepGoal and !Storage.getBool("StepReach"))
+    {
+      lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
+      char StepGoalText[50];
+      sprintf(StepGoalText, "You have reached your step goal of %i Steps!", StepGoal);
+      lv_label_set_text(ui_Notification_Text, StepGoalText);
+      shownotification(0);
+      Storage.putBool("StepReach", 1);
+    }
+
+    Storage.putInt("Steps", Steps);
+    StepDay = GetDay();
+    Storage.putInt("StepsDay", StepDay);
+  }
+
+  if (Storage.getInt("StepDay") != GetDay())
+  {
+    Storage.putInt("StepDay", GetDay());
+    Storage.putBool("StepReach", 0);
+    StepOffset = 0;
+    Storage.putInt("Steps", 0);
+    twatch->bma423_step_reset();
   }
 }
 
