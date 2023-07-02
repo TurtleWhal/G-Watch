@@ -285,7 +285,6 @@ void setup()
   alarms[3].am = 1;
 
   ui_init();
-  // WriteTime();
 
   twatch->backlight_init();
   twatch->backlight_set_value(100);
@@ -355,7 +354,7 @@ void loop()
     lv_timer_handler(); /* let the GUI do its work */
     delay(5);
 
-    if (lv_scr_act() == ui_Clock)
+    if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
     {
       WriteTime();
     }
@@ -372,7 +371,6 @@ void loop()
   if (Timer0Triggered)
   {
     Timer0Triggered = 0;
-    // GetTime();
     Powerhandle();
     StepHandle();
   }
