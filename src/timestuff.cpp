@@ -11,7 +11,6 @@ static uint8_t lasthour = 61;
 
 void WriteTime()
 {
-
     char time[11];
     struct tm t_tm;
     struct timeval val;
