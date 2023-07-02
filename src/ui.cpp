@@ -294,8 +294,7 @@ void setup()
   twatch->rtc_init();
 
   lv_label_set_text(ui_Now_Playing_Label, "");
-  // lv_label_set_text(ui_Date, PCF->formatDateTime(PCF_TIMEFORMAT_DOM_MM_DD));
-
+  
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
     lastpercent = 0;
 
@@ -314,8 +313,6 @@ void setup()
   lv_textarea_set_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), NotificationLengthChar);
 
   // lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
-
-  // xTaskCreatePinnedToCore(StepHandle, "StepCounter", 2048, NULL, 0, NULL, 1);
 
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
@@ -356,7 +353,6 @@ void loop()
   if (!isSleeping())
   {
     lv_timer_handler(); /* let the GUI do its work */
-    // xTaskCreatePinnedToCore();
     delay(5);
 
     if (lv_scr_act() == ui_Clock)
@@ -364,11 +360,11 @@ void loop()
       WriteTime();
     }
     Compass();
-    // StepHandle();
   }
   else
     delay(5);
-  // alarmhandle();
+
+  //alarmhandle();
   BThandle();
   Sleephandle();
 
@@ -380,10 +376,6 @@ void loop()
     Powerhandle();
     StepHandle();
   }
-
-  // StepHandle();
-
-  // Serial.println(ESP.getPsramSize());
 
   /*if (digitalRead(TWATCH_CHARGING) == 1 and twatch->power_get_volt() < 3800)
     Sleephandle();*/
@@ -1273,22 +1265,6 @@ void Compass()
     // lv_obj_set_y(ui_Compass_N, -100);
   }
 }
-
-/*void StepHandleIan()
-{
-  static int Steps=-1;
-
-  if steps == -1
-  initalize and set steps = 0
-  Draw first time
-
-  if previos steps != current Steps
-  process Steps
-
-  if minutes = mod 10
-  save Steps
-  reset steps if time is > midnight
-  }*/
 
 void Timer0Handle()
 {
