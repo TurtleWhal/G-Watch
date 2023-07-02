@@ -120,6 +120,46 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
   lv_disp_flush_ready(disp);
 }
 
+void lv_Calculator_Keyboard_Create(void)
+{
+  /*Create an Calculator keyboard map*/
+  static const char *kb_map[] = {"C", LV_SYMBOL_BACKSPACE, "\n",
+                                 "7", "8", "9", "/", "\n",
+                                 "4", "5", "6", "x", "\n",
+                                 "1", "2", "3", "-", "\n",
+                                 ".", "0", "=", "+", "\n"};
+
+  /*Set the relative width of the buttons and other controls*/
+  static const lv_btnmatrix_ctrl_t kb_ctrl[] = {LV_BTNMATRIX_CTRL_CHECKED | 2, 2,
+                                                1, 1, 1, LV_BTNMATRIX_CTRL_CHECKED | 1,
+                                                1, 1, 1, LV_BTNMATRIX_CTRL_CHECKED | 1,
+                                                1, 1, 1, LV_BTNMATRIX_CTRL_CHECKED | 1,
+                                                1, 1, 1, LV_BTNMATRIX_CTRL_CHECKED | 1};
+
+  /*Create a keyboard and add the new map as USER_1 mode*/
+
+  lv_obj_t *ui_Calculator_Keyboard = lv_keyboard_create(ui_Calculator);
+
+  lv_keyboard_set_map(ui_Calculator_Keyboard, LV_KEYBOARD_MODE_USER_1, kb_map, kb_ctrl);
+  lv_keyboard_set_mode(ui_Calculator_Keyboard, LV_KEYBOARD_MODE_USER_1);
+  lv_obj_set_width(ui_Calculator_Keyboard, 165);
+  lv_obj_set_height(ui_Calculator_Keyboard, 175);
+  lv_obj_set_y(ui_Calculator_Keyboard, 0);
+  lv_obj_set_style_radius(ui_Calculator_Keyboard, 20, LV_PART_ITEMS);
+  lv_obj_set_style_bg_color(ui_Calculator_Keyboard, lv_color_hex(0xFF7D00), LV_PART_ITEMS | LV_STATE_CHECKED);
+  // lv_obj_set_style_text_font(ui_Calculator_Keyboard, &ui_font_Comfortaa_16, LV_PART_ITEMS);
+
+  /*Create a text area. The keyboard will write here*/
+  lv_obj_t *ta;
+  ta = lv_textarea_create(ui_Calculator);
+  lv_obj_align(ta, LV_ALIGN_TOP_MID, 0, 25);
+  lv_obj_set_size(ta, 165, 35);
+  lv_obj_add_state(ta, LV_STATE_FOCUSED);
+  lv_obj_set_style_radius(ta, 20, LV_PART_MAIN);
+
+  lv_keyboard_set_textarea(ui_Calculator_Keyboard, ta);
+}
+
 /*Read the touchpad*/
 void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 {
@@ -293,7 +333,7 @@ void setup()
   twatch->rtc_init();
 
   lv_label_set_text(ui_Now_Playing_Label, "");
-  
+
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
     lastpercent = 0;
 
@@ -316,9 +356,12 @@ void setup()
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
   timerAttachInterrupt(timer, Timer0Handle, true);
-  timerAlarmWrite(timer, 1000000, true);
+  timerAlarmWrite(timer, 5000000, true);
   timerAlarmEnable(timer);
 
+  lv_Calculator_Keyboard_Create();
+
+  twatch->motor_shake(1, 100);
   Serial.println("Setup done");
 }
 
@@ -363,7 +406,7 @@ void loop()
   else
     delay(5);
 
-  //alarmhandle();
+  // alarmhandle();
   BThandle();
   Sleephandle();
 
@@ -1283,10 +1326,7 @@ void StepHandle()
     if (Storage.getInt("StepDay") == GetDay())
       StepOffset = Storage.getInt("Steps");
     else
-    {
-      Storage.putInt("StepDay", GetDay());
-      Storage.putBool("StepReach", 0);
-    }
+      StepOffset = 0;
   }
 
   int GetStep = twatch->bma423_get_step();
@@ -1295,7 +1335,7 @@ void StepHandle()
   {
     LastSteps = GetStep;
     Steps = GetStep + StepOffset;
-    sprintf(StepChar, "%i Steps", Steps);
+    sprintf(StepChar, "%i", Steps);
     lv_label_set_text(ui_Step_Counter_Text, StepChar);
     lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
 

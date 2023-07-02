@@ -13,7 +13,6 @@ void ui_event_comp_Notification_Widget_Notification_Widget(lv_event_t * e)
     if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
         lv_indev_wait_release(lv_indev_get_act());
         NotificationDismiss_Animation(comp_Notification_Widget[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE], 0);
-        DeleteNotification(e);
     }
 }
 
@@ -91,6 +90,7 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
 
     lv_obj_t * cui_Notification_Image;
     cui_Notification_Image = lv_img_create(cui_Notification_Image_Panel);
+    lv_img_set_src(cui_Notification_Image, &ui_img_bellnobackground_png);
     lv_obj_set_width(cui_Notification_Image, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(cui_Notification_Image, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(cui_Notification_Image, -1);

@@ -18,6 +18,7 @@ SET(SOURCES components/ui_comp_app_button.c
     ui_helpers.c
     images/ui_img_tick_dashes_png.c
     images/ui_img_tick_dots_png.c
+    images/ui_img_step_png.c
     images/ui_img_minutehand_png.c
     images/ui_img_hourhand_png.c
     images/ui_img_secondhand_png.c

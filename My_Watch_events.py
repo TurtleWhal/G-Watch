@@ -126,3 +126,7 @@ def PowerOff(event_struct):
 def UpdateSettings(event_struct):
     return
 
+
+def lv_Calculator_Keyboard_Create(event_struct):
+    return
+

@@ -46,6 +46,8 @@ void CalculatorEquationFocus_Animation(lv_obj_t * TargetObject, int delay);
 void ui_Clock_screen_init(void);
 void ui_event_Clock(lv_event_t * e);
 extern lv_obj_t * ui_Clock;
+extern lv_obj_t * ui_Style_Arc_Top;
+extern lv_obj_t * ui_Style_Arc_Bottom;
 extern lv_obj_t * ui_Time;
 extern lv_obj_t * ui_Date_Numerical;
 extern lv_obj_t * ui_Arc_Battery_Charge;
@@ -54,11 +56,14 @@ extern lv_obj_t * ui_Arc_Right;
 extern lv_obj_t * ui_Tick_Dashes;
 extern lv_obj_t * ui_Tick_Dots;
 extern lv_obj_t * ui_Now_Playing_Label;
+extern lv_obj_t * ui_Steps_Panel;
+extern lv_obj_t * ui_Steps_Image;
 extern lv_obj_t * ui_Step_Counter_Text;
 extern lv_obj_t * ui_Minute_Hand;
 extern lv_obj_t * ui_Hour_Hand;
 extern lv_obj_t * ui_Second_Hand;
 extern lv_obj_t * ui_Second_Dot;
+extern lv_obj_t * ui_Center_dot;
 extern lv_obj_t * ui_Date;
 extern lv_obj_t * ui_Battery_Percentage;
 extern lv_obj_t * ui_Bluetooth_Indicator;
@@ -83,6 +88,7 @@ extern lv_obj_t * ui_Notifications_Label;
 extern lv_obj_t * ui_Notification_Panel;
 extern lv_obj_t * ui_No_New_Notifications_Label;
 extern lv_obj_t * ui_Notifications_Gesture_Panel;
+extern lv_obj_t * ui_Notification_Widget2;
 // SCREEN: ui_Alarms
 void ui_Alarms_screen_init(void);
 void ui_event_Alarms(lv_event_t * e);
@@ -278,45 +284,11 @@ extern lv_obj_t * ui_Apps_Label;
 // SCREEN: ui_Calculator
 void ui_Calculator_screen_init(void);
 extern lv_obj_t * ui_Calculator;
-extern lv_obj_t * ui_Calculator_Plus_Button;
-extern lv_obj_t * ui_Calculator_Plus_Label;
-extern lv_obj_t * ui_Calculator_Minus_Button;
-extern lv_obj_t * ui_Calculator_Minus_Label;
-extern lv_obj_t * ui_Calculator_Times_Button;
-extern lv_obj_t * ui_Calculator_Times_Label;
-extern lv_obj_t * ui_Calculator_Divide_Button;
-extern lv_obj_t * ui_Calculator_Divide_Label;
-extern lv_obj_t * ui_Calculator_Equals_Button;
-extern lv_obj_t * ui_Calculator_Equals_Label;
-extern lv_obj_t * ui_Calculator_3_Button;
-extern lv_obj_t * ui_Calculator_3_Label;
-extern lv_obj_t * ui_Calculator_6_Button;
-extern lv_obj_t * ui_Calculator_6_Label;
-extern lv_obj_t * ui_Calculator_9_Button;
-extern lv_obj_t * ui_Calculator_9_Label;
-extern lv_obj_t * ui_Calculator_8_Button;
-extern lv_obj_t * ui_Calculator_8_Label;
-extern lv_obj_t * ui_Calculator_5_Button;
-extern lv_obj_t * ui_Calculator_5_Label;
-extern lv_obj_t * ui_Calculator_2_Button;
-extern lv_obj_t * ui_Calculator_2_Label;
-extern lv_obj_t * ui_Calculator_0_Button;
-extern lv_obj_t * ui_Calculator_0_Label;
-extern lv_obj_t * ui_Calculator_Decimal_Button;
-extern lv_obj_t * ui_Calculator_Decimal_Label;
-extern lv_obj_t * ui_Calculator_1_Button;
-extern lv_obj_t * ui_Calculator_1_Label;
-extern lv_obj_t * ui_Calculator_4_Button;
-extern lv_obj_t * ui_Calculator_4_Label;
-extern lv_obj_t * ui_Calculator_7_Button;
-extern lv_obj_t * ui_Calculator_7_Label;
-void ui_event_Calculator_Equation_Panel(lv_event_t * e);
-extern lv_obj_t * ui_Calculator_Equation_Panel;
-extern lv_obj_t * ui_Calculator_Equation_Label;
 extern lv_obj_t * ui____initial_actions0;
 
 LV_IMG_DECLARE(ui_img_tick_dashes_png);    // assets\Tick Dashes.png
 LV_IMG_DECLARE(ui_img_tick_dots_png);    // assets\Tick Dots.png
+LV_IMG_DECLARE(ui_img_step_png);    // assets\step.png
 LV_IMG_DECLARE(ui_img_minutehand_png);    // assets\MinuteHand.png
 LV_IMG_DECLARE(ui_img_hourhand_png);    // assets\HourHand.png
 LV_IMG_DECLARE(ui_img_secondhand_png);    // assets\SecondHand.png

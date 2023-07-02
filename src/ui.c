@@ -28,6 +28,8 @@ void CalculatorEquationFocus_Animation(lv_obj_t * TargetObject, int delay);
 void ui_Clock_screen_init(void);
 void ui_event_Clock(lv_event_t * e);
 lv_obj_t * ui_Clock;
+lv_obj_t * ui_Style_Arc_Top;
+lv_obj_t * ui_Style_Arc_Bottom;
 lv_obj_t * ui_Time;
 lv_obj_t * ui_Date_Numerical;
 lv_obj_t * ui_Arc_Battery_Charge;
@@ -36,11 +38,14 @@ lv_obj_t * ui_Arc_Right;
 lv_obj_t * ui_Tick_Dashes;
 lv_obj_t * ui_Tick_Dots;
 lv_obj_t * ui_Now_Playing_Label;
+lv_obj_t * ui_Steps_Panel;
+lv_obj_t * ui_Steps_Image;
 lv_obj_t * ui_Step_Counter_Text;
 lv_obj_t * ui_Minute_Hand;
 lv_obj_t * ui_Hour_Hand;
 lv_obj_t * ui_Second_Hand;
 lv_obj_t * ui_Second_Dot;
+lv_obj_t * ui_Center_dot;
 lv_obj_t * ui_Date;
 lv_obj_t * ui_Battery_Percentage;
 lv_obj_t * ui_Bluetooth_Indicator;
@@ -66,6 +71,7 @@ lv_obj_t * ui_Notifications_Label;
 lv_obj_t * ui_Notification_Panel;
 lv_obj_t * ui_No_New_Notifications_Label;
 lv_obj_t * ui_Notifications_Gesture_Panel;
+lv_obj_t * ui_Notification_Widget2;
 
 // SCREEN: ui_Alarms
 void ui_Alarms_screen_init(void);
@@ -270,41 +276,6 @@ lv_obj_t * ui_Apps_Label;
 // SCREEN: ui_Calculator
 void ui_Calculator_screen_init(void);
 lv_obj_t * ui_Calculator;
-lv_obj_t * ui_Calculator_Plus_Button;
-lv_obj_t * ui_Calculator_Plus_Label;
-lv_obj_t * ui_Calculator_Minus_Button;
-lv_obj_t * ui_Calculator_Minus_Label;
-lv_obj_t * ui_Calculator_Times_Button;
-lv_obj_t * ui_Calculator_Times_Label;
-lv_obj_t * ui_Calculator_Divide_Button;
-lv_obj_t * ui_Calculator_Divide_Label;
-lv_obj_t * ui_Calculator_Equals_Button;
-lv_obj_t * ui_Calculator_Equals_Label;
-lv_obj_t * ui_Calculator_3_Button;
-lv_obj_t * ui_Calculator_3_Label;
-lv_obj_t * ui_Calculator_6_Button;
-lv_obj_t * ui_Calculator_6_Label;
-lv_obj_t * ui_Calculator_9_Button;
-lv_obj_t * ui_Calculator_9_Label;
-lv_obj_t * ui_Calculator_8_Button;
-lv_obj_t * ui_Calculator_8_Label;
-lv_obj_t * ui_Calculator_5_Button;
-lv_obj_t * ui_Calculator_5_Label;
-lv_obj_t * ui_Calculator_2_Button;
-lv_obj_t * ui_Calculator_2_Label;
-lv_obj_t * ui_Calculator_0_Button;
-lv_obj_t * ui_Calculator_0_Label;
-lv_obj_t * ui_Calculator_Decimal_Button;
-lv_obj_t * ui_Calculator_Decimal_Label;
-lv_obj_t * ui_Calculator_1_Button;
-lv_obj_t * ui_Calculator_1_Label;
-lv_obj_t * ui_Calculator_4_Button;
-lv_obj_t * ui_Calculator_4_Label;
-lv_obj_t * ui_Calculator_7_Button;
-lv_obj_t * ui_Calculator_7_Label;
-void ui_event_Calculator_Equation_Panel(lv_event_t * e);
-lv_obj_t * ui_Calculator_Equation_Panel;
-lv_obj_t * ui_Calculator_Equation_Label;
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_[1] = {&ui_img_4809254_png};
 
@@ -1235,14 +1206,6 @@ void ui_event_Settings_App_Button_App_Button(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
-    }
-}
-void ui_event_Calculator_Equation_Panel(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_CLICKED) {
-        CalculatorEquationFocus_Animation(ui_Calculator_Equation_Panel, 0);
     }
 }
 
