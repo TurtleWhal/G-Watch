@@ -12,10 +12,6 @@
 
 #include "Preferences.h"
 
-// #include "Functions.c"
-
-// #include "watch.h"
-
 /*Change to your screen resolution*/
 static const uint16_t screenWidth = 240;
 static const uint16_t screenHeight = 240;
@@ -62,9 +58,6 @@ typedef struct
 
 Alarm alarms[4];
 int selectedalarm = 0;
-
-const char compile_time[] = __TIME__;
-const char compile_date[] = __DATE__;
 
 bool notificationshowing = 0;
 int notificationid = 1;
@@ -280,39 +273,6 @@ void setup()
   indev_drv.type = LV_INDEV_TYPE_POINTER;
   indev_drv.read_cb = my_touchpad_read;
   lv_indev_drv_register(&indev_drv);
-
-  // This all was here to use the compile date for initial time.
-  //  rtc.adjust(1, 26, 21, 2022, 6, 3); // 01:26:21 03 Jun 2022
-  /*
-  String Month = compile_date;
-  Month.remove(3, 8);
-  char MonthNum;
-  if (Month == "Jan")
-    MonthNum = 1;
-  else if (Month == "Feb")
-    MonthNum = 2;
-  else if (Month == "Mar")
-    MonthNum = 3;
-  else if (Month == "Apr")
-    MonthNum = 4;
-  else if (Month == "May")
-    MonthNum = 5;
-  else if (Month == "Jun")
-    MonthNum = 6;
-  else if (Month == "Jul")
-    MonthNum = 7;
-  else if (Month == "Aug")
-    MonthNum = 8;
-  else if (Month == "Sep")
-    MonthNum = 9;
-  else if (Month == "Oct")
-    MonthNum = 10;
-  else if (Month == "Nov")
-    MonthNum = 11;
-  else if (Month == "Dec")
-    MonthNum = 12;
-  // rtc.adjust(atoi(compile_time), atoi(compile_time + 3), atoi(compile_time + 6) + 35, atoi(compile_date + 7), MonthNum, atoi(compile_date + 4));
-*/
 
   alarms[0].state = 0;
   alarms[1].state = 0;
