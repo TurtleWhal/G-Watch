@@ -65,7 +65,7 @@ typedef struct
   String Title;
   String Text;
   String Source;
-  //uint8_t index;
+  // uint8_t index;
 } Notification;
 
 Notification NotificationList[11];
@@ -338,7 +338,23 @@ void setup()
   alarms[2].am = 1;
   alarms[3].am = 1;
 
-  ui_init();
+  //////////Initalize UI//////////
+  // ui_init();
+
+  LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
+
+  lv_disp_t *dispp = lv_disp_get_default();
+  lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
+                                            true, LV_FONT_DEFAULT);
+  lv_disp_set_theme(dispp, theme);
+
+  ui_Clock_screen_init();
+  ui_Settings_screen_init();
+
+  ui____initial_actions0 = lv_obj_create(NULL);
+  lv_disp_load_scr(ui_Clock);
+
+  ////////////////////////////////
 
   twatch->backlight_init();
   twatch->backlight_set_value(100);
@@ -933,7 +949,7 @@ void drawnotifications(lv_event_t *e)
     lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[i].Title.c_str());
     lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[i].Text.c_str());
     lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[i].Source.c_str());
-    //lv_obj_set_user_data(NotificationComp, &NotificationList[i]);
+    // lv_obj_set_user_data(NotificationComp, &NotificationList[i]);
     lv_obj_set_user_data(NotificationComp, (void *)i);
   }
 }
@@ -945,14 +961,14 @@ void deletenotificationscreen(lv_event_t *e)
 
 void deletenotification(lv_event_t *e)
 {
-  //lv_obj_del(lv_event_get_target(e));
-  //lv_obj_set_style_bg_color(lv_event_get_target(e), lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-  //lv_obj_set_style_bg_opa(lv_event_get_target(e), 255, LV_PART_MAIN);
-  //lv_obj_set_style_bg_color(ui_Notification_Widget2, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-  //lv_obj_set_style_bg_opa(ui_Notification_Widget2, 255, LV_PART_MAIN);
-  //lv_obj_set_x(lv_event_get_target(e), 10);
+  // lv_obj_del(lv_event_get_target(e));
+  // lv_obj_set_style_bg_color(lv_event_get_target(e), lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  // lv_obj_set_style_bg_opa(lv_event_get_target(e), 255, LV_PART_MAIN);
+  // lv_obj_set_style_bg_color(ui_Notification_Widget2, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  // lv_obj_set_style_bg_opa(ui_Notification_Widget2, 255, LV_PART_MAIN);
+  // lv_obj_set_x(lv_event_get_target(e), 10);
   auto index = lv_obj_get_user_data(lv_event_get_target(e));
-  //index->Title = "Deleted";
+  // index->Title = "Deleted";
   NotificationList[(int)index].Title = "Deleted";
 }
 
@@ -1223,7 +1239,8 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         char song[64];
-        sprintf(song, "♪ %s ♪", input.c_str());
+        // sprintf(song, "♪ %s ♪", input.c_str());
+        sprintf(song, "%s   •", input.c_str());
         lv_label_set_text(ui_Now_Playing_Label, song);
         songtime = millis();
       }

@@ -10,11 +10,11 @@
 extern "C" {
 #endif
 
+void toappsscreen(lv_event_t * e);
 void drawnotifications(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
 void deletenotificationscreen(lv_event_t * e);
-void deletenotification(lv_event_t * e);
 void setalarm1(lv_event_t * e);
 void togglealarm1(lv_event_t * e);
 void setalarm2(lv_event_t * e);
