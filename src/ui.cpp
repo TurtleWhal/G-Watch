@@ -30,7 +30,7 @@ Preferences Storage;
 
 // functions
 void writetimertime();
-void shownotification(bool Store);
+void shownotification(bool);
 void notificationdismiss();
 void alarmhandle();
 void BThandle();
@@ -40,6 +40,7 @@ void Sleephandle();
 void Compass();
 void StepHandle();
 void Timer0Handle();
+void pushnotification(int);
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -58,6 +59,17 @@ typedef struct
 
 Alarm alarms[4];
 int selectedalarm = 0;
+
+typedef struct
+{
+  String Title;
+  String Text;
+  String Source;
+  //uint8_t index;
+} Notification;
+
+Notification NotificationList[11];
+int NotificationCount = 0;
 
 bool notificationshowing = 0;
 int notificationid = 1;
@@ -212,7 +224,9 @@ void btn3_click(void *param)
   Serial.println("BTN3 Click");
   // twatch->motor_shake(1, 60);
   if (lv_scr_act() != ui_Clock)
-    _ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
+    _ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 0, 0);
+  if (lv_obj_is_valid(ui_Notifications))
+    lv_obj_del(ui_Notifications);
   Wakeup("Button 3 Pressed");
   if (notificationshowing == 1)
     notificationdismiss(nullptr);
@@ -221,7 +235,7 @@ void btn1_held(void *param)
 {
   Serial.println("BTN1 Held");
   if (lv_scr_act() != ui_Settings)
-    _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_NONE, 150, 0);
+    _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_NONE, 0, 0);
   Wakeup("Button 1 Held");
 }
 
@@ -237,7 +251,7 @@ void btn3_held(void *param)
 {
   Serial.println("BTN3 Held");
   Wakeup("Button 3 Held");
-  _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_NONE, 150, 0);
+  _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_NONE, 0, 0);
 }
 
 void setup()
@@ -900,10 +914,46 @@ void shownotification(bool Store)
   if (Store)
   {
     lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
+    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
+    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
+    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
+    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[NotificationCount].Title.c_str());
+    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[NotificationCount].Text.c_str());
+    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[NotificationCount].Source.c_str());
   }
+}
+
+void drawnotifications(lv_event_t *e)
+{
+  ui_Notifications_screen_init();
+  _ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
+  for (int i = 0; i < NotificationCount; i++)
+  {
+    lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[i].Title.c_str());
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[i].Text.c_str());
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[i].Source.c_str());
+    //lv_obj_set_user_data(NotificationComp, &NotificationList[i]);
+    lv_obj_set_user_data(NotificationComp, (void *)i);
+  }
+}
+
+void deletenotificationscreen(lv_event_t *e)
+{
+  lv_obj_del(ui_Notifications);
+}
+
+void deletenotification(lv_event_t *e)
+{
+  //lv_obj_del(lv_event_get_target(e));
+  //lv_obj_set_style_bg_color(lv_event_get_target(e), lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  //lv_obj_set_style_bg_opa(lv_event_get_target(e), 255, LV_PART_MAIN);
+  //lv_obj_set_style_bg_color(ui_Notification_Widget2, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  //lv_obj_set_style_bg_opa(ui_Notification_Widget2, 255, LV_PART_MAIN);
+  //lv_obj_set_x(lv_event_get_target(e), 10);
+  auto index = lv_obj_get_user_data(lv_event_get_target(e));
+  //index->Title = "Deleted";
+  NotificationList[(int)index].Title = "Deleted";
 }
 
 void notificationdismiss(lv_event_t *e)
@@ -1144,6 +1194,7 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         lv_label_set_text(ui_Notification_Title, input.c_str());
+        NotificationList[10].Title = input;
       }
       if (input.charAt(0) == 3)
       {
@@ -1152,6 +1203,7 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         lv_label_set_text(ui_Notification_Text, input.c_str());
+        NotificationList[10].Text = input;
       }
       if (input.charAt(0) == 4)
       {
@@ -1160,7 +1212,9 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         lv_label_set_text(ui_Notification_Source, input.c_str());
-        shownotification(1);
+        NotificationList[10].Source = input;
+        shownotification(0);
+        pushnotification(1);
       }
       if (input.charAt(0) == 5)
       {
@@ -1208,6 +1262,19 @@ void BThandle()
   {
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
   }
+}
+
+void pushnotification(int index)
+{
+  int i;
+  for (i = NotificationCount; index <= i; i--)
+  {
+    if (i != 10)
+      NotificationList[i] = NotificationList[i - 1];
+  }
+  NotificationList[i] = NotificationList[10];
+  if (NotificationCount < 10)
+    NotificationCount++;
 }
 
 void Powerhandle()

@@ -7,7 +7,7 @@
 
 void ui_Calculator_screen_init(void)
 {
-    ui_Calculator = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_Calculator, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+ui_Calculator = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_Calculator, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
 }
