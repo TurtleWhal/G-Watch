@@ -3,8 +3,8 @@ extern "C"
 {
 #endif
 
-void toscreen();
-//void toappsscreen();
+void generictoclock();
+void lv_Calculator_Keyboard_Create2(void);
 
 #ifdef __cplusplus
 } /*extern "C"*/

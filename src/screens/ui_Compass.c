@@ -7,113 +7,113 @@
 
 void ui_Compass_screen_init(void)
 {
-    ui_Compass = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_Compass, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+ui_Compass = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_Compass, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-    ui_Compass_Arrow = lv_img_create(ui_Compass);
-    lv_img_set_src(ui_Compass_Arrow, &ui_img_play_button_png);
-    lv_obj_set_width(ui_Compass_Arrow, LV_SIZE_CONTENT);   /// 70
-    lv_obj_set_height(ui_Compass_Arrow, LV_SIZE_CONTENT);    /// 81
-    lv_obj_set_x(ui_Compass_Arrow, 0);
-    lv_obj_set_y(ui_Compass_Arrow, -55);
-    lv_obj_set_align(ui_Compass_Arrow, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Compass_Arrow, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Compass_Arrow, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_angle(ui_Compass_Arrow, -900);
-    lv_img_set_zoom(ui_Compass_Arrow, 150);
-    lv_obj_set_style_img_recolor(ui_Compass_Arrow, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_img_recolor_opa(ui_Compass_Arrow, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_Arrow = lv_img_create(ui_Compass);
+lv_img_set_src(ui_Compass_Arrow, &ui_img_play_button_png);
+lv_obj_set_width( ui_Compass_Arrow, LV_SIZE_CONTENT);  /// 70
+lv_obj_set_height( ui_Compass_Arrow, LV_SIZE_CONTENT);   /// 81
+lv_obj_set_x( ui_Compass_Arrow, 0 );
+lv_obj_set_y( ui_Compass_Arrow, -55 );
+lv_obj_set_align( ui_Compass_Arrow, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Compass_Arrow, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Compass_Arrow, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_angle(ui_Compass_Arrow,-900);
+lv_img_set_zoom(ui_Compass_Arrow,150);
+lv_obj_set_style_img_recolor(ui_Compass_Arrow, lv_color_hex(0xFF7D00), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_img_recolor_opa(ui_Compass_Arrow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_Deg = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_Deg, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_Deg, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Compass_Deg, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_Deg, "359°");
-    lv_obj_set_style_text_font(ui_Compass_Deg, &ui_font_Monoton_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_Deg = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_Deg, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_Deg, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Compass_Deg, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_Deg,"359°");
+lv_obj_set_style_text_font(ui_Compass_Deg, &ui_font_Monoton_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_N = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_N, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_N, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Compass_N, 0);
-    lv_obj_set_y(ui_Compass_N, -100);
-    lv_obj_set_align(ui_Compass_N, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_N, "N");
-    lv_obj_set_style_text_color(ui_Compass_N, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Compass_N, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Compass_N, &ui_font_Comfortaa_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_N = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_N, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_N, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Compass_N, 0 );
+lv_obj_set_y( ui_Compass_N, -100 );
+lv_obj_set_align( ui_Compass_N, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_N,"N");
+lv_obj_set_style_text_color(ui_Compass_N, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Compass_N, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Compass_N, &ui_font_Comfortaa_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_E = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_E, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_E, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Compass_E, 100);
-    lv_obj_set_y(ui_Compass_E, 0);
-    lv_obj_set_align(ui_Compass_E, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_E, "E");
-    lv_obj_set_style_text_font(ui_Compass_E, &ui_font_Comfortaa_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_E = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_E, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_E, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Compass_E, 100 );
+lv_obj_set_y( ui_Compass_E, 0 );
+lv_obj_set_align( ui_Compass_E, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_E,"E");
+lv_obj_set_style_text_font(ui_Compass_E, &ui_font_Comfortaa_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_S = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_S, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_S, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Compass_S, 0);
-    lv_obj_set_y(ui_Compass_S, 100);
-    lv_obj_set_align(ui_Compass_S, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_S, "S");
-    lv_obj_set_style_text_font(ui_Compass_S, &ui_font_Comfortaa_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_S = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_S, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_S, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Compass_S, 0 );
+lv_obj_set_y( ui_Compass_S, 100 );
+lv_obj_set_align( ui_Compass_S, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_S,"S");
+lv_obj_set_style_text_font(ui_Compass_S, &ui_font_Comfortaa_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_W = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_W, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_W, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Compass_W, -100);
-    lv_obj_set_y(ui_Compass_W, 0);
-    lv_obj_set_align(ui_Compass_W, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_W, "W");
-    lv_obj_set_style_text_font(ui_Compass_W, &ui_font_Comfortaa_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_W = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_W, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_W, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Compass_W, -100 );
+lv_obj_set_y( ui_Compass_W, 0 );
+lv_obj_set_align( ui_Compass_W, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_W,"W");
+lv_obj_set_style_text_font(ui_Compass_W, &ui_font_Comfortaa_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_Direction = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_Direction, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_Direction, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Compass_Direction, 0);
-    lv_obj_set_y(ui_Compass_Direction, 50);
-    lv_obj_set_align(ui_Compass_Direction, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_Direction, "N");
-    lv_obj_set_style_text_color(ui_Compass_Direction, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Compass_Direction, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Compass_Direction, &ui_font_Monoton_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_Direction = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_Direction, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_Direction, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Compass_Direction, 0 );
+lv_obj_set_y( ui_Compass_Direction, 50 );
+lv_obj_set_align( ui_Compass_Direction, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_Direction,"N");
+lv_obj_set_style_text_color(ui_Compass_Direction, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Compass_Direction, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Compass_Direction, &ui_font_Monoton_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_NE = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_NE, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_NE, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Compass_NE, 70);
-    lv_obj_set_y(ui_Compass_NE, -70);
-    lv_obj_set_align(ui_Compass_NE, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_NE, "NE");
-    lv_obj_set_style_text_font(ui_Compass_NE, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_NE = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_NE, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_NE, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Compass_NE, 70 );
+lv_obj_set_y( ui_Compass_NE, -70 );
+lv_obj_set_align( ui_Compass_NE, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_NE,"NE");
+lv_obj_set_style_text_font(ui_Compass_NE, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_SE = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_SE, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_SE, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Compass_SE, 70);
-    lv_obj_set_y(ui_Compass_SE, 70);
-    lv_obj_set_align(ui_Compass_SE, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_SE, "SE");
-    lv_obj_set_style_text_font(ui_Compass_SE, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_SE = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_SE, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_SE, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Compass_SE, 70 );
+lv_obj_set_y( ui_Compass_SE, 70 );
+lv_obj_set_align( ui_Compass_SE, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_SE,"SE");
+lv_obj_set_style_text_font(ui_Compass_SE, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_SW = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_SW, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_SW, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Compass_SW, -70);
-    lv_obj_set_y(ui_Compass_SW, 70);
-    lv_obj_set_align(ui_Compass_SW, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_SW, "SW");
-    lv_obj_set_style_text_font(ui_Compass_SW, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_SW = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_SW, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_SW, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Compass_SW, -70 );
+lv_obj_set_y( ui_Compass_SW, 70 );
+lv_obj_set_align( ui_Compass_SW, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_SW,"SW");
+lv_obj_set_style_text_font(ui_Compass_SW, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Compass_NW = lv_label_create(ui_Compass);
-    lv_obj_set_width(ui_Compass_NW, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Compass_NW, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Compass_NW, -70);
-    lv_obj_set_y(ui_Compass_NW, -70);
-    lv_obj_set_align(ui_Compass_NW, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Compass_NW, "NW");
-    lv_obj_set_style_text_font(ui_Compass_NW, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Compass_NW = lv_label_create(ui_Compass);
+lv_obj_set_width( ui_Compass_NW, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Compass_NW, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Compass_NW, -70 );
+lv_obj_set_y( ui_Compass_NW, -70 );
+lv_obj_set_align( ui_Compass_NW, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Compass_NW,"NW");
+lv_obj_set_style_text_font(ui_Compass_NW, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 }

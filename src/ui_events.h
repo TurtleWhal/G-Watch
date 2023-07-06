@@ -12,9 +12,10 @@ extern "C" {
 
 void toappsscreen(lv_event_t * e);
 void drawnotifications(lv_event_t * e);
+void totimersscreen(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
-void deletenotificationscreen(lv_event_t * e);
+void notificationscreenback(lv_event_t * e);
 void setalarm1(lv_event_t * e);
 void togglealarm1(lv_event_t * e);
 void setalarm2(lv_event_t * e);
@@ -27,6 +28,7 @@ void toggleampm(lv_event_t * e);
 void setalarm(lv_event_t * e);
 void resetstopwatch(lv_event_t * e);
 void ToggleStopwatch(lv_event_t * e);
+void timersscreenback(lv_event_t * e);
 void ToggleTimer(lv_event_t * e);
 void timerhourminus10(lv_event_t * e);
 void timerhourminus1(lv_event_t * e);
@@ -40,12 +42,16 @@ void timerminuteplus10(lv_event_t * e);
 void timerminuteplus1(lv_event_t * e);
 void timersecondplus10(lv_event_t * e);
 void timersecondplus1(lv_event_t * e);
-void Brightness(lv_event_t * e);
+void UpdateBrightness(lv_event_t * e);
 void ToggleBT(lv_event_t * e);
 void ToggleDoNotDisturb(lv_event_t * e);
 void PowerOff(lv_event_t * e);
 void UpdateSettings(lv_event_t * e);
 void UpdateSettings(lv_event_t * e);
+void appsscreenback(lv_event_t * e);
+void tocalculatorscreen(lv_event_t * e);
+void tocompassscreen(lv_event_t * e);
+void tosettingsscreen(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

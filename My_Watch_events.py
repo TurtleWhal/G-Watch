@@ -134,3 +134,43 @@ def UpdateSettings(event_struct):
 def toappsscreen(event_struct):
     return
 
+
+def toclockscreen(event_struct):
+    return
+
+
+def deletescreen(event_struct):
+    return
+
+
+def totimersscreen(event_struct):
+    return
+
+
+def appsscreenback(event_struct):
+    return
+
+
+def notificationscreenback(event_struct):
+    return
+
+
+def timersscreenback(event_struct):
+    return
+
+
+def tosettingsscreen(event_struct):
+    return
+
+
+def tocalculatorscreen(event_struct):
+    return
+
+
+def tocompassscreen(event_struct):
+    return
+
+
+def UpdateBrightness(event_struct):
+    return
+
