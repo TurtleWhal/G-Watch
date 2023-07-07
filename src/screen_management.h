@@ -4,7 +4,7 @@ extern "C"
 #endif
 
 void generictoclock();
-void lv_Calculator_Keyboard_Create2(void);
+void lv_Calculator_Keyboard_Create(void);
 
 #ifdef __cplusplus
 } /*extern "C"*/

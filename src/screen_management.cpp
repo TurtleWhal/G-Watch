@@ -8,14 +8,14 @@ extern Preferences Storage;
 
 extern int Brightness;
 
-void lv_Calculator_Keyboard_Create2(void)
+void lv_Calculator_Keyboard_Create(void)
 {
     /*Create an Calculator keyboard map*/
     static const char *kb_map[] = {"C", LV_SYMBOL_BACKSPACE, "\n",
                                    "7", "8", "9", "/", "\n",
                                    "4", "5", "6", "x", "\n",
                                    "1", "2", "3", "-", "\n",
-                                   ".", "0", "=", "+", "\n"};
+                                   ".", "0", "=", "+", NULL};
 
     /*Set the relative width of the buttons and other controls*/
     static const lv_btnmatrix_ctrl_t kb_ctrl[] = {LV_BTNMATRIX_CTRL_CHECKED | 2, 2,
@@ -41,14 +41,14 @@ void lv_Calculator_Keyboard_Create2(void)
     // lv_obj_set_style_text_font(ui_Calculator_Keyboard, &ui_font_Comfortaa_16, LV_PART_ITEMS);
 
     /*Create a text area. The keyboard will write here*/
-    /*lv_obj_t *ta;
+    lv_obj_t *ta;
     ta = lv_textarea_create(ui_Calculator);
     lv_obj_align(ta, LV_ALIGN_TOP_MID, 0, 25);
     lv_obj_set_size(ta, 165, 35);
     lv_obj_add_state(ta, LV_STATE_FOCUSED);
     lv_obj_set_style_radius(ta, 20, LV_PART_MAIN);
 
-    lv_keyboard_set_textarea(ui_Calculator_Keyboard, ta);*/
+    lv_keyboard_set_textarea(ui_Calculator_Keyboard, ta);
 }
 
 void toappsscreen(lv_event_t *e)
