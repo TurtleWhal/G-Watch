@@ -186,7 +186,7 @@ void btn3_click(void *param)
 {
   Serial.println("BTN3 Click");
   Wakeup("Button 3 Pressed");
-  if (notificationshowing == 1)
+  if (notificationshowing)
     notificationdismiss(nullptr);
   else
     buttontoclock();
@@ -392,7 +392,7 @@ void loop()
     StepHandle();
   }
 
-  /*if (digitalRead(TWATCH_CHARGING) == 1 and twatch->power_get_volt() < 3800)
+  /*if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 3800)
     Sleephandle();*/
   /* Serial.println(digitalRead(TWATCH_CHARGING));
    Serial.println(twatch->power_get_volt());*/
@@ -446,7 +446,7 @@ void loop()
 
   // lv_obj_set_style_img_recolor(ui_Colorset_Tick_Dots, lv_color_hex(0xEE3C39), LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  if (notificationshowing == 1)
+  if (notificationshowing)
   {
     lv_arc_set_value(ui_Notification_Timer, ((millis() - notificationtime) / (NotificationLength * 10)) * 10);
     if (notificationtime + (NotificationLength * 1000) < millis())
@@ -456,7 +456,7 @@ void loop()
     }
   }
 
-  if (stopwatchmoving == 1)
+  if (stopwatchmoving)
   {
     stopwatchtime = (millis() - stopwatchtimestarted);
     // itoa(stopwatchtime,stopwatchtimechar,10);
@@ -511,7 +511,7 @@ void loop()
     lv_label_set_text(ui_Stopwatch_Hours, stopwatchtimechar);
   }
 
-  if (timermoving == 1)
+  if (timermoving)
   {
     if (millis() > timerlasttime)
     {
@@ -526,7 +526,7 @@ void loop()
 void setalarm1(lv_event_t *e)
 {
   selectedalarm = 0;
-  if (alarms[0].am == 1)
+  if (alarms[0].am)
   {
     _ui_state_modify(ui_AMPM_Label, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
   }
@@ -538,7 +538,7 @@ void setalarm1(lv_event_t *e)
 void setalarm2(lv_event_t *e)
 {
   selectedalarm = 1;
-  if (alarms[1].am == 1)
+  if (alarms[1].am)
   {
     _ui_state_modify(ui_AMPM_Label, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
   }
@@ -550,7 +550,7 @@ void setalarm2(lv_event_t *e)
 void setalarm3(lv_event_t *e)
 {
   selectedalarm = 2;
-  if (alarms[2].am == 1)
+  if (alarms[2].am)
   {
     _ui_state_modify(ui_AMPM_Label, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
   }
@@ -562,7 +562,7 @@ void setalarm3(lv_event_t *e)
 void setalarm4(lv_event_t *e)
 {
   selectedalarm = 3;
-  if (alarms[3].am == 1)
+  if (alarms[3].am)
   {
     _ui_state_modify(ui_AMPM_Label, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
   }
@@ -578,7 +578,7 @@ void setalarm(lv_event_t *e)
   char temptime[6];
   lv_roller_get_selected_str(ui_Hour_Roller, temptime, 3);
   alarms[selectedalarm].hourtext = temptime;
-  if (alarms[selectedalarm].am == 0)
+  if (!alarms[selectedalarm].am)
   {
     alarms[selectedalarm].hour = atoi(temptime) + 12;
   }
@@ -592,7 +592,7 @@ void setalarm(lv_event_t *e)
   alarms[selectedalarm].minute = atoi(temptime);
 
   // if (alarms[0].hour<10) alarms[0].minutetext = "0"+temptime;
-  if (alarms[selectedalarm].am == 1)
+  if (alarms[selectedalarm].am)
   {
     itoa(alarms[selectedalarm].hour, temptime, 10);
   }
@@ -603,7 +603,7 @@ void setalarm(lv_event_t *e)
 
   if (selectedalarm == 0)
     lv_label_set_text(ui_Alarm_1_Hour, temptime);
-  if (selectedalarm == 1)
+  if (selectedalarm)
     lv_label_set_text(ui_Alarm_2_Hour, temptime);
   if (selectedalarm == 2)
     lv_label_set_text(ui_Alarm_3_Hour, temptime);
@@ -623,7 +623,7 @@ void setalarm(lv_event_t *e)
     lv_label_set_text(ui_Alarm_1_Minute, alarms[selectedalarm].minutetext);
     alarms[0].state = 1;
     lv_obj_add_state(ui_Alarm_1_Switch, LV_STATE_CHECKED);
-    if (alarms[0].am == 1)
+    if (alarms[0].am)
     {
       lv_label_set_text(ui_Alarm_1_AMPM, "AM");
     }
@@ -634,12 +634,12 @@ void setalarm(lv_event_t *e)
     lv_label_set_text(ui_Alarm_1_Name, lv_textarea_get_text(ui_Alarm_Name));
     alarms[0].name = lv_textarea_get_text(ui_Alarm_Name);
   }
-  if (selectedalarm == 1)
+  if (selectedalarm)
   {
     lv_label_set_text(ui_Alarm_2_Minute, alarms[selectedalarm].minutetext);
     alarms[1].state = 1;
     lv_obj_add_state(ui_Alarm_2_Switch, LV_STATE_CHECKED);
-    if (alarms[1].am == 1)
+    if (alarms[1].am)
     {
       lv_label_set_text(ui_Alarm_2_AMPM, "AM");
     }
@@ -655,7 +655,7 @@ void setalarm(lv_event_t *e)
     lv_label_set_text(ui_Alarm_3_Minute, alarms[selectedalarm].minutetext);
     alarms[2].state = 1;
     lv_obj_add_state(ui_Alarm_3_Switch, LV_STATE_CHECKED);
-    if (alarms[2].am == 1)
+    if (alarms[2].am)
     {
       lv_label_set_text(ui_Alarm_3_AMPM, "AM");
     }
@@ -671,7 +671,7 @@ void setalarm(lv_event_t *e)
     lv_label_set_text(ui_Alarm_4_Minute, alarms[selectedalarm].minutetext);
     alarms[3].state = 1;
     lv_obj_add_state(ui_Alarm_4_Switch, LV_STATE_CHECKED);
-    if (alarms[3].am == 1)
+    if (alarms[3].am)
     {
       lv_label_set_text(ui_Alarm_4_AMPM, "AM");
     }
@@ -686,7 +686,7 @@ void setalarm(lv_event_t *e)
 
 void togglealarm1(lv_event_t *e)
 {
-  if (alarms[0].state == 0)
+  if (!alarms[0].state)
   {
     alarms[0].state = 1;
   }
@@ -697,7 +697,7 @@ void togglealarm1(lv_event_t *e)
 }
 void togglealarm2(lv_event_t *e)
 {
-  if (alarms[1].state == 0)
+  if (!alarms[1].state)
   {
     alarms[1].state = 1;
   }
@@ -708,7 +708,7 @@ void togglealarm2(lv_event_t *e)
 }
 void togglealarm3(lv_event_t *e)
 {
-  if (alarms[2].state == 0)
+  if (!alarms[2].state)
   {
     alarms[2].state = 1;
   }
@@ -719,7 +719,7 @@ void togglealarm3(lv_event_t *e)
 }
 void togglealarm4(lv_event_t *e)
 {
-  if (alarms[3].state == 0)
+  if (!alarms[3].state)
   {
     alarms[3].state = 1;
   }
@@ -731,7 +731,7 @@ void togglealarm4(lv_event_t *e)
 
 void toggleampm(lv_event_t *e)
 {
-  if (alarms[selectedalarm].am == 1)
+  if (alarms[selectedalarm].am)
   {
     alarms[selectedalarm].am = 0;
   }
@@ -749,7 +749,7 @@ void toggleampm(lv_event_t *e)
   {
     alarmlastmin = rtc.minute;
 
-    if (alarms[0].state == 1)
+    if (alarms[0].state)
     {
       rtc.read();
       if (alarms[0].hour == rtc.hour)
@@ -775,7 +775,7 @@ void toggleampm(lv_event_t *e)
         }
       }
     }
-    if (alarms[1].state == 1)
+    if (alarms[1].state)
     {
       rtc.read();
       if (alarms[1].hour == rtc.hour)
@@ -801,7 +801,7 @@ void toggleampm(lv_event_t *e)
         }
       }
     }
-    if (alarms[2].state == 1)
+    if (alarms[2].state)
     {
       rtc.read();
       if (alarms[2].hour == rtc.hour)
@@ -828,7 +828,7 @@ void toggleampm(lv_event_t *e)
         }
       }
     }
-    if (alarms[3].state == 1)
+    if (alarms[3].state)
     {
       rtc.read();
       if (alarms[3].hour == rtc.hour)
@@ -931,10 +931,10 @@ void DeleteNotification(lv_event_t *e)
 
 void ToggleStopwatch(lv_event_t *e)
 {
-  if (stopwatchmoving == 0)
+  if (!stopwatchmoving)
   {
     stopwatchmoving = 1;
-    if (stopwatchtimestarted == 0)
+    if (!stopwatchtimestarted)
     {
       stopwatchtimestarted = millis();
     }
@@ -968,7 +968,7 @@ void resetstopwatch(lv_event_t *e)
 
 void ToggleTimer(lv_event_t *e)
 {
-  if (timermoving == 0)
+  if (!timermoving)
   {
     timermoving = 1;
     PlayToPause_Animation(ui_Timer_Play_Pause_Image, 0);
@@ -1054,7 +1054,7 @@ void istimernegative()
   if (timertime <= 0)
   {
     timertime = 0;
-    if (timermoving == 1)
+    if (timermoving)
     {
       lv_label_set_text(ui_Alarm_Going_Off_Time, "00:00:00");
       lv_label_set_text(ui_Alarm_Going_Off_Name, "Timer");
@@ -1236,9 +1236,9 @@ void pushnotification(int index)
 void Powerhandle()
 {
   twatch->power_updata(millis(), 1000);
-  if ((!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000) and charging == 0)
+  if ((!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000) and !charging)
     lastpercent = 0;
-  if ((digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() < 4000) and charging == 1)
+  if ((digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() < 4000) and charging)
     lastpercent = 100;
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
   {
@@ -1251,7 +1251,7 @@ void Powerhandle()
     charging = 0;
   }
 
-  if ((lastpercent > twatch->power_get_percent() and charging == 0) or (lastpercent < twatch->power_get_percent() and charging == 1))
+  if ((lastpercent > twatch->power_get_percent() and !charging) or (lastpercent < twatch->power_get_percent() and charging))
   {
     char percentchar[] = "179&";
     sprintf(percentchar, "%.0f%%", (twatch->power_get_percent()));
