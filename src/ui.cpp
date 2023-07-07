@@ -103,8 +103,8 @@ bool charging;
 int Brightness = 100;
 
 ////////////////////Settings////////////////////
-int StepGoal;               // Step Goal
-int NotificationLength;     // Amount of time notifications are displayed in seconds
+int StepGoal = 6500;               // Step Goal
+int NotificationLength = 10;     // Amount of time notifications are displayed in seconds
 int VibrationStrength = 30; // Strength of button vibrations
 ////////////////////////////////////////////////
 
@@ -873,7 +873,7 @@ void shownotification(bool Store)
   // Create the widget in the notifications screen
   if (Store)
   {
-    lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+    //lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
     // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
     // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
     // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));

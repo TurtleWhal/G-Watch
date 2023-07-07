@@ -86,6 +86,7 @@ lv_obj_set_style_bg_opa(cui_Notification_Image_Panel, 255, LV_PART_MAIN| LV_STAT
 
 lv_obj_t *cui_Notification_Image;
 cui_Notification_Image = lv_img_create(cui_Notification_Image_Panel);
+lv_img_set_src(cui_Notification_Image, &ui_img_bellnobackground_png);
 lv_obj_set_width( cui_Notification_Image, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( cui_Notification_Image, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( cui_Notification_Image, -1 );

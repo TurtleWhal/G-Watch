@@ -10078,7 +10078,7 @@
                 {
                   "nid": 1180491400,
                   "strtype": "IMAGE/Asset",
-                  "strval": "assets\\BellNobackground.png",
+                  "strval": "assets/BellNobackground.png",
                   "InheritedType": 5
                 },
                 {
@@ -18842,8 +18842,7 @@
               "InheritedType": 11
             }
           ],
-          "saved_objtypeKey": "PANEL",
-          "tree_closed": true
+          "saved_objtypeKey": "PANEL"
         }
       ],
       "locked": false,
