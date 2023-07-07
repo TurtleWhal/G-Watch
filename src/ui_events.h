@@ -15,7 +15,7 @@ void drawnotifications(lv_event_t * e);
 void totimersscreen(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
-void notificationscreenback(lv_event_t * e);
+void generictoclock(lv_event_t * e);
 void setalarm1(lv_event_t * e);
 void togglealarm1(lv_event_t * e);
 void setalarm2(lv_event_t * e);

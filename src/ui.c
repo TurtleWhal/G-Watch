@@ -276,6 +276,8 @@ lv_obj_t *ui_Apps_Label;
 // SCREEN: ui_Calculator
 void ui_Calculator_screen_init(void);
 lv_obj_t *ui_Calculator;
+lv_obj_t *ui_Calculator_Keyboard;
+lv_obj_t *ui_Calculator_textarea;
 lv_obj_t *ui____initial_actions0;
 const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_4809254_png};
 
@@ -776,7 +778,7 @@ void ui_event_Notifications( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
 lv_indev_wait_release(lv_indev_get_act());
-      notificationscreenback( e );
+      generictoclock( e );
 }
 }
 void ui_event_Alarms( lv_event_t * e) {

@@ -51,7 +51,7 @@ void Wakeup(String Wakeup_reason)
   {
     // setCpuFrequencyMhz(240);
     //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
-    generictoclock();
+    generictoclock(nullptr);
     //lv_timer_handler();
     WriteTime();
     Serial.println("IM AWAKE!");

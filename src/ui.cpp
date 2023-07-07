@@ -185,13 +185,11 @@ void btn2_click(void *param)
 void btn3_click(void *param)
 {
   Serial.println("BTN3 Click");
-  // twatch->motor_shake(1, 60);
-  generictoclock();
-  if (lv_obj_is_valid(ui_Notifications))
-    lv_obj_del(ui_Notifications);
   Wakeup("Button 3 Pressed");
   if (notificationshowing == 1)
     notificationdismiss(nullptr);
+  else
+    buttontoclock();
 }
 void btn1_held(void *param)
 {
@@ -213,7 +211,7 @@ void btn3_held(void *param)
 {
   Serial.println("BTN3 Held");
   Wakeup("Button 3 Held");
-  _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_NONE, 0, 0);
+  totimersscreen(nullptr);
 }
 
 void setup()
@@ -311,7 +309,6 @@ void setup()
   lv_disp_set_theme(dispp, theme);
 
   ui_Clock_screen_init();
-  ui_Calculator_screen_init();
 
   ui____initial_actions0 = lv_obj_create(NULL);
   lv_disp_load_scr(ui_Clock);
@@ -336,8 +333,6 @@ void setup()
   timerAttachInterrupt(timer, Timer0Handle, true);
   timerAlarmWrite(timer, 5000000, true);
   timerAlarmEnable(timer);
-
-  lv_Calculator_Keyboard_Create();
 
   twatch->motor_shake(1, 100);
   Serial.println("Setup done");
@@ -380,7 +375,7 @@ void loop()
       WriteTime();
     }
     Compass();
-    //twatch->backlight_updata(millis(), 10);
+    // twatch->backlight_updata(millis(), 10);
   }
   else
     delay(5);

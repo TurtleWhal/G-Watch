@@ -284,6 +284,8 @@ extern lv_obj_t *ui_Apps_Label;
 // SCREEN: ui_Calculator
 void ui_Calculator_screen_init(void);
 extern lv_obj_t *ui_Calculator;
+extern lv_obj_t *ui_Calculator_Keyboard;
+extern lv_obj_t *ui_Calculator_textarea;
 extern lv_obj_t *ui____initial_actions0;
 
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png

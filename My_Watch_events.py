@@ -174,3 +174,7 @@ def tocompassscreen(event_struct):
 def UpdateBrightness(event_struct):
     return
 
+
+def generictoclock(event_struct):
+    return
+

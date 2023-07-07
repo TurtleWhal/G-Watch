@@ -67,6 +67,8 @@ ui_Notification_Widget2 = ui_Notification_Widget_create(ui_Notification_Panel);
 lv_obj_set_x( ui_Notification_Widget2, 0 );
 lv_obj_set_y( ui_Notification_Widget2, -43 );
 
+lv_img_set_src(ui_comp_get_child(ui_Notification_Widget2, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL_NOTIFICATION_IMAGE), &ui_img_bellnobackground_png);
+
 ui_Notifications_Gesture_Panel = lv_obj_create(ui_Notifications);
 lv_obj_set_width( ui_Notifications_Gesture_Panel, 267);
 lv_obj_set_height( ui_Notifications_Gesture_Panel, 50);
