@@ -237,6 +237,12 @@ void setup()
      Serial.println(BTnamechar);
      Serial.println(Storage.isKey("BTname"));*/
 
+     if (Storage.isKey("NotifLength"))
+     NotificationLength = Storage.getInt("StepGoal");
+     if (Storage.isKey("StepGoal"))
+     NotificationLength = Storage.getInt("NotifLength");
+
+
   twatch = TWatchClass::getWatch();
 
   twatch->hal_auto_update(true, 1);
