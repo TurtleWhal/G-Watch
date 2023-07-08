@@ -55,3 +55,4 @@ int GetDay()
     getLocalTime(&t_tm);
     return (t_tm.tm_yday);
 }
+

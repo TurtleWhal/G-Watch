@@ -103,9 +103,9 @@ bool charging;
 int Brightness = 100;
 
 ////////////////////Settings////////////////////
-int StepGoal = 6500;               // Step Goal
-int NotificationLength = 10;     // Amount of time notifications are displayed in seconds
-int VibrationStrength = 30; // Strength of button vibrations
+int StepGoal = 6500;         // Step Goal
+int NotificationLength = 10; // Amount of time notifications are displayed in seconds
+int VibrationStrength = 30;  // Strength of button vibrations
 ////////////////////////////////////////////////
 
 lv_obj_t *ui_Notification_Widgets[1];
@@ -237,11 +237,12 @@ void setup()
      Serial.println(BTnamechar);
      Serial.println(Storage.isKey("BTname"));*/
 
-     if (Storage.isKey("NotifLength"))
-     NotificationLength = Storage.getInt("StepGoal");
-     if (Storage.isKey("StepGoal"))
-     NotificationLength = Storage.getInt("NotifLength");
+  if (Storage.isKey("NotifLength"))
+    NotificationLength = Storage.getInt("NotifLength");
+  if (Storage.isKey("StepGoal"))
+    NotificationLength = Storage.getInt("StepGoal");
 
+  // lv_obj_del(ui_Notification_Widget2);
 
   twatch = TWatchClass::getWatch();
 
@@ -337,7 +338,7 @@ void setup()
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
   timerAttachInterrupt(timer, Timer0Handle, true);
-  timerAlarmWrite(timer, 5000000, true);
+  timerAlarmWrite(timer, 10000000, true);
   timerAlarmEnable(timer);
 
   twatch->motor_shake(1, 100);
@@ -879,13 +880,13 @@ void shownotification(bool Store)
   // Create the widget in the notifications screen
   if (Store)
   {
-    //lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
-    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
-    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
-    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
-    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[NotificationCount].Title.c_str());
-    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[NotificationCount].Text.c_str());
-    // lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[NotificationCount].Source.c_str());
+    // lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[NotificationCount].Title.c_str());
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[NotificationCount].Text.c_str());
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[NotificationCount].Source.c_str());
   }
 }
 
@@ -1396,7 +1397,11 @@ void StepHandle()
 void UpdateSettings(lv_event_t *e)
 {
   StepGoal = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
-  Storage.putInt("StepGoal", StepGoal);
+  if (StepGoal != Storage.getInt("StepGoal"))
+  {
+    Storage.putInt("StepGoal", StepGoal);
+    Storage.putBool("StepReach", 0);
+  }
 
   NotificationLength = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
   Storage.putInt("NotifLength", NotificationLength);

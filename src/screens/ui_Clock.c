@@ -290,10 +290,8 @@ lv_obj_set_align( ui_Notification_Popup, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Notification_Popup, LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_Notification_Popup, 30, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_clip_corner(ui_Notification_Popup, true, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_width(ui_Notification_Popup, 20, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_shadow_width(ui_Notification_Popup, 15, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_Notification_Popup, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_ofs_x(ui_Notification_Popup, 2, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_ofs_y(ui_Notification_Popup, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Notification_Timer = lv_arc_create(ui_Notification_Popup);
 lv_obj_set_width( ui_Notification_Timer, 200);
@@ -301,14 +299,16 @@ lv_obj_set_height( ui_Notification_Timer, 200);
 lv_obj_set_align( ui_Notification_Timer, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Notification_Timer, LV_OBJ_FLAG_CLICKABLE );    /// Flags
 lv_arc_set_range(ui_Notification_Timer, 0,1000);
-lv_arc_set_value(ui_Notification_Timer, 1000);
+lv_arc_set_value(ui_Notification_Timer, 500);
 lv_arc_set_bg_angles(ui_Notification_Timer,90,449);
 lv_arc_set_rotation(ui_Notification_Timer,180);
-lv_obj_set_style_arc_color(ui_Notification_Timer, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_arc_color(ui_Notification_Timer, lv_color_hex(0x2B3031), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_arc_opa(ui_Notification_Timer, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_arc_width(ui_Notification_Timer, 75, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_arc_rounded(ui_Notification_Timer, false, LV_PART_MAIN| LV_STATE_DEFAULT);
 
+lv_obj_set_style_arc_color(ui_Notification_Timer, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+lv_obj_set_style_arc_opa(ui_Notification_Timer, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
 lv_obj_set_style_arc_width(ui_Notification_Timer, 75, LV_PART_INDICATOR| LV_STATE_DEFAULT);
 lv_obj_set_style_arc_rounded(ui_Notification_Timer, false, LV_PART_INDICATOR| LV_STATE_DEFAULT);
 

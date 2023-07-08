@@ -39,6 +39,7 @@ void TWatchClass::rtc_set_time(uint16_t year, uint8_t month, uint8_t day,
                              uint8_t hour, uint8_t minute, uint8_t second) {
   if (_isinited_pcf8563) {
     Rtc->setDateTime(year, month, day, hour, minute, second);
+    Rtc->syncToSystem();
   }
 }
 #if defined(USE_RTC_ALARM)

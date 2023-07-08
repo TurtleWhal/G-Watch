@@ -1,11 +1,4 @@
-LVGL running out of memory
-
-SynctoRTC when get from BT
-
-Reset step drawing after goal update in setup
 
 Battery indication is bouncing while charging
 
-steps reset to -1
-
-better step storage logic
+Battery indication doesn't immedieatly update
