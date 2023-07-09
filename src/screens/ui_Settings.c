@@ -41,9 +41,6 @@ lv_obj_set_y( ui_Brightness_Slider, -320 );
 lv_obj_set_align( ui_Brightness_Slider, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Brightness_Slider, LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
 
-lv_obj_set_style_bg_color(ui_Brightness_Slider, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Brightness_Slider, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
-
 lv_obj_set_style_bg_color(ui_Brightness_Slider, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Brightness_Slider, 0, LV_PART_KNOB| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_Brightness_Slider, &ui_img_brightness_png, LV_PART_KNOB | LV_STATE_DEFAULT );
@@ -73,8 +70,6 @@ lv_obj_set_align( ui_Bluetooth_Button, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Bluetooth_Button, LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_IGNORE_LAYOUT | LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_Bluetooth_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_Bluetooth_Button, 175, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Bluetooth_Button, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Bluetooth_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Power_Button_Image = lv_img_create(ui_Bluetooth_Button);
 lv_img_set_src(ui_Power_Button_Image, &ui_img_bluetooth_small_nobackground_png);
@@ -94,8 +89,6 @@ lv_obj_set_align( ui_Do_Not_Disturb_Button, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Do_Not_Disturb_Button, LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_IGNORE_LAYOUT | LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_Do_Not_Disturb_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_Do_Not_Disturb_Button, 175, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Do_Not_Disturb_Button, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Do_Not_Disturb_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Do_Not_Disturb_Button_Image = lv_img_create(ui_Do_Not_Disturb_Button);
 lv_img_set_src(ui_Do_Not_Disturb_Button_Image, &ui_img_bellnobackground_png);

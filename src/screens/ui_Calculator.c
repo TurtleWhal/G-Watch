@@ -13,13 +13,13 @@ lv_obj_clear_flag( ui_Calculator, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 ui_Calculator_Keyboard = lv_keyboard_create(ui_Calculator);
 lv_keyboard_set_mode(ui_Calculator_Keyboard,LV_KEYBOARD_MODE_NUMBER);
 lv_obj_set_width( ui_Calculator_Keyboard, 165);
-lv_obj_set_height( ui_Calculator_Keyboard, 175);
+lv_obj_set_height( ui_Calculator_Keyboard, 165);
 lv_obj_set_x( ui_Calculator_Keyboard, 0 );
-lv_obj_set_y( ui_Calculator_Keyboard, 30 );
+lv_obj_set_y( ui_Calculator_Keyboard, 24 );
 lv_obj_set_align( ui_Calculator_Keyboard, LV_ALIGN_CENTER );
 
 lv_obj_set_style_radius(ui_Calculator_Keyboard, 20, LV_PART_ITEMS| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Calculator_Keyboard, lv_color_hex(0xFF7D00), LV_PART_ITEMS | LV_STATE_CHECKED );
+lv_obj_set_style_bg_color(ui_Calculator_Keyboard, lv_color_hex(0xFF6D00), LV_PART_ITEMS | LV_STATE_CHECKED );
 lv_obj_set_style_bg_opa(ui_Calculator_Keyboard, 255, LV_PART_ITEMS| LV_STATE_CHECKED);
 
 ui_Calculator_textarea = lv_textarea_create(ui_Calculator);

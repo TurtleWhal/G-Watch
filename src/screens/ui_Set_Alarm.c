@@ -88,7 +88,7 @@ lv_obj_set_x( ui_AM, -12 );
 lv_obj_set_y( ui_AM, 1 );
 lv_obj_set_align( ui_AM, LV_ALIGN_CENTER );
 lv_label_set_text(ui_AM,"AM");
-lv_obj_set_style_text_color(ui_AM, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_AM, lv_color_hex(0xFF6D00), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_AM, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_PM = lv_label_create(ui_AMPM_Label);
@@ -116,8 +116,6 @@ lv_obj_set_align( ui_Set_Button, LV_ALIGN_RIGHT_MID );
 lv_obj_add_flag( ui_Set_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_Set_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_Set_Button, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Set_Button, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Set_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Set_Text = lv_label_create(ui_Set_Button);
 lv_obj_set_width( ui_Set_Text, LV_SIZE_CONTENT);  /// 1

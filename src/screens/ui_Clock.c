@@ -26,7 +26,7 @@ lv_obj_set_x( ui_Date_Numerical, 0 );
 lv_obj_set_y( ui_Date_Numerical, 70 );
 lv_obj_set_align( ui_Date_Numerical, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Date_Numerical,"01/01/70");
-lv_obj_set_style_text_color(ui_Date_Numerical, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_Date_Numerical, lv_color_hex(0xFF6D00), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_Date_Numerical, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Date_Numerical, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -39,8 +39,6 @@ lv_arc_set_range(ui_Arc_Battery, 0,250);
 lv_arc_set_value(ui_Arc_Battery, 125);
 lv_arc_set_bg_angles(ui_Arc_Battery,300,60);
 lv_arc_set_rotation(ui_Arc_Battery,180);
-lv_obj_set_style_arc_color(ui_Arc_Battery, lv_color_hex(0x333333), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_arc_opa(ui_Arc_Battery, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_set_style_arc_color(ui_Arc_Battery, lv_color_hex(0xFFFFFF), LV_PART_INDICATOR | LV_STATE_DEFAULT );
 lv_obj_set_style_arc_opa(ui_Arc_Battery, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
@@ -57,11 +55,6 @@ lv_arc_set_range(ui_Arc_Right, 0,250);
 lv_arc_set_value(ui_Arc_Right, 125);
 lv_arc_set_bg_angles(ui_Arc_Right,300,60);
 lv_arc_set_mode(ui_Arc_Right, LV_ARC_MODE_REVERSE);
-lv_obj_set_style_arc_color(ui_Arc_Right, lv_color_hex(0x4C2500), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_arc_opa(ui_Arc_Right, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-lv_obj_set_style_arc_color(ui_Arc_Right, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_DEFAULT );
-lv_obj_set_style_arc_opa(ui_Arc_Right, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
 
 lv_obj_set_style_bg_color(ui_Arc_Right, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Arc_Right, 0, LV_PART_KNOB| LV_STATE_DEFAULT);
@@ -127,7 +120,7 @@ lv_obj_set_x( ui_Step_Counter_Text, 22 );
 lv_obj_set_y( ui_Step_Counter_Text, 0 );
 lv_obj_set_align( ui_Step_Counter_Text, LV_ALIGN_LEFT_MID );
 lv_label_set_text(ui_Step_Counter_Text,"6500");
-lv_obj_set_style_text_color(ui_Step_Counter_Text, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_Step_Counter_Text, lv_color_hex(0xFF6D00), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_Step_Counter_Text, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Step_Counter_Text, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_pad_left(ui_Step_Counter_Text, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -143,7 +136,7 @@ lv_obj_set_align( ui_Minute_Hand, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Minute_Hand, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
 lv_obj_clear_flag( ui_Minute_Hand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_img_set_angle(ui_Minute_Hand,600);
-lv_obj_set_style_img_recolor(ui_Minute_Hand, lv_color_hex(0xFF7F00), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_img_recolor(ui_Minute_Hand, lv_color_hex(0xFF6F00), LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_img_recolor_opa(ui_Minute_Hand, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Hour_Hand = lv_img_create(ui_Clock);
