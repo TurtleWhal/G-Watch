@@ -10,32 +10,6 @@ void ui_Clock_screen_init(void)
 ui_Clock = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Clock, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-ui_Style_Arc_Top = lv_arc_create(ui_Clock);
-lv_obj_set_width( ui_Style_Arc_Top, 222);
-lv_obj_set_height( ui_Style_Arc_Top, 222);
-lv_obj_set_align( ui_Style_Arc_Top, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Style_Arc_Top, LV_OBJ_FLAG_HIDDEN );   /// Flags
-lv_arc_set_bg_angles(ui_Style_Arc_Top,150,210);
-lv_arc_set_rotation(ui_Style_Arc_Top,90);
-lv_obj_set_style_arc_color(ui_Style_Arc_Top, lv_color_hex(0x797779), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_arc_opa(ui_Style_Arc_Top, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_arc_width(ui_Style_Arc_Top, 2, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-lv_obj_set_style_arc_width(ui_Style_Arc_Top, 0, LV_PART_INDICATOR| LV_STATE_DEFAULT);
-
-ui_Style_Arc_Bottom = lv_arc_create(ui_Clock);
-lv_obj_set_width( ui_Style_Arc_Bottom, 222);
-lv_obj_set_height( ui_Style_Arc_Bottom, 222);
-lv_obj_set_align( ui_Style_Arc_Bottom, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Style_Arc_Bottom, LV_OBJ_FLAG_HIDDEN );   /// Flags
-lv_arc_set_bg_angles(ui_Style_Arc_Bottom,150,210);
-lv_arc_set_rotation(ui_Style_Arc_Bottom,270);
-lv_obj_set_style_arc_color(ui_Style_Arc_Bottom, lv_color_hex(0x797779), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_arc_opa(ui_Style_Arc_Bottom, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_arc_width(ui_Style_Arc_Bottom, 2, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-lv_obj_set_style_arc_width(ui_Style_Arc_Bottom, 0, LV_PART_INDICATOR| LV_STATE_DEFAULT);
-
 ui_Time = lv_label_create(ui_Clock);
 lv_obj_set_width( ui_Time, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Time, LV_SIZE_CONTENT);   /// 1
@@ -55,26 +29,6 @@ lv_label_set_text(ui_Date_Numerical,"01/01/70");
 lv_obj_set_style_text_color(ui_Date_Numerical, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_Date_Numerical, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Date_Numerical, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-ui_Arc_Battery_Charge = lv_arc_create(ui_Clock);
-lv_obj_set_width( ui_Arc_Battery_Charge, 234);
-lv_obj_set_height( ui_Arc_Battery_Charge, 234);
-lv_obj_set_align( ui_Arc_Battery_Charge, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Arc_Battery_Charge, LV_OBJ_FLAG_HIDDEN );   /// Flags
-lv_obj_clear_flag( ui_Arc_Battery_Charge, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_CLICK_FOCUSABLE );    /// Flags
-lv_arc_set_range(ui_Arc_Battery_Charge, 0,250);
-lv_arc_set_bg_angles(ui_Arc_Battery_Charge,300,60);
-lv_arc_set_rotation(ui_Arc_Battery_Charge,180);
-lv_obj_set_style_arc_color(ui_Arc_Battery_Charge, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_arc_opa(ui_Arc_Battery_Charge, 150, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_arc_width(ui_Arc_Battery_Charge, 16, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-lv_obj_set_style_arc_color(ui_Arc_Battery_Charge, lv_color_hex(0xF0FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT );
-lv_obj_set_style_arc_opa(ui_Arc_Battery_Charge, 200, LV_PART_INDICATOR| LV_STATE_DEFAULT);
-lv_obj_set_style_arc_width(ui_Arc_Battery_Charge, 16, LV_PART_INDICATOR| LV_STATE_DEFAULT);
-
-lv_obj_set_style_bg_color(ui_Arc_Battery_Charge, lv_color_hex(0xFFFF00), LV_PART_KNOB | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Arc_Battery_Charge, 0, LV_PART_KNOB| LV_STATE_DEFAULT);
 
 ui_Arc_Battery = lv_arc_create(ui_Clock);
 lv_obj_set_width( ui_Arc_Battery, 230);
