@@ -10,6 +10,8 @@
 #include "sleep.h"
 #include "timestuff.h"
 #include "screen_management.h"
+#include "calculator.h"
+#include "Functions.h"
 
 #include "Preferences.h"
 
@@ -28,20 +30,6 @@ TWatchClass *twatch = nullptr;
 
 BluetoothSerial SerialBT;
 Preferences Storage;
-
-// functions
-void writetimertime();
-void shownotification(bool);
-void notificationdismiss();
-void alarmhandle();
-void BThandle();
-void istimernegative();
-void Powerhandle();
-void Sleephandle();
-void Compass();
-void StepHandle();
-void Timer0Handle();
-void pushnotification(int);
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -187,7 +175,10 @@ void btn3_click(void *param)
   Serial.println("BTN3 Click");
   Wakeup("Button 3 Pressed");
   if (notificationshowing)
-    notificationdismiss(nullptr);
+  {
+    if (lv_scr_act() == ui_Clock)
+      notificationdismiss(nullptr);
+  }
   else
     buttontoclock();
 }
@@ -240,7 +231,7 @@ void setup()
   if (Storage.isKey("NotifLength"))
     NotificationLength = Storage.getInt("NotifLength");
   if (Storage.isKey("StepGoal"))
-    NotificationLength = Storage.getInt("StepGoal");
+    StepGoal = Storage.getInt("StepGoal");
 
   // lv_obj_del(ui_Notification_Widget2);
 
@@ -380,8 +371,10 @@ void loop()
     if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
     {
       WriteTime();
+      Powerhandle();
     }
     Compass();
+    CalcHandle();
     // twatch->backlight_updata(millis(), 10);
   }
   else
@@ -395,8 +388,8 @@ void loop()
   if (Timer0Triggered)
   {
     Timer0Triggered = 0;
-    Powerhandle();
     StepHandle();
+    DrawPower();
   }
 
   /*if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 3800)
@@ -1243,29 +1236,36 @@ void pushnotification(int index)
 void Powerhandle()
 {
   twatch->power_updata(millis(), 1000);
-  if ((!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000) and !charging)
-    lastpercent = 0;
-  if ((digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() < 4000) and charging)
-    lastpercent = 100;
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
   {
-    lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    charging = 1;
+    if (!charging)
+    {
+      charging = 1;
+      DrawPower();
+    }
   }
   else
   {
-    lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    charging = 0;
+    if (charging)
+    {
+      charging = 0;
+      DrawPower();
+    }
   }
+}
 
-  if ((lastpercent > twatch->power_get_percent() and !charging) or (lastpercent < twatch->power_get_percent() and charging))
-  {
-    char percentchar[] = "179&";
-    sprintf(percentchar, "%.0f%%", (twatch->power_get_percent()));
-    lv_label_set_text(ui_Battery_Percentage, percentchar);
-    lv_arc_set_value(ui_Arc_Battery, (twatch->power_get_percent() / 100) * 250);
-    lastpercent = twatch->power_get_percent();
-  }
+void DrawPower()
+{
+  char percentchar[] = "179&";
+  sprintf(percentchar, "%.0f%%", (twatch->power_get_percent()));
+  lv_label_set_text(ui_Battery_Percentage, percentchar);
+  lv_arc_set_value(ui_Arc_Battery, (twatch->power_get_percent() / 100) * 250);
+  lastpercent = twatch->power_get_percent();
+
+  if (charging)
+    lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  else
+    lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
 }
 
 void PowerOff(lv_event_t *e)

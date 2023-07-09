@@ -1,6 +1,1 @@
-
-Battery indication is bouncing while charging
-
-Battery indication doesn't immedieatly update
-
-Vibration motor not working
+add ota uploading
