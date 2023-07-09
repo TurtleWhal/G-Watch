@@ -1,5 +1,3 @@
 add OTA uploading
 
 Add global themes (1/2)
-
-Btn 1 hold crashes

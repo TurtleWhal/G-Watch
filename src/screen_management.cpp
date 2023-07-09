@@ -55,7 +55,10 @@ void tosettingsscreen(lv_event_t *e)
 
     lv_slider_set_value(ui_Brightness_Slider, Brightness, LV_ANIM_OFF);
 
-    lv_scr_load_anim(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
+    if (lv_scr_act() != ui_Clock)
+        lv_scr_load_anim(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
+    else
+        lv_scr_load_anim(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 0);
 }
 
 void tocompassscreen(lv_event_t *e)

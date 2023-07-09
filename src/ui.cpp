@@ -186,7 +186,7 @@ void btn1_held(void *param)
 {
   Serial.println("BTN1 Held");
   if (lv_scr_act() != ui_Settings)
-    _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_NONE, 0, 0);
+    tosettingsscreen(nullptr);
   Wakeup("Button 1 Held");
 }
 
