@@ -1,6 +1,7 @@
 #include "lvgl.h"
 #include "ui.h"
 #include "Arduino.h"
+#include "ArduinoLog.h"
 
 #include "calculator.h"
 
@@ -12,7 +13,7 @@ void CalcHandle()
         if (calcbutton == "C")
         {
             lv_textarea_set_text(ui_Calculator_textarea, "");
-            Serial.println((int)calcbutton);
+            Log.verboseln("Calc C pressed %i",(int)calcbutton);
         }
     }
 }

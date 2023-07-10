@@ -14,6 +14,7 @@
 #include "Functions.h"
 
 #include "Preferences.h"
+#include "ArduinoLog.h"
 
 /*Change to your screen resolution*/
 static const uint16_t screenWidth = 240;
@@ -142,37 +143,31 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
     data->point.x = twatch->touch_getX();
     data->point.y = twatch->touch_getY();
 
-    Serial.print("Data x ");
-    Serial.println(twatch->touch_getX());
-
-    Serial.print("Data y ");
-    Serial.println(twatch->touch_getY());
+    Log.verboseln("Touch event. Data X: %i, Data Y: %i", data->point.x, data->point.y);
   }
 }
 
 void btn1_click(void *param)
 {
-  Serial.println("BTN1 Click");
+  Log.verboseln("BTN1 Click. Power Percent: %i", (int)twatch->power_get_percent());
   // twatch->motor_shake(1, 60);
-  Serial.println(twatch->power_get_percent());
   SerialBT.println(twatch->power_get_percent());
   Wakeup("Button 1 Pressed");
 }
 void btn2_click(void *param)
 {
-  Serial.println("BTN2 Click");
+  Log.verboseln("BTN2 Click. MilliVolts: %i", (int)twatch->power_get_volt());
   // twatch->motor_shake(1, 60);
   if (lv_scr_act() == ui_Stopwatch)
     ToggleStopwatch(nullptr);
   if (lv_scr_act() == ui_Timers)
     ToggleTimer(nullptr);
-  Serial.println(twatch->power_get_volt());
   SerialBT.println(twatch->power_get_volt());
   Wakeup("Button 2 Pressed");
 }
 void btn3_click(void *param)
 {
-  Serial.println("BTN3 Click");
+  Log.verboseln("BTN3 Click");
   Wakeup("Button 3 Pressed");
   if (notificationshowing)
   {
@@ -184,7 +179,7 @@ void btn3_click(void *param)
 }
 void btn1_held(void *param)
 {
-  Serial.println("BTN1 Held");
+  Log.verboseln("BTN1 Held");
   if (lv_scr_act() != ui_Settings)
     tosettingsscreen(nullptr);
   Wakeup("Button 1 Held");
@@ -192,7 +187,7 @@ void btn1_held(void *param)
 
 void btn2_held(void *param)
 {
-  Serial.println("BTN2 Held");
+  Log.verboseln("BTN2 Held");
   Wakeup("Button 2 Held");
   if (lv_scr_act() == ui_Stopwatch)
     resetstopwatch(nullptr);
@@ -200,7 +195,7 @@ void btn2_held(void *param)
 
 void btn3_held(void *param)
 {
-  Serial.println("BTN3 Held");
+  Log.verboseln("BTN3 Held");
   Wakeup("Button 3 Held");
   totimersscreen(nullptr);
 }
@@ -211,15 +206,18 @@ void setup()
 
   Storage.begin("Settings", false);
 
+
   Serial.begin(115200); /* prepare for possible serial debug */
+  Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
 
   if (Storage.isKey("BTname"))
   {
     char BTnamechar[17];
     Storage.getBytes("BTname", BTnamechar, 17);
     SerialBT.begin((String)BTnamechar);
-    Serial.print("BT Name: ");
-    Serial.println(BTnamechar);
+    Log.verboseln("BT Name: ");
+    //Serial.print("BT Name: ");
+    //Serial.println(BTnamechar);
   }
   else
     SerialBT.begin("Unnamed Watch"); /*
@@ -250,11 +248,8 @@ void setup()
 
   pinMode(TWATCH_CHARGING, INPUT_PULLUP);
 
-  String LVGL_Arduino = "Hello Arduino! ";
-  LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
-
-  Serial.println(LVGL_Arduino);
-  Serial.println("I am LVGL_Arduino");
+  Log.verboseln("Hello Arduino! V%i.%i.%i", lv_version_major(), lv_version_minor(), lv_version_patch());
+  Log.verboseln("I am LVGL_Arduino");
 
   lv_init();
 
@@ -336,7 +331,7 @@ void setup()
   timerAlarmEnable(timer);
 
   twatch->motor_shake(1, 100);
-  Serial.println("Setup done");
+  Log.verboseln("Setup done");
 }
 
 String input = "";
@@ -1129,7 +1124,8 @@ void BThandle()
       // Serial.print(F(" got a line of input '")); Serial.print(input); Serial.println("'");
       if (input.charAt(0) == 1)
       {
-        Serial.print("Getting Time From Phone: ");
+        Log.verboseln("Getting Time From Phone: %ih %im %is %imonth %iday %iyear",(int)(input.charAt(1)),(int)(input.charAt(2)),(int)(input.charAt(3)),(int)(input.charAt(4)),(int)(input.charAt(5),(int)(input.charAt(6)+2000)));
+       /* Serial.print("Getting Time From Phone: ");
         Serial.print((int)(input.charAt(1)));
         Serial.print("h ");
         Serial.print((int)(input.charAt(2)));
@@ -1141,13 +1137,13 @@ void BThandle()
         Serial.print((int)(input.charAt(5)));
         Serial.print("day ");
         Serial.print((int)((input.charAt(6) + 2000)));
-        Serial.println("year");
+        Serial.println("year");*/
         // rtc.adjust(input.charAt(1), input.charAt(2), input.charAt(3), input.charAt(6) + 2000, input.charAt(4), input.charAt(5));
         twatch->rtc_set_time(input.charAt(6) + 2000, input.charAt(4), input.charAt(5), input.charAt(1), input.charAt(2), input.charAt(3));
       }
       if (input.charAt(0) == 2)
       {
-        Serial.print("Notification Title: ");
+        Log.verbose("Notification Title: ");
         input.remove(0, 1);
         input.remove(input.length() - 1, 1);
         Serial.println(input);
@@ -1292,7 +1288,7 @@ void UpdateBrightness(lv_event_t *e)
     lv_slider_set_value(ui_Brightness_Slider, 1, LV_ANIM_OFF);
   Brightness = lv_slider_get_value(ui_Brightness_Slider);
   twatch->backlight_set_value(Brightness);
-  Serial.println(Brightness);
+  Log.verboseln("Brightness: %i",Brightness);
   // Serial.println(twatch->backlight_get_value);
 }
 
@@ -1342,7 +1338,7 @@ void Compass()
 
 void Timer0Handle()
 {
-  Serial.println("Timer0");
+  Log.verboseln("Timer 0 Fired");
   Timer0Triggered = 1;
 }
 
