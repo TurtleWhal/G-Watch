@@ -12639,8 +12639,8 @@
       "flags": 17,
       "strtype": "OBJECT/Position",
       "intarray": [
-        200,
-        35
+        0,
+        -10
       ],
       "InheritedType": 7
     },
@@ -12856,7 +12856,7 @@
             {
               "nid": 588077132,
               "strtype": "_style/Bg_Radius",
-              "integer": 50,
+              "integer": 17,
               "InheritedType": 6
             },
             {
@@ -12901,9 +12901,8 @@
             },
             {
               "nid": -1711582249,
-              "flags": 2097152,
               "strtype": "_style/Clip_corner",
-              "strval": "False",
+              "strval": "True",
               "InheritedType": 2
             },
             {

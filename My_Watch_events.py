@@ -178,3 +178,39 @@ def UpdateBrightness(event_struct):
 def generictoclock(event_struct):
     return
 
+
+def ToggleThemeSetting(event_struct):
+    return
+
+
+def ToggleTheme(event_struct):
+    return
+
+
+def UpdateTestTheme(event_struct):
+    return
+
+
+def timermoveup(event_struct):
+    return
+
+
+def timermovedown(event_struct):
+    return
+
+
+def stopwatchmoveup(event_struct):
+    return
+
+
+def stopwatchmovedown(event_struct):
+    return
+
+
+def alarmsmovedown(event_struct):
+    return
+
+
+def alarmsmoveup(event_struct):
+    return
+

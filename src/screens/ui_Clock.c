@@ -104,13 +104,13 @@ lv_obj_set_style_border_opa(ui_Steps_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Steps_Image = lv_img_create(ui_Steps_Panel);
 lv_img_set_src(ui_Steps_Image, &ui_img_step_png);
-lv_obj_set_width( ui_Steps_Image, LV_SIZE_CONTENT);  /// 84
+lv_obj_set_width( ui_Steps_Image, LV_SIZE_CONTENT);  /// -2930
 lv_obj_set_height( ui_Steps_Image, LV_SIZE_CONTENT);   /// 70
 lv_obj_set_align( ui_Steps_Image, LV_ALIGN_LEFT_MID );
 lv_obj_add_flag( ui_Steps_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
 lv_obj_clear_flag( ui_Steps_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_img_set_angle(ui_Steps_Image,-1200);
-lv_obj_set_style_img_recolor(ui_Steps_Image, lv_color_hex(0xFF7D00), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_img_recolor(ui_Steps_Image, lv_color_hex(0xFF6D00), LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_img_recolor_opa(ui_Steps_Image, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Step_Counter_Text = lv_label_create(ui_Steps_Panel);
