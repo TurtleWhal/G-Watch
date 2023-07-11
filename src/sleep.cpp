@@ -4,10 +4,12 @@
 #include "timestuff.h"
 #include "sleep.h"
 #include "screen_management.h"
+#include "ArduinoLog.h"
 
 extern TWatchClass *twatch;
 
-int Sleeptimeout = 10; // time until watch goes to sleep in seconds
+//#define SleepWhenPluggedIn
+#define Sleeptimeout 10000 // time until watch goes to sleep in mS
 int sleeptimer;
 bool Sleeping;
 int prevbrightness = 100;
@@ -16,24 +18,22 @@ String Wakeup_reason;
 
 void Sleephandle()
 {
-  if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 4000)
-  {
-    if (twatch->touch_check())
-    {
-      Wakeup("Screen Touched");
-      sleeptimer = millis();
-      Serial.println("Im Touched!");
-    }
-
+  #ifdef SleepWhenPluggedIn
+    if (1)
+  #else
+    if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 4000) //TWATCH_CHARGING is inverted logic
+  #endif
+  {  
+    /*
     twatch->bma423_feature_int(BMA423_WRIST_WEAR, 1);
-    /*if (BMA423_WRIST_WEAR)
+    if (BMA423_WRIST_WEAR)
     {
       Wakeup("Shook");
       sleeptimer = millis();
       Serial.println("Im Shooken!");
-    }*/
-
-    if ((millis() - sleeptimer) >= Sleeptimeout * 1000)
+    }
+    */
+    if ((millis() - sleeptimer) >= Sleeptimeout)
       Sleep();
   }
   else
@@ -54,7 +54,7 @@ void Wakeup(String Wakeup_reason)
     generictoclock(nullptr);
     //lv_timer_handler();
     WriteTime();
-    Serial.println("IM AWAKE!");
+    Log.verboseln("IM AWAKE!");
     // dad hid this comment here because I'm like that.
     // A few moments later...
     // Garrett found this comment because dad didn't go to a different line
@@ -62,7 +62,7 @@ void Wakeup(String Wakeup_reason)
     Sleeping = 0;
     twatch->backlight_set_value(prevbrightness);
     //twatch->backlight_gradual_light(prevbrightness, 1000);
-    Serial.println(Wakeup_reason);
+    Log.verboseln("Wakeup Reason: %s", Wakeup_reason);
   }
   else
     Ticklesleep();

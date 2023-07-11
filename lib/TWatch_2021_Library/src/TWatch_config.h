@@ -25,10 +25,10 @@ If you don't know which one to choose, look at the silkscreen on the circuit boa
 #define CONFIG_TWATCH_HAS_BMA423
 #define CONFIG_TWATCH_HAS_QMC5883L
 #define CONFIG_TWATCH_HAS_PCF8563
-#define CONFIG_TWATCH_HAS_CST816S
+//#define CONFIG_TWATCH_HAS_CST816S
 
 // APP CONFIG
-#define CONFIG_TWATCH_USE_DEBUG             1
+#define CONFIG_TWATCH_USE_DEBUG             0
 //#define CONFIG_TWATCH_APP_LVGL              0
     /*    ├─ */ #define DISP_BUF_SIZE       /**/ (SCREEN_WIDTH *SCREEN_HEIGHT * 0.5)
     /*    ├─ */ #define DISP_BUF_FROM_PSRAM 0 // Turning this on makes the screen appear smoother, but it uses a lot of RAM.

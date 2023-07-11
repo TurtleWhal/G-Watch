@@ -1,25 +1,25 @@
-
 #include "lvgl.h"
 #include <TWatch_hal.h>
 #include "ui.h"
 #include "timestuff.h"
 #include "time.h"
+#include "ArduinoLog.h"
 
 static uint8_t lastsec = 61;
 static uint8_t lastmin = 61;
 static uint8_t lasthour = 61;
+struct tm t_tm;
 
 void WriteTime()
 {
     char time[11];
-    struct tm t_tm;
     struct timeval val;
-    gettimeofday(&val, NULL);
-    
-    char second = val.tv_sec % 60;
 
-    lv_img_set_angle(ui_Second_Hand, (val.tv_usec * 0.00006) + second * 60);
-    lv_img_set_angle(ui_Second_Dot, second * 60);
+    gettimeofday(&val, NULL);
+    int second = (val.tv_sec % 60) * 60;
+
+    lv_img_set_angle(ui_Second_Hand, (val.tv_usec * 0.000012)*5 + second); //Rounds uSec to 0-12, changes to 0,5,10,15,20.., then adds seconds
+    lv_img_set_angle(ui_Second_Dot, second);
 
     if (val.tv_sec != lastsec)
     {
@@ -51,8 +51,6 @@ void WriteTime()
 
 int GetDay()
 {
-    struct tm t_tm;
     getLocalTime(&t_tm);
     return (t_tm.tm_yday);
 }
-

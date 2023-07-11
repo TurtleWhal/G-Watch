@@ -1,7 +1,7 @@
 #include "TWatch_hal.h"
 #include <BluetoothSerial.h>
 #include <TFT_eSPI.h>
-// #include <CST816S.h>
+#include <CST816S.h>
 
 #include <lvgl.h>
 #include "ui.h"
@@ -27,7 +27,7 @@ TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 
 TWatchClass *twatch = nullptr;
 
-// CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
+CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
 
 BluetoothSerial SerialBT;
 Preferences Storage;
@@ -127,23 +127,18 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
 /*Read the touchpad*/
 void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 {
-  // uint16_t touchX = 0, touchY = 0;
+if (touch.available()) {
+    data->state = LV_INDEV_STATE_PR;
+    /*Set the coordinates*/
+    data->point.x = touch.data.x;
+    data->point.y = touch.data.y;
+    Wakeup("Screen Touched");
 
-  // bool touched = false;//tft.getTouch( &touchX, &touchY, 600 );
-
-  if (!twatch->touch_check())
-  {
-    data->state = LV_INDEV_STATE_REL;
+    Log.verboseln("Touch event. Data X: %i, Data Y: %i", data->point.x, data->point.y);
   }
   else
   {
-    data->state = LV_INDEV_STATE_PR;
-
-    /*Set the coordinates*/
-    data->point.x = twatch->touch_getX();
-    data->point.y = twatch->touch_getY();
-
-    Log.verboseln("Touch event. Data X: %i, Data Y: %i", data->point.x, data->point.y);
+    data->state = LV_INDEV_STATE_REL;
   }
 }
 
@@ -260,7 +255,8 @@ void setup()
   tft.begin();        /* TFT init */
   tft.setRotation(0); /* Landscape orientation, flipped */
 
-  twatch->touch_init();
+  touch.begin();
+  //touch.sleep();
 
   lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * screenHeight / 10);
 
@@ -353,18 +349,18 @@ bool readStringUntil(String &input, size_t char_limit)
   return false;
 }
 
-char terminatingChar = '\n';
-int timestart;
+//char terminatingChar = '\n';
+//int timestart;
 
 bool Timer0Triggered;
 
 void loop()
 {
-
+  //Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
   if (!isSleeping())
   {
-    lv_timer_handler(); /* let the GUI do its work */
-    delay(5);
+    //lv_timer_handler(); /* let the GUI do its work */
+    delay(lv_timer_handler());
 
     if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
     {
@@ -376,8 +372,11 @@ void loop()
     // twatch->backlight_updata(millis(), 10);
   }
   else
-    delay(5);
-
+  {
+    if (touch.available()) // Normally handled by lv_timer_handler
+      Wakeup("Screen Touched"); 
+    delay(100);
+  }
   // alarmhandle();
   BThandle();
   Sleephandle();
