@@ -16,13 +16,13 @@
 #include "LittleFS.h"
 #endif
 #if defined(CONFIG_TWATCH_HAS_DISPLAY)
-#include "libraries/TFT_eSPI/TFT_eSPI.h"
+#include "TFT_eSPI.h"
 #endif
 #if defined(CONFIG_TWATCH_HAS_BUTTON)
 #include "libraries/OneButton/src/OneButton.h"
 #endif
 #if defined(CONFIG_TWATCH_HAS_CST816S)
-#include "libraries/Cst816s/CST816S.h"
+#include "CST816S.h"
 #endif
 #if defined(CONFIG_TWATCH_HAS_ENCODER)
 #include "libraries/Encoder/Encoder.h"
@@ -50,7 +50,7 @@
 #include "FS.h"
 #endif
 #if CONFIG_TWATCH_APP_LVGL
-#include "libraries/lvgl/lvgl.h"
+//#include "libraries/lvgl/lvgl.h"
 #endif
 #include "soc/soc_ulp.h"
 // #include "libraries/SdFat/src/SdFat.h"
@@ -94,7 +94,7 @@
 
 #define POWER_UPDATA_CYCLE             50
 
-//typedef TFT_eSPI SCREEN_CLASS;
+typedef TFT_eSPI SCREEN_CLASS;
 typedef void (*irq_Fun_cb_t)(void *user_data_ptr);
 
 typedef enum { BUTTON_CLICK = 0,
@@ -195,10 +195,10 @@ public:
   void motor_stop();
 #endif
 
-//#if defined(CONFIG_TWATCH_HAS_DISPLAY)
-//  /* Display */
-//  void tft_init();
-//  TFT_eSPI *tft_get_instance();
+#if defined(CONFIG_TWATCH_HAS_DISPLAY)
+  /* Display */
+  void tft_init();
+  TFT_eSPI *tft_get_instance();
 
   /* Backlight */
   void backlight_init();
@@ -206,7 +206,7 @@ public:
   int16_t backlight_get_value();
   void backlight_gradual_light(int16_t val, uint32_t ms);
   void backlight_updata(uint32_t millis, uint32_t time_ms);
-//#endif
+#endif
 
 #if defined(CONFIG_TWATCH_HAS_BUTTON)
   /* Button */
@@ -344,7 +344,7 @@ private:
 
 
   /* Display */
-  //TFT_eSPI *tft = nullptr;
+  TFT_eSPI *tft = nullptr;
 
   /* Backlight */
   bool _adjust = false;

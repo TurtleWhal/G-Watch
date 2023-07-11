@@ -147,24 +147,22 @@ void btn3_held(void *param)
 void setup()
 {
   setCpuFrequencyMhz(240);
+  twatch = TWatchClass::getWatch();
+  twatch->hal_init();
 
   Storage.begin("Settings", false);
-
 
   Serial.begin(115200); /* prepare for possible serial debug */
   Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
 
   BT_on();
   
-
   if (Storage.isKey("NotifLength"))
     NotificationLength = Storage.getInt("NotifLength");
   if (Storage.isKey("StepGoal"))
     StepGoal = Storage.getInt("StepGoal");
 
   // lv_obj_del(ui_Notification_Widget2);
-
-  twatch = TWatchClass::getWatch();
 
   twatch->hal_auto_update(true, 1);
 
@@ -174,8 +172,6 @@ void setup()
   twatch->button_bind_event(TWATCH_BTN_1, BUTTON_LONG_PRESS_START, btn1_held);
   twatch->button_bind_event(TWATCH_BTN_2, BUTTON_LONG_PRESS_START, btn2_held);
   twatch->button_bind_event(TWATCH_BTN_3, BUTTON_LONG_PRESS_START, btn3_held);
-
-  twatch->power_init();
 
   pinMode(TWATCH_CHARGING, INPUT_PULLUP);
 
@@ -188,11 +184,10 @@ void setup()
   lv_log_register_print_cb(my_print); /* register print function for debugging */
 #endif
 
-  tft.begin();        /* TFT init */
-  tft.setRotation(0); /* Landscape orientation, flipped */
+  //tft.begin();        /* TFT init */
+  //tft.setRotation(0); /* Landscape orientation, flipped */
 
   touch.begin();
-  //touch.sleep();
 
   lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * screenHeight / 10);
 
@@ -213,9 +208,6 @@ void setup()
   indev_drv.read_cb = my_touchpad_read;
   lv_indev_drv_register(&indev_drv);
 
-  //////////Initalize UI//////////
-  // ui_init();
-
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
 
   // lv_palette_t *myorange = lv_palette_darken(LV_PALETTE_AMBER, 4);
@@ -230,11 +222,7 @@ void setup()
   ApplyTheme();
   ////////////////////////////////
 
-  twatch->backlight_init();
   twatch->backlight_set_value(100);
-
-  twatch->qmc5883l_init();
-  twatch->rtc_init();
 
   lv_label_set_text(ui_Now_Playing_Label, "");
 
