@@ -42,6 +42,8 @@ Preferences Storage;
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
 
+lv_color_t ThemeColor = lv_palette_darken(LV_PALETTE_AMBER, 4);
+
 ////////////////////Settings////////////////////
 int StepGoal = 6500;         // Step Goal
 int NotificationLength = 10; // Amount of time notifications are displayed in seconds
