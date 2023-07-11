@@ -17,7 +17,7 @@ void TWatchClass::lv_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_c
   screen->endWrite();
   // lv_disp_flush_ready(disp);
 #else
-  screen->pushColors((uint16_t *)&color_p->full, w * h);
+  screen->pushColors((uint16_t *)&color_p->full, w * h, false); //False enables 16 bit swap in squareline
   screen->endWrite();
   lv_disp_flush_ready(disp);
 #endif

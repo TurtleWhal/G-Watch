@@ -29,9 +29,9 @@ If you don't know which one to choose, look at the silkscreen on the circuit boa
 
 // APP CONFIG
 #define CONFIG_TWATCH_USE_DEBUG             0
-//#define CONFIG_TWATCH_APP_LVGL              0
+#define CONFIG_TWATCH_APP_LVGL              1
     /*    ├─ */ #define DISP_BUF_SIZE       /**/ (SCREEN_WIDTH *SCREEN_HEIGHT * 0.5)
-    /*    ├─ */ #define DISP_BUF_FROM_PSRAM 0 // Turning this on makes the screen appear smoother, but it uses a lot of RAM.
+    /*    ├─ */ #define DISP_BUF_FROM_PSRAM 1 // Turning this on makes the screen appear smoother, but it uses a lot of RAM.
 /*
 Use LVGL built-in file system
 SD: lv_img_set_src(wp, "A:/sd/logo.sjpg");

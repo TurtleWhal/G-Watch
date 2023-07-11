@@ -151,7 +151,7 @@ else if (target == ui_Timer_Hour_Minus_1)
     timertime -= 60 * 60 * 1000;
 else if (target == ui_Timer_Minute_Plus_10)
     timertime += 10 * 60 * 1000;
-else if (target == ui_Timer_Minute_Minute_10)
+else if (target == ui_Timer_Minute_Minute_10) //This is mis-spelled in Suqareline
     timertime -= 10 * 60 * 1000;
 else if (target == ui_Timer_Minute_Plus_1)
     timertime += 60 * 1000;

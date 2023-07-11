@@ -50,7 +50,7 @@
 #include "FS.h"
 #endif
 #if CONFIG_TWATCH_APP_LVGL
-//#include "libraries/lvgl/lvgl.h"
+#include "lvgl.h"
 #endif
 #include "soc/soc_ulp.h"
 // #include "libraries/SdFat/src/SdFat.h"
