@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 16 px
  * Bpp: 8
- * Opts: --bpp 8 --size 16 --font C:\Users\garre\OneDrive\Documents\Squareline Projects\My_Watch\assets\ZenMaruGothic-Medium.ttf -o C:\Users\garre\OneDrive\Documents\Squareline Projects\My_Watch\assets\ui_font_Music_14.c --format lvgl -r 0x20-0x7f --symbols ♪ --no-compress --no-prefilter
+ * Opts: --bpp 8 --size 16 --font C:\Users\garre\OneDrive\Documents\PlatformIO\Projects\My_Watch 1.3\assets\ZenMaruGothic-Medium.ttf -o C:\Users\garre\OneDrive\Documents\PlatformIO\Projects\My_Watch 1.3\assets\ui_font_Music_14.c --format lvgl -r 0x20-0x7f --symbols ♪⋅∘• --no-compress --no-prefilter
  ******************************************************************************/
 
 #include "../ui.h"
@@ -1173,6 +1173,10 @@ static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
     0xff, 0xf0, 0x40, 0x0, 0x1, 0x0, 0x0, 0x0,
     0xf, 0x3a, 0x12, 0x0,
 
+    /* U+2022 "•" */
+    0x6b, 0xf2, 0xa7, 0x1, 0xdc, 0xff, 0xff, 0x1f,
+    0x84, 0xff, 0xc4, 0x3, 0x0, 0x12, 0x2, 0x0,
+
     /* U+266A "♪" */
     0x0, 0x0, 0x0, 0x7, 0x52, 0x0, 0x0, 0x0,
     0x0, 0x0, 0x0, 0x0, 0x0, 0x14, 0xe1, 0xb,
@@ -1297,14 +1301,17 @@ static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
     {.bitmap_index = 7359, .adv_w = 58, .box_w = 2, .box_h = 11, .ofs_x = 1, .ofs_y = 0},
     {.bitmap_index = 7381, .adv_w = 111, .box_w = 6, .box_h = 16, .ofs_x = 0, .ofs_y = -3},
     {.bitmap_index = 7477, .adv_w = 155, .box_w = 9, .box_h = 4, .ofs_x = 0, .ofs_y = 4},
-    {.bitmap_index = 7513, .adv_w = 256, .box_w = 10, .box_h = 15, .ofs_x = 3, .ofs_y = -1}
+    {.bitmap_index = 7513, .adv_w = 84, .box_w = 4, .box_h = 4, .ofs_x = 1, .ofs_y = 4},
+    {.bitmap_index = 7529, .adv_w = 256, .box_w = 10, .box_h = 15, .ofs_x = 3, .ofs_y = -1}
 };
 
 /*---------------------
  *  CHARACTER MAPPING
  *--------------------*/
 
-
+static const uint16_t unicode_list_1[] = {
+    0x0, 0x648
+};
 
 /*Collect the unicode lists and glyph_id offsets*/
 static const lv_font_fmt_txt_cmap_t cmaps[] =
@@ -1314,8 +1321,8 @@ static const lv_font_fmt_txt_cmap_t cmaps[] =
         .unicode_list = NULL, .glyph_id_ofs_list = NULL, .list_length = 0, .type = LV_FONT_FMT_TXT_CMAP_FORMAT0_TINY
     },
     {
-        .range_start = 9834, .range_length = 1, .glyph_id_start = 96,
-        .unicode_list = NULL, .glyph_id_ofs_list = NULL, .list_length = 0, .type = LV_FONT_FMT_TXT_CMAP_FORMAT0_TINY
+        .range_start = 8226, .range_length = 1609, .glyph_id_start = 96,
+        .unicode_list = unicode_list_1, .glyph_id_ofs_list = NULL, .list_length = 2, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
     }
 };
 
@@ -1339,7 +1346,7 @@ static const uint8_t kern_left_class_mapping[] =
     22, 23, 0, 0, 24, 0, 23, 23,
     19, 19, 25, 21, 26, 27, 25, 28,
     28, 29, 28, 0, 0, 0, 0, 0,
-    0
+    0, 0
 };
 
 /*Map glyph_ids to kern right classes*/
@@ -1357,7 +1364,7 @@ static const uint8_t kern_right_class_mapping[] =
     14, 0, 0, 0, 0, 0, 7, 7,
     14, 15, 14, 7, 16, 17, 18, 19,
     19, 20, 19, 0, 0, 0, 0, 0,
-    0
+    0, 0
 };
 
 /*Kern values between classes*/

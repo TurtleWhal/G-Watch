@@ -1,8 +1,9 @@
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-void writetime();
+void buttontoclock();
 
 #ifdef __cplusplus
 } /*extern "C"*/

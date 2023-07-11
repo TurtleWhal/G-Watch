@@ -1,17 +1,16 @@
 #include <TWatch_hal.h>
-
 #include "lvgl.h"
 #include "ui.h"
-
-#include "time.h"
+#include "timestuff.h"
 #include "sleep.h"
+#include "screen_management.h"
 
 extern TWatchClass *twatch;
 
 int Sleeptimeout = 10; // time until watch goes to sleep in seconds
 int sleeptimer;
 bool Sleeping;
-int bl;
+int prevbrightness = 100;
 String Wakeup_reason;
 // bool setCpuFrequencyMhz(uint32_t cpu_freq_mhz);
 
@@ -33,7 +32,6 @@ void Sleephandle()
       sleeptimer = millis();
       Serial.println("Im Shooken!");
     }*/
-    
 
     if ((millis() - sleeptimer) >= Sleeptimeout * 1000)
       Sleep();
@@ -43,7 +41,7 @@ void Sleephandle()
     Ticklesleep();
     if (Sleeping)
       Wakeup("Plugged In");
-      //Serial.println(BMA423_WRIST_WEAR);
+    // Serial.println(BMA423_WRIST_WEAR);
   }
 }
 
@@ -52,16 +50,20 @@ void Wakeup(String Wakeup_reason)
   if (Sleeping)
   {
     // setCpuFrequencyMhz(240);
-    _ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
-    lv_timer_handler();
-    writetime();
+    //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
+    // generictoclock(nullptr);
+    lv_scr_load(ui_Clock);
+    // lv_timer_handler();
+    WriteTime();
     Serial.println("IM AWAKE!");
     // dad hid this comment here because I'm like that.
     // A few moments later...
     // Garrett found this comment because dad didn't go to a different line
     sleeptimer = millis();
     Sleeping = 0;
-    twatch->backlight_set_value(lv_slider_get_value(ui_Brightness_Slider));
+    delay(200);
+    twatch->backlight_set_value(prevbrightness);
+    // twatch->backlight_gradual_light(prevbrightness, 1000);
     Serial.println(Wakeup_reason);
   }
   else
@@ -72,6 +74,7 @@ void Sleep()
 {
   if (!Sleeping)
   {
+    prevbrightness = twatch->backlight_get_value();
     twatch->backlight_set_value(0);
     Serial.println("Go To Sleep");
     Sleeping = 1;

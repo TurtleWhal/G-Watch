@@ -1,30 +1,21 @@
 #include "TWatch_hal.h"
-
 #include <BluetoothSerial.h>
-
+#include <TFT_eSPI.h>
 // #include <CST816S.h>
 
-// #include <PicoEspTime.h>
-
 #include <lvgl.h>
-#include <TFT_eSPI.h>
 #include "ui.h"
-
 #include "ui_helpers.h"
 
 #include "sleep.h"
-#include "time.h"
-//#include "sntp.h"
-//#include <WiFi.h>
+#include "timestuff.h"
+#include "screen_management.h"
+#include "calculator.h"
+#include "Functions.h"
 
-// #include "Functions.c"
+#include "Preferences.h"
 
-// #include "watch.h"
-/*If you want to use the LVGL examples,
-  make sure to install the lv_examples Arduino library
-  and uncomment the following line.
-#include <lv_examples.h>
-*/
+//#include "gptcalc.h"
 
 /*Change to your screen resolution*/
 static const uint16_t screenWidth = 240;
@@ -35,26 +26,12 @@ static lv_color_t buf[screenWidth * screenHeight / 10];
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 
-PCF8563_Class *PCF = nullptr;
-
 TWatchClass *twatch = nullptr;
 
 // CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
 
-// PicoEspTime rtc;
-
 BluetoothSerial SerialBT;
-
-// functions
-void writetimertime();
-void shownotification();
-void notificationdismiss();
-void alarmhandle();
-void BThandle();
-void istimernegative();
-void Powerhandle();
-void Sleephandle();
-void Compass();
+Preferences Storage;
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -74,13 +51,20 @@ typedef struct
 Alarm alarms[4];
 int selectedalarm = 0;
 
-// const char compile_time[] = __TIME__;
-// const char compile_date[] = __DATE__;
+typedef struct
+{
+  String Title;
+  String Text;
+  String Source;
+  // uint8_t index;
+} Notification;
 
-long int notificationtime;
+Notification NotificationList[11];
+int NotificationCount = 0;
+
 bool notificationshowing = 0;
-int NotificationLength = 20; // amount of time notification is displayed in seconds
 int notificationid = 1;
+int notificationtime;
 
 int stopwatchtime = 0;
 int stopwatchtimestarted = 0;
@@ -106,16 +90,15 @@ int lastpercent = 100;
 
 bool charging;
 
-const char* ssid       = "IT-Test";
-const char* password   = "";
-//const char* ssid       = "NetworkOfIOT";
-//const char* password   = "40961024";
-const char* ntpServer1 = "pool.ntp.org";
-const char* ntpServer2 = "time.nist.gov";
+int Brightness = 100;
 
-const long  gmtOffset_sec = 3600*(-8);
-const int   daylightOffset_sec = 3600;
-const char* time_zone = "CET-1CEST,M3.5.0,M10.5.0/3"; // TimeZone rule for Europe/Rome including daylight adjustment rules (optional)
+lv_color_t ThemeColor = lv_palette_darken(LV_PALETTE_AMBER, 4);
+
+////////////////////Settings////////////////////
+int StepGoal = 6500;         // Step Goal
+int NotificationLength = 10; // Amount of time notifications are displayed in seconds
+int VibrationStrength = 30;  // Strength of button vibrations
+////////////////////////////////////////////////
 
 lv_obj_t *ui_Notification_Widgets[1];
 
@@ -138,7 +121,7 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
 
   tft.startWrite();
   tft.setAddrWindow(area->x1, area->y1, w, h);
-  tft.pushColors((uint16_t *)&color_p->full, w * h, true);
+  tft.pushColors((uint16_t *)&color_p->full, w * h, false);
   tft.endWrite();
 
   lv_disp_flush_ready(disp);
@@ -163,11 +146,11 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
     data->point.x = twatch->touch_getX();
     data->point.y = twatch->touch_getY();
 
-    Serial.print("Data x ");
+    /*Serial.print("Data x ");
     Serial.println(twatch->touch_getX());
 
     Serial.print("Data y ");
-    Serial.println(twatch->touch_getY());
+    Serial.println(twatch->touch_getY());*/
   }
 }
 
@@ -194,26 +177,26 @@ void btn2_click(void *param)
 void btn3_click(void *param)
 {
   Serial.println("BTN3 Click");
-  // twatch->motor_shake(1, 60);
-  if (lv_scr_act() != ui_Clock)
-    _ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
   Wakeup("Button 3 Pressed");
-  if (notificationshowing == 1)
-    notificationdismiss(nullptr);
+  if (notificationshowing)
+  {
+    if (lv_scr_act() == ui_Clock)
+      notificationdismiss(nullptr);
+  }
+  else
+    buttontoclock();
 }
 void btn1_held(void *param)
 {
   Serial.println("BTN1 Held");
-  twatch->motor_shake(1, 60);
   if (lv_scr_act() != ui_Settings)
-    _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
+    tosettingsscreen(nullptr);
   Wakeup("Button 1 Held");
 }
 
 void btn2_held(void *param)
 {
   Serial.println("BTN2 Held");
-  twatch->motor_shake(1, 60);
   Wakeup("Button 2 Held");
   if (lv_scr_act() == ui_Stopwatch)
     resetstopwatch(nullptr);
@@ -222,16 +205,39 @@ void btn2_held(void *param)
 void btn3_held(void *param)
 {
   Serial.println("BTN3 Held");
-  twatch->motor_shake(1, 60);
   Wakeup("Button 3 Held");
-  _ui_screen_change(ui_Timers, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
+  totimersscreen(nullptr);
 }
 
 void setup()
 {
   setCpuFrequencyMhz(240);
-  Serial.begin(115200);              /* prepare for possible serial debug */
-  SerialBT.begin("Kiefer's Watch"); // Bluetooth device name
+
+  Storage.begin("Settings", false);
+
+  Serial.begin(115200); /* prepare for possible serial debug */
+
+  if (Storage.isKey("BTname"))
+  {
+    char BTnamechar[17];
+    Storage.getBytes("BTname", BTnamechar, 17);
+    SerialBT.begin((String)BTnamechar);
+    Serial.print("BT Name: ");
+    Serial.println(BTnamechar);
+  }
+  else
+    SerialBT.begin("Unnamed Watch"); /*
+     char BTnamechar[17];
+     Storage.getBytes("BTname", BTnamechar, 17);
+     Serial.println(BTnamechar);
+     Serial.println(Storage.isKey("BTname"));*/
+
+  if (Storage.isKey("NotifLength"))
+    NotificationLength = Storage.getInt("NotifLength");
+  if (Storage.isKey("StepGoal"))
+    StepGoal = Storage.getInt("StepGoal");
+
+  // lv_obj_del(ui_Notification_Widget2);
 
   twatch = TWatchClass::getWatch();
 
@@ -284,42 +290,6 @@ void setup()
   indev_drv.read_cb = my_touchpad_read;
   lv_indev_drv_register(&indev_drv);
 
-  // rtc.adjust(1, 26, 21, 2022, 6, 3); // 01:26:21 03 Jun 2022
-  // String Month = compile_date;
-  // Month.remove(3, 8);
-  // char MonthNum;
-  // if (Month == "Jan")
-  //   MonthNum = 1;
-  // else if (Month == "Feb")
-  //   MonthNum = 2;
-  // else if (Month == "Mar")
-  //   MonthNum = 3;
-  // else if (Month == "Apr")
-  //   MonthNum = 4;
-  // else if (Month == "May")
-  //   MonthNum = 5;
-  // else if (Month == "Jun")
-  //   MonthNum = 6;
-  // else if (Month == "Jul")
-  //   MonthNum = 7;
-  // else if (Month == "Aug")
-  //   MonthNum = 8;
-  // else if (Month == "Sep")
-  //   MonthNum = 9;
-  // else if (Month == "Oct")
-  //   MonthNum = 10;
-  // else if (Month == "Nov")
-  //   MonthNum = 11;
-  // else if (Month == "Dec")
-  //   MonthNum = 12;
-  // rtc.adjust(atoi(compile_time), atoi(compile_time + 3), atoi(compile_time + 6) + 35, atoi(compile_date + 7), MonthNum, atoi(compile_date + 4));
-  
-  // Set time
-  //configTime(gmtOffset_sec, daylightOffset_sec, ntpServer1, ntpServer2);
-
-  //Connect to WiFi
-  //WiFi.begin(ssid, password);
-
   alarms[0].state = 0;
   alarms[1].state = 0;
   alarms[2].state = 0;
@@ -330,25 +300,43 @@ void setup()
   alarms[2].am = 1;
   alarms[3].am = 1;
 
-  ui_init();
-  // writetime();
+  //////////Initalize UI//////////
+  // ui_init();
+
+  LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
+
+  // lv_palette_t *myorange = lv_palette_darken(LV_PALETTE_AMBER, 4);
+
+  // lv_disp_set_theme(dispp, theme);
+
+  ui_Clock_screen_init();
+
+  ui____initial_actions0 = lv_obj_create(NULL);
+  lv_disp_load_scr(ui_Clock);
+
+  ApplyTheme();
+  ////////////////////////////////
 
   twatch->backlight_init();
   twatch->backlight_set_value(100);
 
-  PCF = twatch->rtc_get_instance();
-
   twatch->qmc5883l_init();
-  // twatch->rtc_init();
+  twatch->rtc_init();
 
   lv_label_set_text(ui_Now_Playing_Label, "");
-  lv_label_set_text(ui_Date, PCF->formatDateTime(PCF_TIMEFORMAT_DOM_MM_DD));
 
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
     lastpercent = 0;
 
   // lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
 
+  hw_timer_t *timer = NULL;
+  timer = timerBegin(0, 80, true);
+  timerAttachInterrupt(timer, Timer0Handle, true);
+  timerAlarmWrite(timer, 10000000, true);
+  timerAlarmEnable(timer);
+
+  twatch->motor_shake(1, 100);
   Serial.println("Setup done");
 }
 
@@ -374,29 +362,42 @@ bool readStringUntil(String &input, size_t char_limit)
 char terminatingChar = '\n';
 int timestart;
 
+bool Timer0Triggered;
+
 void loop()
 {
 
   if (!isSleeping())
   {
     lv_timer_handler(); /* let the GUI do its work */
-    // xTaskCreatePinnedToCore();
     delay(5);
-    writetime();
-    Powerhandle();
+
+    if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
+    {
+      WriteTime();
+      Powerhandle();
+    }
     Compass();
+    CalcHandle();
+    // twatch->backlight_updata(millis(), 10);
   }
   else
     delay(5);
+
   // alarmhandle();
   BThandle();
   Sleephandle();
 
-  char steps[32];
-  sprintf(steps, "%i Steps", twatch->bma423_get_step());
-  lv_label_set_text(ui_Step_Counter_Text, steps);
+  // This stuff runs every X seconds
+  if (Timer0Triggered)
+  {
+    Timer0Triggered = 0;
+    StepHandle();
+    DrawPower();
+  }
 
-  /*if (digitalRead(TWATCH_CHARGING) == 1 and twatch->power_get_volt() < 3800)
+
+  /*if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 3800)
     Sleephandle();*/
   /* Serial.println(digitalRead(TWATCH_CHARGING));
    Serial.println(twatch->power_get_volt());*/
@@ -450,7 +451,7 @@ void loop()
 
   // lv_obj_set_style_img_recolor(ui_Colorset_Tick_Dots, lv_color_hex(0xEE3C39), LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  if (notificationshowing == 1)
+  if (notificationshowing)
   {
     lv_arc_set_value(ui_Notification_Timer, ((millis() - notificationtime) / (NotificationLength * 10)) * 10);
     if (notificationtime + (NotificationLength * 1000) < millis())
@@ -460,7 +461,7 @@ void loop()
     }
   }
 
-  if (stopwatchmoving == 1)
+  if (stopwatchmoving)
   {
     stopwatchtime = (millis() - stopwatchtimestarted);
     // itoa(stopwatchtime,stopwatchtimechar,10);
@@ -515,7 +516,7 @@ void loop()
     lv_label_set_text(ui_Stopwatch_Hours, stopwatchtimechar);
   }
 
-  if (timermoving == 1)
+  if (timermoving)
   {
     if (millis() > timerlasttime)
     {
@@ -530,7 +531,7 @@ void loop()
 void setalarm1(lv_event_t *e)
 {
   selectedalarm = 0;
-  if (alarms[0].am == 1)
+  if (alarms[0].am)
   {
     _ui_state_modify(ui_AMPM_Label, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
   }
@@ -542,7 +543,7 @@ void setalarm1(lv_event_t *e)
 void setalarm2(lv_event_t *e)
 {
   selectedalarm = 1;
-  if (alarms[1].am == 1)
+  if (alarms[1].am)
   {
     _ui_state_modify(ui_AMPM_Label, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
   }
@@ -554,7 +555,7 @@ void setalarm2(lv_event_t *e)
 void setalarm3(lv_event_t *e)
 {
   selectedalarm = 2;
-  if (alarms[2].am == 1)
+  if (alarms[2].am)
   {
     _ui_state_modify(ui_AMPM_Label, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
   }
@@ -566,7 +567,7 @@ void setalarm3(lv_event_t *e)
 void setalarm4(lv_event_t *e)
 {
   selectedalarm = 3;
-  if (alarms[3].am == 1)
+  if (alarms[3].am)
   {
     _ui_state_modify(ui_AMPM_Label, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
   }
@@ -582,7 +583,7 @@ void setalarm(lv_event_t *e)
   char temptime[6];
   lv_roller_get_selected_str(ui_Hour_Roller, temptime, 3);
   alarms[selectedalarm].hourtext = temptime;
-  if (alarms[selectedalarm].am == 0)
+  if (!alarms[selectedalarm].am)
   {
     alarms[selectedalarm].hour = atoi(temptime) + 12;
   }
@@ -596,7 +597,7 @@ void setalarm(lv_event_t *e)
   alarms[selectedalarm].minute = atoi(temptime);
 
   // if (alarms[0].hour<10) alarms[0].minutetext = "0"+temptime;
-  if (alarms[selectedalarm].am == 1)
+  if (alarms[selectedalarm].am)
   {
     itoa(alarms[selectedalarm].hour, temptime, 10);
   }
@@ -607,7 +608,7 @@ void setalarm(lv_event_t *e)
 
   if (selectedalarm == 0)
     lv_label_set_text(ui_Alarm_1_Hour, temptime);
-  if (selectedalarm == 1)
+  if (selectedalarm)
     lv_label_set_text(ui_Alarm_2_Hour, temptime);
   if (selectedalarm == 2)
     lv_label_set_text(ui_Alarm_3_Hour, temptime);
@@ -627,7 +628,7 @@ void setalarm(lv_event_t *e)
     lv_label_set_text(ui_Alarm_1_Minute, alarms[selectedalarm].minutetext);
     alarms[0].state = 1;
     lv_obj_add_state(ui_Alarm_1_Switch, LV_STATE_CHECKED);
-    if (alarms[0].am == 1)
+    if (alarms[0].am)
     {
       lv_label_set_text(ui_Alarm_1_AMPM, "AM");
     }
@@ -638,12 +639,12 @@ void setalarm(lv_event_t *e)
     lv_label_set_text(ui_Alarm_1_Name, lv_textarea_get_text(ui_Alarm_Name));
     alarms[0].name = lv_textarea_get_text(ui_Alarm_Name);
   }
-  if (selectedalarm == 1)
+  if (selectedalarm)
   {
     lv_label_set_text(ui_Alarm_2_Minute, alarms[selectedalarm].minutetext);
     alarms[1].state = 1;
     lv_obj_add_state(ui_Alarm_2_Switch, LV_STATE_CHECKED);
-    if (alarms[1].am == 1)
+    if (alarms[1].am)
     {
       lv_label_set_text(ui_Alarm_2_AMPM, "AM");
     }
@@ -659,7 +660,7 @@ void setalarm(lv_event_t *e)
     lv_label_set_text(ui_Alarm_3_Minute, alarms[selectedalarm].minutetext);
     alarms[2].state = 1;
     lv_obj_add_state(ui_Alarm_3_Switch, LV_STATE_CHECKED);
-    if (alarms[2].am == 1)
+    if (alarms[2].am)
     {
       lv_label_set_text(ui_Alarm_3_AMPM, "AM");
     }
@@ -675,7 +676,7 @@ void setalarm(lv_event_t *e)
     lv_label_set_text(ui_Alarm_4_Minute, alarms[selectedalarm].minutetext);
     alarms[3].state = 1;
     lv_obj_add_state(ui_Alarm_4_Switch, LV_STATE_CHECKED);
-    if (alarms[3].am == 1)
+    if (alarms[3].am)
     {
       lv_label_set_text(ui_Alarm_4_AMPM, "AM");
     }
@@ -690,7 +691,7 @@ void setalarm(lv_event_t *e)
 
 void togglealarm1(lv_event_t *e)
 {
-  if (alarms[0].state == 0)
+  if (!alarms[0].state)
   {
     alarms[0].state = 1;
   }
@@ -701,7 +702,7 @@ void togglealarm1(lv_event_t *e)
 }
 void togglealarm2(lv_event_t *e)
 {
-  if (alarms[1].state == 0)
+  if (!alarms[1].state)
   {
     alarms[1].state = 1;
   }
@@ -712,7 +713,7 @@ void togglealarm2(lv_event_t *e)
 }
 void togglealarm3(lv_event_t *e)
 {
-  if (alarms[2].state == 0)
+  if (!alarms[2].state)
   {
     alarms[2].state = 1;
   }
@@ -723,7 +724,7 @@ void togglealarm3(lv_event_t *e)
 }
 void togglealarm4(lv_event_t *e)
 {
-  if (alarms[3].state == 0)
+  if (!alarms[3].state)
   {
     alarms[3].state = 1;
   }
@@ -735,7 +736,7 @@ void togglealarm4(lv_event_t *e)
 
 void toggleampm(lv_event_t *e)
 {
-  if (alarms[selectedalarm].am == 1)
+  if (alarms[selectedalarm].am)
   {
     alarms[selectedalarm].am = 0;
   }
@@ -753,7 +754,7 @@ void toggleampm(lv_event_t *e)
   {
     alarmlastmin = rtc.minute;
 
-    if (alarms[0].state == 1)
+    if (alarms[0].state)
     {
       rtc.read();
       if (alarms[0].hour == rtc.hour)
@@ -779,7 +780,7 @@ void toggleampm(lv_event_t *e)
         }
       }
     }
-    if (alarms[1].state == 1)
+    if (alarms[1].state)
     {
       rtc.read();
       if (alarms[1].hour == rtc.hour)
@@ -805,7 +806,7 @@ void toggleampm(lv_event_t *e)
         }
       }
     }
-    if (alarms[2].state == 1)
+    if (alarms[2].state)
     {
       rtc.read();
       if (alarms[2].hour == rtc.hour)
@@ -832,7 +833,7 @@ void toggleampm(lv_event_t *e)
         }
       }
     }
-    if (alarms[3].state == 1)
+    if (alarms[3].state)
     {
       rtc.read();
       if (alarms[3].hour == rtc.hour)
@@ -862,7 +863,7 @@ void toggleampm(lv_event_t *e)
   }
 }*/
 
-void shownotification()
+void shownotification(bool Store)
 {
   // Create the widget in the Clock screen
   Wakeup("Notification Received");
@@ -875,11 +876,44 @@ void shownotification()
     twatch->motor_shake(2, 30);
 
   // Create the widget in the notifications screen
+  if (Store)
+  {
+    // lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[NotificationCount].Title.c_str());
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[NotificationCount].Text.c_str());
+    //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[NotificationCount].Source.c_str());
+  }
+}
 
-  lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
-  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
-  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
-  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), lv_label_get_text(ui_Notification_Source));
+void drawnotifications(lv_event_t *e)
+{
+  ui_Notifications_screen_init();
+  _ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
+  for (int i = 0; i < NotificationCount; i++)
+  {
+    lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[i].Title.c_str());
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[i].Text.c_str());
+    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[i].Source.c_str());
+    // lv_obj_set_user_data(NotificationComp, &NotificationList[i]);
+    lv_obj_set_user_data(NotificationComp, (void *)i);
+  }
+}
+
+void deletenotification(lv_event_t *e)
+{
+  // lv_obj_del(lv_event_get_target(e));
+  // lv_obj_set_style_bg_color(lv_event_get_target(e), lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  // lv_obj_set_style_bg_opa(lv_event_get_target(e), 255, LV_PART_MAIN);
+  // lv_obj_set_style_bg_color(ui_Notification_Widget2, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  // lv_obj_set_style_bg_opa(ui_Notification_Widget2, 255, LV_PART_MAIN);
+  // lv_obj_set_x(lv_event_get_target(e), 10);
+  auto index = lv_obj_get_user_data(lv_event_get_target(e));
+  // index->Title = "Deleted";
+  NotificationList[(int)index].Title = "Deleted";
 }
 
 void notificationdismiss(lv_event_t *e)
@@ -902,10 +936,10 @@ void DeleteNotification(lv_event_t *e)
 
 void ToggleStopwatch(lv_event_t *e)
 {
-  if (stopwatchmoving == 0)
+  if (!stopwatchmoving)
   {
     stopwatchmoving = 1;
-    if (stopwatchtimestarted == 0)
+    if (!stopwatchtimestarted)
     {
       stopwatchtimestarted = millis();
     }
@@ -939,7 +973,7 @@ void resetstopwatch(lv_event_t *e)
 
 void ToggleTimer(lv_event_t *e)
 {
-  if (timermoving == 0)
+  if (!timermoving)
   {
     timermoving = 1;
     PlayToPause_Animation(ui_Timer_Play_Pause_Image, 0);
@@ -1025,7 +1059,7 @@ void istimernegative()
   if (timertime <= 0)
   {
     timertime = 0;
-    if (timermoving == 1)
+    if (timermoving)
     {
       lv_label_set_text(ui_Alarm_Going_Off_Time, "00:00:00");
       lv_label_set_text(ui_Alarm_Going_Off_Name, "Timer");
@@ -1097,7 +1131,7 @@ void BThandle()
       // Serial.print(F(" got a line of input '")); Serial.print(input); Serial.println("'");
       if (input.charAt(0) == 1)
       {
-        Serial.print("Geting Time: ");
+        Serial.print("Getting Time From Phone: ");
         Serial.print((int)(input.charAt(1)));
         Serial.print("h ");
         Serial.print((int)(input.charAt(2)));
@@ -1111,7 +1145,7 @@ void BThandle()
         Serial.print((int)((input.charAt(6) + 2000)));
         Serial.println("year");
         // rtc.adjust(input.charAt(1), input.charAt(2), input.charAt(3), input.charAt(6) + 2000, input.charAt(4), input.charAt(5));
-        //twatch->rtc_set_time(input.charAt(6) + 2000, input.charAt(4), input.charAt(5), input.charAt(1), input.charAt(2), input.charAt(3));
+        twatch->rtc_set_time(input.charAt(6) + 2000, input.charAt(4), input.charAt(5), input.charAt(1), input.charAt(2), input.charAt(3));
       }
       if (input.charAt(0) == 2)
       {
@@ -1120,6 +1154,7 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         lv_label_set_text(ui_Notification_Title, input.c_str());
+        NotificationList[10].Title = input;
       }
       if (input.charAt(0) == 3)
       {
@@ -1128,6 +1163,7 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         lv_label_set_text(ui_Notification_Text, input.c_str());
+        NotificationList[10].Text = input;
       }
       if (input.charAt(0) == 4)
       {
@@ -1136,7 +1172,9 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         lv_label_set_text(ui_Notification_Source, input.c_str());
-        shownotification();
+        NotificationList[10].Source = input;
+        shownotification(0);
+        pushnotification(1);
       }
       if (input.charAt(0) == 5)
       {
@@ -1145,7 +1183,8 @@ void BThandle()
         input.remove(input.length() - 1, 1);
         Serial.println(input);
         char song[64];
-        sprintf(song, "♪ %s ♪", input.c_str());
+        // sprintf(song, "♪ %s ♪", input.c_str());
+        sprintf(song, "%s   •", input.c_str());
         lv_label_set_text(ui_Now_Playing_Label, song);
         songtime = millis();
       }
@@ -1186,38 +1225,52 @@ void BThandle()
   }
 }
 
+void pushnotification(int index)
+{
+  int i;
+  for (i = NotificationCount; index <= i; i--)
+  {
+    if (i != 10)
+      NotificationList[i] = NotificationList[i - 1];
+  }
+  NotificationList[i] = NotificationList[10];
+  if (NotificationCount < 10)
+    NotificationCount++;
+}
+
 void Powerhandle()
 {
   twatch->power_updata(millis(), 1000);
-  if ((!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000) and charging == 0)
-    lastpercent = 0;
-  if ((digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() < 4000) and charging == 1)
-    lastpercent = 100;
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
   {
-    lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    charging = 1;
+    if (!charging)
+    {
+      charging = 1;
+      DrawPower();
+    }
   }
   else
   {
+    if (charging)
+    {
+      charging = 0;
+      DrawPower();
+    }
+  }
+}
+
+void DrawPower()
+{
+  char percentchar[] = "179&";
+  sprintf(percentchar, "%.0f%%", (twatch->power_get_percent()));
+  lv_label_set_text(ui_Battery_Percentage, percentchar);
+  lv_arc_set_value(ui_Arc_Battery, (twatch->power_get_percent() / 100) * 250);
+  lastpercent = twatch->power_get_percent();
+
+  if (charging)
+    lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  else
     lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    charging = 0;
-  }
-
-  if ((lastpercent > twatch->power_get_percent() and charging == 0) or (lastpercent < twatch->power_get_percent() and charging == 1))
-  {
-    char percentchar[] = "179&";
-    sprintf(percentchar, "%.0f%%", (twatch->power_get_percent()));
-    lv_label_set_text(ui_Battery_Percentage, percentchar);
-    lv_bar_set_value(ui_Battery_Percent_Bar, twatch->power_get_percent(), LV_ANIM_OFF);
-    lastpercent = twatch->power_get_percent();
-  }
-
-  if (charging == 1) {
-    lv_img_set_src(ui_Battery_Indicator, &ui_img_batterycharging_png);
-  } else if (charging == 0) {
-    lv_img_set_src(ui_Battery_Indicator, &ui_img_batterynormal_png);
-  }
 }
 
 void PowerOff(lv_event_t *e)
@@ -1235,11 +1288,11 @@ void PowerOff(lv_event_t *e)
   twatch->hal_sleep(false);*/
 }
 
-void Brightness(lv_event_t *e)
+void UpdateBrightness(lv_event_t *e)
 {
   if (lv_slider_get_value(ui_Brightness_Slider) < 1)
     lv_slider_set_value(ui_Brightness_Slider, 1, LV_ANIM_OFF);
-  short int Brightness = lv_slider_get_value(ui_Brightness_Slider);
+  Brightness = lv_slider_get_value(ui_Brightness_Slider);
   twatch->backlight_set_value(Brightness);
   Serial.println(Brightness);
   // Serial.println(twatch->backlight_get_value);
@@ -1267,7 +1320,7 @@ void ToggleBT(lv_event_t *e)
   if (!BTon)
   {
     BTon = 1;
-    SerialBT.begin("Kiefer's Watch"); // Bluetooth device name
+    SerialBT.begin("Garrett's Watch"); // Bluetooth device name
   }
   if (BTon)
   {
@@ -1286,5 +1339,166 @@ void Compass()
     lv_label_set_text(ui_Compass_Deg, deg);
     // lv_obj_set_x(ui_Compass_N, 0);
     // lv_obj_set_y(ui_Compass_N, -100);
+  }
+}
+
+void Timer0Handle()
+{
+  Serial.println("Timer0");
+  Timer0Triggered = 1;
+}
+
+void StepHandle()
+{
+  int Steps;
+  static int StepDay;
+  static int LastSteps = -1;
+  static int StepOffset = -1;
+  char StepChar[12];
+
+  if (StepOffset == -1)
+  {
+    if (Storage.getInt("StepDay") == GetDay())
+      StepOffset = Storage.getInt("Steps");
+    else
+      StepOffset = 0;
+  }
+
+  int GetStep = twatch->bma423_get_step();
+
+  if (LastSteps != GetStep)
+  {
+    LastSteps = GetStep;
+    Steps = GetStep + StepOffset;
+    sprintf(StepChar, "%i", Steps);
+    lv_label_set_text(ui_Step_Counter_Text, StepChar);
+    lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
+
+    if (Steps >= StepGoal and !Storage.getBool("StepReach"))
+    {
+      lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
+      char StepGoalText[50];
+      sprintf(StepGoalText, "You have reached your step goal of %i Steps!", StepGoal);
+      lv_label_set_text(ui_Notification_Text, StepGoalText);
+      shownotification(0);
+      Storage.putBool("StepReach", 1);
+    }
+
+    Storage.putInt("Steps", Steps);
+    StepDay = GetDay();
+    Storage.putInt("StepsDay", StepDay);
+  }
+
+  if (Storage.getInt("StepDay") != GetDay())
+  {
+    Storage.putInt("StepDay", GetDay());
+    Storage.putBool("StepReach", 0);
+    StepOffset = 0;
+    Storage.putInt("Steps", 0);
+    twatch->bma423_step_reset();
+  }
+}
+
+void UpdateSettings(lv_event_t *e)
+{
+  StepGoal = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
+  if (StepGoal != Storage.getInt("StepGoal"))
+  {
+    Storage.putInt("StepGoal", StepGoal);
+    Storage.putBool("StepReach", 0);
+  }
+
+  NotificationLength = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
+  Storage.putInt("NotifLength", NotificationLength);
+
+  Storage.putBytes("BTname", lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)), 17);
+  // Serial.println(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
+
+  Storage.putInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);
+  ApplyTheme();
+}
+
+void UpdateTestTheme(lv_event_t *e)
+{
+  lv_obj_set_style_bg_color(ui_Theme_Apply_Button, lv_colorwheel_get_rgb(ui_Theme_Colorwheel), LV_PART_MAIN);
+  // char color[32];
+  // sprintf(color, "Hex: #%i", lv_color_hex(lv_colorwheel_get_hsv(ui_Theme_Colorwheel)));
+  // sprintf(color, "Hex: #%X%X%X", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.red, lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.green_h, lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.blue);
+  /*Serial.print(lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.red);
+  Serial.print(", ");
+  Serial.print(lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.green_l);
+  Serial.print(", ");
+  Serial.println(lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.blue);*/
+  // lv_label_set_text(ui_Theme_Hex_Label, color);
+  lv_label_set_text(ui_Theme_Hex_Label, "Hex Code");
+}
+
+void ToggleTheme(lv_event_t *e)
+{
+  static bool themeexpanded;
+  if (themeexpanded)
+  {
+    ThemeSettingShrink_Animation(ui_Theme_Setting_Panel, 0);
+    lv_img_set_angle(ui_Theme_Expand_Arrow, 1800);
+    themeexpanded = 0;
+    lv_obj_add_flag(ui_Theme_Colorwheel, LV_OBJ_FLAG_HIDDEN);
+  }
+  else
+  {
+    ThemeSettingExpand_Animation(ui_Theme_Setting_Panel, 0);
+    lv_img_set_angle(ui_Theme_Expand_Arrow, 0);
+    themeexpanded = 1;
+    lv_obj_clear_flag(ui_Theme_Colorwheel, LV_OBJ_FLAG_HIDDEN);
+  }
+}
+
+void ApplyTheme()
+{
+  lv_disp_t *dispp = lv_disp_get_default();
+  if (Storage.isKey("Theme"))
+  {
+    lv_color16_t color;
+    color.full = Storage.getInt("Theme");
+    lv_theme_t *theme = lv_theme_default_init(dispp, color, lv_palette_main(LV_PALETTE_RED),
+                                              true, LV_FONT_DEFAULT);
+    lv_disp_set_theme(dispp, theme);
+    ThemeColor = color;
+  }
+  else
+  {
+    lv_theme_t *theme = lv_theme_default_init(dispp, ThemeColor, lv_palette_main(LV_PALETTE_RED),
+                                              true, LV_FONT_DEFAULT);
+    lv_disp_set_theme(dispp, theme);
+  }
+
+  //////////Apply colors to unthemed items//////////
+
+  // Clock Screen
+    lv_obj_set_style_img_recolor(ui_Minute_Hand, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_Steps_Image, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_Second_Dot, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_Step_Counter_Text, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_Date_Numerical, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_color(ui_Notification_Timer, ThemeColor, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Notification_Image_Panel, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+  // Compass Screen
+  if (ui_Compass != NULL)
+  {
+    lv_obj_set_style_text_color(ui_Compass_Direction, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_Compass_N, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_Compass_Arrow, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+
+  // Calculator Screen
+  if (ui_Calculator != NULL)
+  {
+    lv_obj_set_style_bg_color(ui_Calculator_Keyboard, ThemeColor, LV_PART_ITEMS | LV_STATE_CHECKED);
+  }
+
+  // Alarm Set Screen
+  if (ui_Set_Alarm != NULL)
+  {
+    lv_obj_set_style_text_color(ui_AM, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
 }

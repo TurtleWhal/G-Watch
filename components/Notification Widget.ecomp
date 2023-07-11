@@ -10078,7 +10078,7 @@
                 {
                   "nid": 1180491400,
                   "strtype": "IMAGE/Asset",
-                  "strval": "assets\\BellNobackground.png",
+                  "strval": "assets/BellNobackground.png",
                   "InheritedType": 5
                 },
                 {
@@ -18842,8 +18842,7 @@
               "InheritedType": 11
             }
           ],
-          "saved_objtypeKey": "PANEL",
-          "tree_closed": true
+          "saved_objtypeKey": "PANEL"
         }
       ],
       "locked": false,
@@ -31548,44 +31547,6 @@
               "strtype": "PLAY ANIMATION/CallC",
               "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
               "InheritedType": 10
-            }
-          ],
-          "InheritedType": 10
-        },
-        {
-          "nid": -10863757,
-          "strtype": "_event/action",
-          "strval": "CALL FUNCTION",
-          "childs": [
-            {
-              "nid": 1704501458,
-              "strtype": "CALL FUNCTION/Name",
-              "strval": "CALL FUNCTION",
-              "InheritedType": 10
-            },
-            {
-              "nid": 1895551664,
-              "strtype": "CALL FUNCTION/Call",
-              "strval": "<{Function_name}>( event_struct )",
-              "InheritedType": 10
-            },
-            {
-              "nid": 814664389,
-              "strtype": "CALL FUNCTION/CallC",
-              "strval": "<{Function_name}>( e );",
-              "InheritedType": 10
-            },
-            {
-              "nid": 218129915,
-              "strtype": "CALL FUNCTION/Function_name",
-              "strval": "DeleteNotification",
-              "InheritedType": 10
-            },
-            {
-              "nid": -1331307666,
-              "strtype": "CALL FUNCTION/Dont_export_function",
-              "strval": "True",
-              "InheritedType": 2
             }
           ],
           "InheritedType": 10

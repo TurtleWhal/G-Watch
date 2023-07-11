@@ -1,9 +1,13 @@
 
+def drawnotifications(event_struct):
+    return
+
+
 def notificationdismiss(event_struct):
     return
 
 
-def DeleteNotification(event_struct):
+def deletenotificationscreen(event_struct):
     return
 
 
@@ -120,5 +124,101 @@ def ToggleDoNotDisturb(event_struct):
 
 
 def PowerOff(event_struct):
+    return
+
+
+def UpdateSettings(event_struct):
+    return
+
+
+def toappsscreen(event_struct):
+    return
+
+
+def toclockscreen(event_struct):
+    return
+
+
+def deletescreen(event_struct):
+    return
+
+
+def totimersscreen(event_struct):
+    return
+
+
+def appsscreenback(event_struct):
+    return
+
+
+def notificationscreenback(event_struct):
+    return
+
+
+def timersscreenback(event_struct):
+    return
+
+
+def tosettingsscreen(event_struct):
+    return
+
+
+def tocalculatorscreen(event_struct):
+    return
+
+
+def tocompassscreen(event_struct):
+    return
+
+
+def UpdateBrightness(event_struct):
+    return
+
+
+def generictoclock(event_struct):
+    return
+
+
+def ToggleThemeSetting(event_struct):
+    return
+
+
+def ToggleTheme(event_struct):
+    return
+
+
+def UpdateTestTheme(event_struct):
+    return
+
+
+def timermoveup(event_struct):
+    return
+
+
+def timermovedown(event_struct):
+    return
+
+
+def stopwatchmoveup(event_struct):
+    return
+
+
+def stopwatchmovedown(event_struct):
+    return
+
+
+def alarmsmovedown(event_struct):
+    return
+
+
+def alarmsmoveup(event_struct):
+    return
+
+
+def tosetalarm(event_struct):
+    return
+
+
+def setalarmscreenback(event_struct):
     return
 
