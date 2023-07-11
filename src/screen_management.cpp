@@ -166,6 +166,20 @@ void alarmsmovedown(lv_event_t *e)
     LastTimeScreen = 2;
 }
 
+void tosetalarm(lv_event_t *e)
+{
+    ui_Set_Alarm_screen_init();
+    ApplyTheme();
+    lv_scr_load_anim(ui_Set_Alarm, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, 1);
+}
+
+void setalarmscreenback(lv_event_t *e)
+{
+    ui_Alarms_screen_init();
+    ApplyTheme();
+    lv_scr_load_anim(ui_Set_Alarm, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 1);
+}
+
 void generictoclock(lv_event_t *e)
 {
     if (lv_scr_act() != ui_Clock)

@@ -854,8 +854,7 @@ lv_indev_wait_release(lv_indev_get_act());
 void ui_event_Alarm_1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_LONG_PRESSED) {
-      _ui_screen_change( ui_Set_Alarm, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
-      setalarm1( e );
+      tosetalarm( e );
 }
 }
 void ui_event_Alarm_1_Switch( lv_event_t * e) {
@@ -919,9 +918,9 @@ if ( event_code == LV_EVENT_CLICKED) {
 void ui_event_Set_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      _ui_screen_change( ui_Alarms, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
       setalarm( e );
       _ui_state_modify( ui_AMPM_Label, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
+      setalarmscreenback( e );
 }
 }
 void ui_event_Alarm_Name( lv_event_t * e) {

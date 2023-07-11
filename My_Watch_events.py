@@ -214,3 +214,11 @@ def alarmsmovedown(event_struct):
 def alarmsmoveup(event_struct):
     return
 
+
+def tosetalarm(event_struct):
+    return
+
+
+def setalarmscreenback(event_struct):
+    return
+

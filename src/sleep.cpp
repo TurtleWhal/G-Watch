@@ -51,8 +51,9 @@ void Wakeup(String Wakeup_reason)
   {
     // setCpuFrequencyMhz(240);
     //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
-    generictoclock(nullptr);
-    //lv_timer_handler();
+    // generictoclock(nullptr);
+    lv_scr_load(ui_Clock);
+    // lv_timer_handler();
     WriteTime();
     Serial.println("IM AWAKE!");
     // dad hid this comment here because I'm like that.
@@ -60,8 +61,9 @@ void Wakeup(String Wakeup_reason)
     // Garrett found this comment because dad didn't go to a different line
     sleeptimer = millis();
     Sleeping = 0;
+    delay(200);
     twatch->backlight_set_value(prevbrightness);
-    //twatch->backlight_gradual_light(prevbrightness, 1000);
+    // twatch->backlight_gradual_light(prevbrightness, 1000);
     Serial.println(Wakeup_reason);
   }
   else
