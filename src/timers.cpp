@@ -137,6 +137,38 @@ void timersecondminus1(lv_event_t *e)
   writetimertime();
 }
 
+void timeradjust(lv_event_t *e)
+{
+//Log.verbose("%s",lv_event_get_target(e));
+lv_obj_t * target = lv_event_get_target(e);
+if (target == ui_Timer_Hour_Plus_10)
+    timertime += 10 * 60 * 60 * 1000;
+else if (target == ui_Timer_Hour_Minus_10)
+    timertime -= 10 * 60 * 60 * 1000;
+else if (target == ui_Timer_Hour_Plus_1)
+    timertime += 60 * 60 * 1000;
+else if (target == ui_Timer_Hour_Minus_1)
+    timertime -= 60 * 60 * 1000;
+else if (target == ui_Timer_Minute_Plus_10)
+    timertime += 10 * 60 * 1000;
+else if (target == ui_Timer_Minute_Minute_10)
+    timertime -= 10 * 60 * 1000;
+else if (target == ui_Timer_Minute_Plus_1)
+    timertime += 60 * 1000;
+else if (target == ui_Timer_Minute_Minus_1)
+    timertime -= 60 * 1000;
+else if (target == ui_Timer_Second_Plus_10)
+    timertime += 10 * 1000;
+else if (target == ui_Timer_Second_Minus_10)
+    timertime -= 10 * 1000;
+else if (target == ui_Timer_Second_Plus_1)
+    timertime += 1000;
+else if (target == ui_Timer_Second_Minus_1)
+    timertime -= 1000;
+
+  writetimertime();
+}
+
 void istimernegative()
 {
   if (timertime <= 0)
