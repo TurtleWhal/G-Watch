@@ -1,4 +1,3 @@
-#include "Arduino.h"
 #include "lvgl.h"
 #include "ui.h"
 #include "TWatch_hal.h"

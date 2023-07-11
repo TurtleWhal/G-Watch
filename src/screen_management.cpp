@@ -1,9 +1,8 @@
-#include "screen_management.h"
 #include "lvgl.h"
 #include "ui.h"
-#include "ui_events.h"
 #include "Preferences.h"
 #include "Functions.h"
+#include "screen_management.h"
 
 extern Preferences Storage;
 
