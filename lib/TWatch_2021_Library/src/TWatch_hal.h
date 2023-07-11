@@ -22,7 +22,7 @@
 #include "libraries/OneButton/src/OneButton.h"
 #endif
 #if defined(CONFIG_TWATCH_HAS_CST816S)
-#include "CST816S.h"
+#include "libraries/CST816S/CST816S.h"
 #endif
 #if defined(CONFIG_TWATCH_HAS_ENCODER)
 #include "libraries/Encoder/Encoder.h"

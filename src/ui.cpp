@@ -1,9 +1,7 @@
 #include "TWatch_hal.h"
 #include <BluetoothSerial.h>
-#include <TFT_eSPI.h>
 #include <CST816S.h>
 
-#include <lvgl.h>
 #include "ui.h"
 #include "ui_helpers.h"
 
@@ -22,19 +20,9 @@
 #include "Preferences.h"
 #include "ArduinoLog.h"
 
-//#include "gptcalc.h"
-
-/*Change to your screen resolution*/
-static const uint16_t screenWidth = 240;
-static const uint16_t screenHeight = 240;
-
-static lv_disp_draw_buf_t draw_buf;
-static lv_color_t buf[screenWidth * screenHeight / 10];
-
-//TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
-
 TWatchClass *twatch = nullptr;
 
+// TWatch HAL for touch is broken, DIY works better.
 CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
 
 extern BluetoothSerial SerialBT;
@@ -223,7 +211,7 @@ void loop()
   if (!isSleeping())
   {
     //lv_timer_handler(); /* let the GUI do its work */
-    delay(lv_timer_handler());
+    //delay(lv_timer_handler());
 
     if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
     {
