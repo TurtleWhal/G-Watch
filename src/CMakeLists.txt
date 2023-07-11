@@ -2,6 +2,7 @@ SET(SOURCES components/ui_comp_app_button.c
     components/ui_comp_notification_widget.c
     components/ui_comp.c
     screens/ui_Clock.c
+    screens/ui_Storage.c
     screens/ui_Notifications.c
     screens/ui_Alarms.c
     screens/ui_Set_Alarm.c
@@ -23,13 +24,13 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_95517185.c
     images/ui_img_299439519.c
     images/ui_img_feet_png.c
-    images/ui_img_clockwise_min_png.c
-    images/ui_img_clockwise_hour_png.c
-    images/ui_img_clockwise_sec_png.c
     images/ui_img_seconddot_png.c
     images/ui_img_batterynormal_png.c
     images/ui_img_no_bluetooth_small_png.c
     images/ui_img_bellnobackground_png.c
+    images/ui_img_clockwise_min_png.c
+    images/ui_img_clockwise_hour_png.c
+    images/ui_img_clockwise_sec_png.c
     images/ui_img_bellnobackground_png.c
     images/ui_img_restart_button_png.c
     images/ui_img_brightness_png.c
@@ -39,17 +40,17 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_settings_gear_png.c
     images/ui_img_call1_png.c
     images/ui_img_call2_png.c
-    fonts/ui_font_Comfortaa_16.c
-    fonts/ui_font_Comfortaa_26.c
-    fonts/ui_font_Comfortaa_30.c
-    fonts/ui_font_Monoton_40.c
-    fonts/ui_font_Music_14.c
     fonts/ui_font_H1.c
     fonts/ui_font_Number_big.c
     fonts/ui_font_Number_extra.c
     fonts/ui_font_Subtitle.c
     fonts/ui_font_Title.c
+    fonts/ui_font_Comfortaa_12.c
+    fonts/ui_font_Comfortaa_16.c
     fonts/ui_font_Comfortaa_20.c
-    fonts/ui_font_Comfortaa_12.c)
+    fonts/ui_font_Comfortaa_26.c
+    fonts/ui_font_Comfortaa_30.c
+    fonts/ui_font_Monoton_40.c
+    fonts/ui_font_Music_14.c)
 
 add_library(ui ${SOURCES})

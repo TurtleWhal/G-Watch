@@ -63,9 +63,6 @@ extern lv_obj_t *ui_Step_Goal_Percent_Text;
 extern lv_obj_t *ui_Step_Counter_Text;
 extern lv_obj_t *ui_Step_Image;
 extern lv_obj_t *ui_Now_Playing_Label;
-extern lv_obj_t *ui_Minute_Hand;
-extern lv_obj_t *ui_Hour_Hand;
-extern lv_obj_t *ui_Second_Hand;
 extern lv_obj_t *ui_Second_Dot;
 extern lv_obj_t *ui_Battery_Percentage;
 extern lv_obj_t *ui_Battery_Percent_Bar;
@@ -83,6 +80,12 @@ extern lv_obj_t *ui_Notification_Text;
 extern lv_obj_t *ui_Notification_Title;
 extern lv_obj_t *ui_Notification_Image_Panel;
 extern lv_obj_t *ui_Notification_Image;
+// SCREEN: ui_Storage
+void ui_Storage_screen_init(void);
+extern lv_obj_t *ui_Storage;
+extern lv_obj_t *ui_Minute_Hand;
+extern lv_obj_t *ui_Hour_Hand;
+extern lv_obj_t *ui_Second_Hand;
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);
 void ui_event_Notifications( lv_event_t * e);
@@ -360,14 +363,14 @@ LV_IMG_DECLARE( ui_img_weather_png);   // assets/weather.png
 LV_IMG_DECLARE( ui_img_95517185);   // assets/alarm-clock.png
 LV_IMG_DECLARE( ui_img_299439519);   // assets/sand-timer.png
 LV_IMG_DECLARE( ui_img_feet_png);   // assets/feet.png
+LV_IMG_DECLARE( ui_img_seconddot_png);   // assets/SecondDot.png
+LV_IMG_DECLARE( ui_img_batterynormal_png);   // assets/BatteryNormal.png
+LV_IMG_DECLARE( ui_img_batterycharging_png);   // assets/BatteryNormal.png
+LV_IMG_DECLARE( ui_img_no_bluetooth_small_png);   // assets/No Bluetooth_Small.png
+LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
 LV_IMG_DECLARE( ui_img_clockwise_min_png);   // assets/clockwise_min.png
 LV_IMG_DECLARE( ui_img_clockwise_hour_png);   // assets/clockwise_hour.png
 LV_IMG_DECLARE( ui_img_clockwise_sec_png);   // assets/clockwise_sec.png
-LV_IMG_DECLARE( ui_img_seconddot_png);   // assets/SecondDot.png
-LV_IMG_DECLARE( ui_img_batterynormal_png);   // assets/BatteryNormal.png
-LV_IMG_DECLARE( ui_img_batterycharging_png);   // assets/BatteryCharging.png
-LV_IMG_DECLARE( ui_img_no_bluetooth_small_png);   // assets/No Bluetooth_Small.png
-LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
 LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
 LV_IMG_DECLARE( ui_img_restart_button_png);   // assets/Restart Button.png
 LV_IMG_DECLARE( ui_img_brightness_png);   // assets/brightness.png
@@ -378,18 +381,18 @@ LV_IMG_DECLARE( ui_img_settings_gear_png);   // assets/Settings Gear.png
 LV_IMG_DECLARE( ui_img_call1_png);   // assets/call1.png
 LV_IMG_DECLARE( ui_img_call2_png);   // assets/call2.png
 
-LV_FONT_DECLARE( ui_font_Comfortaa_16);
-LV_FONT_DECLARE( ui_font_Comfortaa_26);
-LV_FONT_DECLARE( ui_font_Comfortaa_30);
-LV_FONT_DECLARE( ui_font_Monoton_40);
-LV_FONT_DECLARE( ui_font_Music_14);
 LV_FONT_DECLARE( ui_font_H1);
 LV_FONT_DECLARE( ui_font_Number_big);
 LV_FONT_DECLARE( ui_font_Number_extra);
 LV_FONT_DECLARE( ui_font_Subtitle);
 LV_FONT_DECLARE( ui_font_Title);
-LV_FONT_DECLARE( ui_font_Comfortaa_20);
 LV_FONT_DECLARE( ui_font_Comfortaa_12);
+LV_FONT_DECLARE( ui_font_Comfortaa_16);
+LV_FONT_DECLARE( ui_font_Comfortaa_20);
+LV_FONT_DECLARE( ui_font_Comfortaa_26);
+LV_FONT_DECLARE( ui_font_Comfortaa_30);
+LV_FONT_DECLARE( ui_font_Monoton_40);
+LV_FONT_DECLARE( ui_font_Music_14);
 
 void ui_init(void);
 

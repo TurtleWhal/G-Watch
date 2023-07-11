@@ -45,9 +45,6 @@ lv_obj_t *ui_Step_Goal_Percent_Text;
 lv_obj_t *ui_Step_Counter_Text;
 lv_obj_t *ui_Step_Image;
 lv_obj_t *ui_Now_Playing_Label;
-lv_obj_t *ui_Minute_Hand;
-lv_obj_t *ui_Hour_Hand;
-lv_obj_t *ui_Second_Hand;
 lv_obj_t *ui_Second_Dot;
 lv_obj_t *ui_Battery_Percentage;
 lv_obj_t *ui_Battery_Percent_Bar;
@@ -65,6 +62,13 @@ lv_obj_t *ui_Notification_Text;
 lv_obj_t *ui_Notification_Title;
 lv_obj_t *ui_Notification_Image_Panel;
 lv_obj_t *ui_Notification_Image;
+
+// SCREEN: ui_Storage
+void ui_Storage_screen_init(void);
+lv_obj_t *ui_Storage;
+lv_obj_t *ui_Minute_Hand;
+lv_obj_t *ui_Hour_Hand;
+lv_obj_t *ui_Second_Hand;
 
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);
@@ -773,11 +777,11 @@ lv_anim_start(&PropertyAnimation_2);
 ///////////////////// FUNCTIONS ////////////////////
 void ui_event_Clock( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( ui_Timers, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0);
 }
-if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( ui_Apps, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0);
 }
@@ -1127,6 +1131,7 @@ lv_disp_t *dispp = lv_disp_get_default();
 lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), true, LV_FONT_DEFAULT);
 lv_disp_set_theme(dispp, theme);
 ui_Clock_screen_init();
+ui_Storage_screen_init();
 //ui_Notifications_screen_init();
 //ui_Alarms_screen_init();
 //ui_Set_Alarm_screen_init();

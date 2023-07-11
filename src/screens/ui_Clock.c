@@ -9,7 +9,6 @@ void ui_Clock_screen_init(void)
 {
 ui_Clock = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Clock, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_bg_img_src( ui_Clock, &ui_img_background_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 
 ui_Tick_Dashes = lv_img_create(ui_Clock);
 lv_img_set_src(ui_Tick_Dashes, &ui_img_tick_dashes_png);
@@ -215,42 +214,6 @@ lv_obj_set_align( ui_Now_Playing_Label, LV_ALIGN_CENTER );
 lv_label_set_long_mode(ui_Now_Playing_Label,LV_LABEL_LONG_SCROLL_CIRCULAR);
 lv_label_set_text(ui_Now_Playing_Label,"♪ Safe and Sound by Capitol Cities ♪");
 lv_obj_set_style_text_font(ui_Now_Playing_Label, &ui_font_Music_14, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-ui_Minute_Hand = lv_img_create(ui_Clock);
-lv_img_set_src(ui_Minute_Hand, &ui_img_clockwise_min_png);
-lv_obj_set_width( ui_Minute_Hand, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Minute_Hand, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Minute_Hand, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Minute_Hand, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Minute_Hand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_angle(ui_Minute_Hand,600);
-lv_img_set_zoom(ui_Minute_Hand,130);
-lv_obj_set_style_img_recolor(ui_Minute_Hand, lv_color_hex(0xFF7F00), LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_img_recolor_opa(ui_Minute_Hand, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-ui_Hour_Hand = lv_img_create(ui_Clock);
-lv_img_set_src(ui_Hour_Hand, &ui_img_clockwise_hour_png);
-lv_obj_set_width( ui_Hour_Hand, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Hour_Hand, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Hour_Hand, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Hour_Hand, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Hour_Hand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_angle(ui_Hour_Hand,1300);
-lv_img_set_zoom(ui_Hour_Hand,140);
-lv_obj_set_style_img_recolor(ui_Hour_Hand, lv_color_hex(0xFFFFFF), LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_img_recolor_opa(ui_Hour_Hand, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-ui_Second_Hand = lv_img_create(ui_Clock);
-lv_img_set_src(ui_Second_Hand, &ui_img_clockwise_sec_png);
-lv_obj_set_width( ui_Second_Hand, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Second_Hand, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Second_Hand, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Second_Hand, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Second_Hand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_angle(ui_Second_Hand,60);
-lv_img_set_zoom(ui_Second_Hand,140);
-lv_obj_set_style_img_recolor(ui_Second_Hand, lv_color_hex(0xB6C8CC), LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_img_recolor_opa(ui_Second_Hand, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Second_Dot = lv_img_create(ui_Clock);
 lv_img_set_src(ui_Second_Dot, &ui_img_seconddot_png);

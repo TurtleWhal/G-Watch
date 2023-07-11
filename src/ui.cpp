@@ -14,8 +14,8 @@
 
 #include "sleep.h"
 #include "time.h"
-#include "sntp.h"
-#include <WiFi.h>
+//#include "sntp.h"
+//#include <WiFi.h>
 
 // #include "Functions.c"
 
@@ -315,10 +315,10 @@ void setup()
   // rtc.adjust(atoi(compile_time), atoi(compile_time + 3), atoi(compile_time + 6) + 35, atoi(compile_date + 7), MonthNum, atoi(compile_date + 4));
   
   // Set time
-  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer1, ntpServer2);
+  //configTime(gmtOffset_sec, daylightOffset_sec, ntpServer1, ntpServer2);
 
   //Connect to WiFi
-  WiFi.begin(ssid, password);
+  //WiFi.begin(ssid, password);
 
   alarms[0].state = 0;
   alarms[1].state = 0;
@@ -1267,7 +1267,7 @@ void ToggleBT(lv_event_t *e)
   if (!BTon)
   {
     BTon = 1;
-    SerialBT.begin("Garrett's Watch"); // Bluetooth device name
+    SerialBT.begin("Kiefer's Watch"); // Bluetooth device name
   }
   if (BTon)
   {
