@@ -42,6 +42,8 @@ void PauseToPlay_Animation( lv_obj_t *TargetObject, int delay);
 void notificationstack_Animation( lv_obj_t *TargetObject, int delay);
 void CompassArrowWiggle_Animation( lv_obj_t *TargetObject, int delay);
 void CalculatorEquationFocus_Animation( lv_obj_t *TargetObject, int delay);
+void ThemeSettingExpand_Animation( lv_obj_t *TargetObject, int delay);
+void ThemeSettingShrink_Animation( lv_obj_t *TargetObject, int delay);
 // SCREEN: ui_Clock
 void ui_Clock_screen_init(void);
 void ui_event_Clock( lv_event_t * e);
@@ -224,7 +226,6 @@ extern lv_obj_t *ui_Timer_Seconds;
 extern lv_obj_t *ui_Timer_Colin_Right;
 // SCREEN: ui_Settings
 void ui_Settings_screen_init(void);
-void ui_event_Settings( lv_event_t * e);
 extern lv_obj_t *ui_Settings;
 extern lv_obj_t *ui_Settings_Panel;
 void ui_event_Brightness_Slider( lv_event_t * e);
@@ -242,6 +243,15 @@ extern lv_obj_t *ui_Notification_Time_Setting_Panel;
 void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e);
 extern lv_obj_t *ui_BTname_Setting_Panel;
 void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e);
+void ui_event_Theme_Setting_Panel_Setting_Panel( lv_event_t * e);
+extern lv_obj_t *ui_Theme_Setting_Panel;
+extern lv_obj_t *ui_Theme_Expand_Arrow;
+void ui_event_Theme_Colorwheel( lv_event_t * e);
+extern lv_obj_t *ui_Theme_Colorwheel;
+void ui_event_Theme_Apply_Button( lv_event_t * e);
+extern lv_obj_t *ui_Theme_Apply_Button;
+extern lv_obj_t *ui_Theme_Apply_Label;
+extern lv_obj_t *ui_Theme_Hex_Label;
 void ui_event_Power_Button1( lv_event_t * e);
 extern lv_obj_t *ui_Power_Button1;
 extern lv_obj_t *ui_Power_Button_Image1;
@@ -299,6 +309,7 @@ LV_IMG_DECLARE( ui_img_restart_button_png);   // assets/Restart Button.png
 LV_IMG_DECLARE( ui_img_playpause_button_png);   // assets/PlayPause Button.png
 LV_IMG_DECLARE( ui_img_brightness_png);   // assets/brightness.png
 LV_IMG_DECLARE( ui_img_bluetooth_small_nobackground_png);   // assets/Bluetooth_Small_nobackground.png
+LV_IMG_DECLARE( ui_img_arrow_png);   // assets/Arrow.png
 LV_IMG_DECLARE( ui_img_power_icon_png);   // assets/Power Icon.png
 LV_IMG_DECLARE( ui_img_play_button_png);   // assets/Play Button.png
 LV_IMG_DECLARE( ui_img_calculator_icon_png);   // assets/Calculator Icon.png

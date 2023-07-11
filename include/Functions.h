@@ -16,6 +16,7 @@ void StepHandle();
 void Timer0Handle();
 void pushnotification(int);
 void DrawPower();
+void ApplyTheme();
 
 #ifdef __cplusplus
 } /*extern "C"*/

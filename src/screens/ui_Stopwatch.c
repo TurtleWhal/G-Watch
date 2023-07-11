@@ -105,7 +105,7 @@ lv_label_set_text(ui_Stopwatch_Hours,"00");
 lv_obj_set_style_text_font(ui_Stopwatch_Hours, &lv_font_montserrat_40, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Stopwatch_Time_Underline = lv_obj_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Time_Underline, 224);
+lv_obj_set_width( ui_Stopwatch_Time_Underline, 226);
 lv_obj_set_height( ui_Stopwatch_Time_Underline, 40);
 lv_obj_set_x( ui_Stopwatch_Time_Underline, 0 );
 lv_obj_set_y( ui_Stopwatch_Time_Underline, 13 );

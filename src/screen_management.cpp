@@ -3,36 +3,58 @@
 #include "ui.h"
 #include "ui_events.h"
 #include "Preferences.h"
+#include "Functions.h"
 
 extern Preferences Storage;
 
 extern int Brightness;
 
+int LastTimeScreen = 1;
+
 void toappsscreen(lv_event_t *e)
 {
     ui_Apps_screen_init();
+    ApplyTheme();
     lv_scr_load_anim(ui_Apps, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, 0);
 }
 
 void appsscreenback(lv_event_t *e)
 {
     lv_anim_del_all();
+    ApplyTheme();
     lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 1);
 }
 
 void notificationscreenback(lv_event_t *e)
 {
+    ApplyTheme();
     lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 1);
 }
 
 void totimersscreen(lv_event_t *e)
 {
-    ui_Timers_screen_init();
-    lv_scr_load_anim(ui_Timers, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 0);
+    switch(LastTimeScreen)
+    {
+        case 1:
+        ui_Timers_screen_init();
+        lv_scr_load_anim(ui_Timers, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 0);
+        break;
+        case 2:
+        ui_Stopwatch_screen_init();
+        lv_scr_load_anim(ui_Stopwatch, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 0);
+        break;
+        case 3:
+        ui_Alarms_screen_init();
+        lv_scr_load_anim(ui_Alarms, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 0);
+        break;
+    }
+    ApplyTheme();
+
 }
 
 void timersscreenback(lv_event_t *e)
 {
+    ApplyTheme();
     lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, 1);
 }
 
@@ -40,6 +62,8 @@ void tosettingsscreen(lv_event_t *e)
 {
     lv_anim_del_all();
     ui_Settings_screen_init();
+
+    ApplyTheme();
 
     char StepGoalChar[6];
     sprintf(StepGoalChar, "%i", Storage.getInt("StepGoal"));
@@ -55,6 +79,9 @@ void tosettingsscreen(lv_event_t *e)
 
     lv_slider_set_value(ui_Brightness_Slider, Brightness, LV_ANIM_OFF);
 
+    lv_colorwheel_set_rgb(ui_Theme_Colorwheel, lv_theme_get_color_primary(ui_Clock));
+    UpdateTestTheme(nullptr);
+
     if (lv_scr_act() != ui_Clock)
         lv_scr_load_anim(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
     else
@@ -65,6 +92,7 @@ void tocompassscreen(lv_event_t *e)
 {
     lv_anim_del_all();
     ui_Compass_screen_init();
+    ApplyTheme();
     lv_scr_load_anim(ui_Compass, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
 }
 
@@ -91,13 +119,58 @@ void tocalculatorscreen(lv_event_t *e)
     lv_keyboard_set_map(ui_Calculator_Keyboard, LV_KEYBOARD_MODE_USER_1, kb_map, kb_ctrl);
     lv_keyboard_set_mode(ui_Calculator_Keyboard, LV_KEYBOARD_MODE_USER_1);
 
+    ApplyTheme();
+
     lv_scr_load_anim(ui_Calculator, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 0);
+}
+
+void timermoveup(lv_event_t *e)
+{
+    ui_Stopwatch_screen_init();
+    lv_scr_load_anim(ui_Stopwatch, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, 1);
+    LastTimeScreen = 2;
+}
+
+void timermovedown(lv_event_t *e)
+{
+    ui_Alarms_screen_init();
+    lv_scr_load_anim(ui_Alarms, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 1);
+    LastTimeScreen = 3;
+}
+
+void stopwatchmoveup(lv_event_t *e)
+{
+    ui_Alarms_screen_init();
+    lv_scr_load_anim(ui_Alarms, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, 1);
+    LastTimeScreen = 3;
+}
+
+void stopwatchmovedown(lv_event_t *e)
+{
+    ui_Timers_screen_init();
+    lv_scr_load_anim(ui_Timers, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 1);
+    LastTimeScreen = 1;
+}
+
+void alarmsmoveup(lv_event_t *e)
+{
+    ui_Timers_screen_init();
+    lv_scr_load_anim(ui_Timers, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, 1);
+    LastTimeScreen = 1;
+}
+
+void alarmsmovedown(lv_event_t *e)
+{
+    ui_Stopwatch_screen_init();
+    lv_scr_load_anim(ui_Stopwatch, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 1);
+    LastTimeScreen = 2;
 }
 
 void generictoclock(lv_event_t *e)
 {
     if (lv_scr_act() != ui_Clock)
     {
+        ApplyTheme();
         lv_anim_del_all();
         lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
         switch (dir)
@@ -123,6 +196,7 @@ void buttontoclock()
     if (lv_scr_act() != ui_Clock)
     {
         lv_anim_del_all();
+        ApplyTheme();
         lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
     }
 }

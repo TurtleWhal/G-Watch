@@ -13,11 +13,12 @@ lv_obj_t *cui_Setting_Panel;
 cui_Setting_Panel = lv_obj_create(comp_parent);
 lv_obj_set_width( cui_Setting_Panel, 200);
 lv_obj_set_height( cui_Setting_Panel, 35);
-lv_obj_set_x( cui_Setting_Panel, 200 );
-lv_obj_set_y( cui_Setting_Panel, 35 );
+lv_obj_set_x( cui_Setting_Panel, 0 );
+lv_obj_set_y( cui_Setting_Panel, -10 );
 lv_obj_set_align( cui_Setting_Panel, LV_ALIGN_CENTER );
 lv_obj_clear_flag( cui_Setting_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(cui_Setting_Panel, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_radius(cui_Setting_Panel, 17, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_clip_corner(cui_Setting_Panel, true, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_t *cui_Setting_Label;
 cui_Setting_Label = lv_label_create(cui_Setting_Panel);

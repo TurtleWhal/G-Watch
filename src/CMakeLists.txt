@@ -30,6 +30,7 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_playpause_button_png.c
     images/ui_img_brightness_png.c
     images/ui_img_bluetooth_small_nobackground_png.c
+    images/ui_img_arrow_png.c
     images/ui_img_power_icon_png.c
     images/ui_img_play_button_png.c
     images/ui_img_calculator_icon_png.c
