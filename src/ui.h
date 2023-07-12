@@ -50,6 +50,7 @@ void ui_event_Clock( lv_event_t * e);
 extern lv_obj_t *ui_Clock;
 extern lv_obj_t *ui_Time;
 extern lv_obj_t *ui_Date_Numerical;
+extern lv_obj_t *ui_Date;
 extern lv_obj_t *ui_Arc_Left;
 extern lv_obj_t *ui_Arc_Steps;
 extern lv_obj_t *ui_Tick_Dashes;
@@ -58,12 +59,13 @@ extern lv_obj_t *ui_Now_Playing_Label;
 extern lv_obj_t *ui_Steps_Panel;
 extern lv_obj_t *ui_Steps_Image;
 extern lv_obj_t *ui_Step_Counter_Text;
+extern lv_obj_t *ui_Weather_Img;
+extern lv_obj_t *ui_Temperature;
 extern lv_obj_t *ui_Minute_Hand;
 extern lv_obj_t *ui_Hour_Hand;
 extern lv_obj_t *ui_Second_Hand;
 extern lv_obj_t *ui_Second_Dot;
 extern lv_obj_t *ui_Center_dot;
-extern lv_obj_t *ui_Date;
 extern lv_obj_t *ui_Battery_Percentage;
 extern lv_obj_t *ui_Bluetooth_Indicator;
 extern lv_obj_t *ui_Notification_Amount_Image;
@@ -80,6 +82,7 @@ extern lv_obj_t *ui_Notification_Image_Panel;
 extern lv_obj_t *ui_Notification_Image;
 extern lv_obj_t *ui_Battery_Indicator_Bar;
 extern lv_obj_t *ui_Battery_Indicator;
+extern lv_obj_t *ui_Step_Counter_Percent;
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);
 void ui_event_Notifications( lv_event_t * e);
@@ -300,6 +303,7 @@ extern lv_obj_t *ui____initial_actions0;
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
 LV_IMG_DECLARE( ui_img_tick_dots_png);   // assets/Tick Dots.png
 LV_IMG_DECLARE( ui_img_step_png);   // assets/step.png
+LV_IMG_DECLARE( ui_img_weather_png);   // assets/weather.png
 LV_IMG_DECLARE( ui_img_clockwise_min_png);   // assets/clockwise_min.png
 LV_IMG_DECLARE( ui_img_clockwise_hour_png);   // assets/clockwise_hour.png
 LV_IMG_DECLARE( ui_img_clockwise_sec_png);   // assets/clockwise_sec.png
@@ -327,6 +331,7 @@ LV_FONT_DECLARE( ui_font_Comfortaa_26);
 LV_FONT_DECLARE( ui_font_Comfortaa_30);
 LV_FONT_DECLARE( ui_font_Music_14);
 LV_FONT_DECLARE( ui_font_Monoton_48);
+LV_FONT_DECLARE( ui_font_Comfortaa_20);
 
 void ui_init(void);
 

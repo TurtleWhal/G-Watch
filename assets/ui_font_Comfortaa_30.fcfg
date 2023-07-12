@@ -1,16 +1,16 @@
 {
   "codename": "Comfortaa_30",
-  "ttf_path": "\\assets\\Comfortaa-Bold.ttf",
-  "bin_path": "\\assets\\ui_font_Comfortaa_30.bin",
-  "c_path": "\\assets\\ui_font_Comfortaa_30.c",
-  "cfg_path": "\\assets\\ui_font_Comfortaa_30.fcfg",
+  "ttf_path": "/assets/Comfortaa-VariableFont_wght.ttf",
+  "bin_path": "/assets/ui_font_Comfortaa_30.bin",
+  "c_path": "/assets/ui_font_Comfortaa_30.c",
+  "cfg_path": "/assets/ui_font_Comfortaa_30.fcfg",
   "size": 30,
   "bpp": 4,
   "letters": 0,
   "ranges": [
     "0x20-0x7f"
   ],
-  "symbols": "",
+  "symbols": "°",
   "customparams": "--no-compress --no-prefilter",
   "uploaded": false
 }

@@ -19,6 +19,7 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_tick_dashes_png.c
     images/ui_img_tick_dots_png.c
     images/ui_img_step_png.c
+    images/ui_img_weather_png.c
     images/ui_img_clockwise_min_png.c
     images/ui_img_clockwise_hour_png.c
     images/ui_img_clockwise_sec_png.c
@@ -43,6 +44,7 @@ SET(SOURCES components/ui_comp_app_button.c
     fonts/ui_font_Comfortaa_26.c
     fonts/ui_font_Comfortaa_30.c
     fonts/ui_font_Music_14.c
-    fonts/ui_font_Monoton_48.c)
+    fonts/ui_font_Monoton_48.c
+    fonts/ui_font_Comfortaa_20.c)
 
 add_library(ui ${SOURCES})

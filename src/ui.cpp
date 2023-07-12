@@ -1271,7 +1271,7 @@ void DrawPower()
     lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_img_set_src(ui_Battery_Indicator, &ui_img_batterycharging_png);
   } else {
-    lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_Battery_Percentage, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_img_set_src(ui_Battery_Indicator, &ui_img_batterynormal_png);
   }
 }
@@ -1376,6 +1376,12 @@ void StepHandle()
     sprintf(StepChar, "%i", Steps);
     lv_label_set_text(ui_Step_Counter_Text, StepChar);
     lv_arc_set_value(ui_Arc_Steps, ((float)Steps / StepGoal) * 250);
+      char buffer[20];  // Create a buffer to hold the formatted string
+      float percentage = round(((float)Steps / StepGoal) * 100);
+      // Format the rounded float value as a string and store it in the buffer
+      snprintf(buffer, sizeof(buffer), "%.0f%%", percentage);
+      // Set the label text using the buffer
+      lv_label_set_text(ui_Step_Counter_Percent, buffer);
 
     if (Steps >= StepGoal and !Storage.getBool("StepReach"))
     {
@@ -1480,8 +1486,10 @@ void ApplyTheme()
     lv_obj_set_style_img_recolor(ui_Minute_Hand, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor(ui_Steps_Image, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor(ui_Second_Dot, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_Battery_Indicator, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Step_Counter_Text, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Date_Numerical, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_Step_Counter_Percent, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_arc_color(ui_Notification_Timer, ThemeColor, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(ui_Notification_Image_Panel, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
 
