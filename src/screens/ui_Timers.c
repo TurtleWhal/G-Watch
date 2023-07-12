@@ -56,7 +56,6 @@ lv_obj_add_flag( ui_Timer_Play_Pause_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   //
 lv_obj_clear_flag( ui_Timer_Play_Pause_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
 ui_Timer_Play_Pause_Image = lv_img_create(ui_Timer_Play_Pause_Button);
-lv_img_set_src(ui_Timer_Play_Pause_Image, &ui_img_playpause_button_png);
 lv_obj_set_width( ui_Timer_Play_Pause_Image, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Timer_Play_Pause_Image, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Timer_Play_Pause_Image, 0 );

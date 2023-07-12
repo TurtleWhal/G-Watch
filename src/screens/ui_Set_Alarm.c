@@ -154,7 +154,6 @@ lv_obj_set_style_bg_color(ui_Button2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_
 lv_obj_set_style_bg_opa(ui_Button2, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Image2 = lv_img_create(ui_Set_Alarm);
-lv_img_set_src(ui_Image2, &ui_img_bell_png);
 lv_obj_set_width( ui_Image2, LV_SIZE_CONTENT);  /// 75
 lv_obj_set_height( ui_Image2, LV_SIZE_CONTENT);   /// 75
 lv_obj_set_x( ui_Image2, 0 );

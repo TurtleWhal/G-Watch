@@ -1264,13 +1264,16 @@ void DrawPower()
   char percentchar[] = "179&";
   sprintf(percentchar, "%.0f%%", (twatch->power_get_percent()));
   lv_label_set_text(ui_Battery_Percentage, percentchar);
-  lv_arc_set_value(ui_Arc_Battery, (twatch->power_get_percent() / 100) * 250);
+  lv_bar_set_value(ui_Battery_Indicator_Bar, twatch->power_get_percent(), LV_ANIM_OFF);
   lastpercent = twatch->power_get_percent();
 
-  if (charging)
+  if (charging) {
     lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  else
+    lv_img_set_src(ui_Battery_Indicator, &ui_img_batterycharging_png);
+  } else {
     lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_img_set_src(ui_Battery_Indicator, &ui_img_batterynormal_png);
+  }
 }
 
 void PowerOff(lv_event_t *e)
@@ -1320,7 +1323,7 @@ void ToggleBT(lv_event_t *e)
   if (!BTon)
   {
     BTon = 1;
-    SerialBT.begin("Garrett's Watch"); // Bluetooth device name
+    SerialBT.begin("Kiefer's Watch"); // Bluetooth device name
   }
   if (BTon)
   {
@@ -1372,7 +1375,7 @@ void StepHandle()
     Steps = GetStep + StepOffset;
     sprintf(StepChar, "%i", Steps);
     lv_label_set_text(ui_Step_Counter_Text, StepChar);
-    lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
+    lv_arc_set_value(ui_Arc_Steps, ((float)Steps / StepGoal) * 250);
 
     if (Steps >= StepGoal and !Storage.getBool("StepReach"))
     {

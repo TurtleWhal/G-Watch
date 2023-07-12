@@ -19,15 +19,15 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_tick_dashes_png.c
     images/ui_img_tick_dots_png.c
     images/ui_img_step_png.c
-    images/ui_img_minutehand_png.c
-    images/ui_img_hourhand_png.c
-    images/ui_img_secondhand_png.c
+    images/ui_img_clockwise_min_png.c
+    images/ui_img_clockwise_hour_png.c
+    images/ui_img_clockwise_sec_png.c
     images/ui_img_seconddot_png.c
     images/ui_img_no_bluetooth_small_png.c
     images/ui_img_bellnobackground_png.c
-    images/ui_img_bell_png.c
+    images/ui_img_batterynormal_png.c
+    images/ui_img_bellnobackground_png.c
     images/ui_img_restart_button_png.c
-    images/ui_img_playpause_button_png.c
     images/ui_img_brightness_png.c
     images/ui_img_bluetooth_small_nobackground_png.c
     images/ui_img_arrow_png.c
@@ -36,12 +36,13 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_calculator_icon_png.c
     images/ui_img_compass_png.c
     images/ui_img_settings_gear_png.c
-    images/ui_img_4809254_png.c
+    images/ui_img_call1_png.c
+    images/ui_img_call2_png.c
     fonts/ui_font_Comfortaa_12.c
     fonts/ui_font_Comfortaa_16.c
     fonts/ui_font_Comfortaa_26.c
     fonts/ui_font_Comfortaa_30.c
-    fonts/ui_font_Monoton_48.c
-    fonts/ui_font_Music_14.c)
+    fonts/ui_font_Music_14.c
+    fonts/ui_font_Monoton_48.c)
 
 add_library(ui ${SOURCES})
