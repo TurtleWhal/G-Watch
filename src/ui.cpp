@@ -1,6 +1,5 @@
 #include "TWatch_hal.h"
 #include <BluetoothSerial.h>
-#include <TFT_eSPI.h>
 #include <CST816S.h>
 
 #include <lvgl.h>
@@ -31,8 +30,6 @@ static const uint16_t screenHeight = 240;
 static lv_disp_draw_buf_t draw_buf;
 static lv_color_t buf[screenWidth * screenHeight / 10];
 
-TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
-
 TWatchClass *twatch = nullptr;
 
 CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
@@ -62,13 +59,14 @@ void my_print(const char *buf)
 /* Display flushing */
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
+  TFT_eSPI * tft = twatch->tft_get_instance();
   uint32_t w = (area->x2 - area->x1 + 1);
   uint32_t h = (area->y2 - area->y1 + 1);
 
-  tft.startWrite();
-  tft.setAddrWindow(area->x1, area->y1, w, h);
-  tft.pushColors((uint16_t *)&color_p->full, w * h, false);
-  tft.endWrite();
+  tft->startWrite();
+  tft->setAddrWindow(area->x1, area->y1, w, h);
+  tft->pushColors((uint16_t *)&color_p->full, w * h, false);
+  tft->endWrite();
 
   lv_disp_flush_ready(disp);
 }
@@ -188,8 +186,8 @@ void setup()
   lv_log_register_print_cb(my_print); /* register print function for debugging */
 #endif
 
-  tft.begin();        /* TFT init */
-  tft.setRotation(0); /* Landscape orientation, flipped */
+  //tft.begin();        /* TFT init */
+  //tft.setRotation(0); /* Landscape orientation, flipped */
 
   touch.begin();
   //touch.sleep();
