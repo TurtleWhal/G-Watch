@@ -298,10 +298,12 @@ extern lv_obj_t * ui____initial_actions0;
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
 LV_IMG_DECLARE( ui_img_tick_dots_png);   // assets/Tick Dots.png
 LV_IMG_DECLARE( ui_img_step_png);   // assets/step.png
-LV_IMG_DECLARE( ui_img_minutehand_png);   // assets/MinuteHand.png
-LV_IMG_DECLARE( ui_img_hourhand_png);   // assets/HourHand.png
-LV_IMG_DECLARE( ui_img_secondhand_png);   // assets/SecondHand.png
+LV_IMG_DECLARE( ui_img_minutehandstub_png);   // assets/MinuteHand.png
+LV_IMG_DECLARE( ui_img_hourhandstub_png);   // assets/HourHand.png
+LV_IMG_DECLARE( ui_img_secondhandstub_png);   // assets/SecondHand.png
 LV_IMG_DECLARE( ui_img_seconddot_png);   // assets/SecondDot.png
+LV_IMG_DECLARE( ui_img_seconddotstub_png);   // assets/SecondDot.png
+LV_IMG_DECLARE( ui_img_seconddashstub_png);   // assets/SecondDot.png
 LV_IMG_DECLARE( ui_img_no_bluetooth_small_png);   // assets/No Bluetooth_Small.png
 LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
 LV_IMG_DECLARE( ui_img_bell_png);   // assets/Bell.png
