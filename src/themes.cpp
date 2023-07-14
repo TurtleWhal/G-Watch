@@ -60,6 +60,7 @@ void ApplyTheme()
   }
 
   //////////Apply colors to unthemed items//////////
+  extern lv_obj_t *tick_index[62];
 
   // Clock Screen
 #ifdef UPDATE_ELEMENTS
@@ -69,6 +70,8 @@ void ApplyTheme()
     lv_obj_set_style_text_color(ui_Date_Numerical, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_arc_color(ui_Notification_Timer, ThemeColor, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(ui_Notification_Image_Panel, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(tick_index[60], ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(tick_index[61], ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
 
   // Compass Screen
   if (ui_Compass != NULL)

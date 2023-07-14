@@ -6,7 +6,7 @@
 #include "ArduinoLog.h"
 
 struct tm t_tm;
-static lv_obj_t *tick_index[60];
+lv_obj_t *tick_index[62];
 
 void WriteTime()
 {
@@ -27,7 +27,7 @@ void WriteTime()
         lv_img_set_angle(ui_Second_Hand, secangle * 6 + second * 60); // Rounds uSec to 0-12, changes to 0,5,10,15,20.., then adds seconds
     lastsecangle = secangle;
 #endif
-    
+
     if (second != lastsec)
     {
         Serial.println("sec");
@@ -70,9 +70,8 @@ int GetDay()
 }
 void InitTicks()
 {
-    for (int i = 0; i < 60; i++)
+    for (int i = 0; i < 62; i++)
     {
-        // lv_obj_t *temp_image[60] = lv_img_create(ui_Clock);
         tick_index[i] = lv_img_create(ui_Clock);
 
         if (i % 5) // Minor second ticks
@@ -94,22 +93,23 @@ void InitTicks()
         lv_img_set_angle(tick_index[i], i * 60);
         lv_obj_set_style_img_recolor_opa(tick_index[i], 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     }
+    lv_obj_set_style_img_recolor(tick_index[60], lv_color_hex(0xFFD600), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(tick_index[61], lv_color_hex(0xFFD600), LV_PART_MAIN | LV_STATE_DEFAULT);
 }
 
 void ColorTicks(int i)
 {
-    if (i % 5) // Minor second ticks
-        lv_obj_set_style_img_recolor(tick_index[i], lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    else // Major second dashes
-        lv_obj_set_style_img_recolor(tick_index[i], lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    if (i)
-        i--;
-    else
-        i = 59;
 
     if (i % 5) // Minor second ticks
-        lv_obj_set_style_img_recolor(tick_index[i], lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+    {
+        lv_obj_set_x(tick_index[60], 600);
+        lv_obj_set_x(tick_index[61], 0);
+        lv_img_set_angle(tick_index[61], i * 60);
+    }
     else // Major second dashes
-        lv_obj_set_style_img_recolor(tick_index[i], lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    {
+        lv_obj_set_x(tick_index[61], 600);
+        lv_obj_set_x(tick_index[60], 0);
+        lv_img_set_angle(tick_index[60], i * 60);
+    }
 }
