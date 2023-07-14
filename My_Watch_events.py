@@ -222,3 +222,11 @@ def tosetalarm(event_struct):
 def setalarmscreenback(event_struct):
     return
 
+
+def Deletenotification(event_struct):
+    return
+
+
+def deletenotification(event_struct):
+    return
+

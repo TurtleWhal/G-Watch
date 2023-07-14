@@ -15,7 +15,7 @@
 
 #include "Preferences.h"
 
-//#include "gptcalc.h"
+// #include "gptcalc.h"
 
 /*Change to your screen resolution*/
 static const uint16_t screenWidth = 240;
@@ -192,6 +192,7 @@ void btn1_held(void *param)
   if (lv_scr_act() != ui_Settings)
     tosettingsscreen(nullptr);
   Wakeup("Button 1 Held");
+  twatch->motor_shake(1, 30);
 }
 
 void btn2_held(void *param)
@@ -200,6 +201,7 @@ void btn2_held(void *param)
   Wakeup("Button 2 Held");
   if (lv_scr_act() == ui_Stopwatch)
     resetstopwatch(nullptr);
+  twatch->motor_shake(1, 30);
 }
 
 void btn3_held(void *param)
@@ -207,6 +209,7 @@ void btn3_held(void *param)
   Serial.println("BTN3 Held");
   Wakeup("Button 3 Held");
   totimersscreen(nullptr);
+  twatch->motor_shake(1, 30);
 }
 
 void setup()
@@ -395,7 +398,6 @@ void loop()
     StepHandle();
     DrawPower();
   }
-
 
   /*if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 3800)
     Sleephandle();*/
@@ -872,12 +874,15 @@ void shownotification(bool Store)
   NotificationShow_Animation(ui_Notification_Popup, 0);
   notificationtime = millis();
   notificationshowing = 1;
+  // NotificationCount++;
+  // lv_label_set_text(ui_Notification_Amount_Number, String(NotificationCount).c_str());
   if (!Donotdisturb)
     twatch->motor_shake(2, 30);
 
   // Create the widget in the notifications screen
   if (Store)
   {
+    pushnotification(1);
     // lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
     //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), lv_label_get_text(ui_Notification_Title));
     //  lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), lv_label_get_text(ui_Notification_Text));
@@ -894,12 +899,15 @@ void drawnotifications(lv_event_t *e)
   _ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
   for (int i = 0; i < NotificationCount; i++)
   {
-    lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[i].Title.c_str());
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[i].Text.c_str());
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[i].Source.c_str());
-    // lv_obj_set_user_data(NotificationComp, &NotificationList[i]);
-    lv_obj_set_user_data(NotificationComp, (void *)i);
+    if (NotificationList[i].Source != "Deleted")
+    {
+      lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
+      lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[i].Title.c_str());
+      lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[i].Text.c_str());
+      lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[i].Source.c_str());
+      // lv_obj_set_user_data(NotificationComp, &NotificationList[i]);
+      lv_obj_set_user_data(NotificationComp, (void *)i);
+    }
   }
 }
 
@@ -913,7 +921,8 @@ void deletenotification(lv_event_t *e)
   // lv_obj_set_x(lv_event_get_target(e), 10);
   auto index = lv_obj_get_user_data(lv_event_get_target(e));
   // index->Title = "Deleted";
-  NotificationList[(int)index].Title = "Deleted";
+  // NotificationList[(int)index].Source = "Deleted";
+  popnotification((int)index);
 }
 
 void notificationdismiss(lv_event_t *e)
@@ -923,6 +932,8 @@ void notificationdismiss(lv_event_t *e)
   NotificationDismiss_Animation(ui_Notification_Popup, 0);
   notificationtime = 0;
   notificationshowing = 0;
+  // NotificationCount--;
+  // lv_label_set_text(ui_Notification_Amount_Number, String(NotificationCount).c_str());
 }
 
 void DeleteNotification(lv_event_t *e)
@@ -955,7 +966,7 @@ void ToggleStopwatch(lv_event_t *e)
     stopwatchtimestopped = millis();
     PauseToPlay_Animation(ui_Stopwatch_Play_Pause_Image, 0);
   }
-  twatch->motor_shake(1, 50);
+  twatch->motor_shake(1, 30);
 }
 
 void resetstopwatch(lv_event_t *e)
@@ -968,7 +979,7 @@ void resetstopwatch(lv_event_t *e)
   lv_label_set_text(ui_Stopwatch_Seconds, "00");
   lv_label_set_text(ui_Stopwatch_Minutes, "00");
   lv_label_set_text(ui_Stopwatch_Hours, "00");
-  twatch->motor_shake(1, 50);
+  twatch->motor_shake(1, 30);
 }
 
 void ToggleTimer(lv_event_t *e)
@@ -984,7 +995,7 @@ void ToggleTimer(lv_event_t *e)
     timermoving = 0;
     PauseToPlay_Animation(ui_Timer_Play_Pause_Image, 0);
   }
-  twatch->motor_shake(1, 50);
+  twatch->motor_shake(1, 30);
 }
 
 void timerhourplus10(lv_event_t *e)
@@ -1061,11 +1072,13 @@ void istimernegative()
     timertime = 0;
     if (timermoving)
     {
+      ui_Alarm_Going_Off_screen_init();
       lv_label_set_text(ui_Alarm_Going_Off_Time, "00:00:00");
       lv_label_set_text(ui_Alarm_Going_Off_Name, "Timer");
-      _ui_screen_change(ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
-      timermoving = 0;
+      //_ui_screen_change(ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
+      //timermoving = 0;
       ToggleTimer(nullptr);
+      lv_scr_load_anim(ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 0);
       // VIBRATION MOTOR GO BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
     }
   }
@@ -1173,8 +1186,7 @@ void BThandle()
         Serial.println(input);
         lv_label_set_text(ui_Notification_Source, input.c_str());
         NotificationList[10].Source = input;
-        shownotification(0);
-        pushnotification(1);
+        shownotification(1);
       }
       if (input.charAt(0) == 5)
       {
@@ -1236,6 +1248,24 @@ void pushnotification(int index)
   NotificationList[i] = NotificationList[10];
   if (NotificationCount < 10)
     NotificationCount++;
+}
+
+void popnotification(int index)
+{
+  int i;
+  NotificationList[index].Source = "Deleted";
+  for (i = index; NotificationCount >= i; i++)
+  {
+    if (i != 10)
+      NotificationList[i] = NotificationList[i + 1];
+  }
+  if (NotificationCount < 10)
+    NotificationCount--;
+  for (int t = i; t <= 11; t++)
+  {
+    NotificationList[t].Source = "Deleted";
+    Serial.println(t);
+  }
 }
 
 void Powerhandle()
@@ -1474,13 +1504,13 @@ void ApplyTheme()
   //////////Apply colors to unthemed items//////////
 
   // Clock Screen
-    lv_obj_set_style_img_recolor(ui_Minute_Hand, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_img_recolor(ui_Steps_Image, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_img_recolor(ui_Second_Dot, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Step_Counter_Text, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Date_Numerical, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_color(ui_Notification_Timer, ThemeColor, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_Notification_Image_Panel, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_img_recolor(ui_Minute_Hand, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_img_recolor(ui_Steps_Image, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_img_recolor(ui_Second_Dot, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_text_color(ui_Step_Counter_Text, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_text_color(ui_Date_Numerical, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_arc_color(ui_Notification_Timer, ThemeColor, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+  lv_obj_set_style_bg_color(ui_Notification_Image_Panel, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
 
   // Compass Screen
   if (ui_Compass != NULL)
@@ -1501,4 +1531,17 @@ void ApplyTheme()
   {
     lv_obj_set_style_text_color(ui_AM, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
+
+  // Apps Screen
+  if (ui_Apps != NULL)
+  {
+    /*
+    lv_obj_set_style_bg_color(ui_comp_get_child(ui_Calculator_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL), ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_comp_get_child(ui_Compass_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL), ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_comp_get_child(ui_Settings_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL), ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    */
+   //Serial.println(1);
+  }
+  //else Serial.println(0);
+
 }

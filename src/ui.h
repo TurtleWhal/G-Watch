@@ -156,6 +156,7 @@ extern lv_obj_t *ui_Image2;
 void ui_Alarm_Going_Off_screen_init(void);
 extern lv_obj_t *ui_Alarm_Going_Off;
 extern lv_obj_t *ui_Alarm_Going_Off_Spinner;
+extern lv_obj_t *ui_Panel1;
 extern lv_obj_t *ui_Alarm_Going_Off_Bell;
 extern lv_obj_t *ui_Alarm_Going_Off_Name;
 extern lv_obj_t *ui_Alarm_Going_Off_Name_Underline;
@@ -312,7 +313,7 @@ LV_IMG_DECLARE( ui_img_bluetooth_small_nobackground_png);   // assets/Bluetooth_
 LV_IMG_DECLARE( ui_img_arrow_png);   // assets/Arrow.png
 LV_IMG_DECLARE( ui_img_power_icon_png);   // assets/Power Icon.png
 LV_IMG_DECLARE( ui_img_play_button_png);   // assets/Play Button.png
-LV_IMG_DECLARE( ui_img_calculator_icon_png);   // assets/Calculator Icon.png
+LV_IMG_DECLARE( ui_img_calculator_icon_nobackground_png);   // assets/Calculator Icon nobackground.png
 LV_IMG_DECLARE( ui_img_compass_png);   // assets/Compass.png
 LV_IMG_DECLARE( ui_img_settings_gear_png);   // assets/Settings Gear.png
 LV_IMG_DECLARE( ui_img_4809254_png);   // assets/4809254.png

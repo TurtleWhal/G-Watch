@@ -35,7 +35,7 @@ lv_obj_set_y( ui_Calculator_App_Button, 0 );
 
 lv_label_set_text(ui_comp_get_child(ui_Calculator_App_Button, UI_COMP_APP_BUTTON_APP_LABEL),"Calculator");
 
-lv_img_set_src(ui_comp_get_child(ui_Calculator_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), &ui_img_calculator_icon_png);
+lv_img_set_src(ui_comp_get_child(ui_Calculator_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), &ui_img_calculator_icon_nobackground_png);
 lv_img_set_zoom(ui_comp_get_child(ui_Calculator_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),115);
 
 ui_Compass_App_Button = ui_App_Button_create(ui_Apps_Panel);
@@ -43,9 +43,6 @@ lv_obj_set_x( ui_Compass_App_Button, 0 );
 lv_obj_set_y( ui_Compass_App_Button, 0 );
 
 lv_label_set_text(ui_comp_get_child(ui_Compass_App_Button, UI_COMP_APP_BUTTON_APP_LABEL),"Compass");
-
-lv_obj_set_style_bg_color(ui_comp_get_child(ui_Compass_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL), lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_comp_get_child(ui_Compass_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL), 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_img_set_src(ui_comp_get_child(ui_Compass_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), &ui_img_compass_png);
 lv_img_set_angle(ui_comp_get_child(ui_Compass_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),300);
@@ -58,7 +55,7 @@ lv_obj_set_y( ui_Settings_App_Button, 0 );
 lv_label_set_text(ui_comp_get_child(ui_Settings_App_Button, UI_COMP_APP_BUTTON_APP_LABEL),"Settings");
 
 lv_img_set_src(ui_comp_get_child(ui_Settings_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), &ui_img_settings_gear_png);
-lv_img_set_zoom(ui_comp_get_child(ui_Settings_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),120);
+lv_img_set_zoom(ui_comp_get_child(ui_Settings_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),90);
 
 ui_Apps_Label_Underline = lv_obj_create(ui_Apps);
 lv_obj_set_width( ui_Apps_Label_Underline, 100);

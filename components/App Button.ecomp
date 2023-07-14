@@ -6233,12 +6233,11 @@
                 },
                 {
                   "nid": -2000269104,
-                  "flags": 2097152,
                   "strtype": "_style/Bg_Color",
                   "intarray": [
                     255,
-                    255,
-                    255,
+                    107,
+                    0,
                     255
                   ],
                   "InheritedType": 7

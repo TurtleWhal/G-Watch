@@ -31550,6 +31550,44 @@
             }
           ],
           "InheritedType": 10
+        },
+        {
+          "nid": -1618335780,
+          "strtype": "_custom/action",
+          "strval": "CALL FUNCTION",
+          "childs": [
+            {
+              "nid": 652620103,
+              "strtype": "CALL FUNCTION/Name",
+              "strval": "CALL FUNCTION",
+              "InheritedType": 10
+            },
+            {
+              "nid": 1757016976,
+              "strtype": "CALL FUNCTION/Call",
+              "strval": "<{Function_name}>( event_struct )",
+              "InheritedType": 10
+            },
+            {
+              "nid": -850941407,
+              "strtype": "CALL FUNCTION/CallC",
+              "strval": "<{Function_name}>( e );",
+              "InheritedType": 10
+            },
+            {
+              "nid": 1802597726,
+              "strtype": "CALL FUNCTION/Function_name",
+              "strval": "deletenotification",
+              "InheritedType": 10
+            },
+            {
+              "nid": -1199270249,
+              "strtype": "CALL FUNCTION/Dont_export_function",
+              "strval": "True",
+              "InheritedType": 2
+            }
+          ],
+          "InheritedType": 10
         }
       ],
       "InheritedType": 4

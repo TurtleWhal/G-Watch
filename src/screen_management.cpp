@@ -33,23 +33,22 @@ void notificationscreenback(lv_event_t *e)
 
 void totimersscreen(lv_event_t *e)
 {
-    switch(LastTimeScreen)
+    switch (LastTimeScreen)
     {
-        case 1:
+    case 1:
         ui_Timers_screen_init();
         lv_scr_load_anim(ui_Timers, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 0);
         break;
-        case 2:
+    case 2:
         ui_Stopwatch_screen_init();
         lv_scr_load_anim(ui_Stopwatch, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 0);
         break;
-        case 3:
+    case 3:
         ui_Alarms_screen_init();
         lv_scr_load_anim(ui_Alarms, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 0);
         break;
     }
     ApplyTheme();
-
 }
 
 void timersscreenback(lv_event_t *e)
@@ -83,9 +82,15 @@ void tosettingsscreen(lv_event_t *e)
     UpdateTestTheme(nullptr);
 
     if (lv_scr_act() != ui_Clock)
+    {
         lv_scr_load_anim(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
+        // Serial.println("Not Clock");
+    }
     else
+    {
         lv_scr_load_anim(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 0);
+        // Serial.println("Clock");
+    }
 }
 
 void tocompassscreen(lv_event_t *e)

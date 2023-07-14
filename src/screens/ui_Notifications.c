@@ -66,6 +66,7 @@ lv_obj_set_style_text_font(ui_No_New_Notifications_Label, &ui_font_Music_14, LV_
 ui_Notification_Widget2 = ui_Notification_Widget_create(ui_Notification_Panel);
 lv_obj_set_x( ui_Notification_Widget2, 0 );
 lv_obj_set_y( ui_Notification_Widget2, -43 );
+lv_obj_add_flag( ui_Notification_Widget2, LV_OBJ_FLAG_HIDDEN );   /// Flags
 
 ui_Notifications_Gesture_Panel = lv_obj_create(ui_Notifications);
 lv_obj_set_width( ui_Notifications_Gesture_Panel, 267);

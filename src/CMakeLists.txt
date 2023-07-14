@@ -33,7 +33,7 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_arrow_png.c
     images/ui_img_power_icon_png.c
     images/ui_img_play_button_png.c
-    images/ui_img_calculator_icon_png.c
+    images/ui_img_calculator_icon_nobackground_png.c
     images/ui_img_compass_png.c
     images/ui_img_settings_gear_png.c
     images/ui_img_4809254_png.c

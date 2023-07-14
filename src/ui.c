@@ -142,6 +142,7 @@ lv_obj_t *ui_Image2;
 void ui_Alarm_Going_Off_screen_init(void);
 lv_obj_t *ui_Alarm_Going_Off;
 lv_obj_t *ui_Alarm_Going_Off_Spinner;
+lv_obj_t *ui_Panel1;
 lv_obj_t *ui_Alarm_Going_Off_Bell;
 lv_obj_t *ui_Alarm_Going_Off_Name;
 lv_obj_t *ui_Alarm_Going_Off_Name_Underline;

@@ -37,6 +37,8 @@ lv_obj_set_y( cui_App_Image_Panel, 0 );
 lv_obj_set_align( cui_App_Image_Panel, LV_ALIGN_LEFT_MID );
 lv_obj_clear_flag( cui_App_Image_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(cui_App_Image_Panel, 20, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(cui_App_Image_Panel, lv_color_hex(0xFF6D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(cui_App_Image_Panel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_clip_corner(cui_App_Image_Panel, true, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_t *cui_App_Image;

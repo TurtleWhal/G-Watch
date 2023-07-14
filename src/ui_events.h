@@ -16,6 +16,7 @@ void totimersscreen(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
 void generictoclock(lv_event_t * e);
+void deletenotification(lv_event_t * e);
 void alarmsmovedown(lv_event_t * e);
 void alarmsmoveup(lv_event_t * e);
 void tosetalarm(lv_event_t * e);

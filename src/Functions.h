@@ -17,6 +17,7 @@ void Timer0Handle();
 void pushnotification(int);
 void DrawPower();
 void ApplyTheme();
+void popnotification(int);
 
 #ifdef __cplusplus
 } /*extern "C"*/
