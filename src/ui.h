@@ -61,7 +61,6 @@ extern lv_obj_t *ui_Step_Counter_Text;
 extern lv_obj_t *ui_Minute_Hand;
 extern lv_obj_t *ui_Hour_Hand;
 extern lv_obj_t *ui_Second_Hand;
-extern lv_obj_t *ui_Second_Dot;
 extern lv_obj_t *ui_Center_dot;
 extern lv_obj_t *ui_Date;
 extern lv_obj_t *ui_Battery_Percentage;
@@ -233,7 +232,7 @@ extern lv_obj_t *ui_Settings;
 extern lv_obj_t *ui_Settings_Panel;
 void ui_event_Brightness_Slider( lv_event_t * e);
 extern lv_obj_t *ui_Brightness_Slider;
-extern lv_obj_t *ui_Panel12;
+extern lv_obj_t *ui_Settings_Buttons_Spacer_Panel;
 void ui_event_Bluetooth_Button( lv_event_t * e);
 extern lv_obj_t *ui_Bluetooth_Button;
 extern lv_obj_t *ui_Power_Button_Image;
@@ -304,7 +303,6 @@ LV_IMG_DECLARE( ui_img_step_png);   // assets/step.png
 LV_IMG_DECLARE( ui_img_minutehandstub_png);   // assets/MinuteHandStub.png
 LV_IMG_DECLARE( ui_img_hourhandstub_png);   // assets/HourHandStub.png
 LV_IMG_DECLARE( ui_img_secondhandstub_png);   // assets/SecondHandStub.png
-LV_IMG_DECLARE( ui_img_seconddot_png);   // assets/SecondDot.png
 LV_IMG_DECLARE( ui_img_no_bluetooth_small_png);   // assets/No Bluetooth_Small.png
 LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
 LV_IMG_DECLARE( ui_img_seconddashstub_png);   // assets/SecondDashStub.png

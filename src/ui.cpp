@@ -59,7 +59,7 @@ void my_print(const char *buf)
 /* Display flushing */
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
-  TFT_eSPI * tft = twatch->tft_get_instance();
+  TFT_eSPI *tft = twatch->tft_get_instance();
   uint32_t w = (area->x2 - area->x1 + 1);
   uint32_t h = (area->y2 - area->y1 + 1);
 
@@ -74,7 +74,8 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
 /*Read the touchpad*/
 void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 {
-if (touch.available()) {
+  if (touch.available())
+  {
     data->state = LV_INDEV_STATE_PR;
     /*Set the coordinates*/
     data->point.x = touch.data.x;
@@ -151,12 +152,10 @@ void setup()
 
   Storage.begin("Settings", false);
 
-
   Serial.begin(115200); /* prepare for possible serial debug */
-  //Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
+  // Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
 
   BT_on();
-  
 
   if (Storage.isKey("NotifLength"))
     NotificationLength = Storage.getInt("NotifLength");
@@ -189,11 +188,11 @@ void setup()
   lv_log_register_print_cb(my_print); /* register print function for debugging */
 #endif
 
-  //tft.begin();        /* TFT init */
-  //tft.setRotation(0); /* Landscape orientation, flipped */
+  // tft.begin();        /* TFT init */
+  // tft.setRotation(0); /* Landscape orientation, flipped */
 
   touch.begin();
-  //touch.sleep();
+  // touch.sleep();
 
   lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * screenHeight / 10);
 
@@ -224,8 +223,15 @@ void setup()
   // lv_disp_set_theme(dispp, theme);
 
   ui_Clock_screen_init();
+
+  lv_obj_del(ui_Tick_Dots); // Only used For visual purposes in Squareline Studio
+  lv_obj_del(ui_Tick_Dashes);
+
+  lv_obj_del(ui_Second_Dash_Include); // Only used to include files
+  lv_obj_del(ui_Second_Dot_Include);
+
   InitTicks();
-  
+
   ui____initial_actions0 = lv_obj_create(NULL);
   lv_disp_load_scr(ui_Clock);
 
@@ -258,18 +264,18 @@ void setup()
 
 String input = "";
 
-//char terminatingChar = '\n';
-//int timestart;
+// char terminatingChar = '\n';
+// int timestart;
 
 bool Timer0Triggered;
 
 void loop()
 {
-  //Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
+  // Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
   if (!isSleeping())
   {
-    //lv_timer_handler(); /* let the GUI do its work */
-    //delay(5);
+    // lv_timer_handler(); /* let the GUI do its work */
+    // delay(5);
     delay(lv_timer_handler());
 
     if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
@@ -284,7 +290,7 @@ void loop()
   else
   {
     if (touch.available()) // Normally handled by lv_timer_handler
-      Wakeup("Screen Touched"); 
+      Wakeup("Screen Touched");
     delay(100);
   }
   // alarmhandle();
@@ -386,19 +392,19 @@ void StepHandle()
     LastSteps = GetStep;
     Steps = GetStep + StepOffset;
     sprintf(StepChar, "%i", Steps);
-    #ifdef UPDATE_ELEMENTS
+#ifdef UPDATE_ELEMENTS
     lv_label_set_text(ui_Step_Counter_Text, StepChar);
     lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
-    #endif
+#endif
 
     if (Steps >= StepGoal and !Storage.getBool("StepReach"))
     {
-      #ifdef UPDATE_ELEMENTS
+#ifdef UPDATE_ELEMENTS
       lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
       char StepGoalText[50];
       sprintf(StepGoalText, "You have reached your step goal of %i Steps!", StepGoal);
       lv_label_set_text(ui_Notification_Text, StepGoalText);
-      #endif
+#endif
       shownotification(0);
       Storage.putBool("StepReach", 1);
     }

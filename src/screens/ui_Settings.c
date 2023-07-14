@@ -49,19 +49,19 @@ lv_obj_set_style_pad_right(ui_Brightness_Slider, 0, LV_PART_KNOB| LV_STATE_DEFAU
 lv_obj_set_style_pad_top(ui_Brightness_Slider, 10, LV_PART_KNOB| LV_STATE_DEFAULT);
 lv_obj_set_style_pad_bottom(ui_Brightness_Slider, 10, LV_PART_KNOB| LV_STATE_DEFAULT);
 
-ui_Panel12 = lv_obj_create(ui_Settings_Panel);
-lv_obj_set_width( ui_Panel12, 200);
-lv_obj_set_height( ui_Panel12, 35);
-lv_obj_set_x( ui_Panel12, -5 );
-lv_obj_set_y( ui_Panel12, -10 );
-lv_obj_set_align( ui_Panel12, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Panel12, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_bg_color(ui_Panel12, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Panel12, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_Panel12, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_border_opa(ui_Panel12, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Settings_Buttons_Spacer_Panel = lv_obj_create(ui_Settings_Panel);
+lv_obj_set_width( ui_Settings_Buttons_Spacer_Panel, 200);
+lv_obj_set_height( ui_Settings_Buttons_Spacer_Panel, 35);
+lv_obj_set_x( ui_Settings_Buttons_Spacer_Panel, -5 );
+lv_obj_set_y( ui_Settings_Buttons_Spacer_Panel, -10 );
+lv_obj_set_align( ui_Settings_Buttons_Spacer_Panel, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Settings_Buttons_Spacer_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_bg_color(ui_Settings_Buttons_Spacer_Panel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Settings_Buttons_Spacer_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_Settings_Buttons_Spacer_Panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Settings_Buttons_Spacer_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Bluetooth_Button = lv_btn_create(ui_Panel12);
+ui_Bluetooth_Button = lv_btn_create(ui_Settings_Buttons_Spacer_Panel);
 lv_obj_set_width( ui_Bluetooth_Button, 98);
 lv_obj_set_height( ui_Bluetooth_Button, 35);
 lv_obj_set_x( ui_Bluetooth_Button, -51 );
@@ -80,7 +80,7 @@ lv_obj_add_flag( ui_Power_Button_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
 lv_obj_clear_flag( ui_Power_Button_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_img_set_zoom(ui_Power_Button_Image,280);
 
-ui_Do_Not_Disturb_Button = lv_btn_create(ui_Panel12);
+ui_Do_Not_Disturb_Button = lv_btn_create(ui_Settings_Buttons_Spacer_Panel);
 lv_obj_set_width( ui_Do_Not_Disturb_Button, 98);
 lv_obj_set_height( ui_Do_Not_Disturb_Button, 35);
 lv_obj_set_x( ui_Do_Not_Disturb_Button, 51 );

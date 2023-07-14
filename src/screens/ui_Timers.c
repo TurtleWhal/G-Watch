@@ -92,18 +92,18 @@ lv_obj_set_style_text_opa(ui_Timer_Hour_Minus_1, 255, LV_PART_MAIN| LV_STATE_DEF
 lv_obj_set_style_text_align(ui_Timer_Hour_Minus_1, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Timer_Hour_Minus_1, &lv_font_montserrat_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Timer_Minute_Minute_10 = lv_label_create(ui_Timers);
-lv_obj_set_width( ui_Timer_Minute_Minute_10, 25);
-lv_obj_set_height( ui_Timer_Minute_Minute_10, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Timer_Minute_Minute_10, -16 );
-lv_obj_set_y( ui_Timer_Minute_Minute_10, 30 );
-lv_obj_set_align( ui_Timer_Minute_Minute_10, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Timer_Minute_Minute_10,"-");
-lv_obj_add_flag( ui_Timer_Minute_Minute_10, LV_OBJ_FLAG_CLICKABLE );   /// Flags
-lv_obj_set_style_text_color(ui_Timer_Minute_Minute_10, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_Timer_Minute_Minute_10, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_align(ui_Timer_Minute_Minute_10, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Timer_Minute_Minute_10, &lv_font_montserrat_48, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Timer_Minute_Minus_10 = lv_label_create(ui_Timers);
+lv_obj_set_width( ui_Timer_Minute_Minus_10, 25);
+lv_obj_set_height( ui_Timer_Minute_Minus_10, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Timer_Minute_Minus_10, -16 );
+lv_obj_set_y( ui_Timer_Minute_Minus_10, 30 );
+lv_obj_set_align( ui_Timer_Minute_Minus_10, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Timer_Minute_Minus_10,"-");
+lv_obj_add_flag( ui_Timer_Minute_Minus_10, LV_OBJ_FLAG_CLICKABLE );   /// Flags
+lv_obj_set_style_text_color(ui_Timer_Minute_Minus_10, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Timer_Minute_Minus_10, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_align(ui_Timer_Minute_Minus_10, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Timer_Minute_Minus_10, &lv_font_montserrat_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Timer_Minute_Minus_1 = lv_label_create(ui_Timers);
 lv_obj_set_width( ui_Timer_Minute_Minus_1, 25);
@@ -262,7 +262,7 @@ lv_obj_set_style_text_font(ui_Timer_Colin_Right, &lv_font_montserrat_46, LV_PART
 lv_obj_add_event_cb(ui_Timer_Play_Pause_Button, ui_event_Timer_Play_Pause_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Timer_Hour_Minus_10, ui_event_Timer_Hour_Minus_10, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Timer_Hour_Minus_1, ui_event_Timer_Hour_Minus_1, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Timer_Minute_Minute_10, ui_event_Timer_Minute_Minute_10, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Timer_Minute_Minus_10, ui_event_Timer_Minute_Minus_10, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Timer_Minute_Minus_1, ui_event_Timer_Minute_Minus_1, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Timer_Second_Minus_10, ui_event_Timer_Second_Minus_10, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Timer_Second_Minus_1, ui_event_Timer_Second_Minus_1, LV_EVENT_ALL, NULL);

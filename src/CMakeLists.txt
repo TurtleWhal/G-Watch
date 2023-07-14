@@ -22,7 +22,6 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_minutehandstub_png.c
     images/ui_img_hourhandstub_png.c
     images/ui_img_secondhandstub_png.c
-    images/ui_img_seconddot_png.c
     images/ui_img_no_bluetooth_small_png.c
     images/ui_img_bellnobackground_png.c
     images/ui_img_seconddashstub_png.c
