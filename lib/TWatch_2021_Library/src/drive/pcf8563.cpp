@@ -13,6 +13,7 @@ void TWatchClass::rtc_init() {
   }
   if (_isinited_pcf8563) {
     Rtc->syncToSystem();
+    Rtc->check(); // Fixes bad RTC time
   }
 
 #if (USE_RTC_ALARM == 1)
