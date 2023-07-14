@@ -51,7 +51,6 @@ void BThandle()
   static bool waitingforping = 1;
   static int songtime;
 
-
   if (readStringUntil(input, 240))
   { // read until find newline or have read 20 chars
     if (input.lastIndexOf(254) >= 0)
@@ -59,20 +58,20 @@ void BThandle()
       // Serial.print(F(" got a line of input '")); Serial.print(input); Serial.println("'");
       if (input.charAt(0) == 1)
       {
-        Log.verboseln("Getting Time From Phone: %ih %im %is %imonth %iday %iyear",(int)(input.charAt(1)),(int)(input.charAt(2)),(int)(input.charAt(3)),(int)(input.charAt(4)),(int)(input.charAt(5),(int)(input.charAt(6)+2000)));
-       /* Serial.print("Getting Time From Phone: ");
-        Serial.print((int)(input.charAt(1)));
-        Serial.print("h ");
-        Serial.print((int)(input.charAt(2)));
-        Serial.print("m ");
-        Serial.print((int)(input.charAt(3)));
-        Serial.print("s ");
-        Serial.print((int)(input.charAt(4)));
-        Serial.print("month ");
-        Serial.print((int)(input.charAt(5)));
-        Serial.print("day ");
-        Serial.print((int)((input.charAt(6) + 2000)));
-        Serial.println("year");*/
+        Log.verboseln("Getting Time From Phone: %ih %im %is %imonth %iday %iyear", (int)(input.charAt(1)), (int)(input.charAt(2)), (int)(input.charAt(3)), (int)(input.charAt(4)), (int)(input.charAt(5), (int)(input.charAt(6) + 2000)));
+        /* Serial.print("Getting Time From Phone: ");
+         Serial.print((int)(input.charAt(1)));
+         Serial.print("h ");
+         Serial.print((int)(input.charAt(2)));
+         Serial.print("m ");
+         Serial.print((int)(input.charAt(3)));
+         Serial.print("s ");
+         Serial.print((int)(input.charAt(4)));
+         Serial.print("month ");
+         Serial.print((int)(input.charAt(5)));
+         Serial.print("day ");
+         Serial.print((int)((input.charAt(6) + 2000)));
+         Serial.println("year");*/
         // rtc.adjust(input.charAt(1), input.charAt(2), input.charAt(3), input.charAt(6) + 2000, input.charAt(4), input.charAt(5));
         twatch->rtc_set_time(input.charAt(6) + 2000, input.charAt(4), input.charAt(5), input.charAt(1), input.charAt(2), input.charAt(3));
       }
@@ -114,7 +113,9 @@ void BThandle()
         char song[64];
         // sprintf(song, "♪ %s ♪", input.c_str());
         sprintf(song, "%s   •", input.c_str());
+#ifdef UPDATE_ELEMENTS
         lv_label_set_text(ui_Now_Playing_Label, song);
+#endif
         songtime = millis();
       }
 
@@ -141,17 +142,17 @@ void BThandle()
   if (songtime < (millis() - 70000))
   {
     songtime = millis();
+#ifdef UPDATE_ELEMENTS
     lv_label_set_text(ui_Now_Playing_Label, "");
+#endif
   }
 
-  if (SerialBT.connected())
-  {
+#ifdef UPDATE_ELEMENTS
+  if (SerialBT.connected() && lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
-  }
-  else
-  {
+  else if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png )
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
-  }
+#endif
 }
 
 void ToggleBT(lv_event_t *e)
@@ -164,17 +165,17 @@ void ToggleBT(lv_event_t *e)
 
 void BT_on()
 {
-    BTon=1;
-if (Storage.isKey("BTname"))
+  BTon = 1;
+  if (Storage.isKey("BTname"))
   {
     char BTnamechar[17];
     Storage.getBytes("BTname", BTnamechar, 17);
     SerialBT.begin((String)BTnamechar);
     Log.verboseln("BT Name: ");
-    //Serial.print("BT Name: ");
-    //Serial.println(BTnamechar);
+    // Serial.print("BT Name: ");
+    // Serial.println(BTnamechar);
   }
-else
+  else
     SerialBT.begin("Unnamed Watch"); /*
      char BTnamechar[17];
      Storage.getBytes("BTname", BTnamechar, 17);
@@ -184,6 +185,6 @@ else
 
 void BT_off()
 {
-    BTon=0;
-    SerialBT.disconnect();
+  BTon = 0;
+  SerialBT.disconnect();
 }

@@ -8,7 +8,7 @@
 
 extern TWatchClass *twatch;
 
-//#define SleepWhenPluggedIn
+// #define SleepWhenPluggedIn
 #define Sleeptimeout 10000 // time until watch goes to sleep in mS
 int sleeptimer;
 bool Sleeping;
@@ -21,12 +21,12 @@ int Brightness = 100;
 
 void Sleephandle()
 {
-  #ifdef SleepWhenPluggedIn
-    if (1)
-  #else
-    if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 4000) //TWATCH_CHARGING is inverted logic
-  #endif
-  {  
+#ifdef SleepWhenPluggedIn
+  if (1)
+#else
+  if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 4000) // TWATCH_CHARGING is inverted logic
+#endif
+  {
     /*
     twatch->bma423_feature_int(BMA423_WRIST_WEAR, 1);
     if (BMA423_WRIST_WEAR)
@@ -55,7 +55,7 @@ void Wakeup(String Wakeup_reason)
     // setCpuFrequencyMhz(240);
     //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
     generictoclock(nullptr);
-    //lv_timer_handler();
+    // lv_timer_handler();
     WriteTime();
     Log.verboseln("IM AWAKE!");
     // dad hid this comment here because I'm like that.
@@ -64,7 +64,7 @@ void Wakeup(String Wakeup_reason)
     sleeptimer = millis();
     Sleeping = 0;
     twatch->backlight_set_value(prevbrightness);
-    //twatch->backlight_gradual_light(prevbrightness, 1000);
+    // twatch->backlight_gradual_light(prevbrightness, 1000);
     Log.verboseln("Wakeup Reason: %s", Wakeup_reason);
   }
   else
@@ -126,14 +126,18 @@ void DrawPower()
 {
   char percentchar[] = "179&";
   sprintf(percentchar, "%.0f%%", (twatch->power_get_percent()));
+#ifdef UPDATE_ELEMENTS
   lv_label_set_text(ui_Battery_Percentage, percentchar);
   lv_arc_set_value(ui_Arc_Battery, (twatch->power_get_percent() / 100) * 250);
+#endif
   lastpercent = twatch->power_get_percent();
 
+#ifdef UPDATE_ELEMENTS
   if (charging)
     lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   else
     lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+#endif
 }
 
 void PowerOff(lv_event_t *e)
@@ -157,6 +161,6 @@ void UpdateBrightness(lv_event_t *e)
     lv_slider_set_value(ui_Brightness_Slider, 1, LV_ANIM_OFF);
   Brightness = lv_slider_get_value(ui_Brightness_Slider);
   twatch->backlight_set_value(Brightness);
-  Log.verboseln("Brightness: %i",Brightness);
+  Log.verboseln("Brightness: %i", Brightness);
   // Serial.println(twatch->backlight_get_value);
 }

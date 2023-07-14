@@ -65,7 +65,7 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
 
   tft->startWrite();
   tft->setAddrWindow(area->x1, area->y1, w, h);
-  tft->pushColors((uint16_t *)&color_p->full, w * h, false);
+  tft->pushColors((uint16_t *)&color_p->full, w * h, true);
   tft->endWrite();
 
   lv_disp_flush_ready(disp);
@@ -150,7 +150,7 @@ void setup()
 
 
   Serial.begin(115200); /* prepare for possible serial debug */
-  Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
+  //Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
 
   BT_on();
   
@@ -221,7 +221,8 @@ void setup()
   // lv_disp_set_theme(dispp, theme);
 
   ui_Clock_screen_init();
-
+  InitTicks();
+  
   ui____initial_actions0 = lv_obj_create(NULL);
   lv_disp_load_scr(ui_Clock);
 
@@ -234,7 +235,9 @@ void setup()
   twatch->qmc5883l_init();
   twatch->rtc_init();
 
+#ifdef UPDATE_ELEMENTS
   lv_label_set_text(ui_Now_Playing_Label, "");
+#endif
 
   InitPercent();
 
@@ -263,6 +266,7 @@ void loop()
   if (!isSleeping())
   {
     //lv_timer_handler(); /* let the GUI do its work */
+    //delay(5);
     delay(lv_timer_handler());
 
     if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
@@ -380,15 +384,19 @@ void StepHandle()
     LastSteps = GetStep;
     Steps = GetStep + StepOffset;
     sprintf(StepChar, "%i", Steps);
+    #ifdef UPDATE_ELEMENTS
     lv_label_set_text(ui_Step_Counter_Text, StepChar);
     lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
+    #endif
 
     if (Steps >= StepGoal and !Storage.getBool("StepReach"))
     {
+      #ifdef UPDATE_ELEMENTS
       lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
       char StepGoalText[50];
       sprintf(StepGoalText, "You have reached your step goal of %i Steps!", StepGoal);
       lv_label_set_text(ui_Notification_Text, StepGoalText);
+      #endif
       shownotification(0);
       Storage.putBool("StepReach", 1);
     }
