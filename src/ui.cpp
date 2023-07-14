@@ -150,21 +150,12 @@ void setup()
 {
   setCpuFrequencyMhz(240);
 
-  Storage.begin("Settings", false);
-
   Serial.begin(115200); /* prepare for possible serial debug */
   // Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
 
-  BT_on();
-
-  if (Storage.isKey("NotifLength"))
-    NotificationLength = Storage.getInt("NotifLength");
-  if (Storage.isKey("StepGoal"))
-    StepGoal = Storage.getInt("StepGoal");
-
-  // lv_obj_del(ui_Notification_Widget2);
-
   twatch = TWatchClass::getWatch();
+  twatch->hal_init();
+  pinMode(TWATCH_CHARGING, INPUT_PULLUP);
 
   twatch->hal_auto_update(true, 1);
 
@@ -175,9 +166,7 @@ void setup()
   twatch->button_bind_event(TWATCH_BTN_2, BUTTON_LONG_PRESS_START, btn2_held);
   twatch->button_bind_event(TWATCH_BTN_3, BUTTON_LONG_PRESS_START, btn3_held);
 
-  twatch->power_init();
-
-  pinMode(TWATCH_CHARGING, INPUT_PULLUP);
+  touch.begin();
 
   Log.verboseln("Hello Arduino! V%i.%i.%i", lv_version_major(), lv_version_minor(), lv_version_patch());
   Log.verboseln("I am LVGL_Arduino");
@@ -187,12 +176,6 @@ void setup()
 #if LV_USE_LOG != 0
   lv_log_register_print_cb(my_print); /* register print function for debugging */
 #endif
-
-  // tft.begin();        /* TFT init */
-  // tft.setRotation(0); /* Landscape orientation, flipped */
-
-  touch.begin();
-  // touch.sleep();
 
   lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * screenHeight / 10);
 
@@ -214,13 +197,7 @@ void setup()
   lv_indev_drv_register(&indev_drv);
 
   //////////Initalize UI//////////
-  // ui_init();
-
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
-
-  // lv_palette_t *myorange = lv_palette_darken(LV_PALETTE_AMBER, 4);
-
-  // lv_disp_set_theme(dispp, theme);
 
   ui_Clock_screen_init();
 
@@ -238,19 +215,23 @@ void setup()
   ApplyTheme();
   ////////////////////////////////
 
-  twatch->backlight_init();
   twatch->backlight_set_value(100);
-
-  twatch->qmc5883l_init();
-  twatch->rtc_init();
+  //twatch->backlight_gradual_light(255,1000);
+  lv_timer_handler();
 
 #ifdef UPDATE_ELEMENTS
   lv_label_set_text(ui_Now_Playing_Label, "");
 #endif
 
-  InitPercent();
+  InitPercent(); // Battery Percent
 
-  // lv_theme_default_init(lv_disp_get_default(), lv_palette_main(LV_PALETTE_ORANGE), lv_palette_main(LV_PALETTE_BLUE), true, LV_FONT_DEFAULT);
+  Storage.begin("Settings", false);
+  if (Storage.isKey("NotifLength"))
+    NotificationLength = Storage.getInt("NotifLength");
+  if (Storage.isKey("StepGoal"))
+    StepGoal = Storage.getInt("StepGoal");
+
+  BT_on();
 
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
@@ -263,10 +244,6 @@ void setup()
 }
 
 String input = "";
-
-// char terminatingChar = '\n';
-// int timestart;
-
 bool Timer0Triggered;
 
 void loop()
