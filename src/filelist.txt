@@ -19,10 +19,11 @@ ui_helpers.c
 images/ui_img_tick_dashes_png.c
 images/ui_img_tick_dots_png.c
 images/ui_img_step_png.c
-images/ui_img_minutehand_png.c
-images/ui_img_hourhand_png.c
-images/ui_img_secondhand_png.c
-images/ui_img_seconddot_png.c
+images/ui_img_minutehandstub_png.c
+images/ui_img_hourhandstub_png.c
+images/ui_img_secondhandstub_png.c
+images/ui_img_seconddashstub_png.c
+images/ui_img_seconddotstub_png.c
 images/ui_img_no_bluetooth_small_png.c
 images/ui_img_bellnobackground_png.c
 images/ui_img_bell_png.c
