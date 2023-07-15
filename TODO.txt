@@ -2,3 +2,7 @@ add OTA uploading
 
 BLE
 
+Make notifications show on all screens
+
+Flashlight!? 
+

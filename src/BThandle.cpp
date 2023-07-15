@@ -86,7 +86,7 @@ void BThandle()
       }
       if (input.charAt(0) == 3)
       {
-        Serial.print("Notification Text: ");
+        Log.verbose("Notification Text: ");
         input.remove(0, 1);
         input.remove(input.length() - 1, 1);
         Serial.println(input);
@@ -95,7 +95,7 @@ void BThandle()
       }
       if (input.charAt(0) == 4)
       {
-        Serial.print("Notification Source: ");
+        Log.verbose("Notification Source: ");
         input.remove(0, 1);
         input.remove(input.length() - 1, 1);
         Serial.println(input);
@@ -106,7 +106,7 @@ void BThandle()
       }
       if (input.charAt(0) == 5)
       {
-        Serial.print("Now Playing: ");
+        Log.verbose("Now Playing: ");
         input.remove(0, 1);
         input.remove(input.length() - 1, 1);
         Serial.println(input);

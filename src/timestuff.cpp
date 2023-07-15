@@ -92,9 +92,12 @@ void InitTicks()
         lv_img_set_pivot(tick_index[i], 2, 95);
         lv_img_set_angle(tick_index[i], i * 60);
         lv_obj_set_style_img_recolor_opa(tick_index[i], 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_move_background(tick_index[i]);
     }
     lv_obj_set_style_img_recolor(tick_index[60], lv_color_hex(0xFFD600), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor(tick_index[61], lv_color_hex(0xFFD600), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_swap(tick_index[0], tick_index[60]);
+    lv_obj_swap(tick_index[1],tick_index[61]);
 }
 
 void ColorTicks(int i)

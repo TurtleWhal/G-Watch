@@ -212,25 +212,24 @@ void setup()
   ui____initial_actions0 = lv_obj_create(NULL);
   lv_disp_load_scr(ui_Clock);
 
-  ApplyTheme();
-  ////////////////////////////////
-
   twatch->backlight_set_value(100);
   // twatch->backlight_gradual_light(255,1000);
-  lv_timer_handler();
 
 #ifdef UPDATE_ELEMENTS
   lv_label_set_text(ui_Now_Playing_Label, "");
 #endif
 
   InitPercent(); // Battery Percent
-  Storage.begin("Settings");
 
+  Storage.begin("Settings");
   if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
     Storage.putUInt("NotifLength", defaultnotificationlength);
 
   if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
     Storage.putUInt("StepGoal", defaultStepgoal);
+  
+  ApplyTheme();
+  lv_timer_handler();
 
   BT_on();
 
