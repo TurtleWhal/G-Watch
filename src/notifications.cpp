@@ -61,6 +61,8 @@ void deletenotification(lv_event_t *e)
   auto index = lv_obj_get_user_data(lv_event_get_target(e));
   popnotification((int)index + 1);
   lv_obj_del_delayed(NotificationComp[(int)index], 350);
+    if(!NotificationCount)
+    lv_obj_clear_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_HIDDEN);
 }
 
 void notificationdismiss(lv_event_t *e)
