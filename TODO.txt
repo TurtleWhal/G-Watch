@@ -10,3 +10,5 @@ Change to LVGL task Handler vs timers? Is this right when sleeping?
 Change to TWATCH LVGL
 Change to Arduino logging
 Get rid of char, move to strings
+
+Crashes when awake and non 100 brightness 
