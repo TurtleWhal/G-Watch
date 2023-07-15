@@ -44,7 +44,7 @@ Preferences Storage;
 ////////////////////Settings////////////////////
 #define defaultnotificationlength 10
 #define defaultStepgoal 10000
-int VibrationStrength = 30;     // Strength of button vibrations
+int VibrationStrength = 30; // Strength of button vibrations
 ////////////////////////////////////////////////
 
 #if LV_USE_LOG != 0
@@ -153,16 +153,6 @@ void setup()
   Serial.begin(115200); /* prepare for possible serial debug */
   // Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
 
-  BT_on();
-
-  if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
-    Storage.putUInt("NotifLength", defaultnotificationlength);
-
-  if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
-    Storage.putUInt("StepGoal", defaultStepgoal);
-
-  // lv_obj_del(ui_Notification_Widget2);
-
   twatch = TWatchClass::getWatch();
   twatch->hal_init();
   pinMode(TWATCH_CHARGING, INPUT_PULLUP);
@@ -226,7 +216,7 @@ void setup()
   ////////////////////////////////
 
   twatch->backlight_set_value(100);
-  //twatch->backlight_gradual_light(255,1000);
+  // twatch->backlight_gradual_light(255,1000);
   lv_timer_handler();
 
 #ifdef UPDATE_ELEMENTS
@@ -234,12 +224,13 @@ void setup()
 #endif
 
   InitPercent(); // Battery Percent
+  Storage.begin("Settings");
 
-  Storage.begin("Settings", false);
-  if (Storage.isKey("NotifLength"))
-    NotificationLength = Storage.getInt("NotifLength");
-  if (Storage.isKey("StepGoal"))
-    StepGoal = Storage.getInt("StepGoal");
+  if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
+    Storage.putUInt("NotifLength", defaultnotificationlength);
+
+  if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
+    Storage.putUInt("StepGoal", defaultStepgoal);
 
   BT_on();
 
