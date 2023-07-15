@@ -11,4 +11,6 @@ Change to TWATCH LVGL
 Change to Arduino logging
 Get rid of char, move to strings
 
-Crashes when awake and non 100 brightness 
+Crashes when awake and non 100 brightness
+
+Crashes on wakeup from calculator 
