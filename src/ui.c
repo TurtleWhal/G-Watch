@@ -1000,73 +1000,73 @@ if ( event_code == LV_EVENT_CLICKED) {
 void ui_event_Timer_Hour_Minus_10( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timerhourminus10( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Hour_Minus_1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timerhourminus1( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Minute_Minus_10( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timerminuteminus10( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Minute_Minus_1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timerminuteminus1( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Second_Minus_10( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timersecondminus10( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Second_Minus_1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timersecondminus1( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Hour_Plus_10( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timerhourplus10( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Hour_Plus_1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timerhourplus1( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Minute_Plus_10( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timerminuteplus10( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Minute_Plus_1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timerminuteplus1( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Second_Plus_10( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timersecondplus10( e );
+      timeradjust( e );
 }
 }
 void ui_event_Timer_Second_Plus_1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      timersecondplus1( e );
+      timeradjust( e );
 }
 }
 void ui_event_Brightness_Slider( lv_event_t * e) {
