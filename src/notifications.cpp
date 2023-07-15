@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "lvgl.h"
-//#include "ArduinoLog.h"
+// #include "ArduinoLog.h"
 #include "ui.h"
 #include "ui_helpers.h"
 #include "TWatch_hal.h"
@@ -9,6 +9,8 @@
 #include "Preferences.h"
 
 Notification NotificationList[11];
+lv_obj_t *NotificationComp[10];
+
 int NotificationCount = 0;
 
 bool notificationshowing = 0;
@@ -17,7 +19,6 @@ int notificationtime;
 bool Donotdisturb;
 extern TWatchClass *twatch;
 extern Preferences Storage;
-
 
 void shownotification(bool Store)
 {
@@ -34,30 +35,32 @@ void shownotification(bool Store)
 
 void drawnotifications(lv_event_t *e)
 {
-  ui_Notifications_screen_init();
-  _ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
-  for (int i = 0; i < NotificationCount; i++)
+  if (lv_scr_act() != ui_Notifications)
   {
-    lv_obj_t *NotificationComp = ui_Notification_Widget_create(ui_Notification_Panel);
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[i].Title.c_str());
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[i].Text.c_str());
-    lv_label_set_text(ui_comp_get_child(NotificationComp, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[i].Source.c_str());
-    // lv_obj_set_user_data(NotificationComp, &NotificationList[i]);
-    lv_obj_set_user_data(NotificationComp, (void *)i);
+    ui_Notifications_screen_init();
+    _ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
   }
+  if (NotificationCount)
+  {
+    lv_obj_add_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_HIDDEN);
+    for (int i = 0; i < NotificationCount; i++)
+    {
+      NotificationComp[i] = ui_Notification_Widget_create(ui_Notification_Panel);
+      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[i].Title.c_str());
+      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[i].Text.c_str());
+      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[i].Source.c_str());
+      lv_obj_set_user_data(NotificationComp[i], (void *)i);
+    }
+  }
+  else
+    lv_obj_clear_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_HIDDEN);
 }
 
 void deletenotification(lv_event_t *e)
 {
-  // lv_obj_del(lv_event_get_target(e));
-  // lv_obj_set_style_bg_color(lv_event_get_target(e), lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-  // lv_obj_set_style_bg_opa(lv_event_get_target(e), 255, LV_PART_MAIN);
-  // lv_obj_set_style_bg_color(ui_Notification_Widget2, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-  // lv_obj_set_style_bg_opa(ui_Notification_Widget2, 255, LV_PART_MAIN);
-  // lv_obj_set_x(lv_event_get_target(e), 10);
   auto index = lv_obj_get_user_data(lv_event_get_target(e));
-  // index->Title = "Deleted";
-  NotificationList[(int)index].Title = "Deleted";
+  popnotification((int)index + 1);
+  lv_obj_del_delayed(NotificationComp[(int)index], 350);
 }
 
 void notificationdismiss(lv_event_t *e)
@@ -80,6 +83,19 @@ void pushnotification(int index)
   NotificationList[i] = NotificationList[10];
   if (NotificationCount < 10)
     NotificationCount++;
+}
+
+void popnotification(int index)
+{
+  if (!NotificationCount)
+    return;
+  int i;
+  for (i = index; i < NotificationCount; i++)
+  {
+    if (i != 10)
+      NotificationList[i - 1] = NotificationList[i];
+  }
+  NotificationCount--;
 }
 
 void drawnotificationarc()
@@ -114,5 +130,23 @@ void ToggleDoNotDisturb(lv_event_t *e)
 
 bool NotificationActive()
 {
-    return notificationshowing;
+  return notificationshowing;
+}
+
+void FakeNotes()
+{
+  for (int i = 1; i < 7; i++)
+  {
+    String temp;
+    temp = "Title: ";
+    temp += i;
+    NotificationList[10].Title = temp;
+    temp = "Text: ";
+    temp += i;
+    NotificationList[10].Text = temp;
+    temp = "Source: ";
+    temp += i;
+    NotificationList[10].Source = temp;
+    pushnotification(1);
+  }
 }

@@ -239,6 +239,9 @@ void setup()
   timerAlarmWrite(timer, 10000000, true);
   timerAlarmEnable(timer);
 
+//////////////////////////Fake Notifications///////////
+FakeNotes();
+
   twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
 }
