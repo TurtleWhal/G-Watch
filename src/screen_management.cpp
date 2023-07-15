@@ -64,7 +64,7 @@ void tosettingsscreen(lv_event_t *e)
     ApplyTheme();
 
     char StepGoalChar[6];
-    sprintf(StepGoalChar, "%i", Storage.getInt("StepGoal"));
+    sprintf(StepGoalChar, "%i", Storage.getUInt("StepGoal"));
     lv_textarea_set_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), StepGoalChar);
 
     char BTnamechar[17];
@@ -72,7 +72,7 @@ void tosettingsscreen(lv_event_t *e)
     lv_textarea_set_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), BTnamechar);
 
     char NotificationLengthChar[4];
-    sprintf(NotificationLengthChar, "%i", Storage.getInt("NotifLength"));
+    sprintf(NotificationLengthChar, "%i", Storage.getUInt("NotifLength"));
     lv_textarea_set_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), NotificationLengthChar);
 
     lv_slider_set_value(ui_Brightness_Slider, Brightness, LV_ANIM_OFF);

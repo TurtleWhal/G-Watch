@@ -18,7 +18,7 @@ extern "C" {
 #define UI_COMP_APP_BUTTON_APP_IMAGE_PANEL 2
 #define UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE 3
 #define _UI_COMP_APP_BUTTON_NUM 4
-lv_obj_t * ui_App_Button_create(lv_obj_t * comp_parent);
+lv_obj_t *ui_App_Button_create(lv_obj_t *comp_parent);
 
 #ifdef __cplusplus
 } /*extern "C"*/

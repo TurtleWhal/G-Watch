@@ -42,9 +42,9 @@ Preferences Storage;
 #endif
 
 ////////////////////Settings////////////////////
-int StepGoal = 6500;         // Step Goal
-int NotificationLength = 10; // Amount of time notifications are displayed in seconds
-int VibrationStrength = 30;  // Strength of button vibrations
+#define defaultnotificationlength 10
+#define defaultStepgoal 10000
+int VibrationStrength = 30;     // Strength of button vibrations
 ////////////////////////////////////////////////
 
 #if LV_USE_LOG != 0
@@ -152,6 +152,16 @@ void setup()
 
   Serial.begin(115200); /* prepare for possible serial debug */
   // Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
+
+  BT_on();
+
+  if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
+    Storage.putUInt("NotifLength", defaultnotificationlength);
+
+  if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
+    Storage.putUInt("StepGoal", defaultStepgoal);
+
+  // lv_obj_del(ui_Notification_Widget2);
 
   twatch = TWatchClass::getWatch();
   twatch->hal_init();
@@ -356,8 +366,8 @@ void StepHandle()
 
   if (StepOffset == -1)
   {
-    if (Storage.getInt("StepDay") == GetDay())
-      StepOffset = Storage.getInt("Steps");
+    if (Storage.getUInt("StepDay") == GetDay())
+      StepOffset = Storage.getUInt("Steps");
     else
       StepOffset = 0;
   }
@@ -371,51 +381,49 @@ void StepHandle()
     sprintf(StepChar, "%i", Steps);
 #ifdef UPDATE_ELEMENTS
     lv_label_set_text(ui_Step_Counter_Text, StepChar);
-    lv_arc_set_value(ui_Arc_Right, ((float)Steps / StepGoal) * 250);
+    lv_arc_set_value(ui_Arc_Right, ((float)Steps / Storage.getUInt("StepGoal")) * 250);
 #endif
 
-    if (Steps >= StepGoal and !Storage.getBool("StepReach"))
+    if (Steps >= Storage.getUInt("StepGoal") and !Storage.getBool("StepReach"))
     {
 #ifdef UPDATE_ELEMENTS
       lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
       char StepGoalText[50];
-      sprintf(StepGoalText, "You have reached your step goal of %i Steps!", StepGoal);
+      sprintf(StepGoalText, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
       lv_label_set_text(ui_Notification_Text, StepGoalText);
 #endif
       shownotification(0);
       Storage.putBool("StepReach", 1);
     }
 
-    Storage.putInt("Steps", Steps);
+    Storage.putUInt("Steps", Steps);
     StepDay = GetDay();
-    Storage.putInt("StepsDay", StepDay);
+    Storage.putUInt("StepsDay", StepDay);
   }
 
-  if (Storage.getInt("StepDay") != GetDay())
+  if (Storage.getUInt("StepDay") != GetDay())
   {
-    Storage.putInt("StepDay", GetDay());
+    Storage.putUInt("StepDay", GetDay());
     Storage.putBool("StepReach", 0);
     StepOffset = 0;
-    Storage.putInt("Steps", 0);
+    Storage.putUInt("Steps", 0);
     twatch->bma423_step_reset();
   }
 }
 
 void UpdateSettings(lv_event_t *e)
 {
-  StepGoal = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
-  if (StepGoal != Storage.getInt("StepGoal"))
+  if (Storage.getUInt("StepGoal") != Storage.getUInt("StepGoal"))
   {
-    Storage.putInt("StepGoal", StepGoal);
+    Storage.putUInt("StepGoal", Storage.getUInt("StepGoal"));
     Storage.putBool("StepReach", 0);
   }
 
-  NotificationLength = atoi(lv_textarea_get_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
-  Storage.putInt("NotifLength", NotificationLength);
+  Storage.putUInt("NotifLength", atoi(lv_textarea_get_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL))));
 
   Storage.putBytes("BTname", lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)), 17);
   // Serial.println(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
 
-  Storage.putInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);
+  Storage.putUInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);
   ApplyTheme();
 }

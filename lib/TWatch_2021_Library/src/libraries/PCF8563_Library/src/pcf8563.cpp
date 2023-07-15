@@ -407,6 +407,9 @@ void PCF8563_Class::syncToSystem()
     val.tv_sec = mktime(&t_tm);
     val.tv_usec = 0;
     settimeofday(&val, NULL);
+
+    if (dt.year < 2023 or dt.year > 2040 or dt.hour < 0 or dt.hour > 23)
+    setDateTime(2023, 1, 1, 12, 34, 0);
 }
 #endif
 

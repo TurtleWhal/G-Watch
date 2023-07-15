@@ -70,69 +70,34 @@ void ToggleTimer(lv_event_t *e)
   twatch->motor_shake(1, 50);
 }
 
-void timerhourplus10(lv_event_t *e)
+void timeradjust(lv_event_t *e)
 {
-  timertime += 36000000;
-  writetimertime();
-}
-void timerhourplus1(lv_event_t *e)
-{
-  timertime += 3600000;
-  writetimertime();
-}
-void timerminuteplus10(lv_event_t *e)
-{
-  timertime += 600000;
-  writetimertime();
-}
-void timerminuteplus1(lv_event_t *e)
-{
-  timertime += 60000;
-  writetimertime();
-}
-void timersecondplus10(lv_event_t *e)
-{
-  timertime += 10000;
-  writetimertime();
-}
-void timersecondplus1(lv_event_t *e)
-{
-  timertime += 1000;
-  writetimertime();
-}
-void timerhourminus10(lv_event_t *e)
-{
-  timertime -= 36000000;
-  istimernegative();
-  writetimertime();
-}
-void timerhourminus1(lv_event_t *e)
-{
-  timertime -= 3600000;
-  istimernegative();
-  writetimertime();
-}
-void timerminuteminus10(lv_event_t *e)
-{
-  timertime -= 600000;
-  istimernegative();
-  writetimertime();
-}
-void timerminuteminus1(lv_event_t *e)
-{
-  timertime -= 60000;
-  istimernegative();
-  writetimertime();
-}
-void timersecondminus10(lv_event_t *e)
-{
-  timertime -= 10000;
-  istimernegative();
-  writetimertime();
-}
-void timersecondminus1(lv_event_t *e)
-{
-  timertime -= 1000;
+lv_obj_t * target = lv_event_get_target(e);
+if (target == ui_Timer_Hour_Plus_10)
+    timertime += 10 * 60 * 60 * 1000;
+else if (target == ui_Timer_Hour_Minus_10)
+    timertime -= 10 * 60 * 60 * 1000;
+else if (target == ui_Timer_Hour_Plus_1)
+    timertime += 60 * 60 * 1000;
+else if (target == ui_Timer_Hour_Minus_1)
+    timertime -= 60 * 60 * 1000;
+else if (target == ui_Timer_Minute_Plus_10)
+    timertime += 10 * 60 * 1000;
+else if (target == ui_Timer_Minute_Minus_10)
+    timertime -= 10 * 60 * 1000;
+else if (target == ui_Timer_Minute_Plus_1)
+    timertime += 60 * 1000;
+else if (target == ui_Timer_Minute_Minus_1)
+    timertime -= 60 * 1000;
+else if (target == ui_Timer_Second_Plus_10)
+    timertime += 10 * 1000;
+else if (target == ui_Timer_Second_Minus_10)
+    timertime -= 10 * 1000;
+else if (target == ui_Timer_Second_Plus_1)
+    timertime += 1000;
+else if (target == ui_Timer_Second_Minus_1)
+    timertime -= 1000;
+
   istimernegative();
   writetimertime();
 }
@@ -161,7 +126,7 @@ void writetimertime()
   unsigned long timerhours = timerminutes / 60;
   timerseconds %= 60;
   timerminutes %= 60;
-  timerhours %= 24;
+  timerhours %= 100;
 
   if (timerseconds < 10)
   {

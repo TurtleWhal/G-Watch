@@ -6,6 +6,7 @@
 #include "TWatch_hal.h"
 #include "notifications.h"
 #include "power_managment.h"
+#include "Preferences.h"
 
 Notification NotificationList[11];
 int NotificationCount = 0;
@@ -15,7 +16,7 @@ int notificationid = 1;
 int notificationtime;
 bool Donotdisturb;
 extern TWatchClass *twatch;
-extern int NotificationLength;
+extern Preferences Storage;
 
 
 void shownotification(bool Store)
@@ -85,8 +86,8 @@ void drawnotificationarc()
 {
   if (notificationshowing)
   {
-    lv_arc_set_value(ui_Notification_Timer, ((millis() - notificationtime) / (NotificationLength * 10)) * 10);
-    if (notificationtime + (NotificationLength * 1000) < millis())
+    lv_arc_set_value(ui_Notification_Timer, ((millis() - notificationtime) / (Storage.getUInt("NotifLength") * 10)) * 10);
+    if (notificationtime + (Storage.getUInt("NotifLength") * 1000) < millis())
     {
       NotificationHide_Animation(ui_Notification_Popup, 0);
       notificationshowing = 0;

@@ -230,3 +230,7 @@ def Deletenotification(event_struct):
 def deletenotification(event_struct):
     return
 
+
+def timeradjust(event_struct):
+    return
+
