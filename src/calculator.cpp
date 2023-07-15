@@ -46,12 +46,12 @@ int calculateExpression(String expression) {
       if (num2 != 0)
         result = num1 / num2;
       else {
-        Serial.println("Error: Division by zero");
+        Log.verboseln("Error: Division by zero");
         return 0;
       }
       break;
     default:
-      Serial.println("Error: Invalid operator");
+      Log.verboseln("Error: Invalid operator");
       return 0;
   }
 
