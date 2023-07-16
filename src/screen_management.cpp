@@ -83,12 +83,12 @@ void tosettingsscreen(lv_event_t *e)
     if (lv_scr_act() != ui_Clock)
     {
         lv_scr_load_anim(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
-        // Serial.println("Not Clock");
+        // Log.verboseln("Not Clock");
     }
     else
     {
         lv_scr_load_anim(ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 0);
-        // Serial.println("Clock");
+        // Log.verboseln("Clock");
     }
 }
 

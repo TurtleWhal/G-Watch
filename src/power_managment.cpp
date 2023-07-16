@@ -33,7 +33,7 @@ void Sleephandle()
     {
       Wakeup("Shook");
       sleeptimer = millis();
-      Serial.println("Im Shooken!");
+      Log.verboseln("Im Shooken!");
     }
     */
     if ((millis() - sleeptimer) >= Sleeptimeout)
@@ -77,7 +77,7 @@ void Sleep()
   {
     prevbrightness = twatch->backlight_get_value();
     twatch->backlight_set_value(0);
-    Serial.println("Go To Sleep");
+    Log.verboseln("Go To Sleep");
     Sleeping = 1;
     // setCpuFrequencyMhz(160);
   }

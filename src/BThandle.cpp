@@ -77,28 +77,25 @@ void BThandle()
       }
       if (input.charAt(0) == 2)
       {
-        Log.verbose("Notification Title: ");
         input.remove(0, 1);
         input.remove(input.length() - 1, 1);
-        Serial.println(input);
+        Log.verboseln("Notification Title: %s", input);
         lv_label_set_text(ui_Notification_Title, input.c_str());
         NotificationList[10].Title = input;
       }
       if (input.charAt(0) == 3)
       {
-        Log.verbose("Notification Text: ");
         input.remove(0, 1);
         input.remove(input.length() - 1, 1);
-        Serial.println(input);
+        Log.verboseln("Notification Text: %s", input);
         lv_label_set_text(ui_Notification_Text, input.c_str());
         NotificationList[10].Text = input;
       }
       if (input.charAt(0) == 4)
       {
-        Log.verbose("Notification Source: ");
         input.remove(0, 1);
         input.remove(input.length() - 1, 1);
-        Serial.println(input);
+        Log.verboseln("Notification Source: %s", input);
         lv_label_set_text(ui_Notification_Source, input.c_str());
         NotificationList[10].Source = input;
         shownotification(0);
@@ -106,10 +103,9 @@ void BThandle()
       }
       if (input.charAt(0) == 5)
       {
-        Log.verbose("Now Playing: ");
         input.remove(0, 1);
         input.remove(input.length() - 1, 1);
-        Serial.println(input);
+        Log.verboseln("Now Playing: %s", input);
         char song[64];
         // sprintf(song, "♪ %s ♪", input.c_str());
         sprintf(song, "%s   •", input.c_str());
@@ -131,11 +127,7 @@ void BThandle()
       }
     }
     else
-    {
-      Serial.print(F(" reached limit without newline '"));
-      Serial.print(input);
-      Serial.println("'");
-    }
+      Log.verboseln(" reached limit without newline ' %s", input);
     input = ""; // clear after processing for next line
   }
 
@@ -150,7 +142,7 @@ void BThandle()
 #ifdef UPDATE_ELEMENTS
   if (SerialBT.connected() && lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
-  else if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png )
+  else if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
 #endif
 }
@@ -171,16 +163,10 @@ void BT_on()
     char BTnamechar[17];
     Storage.getBytes("BTname", BTnamechar, 17);
     SerialBT.begin((String)BTnamechar);
-    Log.verboseln("BT Name: ");
-    // Serial.print("BT Name: ");
-    // Serial.println(BTnamechar);
+    Log.verboseln("BT Name: %s", BTnamechar);
   }
   else
-    SerialBT.begin("Unnamed Watch"); /*
-     char BTnamechar[17];
-     Storage.getBytes("BTname", BTnamechar, 17);
-     Serial.println(BTnamechar);
-     Serial.println(Storage.isKey("BTname"));*/
+    SerialBT.begin("Unnamed Watch");
 }
 
 void BT_off()

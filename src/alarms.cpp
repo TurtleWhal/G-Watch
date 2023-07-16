@@ -250,7 +250,7 @@ void toggleampm(lv_event_t *e)
       {
         if (alarms[0].minute == rtc.minute)
         {
-          Serial.println("alarm 1 triggered");
+          Log.verboseln("alarm 1 triggered");
           alarms[0].state = 0;
           _ui_state_modify(ui_Alarm_1_Switch, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
 
@@ -276,7 +276,7 @@ void toggleampm(lv_event_t *e)
       {
         if (alarms[1].minute == rtc.minute)
         {
-          Serial.println("alarm 2 triggered");
+          Log.verboseln("alarm 2 triggered");
           alarms[1].state = 0;
           _ui_state_modify(ui_Alarm_2_Switch, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
 
@@ -302,7 +302,7 @@ void toggleampm(lv_event_t *e)
       {
         if (alarms[2].minute == rtc.minute)
         {
-          Serial.println("alarm 3 triggered");
+          Log.verbosetln("alarm 3 triggered");
           alarms[2].state = 0;
           _ui_state_modify(ui_Alarm_3_Switch, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
           lv_img_set_src(ui_Notification_Image, &ui_img_bell_png);
@@ -329,7 +329,7 @@ void toggleampm(lv_event_t *e)
       {
         if (alarms[3].minute == rtc.minute)
         {
-          Serial.println("alarm 1 triggered");
+          Log.verboseln("alarm 1 triggered");
           alarms[3].state = 0;
           _ui_state_modify(ui_Alarm_4_Switch, LV_STATE_CHECKED, _UI_MODIFY_STATE_REMOVE);
 
@@ -348,6 +348,6 @@ void toggleampm(lv_event_t *e)
         }
       }
     }
-    Serial.println("Alarms Handled");
+    Log.verboseln("Alarms Handled");
   }
 }*/

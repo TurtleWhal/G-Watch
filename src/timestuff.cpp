@@ -30,7 +30,7 @@ void WriteTime()
 
     if (second != lastsec)
     {
-        Serial.println("sec");
+        Log.verboseln("sec");
         lastsec = second;
         getLocalTime(&t_tm);
 #ifdef UPDATE_ELEMENTS
