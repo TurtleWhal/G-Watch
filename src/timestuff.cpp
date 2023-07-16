@@ -36,6 +36,10 @@ void WriteTime()
 #ifdef UPDATE_ELEMENTS
         ColorTicks(second);
         lv_img_set_angle(ui_Minute_Hand, (t_tm.tm_min * 60) + (second));
+          /*if (lv_scr_act() == ui_Timers){
+            lv_roller_set_selected(ui_Timer_Second_Right_Roller, t_tm.tm_sec % 10, LV_ANIM_ON);
+            lv_roller_set_selected(ui_Timer_Second_Left_Roller, t_tm.tm_sec / 10 , LV_ANIM_ON);
+            }*/
 #endif
 
         if (t_tm.tm_min != lastmin)

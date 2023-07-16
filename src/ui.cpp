@@ -347,6 +347,8 @@ void loop()
     DrawPower();
   }
 
+  //Serial.println(lv_roller_get_selected(ui_Roller2));
+
   /*if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 3800)
     Sleephandle();*/
   /* Serial.println(digitalRead(TWATCH_CHARGING));

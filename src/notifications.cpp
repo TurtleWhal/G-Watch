@@ -38,7 +38,8 @@ void drawnotifications(lv_event_t *e)
   if (lv_scr_act() != ui_Notifications)
   {
     ui_Notifications_screen_init();
-    _ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
+    //_ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
+    lv_scr_load_anim(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 0);
   }
   if (NotificationCount)
   {
