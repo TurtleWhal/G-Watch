@@ -260,6 +260,7 @@ if (useOTA)
 {
   lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
   WiFi.mode(WIFI_STA);
+  WiFi.setHostname("ESP-Watch");
   WiFi.begin(ssid, password);
   while (WiFi.waitForConnectResult() != WL_CONNECTED) {
     Serial.println("Connection Failed! Rebooting...");
@@ -419,7 +420,6 @@ void StepHandle()
   static int StepDay;
   static int LastSteps = -1;
   static int StepOffset = -1;
-  char StepChar[12];
 
   if (StepOffset == -1)
   {
@@ -435,9 +435,8 @@ void StepHandle()
   {
     LastSteps = GetStep;
     Steps = GetStep + StepOffset;
-    sprintf(StepChar, "%i", Steps);
 #ifdef UPDATE_ELEMENTS
-    lv_label_set_text(ui_Step_Counter_Text, StepChar);
+    lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Steps);
     lv_arc_set_value(ui_Arc_Right, ((float)Steps / Storage.getUInt("StepGoal")) * 250);
 #endif
 
@@ -445,9 +444,7 @@ void StepHandle()
     {
 #ifdef UPDATE_ELEMENTS
       lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
-      char StepGoalText[50];
-      sprintf(StepGoalText, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
-      lv_label_set_text(ui_Notification_Text, StepGoalText);
+      lv_label_set_text_fmt(ui_Notification_Text, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
 #endif
       shownotification(0);
       Storage.putBool("StepReach", 1);

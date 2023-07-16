@@ -10,10 +10,7 @@ void Compass()
 {
   if (lv_scr_act() == ui_Compass)
   {
-    // Serial.println(mag.getAzimuth());
-    char deg[6];
-    sprintf(deg, "%i°", twatch->qmc5883l_get_Azimuth());
-    lv_label_set_text(ui_Compass_Deg, deg);
+    lv_label_set_text_fmt(ui_Compass_Deg, "%i°", twatch->qmc5883l_get_Azimuth());
     // lv_obj_set_x(ui_Compass_N, 0);
     // lv_obj_set_y(ui_Compass_N, -100);
   }
