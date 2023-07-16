@@ -131,15 +131,13 @@ void BThandle()
     input = ""; // clear after processing for next line
   }
 
-  if (songtime < (millis() - 70000))
-  {
-    songtime = millis();
 #ifdef UPDATE_ELEMENTS
+  if (songtime and songtime < (millis() - 70000))
+  {
+    songtime = 0;
     lv_label_set_text(ui_Now_Playing_Label, "");
-#endif
   }
 
-#ifdef UPDATE_ELEMENTS
   if (SerialBT.connected() && lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
   else if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)

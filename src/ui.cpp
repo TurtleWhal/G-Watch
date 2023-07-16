@@ -1,6 +1,9 @@
 #include "TWatch_hal.h"
 #include <BluetoothSerial.h>
 #include <CST816S.h>
+#include <WiFi.h>
+#include <ESPmDNS.h>
+#include <WiFiUdp.h>
 
 #include <lvgl.h>
 #include "ui.h"
@@ -20,6 +23,10 @@
 
 #include "Preferences.h"
 #include "ArduinoLog.h"
+#include "ArduinoOTA.h"
+
+const char* ssid = "ThisNetworkIsOWN3D";
+const char* password = "10244096";
 
 // #include "gptcalc.h"
 
@@ -36,6 +43,8 @@ CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
 
 extern BluetoothSerial SerialBT;
 Preferences Storage;
+
+bool useOTA;
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -157,6 +166,9 @@ void setup()
   twatch->hal_init();
   pinMode(TWATCH_CHARGING, INPUT_PULLUP);
 
+if (!digitalRead(TWATCH_BTN_2)) //Enable OTA if B2 is held at boot
+  useOTA = 1;
+
   twatch->hal_auto_update(true, 1);
 
   twatch->button_bind_event(TWATCH_BTN_1, BUTTON_CLICK, btn1_click);
@@ -242,6 +254,54 @@ void setup()
 //////////////////////////Fake Notifications///////////
 FakeNotes();
 
+
+////////////////////////////OTA
+if (useOTA)
+{
+  lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    Serial.println("Connection Failed! Rebooting...");
+    delay(5000);
+    ESP.restart();
+  }
+
+   ArduinoOTA.onStart([]() {
+      String type;
+      if (ArduinoOTA.getCommand() == U_FLASH)
+        type = "sketch";
+      else // U_SPIFFS
+        type = "filesystem";
+
+      // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
+      Serial.println("Start updating " + type);
+    })
+    .onEnd([]() {
+      Serial.println("\nEnd");
+    })
+    .onProgress([](unsigned int progress, unsigned int total) {
+      Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+    })
+    .onError([](ota_error_t error) {
+      Serial.printf("Error[%u]: ", error);
+      if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
+      else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
+      else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
+      else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
+      else if (error == OTA_END_ERROR) Serial.println("End Failed");
+    });
+
+  ArduinoOTA.begin();
+  
+  Serial.println("Ready");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+  ////////////////////////////////////////END OTA
+  
+
   twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
 }
@@ -251,6 +311,8 @@ bool Timer0Triggered;
 
 void loop()
 {
+   if (useOTA)
+    ArduinoOTA.handle();
   // Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
   if (!isSleeping())
   {
