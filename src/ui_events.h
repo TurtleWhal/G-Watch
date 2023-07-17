@@ -36,6 +36,7 @@ void UpdateSettings(lv_event_t * e);
 void PowerOff(lv_event_t * e);
 void stopanim(lv_event_t * e);
 void loadcalc(lv_event_t * e);
+void ToggleFlashlight(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

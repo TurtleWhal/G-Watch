@@ -167,3 +167,8 @@ void UpdateBrightness(lv_event_t *e)
   Log.verboseln("Brightness: %i", Brightness);
   // Serial.println(twatch->backlight_get_value);
 }
+
+int GetUserBrightness()
+{
+  return Brightness;
+}

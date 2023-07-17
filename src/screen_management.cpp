@@ -3,10 +3,11 @@
 #include "Preferences.h"
 #include "Functions.h"
 #include "screen_management.h"
+#include "power_managment.h"
 
 extern Preferences Storage;
 
-extern int Brightness;
+//extern int Brightness;
 
 int LastTimeScreen = 2;
 
@@ -49,7 +50,7 @@ void loadsettings(lv_event_t *e)
     sprintf(NotificationLengthChar, "%i", Storage.getUInt("NotifLength"));
     lv_textarea_set_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), NotificationLengthChar);
 
-    lv_slider_set_value(ui_Brightness_Slider, Brightness, LV_ANIM_OFF);
+    lv_slider_set_value(ui_Brightness_Slider, GetUserBrightness(), LV_ANIM_OFF);
 
     lv_colorwheel_set_rgb(ui_Theme_Colorwheel, lv_theme_get_color_primary(ui_Clock));
     UpdateTestTheme(nullptr);
@@ -301,7 +302,7 @@ void screenback()
     _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, NULL);
     }
 
-    else if (lv_scr_act() == ui_Calculator or lv_scr_act() == ui_Compass or lv_scr_act() == ui_Settings)
+    else if (lv_scr_act() == ui_Calculator or lv_scr_act() == ui_Compass or lv_scr_act() == ui_Settings or lv_scr_act() == ui_Flashlight)
     {
     _ui_screen_change( &ui_Apps, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Apps_screen_init);
     }

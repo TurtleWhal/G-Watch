@@ -290,6 +290,8 @@ void ui_event_Compass_App_Button_App_Button( lv_event_t * e);
 lv_obj_t *ui_Compass_App_Button;
 void ui_event_Settings_App_Button_App_Button( lv_event_t * e);
 lv_obj_t *ui_Settings_App_Button;
+void ui_event_App_Button1_App_Button( lv_event_t * e);
+lv_obj_t *ui_App_Button1;
 lv_obj_t *ui_Apps_Label_Underline;
 lv_obj_t *ui_Apps_Label;
 
@@ -299,6 +301,11 @@ void ui_event_Calculator( lv_event_t * e);
 lv_obj_t *ui_Calculator;
 lv_obj_t *ui_Calculator_Keyboard;
 lv_obj_t *ui_Calculator_textarea;
+
+// SCREEN: ui_Flashlight
+void ui_Flashlight_screen_init(void);
+void ui_event_Flashlight( lv_event_t * e);
+lv_obj_t *ui_Flashlight;
 lv_obj_t *ui____initial_actions0;
 const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_4809254_png};
 
@@ -1227,11 +1234,30 @@ if ( event_code == LV_EVENT_CLICKED) {
       _ui_screen_change( &ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Settings_screen_init);
 }
 }
+void ui_event_App_Button1_App_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_screen_change( &ui_Flashlight, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Flashlight_screen_init);
+}
+}
 void ui_event_Calculator( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_SCREEN_LOADED) {
       loadcalc( e );
       ApplyTheme( e );
+}
+}
+void ui_event_Flashlight( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Apps, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Apps_screen_init);
+}
+if ( event_code == LV_EVENT_CLICKED) {
+      ToggleFlashlight( e );
+}
+if ( event_code == LV_EVENT_SCREEN_UNLOAD_START) {
+      ToggleFlashlight( e );
 }
 }
 

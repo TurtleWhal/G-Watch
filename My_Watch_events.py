@@ -258,3 +258,7 @@ def settimerdefault(event_struct):
 def totimescreen(event_struct):
     return
 
+
+def ToggleFlashlight(event_struct):
+    return
+

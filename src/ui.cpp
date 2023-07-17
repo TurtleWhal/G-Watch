@@ -138,8 +138,8 @@ void btn1_held(void *param)
 {
   Log.verboseln("BTN1 Held");
   if (lv_scr_act() != ui_Settings)
-    //tosettingsscreen(nullptr);
-  Wakeup("Button 1 Held");
+    // tosettingsscreen(nullptr);
+    Wakeup("Button 1 Held");
   twatch->motor_shake(1, 30);
 }
 
@@ -156,7 +156,7 @@ void btn3_held(void *param)
 {
   Log.verboseln("BTN3 Held");
   Wakeup("Button 3 Held");
-  //totimersscreen(nullptr);
+  // totimersscreen(nullptr);
   twatch->motor_shake(1, 30);
 }
 
@@ -242,7 +242,7 @@ void setup()
   if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
     Storage.putUInt("NotifLength", defaultnotificationlength);
 
-  //lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Storage.getUInt("StepGoal"));
+  // lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Storage.getUInt("StepGoal"));
   if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
     Storage.putUInt("StepGoal", defaultStepgoal);
 
@@ -483,4 +483,15 @@ void UpdateSettings(lv_event_t *e)
 
   Storage.putUInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);
   ApplyTheme(nullptr);
+}
+
+void ToggleFlashlight(lv_event_t *e)
+{
+  if (lv_event_get_code(e) == LV_EVENT_SCREEN_UNLOADED)
+    twatch->backlight_set_value(GetUserBrightness());
+
+  if ((int)lv_obj_get_style_bg_color(ui_Flashlight, LV_PART_MAIN).full == (int)lv_color_hex(0xFFFFFF).full)
+    twatch->backlight_set_value(100);
+  else
+    twatch->backlight_set_value(GetUserBrightness());
 }

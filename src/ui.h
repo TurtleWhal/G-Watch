@@ -299,6 +299,8 @@ void ui_event_Compass_App_Button_App_Button( lv_event_t * e);
 extern lv_obj_t *ui_Compass_App_Button;
 void ui_event_Settings_App_Button_App_Button( lv_event_t * e);
 extern lv_obj_t *ui_Settings_App_Button;
+void ui_event_App_Button1_App_Button( lv_event_t * e);
+extern lv_obj_t *ui_App_Button1;
 extern lv_obj_t *ui_Apps_Label_Underline;
 extern lv_obj_t *ui_Apps_Label;
 // SCREEN: ui_Calculator
@@ -307,6 +309,10 @@ void ui_event_Calculator( lv_event_t * e);
 extern lv_obj_t *ui_Calculator;
 extern lv_obj_t *ui_Calculator_Keyboard;
 extern lv_obj_t *ui_Calculator_textarea;
+// SCREEN: ui_Flashlight
+void ui_Flashlight_screen_init(void);
+void ui_event_Flashlight( lv_event_t * e);
+extern lv_obj_t *ui_Flashlight;
 extern lv_obj_t *ui____initial_actions0;
 
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
@@ -330,6 +336,7 @@ LV_IMG_DECLARE( ui_img_play_button_png);   // assets/Play Button.png
 LV_IMG_DECLARE( ui_img_calculator_icon_nobackground_png);   // assets/Calculator Icon nobackground.png
 LV_IMG_DECLARE( ui_img_compass_png);   // assets/Compass.png
 LV_IMG_DECLARE( ui_img_settings_gear_png);   // assets/Settings Gear.png
+LV_IMG_DECLARE( ui_img_flashlight_png);   // assets/Flashlight.png
 LV_IMG_DECLARE( ui_img_4809254_png);   // assets/4809254.png
 
 LV_FONT_DECLARE( ui_font_Comfortaa_12);

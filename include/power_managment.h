@@ -13,6 +13,7 @@ extern "C"
   void PowerOff(lv_event_t *e);
   void UpdateBrightness(lv_event_t *e);
   void InitPercent();
+  int GetUserBrightness();
 
 #ifdef __cplusplus
 } /*extern "C"*/
