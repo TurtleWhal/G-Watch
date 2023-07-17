@@ -9,6 +9,7 @@ void ui_Stopwatch_screen_init(void)
 {
 ui_Stopwatch = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Stopwatch, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Stopwatch, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Stopwatch);
 
 ui_Stopwatch_Label_Underline = lv_obj_create(ui_Stopwatch);
 lv_obj_set_width( ui_Stopwatch_Label_Underline, 128);

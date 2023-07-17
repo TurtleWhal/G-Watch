@@ -9,6 +9,7 @@ void ui_Timers_screen_init(void)
 {
 ui_Timers = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Timers, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Timers, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Timers);
 
 ui_Timer_Label = lv_label_create(ui_Timers);
 lv_obj_set_width( ui_Timer_Label, LV_SIZE_CONTENT);  /// 1
@@ -211,16 +212,6 @@ lv_label_set_text(ui_Timer_Hours,"00");
 lv_obj_add_flag( ui_Timer_Hours, LV_OBJ_FLAG_HIDDEN );   /// Flags
 lv_obj_set_style_text_font(ui_Timer_Hours, &lv_font_montserrat_46, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Timer_Colin_Left = lv_label_create(ui_Timers);
-lv_obj_set_width( ui_Timer_Colin_Left, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Timer_Colin_Left, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Timer_Colin_Left, -36 );
-lv_obj_set_y( ui_Timer_Colin_Left, 0 );
-lv_obj_set_align( ui_Timer_Colin_Left, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Timer_Colin_Left,":");
-lv_obj_add_flag( ui_Timer_Colin_Left, LV_OBJ_FLAG_HIDDEN );   /// Flags
-lv_obj_set_style_text_font(ui_Timer_Colin_Left, &lv_font_montserrat_46, LV_PART_MAIN| LV_STATE_DEFAULT);
-
 ui_Timer_Minutes = lv_label_create(ui_Timers);
 lv_obj_set_width( ui_Timer_Minutes, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Timer_Minutes, LV_SIZE_CONTENT);   /// 1
@@ -239,51 +230,11 @@ lv_label_set_text(ui_Timer_Seconds,"00");
 lv_obj_add_flag( ui_Timer_Seconds, LV_OBJ_FLAG_HIDDEN );   /// Flags
 lv_obj_set_style_text_font(ui_Timer_Seconds, &lv_font_montserrat_46, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Timer_Colin_Right = lv_label_create(ui_Timers);
-lv_obj_set_width( ui_Timer_Colin_Right, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Timer_Colin_Right, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Timer_Colin_Right, 36 );
-lv_obj_set_y( ui_Timer_Colin_Right, 0 );
-lv_obj_set_align( ui_Timer_Colin_Right, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Timer_Colin_Right,":");
-lv_obj_add_flag( ui_Timer_Colin_Right, LV_OBJ_FLAG_HIDDEN );   /// Flags
-lv_obj_set_style_text_font(ui_Timer_Colin_Right, &lv_font_montserrat_46, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-ui_Timer_Colin_Left_Roller = lv_roller_create(ui_Timers);
-lv_roller_set_options( ui_Timer_Colin_Left_Roller, ":", LV_ROLLER_MODE_NORMAL );
-lv_obj_set_width( ui_Timer_Colin_Left_Roller, 32);
-lv_obj_set_height( ui_Timer_Colin_Left_Roller, 100);
-lv_obj_set_x( ui_Timer_Colin_Left_Roller, -34 );
-lv_obj_set_y( ui_Timer_Colin_Left_Roller, 0 );
-lv_obj_set_align( ui_Timer_Colin_Left_Roller, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Timer_Colin_Left_Roller, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
-lv_obj_set_style_text_font(ui_Timer_Colin_Left_Roller, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Timer_Colin_Left_Roller, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Timer_Colin_Left_Roller, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_Timer_Colin_Left_Roller, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_border_opa(ui_Timer_Colin_Left_Roller, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-lv_obj_set_style_radius(ui_Timer_Colin_Left_Roller, 10, LV_PART_SELECTED| LV_STATE_DEFAULT);
-
-ui_Timer_Colin_Right_Roller = lv_roller_create(ui_Timers);
-lv_roller_set_options( ui_Timer_Colin_Right_Roller, ":", LV_ROLLER_MODE_NORMAL );
-lv_obj_set_width( ui_Timer_Colin_Right_Roller, 32);
-lv_obj_set_height( ui_Timer_Colin_Right_Roller, 100);
-lv_obj_set_x( ui_Timer_Colin_Right_Roller, 33 );
-lv_obj_set_y( ui_Timer_Colin_Right_Roller, 0 );
-lv_obj_set_align( ui_Timer_Colin_Right_Roller, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Timer_Colin_Right_Roller, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
-lv_obj_set_style_text_font(ui_Timer_Colin_Right_Roller, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Timer_Colin_Right_Roller, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Timer_Colin_Right_Roller, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_Timer_Colin_Right_Roller, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_border_opa(ui_Timer_Colin_Right_Roller, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-
 ui_Timer_Second_Right_Roller = lv_roller_create(ui_Timers);
 lv_roller_set_options( ui_Timer_Second_Right_Roller, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9", LV_ROLLER_MODE_INFINITE );
 lv_obj_set_width( ui_Timer_Second_Right_Roller, 36);
-lv_obj_set_height( ui_Timer_Second_Right_Roller, 100);
-lv_obj_set_x( ui_Timer_Second_Right_Roller, 81 );
+lv_obj_set_height( ui_Timer_Second_Right_Roller, 60);
+lv_obj_set_x( ui_Timer_Second_Right_Roller, 75 );
 lv_obj_set_y( ui_Timer_Second_Right_Roller, 0 );
 lv_obj_set_align( ui_Timer_Second_Right_Roller, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Timer_Second_Right_Roller, LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
@@ -300,8 +251,8 @@ lv_obj_set_style_radius(ui_Timer_Second_Right_Roller, 10, LV_PART_SELECTED| LV_S
 ui_Timer_Second_Left_Roller = lv_roller_create(ui_Timers);
 lv_roller_set_options( ui_Timer_Second_Left_Roller, "0\n1\n2\n3\n4\n5", LV_ROLLER_MODE_INFINITE );
 lv_obj_set_width( ui_Timer_Second_Left_Roller, 36);
-lv_obj_set_height( ui_Timer_Second_Left_Roller, 100);
-lv_obj_set_x( ui_Timer_Second_Left_Roller, 53 );
+lv_obj_set_height( ui_Timer_Second_Left_Roller, 60);
+lv_obj_set_x( ui_Timer_Second_Left_Roller, 47 );
 lv_obj_set_y( ui_Timer_Second_Left_Roller, 0 );
 lv_obj_set_align( ui_Timer_Second_Left_Roller, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Timer_Second_Left_Roller, LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
@@ -315,7 +266,7 @@ lv_obj_set_style_border_opa(ui_Timer_Second_Left_Roller, 0, LV_PART_MAIN| LV_STA
 ui_Timer_Minute_Right_Roller = lv_roller_create(ui_Timers);
 lv_roller_set_options( ui_Timer_Minute_Right_Roller, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9", LV_ROLLER_MODE_INFINITE );
 lv_obj_set_width( ui_Timer_Minute_Right_Roller, 36);
-lv_obj_set_height( ui_Timer_Minute_Right_Roller, 100);
+lv_obj_set_height( ui_Timer_Minute_Right_Roller, 60);
 lv_obj_set_x( ui_Timer_Minute_Right_Roller, 14 );
 lv_obj_set_y( ui_Timer_Minute_Right_Roller, 0 );
 lv_obj_set_align( ui_Timer_Minute_Right_Roller, LV_ALIGN_CENTER );
@@ -330,7 +281,7 @@ lv_obj_set_style_border_opa(ui_Timer_Minute_Right_Roller, 0, LV_PART_MAIN| LV_ST
 ui_Timer_Minute_Left_Roller = lv_roller_create(ui_Timers);
 lv_roller_set_options( ui_Timer_Minute_Left_Roller, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9", LV_ROLLER_MODE_INFINITE );
 lv_obj_set_width( ui_Timer_Minute_Left_Roller, 36);
-lv_obj_set_height( ui_Timer_Minute_Left_Roller, 100);
+lv_obj_set_height( ui_Timer_Minute_Left_Roller, 60);
 lv_obj_set_x( ui_Timer_Minute_Left_Roller, -14 );
 lv_obj_set_y( ui_Timer_Minute_Left_Roller, 0 );
 lv_obj_set_align( ui_Timer_Minute_Left_Roller, LV_ALIGN_CENTER );
@@ -345,8 +296,8 @@ lv_obj_set_style_border_opa(ui_Timer_Minute_Left_Roller, 0, LV_PART_MAIN| LV_STA
 ui_Timer_Hour_Right_Roller = lv_roller_create(ui_Timers);
 lv_roller_set_options( ui_Timer_Hour_Right_Roller, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9", LV_ROLLER_MODE_INFINITE );
 lv_obj_set_width( ui_Timer_Hour_Right_Roller, 36);
-lv_obj_set_height( ui_Timer_Hour_Right_Roller, 100);
-lv_obj_set_x( ui_Timer_Hour_Right_Roller, -53 );
+lv_obj_set_height( ui_Timer_Hour_Right_Roller, 60);
+lv_obj_set_x( ui_Timer_Hour_Right_Roller, -47 );
 lv_obj_set_y( ui_Timer_Hour_Right_Roller, 0 );
 lv_obj_set_align( ui_Timer_Hour_Right_Roller, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Timer_Hour_Right_Roller, LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
@@ -360,8 +311,8 @@ lv_obj_set_style_border_opa(ui_Timer_Hour_Right_Roller, 0, LV_PART_MAIN| LV_STAT
 ui_Timer_Hour_Left_Roller = lv_roller_create(ui_Timers);
 lv_roller_set_options( ui_Timer_Hour_Left_Roller, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9", LV_ROLLER_MODE_INFINITE );
 lv_obj_set_width( ui_Timer_Hour_Left_Roller, 36);
-lv_obj_set_height( ui_Timer_Hour_Left_Roller, 100);
-lv_obj_set_x( ui_Timer_Hour_Left_Roller, -81 );
+lv_obj_set_height( ui_Timer_Hour_Left_Roller, 60);
+lv_obj_set_x( ui_Timer_Hour_Left_Roller, -75 );
 lv_obj_set_y( ui_Timer_Hour_Left_Roller, 0 );
 lv_obj_set_align( ui_Timer_Hour_Left_Roller, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Timer_Hour_Left_Roller, LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
@@ -374,10 +325,29 @@ lv_obj_set_style_border_opa(ui_Timer_Hour_Left_Roller, 0, LV_PART_MAIN| LV_STATE
 
 lv_obj_set_style_radius(ui_Timer_Hour_Left_Roller, 10, LV_PART_SELECTED| LV_STATE_DEFAULT);
 
+ui_Timer_Colin_Right = lv_label_create(ui_Timers);
+lv_obj_set_width( ui_Timer_Colin_Right, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Timer_Colin_Right, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Timer_Colin_Right, 30 );
+lv_obj_set_y( ui_Timer_Colin_Right, 0 );
+lv_obj_set_align( ui_Timer_Colin_Right, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Timer_Colin_Right,":");
+lv_obj_set_style_text_font(ui_Timer_Colin_Right, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Timer_Colin_Left = lv_label_create(ui_Timers);
+lv_obj_set_width( ui_Timer_Colin_Left, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Timer_Colin_Left, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Timer_Colin_Left, -30 );
+lv_obj_set_y( ui_Timer_Colin_Left, 0 );
+lv_obj_set_align( ui_Timer_Colin_Left, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Timer_Colin_Left,":");
+lv_obj_set_style_text_font(ui_Timer_Colin_Left, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
+
 ui_Timer_Arc = lv_arc_create(ui_Timers);
 lv_obj_set_width( ui_Timer_Arc, 244);
 lv_obj_set_height( ui_Timer_Arc, 244);
 lv_obj_set_align( ui_Timer_Arc, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Timer_Arc, LV_OBJ_FLAG_HIDDEN );   /// Flags
 lv_obj_clear_flag( ui_Timer_Arc, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
 lv_arc_set_range(ui_Timer_Arc, 0,1000);
 lv_arc_set_bg_angles(ui_Timer_Arc,91,90);

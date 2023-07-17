@@ -10,34 +10,23 @@
 extern "C" {
 #endif
 
-void toappsscreen(lv_event_t * e);
-void drawnotifications(lv_event_t * e);
-void totimersscreen(lv_event_t * e);
+void totimescreen(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
-void generictoclock(lv_event_t * e);
+void drawnotifications(lv_event_t * e);
+void ApplyTheme(lv_event_t * e);
 void deletenotification(lv_event_t * e);
-void alarmsmovedown(lv_event_t * e);
-void alarmsmoveup(lv_event_t * e);
-void tosetalarm(lv_event_t * e);
+void settimerdefault(lv_event_t * e);
 void togglealarm1(lv_event_t * e);
-void setalarm2(lv_event_t * e);
 void togglealarm2(lv_event_t * e);
-void setalarm3(lv_event_t * e);
 void togglealarm3(lv_event_t * e);
-void setalarm4(lv_event_t * e);
 void togglealarm4(lv_event_t * e);
 void toggleampm(lv_event_t * e);
 void setalarm(lv_event_t * e);
-void setalarmscreenback(lv_event_t * e);
-void stopwatchmoveup(lv_event_t * e);
-void stopwatchmovedown(lv_event_t * e);
 void resetstopwatch(lv_event_t * e);
 void ToggleStopwatch(lv_event_t * e);
-void timersscreenback(lv_event_t * e);
-void timermoveup(lv_event_t * e);
-void timermovedown(lv_event_t * e);
 void ToggleTimer(lv_event_t * e);
 void timeradjust(lv_event_t * e);
+void loadsettings(lv_event_t * e);
 void UpdateBrightness(lv_event_t * e);
 void ToggleBT(lv_event_t * e);
 void ToggleDoNotDisturb(lv_event_t * e);
@@ -45,10 +34,8 @@ void ToggleTheme(lv_event_t * e);
 void UpdateTestTheme(lv_event_t * e);
 void UpdateSettings(lv_event_t * e);
 void PowerOff(lv_event_t * e);
-void appsscreenback(lv_event_t * e);
-void tocalculatorscreen(lv_event_t * e);
-void tocompassscreen(lv_event_t * e);
-void tosettingsscreen(lv_event_t * e);
+void stopanim(lv_event_t * e);
+void loadcalc(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

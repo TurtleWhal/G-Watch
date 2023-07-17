@@ -130,13 +130,13 @@ void btn3_click(void *param)
       notificationdismiss(nullptr);
   }
   else
-    buttontoclock();
+    screenback();
 }
 void btn1_held(void *param)
 {
   Log.verboseln("BTN1 Held");
   if (lv_scr_act() != ui_Settings)
-    tosettingsscreen(nullptr);
+    //tosettingsscreen(nullptr);
   Wakeup("Button 1 Held");
   twatch->motor_shake(1, 30);
 }
@@ -154,7 +154,7 @@ void btn3_held(void *param)
 {
   Log.verboseln("BTN3 Held");
   Wakeup("Button 3 Held");
-  totimersscreen(nullptr);
+  //totimersscreen(nullptr);
   twatch->motor_shake(1, 30);
 }
 
@@ -240,10 +240,17 @@ void setup()
   if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
     Storage.putUInt("NotifLength", defaultnotificationlength);
 
+  //lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Storage.getUInt("StepGoal"));
   if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
     Storage.putUInt("StepGoal", defaultStepgoal);
 
+<<<<<<< HEAD
   ApplyTheme();
+=======
+  // lv_label_set_text_fmt(ui_Step_Counter_Text, "%s", Storage.isKey("StepGoal") ? "TRUE":"FALSE");
+
+  ApplyTheme(nullptr);
+>>>>>>> b8e921efd93b7f88ee6582621b5b59df59db0be2
   lv_timer_handler();
 
   // BT_on();
@@ -260,9 +267,14 @@ void setup()
   ////////////////////////////OTA
   if (useOTA)
   {
+<<<<<<< HEAD
     lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
     WiFi.mode(WIFI_STA);
     WiFi.setHostname("ESP-Watch");
+=======
+    // lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
+    WiFi.mode(WIFI_STA);
+>>>>>>> b8e921efd93b7f88ee6582621b5b59df59db0be2
     WiFi.begin(ssid, password);
     while (WiFi.waitForConnectResult() != WL_CONNECTED)
     {
@@ -299,6 +311,11 @@ void setup()
     Serial.println("Ready");
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
+<<<<<<< HEAD
+=======
+
+    lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
+>>>>>>> b8e921efd93b7f88ee6582621b5b59df59db0be2
   }
 
   ////////////////////////////////////////END OTA
@@ -467,9 +484,9 @@ void StepHandle()
 
 void UpdateSettings(lv_event_t *e)
 {
-  if (Storage.getUInt("StepGoal") != Storage.getUInt("StepGoal"))
+  if (Storage.getUInt("StepGoal") != atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL))))
   {
-    Storage.putUInt("StepGoal", Storage.getUInt("StepGoal"));
+    Storage.putUInt("StepGoal", atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL))));
     Storage.putBool("StepReach", 0);
   }
 
@@ -479,5 +496,5 @@ void UpdateSettings(lv_event_t *e)
   // Serial.println(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
 
   Storage.putUInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);
-  ApplyTheme();
+  ApplyTheme(nullptr);
 }

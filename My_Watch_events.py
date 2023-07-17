@@ -234,3 +234,27 @@ def deletenotification(event_struct):
 def timeradjust(event_struct):
     return
 
+
+def ApplyTheme(event_struct):
+    return
+
+
+def stopanim(event_struct):
+    return
+
+
+def loadcalc(event_struct):
+    return
+
+
+def loadsettings(event_struct):
+    return
+
+
+def settimerdefault(event_struct):
+    return
+
+
+def totimescreen(event_struct):
+    return
+
