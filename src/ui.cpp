@@ -20,6 +20,7 @@
 #include "BThandle.h"
 #include "themes.h"
 #include "compass.h"
+#include "usersettings.h"
 
 #include "Preferences.h"
 #include "ArduinoLog.h"
@@ -42,7 +43,7 @@ TWatchClass *twatch = nullptr;
 CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
 
 extern BluetoothSerial SerialBT;
-Preferences Storage;
+extern Preferences Storage;
 
 bool useOTA;
 extern bool BTon;
@@ -52,12 +53,6 @@ bool Timer0Triggered;
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
-
-////////////////////Settings////////////////////
-#define defaultnotificationlength 10
-#define defaultStepgoal 10000
-int VibrationStrength = 30; // Strength of button vibrations
-////////////////////////////////////////////////
 
 #if LV_USE_LOG != 0
 /* Serial debugging */
@@ -238,15 +233,7 @@ void setup()
 
   InitPercent(); // Battery Percent
 
-  Storage.begin("Settings");
-  if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
-    Storage.putUInt("NotifLength", defaultnotificationlength);
-
-  // lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Storage.getUInt("StepGoal"));
-  if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
-    Storage.putUInt("StepGoal", defaultStepgoal);
-
-  // lv_label_set_text_fmt(ui_Step_Counter_Text, "%s", Storage.isKey("StepGoal") ? "TRUE":"FALSE");
+  InitUserSettings();
 
   ApplyTheme(nullptr);
   lv_timer_handler();
@@ -410,23 +397,6 @@ void StepHandle()
     Storage.putUInt("Steps", 0);
     twatch->bma423_step_reset();
   }
-}
-
-void UpdateSettings(lv_event_t *e)
-{
-  if (Storage.getUInt("StepGoal") != atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL))))
-  {
-    Storage.putUInt("StepGoal", atoi(lv_textarea_get_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL))));
-    Storage.putBool("StepReach", 0);
-  }
-
-  Storage.putUInt("NotifLength", atoi(lv_textarea_get_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL))));
-
-  Storage.putBytes("BTname", lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)), 17);
-  // Serial.println(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
-
-  Storage.putUInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);
-  ApplyTheme(nullptr);
 }
 
 void ToggleFlashlight(lv_event_t *e)
