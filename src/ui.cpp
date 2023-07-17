@@ -25,8 +25,8 @@
 #include "ArduinoLog.h"
 #include "ArduinoOTA.h"
 
-const char* ssid = "ThisNetworkIsOWN3D";
-const char* password = "10244096";
+const char *ssid = "ThisNetworkIsOWN3D";
+const char *password = "10244096";
 
 // #include "gptcalc.h"
 
@@ -45,6 +45,7 @@ extern BluetoothSerial SerialBT;
 Preferences Storage;
 
 bool useOTA;
+extern bool BTon;
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -103,7 +104,8 @@ void btn1_click(void *param)
 {
   Log.verboseln("BTN1 Click. Power Percent: %i", (int)twatch->power_get_percent());
   // twatch->motor_shake(1, 60);
-  SerialBT.println(twatch->power_get_percent());
+  if (BTon)
+    SerialBT.println(twatch->power_get_percent());
   Wakeup("Button 1 Pressed");
 }
 void btn2_click(void *param)
@@ -114,7 +116,8 @@ void btn2_click(void *param)
     ToggleStopwatch(nullptr);
   if (lv_scr_act() == ui_Timers)
     ToggleTimer(nullptr);
-  SerialBT.println(twatch->power_get_volt());
+  if (BTon)
+    SerialBT.println(twatch->power_get_volt());
   Wakeup("Button 2 Pressed");
 }
 void btn3_click(void *param)
@@ -166,8 +169,8 @@ void setup()
   twatch->hal_init();
   pinMode(TWATCH_CHARGING, INPUT_PULLUP);
 
-if (!digitalRead(TWATCH_BTN_2)) //Enable OTA if B2 is held at boot
-  useOTA = 1;
+  if (!digitalRead(TWATCH_BTN_2)) // Enable OTA if B2 is held at boot
+    useOTA = 1;
 
   twatch->hal_auto_update(true, 1);
 
@@ -239,11 +242,11 @@ if (!digitalRead(TWATCH_BTN_2)) //Enable OTA if B2 is held at boot
 
   if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
     Storage.putUInt("StepGoal", defaultStepgoal);
-  
+
   ApplyTheme();
   lv_timer_handler();
 
-  BT_on();
+  // BT_on();
 
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
@@ -251,24 +254,25 @@ if (!digitalRead(TWATCH_BTN_2)) //Enable OTA if B2 is held at boot
   timerAlarmWrite(timer, 10000000, true);
   timerAlarmEnable(timer);
 
-//////////////////////////Fake Notifications///////////
-FakeNotes();
+  //////////////////////////Fake Notifications///////////
+  FakeNotes();
 
+  ////////////////////////////OTA
+  if (useOTA)
+  {
+    lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
+    WiFi.mode(WIFI_STA);
+    WiFi.setHostname("ESP-Watch");
+    WiFi.begin(ssid, password);
+    while (WiFi.waitForConnectResult() != WL_CONNECTED)
+    {
+      Serial.println("Connection Failed! Rebooting...");
+      delay(5000);
+      ESP.restart();
+    }
 
-////////////////////////////OTA
-if (useOTA)
-{
-  lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
-  WiFi.mode(WIFI_STA);
-  WiFi.setHostname("ESP-Watch");
-  WiFi.begin(ssid, password);
-  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("Connection Failed! Rebooting...");
-    delay(5000);
-    ESP.restart();
-  }
-
-   ArduinoOTA.onStart([]() {
+    ArduinoOTA.onStart([]()
+                       {
       String type;
       if (ArduinoOTA.getCommand() == U_FLASH)
         type = "sketch";
@@ -276,32 +280,28 @@ if (useOTA)
         type = "filesystem";
 
       // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
-      Serial.println("Start updating " + type);
-    })
-    .onEnd([]() {
-      Serial.println("\nEnd");
-    })
-    .onProgress([](unsigned int progress, unsigned int total) {
-      Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
-    })
-    .onError([](ota_error_t error) {
+      Serial.println("Start updating " + type); })
+        .onEnd([]()
+               { Serial.println("\nEnd"); })
+        .onProgress([](unsigned int progress, unsigned int total)
+                    { Serial.printf("Progress: %u%%\r", (progress / (total / 100))); })
+        .onError([](ota_error_t error)
+                 {
       Serial.printf("Error[%u]: ", error);
       if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
       else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
       else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
       else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
-      else if (error == OTA_END_ERROR) Serial.println("End Failed");
-    });
+      else if (error == OTA_END_ERROR) Serial.println("End Failed"); });
 
-  ArduinoOTA.begin();
-  
-  Serial.println("Ready");
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
-}
+    ArduinoOTA.begin();
+
+    Serial.println("Ready");
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
+  }
 
   ////////////////////////////////////////END OTA
-  
 
   twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
@@ -312,7 +312,7 @@ bool Timer0Triggered;
 
 void loop()
 {
-   if (useOTA)
+  if (useOTA)
     ArduinoOTA.handle();
   // Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
   if (!isSleeping())
@@ -348,7 +348,7 @@ void loop()
     DrawPower();
   }
 
-  //Serial.println(lv_roller_get_selected(ui_Roller2));
+  // Serial.println(lv_roller_get_selected(ui_Roller2));
 
   /*if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 3800)
     Sleephandle();*/

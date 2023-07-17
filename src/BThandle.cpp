@@ -20,7 +20,7 @@ bool BTon;
 
 bool readStringUntil(String &input, size_t char_limit)
 {
-  while (SerialBT.available())
+  while (BTon and SerialBT.available())
   {
     char c = SerialBT.read();
     input += c;
@@ -138,7 +138,7 @@ void BThandle()
     lv_label_set_text(ui_Now_Playing_Label, "");
   }
 
-  if (SerialBT.connected() && lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
+  if (BTon and SerialBT.connected() && lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
   else if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
