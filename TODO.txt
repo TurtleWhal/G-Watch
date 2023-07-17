@@ -14,3 +14,7 @@ Get rid of char, move to strings
 Crashes when awake and non 100 brightness
 
 Crashes on wakeup from calculator 
+
+notification images
+
+music controls
