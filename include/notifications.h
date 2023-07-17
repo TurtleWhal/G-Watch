@@ -8,7 +8,6 @@ typedef struct
   String Title;
   String Text;
   String Source;
-  //lv_obj_t *NotificationComp;
 } Notification;
 
 void shownotification(bool);
