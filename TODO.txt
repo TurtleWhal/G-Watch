@@ -19,4 +19,6 @@ Order Mag adapter
 
 notification images
 
+Float based calculator only does two decimal places
+
 music controls

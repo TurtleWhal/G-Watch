@@ -52,12 +52,12 @@ void Wakeup(String Wakeup_reason)
 {
   if (Sleeping)
   {
-    // setCpuFrequencyMhz(240);
+    setCpuFrequencyMhz(240);
     //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
     // generictoclock(nullptr);
     // lv_timer_handler();
     WriteTime();
-    Log.verboseln("IM AWAKE!");
+    //Log.verboseln("IM AWAKE!");
     // dad hid this comment here because I'm like that.
     // A few moments later...
     // Garrett found this comment because dad didn't go to a different line
