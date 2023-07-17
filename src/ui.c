@@ -857,7 +857,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Clock_screen_init);
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       drawnotifications( e );
       ApplyTheme( e );
 }

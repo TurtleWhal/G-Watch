@@ -122,9 +122,9 @@ void btn3_click(void *param)
 {
   Log.verboseln("BTN3 Click");
   Wakeup("Button 3 Pressed");
-  if (NotificationActive())
+  if (lv_scr_act() == ui_Clock)
   {
-    if (lv_scr_act() == ui_Clock)
+    if (NotificationActive())
       notificationdismiss(nullptr);
   }
   else
