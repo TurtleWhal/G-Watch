@@ -9,6 +9,7 @@ void ui_Calculator_screen_init(void)
 {
 ui_Calculator = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Calculator, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Calculator, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Calculator);
 
 ui_Calculator_Keyboard = lv_keyboard_create(ui_Calculator);
 lv_keyboard_set_mode(ui_Calculator_Keyboard,LV_KEYBOARD_MODE_NUMBER);
@@ -34,5 +35,6 @@ lv_textarea_set_one_line(ui_Calculator_textarea,true);
 lv_obj_set_style_radius(ui_Calculator_textarea, 20, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_keyboard_set_textarea(ui_Calculator_Keyboard,ui_Calculator_textarea);
+lv_obj_add_event_cb(ui_Calculator, ui_event_Calculator, LV_EVENT_ALL, NULL);
 
 }

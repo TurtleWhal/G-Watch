@@ -16,7 +16,7 @@ void StepHandle();
 void Timer0Handle();
 void pushnotification(int);
 void DrawPower();
-void ApplyTheme();
+//void ApplyTheme();
 void popnotification(int);
 
 #ifdef __cplusplus

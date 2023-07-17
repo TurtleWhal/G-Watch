@@ -9,6 +9,7 @@ void ui_Notifications_screen_init(void)
 {
 ui_Notifications = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Notifications, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Notifications, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Notifications);
 
 ui_Notifications_Label_Underline = lv_obj_create(ui_Notifications);
 lv_obj_set_width( ui_Notifications_Label_Underline, 128);

@@ -9,6 +9,7 @@ void ui_Compass_screen_init(void)
 {
 ui_Compass = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Compass, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Compass, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Compass);
 
 ui_Compass_Arrow = lv_img_create(ui_Compass);
 lv_img_set_src(ui_Compass_Arrow, &ui_img_play_button_png);
@@ -115,5 +116,7 @@ lv_obj_set_y( ui_Compass_NW, -70 );
 lv_obj_set_align( ui_Compass_NW, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Compass_NW,"NW");
 lv_obj_set_style_text_font(ui_Compass_NW, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_add_event_cb(ui_Compass, ui_event_Compass, LV_EVENT_ALL, NULL);
 
 }

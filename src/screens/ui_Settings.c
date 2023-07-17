@@ -9,6 +9,7 @@ void ui_Settings_screen_init(void)
 {
 ui_Settings = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Settings, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Settings, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Settings);
 
 ui_Settings_Panel = lv_obj_create(ui_Settings);
 lv_obj_set_width( ui_Settings_Panel, 235);
@@ -289,5 +290,6 @@ lv_obj_add_event_cb(ui_Power_Button1, ui_event_Power_Button1, LV_EVENT_ALL, NULL
 lv_keyboard_set_textarea(ui_Settings_Numberpad,ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE));
 lv_obj_add_event_cb(ui_Settings_Numberpad, ui_event_Settings_Numberpad, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Settings_Keyboard, ui_event_Settings_Keyboard, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Settings, ui_event_Settings, LV_EVENT_ALL, NULL);
 
 }

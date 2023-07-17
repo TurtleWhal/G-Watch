@@ -40,7 +40,7 @@ void ToggleTheme(lv_event_t *e)
   }
 }
 
-void ApplyTheme()
+void ApplyTheme(lv_event_t * e)
 {
   lv_disp_t *dispp = lv_disp_get_default();
   if (Storage.isKey("Theme"))

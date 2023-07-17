@@ -267,6 +267,41 @@ lv_obj_set_y( ui_Alarm_4_AMPM, 6 );
 lv_obj_set_align( ui_Alarm_4_AMPM, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Alarm_4_AMPM,"AM");
 
+ui_Alarms_Dot_Top = lv_obj_create(ui_Alarms);
+lv_obj_set_width( ui_Alarms_Dot_Top, 10);
+lv_obj_set_height( ui_Alarms_Dot_Top, 10);
+lv_obj_set_x( ui_Alarms_Dot_Top, -110 );
+lv_obj_set_y( ui_Alarms_Dot_Top, -15 );
+lv_obj_set_align( ui_Alarms_Dot_Top, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Alarms_Dot_Top, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Alarms_Dot_Top, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_Alarms_Dot_Top, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Alarms_Dot_Top, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Alarms_Dot_Mid = lv_obj_create(ui_Alarms);
+lv_obj_set_width( ui_Alarms_Dot_Mid, 10);
+lv_obj_set_height( ui_Alarms_Dot_Mid, 10);
+lv_obj_set_x( ui_Alarms_Dot_Mid, -110 );
+lv_obj_set_y( ui_Alarms_Dot_Mid, 0 );
+lv_obj_set_align( ui_Alarms_Dot_Mid, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Alarms_Dot_Mid, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Alarms_Dot_Mid, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_Alarms_Dot_Mid, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Alarms_Dot_Mid, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Alarms_Dot_Bottom = lv_obj_create(ui_Alarms);
+lv_obj_set_width( ui_Alarms_Dot_Bottom, 10);
+lv_obj_set_height( ui_Alarms_Dot_Bottom, 10);
+lv_obj_set_x( ui_Alarms_Dot_Bottom, -110 );
+lv_obj_set_y( ui_Alarms_Dot_Bottom, 15 );
+lv_obj_set_align( ui_Alarms_Dot_Bottom, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Alarms_Dot_Bottom, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Alarms_Dot_Bottom, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Alarms_Dot_Bottom, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Alarms_Dot_Bottom, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_Alarms_Dot_Bottom, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Alarms_Dot_Bottom, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+
 lv_obj_add_event_cb(ui_Alarm_1_Switch, ui_event_Alarm_1_Switch, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Alarm_1, ui_event_Alarm_1, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Alarm_2_Switch, ui_event_Alarm_2_Switch, LV_EVENT_ALL, NULL);

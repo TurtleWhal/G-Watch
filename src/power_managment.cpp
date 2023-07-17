@@ -54,7 +54,7 @@ void Wakeup(String Wakeup_reason)
   {
     // setCpuFrequencyMhz(240);
     //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
-    generictoclock(nullptr);
+    // generictoclock(nullptr);
     // lv_timer_handler();
     WriteTime();
     Log.verboseln("IM AWAKE!");
@@ -63,8 +63,11 @@ void Wakeup(String Wakeup_reason)
     // Garrett found this comment because dad didn't go to a different line
     sleeptimer = millis();
     Sleeping = 0;
+    // lv_label_set_text_fmt(ui_Battery_Percentage, "%i", prevbrightness);
     twatch->backlight_set_value(prevbrightness);
-    // twatch->backlight_gradual_light(prevbrightness, 1000);
+    // twatch->backlight_set_value(100);
+    //  Serial.println(prevbrightness);
+    //   twatch->backlight_gradual_light(prevbrightness, 1000);
     Log.verboseln("Wakeup Reason: %s", Wakeup_reason);
   }
   else
@@ -76,6 +79,8 @@ void Sleep()
   if (!Sleeping)
   {
     prevbrightness = twatch->backlight_get_value();
+    if (!prevbrightness)
+      prevbrightness = 1;
     twatch->backlight_set_value(0);
     Log.verboseln("Go To Sleep");
     Sleeping = 1;

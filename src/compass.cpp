@@ -8,7 +8,7 @@ extern TWatchClass *twatch;
 
 void Compass()
 {
-  if (lv_scr_act() == ui_Compass)
+  if (ui_Compass != NULL)
   {
     // Serial.println(mag.getAzimuth());
     char deg[6];

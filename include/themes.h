@@ -5,7 +5,7 @@ extern "C"
 
 void UpdateTestTheme(lv_event_t * e);
 void ToggleTheme(lv_event_t * e);
-void ApplyTheme();
+//void ApplyTheme();
 
 #ifdef __cplusplus
 } /*extern "C"*/

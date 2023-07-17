@@ -9,6 +9,7 @@ void ui_Apps_screen_init(void)
 {
 ui_Apps = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Apps, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Apps, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Apps);
 
 ui_Apps_Panel = lv_obj_create(ui_Apps);
 lv_obj_set_width( ui_Apps_Panel, 235);
