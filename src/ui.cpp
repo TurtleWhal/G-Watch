@@ -330,7 +330,6 @@ void loop()
       Powerhandle();
     }
     Compass();
-    CalcHandle();
     // twatch->backlight_updata(millis(), 10);
   }
   else

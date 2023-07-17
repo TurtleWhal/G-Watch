@@ -262,3 +262,7 @@ def totimescreen(event_struct):
 def ToggleFlashlight(event_struct):
     return
 
+
+def calchandle(event_struct):
+    return
+

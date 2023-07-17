@@ -299,6 +299,7 @@ lv_obj_t *ui_Apps_Label;
 void ui_Calculator_screen_init(void);
 void ui_event_Calculator( lv_event_t * e);
 lv_obj_t *ui_Calculator;
+void ui_event_Calculator_Keyboard( lv_event_t * e);
 lv_obj_t *ui_Calculator_Keyboard;
 lv_obj_t *ui_Calculator_textarea;
 
@@ -1245,6 +1246,12 @@ void ui_event_Calculator( lv_event_t * e) {
 if ( event_code == LV_EVENT_SCREEN_LOADED) {
       loadcalc( e );
       ApplyTheme( e );
+}
+}
+void ui_event_Calculator_Keyboard( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      CalcHandle( e );
 }
 }
 void ui_event_Flashlight( lv_event_t * e) {

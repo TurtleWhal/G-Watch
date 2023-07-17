@@ -307,6 +307,7 @@ extern lv_obj_t *ui_Apps_Label;
 void ui_Calculator_screen_init(void);
 void ui_event_Calculator( lv_event_t * e);
 extern lv_obj_t *ui_Calculator;
+void ui_event_Calculator_Keyboard( lv_event_t * e);
 extern lv_obj_t *ui_Calculator_Keyboard;
 extern lv_obj_t *ui_Calculator_textarea;
 // SCREEN: ui_Flashlight

@@ -5,7 +5,7 @@
 
 #include "calculator.h"
 
-void CalcHandle()
+void CalcHandle(lv_event_t *e)
 {
     if (lv_scr_act() == ui_Calculator)
     {
@@ -14,12 +14,14 @@ void CalcHandle()
         {
             lv_textarea_set_text(ui_Calculator_textarea, "");
             Log.verboseln("Calc C pressed %i",(int)calcbutton);
+            lv_btnmatrix_set_selected_btn(ui_Calculator_Keyboard, 16);
         }
 
         if (calcbutton == "=")
         {
             String expr = lv_textarea_get_text(ui_Calculator_textarea);
             lv_textarea_set_text(ui_Calculator_textarea, String(calculateExpression(expr)).c_str());
+            lv_btnmatrix_set_selected_btn(ui_Calculator_Keyboard, 16);
         }
     }
 }
@@ -52,7 +54,7 @@ int calculateExpression(String expression) {
       break;
     default:
       Log.verboseln("Error: Invalid operator");
-      return 0;
+      return num1;
   }
 
   return result;
