@@ -3,7 +3,7 @@ extern "C"
 {
 #endif
 
-int calculateExpression(String);
+float calculateExpression(String);
 
 #ifdef __cplusplus
 } /*extern "C"*/
