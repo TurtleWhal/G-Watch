@@ -1,5 +1,3 @@
-add OTA uploading
-
 BLE
 
 Make notifications show on all screens
@@ -11,9 +9,17 @@ Change to TWATCH LVGL
 Change to Arduino logging
 Get rid of char, move to strings
 
+Store blurttoh status in FLASH
+
 Crashes when awake and non 100 brightness
 
 Crashes on wakeup from calculator 
+
+Backlight gradual on/off
+Power managment when asleep
+Improve boot upload_speed
+Move button handler to LVGL
+
 
 Order batteries
 Order Mag adapter

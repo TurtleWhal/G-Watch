@@ -46,6 +46,8 @@ Preferences Storage;
 
 bool useOTA;
 extern bool BTon;
+String input = "";
+bool Timer0Triggered;
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -244,16 +246,12 @@ void setup()
   if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
     Storage.putUInt("StepGoal", defaultStepgoal);
 
-<<<<<<< HEAD
-  ApplyTheme();
-=======
   // lv_label_set_text_fmt(ui_Step_Counter_Text, "%s", Storage.isKey("StepGoal") ? "TRUE":"FALSE");
 
   ApplyTheme(nullptr);
->>>>>>> b8e921efd93b7f88ee6582621b5b59df59db0be2
   lv_timer_handler();
 
-  // BT_on();
+  BT_on();
 
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
@@ -267,14 +265,9 @@ void setup()
   ////////////////////////////OTA
   if (useOTA)
   {
-<<<<<<< HEAD
     lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
     WiFi.mode(WIFI_STA);
     WiFi.setHostname("ESP-Watch");
-=======
-    // lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
-    WiFi.mode(WIFI_STA);
->>>>>>> b8e921efd93b7f88ee6582621b5b59df59db0be2
     WiFi.begin(ssid, password);
     while (WiFi.waitForConnectResult() != WL_CONNECTED)
     {
@@ -311,11 +304,7 @@ void setup()
     Serial.println("Ready");
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
-<<<<<<< HEAD
-=======
-
     lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
->>>>>>> b8e921efd93b7f88ee6582621b5b59df59db0be2
   }
 
   ////////////////////////////////////////END OTA
@@ -323,9 +312,6 @@ void setup()
   twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
 }
-
-String input = "";
-bool Timer0Triggered;
 
 void loop()
 {
