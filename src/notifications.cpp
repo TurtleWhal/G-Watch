@@ -59,9 +59,10 @@ void drawnotifications(lv_event_t *e)
 
 void deletenotification(lv_event_t *e)
 {
-  auto index = lv_obj_get_user_data(lv_event_get_target(e));
-  popnotification((int)index + 1);
-  lv_obj_del_delayed(NotificationComp[(int)index], 350);
+  int index = (int)lv_obj_get_user_data(lv_event_get_target(e));
+  popnotification(index + 1);
+  lv_obj_del_delayed(lv_event_get_target(e), 350);
+
   if (!NotificationCount)
     lv_obj_clear_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_HIDDEN);
 }
@@ -97,6 +98,7 @@ void popnotification(int index)
   {
     if (i != 10)
       NotificationList[i - 1] = NotificationList[i];
+    lv_obj_set_user_data(NotificationComp[i], (void *)i - 1);
   }
   NotificationCount--;
 }
