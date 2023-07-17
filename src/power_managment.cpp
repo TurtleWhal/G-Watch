@@ -125,7 +125,7 @@ void InitPercent()
 void DrawPower()
 {
 #ifdef UPDATE_ELEMENTS
-  lv_label_set_text_fmt(ui_Battery_Percentage, "%.0f%%", twatch->power_get_percent());
+  lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", (int)(twatch->power_get_percent()+0.5));
   lv_arc_set_value(ui_Arc_Battery, (twatch->power_get_percent() / 100) * 250);
 #endif
   lastpercent = twatch->power_get_percent();
