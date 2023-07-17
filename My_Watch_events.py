@@ -266,3 +266,7 @@ def ToggleFlashlight(event_struct):
 def calchandle(event_struct):
     return
 
+
+def CalcHandle(event_struct):
+    return
+

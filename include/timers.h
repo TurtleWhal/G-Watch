@@ -5,7 +5,7 @@ extern "C"
 
 void istimernegative();
 void writetimertime();
-void processstopwatch();
+void StopwatchHandle();
 
 #ifdef __cplusplus
 } /*extern "C"*/

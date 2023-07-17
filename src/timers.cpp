@@ -160,7 +160,7 @@ void writetimertime()
   lv_label_set_text(ui_Timer_Hours, timertimechar);
 }
 
-void processstopwatch()
+void StopwatchHandle()
 {
   if (stopwatchmoving)
   {

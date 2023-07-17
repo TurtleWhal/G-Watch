@@ -318,7 +318,7 @@ void loop()
   if (useOTA)
     ArduinoOTA.handle();
   // Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
-  if (!isSleeping())
+  if (!isSleeping()) // If Awake
   {
     // lv_timer_handler(); /* let the GUI do its work */
     // delay(5);
@@ -328,11 +328,15 @@ void loop()
     {
       WriteTime();
       Powerhandle();
+      drawnotificationarc();
     }
-    Compass();
-    // twatch->backlight_updata(millis(), 10);
+    else
+    {
+      Compass();
+      StopwatchHandle();
+    }
   }
-  else
+  else // If Asleep
   {
     if (touch.available()) // Normally handled by lv_timer_handler
       Wakeup("Screen Touched");
@@ -349,65 +353,6 @@ void loop()
     StepHandle();
     DrawPower();
   }
-
-  // Serial.println(lv_roller_get_selected(ui_Roller2));
-
-  /*if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 3800)
-    Sleephandle();*/
-  /* Serial.println(digitalRead(TWATCH_CHARGING));
-   Serial.println(twatch->power_get_volt());*/
-
-  // Serial.println(twatch->rtc_get_time());
-  // Serial.println(twatch->rtc_get_date());
-
-  /*static uint32_t lastTime;
-  if (millis() - lastTime >= 6000)
-  {*/
-
-  /*int mils = 2000;
-
-      twatch->backlight_set_value(100);
-      delay(mils);
-      //SerialBT.print("100%: = ");
-      //SerialBT.print("100%:");
-      SerialBT.print(twatch->power_get_volt());
-      SerialBT.print(",");
-
-      twatch->backlight_set_value(75);
-      delay(mils);
-      //SerialBT.print("75%: = ");
-      //SerialBT.print("75%:");
-      SerialBT.print(twatch->power_get_volt());
-      SerialBT.print(",");
-
-      twatch->backlight_set_value(50);
-      delay(mils);
-      //SerialBT.print("50%: = ");
-      //SerialBT.print("50%:");
-      SerialBT.print(twatch->power_get_volt());
-      SerialBT.print(",");
-
-      twatch->backlight_set_value(25);
-      delay(mils);
-      //SerialBT.print("25%: = ");
-      //SerialBT.print("25%:");
-      SerialBT.print(twatch->power_get_volt());
-      SerialBT.print(",");
-
-      twatch->backlight_set_value(0);
-      delay(mils);
-      //SerialBT.print("0%: = ");
-      //SerialBT.print("0%:");
-      SerialBT.println(twatch->power_get_volt());*/
-
-  /*lastTime = millis();
-  // 3750 = battery full
-}*/
-
-  // lv_obj_set_style_img_recolor(ui_Colorset_Tick_Dots, lv_color_hex(0xEE3C39), LV_PART_MAIN | LV_STATE_DEFAULT);
-
-  drawnotificationarc();
-  processstopwatch();
 }
 
 void Timer0Handle()
