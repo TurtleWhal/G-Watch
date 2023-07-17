@@ -17,3 +17,7 @@ Crashes on wakeup from calculator
 
 Order batteries
 Order Mag adapter
+
+notification images
+
+music controls
