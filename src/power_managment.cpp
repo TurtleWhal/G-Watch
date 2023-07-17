@@ -84,7 +84,7 @@ void Sleep()
     twatch->backlight_set_value(0);
     Log.verboseln("Go To Sleep");
     Sleeping = 1;
-    // setCpuFrequencyMhz(160);
+    setCpuFrequencyMhz(10); //10 is lowest can go with 40 MHz Crystal
   }
 }
 
