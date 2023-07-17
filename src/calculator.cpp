@@ -26,13 +26,13 @@ void CalcHandle(lv_event_t *e)
     }
 }
 
-int calculateExpression(String expression) {
-  int num1 = 0;
-  int num2 = 0;
+float calculateExpression(String expression) {
+  float num1 = 0;
+  float num2 = 0;
   char operatorChar = '+';
-  int result = 0;
+  float result = 0;
 
-  sscanf(expression.c_str(), "%d%c%d", &num1, &operatorChar, &num2);
+  sscanf(expression.c_str(), "%f%c%f", &num1, &operatorChar, &num2);
 
   switch (operatorChar) {
     case '+':
@@ -54,7 +54,8 @@ int calculateExpression(String expression) {
       break;
     default:
       Log.verboseln("Error: Invalid operator");
-      return num1;
+      //return num1;
+      return 0.0000123456;
   }
 
   return result;
