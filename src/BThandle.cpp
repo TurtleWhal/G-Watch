@@ -98,8 +98,7 @@ void BThandle()
         Log.verboseln("Notification Source: %s", input);
         lv_label_set_text(ui_Notification_Source, input.c_str());
         NotificationList[10].Source = input;
-        shownotification(0);
-        pushnotification(1);
+        shownotification(1);
       }
       if (input.charAt(0) == 5)
       {

@@ -31,6 +31,8 @@ void shownotification(bool Store)
   notificationshowing = 1;
   if (!Donotdisturb)
     twatch->motor_shake(2, 30);
+  if (Store)
+  pushnotification(1);
 }
 
 void drawnotifications(lv_event_t *e)
