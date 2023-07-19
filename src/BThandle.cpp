@@ -1,5 +1,6 @@
 #include "Arduino.h"
-#include <BluetoothSerial.h>
+#include "BluetoothSerial.h"
+#include "NimBLEDevice.h"
 #include "lvgl.h"
 #include "ArduinoLog.h"
 #include "ui.h"
@@ -8,6 +9,7 @@
 #include "BThandle.h"
 #include "notifications.h"
 #include "Preferences.h"
+#include "hardware/blectl.h"
 
 BluetoothSerial SerialBT;
 extern TWatchClass *twatch;
@@ -136,11 +138,12 @@ void BThandle()
     songtime = 0;
     lv_label_set_text(ui_Now_Playing_Label, "");
   }
-
+/*
   if (BTon and SerialBT.connected() && lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
   else if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
+*/
 #endif
 }
 
@@ -155,6 +158,9 @@ void ToggleBT(lv_event_t *e)
 void BT_on()
 {
   BTon = 1;
+
+  blectl_setup();
+  /*
   if (Storage.isKey("BTname"))
   {
     char BTnamechar[17];
@@ -164,10 +170,11 @@ void BT_on()
   }
   else
     SerialBT.begin("Unnamed Watch");
+    */
 }
 
 void BT_off()
 {
   BTon = 0;
-  SerialBT.disconnect();
+  //SerialBT.disconnect();
 }
