@@ -312,6 +312,11 @@ void screenback()
     _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, NULL);
     }
 
+    else if (lv_scr_act() == ui_Music)
+    {
+    _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, NULL);
+    }
+
     else if (lv_scr_act() == ui_Timers or lv_scr_act() == ui_Stopwatch or lv_scr_act() == ui_Alarms)
     {
     _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, NULL);

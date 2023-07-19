@@ -314,6 +314,33 @@ extern lv_obj_t *ui_Calculator_textarea;
 void ui_Flashlight_screen_init(void);
 void ui_event_Flashlight( lv_event_t * e);
 extern lv_obj_t *ui_Flashlight;
+// SCREEN: ui_Music
+void ui_Music_screen_init(void);
+void ui_event_Music( lv_event_t * e);
+extern lv_obj_t *ui_Music;
+extern lv_obj_t *ui_Cover_Art;
+extern lv_obj_t *ui_Control_Panel;
+extern lv_obj_t *ui_Music_Play_Button;
+extern lv_obj_t *ui_Music_Play_Button_Image;
+extern lv_obj_t *ui_Music_Skip_Forward_Button;
+extern lv_obj_t *ui_Music_Skip_Forwards_Button_img;
+extern lv_obj_t *ui_Music_Skip_Forwards_Button_Bar;
+extern lv_obj_t *ui_Music_Skip_Backwards_Button;
+extern lv_obj_t *ui_Music_Skip_Backwards_Button_img;
+extern lv_obj_t *ui_Music_Skip_Backwards_Button_Bar;
+extern lv_obj_t *ui_Music_Play_Bar;
+extern lv_obj_t *ui_Music_Artist;
+extern lv_obj_t *ui_Music_Title;
+// SCREEN: ui_Weather
+void ui_Weather_screen_init(void);
+extern lv_obj_t *ui_Weather;
+extern lv_obj_t *ui_Arc1;
+extern lv_obj_t *ui_Image3;
+extern lv_obj_t *ui_Temperature;
+extern lv_obj_t *ui_Panel4;
+extern lv_obj_t *ui_Panel2;
+extern lv_obj_t *ui_Label1;
+extern lv_obj_t *ui_Label2;
 extern lv_obj_t *ui____initial_actions0;
 
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
@@ -338,6 +365,9 @@ LV_IMG_DECLARE( ui_img_calculator_icon_nobackground_png);   // assets/Calculator
 LV_IMG_DECLARE( ui_img_compass_png);   // assets/Compass.png
 LV_IMG_DECLARE( ui_img_settings_gear_png);   // assets/Settings Gear.png
 LV_IMG_DECLARE( ui_img_flashlight_png);   // assets/Flashlight.png
+LV_IMG_DECLARE( ui_img_album_cover_png);   // assets/album cover.png
+LV_IMG_DECLARE( ui_img_moon_png);   // assets/moon.png
+LV_IMG_DECLARE( ui_img_mostly_cloudy_png);   // assets/Mostly Cloudy.png
 LV_IMG_DECLARE( ui_img_4809254_png);   // assets/4809254.png
 
 LV_FONT_DECLARE( ui_font_Comfortaa_12);

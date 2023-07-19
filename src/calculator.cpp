@@ -54,8 +54,7 @@ float calculateExpression(String expression) {
       break;
     default:
       Log.verboseln("Error: Invalid operator");
-      //return num1;
-      return 0.0000123456;
+      return num1;
   }
 
   return result;

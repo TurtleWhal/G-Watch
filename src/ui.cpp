@@ -152,7 +152,7 @@ void btn3_held(void *param)
 {
   Log.verboseln("BTN3 Held");
   Wakeup("Button 3 Held");
-  // totimersscreen(nullptr);
+  totimescreen(nullptr);
   twatch->motor_shake(1, 30);
 }
 

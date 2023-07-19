@@ -307,6 +307,35 @@ lv_obj_t *ui_Calculator_textarea;
 void ui_Flashlight_screen_init(void);
 void ui_event_Flashlight( lv_event_t * e);
 lv_obj_t *ui_Flashlight;
+
+// SCREEN: ui_Music
+void ui_Music_screen_init(void);
+void ui_event_Music( lv_event_t * e);
+lv_obj_t *ui_Music;
+lv_obj_t *ui_Cover_Art;
+lv_obj_t *ui_Control_Panel;
+lv_obj_t *ui_Music_Play_Button;
+lv_obj_t *ui_Music_Play_Button_Image;
+lv_obj_t *ui_Music_Skip_Forward_Button;
+lv_obj_t *ui_Music_Skip_Forwards_Button_img;
+lv_obj_t *ui_Music_Skip_Forwards_Button_Bar;
+lv_obj_t *ui_Music_Skip_Backwards_Button;
+lv_obj_t *ui_Music_Skip_Backwards_Button_img;
+lv_obj_t *ui_Music_Skip_Backwards_Button_Bar;
+lv_obj_t *ui_Music_Play_Bar;
+lv_obj_t *ui_Music_Artist;
+lv_obj_t *ui_Music_Title;
+
+// SCREEN: ui_Weather
+void ui_Weather_screen_init(void);
+lv_obj_t *ui_Weather;
+lv_obj_t *ui_Arc1;
+lv_obj_t *ui_Image3;
+lv_obj_t *ui_Temperature;
+lv_obj_t *ui_Panel4;
+lv_obj_t *ui_Panel2;
+lv_obj_t *ui_Label1;
+lv_obj_t *ui_Label2;
 lv_obj_t *ui____initial_actions0;
 const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_4809254_png};
 
@@ -834,6 +863,10 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       totimescreen( e );
 }
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Music, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Music_screen_init);
+}
 }
 void ui_event_Notification_Popup( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
@@ -1247,6 +1280,10 @@ if ( event_code == LV_EVENT_SCREEN_LOADED) {
       loadcalc( e );
       ApplyTheme( e );
 }
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Apps, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Apps_screen_init);
+}
 }
 void ui_event_Calculator_Keyboard( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
@@ -1265,6 +1302,13 @@ if ( event_code == LV_EVENT_CLICKED) {
 }
 if ( event_code == LV_EVENT_SCREEN_UNLOAD_START) {
       ToggleFlashlight( e );
+}
+}
+void ui_event_Music( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, &ui_Clock_screen_init);
 }
 }
 

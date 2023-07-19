@@ -14,9 +14,9 @@ lv_obj_add_event_cb(ui_Calculator, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOA
 ui_Calculator_Keyboard = lv_keyboard_create(ui_Calculator);
 lv_keyboard_set_mode(ui_Calculator_Keyboard,LV_KEYBOARD_MODE_NUMBER);
 lv_obj_set_width( ui_Calculator_Keyboard, 165);
-lv_obj_set_height( ui_Calculator_Keyboard, 165);
+lv_obj_set_height( ui_Calculator_Keyboard, 154);
 lv_obj_set_x( ui_Calculator_Keyboard, 0 );
-lv_obj_set_y( ui_Calculator_Keyboard, 24 );
+lv_obj_set_y( ui_Calculator_Keyboard, 20 );
 lv_obj_set_align( ui_Calculator_Keyboard, LV_ALIGN_CENTER );
 
 lv_obj_set_style_radius(ui_Calculator_Keyboard, 20, LV_PART_ITEMS| LV_STATE_DEFAULT);

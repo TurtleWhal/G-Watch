@@ -14,6 +14,8 @@ SET(SOURCES components/ui_comp_app_button.c
     screens/ui_Apps.c
     screens/ui_Calculator.c
     screens/ui_Flashlight.c
+    screens/ui_Music.c
+    screens/ui_Weather.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
@@ -39,6 +41,9 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_compass_png.c
     images/ui_img_settings_gear_png.c
     images/ui_img_flashlight_png.c
+    images/ui_img_album_cover_png.c
+    images/ui_img_moon_png.c
+    images/ui_img_mostly_cloudy_png.c
     images/ui_img_4809254_png.c
     fonts/ui_font_Comfortaa_12.c
     fonts/ui_font_Comfortaa_16.c
