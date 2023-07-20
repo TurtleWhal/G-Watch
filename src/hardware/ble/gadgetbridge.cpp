@@ -29,6 +29,7 @@
 #include "utils/alloc.h"
 #include "utils/bluejsonrequest.h"
 #include "ui.h"
+#include "BThandle.h"
 /**
  * platform depended libs
  */
@@ -99,7 +100,8 @@ static bool gadgetbridge_blectl_event_cb( EventBits_t event, void *arg );
                                                  */
                                                 char *buff = (char *)CALLOC_ASSERT( size, 1, "buff calloc failed" );
                                                 strlcpy( buff, gadgetbridge_RX_msg.c_str(), size );
-                                                lv_label_set_text(ui_Now_Playing_Label, buff);
+                                                //lv_label_set_text(ui_Now_Playing_Label, buff);
+                                                ParseGB(buff);
                                                 /*
                                                  * Send message
                                                  */

@@ -1,5 +1,4 @@
 #include "Arduino.h"
-#include "BluetoothSerial.h"
 #include "NimBLEDevice.h"
 #include "lvgl.h"
 #include "ArduinoLog.h"
@@ -11,7 +10,6 @@
 #include "Preferences.h"
 #include "hardware/blectl.h"
 
-BluetoothSerial SerialBT;
 extern TWatchClass *twatch;
 extern Notification NotificationList[11];
 extern Preferences Storage;
@@ -20,131 +18,9 @@ lv_obj_t *ui_Notification_Widgets[1];
 LV_IMG_DECLARE(ui_img_bluetooth_small_png);
 bool BTon;
 
-bool readStringUntil(String &input, size_t char_limit)
+void ParseGB(char *Message)
 {
-  while (BTon and SerialBT.available())
-  {
-    char c = SerialBT.read();
-    input += c;
-    if (c == 254)
-    {
-      return true;
-    }
-    if (input.length() >= char_limit)
-    {
-      return true;
-    }
-  }
-  return false;
-}
-
-void BThandle()
-{
-  /*    if (Serial.available()) {
-    SerialBT.write(Serial.read());
-  }
-
-  if (SerialBT.available()) {
-    Serial.write(SerialBT.read());
-  }*/
-
-  static String input = "";
-  static bool ping = 0;
-  static bool waitingforping = 1;
-  static int songtime;
-
-  if (readStringUntil(input, 240))
-  { // read until find newline or have read 20 chars
-    if (input.lastIndexOf(254) >= 0)
-    { // could also use check  if (input[input.length()-1] == terminatingChar) {
-      // Serial.print(F(" got a line of input '")); Serial.print(input); Serial.println("'");
-      if (input.charAt(0) == 1)
-      {
-        Log.verboseln("Getting Time From Phone: %ih %im %is %imonth %iday %iyear", (int)(input.charAt(1)), (int)(input.charAt(2)), (int)(input.charAt(3)), (int)(input.charAt(4)), (int)(input.charAt(5), (int)(input.charAt(6) + 2000)));
-        /* Serial.print("Getting Time From Phone: ");
-         Serial.print((int)(input.charAt(1)));
-         Serial.print("h ");
-         Serial.print((int)(input.charAt(2)));
-         Serial.print("m ");
-         Serial.print((int)(input.charAt(3)));
-         Serial.print("s ");
-         Serial.print((int)(input.charAt(4)));
-         Serial.print("month ");
-         Serial.print((int)(input.charAt(5)));
-         Serial.print("day ");
-         Serial.print((int)((input.charAt(6) + 2000)));
-         Serial.println("year");*/
-        // rtc.adjust(input.charAt(1), input.charAt(2), input.charAt(3), input.charAt(6) + 2000, input.charAt(4), input.charAt(5));
-        twatch->rtc_set_time(input.charAt(6) + 2000, input.charAt(4), input.charAt(5), input.charAt(1), input.charAt(2), input.charAt(3));
-      }
-      if (input.charAt(0) == 2)
-      {
-        input.remove(0, 1);
-        input.remove(input.length() - 1, 1);
-        Log.verboseln("Notification Title: %s", input);
-        lv_label_set_text(ui_Notification_Title, input.c_str());
-        NotificationList[10].Title = input;
-      }
-      if (input.charAt(0) == 3)
-      {
-        input.remove(0, 1);
-        input.remove(input.length() - 1, 1);
-        Log.verboseln("Notification Text: %s", input);
-        lv_label_set_text(ui_Notification_Text, input.c_str());
-        NotificationList[10].Text = input;
-      }
-      if (input.charAt(0) == 4)
-      {
-        input.remove(0, 1);
-        input.remove(input.length() - 1, 1);
-        Log.verboseln("Notification Source: %s", input);
-        lv_label_set_text(ui_Notification_Source, input.c_str());
-        NotificationList[10].Source = input;
-        shownotification(1);
-      }
-      if (input.charAt(0) == 5)
-      {
-        input.remove(0, 1);
-        input.remove(input.length() - 1, 1);
-        Log.verboseln("Now Playing: %s", input);
-        char song[64];
-        // sprintf(song, "♪ %s ♪", input.c_str());
-        sprintf(song, "%s   •", input.c_str());
-#ifdef UPDATE_ELEMENTS
-        lv_label_set_text(ui_Now_Playing_Label, song);
-#endif
-        songtime = millis();
-      }
-
-      if (input.charAt(0) == 7)
-      {
-        // static char componentname[25];
-        // sprintf(componentname, "ui_Generic_Notification%d", notificationid);
-        // lv_obj_t * ui_Notification_Widgets[1];
-        ui_Notification_Widgets[0] = ui_Notification_Widget_create(ui_Notification_Panel);
-        lv_obj_set_x(ui_Notification_Widgets[0], 0);
-        lv_obj_set_y(ui_Notification_Widgets[0], (((notificationid - 1) * 60) - 50));
-        notificationid += 1;
-      }
-    }
-    else
-      Log.verboseln(" reached limit without newline ' %s", input);
-    input = ""; // clear after processing for next line
-  }
-
-#ifdef UPDATE_ELEMENTS
-  if (songtime and songtime < (millis() - 70000))
-  {
-    songtime = 0;
-    lv_label_set_text(ui_Now_Playing_Label, "");
-  }
-/*
-  if (BTon and SerialBT.connected() && lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
-    lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
-  else if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
-    lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
-*/
-#endif
+  lv_label_set_text(ui_Now_Playing_Label, Message);
 }
 
 void ToggleBT(lv_event_t *e)
