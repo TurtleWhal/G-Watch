@@ -66,17 +66,12 @@ class CharacteristicCallbacks : public NimBLECharacteristicCallbacks
                  */
                 char *buff = (char *)CALLOC_ASSERT(size, 1, "buff calloc failed");
                 strlcpy(buff, gadgetbridge_RX_msg.c_str(), size);
-                // lv_label_set_text(ui_Now_Playing_Label, buff);
-                ParseGB(buff);
                 /*
                  * Send message
                  */
-                // powermgm_resume_from_ISR();
+                ParseGB(buff);
                 if (xQueueSendFromISR(gadgetbridge_msg_receive_queue, &buff, 0) != pdTRUE)
                     log_e("fail to send a receive BLE msg (%d bytes)", size);
-                Serial.print("Data: ");
-                Serial.println(buff);
-
                 gadgetbridge_RX_msg.clear();
                 break;
             }
