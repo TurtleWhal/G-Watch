@@ -250,8 +250,6 @@ void setup()
   ApplyTheme(nullptr);
   lv_timer_handler();
 
-  BT_on();
-
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
   timerAttachInterrupt(timer, Timer0Handle, true);
@@ -305,6 +303,8 @@ void setup()
     Serial.println(WiFi.localIP());
     lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
   }
+  else
+    BT_on();
 
   ////////////////////////////////////////END OTA
 
@@ -344,8 +344,7 @@ void loop()
   // alarmhandle();
   //BThandle();
   Sleephandle();
-  //gadgetbridge_powermgm_loop_cb(NULL, nullptr);
-
+  
   // This stuff runs every X seconds
   if (Timer0Triggered)
   {

@@ -1,7 +1,6 @@
 #include "config.h"
 #include "blectl.h"
 #include "callback.h"
-#include "device.h"
 #include "utils/charbuffer.h"
 #include "utils/alloc.h"
 #include "utils/bluejsonrequest.h"
@@ -13,6 +12,9 @@
 #include "ble/deviceinfo.h"
 
 #include "NimBLEDescriptor.h"
+#include "Preferences.h"
+
+extern Preferences Storage;
 
 EventGroupHandle_t blectl_status = NULL;
 portMUX_TYPE DRAM_ATTR blectlMux = portMUX_INITIALIZER_UNLOCKED;
@@ -143,25 +145,14 @@ void blectl_setup( void ) {
          *  Create the BLE Device
          */
         char deviceName[ 64 ];
-        snprintf( deviceName, sizeof( deviceName ), "Espruino (%s)", device_get_name() );
+        char BTnamechar[17];
+        Storage.getBytes("BTname", BTnamechar, 17);
+        snprintf( deviceName, sizeof( deviceName ), "Espruino (%s)", BTnamechar);
         NimBLEDevice::init( deviceName );
         /*
-         * set power level from config
+         * set power level
          */
-        switch( blectl_config.txpower ) {
-            case 0:             NimBLEDevice::setPower( ESP_PWR_LVL_N12 );
-                                break;
-            case 1:             NimBLEDevice::setPower( ESP_PWR_LVL_N9 );
-                                break;
-            case 2:             NimBLEDevice::setPower( ESP_PWR_LVL_N6 );
-                                break;
-            case 3:             NimBLEDevice::setPower( ESP_PWR_LVL_N3 );
-                                break;
-            case 4:             NimBLEDevice::setPower( ESP_PWR_LVL_N0 );
-                                break;
-            default:            NimBLEDevice::setPower( ESP_PWR_LVL_N9 );
-                                break;
-        }
+        NimBLEDevice::setPower( ESP_PWR_LVL_N12 ); //-12 dBm
         /*
          * Enable encryption and pairing options
          */
