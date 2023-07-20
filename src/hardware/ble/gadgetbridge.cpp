@@ -1,3 +1,26 @@
+/****************************************************************************
+ *   Aug 11 17:13:51 2020
+ *   Copyright  2020  Dirk Brosswick
+ *   Email: dirk.brosswick@googlemail.com
+ ****************************************************************************/
+ 
+/*
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+//#include "hardware/pmu.h"
+//#include "hardware/powermgm.h"
 #include "config.h"
 #include "gadgetbridge.h"
 #include "hardware/blectl.h"
@@ -5,16 +28,29 @@
 #include "utils/charbuffer.h"
 #include "utils/alloc.h"
 #include "utils/bluejsonrequest.h"
-
+#include "ui.h"
 /**
  * platform depended libs
  */
-#include <Arduino.h>
-#include "NimBLEDescriptor.h"
-#include "ArduinoLog.h"
+#ifdef NATIVE_64BIT
+    #include "utils/logging.h"
+    #include "utils/millis.h"
+#else
+    #if defined( M5PAPER )
+    #elif defined( M5CORE2 )
+    #elif defined( LILYGO_WATCH_2020_V1 ) || defined( LILYGO_WATCH_2020_V2 ) || defined( LILYGO_WATCH_2020_V3 )
+    #elif defined( LILYGO_WATCH_2021 )
+    #elif defined( WT32_SC01 )
+    #else
+        #warning "no hardware driver for blegadgetbridge"
+    #endif
 
-QueueHandle_t gadgetbridge_msg_transmit_queue;                      /** @brief gadgetbridge transmit message queue */
-QueueHandle_t gadgetbridge_msg_receive_queue;                       /** @brief gadgetbridge receive message queue */
+    #include <Arduino.h>
+    #include "NimBLEDescriptor.h"
+
+    QueueHandle_t gadgetbridge_msg_transmit_queue;                      /** @brief gadgetbridge transmit message queue */
+    QueueHandle_t gadgetbridge_msg_receive_queue;                       /** @brief gadgetbridge receive message queue */
+#endif
 /**
  * local buffer and callback table
  */
@@ -27,7 +63,7 @@ static CharBuffer gadgetbridge_RX_msg;                                  /** @bri
 static void gadgetbridge_send_next_msg( char *msg );
 static void gadgetbridge_send_chunk( unsigned char *msg, int32_t len );
 static bool gadgetbridge_send_event_cb( EventBits_t event, void *arg );
-//static bool gadgetbridge_powermgm_loop_cb( EventBits_t event, void *arg );
+static bool gadgetbridge_powermgm_loop_cb( EventBits_t event, void *arg );
 static bool gadgetbridge_blectl_event_cb( EventBits_t event, void *arg );
 
 #ifdef NATIVE_64BIT
@@ -40,16 +76,14 @@ static bool gadgetbridge_blectl_event_cb( EventBits_t event, void *arg );
     class CharacteristicCallbacks: public NimBLECharacteristicCallbacks {
 
         void onRead(NimBLECharacteristic* pCharacteristic){
-            //std::string msg = pCharacteristic->getValue();
-            std::string msg = "getValue";
-            Log.verboseln("BLE received: %s, %i\n", msg.c_str(), msg.length() );
+            std::string msg = pCharacteristic->getValue();
+            log_d("BLE received: %s, %i\n", msg.c_str(), msg.length() );
+            
         };
 
         void onWrite(NimBLECharacteristic* pCharacteristic) {
-            //size_t msgLen = pCharacteristic->getValue().length();
-            //const char *msg = pCharacteristic->getValue().c_str();
-            size_t msgLen = 9;
-            const char *msg = "getValue2";
+            size_t msgLen = pCharacteristic->getValue().length();
+            const char *msg = pCharacteristic->getValue().c_str();
 
             for ( int i = 0 ; i < msgLen ; i++ ) {
                 switch( msg[ i ] ) {
@@ -65,12 +99,16 @@ static bool gadgetbridge_blectl_event_cb( EventBits_t event, void *arg );
                                                  */
                                                 char *buff = (char *)CALLOC_ASSERT( size, 1, "buff calloc failed" );
                                                 strlcpy( buff, gadgetbridge_RX_msg.c_str(), size );
+                                                lv_label_set_text(ui_Now_Playing_Label, buff);
                                                 /*
                                                  * Send message
                                                  */
                                                 //powermgm_resume_from_ISR();
                                                 if ( xQueueSendFromISR( gadgetbridge_msg_receive_queue, &buff, 0 ) != pdTRUE )
-                                                    Log.verboseln("fail to send a receive BLE msg (%d bytes)", size );
+                                                    log_e("fail to send a receive BLE msg (%d bytes)", size );
+                                                Serial.print("Data: ");
+                                                Serial.println(buff);
+                                                
                                                 gadgetbridge_RX_msg.clear();
                                                 break;
                                             }
@@ -124,7 +162,7 @@ void gadgetbridge_setup( void ) {
      * init callback for powermgm and bluetooth
      */
     //powermgm_register_loop_cb( POWERMGM_SILENCE_WAKEUP | POWERMGM_STANDBY | POWERMGM_WAKEUP, gadgetbridge_powermgm_loop_cb, "powermgm blectl loop" );
-    //blectl_register_cb( BLECTL_DISCONNECT, gadgetbridge_blectl_event_cb, "blectl gadgetbridge event cb");
+    blectl_register_cb( BLECTL_DISCONNECT, gadgetbridge_blectl_event_cb, "blectl gadgetbridge event cb");
     return;
 }
 
@@ -162,23 +200,15 @@ bool gadgetbridge_send_loop_msg( const char *format, ... ) {
     /**
      * if we have a string, send it via via call back
      */
-    Log.verboseln("BLE TXLM0");
     if( buffer ) {
         BluetoothJsonRequest request( buffer, strlen( buffer ) * 4 );
         /**
          * check if we have a valid json
          */
-        Log.verboseln("BLE TXLM1");
         if ( request.isValid() )
-            {
-                gadgetbridge_send_event_cb( GADGETBRIDGE_JSON_MSG, (void *)&request );
-            Log.verboseln("BLE TXLM2");
-            }
+            gadgetbridge_send_event_cb( GADGETBRIDGE_JSON_MSG, (void *)&request );
         else
-            {
-                gadgetbridge_send_event_cb( GADGETBRIDGE_MSG, (void *)buffer );
-            Log.verboseln("BLE TXLM3");
-            }
+            gadgetbridge_send_event_cb( GADGETBRIDGE_MSG, (void *)buffer );
 
         request.clear();
         
@@ -211,13 +241,13 @@ bool gadgetbridge_send_msg( const char *format, ... ) {
              */
             if( buffer ) {
                 if ( xQueueSend( gadgetbridge_msg_transmit_queue, &buffer, 0 ) != pdTRUE )
-                    Log.verboseln("fail to send msg");
+                    log_e("fail to send msg");
                 else
                     retval = true;
             }
         }
         else {
-            Log.verboseln("msg can't send while bluetooth is not connected");
+            log_e("msg can't send while bluetooth is not connected");
         }
     #endif
     
@@ -243,7 +273,7 @@ static void gadgetbridge_send_next_msg( char *msg ) {
         gadgetbridge_msg.msgpos = 0;
     }
     else {
-        Log.verboseln("blectl is send another msg or not connected");
+        log_e("blectl is send another msg or not connected");
         gadgetbridge_send_event_cb( GADGETBRIDGE_MSG_SEND_ABORT , (char*)"msg send abort, blectl is send another msg or not connected" );
         return;
     }
@@ -274,7 +304,7 @@ static void gadgetbridge_send_chunk ( unsigned char *msg, int32_t len ) {
  * @return true             
  * @return false 
  */
-bool gadgetbridge_powermgm_loop_cb( EventBits_t event, void *arg ) {
+static bool gadgetbridge_powermgm_loop_cb( EventBits_t event, void *arg ) {
     static uint64_t nextmillis = 0;
     /**
      * check if we connected
@@ -290,11 +320,9 @@ bool gadgetbridge_powermgm_loop_cb( EventBits_t event, void *arg ) {
          * copy next msg from the queue
          */
         if ( !gadgetbridge_msg.active ) {
-            
             char *msg;
             BaseType_t available = xQueueReceive( gadgetbridge_msg_transmit_queue, &msg, 0);
             if ( available == pdTRUE && msg ) {
-                Log.verboseln("BLE2");
                 gadgetbridge_send_next_msg( msg );
                 free( msg );
             }
@@ -306,22 +334,18 @@ bool gadgetbridge_powermgm_loop_cb( EventBits_t event, void *arg ) {
     if ( gadgetbridge_msg.active && nextmillis < millis() ) {
         bool finish = true;
         nextmillis = millis() + BLECTL_CHUNKDELAY;
-        Log.verboseln("BLE3");
 
         if ( gadgetbridge_msg.msgpos < gadgetbridge_msg.msglen ) {
-            Log.verboseln("BLE4");
             if ( ( gadgetbridge_msg.msglen - gadgetbridge_msg.msgpos ) > BLECTL_CHUNKSIZE ) {
                 gadgetbridge_send_chunk ( (unsigned char *)&gadgetbridge_msg.msg[ gadgetbridge_msg.msgpos ], BLECTL_CHUNKSIZE );
                 gadgetbridge_msg.msgpos += BLECTL_CHUNKSIZE;
                 finish = false;
             }
             else if ( ( gadgetbridge_msg.msglen - gadgetbridge_msg.msgpos ) > 0 ) {
-                Log.verboseln("BLE5");
                 gadgetbridge_send_chunk ( (unsigned char *)&gadgetbridge_msg.msg[ gadgetbridge_msg.msgpos ], gadgetbridge_msg.msglen - gadgetbridge_msg.msgpos );
                 gadgetbridge_send_event_cb( GADGETBRIDGE_MSG_SEND_SUCCESS , (char*)"msg send success" );
             }
             else {
-                Log.verboseln("BLE6");
                 gadgetbridge_send_event_cb( GADGETBRIDGE_MSG_SEND_ABORT , (char*)"msg send abort, malformed chunksize" );
             }
         }
@@ -346,7 +370,6 @@ bool gadgetbridge_powermgm_loop_cb( EventBits_t event, void *arg ) {
             /**
              * check if we have a GB message
              */
-            Log.verboseln("BLE RX0");
             if( gbmsg[ 0 ] == 'G' && gbmsg[ 1 ] == 'B' ) {
                 /**
                  * copy gbmsg pointer to a new pointer to prevent destroying gbmsg pointer
@@ -357,15 +380,9 @@ bool gadgetbridge_powermgm_loop_cb( EventBits_t event, void *arg ) {
                 BluetoothJsonRequest request( GBmsg, strlen( GBmsg ) * 4 );
 
                 if ( request.isValid() )
-                    {
-                        gadgetbridge_send_event_cb( GADGETBRIDGE_JSON_MSG, (void *)&request );
-                    Log.verboseln("BLE RX1");
-                    }
+                    gadgetbridge_send_event_cb( GADGETBRIDGE_JSON_MSG, (void *)&request );
                 else
-                    {
-                        gadgetbridge_send_event_cb( GADGETBRIDGE_MSG, (void *)GBmsg );
-                    Log.verboseln("BLE RX1");
-                    }
+                    gadgetbridge_send_event_cb( GADGETBRIDGE_MSG, (void *)GBmsg );
 
                 request.clear();
             }

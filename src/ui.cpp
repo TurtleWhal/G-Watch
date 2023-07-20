@@ -344,7 +344,7 @@ void loop()
   // alarmhandle();
   //BThandle();
   Sleephandle();
-  gadgetbridge_powermgm_loop_cb(NULL, nullptr);
+  //gadgetbridge_powermgm_loop_cb(NULL, nullptr);
 
   // This stuff runs every X seconds
   if (Timer0Triggered)
