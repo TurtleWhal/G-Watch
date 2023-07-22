@@ -9,6 +9,7 @@
 #include "notifications.h"
 #include "Preferences.h"
 #include "hardware/blectl.h"
+#include "ArduinoJson.h"
 
 extern TWatchClass *twatch;
 extern Notification NotificationList[11];
@@ -20,7 +21,67 @@ bool BTon;
 
 void ParseGB(char *Message)
 {
-  lv_label_set_text(ui_Now_Playing_Label, Message);
+  // GB({t:"notify",id:1689704373,src:"Gadgetbridge",title:"",subject:"Testgh",body:"Testgh",sender:"Testgh",tel:"Testgh"})
+
+  StaticJsonDocument<200> doc;
+
+  // char Message2[] = "{t:\"notify\",id:1689704373,src:\"Gadgetbridge\",title:\"\",subject:\"Testgh\",body:\"Testgh\",sender:\"Testgh\",tel:\"Testgh\"}";
+  // Message = "GB({t:\"notify\",id:1234567890,src:\"Messages\",title:\"Dad\",body:\"Test\"})";
+  // GB({t:"notify",id:1234567890,src:"Messages",title:"Dad",body:"Test"})
+  //  char json[] =
+  //      "{sensor:\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
+  const char *TempMessage = Message;
+  DeserializationError error = deserializeJson(doc, TempMessage + 3);
+
+  // Test if parsing succeeds.
+  if (error)
+  {
+    // lv_label_set_text(ui_Now_Playing_Label, Message);
+    return;
+  }
+
+  const char *NotifType = doc["t"];
+
+  if (strcmp(NotifType, "notify") == 0)
+  {
+
+    const char *NotifText = "";
+    const char *NotifTitle = "";
+    const char *NotifSource = "Undefined";
+    int NotifID;
+
+    if (doc.containsKey("title"))
+      NotifTitle = doc["title"];
+    else if (doc.containsKey("subject"))
+      NotifTitle = doc["subject"];
+
+    if (doc.containsKey("body"))
+      NotifText = doc["body"];
+
+    if (doc.containsKey("src"))
+      NotifSource = doc["src"];
+
+    if (doc.containsKey("id"))
+      NotifID = doc["id"];
+
+    Serial.println(Message);
+    if (strcmp(NotifSource, "com.google.android.as") == 0)
+      lv_label_set_text_fmt(ui_Now_Playing_Label, "%s, %s", NotifTitle, NotifText);
+    else
+      shownotification(NotifTitle, NotifText, NotifSource, NotifID, 1);
+  }
+  else if (strcmp(NotifType, "notify-") == 0)
+  {
+    int NotifID = doc["id"];
+    for (int i = 0; i < 10; i++)
+    {
+      if (NotificationList[i].id == NotifID)
+      {
+        // popnotification(i + 1);
+        lv_label_set_text_fmt(ui_Now_Playing_Label, "%i", i);
+      }
+    }
+  }
 }
 
 void ToggleBT(lv_event_t *e)
@@ -52,5 +113,5 @@ void BT_on()
 void BT_off()
 {
   BTon = 0;
-  //SerialBT.disconnect();
+  // SerialBT.disconnect();
 }

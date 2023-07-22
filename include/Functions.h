@@ -4,7 +4,6 @@ extern "C"
 #endif
 
 void writetimertime();
-void shownotification(bool);
 //void notificationdismiss();
 void alarmhandle();
 void BThandle();
