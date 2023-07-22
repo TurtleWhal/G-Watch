@@ -38,11 +38,13 @@ void StepHandle()
 
     if (Steps >= Storage.getUInt("StepGoal") and !Storage.getBool("StepReach"))
     {
-#ifdef UPDATE_ELEMENTS
-      lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
-      lv_label_set_text_fmt(ui_Notification_Text, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
-#endif
-      shownotification(0);
+//#ifdef UPDATE_ELEMENTS
+//      lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
+//      lv_label_set_text_fmt(ui_Notification_Text, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
+//#endif
+      char *StepNotif;
+      sprintf(StepNotif, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
+      shownotification("Step Goal Reached!", StepNotif, "local.stephandle", 0, 0);
       Storage.putBool("StepReach", 1);
     }
 

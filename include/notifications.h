@@ -8,9 +8,10 @@ typedef struct
   String Title;
   String Text;
   String Source;
+  int id;
 } Notification;
 
-void shownotification(bool);
+void shownotification(String, String, String, int, bool);
 void pushnotification(int);
 void popnotification(int);
 void deleteNotification(lv_event_t *e);

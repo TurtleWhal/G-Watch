@@ -20,28 +20,43 @@ bool Donotdisturb;
 extern TWatchClass *twatch;
 extern Preferences Storage;
 
-void shownotification(bool Store)
+void shownotification(String Title, String Text, String Source, int id, bool Store)
 {
   // Create the widget in the Clock screen
   Wakeup("Notification Received");
+
+  lv_label_set_text(ui_Notification_Title, Title.c_str());
+  lv_label_set_text(ui_Notification_Text, Text.c_str());
+  lv_label_set_text(ui_Notification_Source, Source.c_str());
+
   lv_obj_set_x(ui_Notification_Popup, 0);
   lv_obj_set_y(ui_Notification_Popup, -160);
+
   NotificationShow_Animation(ui_Notification_Popup, 0);
+
   notificationtime = millis();
   notificationshowing = 1;
+
   if (!Donotdisturb)
     twatch->motor_shake(2, 30);
+
   if (Store)
-  pushnotification(1);
+  {
+    NotificationList[10].Title = Title;
+    NotificationList[10].Text = Text;
+    NotificationList[10].Source = Source;
+    NotificationList[10].id = id;
+    pushnotification(1);
+  }
 }
 
 void drawnotifications(lv_event_t *e)
 {
   if (lv_scr_act() != ui_Notifications)
   {
-    //ui_Notifications_screen_init();
+    // ui_Notifications_screen_init();
     //_ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
-    //lv_scr_load_anim(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 0);
+    // lv_scr_load_anim(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 0);
     //_ui_screen_change( &ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Notifications_screen_init);
   }
   if (NotificationCount)
