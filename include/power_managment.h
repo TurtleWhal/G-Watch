@@ -14,6 +14,8 @@ extern "C"
   void UpdateBrightness(lv_event_t *e);
   void InitPercent();
   int GetUserBrightness();
+  void FullSpeed();
+  void SleepSpeed();
 
 #ifdef __cplusplus
 } /*extern "C"*/

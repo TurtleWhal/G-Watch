@@ -5,8 +5,10 @@
 #include "power_managment.h"
 #include "screen_management.h"
 #include "ArduinoLog.h"
+#include "esp_pm.h"
 
 extern TWatchClass *twatch;
+esp_pm_config_esp32_t pm_config;
 
 // #define SleepWhenPluggedIn
 #define Sleeptimeout 10000 // time until watch goes to sleep in mS
@@ -57,10 +59,10 @@ void Wakeup(String Wakeup_reason)
     // generictoclock(nullptr);
     // lv_timer_handler();
     WriteTime();
-    //Log.verboseln("IM AWAKE!");
-    // dad hid this comment here because I'm like that.
-    // A few moments later...
-    // Garrett found this comment because dad didn't go to a different line
+    // Log.verboseln("IM AWAKE!");
+    //  dad hid this comment here because I'm like that.
+    //  A few moments later...
+    //  Garrett found this comment because dad didn't go to a different line
     sleeptimer = millis();
     Sleeping = 0;
     // lv_label_set_text_fmt(ui_Battery_Percentage, "%i", prevbrightness);
@@ -72,6 +74,7 @@ void Wakeup(String Wakeup_reason)
   }
   else
     Ticklesleep();
+    FullSpeed();
 }
 
 void Sleep()
@@ -84,7 +87,8 @@ void Sleep()
     twatch->backlight_set_value(0);
     Log.verboseln("Go To Sleep");
     Sleeping = 1;
-    setCpuFrequencyMhz(10); //10 is lowest can go with 40 MHz Crystal
+    //setCpuFrequencyMhz(10); // 10 is lowest can go with 40 MHz Crystal
+    SleepSpeed();
   }
 }
 
@@ -130,7 +134,7 @@ void InitPercent()
 void DrawPower()
 {
 #ifdef UPDATE_ELEMENTS
-  lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", (int)(twatch->power_get_percent()+0.5));
+  lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", (int)(twatch->power_get_percent() + 0.5));
   lv_arc_set_value(ui_Arc_Battery, (twatch->power_get_percent() / 100) * 250);
 #endif
   lastpercent = twatch->power_get_percent();
@@ -171,4 +175,25 @@ void UpdateBrightness(lv_event_t *e)
 int GetUserBrightness()
 {
   return Brightness;
+}
+
+void FullSpeed()
+{
+  pm_config.max_freq_mhz = 240;
+  pm_config.min_freq_mhz = 240;
+  pm_config.light_sleep_enable = true;
+  ESP_ERROR_CHECK(esp_pm_configure(&pm_config));
+  setCpuFrequencyMhz(240);
+}
+
+void SleepSpeed()
+{
+  pm_config.max_freq_mhz = 80;
+  pm_config.min_freq_mhz = 40;
+  pm_config.light_sleep_enable = true;
+  ESP_ERROR_CHECK(esp_pm_configure(&pm_config));
+  //log_d("custom arduino-esp32 framework detected, enable PM/DFS support, %d/%dMHz %s light sleep (%d)", pm_config.max_freq_mhz, pm_config.min_freq_mhz, lighsleep ? "without" : "with", lighsleep);
+  setCpuFrequencyMhz(80);
+  // esp_light_sleep_start();
+  // esp_light_sleep_start();
 }
