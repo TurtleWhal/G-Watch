@@ -26,6 +26,9 @@
 #include "Preferences.h"
 #include "ArduinoLog.h"
 #include "ArduinoOTA.h"
+#include "hardware/ble/gadgetbridge.h"
+
+
 
 const char *ssid = "ThisNetworkIsOWN3D";
 const char *password = "10244096";
@@ -43,7 +46,7 @@ TWatchClass *twatch = nullptr;
 
 CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
 
-extern BluetoothSerial SerialBT;
+//extern BluetoothSerial SerialBT;
 extern Preferences Storage;
 
 bool useOTA;
@@ -102,8 +105,10 @@ void btn1_click(void *param)
 {
   Log.verboseln("BTN1 Click. Power Percent: %i", (int)twatch->power_get_percent());
   // twatch->motor_shake(1, 60);
+ /*
   if (BTon)
     SerialBT.println(twatch->power_get_percent());
+    */
   Wakeup("Button 1 Pressed");
 }
 void btn2_click(void *param)
@@ -114,8 +119,10 @@ void btn2_click(void *param)
     ToggleStopwatch(nullptr);
   if (lv_scr_act() == ui_Timers)
     ToggleTimer(nullptr);
+  /*
   if (BTon)
     SerialBT.println(twatch->power_get_volt());
+    */
   Wakeup("Button 2 Pressed");
 }
 void btn3_click(void *param)
@@ -154,6 +161,10 @@ void btn3_held(void *param)
   Wakeup("Button 3 Held");
   totimescreen(nullptr);
   twatch->motor_shake(1, 30);
+              gadgetbridge_send_msg("{\t\":\"notify\",\"id\":1654906063,\"src\":\"K-9 Mail\",\"title\":\"foo\",\"body\":\"bar 23\"}");
+              gadgetbridge_send_loop_msg( "{\"t\":\"notify\",\"id\":1654906064,\"src\":\"K-9 Mail\",\"title\":\"foo\",\"body\":\"bar 23\"}" );
+//gadgetbridge_send_msg( "{\"t\":\"notify\",\"id\":1654906064,\"src\":\"K-9 Mail\",\"title\":\"foo\",\"body\":\"bar 23\"}" );
+
 }
 
 void setup()
@@ -161,7 +172,7 @@ void setup()
   setCpuFrequencyMhz(240);
 
   Serial.begin(115200); /* prepare for possible serial debug */
-  // Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
+  Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
 
   twatch = TWatchClass::getWatch();
   twatch->hal_init();
@@ -239,8 +250,6 @@ void setup()
   ApplyTheme(nullptr);
   lv_timer_handler();
 
-  BT_on();
-
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
   timerAttachInterrupt(timer, Timer0Handle, true);
@@ -294,6 +303,8 @@ void setup()
     Serial.println(WiFi.localIP());
     lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
   }
+  else
+    BT_on();
 
   ////////////////////////////////////////END OTA
 
@@ -331,9 +342,9 @@ void loop()
     delay(100);
   }
   // alarmhandle();
-  BThandle();
+  //BThandle();
   Sleephandle();
-
+  
   // This stuff runs every X seconds
   if (Timer0Triggered)
   {
