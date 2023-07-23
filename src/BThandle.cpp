@@ -21,6 +21,7 @@ bool BTon;
 
 void ParseGB(char *Message)
 {
+  static int songtime;
   // GB({t:"notify",id:1689704373,src:"Gadgetbridge",title:"",subject:"Testgh",body:"Testgh",sender:"Testgh",tel:"Testgh"})
 
   StaticJsonDocument<200> doc;
@@ -65,8 +66,11 @@ void ParseGB(char *Message)
       NotifID = doc["id"];
 
     Serial.println(Message);
-    if (strcmp(NotifSource, "com.google.android.as") == 0)
-      lv_label_set_text_fmt(ui_Now_Playing_Label, "%s, %s", NotifTitle, NotifText);
+    if (strcmp(NotifSource, "Android System Intelligence") == 0)
+    {
+      lv_label_set_text_fmt(ui_Now_Playing_Label, "%s   •", NotifTitle);
+      songtime = millis();
+    }
     else
       shownotification(NotifTitle, NotifText, NotifSource, NotifID, 1);
   }
@@ -81,6 +85,19 @@ void ParseGB(char *Message)
         lv_label_set_text_fmt(ui_Now_Playing_Label, "%i", i);
       }
     }
+  }
+  else if (strcmp(NotifType, "musicinfo") == 0)
+  {
+    const char *MusicArtist = "";
+    const char *MusicSong = "";
+    MusicArtist = doc["artist"];
+    MusicSong = doc["track"];
+  }
+
+  if (songtime and songtime < (millis() - 70000))
+  {
+    songtime = 0;
+    lv_label_set_text(ui_Now_Playing_Label, "");
   }
 }
 
