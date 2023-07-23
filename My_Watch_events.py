@@ -270,3 +270,7 @@ def calchandle(event_struct):
 def CalcHandle(event_struct):
     return
 
+
+def ClockDown(event_struct):
+    return
+

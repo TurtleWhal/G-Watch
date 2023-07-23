@@ -328,14 +328,22 @@ lv_obj_t *ui_Music_Title;
 
 // SCREEN: ui_Weather
 void ui_Weather_screen_init(void);
+void ui_event_Weather( lv_event_t * e);
 lv_obj_t *ui_Weather;
-lv_obj_t *ui_Arc1;
-lv_obj_t *ui_Image3;
+lv_obj_t *ui_Sun_Phase_Arc;
+lv_obj_t *ui_Weather_Image;
 lv_obj_t *ui_Temperature;
-lv_obj_t *ui_Panel4;
-lv_obj_t *ui_Panel2;
-lv_obj_t *ui_Label1;
-lv_obj_t *ui_Label2;
+lv_obj_t *ui_Weather_Ground;
+lv_obj_t *ui_HiLo_Temp_Line;
+lv_obj_t *ui_High_Temp;
+lv_obj_t *ui_Low_Temp;
+lv_obj_t *ui_Weather_State;
+lv_obj_t *ui_Humidity_Icon;
+lv_obj_t *ui_Humidity_Label;
+lv_obj_t *ui_Precepitation_Icon;
+lv_obj_t *ui_Precepitation_Label;
+lv_obj_t *ui_UV_Index_Icon;
+lv_obj_t *ui_UV_Index_Label;
 lv_obj_t *ui____initial_actions0;
 const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_4809254_png};
 
@@ -865,7 +873,7 @@ lv_indev_wait_release(lv_indev_get_act());
 }
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
 lv_indev_wait_release(lv_indev_get_act());
-      _ui_screen_change( &ui_Music, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Music_screen_init);
+      ClockDown( e );
 }
 }
 void ui_event_Notification_Popup( lv_event_t * e) {
@@ -1305,6 +1313,13 @@ if ( event_code == LV_EVENT_SCREEN_UNLOAD_START) {
 }
 }
 void ui_event_Music( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, &ui_Clock_screen_init);
+}
+}
+void ui_event_Weather( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
 lv_indev_wait_release(lv_indev_get_act());

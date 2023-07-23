@@ -11,6 +11,7 @@ extern "C" {
 #endif
 
 void totimescreen(lv_event_t * e);
+void ClockDown(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
 void drawnotifications(lv_event_t * e);
 void ApplyTheme(lv_event_t * e);

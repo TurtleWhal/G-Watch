@@ -333,14 +333,22 @@ extern lv_obj_t *ui_Music_Artist;
 extern lv_obj_t *ui_Music_Title;
 // SCREEN: ui_Weather
 void ui_Weather_screen_init(void);
+void ui_event_Weather( lv_event_t * e);
 extern lv_obj_t *ui_Weather;
-extern lv_obj_t *ui_Arc1;
-extern lv_obj_t *ui_Image3;
+extern lv_obj_t *ui_Sun_Phase_Arc;
+extern lv_obj_t *ui_Weather_Image;
 extern lv_obj_t *ui_Temperature;
-extern lv_obj_t *ui_Panel4;
-extern lv_obj_t *ui_Panel2;
-extern lv_obj_t *ui_Label1;
-extern lv_obj_t *ui_Label2;
+extern lv_obj_t *ui_Weather_Ground;
+extern lv_obj_t *ui_HiLo_Temp_Line;
+extern lv_obj_t *ui_High_Temp;
+extern lv_obj_t *ui_Low_Temp;
+extern lv_obj_t *ui_Weather_State;
+extern lv_obj_t *ui_Humidity_Icon;
+extern lv_obj_t *ui_Humidity_Label;
+extern lv_obj_t *ui_Precepitation_Icon;
+extern lv_obj_t *ui_Precepitation_Label;
+extern lv_obj_t *ui_UV_Index_Icon;
+extern lv_obj_t *ui_UV_Index_Label;
 extern lv_obj_t *ui____initial_actions0;
 
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
@@ -368,6 +376,9 @@ LV_IMG_DECLARE( ui_img_flashlight_png);   // assets/Flashlight.png
 LV_IMG_DECLARE( ui_img_album_cover_png);   // assets/album cover.png
 LV_IMG_DECLARE( ui_img_moon_png);   // assets/moon.png
 LV_IMG_DECLARE( ui_img_mostly_cloudy_png);   // assets/Mostly Cloudy.png
+LV_IMG_DECLARE( ui_img_rain_png);   // assets/rain.png
+LV_IMG_DECLARE( ui_img_snow_rain_png);   // assets/Snow Rain.png
+LV_IMG_DECLARE( ui_img_mostly_sunny_png);   // assets/Mostly Sunny.png
 LV_IMG_DECLARE( ui_img_4809254_png);   // assets/4809254.png
 
 LV_FONT_DECLARE( ui_font_Comfortaa_12);
