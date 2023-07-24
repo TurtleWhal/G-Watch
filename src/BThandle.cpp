@@ -120,7 +120,7 @@ void ParseGB(char *Message)
     MusicPlaying = received["musicstate"];
     MusicPos = received["position"];
 
-    if (strcmp(MusicPlaying, "play") == 0)
+    /*if (strcmp(MusicPlaying, "play") == 0)
     {
       // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
       lv_label_set_text(ui_Now_Playing_Label, MusicPlaying);
@@ -129,7 +129,7 @@ void ParseGB(char *Message)
     {
       // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
       lv_label_set_text(ui_Now_Playing_Label, MusicPlaying);
-    }
+    }*/
     lv_label_set_text_fmt(ui_Music_Time, "%i:%02i / %i:%02i", (int)(MusicPos / 60), MusicPos % 60, (int)(MusicLength / 60), MusicLength % 60);
     lv_slider_set_range(ui_Music_Play_Bar, 0, MusicLength);
     lv_slider_set_value(ui_Music_Play_Bar, MusicPos, LV_ANIM_ON);
@@ -147,7 +147,8 @@ void PauseMusic(lv_event_t *e)
   sprintf(TempChar, "GB(%s", TempJson);
   lv_label_set_text(ui_Now_Playing_Label, TempChar);
   gadgetbridge_send_msg("json", TempChar);*/
-  gadgetbridge_send_msg("\r\n{t:\"music\", n:\"pause\"}\r\n");
+  //gadgetbridge_send_msg("\r\n{t:\"music\", n:\"pause\"}\r\n");
+  //BTsend("{\"t\":\"music\", \"n\":\"pause\"}");
 }
 
 void BTHandle()
@@ -192,47 +193,36 @@ void BT_off()
   // SerialBT.disconnect();
 }
 
-void BTsend(char *msg2)
+void BTsend(String message)
 {
   Serial.println("BTsend");
-  msg = "\r\n{\"t\":\"status\", \"bat\":42}\r\naaaaaqaaaaaaabbbbbbbbbbbcccccccccccddddd";
+  msg = "\r\n" + message + "\r\n";
   msgAvailible = 1;
-  /*msg.sizeof
-
-
-
-  String
-  \0\r\n string \r\n
-  for length of string % 20
-  send string chunk
-
-  s | t | r | i | n | g
-  send s then t then r then i then n then g*/
+  Log.verboseln("BTsend: %s", message.c_str());
+  //msg = "\r\n{\"t\":\"status\", \"bat\":42}\r\n";
 }
 
 void BTmsgloop()
 {
   // Serial.println("BTmsgloop");
-  //  add \r\n to beginning and end when sent
-  Serial.println(msgAvailible);
-  char tempmsg[100];
+  // add \r\n to beginning and end when sent
+  // Serial.println(msgAvailible);
+  unsigned char tempmsg[BLECTL_CHUNKSIZE + 1];
   if (msgAvailible)
   {
-    if (sizeof(msg) > 20)
+    if (msg.length() > BLECTL_CHUNKSIZE)
     {
-      msg.remove(0, 19);
-      sprintf(tempmsg, "\0%s", msg);
-      //msg = msg.substring(19);
+      msg.getBytes(tempmsg + 1, BLECTL_CHUNKSIZE);
+      // tempmsg[0] = 0;
+      msg.remove(0, BLECTL_CHUNKSIZE - 1);
+      gadgetbridge_send_chunk(tempmsg, BLECTL_CHUNKSIZE);
     }
     else
     {
-      sprintf(tempmsg, "%s", msg);
+      msg.getBytes(tempmsg, BLECTL_CHUNKSIZE);
       msgAvailible = false;
-      // msg = "\r\n{\"t\":\"status\", \"bat\":42}\r\n";
+      gadgetbridge_send_chunk(tempmsg, msg.length());
     }
-
-    gadgetbridge_send_chunk((unsigned char *)tempmsg, 20);
-    Serial.println(tempmsg);
-    Serial.println(msg);
+    // Serial.println(msg);
   }
 }

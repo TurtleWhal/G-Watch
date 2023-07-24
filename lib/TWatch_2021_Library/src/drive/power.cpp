@@ -50,7 +50,7 @@ void TWatchClass::power_updata(uint32_t millis, uint32_t time_ms) {
     Millis = millis;
   }
 }
-float TWatchClass::power_get_percent() {
+int TWatchClass::power_get_percent() {
 
   /*float Qcm[11] = {2671, 3079, 3148, 3211, 3282, 3335, 3379, 3441, 3522, 3611, 3740};
   if (!digitalRead(TWATCH_CHARGING) || power_get_volt() > 4000) {
@@ -73,7 +73,7 @@ float TWatchClass::power_get_percent() {
   float decade = i * 10.0;
   _pow_percent = constrain(decade + 10.0 * ((_pow_cur_vol - Qcm[charging][i]) / vol_section), 0.0, 100.0);
 
-  return _pow_percent;
+  return (int)_pow_percent + 0.5;
 }
 float TWatchClass::power_get_volt() {
   return constrain(_pow_cur_vol, 0, 4200);

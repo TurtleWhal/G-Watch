@@ -183,7 +183,7 @@ public:
   /* Power */ 
   void power_init();
   float power_get_volt();
-  float power_get_percent();
+  int power_get_percent();
   void power_updata(uint32_t millis, uint32_t time_ms);
 #endif
 

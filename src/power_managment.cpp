@@ -197,3 +197,8 @@ void SleepSpeed()
   // esp_light_sleep_start();
   // esp_light_sleep_start();
 }
+
+bool isCharging()
+{
+  return charging;
+}

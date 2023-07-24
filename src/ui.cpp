@@ -369,7 +369,14 @@ void loop()
     StepHandle();
     DrawPower();
 
-    BTsend(nullptr);
+    StaticJsonDocument<200> batinfo;
+    batinfo["t"] = "status";
+    batinfo["bat"] = twatch->power_get_percent();
+    //batinfo["volt"] = (float)twatch->power_get_volt()/1000;
+    batinfo["chg"] = isCharging() ? 1:0;
+    String buffer;
+    serializeJson(batinfo, buffer);
+    BTsend(buffer);
     // gadgetbridge_send_msg("\r\n{t:\"status\", bat:%d}\r\n", 79);
     // gadgetbridge_send_msg("\r\n{t:\"status\", bat:%d}\r\n", 79);
     // const char *buffer = "{t:\"status\", bat:0}";
