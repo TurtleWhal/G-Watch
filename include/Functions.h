@@ -13,6 +13,7 @@ void Sleephandle();
 void Compass();
 void StepHandle();
 void Timer0Handle();
+void BTTimerHandle();
 void pushnotification(int);
 void DrawPower();
 //void ApplyTheme();

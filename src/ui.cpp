@@ -28,7 +28,7 @@
 #include "ArduinoOTA.h"
 #include "hardware/ble/gadgetbridge.h"
 
-
+#include "ArduinoJson.h"
 
 const char *ssid = "ThisNetworkIsOWN3D";
 const char *password = "10244096";
@@ -46,13 +46,16 @@ TWatchClass *twatch = nullptr;
 
 CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
 
-//extern BluetoothSerial SerialBT;
+// extern BluetoothSerial SerialBT;
 extern Preferences Storage;
 
 bool useOTA;
 extern bool BTon;
 String input = "";
 bool Timer0Triggered;
+bool BTTimerTriggered;
+
+extern NimBLECharacteristic *pGadgetbridgeTXCharacteristic;
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -105,10 +108,10 @@ void btn1_click(void *param)
 {
   Log.verboseln("BTN1 Click. Power Percent: %i", (int)twatch->power_get_percent());
   // twatch->motor_shake(1, 60);
- /*
-  if (BTon)
-    SerialBT.println(twatch->power_get_percent());
-    */
+  /*
+   if (BTon)
+     SerialBT.println(twatch->power_get_percent());
+     */
   Wakeup("Button 1 Pressed");
 }
 void btn2_click(void *param)
@@ -161,10 +164,9 @@ void btn3_held(void *param)
   Wakeup("Button 3 Held");
   totimescreen(nullptr);
   twatch->motor_shake(1, 30);
-              gadgetbridge_send_msg("{\t\":\"notify\",\"id\":1654906063,\"src\":\"K-9 Mail\",\"title\":\"foo\",\"body\":\"bar 23\"}");
-              gadgetbridge_send_loop_msg( "{\"t\":\"notify\",\"id\":1654906064,\"src\":\"K-9 Mail\",\"title\":\"foo\",\"body\":\"bar 23\"}" );
-//gadgetbridge_send_msg( "{\"t\":\"notify\",\"id\":1654906064,\"src\":\"K-9 Mail\",\"title\":\"foo\",\"body\":\"bar 23\"}" );
-
+  gadgetbridge_send_msg("{\t\":\"notify\",\"id\":1654906063,\"src\":\"K-9 Mail\",\"title\":\"foo\",\"body\":\"bar 23\"}");
+  gadgetbridge_send_loop_msg("{\"t\":\"notify\",\"id\":1654906064,\"src\":\"K-9 Mail\",\"title\":\"foo\",\"body\":\"bar 23\"}");
+  // gadgetbridge_send_msg( "{\"t\":\"notify\",\"id\":1654906064,\"src\":\"K-9 Mail\",\"title\":\"foo\",\"body\":\"bar 23\"}" );
 }
 
 void setup()
@@ -172,7 +174,7 @@ void setup()
   setCpuFrequencyMhz(240);
 
   Serial.begin(115200); /* prepare for possible serial debug */
-  Log.begin   (LOG_LEVEL_VERBOSE, &Serial);
+  Log.begin(LOG_LEVEL_VERBOSE, &Serial);
 
   twatch = TWatchClass::getWatch();
   twatch->hal_init();
@@ -224,6 +226,7 @@ void setup()
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
 
   ui_Clock_screen_init();
+  ui_Music_screen_init();
 
   lv_obj_del(ui_Tick_Dots); // Only used For visual purposes in Squareline Studio
   lv_obj_del(ui_Tick_Dashes);
@@ -253,8 +256,15 @@ void setup()
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
   timerAttachInterrupt(timer, Timer0Handle, true);
-  timerAlarmWrite(timer, 10000000, true);
+  timerAlarmWrite(timer, 10000 * 1000, true); // 10 seconds
   timerAlarmEnable(timer);
+
+  // BTmsgloop 50ms timer
+  hw_timer_t *timer2 = NULL;
+  timer2 = timerBegin(1, 80, true);
+  timerAttachInterrupt(timer2, BTTimerHandle, true);
+  timerAlarmWrite(timer2, 1000 * 1000, true);
+  timerAlarmEnable(timer2);
 
   //////////////////////////Fake Notifications///////////
   FakeNotes();
@@ -342,15 +352,73 @@ void loop()
     delay(100);
   }
   // alarmhandle();
-  //BThandle();
+  BTHandle();
   Sleephandle();
-  
+
+  // this runs every 50ms
+  if (BTTimerTriggered)
+  {
+    BTmsgloop();
+    BTTimerTriggered = 0;
+  }
+
   // This stuff runs every X seconds
   if (Timer0Triggered)
   {
     Timer0Triggered = 0;
     StepHandle();
     DrawPower();
+
+    BTsend(nullptr);
+    // gadgetbridge_send_msg("\r\n{t:\"status\", bat:%d}\r\n", 79);
+    // gadgetbridge_send_msg("\r\n{t:\"status\", bat:%d}\r\n", 79);
+    // const char *buffer = "{t:\"status\", bat:0}";
+    // sprintf((char *)buffer, "\r\n{t:\"status\", bat:%d}\r\n", 79);
+    //  const unsigned char *TempMsg = "\r\n{t:\"status\", bat:79}\r\n";
+    // pGadgetbridgeTXCharacteristic->setValue(*buffer, 24);
+    // pGadgetbridgeTXCharacteristic->setValue(&3, 1);
+
+    /*StaticJsonDocument<200> Sendjson;
+    Sendjson["t"] = "status";
+    Sendjson["bat"] = 72;
+    String TempJson;
+    serializeJson(Sendjson, TempJson);
+    TempJson = "\r\n{t:\"status\", bat:0}\r\n";
+    // TempJson = "\0\r\n" + TempJson + "\r\n";
+    // sprintf((char *)TempJson.c_str(), "", TempJson.c_str());
+    lv_label_set_text(ui_Now_Playing_Label, TempJson.c_str());
+
+    // unsigned char buf[26] = "\0\r\n{t:\"status\", bat:";
+    // unsigned char buf2[26] = "98}\r\n";
+    unsigned char buf[26] = "\0\r\n{\"t\":\"status\", \"b";
+    unsigned char buf2[26] = "at\":96}\r\n";
+
+    // gadgetbridge_send_chunk(buf, 21);
+
+    gadgetbridge_send_chunk(buf, 20);
+    delay(50);
+    gadgetbridge_send_chunk(buf2, 9);*/
+
+    /*static bool temp = true;
+    if (temp)
+    {
+      // buffer = "\r\n{t:\"status\", bat:7";
+      //buf = "\r\n{t:\"status\", bat:\0";
+      gadgetbridge_send_chunk(buf, 21);
+      temp = !temp;
+    }
+    else
+    {
+      // buffer = "9}\r\n";
+      //buf[26] = "0}\r\n";
+      gadgetbridge_send_chunk(buf2, 2);
+      temp = !temp;
+    }*/
+
+    // gadgetbridge_send_chunk((unsigned char *)buffer, 25);
+    //  gadgetbridge_send_loop_msg("\r\n{t:\"status\", bat:%d}\r\n", 79);
+
+    // pGadgetbridgeTXCharacteristic->notify();
   }
 }
 
@@ -358,6 +426,11 @@ void Timer0Handle()
 {
   Log.verboseln("Timer 0 Fired");
   Timer0Triggered = 1;
+}
+
+void BTTimerHandle()
+{
+  BTTimerTriggered = 1;
 }
 
 void ToggleFlashlight(lv_event_t *e)

@@ -23,7 +23,7 @@ static CharBuffer gadgetbridge_RX_msg;           /** @brief RX msg buffer */
  * local function declaration
  */
 static void gadgetbridge_send_next_msg(char *msg);
-static void gadgetbridge_send_chunk(unsigned char *msg, int32_t len);
+//static void gadgetbridge_send_chunk(unsigned char *msg, int32_t len);
 static bool gadgetbridge_send_event_cb(EventBits_t event, void *arg);
 static bool gadgetbridge_powermgm_loop_cb(EventBits_t event, void *arg);
 static bool gadgetbridge_blectl_event_cb(EventBits_t event, void *arg);
@@ -258,7 +258,7 @@ static void gadgetbridge_send_next_msg(char *msg)
  * @param msg       pointer to a msg
  * @param len       chunk size (normaly 20bytes)
  */
-static void gadgetbridge_send_chunk(unsigned char *msg, int32_t len)
+void gadgetbridge_send_chunk(unsigned char *msg, int32_t len)
 {
     /*
      * send msg chunk

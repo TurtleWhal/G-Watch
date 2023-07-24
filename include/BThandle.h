@@ -3,8 +3,10 @@ extern "C"
 {
 #endif
 
-void BThandle();
+void BTHandle();
 void ParseGB(char *Message);
+void BTmsgloop();
+void BTsend(char *msg2);
 //bool readStringUntil(String &input, size_t char_limit);
 void ToggleBT(lv_event_t *e);
 void BT_off();

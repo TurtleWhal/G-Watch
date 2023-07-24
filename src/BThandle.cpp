@@ -9,6 +9,7 @@
 #include "notifications.h"
 #include "Preferences.h"
 #include "hardware/blectl.h"
+#include "hardware/ble/gadgetbridge.h"
 #include "ArduinoJson.h"
 
 extern TWatchClass *twatch;
@@ -17,14 +18,19 @@ extern Preferences Storage;
 extern int notificationid;
 lv_obj_t *ui_Notification_Widgets[1];
 LV_IMG_DECLARE(ui_img_bluetooth_small_png);
+LV_IMG_DECLARE(ui_img_pause_button_png);
 bool BTon;
+int songtime;
+int MusicPos;
+bool msgAvailible;
+static String msg;
 
 void ParseGB(char *Message)
 {
-  static int songtime;
+  static int MusicLength;
   // GB({t:"notify",id:1689704373,src:"Gadgetbridge",title:"",subject:"Testgh",body:"Testgh",sender:"Testgh",tel:"Testgh"})
 
-  StaticJsonDocument<200> doc;
+  StaticJsonDocument<200> received;
 
   // char Message2[] = "{t:\"notify\",id:1689704373,src:\"Gadgetbridge\",title:\"\",subject:\"Testgh\",body:\"Testgh\",sender:\"Testgh\",tel:\"Testgh\"}";
   // Message = "GB({t:\"notify\",id:1234567890,src:\"Messages\",title:\"Dad\",body:\"Test\"})";
@@ -32,7 +38,7 @@ void ParseGB(char *Message)
   //  char json[] =
   //      "{sensor:\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
   const char *TempMessage = Message;
-  DeserializationError error = deserializeJson(doc, TempMessage + 3);
+  DeserializationError error = deserializeJson(received, TempMessage + 3);
 
   // Test if parsing succeeds.
   if (error)
@@ -41,7 +47,10 @@ void ParseGB(char *Message)
     return;
   }
 
-  const char *NotifType = doc["t"];
+  const char *NotifType = received["t"];
+
+  //  if (strcmp(NotifType, "musicstate") != 0)
+  lv_label_set_text(ui_Now_Playing_Label, Message);
 
   if (strcmp(NotifType, "notify") == 0)
   {
@@ -51,19 +60,19 @@ void ParseGB(char *Message)
     const char *NotifSource = "Undefined";
     int NotifID;
 
-    if (doc.containsKey("title"))
-      NotifTitle = doc["title"];
-    else if (doc.containsKey("subject"))
-      NotifTitle = doc["subject"];
+    if (received.containsKey("title"))
+      NotifTitle = received["title"];
+    else if (received.containsKey("subject"))
+      NotifTitle = received["subject"];
 
-    if (doc.containsKey("body"))
-      NotifText = doc["body"];
+    if (received.containsKey("body"))
+      NotifText = received["body"];
 
-    if (doc.containsKey("src"))
-      NotifSource = doc["src"];
+    if (received.containsKey("src"))
+      NotifSource = received["src"];
 
-    if (doc.containsKey("id"))
-      NotifID = doc["id"];
+    if (received.containsKey("id"))
+      NotifID = received["id"];
 
     Serial.println(Message);
     if (strcmp(NotifSource, "Android System Intelligence") == 0)
@@ -76,7 +85,7 @@ void ParseGB(char *Message)
   }
   else if (strcmp(NotifType, "notify-") == 0)
   {
-    int NotifID = doc["id"];
+    int NotifID = received["id"];
     for (int i = 0; i < 10; i++)
     {
       if (NotificationList[i].id == NotifID)
@@ -90,10 +99,59 @@ void ParseGB(char *Message)
   {
     const char *MusicArtist = "";
     const char *MusicSong = "";
-    MusicArtist = doc["artist"];
-    MusicSong = doc["track"];
-  }
+    const char *MusicAlbum = "";
 
+    MusicArtist = received["artist"];
+    MusicSong = received["track"];
+    MusicLength = received["dur"];
+    MusicAlbum = received["album"];
+
+    // ui_Music_screen_init();
+
+    lv_label_set_text(ui_Music_Artist, MusicArtist);
+    lv_label_set_text(ui_Music_Title, MusicSong);
+    lv_label_set_text(ui_Music_Album, MusicAlbum);
+    // twatch->motor_shake(1, 50);
+  }
+  else if (strcmp(NotifType, "musicstate") == 0)
+  {
+    const char *MusicPlaying;
+
+    MusicPlaying = received["musicstate"];
+    MusicPos = received["position"];
+
+    if (strcmp(MusicPlaying, "play") == 0)
+    {
+      // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
+      lv_label_set_text(ui_Now_Playing_Label, MusicPlaying);
+    }
+    else
+    {
+      // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
+      lv_label_set_text(ui_Now_Playing_Label, MusicPlaying);
+    }
+    lv_label_set_text_fmt(ui_Music_Time, "%i:%02i / %i:%02i", (int)(MusicPos / 60), MusicPos % 60, (int)(MusicLength / 60), MusicLength % 60);
+    lv_slider_set_range(ui_Music_Play_Bar, 0, MusicLength);
+    lv_slider_set_value(ui_Music_Play_Bar, MusicPos, LV_ANIM_ON);
+  }
+}
+
+void PauseMusic(lv_event_t *e)
+{
+  /*StaticJsonDocument<200> Send;
+  Send["t"] = "music";
+  Send["n"] = "pause";
+  String TempJson;
+  serializeJson(Send, TempJson);
+  char *TempChar;
+  sprintf(TempChar, "GB(%s", TempJson);
+  lv_label_set_text(ui_Now_Playing_Label, TempChar);
+  gadgetbridge_send_msg("json", TempChar);*/
+  gadgetbridge_send_msg("\r\n{t:\"music\", n:\"pause\"}\r\n");
+}
+
+void BTHandle()
+{
   if (songtime and songtime < (millis() - 70000))
   {
     songtime = 0;
@@ -114,6 +172,7 @@ void BT_on()
   BTon = 1;
 
   blectl_setup();
+
   /*
   if (Storage.isKey("BTname"))
   {
@@ -131,4 +190,49 @@ void BT_off()
 {
   BTon = 0;
   // SerialBT.disconnect();
+}
+
+void BTsend(char *msg2)
+{
+  Serial.println("BTsend");
+  msg = "\r\n{\"t\":\"status\", \"bat\":42}\r\naaaaaqaaaaaaabbbbbbbbbbbcccccccccccddddd";
+  msgAvailible = 1;
+  /*msg.sizeof
+
+
+
+  String
+  \0\r\n string \r\n
+  for length of string % 20
+  send string chunk
+
+  s | t | r | i | n | g
+  send s then t then r then i then n then g*/
+}
+
+void BTmsgloop()
+{
+  // Serial.println("BTmsgloop");
+  //  add \r\n to beginning and end when sent
+  Serial.println(msgAvailible);
+  char tempmsg[100];
+  if (msgAvailible)
+  {
+    if (sizeof(msg) > 20)
+    {
+      msg.remove(0, 19);
+      sprintf(tempmsg, "\0%s", msg);
+      //msg = msg.substring(19);
+    }
+    else
+    {
+      sprintf(tempmsg, "%s", msg);
+      msgAvailible = false;
+      // msg = "\r\n{\"t\":\"status\", \"bat\":42}\r\n";
+    }
+
+    gadgetbridge_send_chunk((unsigned char *)tempmsg, 20);
+    Serial.println(tempmsg);
+    Serial.println(msg);
+  }
 }

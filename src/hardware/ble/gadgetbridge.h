@@ -87,5 +87,7 @@
      */
     bool gadgetbridge_send_msg( const char *format, ... );
 
+    void gadgetbridge_send_chunk(unsigned char *msg, int32_t len);
+
 
 #endif // _GADEGTBRIDGE_H
