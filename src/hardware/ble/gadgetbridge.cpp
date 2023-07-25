@@ -7,7 +7,7 @@
 #include "utils/bluejsonrequest.h"
 #include "ui.h"
 #include "BThandle.h"
-#include <Arduino.h>
+#include "Arduino.h"
 #include "NimBLEDescriptor.h"
 
 QueueHandle_t gadgetbridge_msg_transmit_queue; /** @brief gadgetbridge transmit message queue */
@@ -23,7 +23,6 @@ static CharBuffer gadgetbridge_RX_msg;           /** @brief RX msg buffer */
  * local function declaration
  */
 static void gadgetbridge_send_next_msg(char *msg);
-//static void gadgetbridge_send_chunk(unsigned char *msg, int32_t len);
 static bool gadgetbridge_send_event_cb(EventBits_t event, void *arg);
 static bool gadgetbridge_powermgm_loop_cb(EventBits_t event, void *arg);
 static bool gadgetbridge_blectl_event_cb(EventBits_t event, void *arg);
