@@ -320,6 +320,7 @@ void ui_event_Music( lv_event_t * e);
 extern lv_obj_t *ui_Music;
 extern lv_obj_t *ui_Cover_Art;
 extern lv_obj_t *ui_Control_Panel;
+void ui_event_Music_Play_Button( lv_event_t * e);
 extern lv_obj_t *ui_Music_Play_Button;
 extern lv_obj_t *ui_Music_Play_Button_Image;
 extern lv_obj_t *ui_Music_Skip_Forward_Button;
@@ -331,6 +332,8 @@ extern lv_obj_t *ui_Music_Skip_Backwards_Button_Bar;
 extern lv_obj_t *ui_Music_Play_Bar;
 extern lv_obj_t *ui_Music_Artist;
 extern lv_obj_t *ui_Music_Title;
+extern lv_obj_t *ui_Music_Album;
+extern lv_obj_t *ui_Music_Time;
 // SCREEN: ui_Weather
 void ui_Weather_screen_init(void);
 void ui_event_Weather( lv_event_t * e);
@@ -387,6 +390,7 @@ LV_FONT_DECLARE( ui_font_Comfortaa_26);
 LV_FONT_DECLARE( ui_font_Comfortaa_30);
 LV_FONT_DECLARE( ui_font_Monoton_48);
 LV_FONT_DECLARE( ui_font_Music_14);
+LV_FONT_DECLARE( ui_font_Comfortaa_10);
 
 void ui_init(void);
 

@@ -314,6 +314,7 @@ void ui_event_Music( lv_event_t * e);
 lv_obj_t *ui_Music;
 lv_obj_t *ui_Cover_Art;
 lv_obj_t *ui_Control_Panel;
+void ui_event_Music_Play_Button( lv_event_t * e);
 lv_obj_t *ui_Music_Play_Button;
 lv_obj_t *ui_Music_Play_Button_Image;
 lv_obj_t *ui_Music_Skip_Forward_Button;
@@ -325,6 +326,8 @@ lv_obj_t *ui_Music_Skip_Backwards_Button_Bar;
 lv_obj_t *ui_Music_Play_Bar;
 lv_obj_t *ui_Music_Artist;
 lv_obj_t *ui_Music_Title;
+lv_obj_t *ui_Music_Album;
+lv_obj_t *ui_Music_Time;
 
 // SCREEN: ui_Weather
 void ui_Weather_screen_init(void);
@@ -1317,6 +1320,12 @@ void ui_event_Music( lv_event_t * e) {
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, &ui_Clock_screen_init);
+}
+}
+void ui_event_Music_Play_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      PauseMusic( e );
 }
 }
 void ui_event_Weather( lv_event_t * e) {

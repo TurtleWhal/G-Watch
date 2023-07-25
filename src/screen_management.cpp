@@ -84,7 +84,7 @@ void totimescreen(lv_event_t *e)
 
 void ClockDown(lv_event_t *e)
 {
-    bool musicplaying = 0;
+    bool musicplaying = 1;
     if (musicplaying)
     _ui_screen_change(&ui_Music, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Music_screen_init);
     else
@@ -146,7 +146,7 @@ void screenback()
     _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, NULL);
     }
 
-    else if (lv_scr_act() == ui_Music)
+    else if (lv_scr_act() == ui_Music or lv_scr_act() == ui_Weather)
     {
     _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, NULL);
     }

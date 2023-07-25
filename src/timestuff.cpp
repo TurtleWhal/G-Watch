@@ -30,7 +30,7 @@ void WriteTime()
 
     if (second != lastsec)
     {
-        Log.verboseln("sec");
+        Log.verboseln("Writetime sec");
         lastsec = second;
         getLocalTime(&t_tm);
 #ifdef UPDATE_ELEMENTS

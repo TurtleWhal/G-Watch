@@ -136,7 +136,7 @@ ui_Music_Artist = lv_label_create(ui_Music);
 lv_obj_set_width( ui_Music_Artist, 232);
 lv_obj_set_height( ui_Music_Artist, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Music_Artist, 4 );
-lv_obj_set_y( ui_Music_Artist, 12 );
+lv_obj_set_y( ui_Music_Artist, 8 );
 lv_obj_set_align( ui_Music_Artist, LV_ALIGN_LEFT_MID );
 lv_label_set_long_mode(ui_Music_Artist,LV_LABEL_LONG_SCROLL);
 lv_label_set_text(ui_Music_Artist,"Capitol Cities");
@@ -154,6 +154,29 @@ lv_label_set_text(ui_Music_Title,"Safe And Sound");
 lv_obj_set_style_text_align(ui_Music_Title, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Music_Title, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
 
+ui_Music_Album = lv_label_create(ui_Music);
+lv_obj_set_width( ui_Music_Album, 155);
+lv_obj_set_height( ui_Music_Album, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Music_Album, -13 );
+lv_obj_set_y( ui_Music_Album, 28 );
+lv_obj_set_align( ui_Music_Album, LV_ALIGN_RIGHT_MID );
+lv_label_set_long_mode(ui_Music_Album,LV_LABEL_LONG_SCROLL_CIRCULAR);
+lv_label_set_text(ui_Music_Album,"In a Tidal Wave of Mystery");
+lv_obj_set_style_text_align(ui_Music_Album, LV_TEXT_ALIGN_AUTO, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Music_Album, &ui_font_Comfortaa_10, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Music_Time = lv_label_create(ui_Music);
+lv_obj_set_width( ui_Music_Time, 54);
+lv_obj_set_height( ui_Music_Time, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Music_Time, 13 );
+lv_obj_set_y( ui_Music_Time, 28 );
+lv_obj_set_align( ui_Music_Time, LV_ALIGN_LEFT_MID );
+lv_label_set_long_mode(ui_Music_Time,LV_LABEL_LONG_SCROLL);
+lv_label_set_text(ui_Music_Time,"1:27 / 3:12");
+lv_obj_set_style_text_align(ui_Music_Time, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Music_Time, &ui_font_Comfortaa_10, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_add_event_cb(ui_Music_Play_Button, ui_event_Music_Play_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Music, ui_event_Music, LV_EVENT_ALL, NULL);
 
 }
