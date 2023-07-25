@@ -208,7 +208,7 @@ void setup()
   hw_timer_t *timer2 = NULL;
   timer2 = timerBegin(1, 80, true);
   timerAttachInterrupt(timer2, BTTimerHandle, true);
-  timerAlarmWrite(timer2, 1000 * 1000, true);
+  timerAlarmWrite(timer2, BLECTL_CHUNKDELAY * 1000, true);
   timerAlarmEnable(timer2);
 
   //////////////////////////Fake Notifications///////////

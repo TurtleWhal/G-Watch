@@ -274,3 +274,23 @@ def CalcHandle(event_struct):
 def ClockDown(event_struct):
     return
 
+
+def PauseMusic(event_struct):
+    return
+
+
+def DrawMusicInfo(event_struct):
+    return
+
+
+def DrawMusicTime(event_struct):
+    return
+
+
+def MusicSkipForward(event_struct):
+    return
+
+
+def MusicSkipBackward(event_struct):
+    return
+

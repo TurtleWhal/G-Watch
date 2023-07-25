@@ -39,6 +39,11 @@ void stopanim(lv_event_t * e);
 void loadcalc(lv_event_t * e);
 void CalcHandle(lv_event_t * e);
 void ToggleFlashlight(lv_event_t * e);
+void DrawMusicInfo(lv_event_t * e);
+void DrawMusicTime(lv_event_t * e);
+void PauseMusic(lv_event_t * e);
+void MusicSkipForward(lv_event_t * e);
+void MusicSkipBackward(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

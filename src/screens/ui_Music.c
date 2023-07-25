@@ -55,6 +55,15 @@ lv_obj_add_flag( ui_Music_Play_Button_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Fl
 lv_obj_clear_flag( ui_Music_Play_Button_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_img_set_zoom(ui_Music_Play_Button_Image,120);
 
+ui_Pause_Button_Include = lv_img_create(ui_Music_Play_Button);
+lv_img_set_src(ui_Pause_Button_Include, &ui_img_pause_button_png);
+lv_obj_set_width( ui_Pause_Button_Include, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Pause_Button_Include, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Pause_Button_Include, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Pause_Button_Include, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Pause_Button_Include, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_zoom(ui_Pause_Button_Include,120);
+
 ui_Music_Skip_Forward_Button = lv_btn_create(ui_Control_Panel);
 lv_obj_set_width( ui_Music_Skip_Forward_Button, 40);
 lv_obj_set_height( ui_Music_Skip_Forward_Button, 40);
@@ -136,7 +145,7 @@ ui_Music_Artist = lv_label_create(ui_Music);
 lv_obj_set_width( ui_Music_Artist, 232);
 lv_obj_set_height( ui_Music_Artist, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Music_Artist, 4 );
-lv_obj_set_y( ui_Music_Artist, 12 );
+lv_obj_set_y( ui_Music_Artist, 8 );
 lv_obj_set_align( ui_Music_Artist, LV_ALIGN_LEFT_MID );
 lv_label_set_long_mode(ui_Music_Artist,LV_LABEL_LONG_SCROLL);
 lv_label_set_text(ui_Music_Artist,"Capitol Cities");
@@ -154,6 +163,31 @@ lv_label_set_text(ui_Music_Title,"Safe And Sound");
 lv_obj_set_style_text_align(ui_Music_Title, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Music_Title, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
 
+ui_Music_Album = lv_label_create(ui_Music);
+lv_obj_set_width( ui_Music_Album, 155);
+lv_obj_set_height( ui_Music_Album, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Music_Album, -13 );
+lv_obj_set_y( ui_Music_Album, 28 );
+lv_obj_set_align( ui_Music_Album, LV_ALIGN_RIGHT_MID );
+lv_label_set_long_mode(ui_Music_Album,LV_LABEL_LONG_SCROLL_CIRCULAR);
+lv_label_set_text(ui_Music_Album,"In a Tidal Wave of Mystery");
+lv_obj_set_style_text_align(ui_Music_Album, LV_TEXT_ALIGN_AUTO, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Music_Album, &ui_font_Comfortaa_10, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Music_Time = lv_label_create(ui_Music);
+lv_obj_set_width( ui_Music_Time, 54);
+lv_obj_set_height( ui_Music_Time, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Music_Time, 13 );
+lv_obj_set_y( ui_Music_Time, 28 );
+lv_obj_set_align( ui_Music_Time, LV_ALIGN_LEFT_MID );
+lv_label_set_long_mode(ui_Music_Time,LV_LABEL_LONG_SCROLL);
+lv_label_set_text(ui_Music_Time,"1:27 / 3:12");
+lv_obj_set_style_text_align(ui_Music_Time, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Music_Time, &ui_font_Comfortaa_10, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_add_event_cb(ui_Music_Play_Button, ui_event_Music_Play_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Music_Skip_Forward_Button, ui_event_Music_Skip_Forward_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Music_Skip_Backwards_Button, ui_event_Music_Skip_Backwards_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Music, ui_event_Music, LV_EVENT_ALL, NULL);
 
 }

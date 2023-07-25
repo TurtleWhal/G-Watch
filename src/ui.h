@@ -320,17 +320,23 @@ void ui_event_Music( lv_event_t * e);
 extern lv_obj_t *ui_Music;
 extern lv_obj_t *ui_Cover_Art;
 extern lv_obj_t *ui_Control_Panel;
+void ui_event_Music_Play_Button( lv_event_t * e);
 extern lv_obj_t *ui_Music_Play_Button;
 extern lv_obj_t *ui_Music_Play_Button_Image;
+extern lv_obj_t *ui_Pause_Button_Include;
+void ui_event_Music_Skip_Forward_Button( lv_event_t * e);
 extern lv_obj_t *ui_Music_Skip_Forward_Button;
 extern lv_obj_t *ui_Music_Skip_Forwards_Button_img;
 extern lv_obj_t *ui_Music_Skip_Forwards_Button_Bar;
+void ui_event_Music_Skip_Backwards_Button( lv_event_t * e);
 extern lv_obj_t *ui_Music_Skip_Backwards_Button;
 extern lv_obj_t *ui_Music_Skip_Backwards_Button_img;
 extern lv_obj_t *ui_Music_Skip_Backwards_Button_Bar;
 extern lv_obj_t *ui_Music_Play_Bar;
 extern lv_obj_t *ui_Music_Artist;
 extern lv_obj_t *ui_Music_Title;
+extern lv_obj_t *ui_Music_Album;
+extern lv_obj_t *ui_Music_Time;
 // SCREEN: ui_Weather
 void ui_Weather_screen_init(void);
 void ui_event_Weather( lv_event_t * e);
@@ -374,6 +380,7 @@ LV_IMG_DECLARE( ui_img_compass_png);   // assets/Compass.png
 LV_IMG_DECLARE( ui_img_settings_gear_png);   // assets/Settings Gear.png
 LV_IMG_DECLARE( ui_img_flashlight_png);   // assets/Flashlight.png
 LV_IMG_DECLARE( ui_img_album_cover_png);   // assets/album cover.png
+LV_IMG_DECLARE( ui_img_pause_button_png);   // assets/Pause Button.png
 LV_IMG_DECLARE( ui_img_moon_png);   // assets/moon.png
 LV_IMG_DECLARE( ui_img_mostly_cloudy_png);   // assets/Mostly Cloudy.png
 LV_IMG_DECLARE( ui_img_rain_png);   // assets/rain.png
@@ -387,6 +394,7 @@ LV_FONT_DECLARE( ui_font_Comfortaa_26);
 LV_FONT_DECLARE( ui_font_Comfortaa_30);
 LV_FONT_DECLARE( ui_font_Monoton_48);
 LV_FONT_DECLARE( ui_font_Music_14);
+LV_FONT_DECLARE( ui_font_Comfortaa_10);
 
 void ui_init(void);
 
