@@ -21,14 +21,19 @@ LV_IMG_DECLARE(ui_img_bluetooth_small_png);
 LV_IMG_DECLARE(ui_img_pause_button_png);
 bool BTon;
 int songtime;
-int MusicPos;
 bool msgAvailible;
 static String msg;
 
+int MusicPos;
+int MusicLength;
+String MusicSong;
+String MusicArtist;
+String MusicAlbum;
+
 void ParseGB(char *Message)
 {
-  int MusicLength = 600;
-  // GB({t:"notify",id:1689704373,src:"Gadgetbridge",title:"",subject:"Testgh",body:"Testgh",sender:"Testgh",tel:"Testgh"})
+  // int MusicLength = 600;
+  //  GB({t:"notify",id:1689704373,src:"Gadgetbridge",title:"",subject:"Testgh",body:"Testgh",sender:"Testgh",tel:"Testgh"})
 
   StaticJsonDocument<2048> received;
 
@@ -105,28 +110,27 @@ void ParseGB(char *Message)
     // const char *MusicAlbum = "album";
 
     // if (received.containsKey("artist"))
-    const char *MusicArtist = received["artist"];
+    const char *localMusicArtist = received["artist"];
     // if (received.containsKey("track"))
-    const char *MusicSong = received["track"];
+    const char *localMusicSong = received["track"];
     // if (received.containsKey("dur"))
     MusicLength = received["dur"];
     // if (received.containsKey("album"))
-    const char *MusicAlbum = received["album"];
+    const char *localMusicAlbum = received["album"];
 
-    Serial.println(MusicArtist);
-    Serial.println(MusicSong);
+    Serial.println(localMusicArtist);
+    Serial.println(localMusicSong);
     Serial.println(MusicLength);
-    Serial.println(MusicAlbum);
+    Serial.println(localMusicAlbum);
+
+    MusicSong = localMusicSong;
+    MusicArtist = localMusicArtist;
+    MusicAlbum = localMusicAlbum;
 
     // ui_Music_screen_init();
 
     // lv_label_set_text(ui_Now_Playing_Label, MusicSong);
-    if (lv_scr_act() == ui_Music)
-    {
-      lv_label_set_text(ui_Music_Artist, MusicArtist);
-      lv_label_set_text(ui_Music_Title, MusicSong);
-      lv_label_set_text(ui_Music_Album, MusicAlbum);
-    }
+    DrawMusicInfo(nullptr);
     // twatch->motor_shake(1, 50);
   }
   else if (strcmp(NotifType, "musicstate") == 0)
@@ -146,6 +150,24 @@ void ParseGB(char *Message)
       // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
       lv_label_set_text(ui_Now_Playing_Label, MusicPlaying);
     }*/
+    DrawMusicTime(nullptr);
+  }
+}
+
+void DrawMusicInfo(lv_event_t *e)
+{
+  if (lv_scr_act() == ui_Music)
+  {
+    lv_label_set_text(ui_Music_Artist, MusicArtist.c_str());
+    lv_label_set_text(ui_Music_Title, MusicSong.c_str());
+    lv_label_set_text(ui_Music_Album, MusicAlbum.c_str());
+  }
+}
+
+void DrawMusicTime(lv_event_t *e)
+{
+  if (lv_scr_act() == ui_Music)
+  {
     lv_label_set_text_fmt(ui_Music_Time, "%i:%02i / %i:%02i", (int)(MusicPos / 60), MusicPos % 60, (int)(MusicLength / 60), MusicLength % 60);
     if (MusicLength)
       lv_slider_set_range(ui_Music_Play_Bar, 0, MusicLength);

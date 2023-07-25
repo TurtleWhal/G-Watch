@@ -278,3 +278,7 @@ def ClockDown(event_struct):
 def PauseMusic(event_struct):
     return
 
+
+def DrawMusicInfo(event_struct):
+    return
+
