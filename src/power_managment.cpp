@@ -1,4 +1,4 @@
-#include <TWatch_hal.h>
+#include "TWatch_hal.h"
 #include "lvgl.h"
 #include "ui.h"
 #include "timestuff.h"
@@ -55,6 +55,7 @@ void Wakeup(String Wakeup_reason)
   if (Sleeping)
   {
     setCpuFrequencyMhz(240);
+    twatch->hal_auto_update(true, 1);
     //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
     // generictoclock(nullptr);
     // lv_timer_handler();
@@ -89,6 +90,7 @@ void Sleep()
     Sleeping = 1;
     //setCpuFrequencyMhz(10); // 10 is lowest can go with 40 MHz Crystal
     SleepSpeed();
+    twatch->hal_auto_update(false, 1);
   }
 }
 

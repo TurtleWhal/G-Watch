@@ -16,7 +16,7 @@ If you don't know which one to choose, look at the silkscreen on the circuit boa
 /*   ├─ */ #define LFS_MOUNT_POINT "/lfs"
 #define CONFIG_TWATCH_HAS_MOTOR
 #define CONFIG_TWATCH_HAS_DISPLAY
-    /*   ├─ */ #define USE_TFT_DMA   1 // 0-1  If this option is enabled, DISP_BUF_FROM_PSRAM conflicts. Only one of the two can be enabled
+    /*   ├─ */ #define USE_TFT_DMA   0 // 0-1  If this option is enabled, DISP_BUF_FROM_PSRAM conflicts. Only one of the two can be enabled
     /*   ├─ */ #define TFT_ROTATION  0 // 0-7
     /*   ├─ */ #define SCREEN_WIDTH  240
     /*   ├─ */ #define SCREEN_HEIGHT 240
@@ -29,8 +29,8 @@ If you don't know which one to choose, look at the silkscreen on the circuit boa
 
 // APP CONFIG
 #define CONFIG_TWATCH_USE_DEBUG             0
-//#define CONFIG_TWATCH_APP_LVGL              0
-    /*    ├─ */ #define DISP_BUF_SIZE       /**/ (SCREEN_WIDTH *SCREEN_HEIGHT * 0.5)
+#define CONFIG_TWATCH_APP_LVGL              1
+    /*    ├─ */ #define DISP_BUF_SIZE       /**/ (SCREEN_WIDTH *SCREEN_HEIGHT / 10)
     /*    ├─ */ #define DISP_BUF_FROM_PSRAM 0 // Turning this on makes the screen appear smoother, but it uses a lot of RAM.
 /*
 Use LVGL built-in file system
