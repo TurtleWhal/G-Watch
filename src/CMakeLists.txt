@@ -42,6 +42,7 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_settings_gear_png.c
     images/ui_img_flashlight_png.c
     images/ui_img_album_cover_png.c
+    images/ui_img_pause_button_png.c
     images/ui_img_moon_png.c
     images/ui_img_mostly_cloudy_png.c
     images/ui_img_rain_png.c

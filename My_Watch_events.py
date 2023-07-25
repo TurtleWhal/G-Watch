@@ -282,3 +282,15 @@ def PauseMusic(event_struct):
 def DrawMusicInfo(event_struct):
     return
 
+
+def DrawMusicTime(event_struct):
+    return
+
+
+def MusicSkipForward(event_struct):
+    return
+
+
+def MusicSkipBackward(event_struct):
+    return
+

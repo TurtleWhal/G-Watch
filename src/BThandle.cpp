@@ -29,6 +29,7 @@ int MusicLength;
 String MusicSong;
 String MusicArtist;
 String MusicAlbum;
+bool MusicPlaying;
 
 void ParseGB(char *Message)
 {
@@ -135,21 +136,22 @@ void ParseGB(char *Message)
   }
   else if (strcmp(NotifType, "musicstate") == 0)
   {
-    const char *MusicPlaying;
-
-    MusicPlaying = received["musicstate"];
+    const char *MusicState = received["state"];
     MusicPos = received["position"];
+    Serial.println(MusicState);
 
-    /*if (strcmp(MusicPlaying, "play") == 0)
+    if (strcmp(MusicState, "play") == 0)
     {
-      // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
-      lv_label_set_text(ui_Now_Playing_Label, MusicPlaying);
+      Serial.println("Change To Pause Button");
+      lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
+      // lv_label_set_text(ui_Now_Playing_Label, MusicState);
     }
     else
     {
-      // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
-      lv_label_set_text(ui_Now_Playing_Label, MusicPlaying);
-    }*/
+      Serial.println("Change To Play Button");
+      lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
+      // lv_label_set_text(ui_Now_Playing_Label, MusicState);
+    }
     DrawMusicTime(nullptr);
   }
 }
@@ -177,19 +179,36 @@ void DrawMusicTime(lv_event_t *e)
 
 void PauseMusic(lv_event_t *e)
 {
-  /*StaticJsonDocument<200> Send;
-  Send["t"] = "music";
-  Send["n"] = "pause";
-  String TempJson;
-  serializeJson(Send, TempJson);
-  char *TempChar;
-  sprintf(TempChar, "GB(%s", TempJson);
-  lv_label_set_text(ui_Now_Playing_Label, TempChar);
-  gadgetbridge_send_msg("json", TempChar);*/
-  // gadgetbridge_send_msg("\r\n{t:\"music\", n:\"pause\"}\r\n");
-  String tempstring = "{t:\"music\", n:\"pause\"}";
-  // BTsend("{\"t\":\"music\", \"n\":\"pause\"}\0");
-  BTsend(tempstring);
+  if (MusicPlaying)
+  {
+    Serial.println("Pausing");
+    String pausestring = "{t:\"music\", n:\"pause\"}";
+    BTsend(pausestring);
+    // lv_img_set_src(ui_Music_Play_Button, &ui_img_play_button_png);
+    MusicPlaying = !MusicPlaying;
+  }
+  else
+  {
+    Serial.println("Resuming");
+    String playstring = "{t:\"music\", n:\"play\"}";
+    BTsend(playstring);
+    // lv_img_set_src(ui_Music_Play_Button, &ui_img_pause_button_png);
+    MusicPlaying = !MusicPlaying;
+  }
+}
+
+void MusicSkipForward(lv_event_t *e)
+{
+  Serial.println("Skipping Forward");
+  String skipforwardstring = "{t:\"music\", n:\"next\"}";
+  BTsend(skipforwardstring);
+}
+
+void MusicSkipBackward(lv_event_t *e)
+{
+  Serial.println("Skipping Backward");
+  String skipbackwardstring = "{t:\"music\", n:\"previous\"}";
+  BTsend(skipbackwardstring);
 }
 
 void BTHandle()
@@ -245,6 +264,7 @@ void BTsend(String message)
 
 void BTmsgloop()
 {
+  static int lasttime;
   // Serial.println("BTmsgloop");
   // add \r\n to beginning and end when sent
   // Serial.println(msgAvailible);
@@ -265,5 +285,24 @@ void BTmsgloop()
       gadgetbridge_send_chunk(tempmsg, msg.length());
     }
     // Serial.println(msg);
+  }
+
+  if (blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT))
+  {
+    lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
+  }
+  else
+  {
+    lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
+  }
+
+  if (lasttime < millis() - 1000)
+  {
+    if (MusicPlaying)
+    {
+      MusicPos++;
+      DrawMusicTime(nullptr);
+    }
+    lasttime = millis();
   }
 }

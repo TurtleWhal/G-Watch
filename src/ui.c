@@ -317,9 +317,12 @@ lv_obj_t *ui_Control_Panel;
 void ui_event_Music_Play_Button( lv_event_t * e);
 lv_obj_t *ui_Music_Play_Button;
 lv_obj_t *ui_Music_Play_Button_Image;
+lv_obj_t *ui_Pause_Button_Include;
+void ui_event_Music_Skip_Forward_Button( lv_event_t * e);
 lv_obj_t *ui_Music_Skip_Forward_Button;
 lv_obj_t *ui_Music_Skip_Forwards_Button_img;
 lv_obj_t *ui_Music_Skip_Forwards_Button_Bar;
+void ui_event_Music_Skip_Backwards_Button( lv_event_t * e);
 lv_obj_t *ui_Music_Skip_Backwards_Button;
 lv_obj_t *ui_Music_Skip_Backwards_Button_img;
 lv_obj_t *ui_Music_Skip_Backwards_Button_Bar;
@@ -1330,6 +1333,18 @@ void ui_event_Music_Play_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       PauseMusic( e );
+}
+}
+void ui_event_Music_Skip_Forward_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      MusicSkipForward( e );
+}
+}
+void ui_event_Music_Skip_Backwards_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      MusicSkipBackward( e );
 }
 }
 void ui_event_Weather( lv_event_t * e) {

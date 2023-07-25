@@ -11,7 +11,7 @@ extern TWatchClass *twatch;
 esp_pm_config_esp32_t pm_config;
 
 // #define SleepWhenPluggedIn
-#define Sleeptimeout 10000 // time until watch goes to sleep in mS
+#define Sleeptimeout 30000 // time until watch goes to sleep in mS
 int sleeptimer;
 bool Sleeping;
 int prevbrightness = 100;
@@ -38,6 +38,12 @@ void Sleephandle()
       Log.verboseln("Im Shooken!");
     }
     */
+    /*if ((millis() - sleeptimer) >= Sleeptimeout * 0.7 and prevbrightness != twatch->backlight_get_value())
+    {
+      prevbrightness = twatch->backlight_get_value();
+      twatch->backlight_set_value(prevbrightness / 3);
+    }*/
+
     if ((millis() - sleeptimer) >= Sleeptimeout)
       Sleep();
   }
@@ -74,20 +80,20 @@ void Wakeup(String Wakeup_reason)
   }
   else
     Ticklesleep();
-    FullSpeed();
+  FullSpeed();
 }
 
 void Sleep()
 {
   if (!Sleeping)
   {
-    prevbrightness = twatch->backlight_get_value();
+    // prevbrightness = twatch->backlight_get_value();
     if (!prevbrightness)
       prevbrightness = 1;
     twatch->backlight_set_value(0);
     Log.verboseln("Go To Sleep");
     Sleeping = 1;
-    //setCpuFrequencyMhz(10); // 10 is lowest can go with 40 MHz Crystal
+    // setCpuFrequencyMhz(10); // 10 is lowest can go with 40 MHz Crystal
     SleepSpeed();
   }
 }
@@ -95,6 +101,8 @@ void Sleep()
 void Ticklesleep()
 {
   sleeptimer = millis();
+  //if (twatch->backlight_get_value() != prevbrightness)
+  //  twatch->backlight_set_value(prevbrightness * 3);
 }
 
 bool isSleeping()
@@ -192,7 +200,7 @@ void SleepSpeed()
   pm_config.min_freq_mhz = 40;
   pm_config.light_sleep_enable = true;
   ESP_ERROR_CHECK(esp_pm_configure(&pm_config));
-  //log_d("custom arduino-esp32 framework detected, enable PM/DFS support, %d/%dMHz %s light sleep (%d)", pm_config.max_freq_mhz, pm_config.min_freq_mhz, lighsleep ? "without" : "with", lighsleep);
+  // log_d("custom arduino-esp32 framework detected, enable PM/DFS support, %d/%dMHz %s light sleep (%d)", pm_config.max_freq_mhz, pm_config.min_freq_mhz, lighsleep ? "without" : "with", lighsleep);
   setCpuFrequencyMhz(80);
   // esp_light_sleep_start();
   // esp_light_sleep_start();

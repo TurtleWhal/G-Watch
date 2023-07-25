@@ -55,6 +55,15 @@ lv_obj_add_flag( ui_Music_Play_Button_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Fl
 lv_obj_clear_flag( ui_Music_Play_Button_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_img_set_zoom(ui_Music_Play_Button_Image,120);
 
+ui_Pause_Button_Include = lv_img_create(ui_Music_Play_Button);
+lv_img_set_src(ui_Pause_Button_Include, &ui_img_pause_button_png);
+lv_obj_set_width( ui_Pause_Button_Include, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Pause_Button_Include, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Pause_Button_Include, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Pause_Button_Include, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Pause_Button_Include, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_zoom(ui_Pause_Button_Include,120);
+
 ui_Music_Skip_Forward_Button = lv_btn_create(ui_Control_Panel);
 lv_obj_set_width( ui_Music_Skip_Forward_Button, 40);
 lv_obj_set_height( ui_Music_Skip_Forward_Button, 40);
@@ -177,6 +186,8 @@ lv_obj_set_style_text_align(ui_Music_Time, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_
 lv_obj_set_style_text_font(ui_Music_Time, &ui_font_Comfortaa_10, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_add_event_cb(ui_Music_Play_Button, ui_event_Music_Play_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Music_Skip_Forward_Button, ui_event_Music_Skip_Forward_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Music_Skip_Backwards_Button, ui_event_Music_Skip_Backwards_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Music, ui_event_Music, LV_EVENT_ALL, NULL);
 
 }
