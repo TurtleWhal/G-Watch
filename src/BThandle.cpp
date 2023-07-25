@@ -231,26 +231,14 @@ void ToggleBT(lv_event_t *e)
 void BT_on()
 {
   BTon = 1;
-
   blectl_setup();
-
-  /*
-  if (Storage.isKey("BTname"))
-  {
-    char BTnamechar[17];
-    Storage.getBytes("BTname", BTnamechar, 17);
-    SerialBT.begin((String)BTnamechar);
-    Log.verboseln("BT Name: %s", BTnamechar);
-  }
-  else
-    SerialBT.begin("Unnamed Watch");
-    */
 }
 
 void BT_off()
 {
   BTon = 0;
-  // SerialBT.disconnect();
+  msgAvailible = 0;
+  blectl_off();
 }
 
 void BTsend(String message)
@@ -269,7 +257,7 @@ void BTmsgloop()
   // add \r\n to beginning and end when sent
   // Serial.println(msgAvailible);
   unsigned char tempmsg[BLECTL_CHUNKSIZE + 1];
-  if (msgAvailible)
+  if (msgAvailible && BTon)
   {
     if (msg.length() > BLECTL_CHUNKSIZE)
     {
@@ -286,7 +274,7 @@ void BTmsgloop()
     }
     // Serial.println(msg);
   }
-
+if (BTon){
   if (blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT))
   {
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
@@ -295,7 +283,7 @@ void BTmsgloop()
   {
     lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
   }
-
+}
   if (lasttime < millis() - 1000)
   {
     if (MusicPlaying)
