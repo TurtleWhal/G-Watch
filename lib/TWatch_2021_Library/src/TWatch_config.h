@@ -16,13 +16,14 @@ If you don't know which one to choose, look at the silkscreen on the circuit boa
 /*   ├─ */ #define LFS_MOUNT_POINT "/lfs"
 #define CONFIG_TWATCH_HAS_MOTOR
 #define CONFIG_TWATCH_HAS_DISPLAY
-    /*   ├─ */ #define USE_TFT_DMA   0 // 0-1  If this option is enabled, DISP_BUF_FROM_PSRAM conflicts. Only one of the two can be enabled
+    /*   ├─ */ #define USE_TFT_DMA   1 // 0-1  If this option is enabled, DISP_BUF_FROM_PSRAM conflicts. Only one of the two can be enabled
     /*   ├─ */ #define TFT_ROTATION  0 // 0-7
     /*   ├─ */ #define SCREEN_WIDTH  240
     /*   ├─ */ #define SCREEN_HEIGHT 240
 
 #define CONFIG_TWATCH_HAS_BUTTON
 #define CONFIG_TWATCH_HAS_BMA423
+#define CONFIG_BMA423_LATER
 #define CONFIG_TWATCH_HAS_QMC5883L
 #define CONFIG_TWATCH_HAS_PCF8563
 //#define CONFIG_TWATCH_HAS_CST816S

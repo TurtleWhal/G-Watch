@@ -267,6 +267,8 @@ void setup()
   ////////////////////////////////////////END OTA
 
   twatch->motor_shake(1, 100);
+  WriteTime();
+  twatch->bma423_begin(); //This takes 2 seconds
   Log.verboseln("Setup done");
 }
 
