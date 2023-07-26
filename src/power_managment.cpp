@@ -9,8 +9,6 @@
 #include "ArduinoJson.h"
 #include "BThandle.h"
 
-void BTsendpower();
-
 extern TWatchClass *twatch;
 esp_pm_config_esp32_t pm_config;
 

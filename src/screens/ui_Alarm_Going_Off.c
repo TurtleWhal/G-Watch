@@ -9,6 +9,7 @@ void ui_Alarm_Going_Off_screen_init(void)
 {
 ui_Alarm_Going_Off = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Alarm_Going_Off, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Alarm_Going_Off, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Alarm_Going_Off);
 
 ui_Alarm_Going_Off_Spinner = lv_spinner_create(ui_Alarm_Going_Off,1000,90);
 lv_obj_set_width( ui_Alarm_Going_Off_Spinner, 244);

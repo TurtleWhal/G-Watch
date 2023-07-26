@@ -12,12 +12,12 @@ extern "C"
   void DrawPower();
   void PowerOff(lv_event_t *e);
   void UpdateBrightness(lv_event_t *e);
-  //void InitPercent();
   int GetUserBrightness();
   void FullSpeed();
   void SleepSpeed();
   bool isCharging();
   int getSleepTimer();
+  void BTsendpower();
 
 #ifdef __cplusplus
 } /*extern "C"*/

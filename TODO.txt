@@ -19,7 +19,12 @@ notification images
 
 Float based calculator only does two decimal places
 
-music controls
 Weather
 
 Increase LVGL Buffer Size
+
+alarms
+timers
+vibrate pattern
+
+buttons wierd?

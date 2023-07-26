@@ -101,6 +101,7 @@ void btn3_click(void *param)
   {
     if (NotificationActive())
       notificationdismiss(nullptr);
+    pairBT(random( 0,999999 ));
   }
   else
     screenback();

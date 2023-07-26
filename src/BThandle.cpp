@@ -6,6 +6,7 @@
 #include "ui_helpers.h"
 #include "TWatch_hal.h"
 #include "BThandle.h"
+#include "power_managment.h"
 #include "notifications.h"
 #include "Preferences.h"
 #include "hardware/blectl.h"
@@ -156,7 +157,7 @@ void ParseGB(char *Message)
   }
   else if (strcmp(NotifType, "is_gps_active") == 0)
   {
-    BTsend("{\"t\":\"gps_power\", \"status\":0}");
+    //BTsend("{\"t\":\"gps_power\", \"status\":0}");
   }
 }
 
@@ -244,6 +245,11 @@ void BT_off()
   blectl_off();
 }
 
+void onBTConnect()
+{
+  BTsendpower();
+}
+
 void BTsend(String message)
 {
   msg = msg + "\r\n" + message + "\r\n" + BTtermchar;
@@ -299,4 +305,13 @@ void BTmsgloop()
 bool isBTconnected()
 {
   return BTconnected;
+}
+
+void pairBT(int pin)
+{
+  _ui_screen_change(&ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Alarm_Going_Off_screen_init);
+  lv_label_set_text(ui_Alarm_Going_Off_Stop_Button_Text, "Ok");
+  lv_label_set_text(ui_Alarm_Going_Off_Name, "Pairing Pin");
+  lv_label_set_text_fmt(ui_Alarm_Going_Off_Time, "%03i %03i", pin/1000, pin % 1000);
+  //lv_scr_load_anim(ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 0);
 }
