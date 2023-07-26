@@ -11,6 +11,9 @@ void BTsend(String);
 void ToggleBT(lv_event_t *e);
 void BT_off();
 void BT_on();
+bool isBTconnected();
+
+#define BTtermchar "\x1e" // 0x1e is "record seperator" in ascii and is used to seperate messages
 
 #ifdef __cplusplus
 } /*extern "C"*/

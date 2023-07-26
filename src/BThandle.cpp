@@ -18,10 +18,10 @@ extern Preferences Storage;
 extern int notificationid;
 lv_obj_t *ui_Notification_Widgets[1];
 LV_IMG_DECLARE(ui_img_bluetooth_small_png);
-LV_IMG_DECLARE(ui_img_pause_button_png);
+// LV_IMG_DECLARE(ui_img_pause_button_png);
 bool BTon;
+bool BTconnected;
 int songtime;
-bool msgAvailible;
 static String msg;
 
 int MusicPos;
@@ -233,67 +233,52 @@ void BT_on()
   BTon = 1;
 
   blectl_setup();
-
-  /*
-  if (Storage.isKey("BTname"))
-  {
-    char BTnamechar[17];
-    Storage.getBytes("BTname", BTnamechar, 17);
-    SerialBT.begin((String)BTnamechar);
-    Log.verboseln("BT Name: %s", BTnamechar);
-  }
-  else
-    SerialBT.begin("Unnamed Watch");
-    */
 }
 
 void BT_off()
 {
   BTon = 0;
-  // SerialBT.disconnect();
 }
 
 void BTsend(String message)
 {
-  Serial.println("BTsend");
-  msg = "\r\n" + message + "\r\n";
-  msgAvailible = 1;
+  msg = msg + "\r\n" + message + "\r\n" + BTtermchar;
   Log.verboseln("BTsend: %s", message.c_str());
-  // msg = "\r\n{\"t\":\"status\", \"bat\":42}\r\n";
+  Log.verboseln("BTsendmsg: %s", msg.c_str());
 }
 
 void BTmsgloop()
 {
   static int lasttime;
-  // Serial.println("BTmsgloop");
-  // add \r\n to beginning and end when sent
-  // Serial.println(msgAvailible);
   unsigned char tempmsg[BLECTL_CHUNKSIZE + 1];
-  if (msgAvailible)
+  if (msg.length() and BTconnected)
   {
-    if (msg.length() > BLECTL_CHUNKSIZE)
+    if (msg.indexOf(BTtermchar) - 1 > BLECTL_CHUNKSIZE)
     {
       msg.getBytes(tempmsg + 1, BLECTL_CHUNKSIZE);
-      // tempmsg[0] = 0;
       msg.remove(0, BLECTL_CHUNKSIZE - 1);
       gadgetbridge_send_chunk(tempmsg, BLECTL_CHUNKSIZE);
     }
     else
     {
       msg.getBytes(tempmsg, BLECTL_CHUNKSIZE);
-      msgAvailible = false;
-      gadgetbridge_send_chunk(tempmsg, msg.length());
+      gadgetbridge_send_chunk(tempmsg, msg.indexOf(BTtermchar) - 1);
+      msg.remove(0, msg.indexOf(BTtermchar) + 1);
     }
     // Serial.println(msg);
   }
 
   if (blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT))
   {
-    lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
+    BTconnected = true;
+    if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
+      lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
   }
   else
   {
-    lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
+    BTconnected = false;
+    if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
+      lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
   }
 
   if (lasttime < millis() - 1000)
@@ -305,4 +290,9 @@ void BTmsgloop()
     }
     lasttime = millis();
   }
+}
+
+bool isBTconnected()
+{
+  return BTconnected;
 }
