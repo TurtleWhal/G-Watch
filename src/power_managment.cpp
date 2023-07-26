@@ -6,6 +6,10 @@
 #include "screen_management.h"
 #include "ArduinoLog.h"
 #include "esp_pm.h"
+#include "ArduinoJson.h"
+#include "BThandle.h"
+
+void BTsendpower();
 
 extern TWatchClass *twatch;
 esp_pm_config_esp32_t pm_config;
@@ -17,7 +21,7 @@ bool Sleeping;
 int prevbrightness = 100;
 String Wakeup_reason;
 bool charging;
-int lastpercent;
+// int lastpercent;
 int Brightness = 100;
 // bool setCpuFrequencyMhz(uint32_t cpu_freq_mhz);
 
@@ -103,8 +107,8 @@ void Sleep()
 void Ticklesleep()
 {
   sleeptimer = millis();
-  //if (twatch->backlight_get_value() != prevbrightness)
-  //  twatch->backlight_set_value(prevbrightness * 3);
+  // if (twatch->backlight_get_value() != prevbrightness)
+  //   twatch->backlight_set_value(prevbrightness * 3);
 }
 
 bool isSleeping()
@@ -133,28 +137,34 @@ void Powerhandle()
   }
 }
 
-void InitPercent()
+/*void InitPercent()
 {
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
     lastpercent = 0;
   else
     lastpercent = 100;
-}
+}*/
 
 void DrawPower()
 {
+  static int lastpercent = 200;
+  if (lastpercent != twatch->power_get_percent())
+  {
 #ifdef UPDATE_ELEMENTS
-  lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", twatch->power_get_percent());
-  lv_arc_set_value(ui_Arc_Battery, twatch->power_get_percent());
+    lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", twatch->power_get_percent());
+    lv_arc_set_value(ui_Arc_Battery, twatch->power_get_percent());
 #endif
-  lastpercent = twatch->power_get_percent();
+    lastpercent = twatch->power_get_percent();
 
 #ifdef UPDATE_ELEMENTS
-  if (charging)
-    lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  else
-    lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    if (charging)
+      lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    else
+      lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
 #endif
+
+    BTsendpower();
+  }
 }
 
 void PowerOff(lv_event_t *e)
@@ -216,4 +226,16 @@ bool isCharging()
 int getSleepTimer()
 {
   return sleeptimer;
+}
+
+void BTsendpower()
+{
+  String buffer;
+  StaticJsonDocument<200> batinfo;
+  batinfo["t"] = "status";
+  batinfo["bat"] = twatch->power_get_percent();
+  // batinfo["volt"] = (float)twatch->power_get_volt()/1000;
+  batinfo["chg"] = isCharging() ? 1 : 0;
+  serializeJson(batinfo, buffer);
+  BTsend(buffer);
 }

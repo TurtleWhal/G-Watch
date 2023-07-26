@@ -4,6 +4,10 @@
 #include "TWatch_hal.h"
 #include "timestuff.h"
 #include "notifications.h"
+#include "ArduinoJson.h"
+#include "BThandle.h"
+
+void BTsendSteps();
 
 extern Preferences Storage;
 extern TWatchClass *twatch;
@@ -49,6 +53,8 @@ void StepHandle()
     Storage.putUInt("Steps", Steps);
     StepDay = GetDay();
     Storage.putUInt("StepsDay", StepDay);
+
+    BTsendSteps();
   }
 
   if (Storage.getUInt("StepDay") != GetDay())
@@ -64,4 +70,18 @@ void StepHandle()
 int getSteps()
 {
   return Steps;
+}
+
+void BTsendSteps()
+{
+  static int laststep = getSteps();
+  String buffer;
+  // t:"act", hrm:int, stp:int, time:int
+  StaticJsonDocument<200> actinfo;
+  actinfo["t"] = "act";
+  // actinfo["stp"] = Storage.getInt("Steps");
+  actinfo["stp"] = getSteps() - laststep;
+  laststep = getSteps();
+  serializeJson(actinfo, buffer);
+  BTsend(buffer);
 }

@@ -194,7 +194,7 @@ void setup()
   lv_label_set_text(ui_Now_Playing_Label, "");
 #endif
 
-  InitPercent(); // Battery Percent
+  //InitPercent(); // Battery Percent
 
   InitUserSettings();
 
@@ -313,39 +313,9 @@ void loop()
   // This stuff runs every X seconds
   if (Timer0Triggered)
   {
-    static int laststep = getSteps();
     Timer0Triggered = 0;
     StepHandle();
     DrawPower();
-
-    StaticJsonDocument<200> batinfo;
-    batinfo["t"] = "status";
-    batinfo["bat"] = twatch->power_get_percent();
-    // batinfo["volt"] = (float)twatch->power_get_volt()/1000;
-    batinfo["chg"] = isCharging() ? 1 : 0;
-    String buffer;
-    serializeJson(batinfo, buffer);
-    BTsend(buffer);
-    buffer = "";
-
-    // t:"act", hrm:int, stp:int, time:int
-    StaticJsonDocument<200> actinfo;
-    actinfo["t"] = "act";
-    // actinfo["stp"] = Storage.getInt("Steps");
-    actinfo["stp"] = getSteps() - laststep;
-    laststep = getSteps();
-    serializeJson(actinfo, buffer);
-     BTsend(buffer);
-    buffer = "";
-
-    // t:"act", hrm:int, stp:int, time:int
-    StaticJsonDocument<200> actinfo;
-    actinfo["t"] = "act";
-    // actinfo["stp"] = Storage.getInt("Steps");
-    actinfo["stp"] = getSteps() - laststep;
-    laststep = getSteps();
-    serializeJson(actinfo, buffer);
-     BTsend(buffer);
   }
 }
 

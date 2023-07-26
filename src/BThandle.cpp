@@ -154,6 +154,10 @@ void ParseGB(char *Message)
     }
     DrawMusicTime(nullptr);
   }
+  else if (strcmp(NotifType, "is_gps_active") == 0)
+  {
+    BTsend("{\"t\":\"gps_power\", \"status\":0}");
+  }
 }
 
 void DrawMusicInfo(lv_event_t *e)
@@ -267,8 +271,8 @@ void BTmsgloop()
     }
     // Serial.println(msg);
   }
-if (BTon){
-  if (blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT))
+
+  if (BTon and blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT)) // can't call get event unless BTon = true
   {
     BTconnected = true;
     if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
@@ -280,7 +284,7 @@ if (BTon){
     if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
       lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
   }
-}
+
   if (lasttime < millis() - 1000)
   {
     if (MusicPlaying)
