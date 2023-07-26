@@ -115,9 +115,6 @@ lv_obj_t *ui_Alarm_4_Hour;
 lv_obj_t *ui_Alarm_4_Colin;
 lv_obj_t *ui_Alarm_4_Minute;
 lv_obj_t *ui_Alarm_4_AMPM;
-lv_obj_t *ui_Alarms_Dot_Top;
-lv_obj_t *ui_Alarms_Dot_Mid;
-lv_obj_t *ui_Alarms_Dot_Bottom;
 
 // SCREEN: ui_Set_Alarm
 void ui_Set_Alarm_screen_init(void);

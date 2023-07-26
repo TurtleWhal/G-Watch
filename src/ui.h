@@ -131,9 +131,6 @@ extern lv_obj_t *ui_Alarm_4_Hour;
 extern lv_obj_t *ui_Alarm_4_Colin;
 extern lv_obj_t *ui_Alarm_4_Minute;
 extern lv_obj_t *ui_Alarm_4_AMPM;
-extern lv_obj_t *ui_Alarms_Dot_Top;
-extern lv_obj_t *ui_Alarms_Dot_Mid;
-extern lv_obj_t *ui_Alarms_Dot_Bottom;
 // SCREEN: ui_Set_Alarm
 void ui_Set_Alarm_screen_init(void);
 void ui_event_Set_Alarm( lv_event_t * e);

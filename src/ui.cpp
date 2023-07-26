@@ -62,8 +62,11 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
   {
     data->state = LV_INDEV_STATE_PR;
     /*Set the coordinates*/
+    // if (getSleepTimer() < millis() - 200)
+    //{
     data->point.x = touch.data.x;
     data->point.y = touch.data.y;
+    //}
     Wakeup("Screen Touched");
 
     Log.verboseln("Touch event. Data X: %i, Data Y: %i", data->point.x, data->point.y);
@@ -76,7 +79,7 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 
 void btn1_click(void *param)
 {
-  Log.verboseln("BTN1 Click. Power Percent: %i", (int)twatch->power_get_percent());
+  Log.verboseln("BTN1 Click. Power Percent: %i", twatch->power_get_percent());
   // twatch->motor_shake(1, 60);
   Wakeup("Button 1 Pressed");
 }
@@ -130,13 +133,13 @@ void btn3_held(void *param)
 
 void setup()
 {
-  setCpuFrequencyMhz(240);
+  //setCpuFrequencyMhz(240);
 
   Serial.begin(115200); /* prepare for possible serial debug */
   Log.begin(LOG_LEVEL_VERBOSE, &Serial);
 
   twatch = TWatchClass::getWatch();
-  twatch->hal_init();
+  //twatch->hal_init();
   pinMode(TWATCH_CHARGING, INPUT_PULLUP);
 
   if (!digitalRead(TWATCH_BTN_2)) // Enable OTA if B2 is held at boot
@@ -191,7 +194,7 @@ void setup()
   lv_label_set_text(ui_Now_Playing_Label, "");
 #endif
 
-  InitPercent(); // Battery Percent
+  //InitPercent(); // Battery Percent
 
   InitUserSettings();
 
@@ -313,15 +316,6 @@ void loop()
     Timer0Triggered = 0;
     StepHandle();
     DrawPower();
-
-    StaticJsonDocument<200> batinfo;
-    batinfo["t"] = "status";
-    batinfo["bat"] = twatch->power_get_percent();
-    // batinfo["volt"] = (float)twatch->power_get_volt()/1000;
-    batinfo["chg"] = isCharging() ? 1 : 0;
-    String buffer;
-    serializeJson(batinfo, buffer);
-    BTsend(buffer);
   }
 }
 

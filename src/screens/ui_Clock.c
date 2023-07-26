@@ -35,7 +35,6 @@ lv_obj_set_width( ui_Arc_Battery, 230);
 lv_obj_set_height( ui_Arc_Battery, 230);
 lv_obj_set_align( ui_Arc_Battery, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Arc_Battery, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_CLICK_FOCUSABLE );    /// Flags
-lv_arc_set_range(ui_Arc_Battery, 0,250);
 lv_arc_set_value(ui_Arc_Battery, 125);
 lv_arc_set_bg_angles(ui_Arc_Battery,300,60);
 lv_arc_set_rotation(ui_Arc_Battery,180);

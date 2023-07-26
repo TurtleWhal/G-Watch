@@ -18,10 +18,10 @@ extern Preferences Storage;
 extern int notificationid;
 lv_obj_t *ui_Notification_Widgets[1];
 LV_IMG_DECLARE(ui_img_bluetooth_small_png);
-LV_IMG_DECLARE(ui_img_pause_button_png);
+// LV_IMG_DECLARE(ui_img_pause_button_png);
 bool BTon;
+bool BTconnected;
 int songtime;
-bool msgAvailible;
 static String msg;
 
 int MusicPos;
@@ -154,6 +154,10 @@ void ParseGB(char *Message)
     }
     DrawMusicTime(nullptr);
   }
+  else if (strcmp(NotifType, "is_gps_active") == 0)
+  {
+    BTsend("{\"t\":\"gps_power\", \"status\":0}");
+  }
 }
 
 void DrawMusicInfo(lv_event_t *e)
@@ -237,53 +241,50 @@ void BT_on()
 void BT_off()
 {
   BTon = 0;
-  msgAvailible = 0;
   blectl_off();
 }
 
 void BTsend(String message)
 {
-  Serial.println("BTsend");
-  msg = "\r\n" + message + "\r\n";
-  msgAvailible = 1;
+  msg = msg + "\r\n" + message + "\r\n" + BTtermchar;
   Log.verboseln("BTsend: %s", message.c_str());
-  // msg = "\r\n{\"t\":\"status\", \"bat\":42}\r\n";
+  Log.verboseln("BTsendmsg: %s", msg.c_str());
 }
 
 void BTmsgloop()
 {
   static int lasttime;
-  // Serial.println("BTmsgloop");
-  // add \r\n to beginning and end when sent
-  // Serial.println(msgAvailible);
   unsigned char tempmsg[BLECTL_CHUNKSIZE + 1];
-  if (msgAvailible && BTon)
+  if (msg.length() and BTon)
   {
-    if (msg.length() > BLECTL_CHUNKSIZE)
+    if (msg.indexOf(BTtermchar) - 1 > BLECTL_CHUNKSIZE)
     {
       msg.getBytes(tempmsg + 1, BLECTL_CHUNKSIZE);
-      // tempmsg[0] = 0;
       msg.remove(0, BLECTL_CHUNKSIZE - 1);
       gadgetbridge_send_chunk(tempmsg, BLECTL_CHUNKSIZE);
     }
     else
     {
       msg.getBytes(tempmsg, BLECTL_CHUNKSIZE);
-      msgAvailible = false;
-      gadgetbridge_send_chunk(tempmsg, msg.length());
+      gadgetbridge_send_chunk(tempmsg, msg.indexOf(BTtermchar) - 1);
+      msg.remove(0, msg.indexOf(BTtermchar) + 1);
     }
     // Serial.println(msg);
   }
-if (BTon){
-  if (blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT))
+
+  if (BTon and blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT)) // can't call get event unless BTon = true
   {
-    lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
+    BTconnected = true;
+    if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
+      lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
   }
   else
   {
-    lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
+    BTconnected = false;
+    if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
+      lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
   }
-}
+
   if (lasttime < millis() - 1000)
   {
     if (MusicPlaying)
@@ -293,4 +294,9 @@ if (BTon){
     }
     lasttime = millis();
   }
+}
+
+bool isBTconnected()
+{
+  return BTconnected;
 }
