@@ -204,7 +204,7 @@ void setup()
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
   timerAttachInterrupt(timer, Timer0Handle, true);
-  timerAlarmWrite(timer, 10000 * 1000, true); // 10 seconds
+  timerAlarmWrite(timer, 10007 * 1000, true); // 10 seconds, plus prime mS to not 
   timerAlarmEnable(timer);
 
   // BTmsgloop 50ms timer
