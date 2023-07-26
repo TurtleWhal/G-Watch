@@ -231,13 +231,13 @@ void ToggleBT(lv_event_t *e)
 void BT_on()
 {
   BTon = 1;
-
   blectl_setup();
 }
 
 void BT_off()
 {
   BTon = 0;
+  blectl_off();
 }
 
 void BTsend(String message)
@@ -251,7 +251,7 @@ void BTmsgloop()
 {
   static int lasttime;
   unsigned char tempmsg[BLECTL_CHUNKSIZE + 1];
-  if (msg.length() and BTconnected)
+  if (msg.length() and BTon)
   {
     if (msg.indexOf(BTtermchar) - 1 > BLECTL_CHUNKSIZE)
     {
@@ -267,7 +267,7 @@ void BTmsgloop()
     }
     // Serial.println(msg);
   }
-
+if (BTon){
   if (blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT))
   {
     BTconnected = true;
@@ -280,7 +280,7 @@ void BTmsgloop()
     if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
       lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
   }
-
+}
   if (lasttime < millis() - 1000)
   {
     if (MusicPlaying)

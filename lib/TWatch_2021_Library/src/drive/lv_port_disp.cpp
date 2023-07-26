@@ -42,13 +42,15 @@ void TWatchClass::lv_port_disp_init(SCREEN_CLASS *scr) {
 #if DISP_BUF_FROM_PSRAM
   if (lv_disp_buf_p == nullptr) {
     lv_disp_buf_p = (lv_color_t *)heap_caps_malloc(sizeof(lv_color_t) * DISP_BUF_SIZE, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
+    lv_disp_buf_p2 = (lv_color_t *)heap_caps_malloc(sizeof(lv_color_t) * DISP_BUF_SIZE, MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
   }
 #else
   if (lv_disp_buf_p == nullptr) {
     lv_disp_buf_p = (lv_color_t *)heap_caps_malloc(sizeof(lv_color_t) * DISP_BUF_SIZE, MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+    lv_disp_buf_p2 = (lv_color_t *)heap_caps_malloc(sizeof(lv_color_t) * DISP_BUF_SIZE, MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
   }
 #endif
-  lv_disp_draw_buf_init(&draw_buf, lv_disp_buf_p, NULL, DISP_BUF_SIZE);
+  lv_disp_draw_buf_init(&draw_buf, lv_disp_buf_p, lv_disp_buf_p2, DISP_BUF_SIZE);
   
   static lv_disp_drv_t disp_drv;
   lv_disp_drv_init(&disp_drv);
@@ -58,6 +60,9 @@ void TWatchClass::lv_port_disp_init(SCREEN_CLASS *scr) {
   disp_drv.draw_buf = &draw_buf;
   disp_drv.wait_cb = display_wait_cb;
   disp_drv.user_data = scr;
+  disp_drv.sw_rotate = 0;
+  disp_drv.rotated = LV_DISP_ROT_NONE;
+
   lv_disp_drv_register(&disp_drv);
 }
 

@@ -315,8 +315,12 @@ public:
 
 #if CONFIG_TWATCH_APP_LVGL
   lv_indev_t *lv_touch_handle;
+  #if defined(CONFIG_TWATCH_HAS_ENCODER)
   lv_indev_t *lv_encoder_handle;
+  #endif
+  #if defined(CONFIG_TWATCH_HAS_BUTTON)
   lv_indev_t *lv_button_handle;
+  #endif
 #endif
 
 private:
@@ -419,17 +423,24 @@ private:
 
 #if CONFIG_TWATCH_APP_LVGL
   lv_color_t *lv_disp_buf_p = nullptr;
+  lv_color_t *lv_disp_buf_p2 = nullptr;
 
   static void lv_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data);
   static void lv_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
+  #if defined(CONFIG_TWATCH_HAS_BUTTON)
   static void lv_button_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data);
+  #endif
+  #if defined(CONFIG_TWATCH_HAS_ENCODER)
   static void lv_encoder_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data);
+  #endif
   static void wrist_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data);
 
   void lv_port_disp_init(SCREEN_CLASS *scr);
   void lv_port_indev_init(void);
   void lv_ffat_fs_if_init(void);
-  // void display_send_DMA_done_cb(spi_transaction_t *trans);
+  #if defined(USE_TFT_DMA)
+  void display_send_DMA_done_cb(spi_transaction_t *trans);
+  #endif
 #endif
   void tw_bubble_sort(uint16_t *arr, int len) {
     int i, j;
