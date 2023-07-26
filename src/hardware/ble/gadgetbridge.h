@@ -47,7 +47,7 @@
     #define DataLinkEscape                                      0x10            /** @brief gadgetbridge DataLinkEscape marker */
 
     #define BLECTL_CHUNKSIZE                                    20              /** @brief chunksize for send msg */
-    #define BLECTL_CHUNKDELAY                                   50              /** @brief chunk delay in ms for each msg chunk */
+    #define BLECTL_CHUNKDELAY                                   53             /** @brief chunk delay in ms for each msg chunk, prime number */
     /**
      * @brief blectl send msg structure
      */

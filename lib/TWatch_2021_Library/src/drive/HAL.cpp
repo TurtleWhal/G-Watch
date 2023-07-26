@@ -91,7 +91,10 @@ void TWatchClass::hal_init(void) {
 #if defined(CONFIG_TWATCH_HAS_BMA423)
   DEBUGLN("Initializing the pedometer");
   bma423_interface_init();
-  bma423_begin();
+  #if defined (CONFIG_BMA423_LATER)
+  #elif
+    bma423_begin();
+  #endif
 #endif
 
   DEBUGLN("twatch Initialization completed");
