@@ -17,6 +17,7 @@ extern "C"
   void FullSpeed();
   void SleepSpeed();
   bool isCharging();
+  int getSleepTimer();
 
 #ifdef __cplusplus
 } /*extern "C"*/

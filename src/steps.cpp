@@ -7,12 +7,10 @@
 
 extern Preferences Storage;
 extern TWatchClass *twatch;
-
-
+int Steps;
 
 void StepHandle()
 {
-  int Steps;
   static int StepDay;
   static int LastSteps = -1;
   static int StepOffset = -1;
@@ -38,10 +36,10 @@ void StepHandle()
 
     if (Steps >= Storage.getUInt("StepGoal") and !Storage.getBool("StepReach"))
     {
-//#ifdef UPDATE_ELEMENTS
-//      lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
-//      lv_label_set_text_fmt(ui_Notification_Text, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
-//#endif
+      // #ifdef UPDATE_ELEMENTS
+      //       lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
+      //       lv_label_set_text_fmt(ui_Notification_Text, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
+      // #endif
       char *StepNotif;
       sprintf(StepNotif, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
       shownotification("Step Goal Reached!", StepNotif, "local.stephandle", 0, 0);
@@ -61,4 +59,9 @@ void StepHandle()
     Storage.putUInt("Steps", 0);
     twatch->bma423_step_reset();
   }
+}
+
+int getSteps()
+{
+  return Steps;
 }
