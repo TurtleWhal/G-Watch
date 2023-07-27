@@ -14,6 +14,8 @@
 #include "NimBLEDescriptor.h"
 #include "Preferences.h"
 
+#include "BThandle.h"
+
 extern Preferences Storage;
 
 EventGroupHandle_t blectl_status = NULL;
@@ -63,11 +65,12 @@ static bool blectl_powermgm_event_cb( EventBits_t event, void *arg );
         };
         
         uint32_t onPassKeyRequest(){
-            //uint32_t pass_key = random( 0,999999 );
-            uint32_t pass_key = 123457;
+            uint32_t pass_key = random( 0,999999 );
+            //uint32_t pass_key = 123457;
             char pin[16]="";
             snprintf( pin, sizeof( pin ), "%06d", pass_key );
             Log.verboseln("BLECTL pairing request, PIN: %s", pin );
+            pairBT(pass_key);
 
             blectl_set_event( BLECTL_PIN_AUTH );
             blectl_send_event_cb( BLECTL_PIN_AUTH, (void *)pin );
@@ -127,6 +130,7 @@ static bool blectl_powermgm_event_cb( EventBits_t event, void *arg );
                     blectl_clear_event( BLECTL_AUTHWAIT | BLECTL_DISCONNECT );
                     blectl_set_event( BLECTL_CONNECT );
                     blectl_send_event_cb( BLECTL_CONNECT, (void *) "connected" );
+                    onBTConnect();
                     return;
                 }
             }

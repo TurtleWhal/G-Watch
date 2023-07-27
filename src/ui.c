@@ -1363,7 +1363,6 @@ lv_disp_set_theme(dispp, theme);
 ui_Clock_screen_init();
 ui_Alarms_screen_init();
 ui_Set_Alarm_screen_init();
-ui_Alarm_Going_Off_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
 lv_disp_load_scr( ui_Clock);
 }
