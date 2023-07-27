@@ -294,3 +294,7 @@ def MusicSkipForward(event_struct):
 def MusicSkipBackward(event_struct):
     return
 
+
+def DrawWeather(event_struct):
+    return
+

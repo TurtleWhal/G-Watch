@@ -91,21 +91,23 @@ lv_obj_set_style_border_color(ui_HiLo_Temp_Line, lv_color_hex(0x000000), LV_PART
 lv_obj_set_style_border_opa(ui_HiLo_Temp_Line, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_High_Temp = lv_label_create(ui_Weather);
-lv_obj_set_width( ui_High_Temp, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_width( ui_High_Temp, 32);
 lv_obj_set_height( ui_High_Temp, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_High_Temp, -36 );
+lv_obj_set_x( ui_High_Temp, -35 );
 lv_obj_set_y( ui_High_Temp, -14 );
 lv_obj_set_align( ui_High_Temp, LV_ALIGN_RIGHT_MID );
-lv_label_set_text(ui_High_Temp,"82");
+lv_label_set_text(ui_High_Temp,"72");
+lv_obj_set_style_text_align(ui_High_Temp, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_High_Temp, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Low_Temp = lv_label_create(ui_Weather);
-lv_obj_set_width( ui_Low_Temp, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_width( ui_Low_Temp, 32);
 lv_obj_set_height( ui_Low_Temp, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Low_Temp, -36 );
+lv_obj_set_x( ui_Low_Temp, -35 );
 lv_obj_set_y( ui_Low_Temp, 18 );
 lv_obj_set_align( ui_Low_Temp, LV_ALIGN_RIGHT_MID );
 lv_label_set_text(ui_Low_Temp,"56");
+lv_obj_set_style_text_align(ui_Low_Temp, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Low_Temp, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Weather_State = lv_label_create(ui_Weather);
