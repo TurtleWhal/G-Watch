@@ -269,7 +269,7 @@ void setup()
   lv_timer_handler();
   BT_on();
 #if defined(CONFIG_BMA423_LATER)
-  // twatch->bma423_begin(); //This takes 2 seconds
+  twatch->bma423_begin(); //This takes 2 seconds
 #endif
   twatch->hal_auto_update(true, 1);
 
