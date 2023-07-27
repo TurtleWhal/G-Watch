@@ -63,9 +63,9 @@ void ParseGB(char *Message)
   if (strcmp(NotifType, "notify") == 0)
   {
 
-    const char *NotifText = "";
-    const char *NotifTitle = "";
-    const char *NotifSource = "Undefined";
+    const char *NotifText = "";  //This doesn't initialize enought space
+    const char *NotifTitle = ""; //This doesn't initialize enought space
+    const char *NotifSource = "Undefined"; //This may not initialize enough space
     int NotifID;
 
     if (received.containsKey("title"))
