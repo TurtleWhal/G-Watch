@@ -134,19 +134,18 @@ void btn3_held(void *param)
 
 void setup()
 {
-  //setCpuFrequencyMhz(240);
+  // setCpuFrequencyMhz(240);
 
   Serial.begin(115200); /* prepare for possible serial debug */
   Log.begin(LOG_LEVEL_VERBOSE, &Serial);
 
-  twatch = TWatchClass::getWatch();
-  //twatch->hal_init();
+  twatch = TWatchClass::getWatch(); // Does HALinit for us
   pinMode(TWATCH_CHARGING, INPUT_PULLUP);
 
   if (!digitalRead(TWATCH_BTN_2)) // Enable OTA if B2 is held at boot
     useOTA = 1;
 
-  twatch->hal_auto_update(true, 1);
+  // twatch->hal_auto_update(true, 1);
 
   twatch->button_bind_event(TWATCH_BTN_1, BUTTON_CLICK, btn1_click);
   twatch->button_bind_event(TWATCH_BTN_2, BUTTON_CLICK, btn2_click);
@@ -183,7 +182,7 @@ void setup()
   lv_obj_del(ui_Second_Dash_Include); // Only used to include files
   lv_obj_del(ui_Second_Dot_Include);
 
-  InitTicks();
+  InitTicks(); // Draws the tick marks around the edge
 
   ui____initial_actions0 = lv_obj_create(NULL);
   lv_disp_load_scr(ui_Clock);
@@ -195,17 +194,17 @@ void setup()
   lv_label_set_text(ui_Now_Playing_Label, "");
 #endif
 
-  //InitPercent(); // Battery Percent
+  // InitPercent(); // Battery Percent
 
   InitUserSettings();
 
   ApplyTheme(nullptr);
-  //lv_timer_handler();
+  // lv_timer_handler();
 
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
   timerAttachInterrupt(timer, Timer0Handle, true);
-  timerAlarmWrite(timer, 10007 * 1000, true); // 10 seconds, plus prime mS to not 
+  timerAlarmWrite(timer, 10007 * 1000, true); // 10 seconds, plus prime mS to not
   timerAlarmEnable(timer);
 
   // BTmsgloop 50ms timer
@@ -263,13 +262,18 @@ void setup()
     lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
   }
   else
-    BT_on();
 
-  ////////////////////////////////////////END OTA
+    ////////////////////////////////////////END OTA
+
+  WriteTime(); 
+  lv_timer_handler();
+  BT_on();
+#if defined(CONFIG_BMA423_LATER)
+  // twatch->bma423_begin(); //This takes 2 seconds
+#endif
+  twatch->hal_auto_update(true, 1);
 
   twatch->motor_shake(1, 100);
-  WriteTime();
-  twatch->bma423_begin(); //This takes 2 seconds
   Log.verboseln("Setup done");
 }
 
@@ -277,12 +281,12 @@ void loop()
 {
   if (useOTA)
     ArduinoOTA.handle();
-    //Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
+  // Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
   if (!isSleeping()) // If Awake
   {
     // lv_timer_handler(); /* let the GUI do its work */
     // delay(5);
-    //delay(lv_timer_handler());
+    // delay(lv_timer_handler());
 
     if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
     {
