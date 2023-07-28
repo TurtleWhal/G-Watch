@@ -1324,6 +1324,7 @@ lv_indev_wait_release(lv_indev_get_act());
 if ( event_code == LV_EVENT_SCREEN_LOADED) {
       DrawMusicInfo( e );
       DrawMusicTime( e );
+      SetMusicDeafault( e );
 }
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
 lv_indev_wait_release(lv_indev_get_act());
@@ -1368,6 +1369,7 @@ lv_indev_wait_release(lv_indev_get_act());
 }
 if ( event_code == LV_EVENT_SCREEN_LOADED) {
       DrawWeather( e );
+      SetWeatherDeafault( e );
 }
 }
 

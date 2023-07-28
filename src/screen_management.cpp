@@ -7,9 +7,10 @@
 
 extern Preferences Storage;
 
-//extern int Brightness;
+// extern int Brightness;
 
 int LastTimeScreen = 2;
+int LastDownScreen = 1;
 
 void stopanim(lv_event_t *e)
 {
@@ -59,11 +60,21 @@ void loadsettings(lv_event_t *e)
 void settimerdefault(lv_event_t *e)
 {
     if (lv_event_get_target(e) == ui_Timers)
-    LastTimeScreen = 1;
+        LastTimeScreen = 1;
     else if (lv_event_get_target(e) == ui_Alarms)
-    LastTimeScreen = 3;
+        LastTimeScreen = 3;
     else
-    LastTimeScreen = 2;
+        LastTimeScreen = 2;
+}
+
+void SetWeatherDeafault(lv_event_t *e)
+{
+    LastDownScreen = 1;
+}
+
+void SetMusicDeafault(lv_event_t *e)
+{
+    LastDownScreen = 2;
 }
 
 void totimescreen(lv_event_t *e)
@@ -84,11 +95,10 @@ void totimescreen(lv_event_t *e)
 
 void ClockDown(lv_event_t *e)
 {
-    bool musicplaying = 1;
-    if (musicplaying)
-    _ui_screen_change(&ui_Music, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Music_screen_init);
+    if (LastDownScreen == 2)
+        _ui_screen_change(&ui_Music, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Music_screen_init);
     else
-    _ui_screen_change(&ui_Weather, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Weather_screen_init);
+        _ui_screen_change(&ui_Weather, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Weather_screen_init);
 }
 
 void generictoclock(lv_event_t *e)
@@ -133,37 +143,36 @@ void screenback()
 {
     if (lv_scr_act() == ui_Apps)
     {
-    _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, NULL);
+        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, NULL);
     }
 
     else if (lv_scr_act() == ui_Calculator or lv_scr_act() == ui_Compass or lv_scr_act() == ui_Settings or lv_scr_act() == ui_Flashlight)
     {
-    _ui_screen_change( &ui_Apps, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Apps_screen_init);
+        _ui_screen_change(&ui_Apps, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Apps_screen_init);
     }
 
     else if (lv_scr_act() == ui_Notifications)
     {
-    _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, NULL);
+        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, NULL);
     }
 
     else if (lv_scr_act() == ui_Music or lv_scr_act() == ui_Weather)
     {
-    _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, NULL);
+        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, NULL);
     }
 
     else if (lv_scr_act() == ui_Timers or lv_scr_act() == ui_Stopwatch or lv_scr_act() == ui_Alarms)
     {
-    _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, NULL);
+        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, NULL);
     }
-    
+
     else if (lv_scr_act() == ui_Alarm_Going_Off)
     {
-    _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, NULL);
+        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, NULL);
     }
 
     else if (lv_scr_act() == ui_Set_Alarm)
     {
-    _ui_screen_change( &ui_Alarms, LV_SCR_LOAD_ANIM_FADE_OUT, 150, 0, NULL);
+        _ui_screen_change(&ui_Alarms, LV_SCR_LOAD_ANIM_FADE_OUT, 150, 0, NULL);
     }
-
 }

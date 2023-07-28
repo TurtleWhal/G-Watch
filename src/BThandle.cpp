@@ -158,12 +158,14 @@ void ParseGB(char *Message)
       Serial.println("Change To Pause Button");
       lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
       // lv_label_set_text(ui_Now_Playing_Label, MusicState);
+      MusicPlaying = 1;
     }
     else
     {
       Serial.println("Change To Play Button");
       lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
       // lv_label_set_text(ui_Now_Playing_Label, MusicState);
+      MusicPlaying = 0;
     }
     DrawMusicTime(nullptr);
   }
@@ -246,7 +248,7 @@ void PauseMusic(lv_event_t *e)
     String pausestring = "{t:\"music\", n:\"pause\"}";
     BTsend(pausestring);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_play_button_png);
-    MusicPlaying = !MusicPlaying;
+    // MusicPlaying = !MusicPlaying;
   }
   else
   {
@@ -254,7 +256,7 @@ void PauseMusic(lv_event_t *e)
     String playstring = "{t:\"music\", n:\"play\"}";
     BTsend(playstring);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_pause_button_png);
-    MusicPlaying = !MusicPlaying;
+    // MusicPlaying = !MusicPlaying;
   }
 }
 
