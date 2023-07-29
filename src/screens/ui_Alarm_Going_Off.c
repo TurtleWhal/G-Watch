@@ -48,7 +48,7 @@ ui_Alarm_Going_Off_Name = lv_label_create(ui_Alarm_Going_Off);
 lv_obj_set_width( ui_Alarm_Going_Off_Name, 215);
 lv_obj_set_height( ui_Alarm_Going_Off_Name, 45);
 lv_obj_set_x( ui_Alarm_Going_Off_Name, 0 );
-lv_obj_set_y( ui_Alarm_Going_Off_Name, -18 );
+lv_obj_set_y( ui_Alarm_Going_Off_Name, -16 );
 lv_obj_set_align( ui_Alarm_Going_Off_Name, LV_ALIGN_CENTER );
 lv_label_set_long_mode(ui_Alarm_Going_Off_Name,LV_LABEL_LONG_SCROLL);
 lv_label_set_text(ui_Alarm_Going_Off_Name,"Lunch");
@@ -58,6 +58,8 @@ lv_obj_set_style_text_font(ui_Alarm_Going_Off_Name, &ui_font_Comfortaa_30, LV_PA
 ui_Alarm_Going_Off_Name_Underline = lv_obj_create(ui_Alarm_Going_Off);
 lv_obj_set_width( ui_Alarm_Going_Off_Name_Underline, 200);
 lv_obj_set_height( ui_Alarm_Going_Off_Name_Underline, 3);
+lv_obj_set_x( ui_Alarm_Going_Off_Name_Underline, 0 );
+lv_obj_set_y( ui_Alarm_Going_Off_Name_Underline, 2 );
 lv_obj_set_align( ui_Alarm_Going_Off_Name_Underline, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Alarm_Going_Off_Name_Underline, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_Alarm_Going_Off_Name_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -69,7 +71,7 @@ ui_Alarm_Going_Off_Time = lv_label_create(ui_Alarm_Going_Off);
 lv_obj_set_width( ui_Alarm_Going_Off_Time, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Alarm_Going_Off_Time, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Alarm_Going_Off_Time, 0 );
-lv_obj_set_y( ui_Alarm_Going_Off_Time, 27 );
+lv_obj_set_y( ui_Alarm_Going_Off_Time, 29 );
 lv_obj_set_align( ui_Alarm_Going_Off_Time, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Alarm_Going_Off_Time,"12:00");
 lv_obj_set_style_text_font(ui_Alarm_Going_Off_Time, &lv_font_montserrat_48, LV_PART_MAIN| LV_STATE_DEFAULT);

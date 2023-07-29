@@ -114,7 +114,7 @@ void popnotification(int index)
   Log.verboseln("Popnotification: %i", index);
   if (!NotificationCount)
     return;
-  char temp[40];
+  char temp[30];
   sprintf(temp, "{t:\"notify-\", id:%i}", NotificationList[index - 1].id);
   BTsend(temp);
   int i;

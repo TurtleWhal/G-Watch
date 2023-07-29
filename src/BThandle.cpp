@@ -12,6 +12,7 @@
 #include "hardware/blectl.h"
 #include "hardware/ble/gadgetbridge.h"
 #include "ArduinoJson.h"
+#include "timers.h"
 
 extern TWatchClass *twatch;
 extern Notification NotificationList[11];
@@ -71,6 +72,8 @@ void ParseGB(char *Message)
 
   //  if (strcmp(NotifType, "musicstate") != 0)
   // lv_label_set_text(ui_Now_Playing_Label, Message);
+
+  Serial.println(Message);
 
   if (strcmp(NotifType, "notify") == 0)
   {
@@ -217,6 +220,22 @@ void ParseGB(char *Message)
     WeatherLoc = Loc;
 
     DrawWeather(nullptr);
+  }
+  else if (strcmp(NotifType, "find") == 0)
+  {
+    bool find = received["n"];
+    Serial.println(find);
+    if (find)
+    {
+      VibrateStart(100);
+      _ui_screen_change(&ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, ui_Alarm_Going_Off_screen_init);
+      lv_label_set_text(ui_Alarm_Going_Off_Name, "Find Watch");
+      lv_label_set_text(ui_Alarm_Going_Off_Time, "");
+    }
+    else
+    {
+      VibrateStop(nullptr);
+    }
   }
 }
 
