@@ -112,8 +112,9 @@ void ParseGB(char *Message)
     {
       if (NotificationList[i].id == NotifID)
       {
-        // popnotification(i + 1);
-        lv_label_set_text_fmt(ui_Now_Playing_Label, "%i", i);
+        popnotification(i + 1);
+        // lv_label_set_text_fmt(ui_Now_Playing_Label, "%i", i);
+        Log.verboseln("Notify: %i", i);
       }
     }
   }

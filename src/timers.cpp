@@ -203,7 +203,7 @@ void writetimertime()
 
 void StopwatchHandle()
 {
-  if (lv_scr_act() == ui_Stopwatch and stopwatchmoving)
+  if (ui_Stopwatch != NULL and stopwatchmoving)
   {
     DrawStopwatch();
   }
