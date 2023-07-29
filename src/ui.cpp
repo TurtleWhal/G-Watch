@@ -101,7 +101,7 @@ void btn3_click(void *param)
   {
     if (NotificationActive())
       notificationdismiss(nullptr);
-    //pairBT(random( 0,999999 ));
+    // pairBT(random( 0,999999 ));
   }
   else
     screenback();
@@ -120,7 +120,7 @@ void btn2_held(void *param)
   Log.verboseln("BTN2 Held");
   Wakeup("Button 2 Held");
   if (lv_scr_act() == ui_Stopwatch)
-    resetstopwatch(nullptr);
+    lv_event_send(ui_Stopwatch_Reset_Button, LV_EVENT_CLICKED, NULL); // Tell LVGL that we clicked the stopwatch reset button
   twatch->motor_shake(1, 30);
 }
 
@@ -265,11 +265,11 @@ void setup()
 
     ////////////////////////////////////////END OTA
 
-  WriteTime(); 
+    WriteTime();
   lv_timer_handler();
   BT_on();
 #if defined(CONFIG_BMA423_LATER)
-  twatch->bma423_begin(); //This takes 2 seconds
+  twatch->bma423_begin(); // This takes 2 seconds
 #endif
   twatch->hal_auto_update(true, 1);
 
@@ -309,6 +309,7 @@ void loop()
   // alarmhandle();
   BTHandle();
   Sleephandle();
+  VibrateHandle();
 
   // this runs every 50ms
   if (BTTimerTriggered)

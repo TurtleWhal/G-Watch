@@ -2,6 +2,7 @@
 #include "ui.h"
 #include "TWatch_hal.h"
 #include "timers.h"
+#include "power_managment.h"
 
 char timertimechar[3];
 int stopwatchtime = 0;
@@ -15,7 +16,14 @@ int timertime;
 bool timermoving;
 int timerlasttime;
 
+int vibrate;
+
 extern TWatchClass *twatch;
+
+void DrawStopwatch();
+
+void Vibrate();
+void VibrateStart(int);
 
 void ToggleStopwatch(lv_event_t *e)
 {
@@ -47,10 +55,13 @@ void resetstopwatch(lv_event_t *e)
   PauseToPlay_Animation(ui_Stopwatch_Play_Pause_Image, 0);
 
   stopwatchtimestarted = 0;
+  stopwatchtime = 0;
   lv_label_set_text(ui_Stopwatch_Milliseconds, "00");
   lv_label_set_text(ui_Stopwatch_Seconds, "00");
   lv_label_set_text(ui_Stopwatch_Minutes, "00");
   lv_label_set_text(ui_Stopwatch_Hours, "00");
+  // DrawStopwatch();
+  // lv_label_set_text(ui_Stopwatch_Time_Long, "00:00:00.00");
   twatch->motor_shake(1, 50);
 }
 
@@ -70,33 +81,54 @@ void ToggleTimer(lv_event_t *e)
   twatch->motor_shake(1, 50);
 }
 
+void InitTimer(lv_event_t *e)
+{
+  writetimertime();
+  if (timermoving)
+  {
+    lv_obj_set_y(ui_Timer_Play_Pause_Image, 34);
+  }
+}
+
 void timeradjust(lv_event_t *e)
 {
-lv_obj_t * target = lv_event_get_target(e);
-if (target == ui_Timer_Hour_Plus_10)
-    timertime += 10 * 60 * 60 * 1000;
-else if (target == ui_Timer_Hour_Minus_10)
-    timertime -= 10 * 60 * 60 * 1000;
-else if (target == ui_Timer_Hour_Plus_1)
-    timertime += 60 * 60 * 1000;
-else if (target == ui_Timer_Hour_Minus_1)
-    timertime -= 60 * 60 * 1000;
-else if (target == ui_Timer_Minute_Plus_10)
-    timertime += 10 * 60 * 1000;
-else if (target == ui_Timer_Minute_Minus_10)
-    timertime -= 10 * 60 * 1000;
-else if (target == ui_Timer_Minute_Plus_1)
-    timertime += 60 * 1000;
-else if (target == ui_Timer_Minute_Minus_1)
-    timertime -= 60 * 1000;
-else if (target == ui_Timer_Second_Plus_10)
-    timertime += 10 * 1000;
-else if (target == ui_Timer_Second_Minus_10)
-    timertime -= 10 * 1000;
-else if (target == ui_Timer_Second_Plus_1)
-    timertime += 1000;
-else if (target == ui_Timer_Second_Minus_1)
-    timertime -= 1000;
+  lv_obj_t *target = lv_event_get_target(e);
+  /*if (target == ui_Timer_Hour_Plus_10)
+      timertime += 10 * 60 * 60 * 1000;
+  else if (target == ui_Timer_Hour_Minus_10)
+      timertime -= 10 * 60 * 60 * 1000;
+  else if (target == ui_Timer_Hour_Plus_1)
+      timertime += 60 * 60 * 1000;
+  else if (target == ui_Timer_Hour_Minus_1)
+      timertime -= 60 * 60 * 1000;
+  else if (target == ui_Timer_Minute_Plus_10)
+      timertime += 10 * 60 * 1000;
+  else if (target == ui_Timer_Minute_Minus_10)
+      timertime -= 10 * 60 * 1000;
+  else if (target == ui_Timer_Minute_Plus_1)
+      timertime += 60 * 1000;
+  else if (target == ui_Timer_Minute_Minus_1)
+      timertime -= 60 * 1000;
+  else if (target == ui_Timer_Second_Plus_10)
+      timertime += 10 * 1000;
+  else if (target == ui_Timer_Second_Minus_10)
+      timertime -= 10 * 1000;
+  else if (target == ui_Timer_Second_Plus_1)
+      timertime += 1000;
+  else if (target == ui_Timer_Second_Minus_1)
+      timertime -= 1000;*/
+
+  timertime = ((lv_roller_get_selected(ui_Timer_Hour_Left_Roller) * 60 * 60 * 10) +
+               (lv_roller_get_selected(ui_Timer_Hour_Right_Roller) * 60 * 60) +
+
+               (lv_roller_get_selected(ui_Timer_Minute_Left_Roller) * 60 * 10) +
+               (lv_roller_get_selected(ui_Timer_Minute_Right_Roller) * 60) +
+
+               (lv_roller_get_selected(ui_Timer_Second_Left_Roller) * 10) +
+               (lv_roller_get_selected(ui_Timer_Second_Right_Roller))) *
+              1000;
+
+  Serial.println(timertime);
 
   istimernegative();
   writetimertime();
@@ -109,27 +141,36 @@ void istimernegative()
     timertime = 0;
     if (timermoving)
     {
+      timermoving = 0;
+      // ToggleTimer(nullptr);
+      _ui_screen_change(&ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Alarm_Going_Off_screen_init);
       lv_label_set_text(ui_Alarm_Going_Off_Time, "00:00:00");
       lv_label_set_text(ui_Alarm_Going_Off_Name, "Timer");
-      //_ui_screen_change(ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0);
-      lv_scr_load_anim(ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 0);
-      timermoving = 0;
-      ToggleTimer(nullptr);
-      // VIBRATION MOTOR GO BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+      Wakeup("Timer");
+      VibrateStart(100); // VIBRATION MOTOR GO BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
     }
   }
 }
 
 void writetimertime()
 {
-  unsigned long timerseconds = timertime / 1000;
-  unsigned long timerminutes = timerseconds / 60;
-  unsigned long timerhours = timerminutes / 60;
+  uint8_t timerseconds = timertime / 1000;
+  uint8_t timerminutes = timerseconds / 60;
+  uint8_t timerhours = timerminutes / 60;
   timerseconds %= 60;
   timerminutes %= 60;
   timerhours %= 100;
 
-  if (timerseconds < 10)
+  lv_roller_set_selected(ui_Timer_Second_Right_Roller, timerseconds % 10, LV_ANIM_ON);
+  lv_roller_set_selected(ui_Timer_Second_Left_Roller, timerseconds / 10, LV_ANIM_ON);
+
+  lv_roller_set_selected(ui_Timer_Minute_Right_Roller, timerminutes % 10, LV_ANIM_ON);
+  lv_roller_set_selected(ui_Timer_Minute_Left_Roller, timerminutes / 10, LV_ANIM_ON);
+
+  lv_roller_set_selected(ui_Timer_Hour_Right_Roller, timerhours % 10, LV_ANIM_ON);
+  lv_roller_set_selected(ui_Timer_Hour_Left_Roller, timerhours / 10, LV_ANIM_ON);
+
+  /*if (timerseconds < 10)
   {
     sprintf(timertimechar, "0%d", timerseconds);
   }
@@ -157,74 +198,103 @@ void writetimertime()
   {
     itoa(timerhours, timertimechar, 10);
   }
-  lv_label_set_text(ui_Timer_Hours, timertimechar);
+  lv_label_set_text(ui_Timer_Hours, timertimechar);*/
 }
 
 void StopwatchHandle()
 {
-  if (stopwatchmoving)
+  if (lv_scr_act() == ui_Stopwatch and stopwatchmoving)
   {
-    stopwatchtime = (millis() - stopwatchtimestarted);
-    // itoa(stopwatchtime,stopwatchtimechar,10);
-
-    unsigned long stopwatchmilliseconds = stopwatchtime / 10;
-    unsigned long stopwatchseconds = stopwatchtime / 1000;
-    unsigned long stopwatchminutes = stopwatchseconds / 60;
-    unsigned long stopwatchhours = stopwatchminutes / 60;
-    stopwatchmilliseconds %= 100;
-    stopwatchseconds %= 60;
-    stopwatchminutes %= 60;
-    stopwatchhours %= 24;
-
-    if (stopwatchmilliseconds < 10)
-    {
-      sprintf(stopwatchtimechar, "0%d", stopwatchmilliseconds);
-    }
-    else
-    {
-      itoa(stopwatchmilliseconds, stopwatchtimechar, 10);
-    }
-    lv_label_set_text(ui_Stopwatch_Milliseconds, stopwatchtimechar);
-
-    if (stopwatchseconds < 10)
-    {
-      sprintf(stopwatchtimechar, "0%d", stopwatchseconds);
-    }
-    else
-    {
-      itoa(stopwatchseconds, stopwatchtimechar, 10);
-    }
-    lv_label_set_text(ui_Stopwatch_Seconds, stopwatchtimechar);
-
-    if (stopwatchminutes < 10)
-    {
-      sprintf(stopwatchtimechar, "0%d", stopwatchminutes);
-    }
-    else
-    {
-      itoa(stopwatchminutes, stopwatchtimechar, 10);
-    }
-    lv_label_set_text(ui_Stopwatch_Minutes, stopwatchtimechar);
-
-    if (stopwatchhours < 10)
-    {
-      sprintf(stopwatchtimechar, "0%d", stopwatchhours);
-    }
-    else
-    {
-      itoa(stopwatchhours, stopwatchtimechar, 10);
-    }
-    lv_label_set_text(ui_Stopwatch_Hours, stopwatchtimechar);
+    DrawStopwatch();
   }
 
   if (timermoving)
   {
+    static int lasttime = millis();
     if (millis() > timerlasttime)
     {
       timertime -= (millis() - timerlasttime);
       timerlasttime = millis();
     }
-    writetimertime();
-    istimernegative();
+    if (lasttime < millis() - 500)
+    {
+      Serial.println(timertime);
+      writetimertime();
+      istimernegative();
+      lasttime = millis();
+    }
   }
+}
+
+void DrawStopwatch()
+{
+  stopwatchtime = (millis() - stopwatchtimestarted);
+  uint8_t stopwatchmilliseconds = stopwatchtime / 10;
+  uint8_t stopwatchseconds = stopwatchtime / 1000;
+  uint8_t stopwatchminutes = stopwatchseconds / 60;
+  uint8_t stopwatchhours = stopwatchminutes / 60;
+  stopwatchmilliseconds %= 100;
+  stopwatchseconds %= 60;
+  stopwatchminutes %= 60;
+  stopwatchhours %= 99;
+
+  static uint8_t lastmilliseconds;
+  static uint8_t lastseconds;
+  static uint8_t lastminutes;
+  static uint8_t lasthours;
+
+  if (lastmilliseconds != stopwatchmilliseconds)
+  {
+    lv_label_set_text_fmt(ui_Stopwatch_Milliseconds, "%02d", stopwatchmilliseconds);
+    lastmilliseconds = stopwatchmilliseconds;
+  }
+
+  if (lastseconds != stopwatchseconds)
+  {
+    lv_label_set_text_fmt(ui_Stopwatch_Seconds, "%02d", stopwatchseconds);
+    lastseconds = stopwatchseconds;
+  }
+
+  if (lastminutes != stopwatchminutes)
+  {
+    lv_label_set_text_fmt(ui_Stopwatch_Minutes, "%02d", stopwatchminutes);
+    lastminutes = stopwatchminutes;
+  }
+
+  if (lasthours != stopwatchhours)
+  {
+    lv_label_set_text_fmt(ui_Stopwatch_Hours, "%02d", stopwatchhours);
+    lasthours = stopwatchhours;
+  }
+  // lv_label_set_text_fmt(ui_Stopwatch_Time_Long, "%02d:%02d:%02d.%02d", stopwatchhours, stopwatchminutes, stopwatchseconds, stopwatchmilliseconds);
+}
+
+void VibrateHandle()
+{
+  static int lasttime;
+  if (lasttime < millis() - 4000)
+  {
+    lasttime = millis();
+    Vibrate();
+  }
+}
+
+void Vibrate()
+{
+  if (vibrate)
+  {
+    twatch->motor_shake(2, vibrate);
+    delay(800);
+    twatch->motor_shake(2, vibrate);
+  }
+}
+
+void VibrateStart(int Strength)
+{
+  vibrate = Strength;
+}
+
+void VibrateStop(lv_event_t *e)
+{
+  vibrate = 0;
 }

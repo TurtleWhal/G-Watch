@@ -306,3 +306,11 @@ def SetWeatherDeafault(event_struct):
 def SetMusicDeafault(event_struct):
     return
 
+
+def InitTimer(event_struct):
+    return
+
+
+def VibrateStop(event_struct):
+    return
+
