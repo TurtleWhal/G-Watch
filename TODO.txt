@@ -26,3 +26,11 @@ alarms
 buttons wierd?
 
 Find phone from watch
+
+SET TIME
+
+fix timer and stopwatch instability
+
+redraw steps and battery on wakeup
+
+send battery percentage and steps in sleep
