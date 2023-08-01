@@ -294,3 +294,23 @@ def MusicSkipForward(event_struct):
 def MusicSkipBackward(event_struct):
     return
 
+
+def DrawWeather(event_struct):
+    return
+
+
+def SetWeatherDeafault(event_struct):
+    return
+
+
+def SetMusicDeafault(event_struct):
+    return
+
+
+def InitTimer(event_struct):
+    return
+
+
+def VibrateStop(event_struct):
+    return
+

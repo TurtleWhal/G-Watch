@@ -7,6 +7,8 @@
 #include "notifications.h"
 #include "power_managment.h"
 #include "Preferences.h"
+#include "ArduinoLog.h"
+#include "BThandle.h"
 
 Notification NotificationList[11];
 lv_obj_t *NotificationComp[10];
@@ -109,14 +111,19 @@ void pushnotification(int index)
 
 void popnotification(int index)
 {
+  Log.verboseln("Popnotification: %i", index);
   if (!NotificationCount)
     return;
+  char temp[30];
+  sprintf(temp, "{t:\"notify-\", id:%i}", NotificationList[index - 1].id);
+  BTsend(temp);
   int i;
   for (i = index; i < NotificationCount; i++)
   {
     if (i != 10)
       NotificationList[i - 1] = NotificationList[i];
-    lv_obj_set_user_data(NotificationComp[i], (void *)i - 1);
+    if (NotificationComp[1] != NULL)
+      lv_obj_set_user_data(NotificationComp[i], (void *)i - 1);
   }
   NotificationCount--;
 }

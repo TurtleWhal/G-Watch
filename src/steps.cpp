@@ -15,14 +15,14 @@ int Steps;
 
 void StepHandle()
 {
-  static int StepDay;
-  static int LastSteps = -1;
-  static int StepOffset = -1;
+  static uint16_t StepDay;
+  static uint16_t LastSteps = UINT16_MAX;
+  static uint16_t StepOffset = UINT16_MAX;
 
-  if (StepOffset == -1)
+  if (StepOffset == UINT16_MAX)
   {
-    if (Storage.getUInt("StepDay") == GetDay())
-      StepOffset = Storage.getUInt("Steps");
+    if (Storage.getUShort("StepDay") == GetDay())
+      StepOffset = Storage.getUShort("Steps");
     else
       StepOffset = 0;
   }
@@ -35,34 +35,34 @@ void StepHandle()
     Steps = GetStep + StepOffset;
 #ifdef UPDATE_ELEMENTS
     lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Steps);
-    lv_arc_set_value(ui_Arc_Right, ((float)Steps / Storage.getUInt("StepGoal")) * 250);
+    lv_arc_set_value(ui_Arc_Right, ((float)Steps / Storage.getUShort("StepGoal")) * 250);
 #endif
 
-    if (Steps >= Storage.getUInt("StepGoal") and !Storage.getBool("StepReach"))
+    if (Steps >= Storage.getUShort("StepGoal") and !Storage.getBool("StepReach"))
     {
       // #ifdef UPDATE_ELEMENTS
       //       lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
       //       lv_label_set_text_fmt(ui_Notification_Text, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
       // #endif
-      char *StepNotif;
-      sprintf(StepNotif, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
+      char StepNotif[] = "You have reached your step goal of 4294967295 Steps!";
+      sprintf(StepNotif, "You have reached your step goal of %i Steps!", Storage.getUShort("StepGoal"));
       shownotification("Step Goal Reached!", StepNotif, "local.stephandle", 0, 0);
       Storage.putBool("StepReach", 1);
     }
 
-    Storage.putUInt("Steps", Steps);
+    Storage.putUShort("Steps", Steps);
     StepDay = GetDay();
-    Storage.putUInt("StepsDay", StepDay);
+    Storage.putUShort("StepsDay", StepDay);
 
     BTsendSteps();
   }
 
-  if (Storage.getUInt("StepDay") != GetDay())
+  if (Storage.getUShort("StepDay") != GetDay())
   {
-    Storage.putUInt("StepDay", GetDay());
+    Storage.putUShort("StepDay", GetDay());
     Storage.putBool("StepReach", 0);
     StepOffset = 0;
-    Storage.putUInt("Steps", 0);
+    Storage.putUShort("Steps", 0);
     twatch->bma423_step_reset();
   }
 }

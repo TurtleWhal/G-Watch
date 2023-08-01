@@ -12,6 +12,7 @@
 #include "hardware/blectl.h"
 #include "hardware/ble/gadgetbridge.h"
 #include "ArduinoJson.h"
+#include "timers.h"
 
 extern TWatchClass *twatch;
 extern Notification NotificationList[11];
@@ -31,6 +32,18 @@ String MusicSong;
 String MusicArtist;
 String MusicAlbum;
 bool MusicPlaying;
+
+String WeatherTemp = "0";
+String WeatherHigh = "0";
+String WeatherLow = "0";
+String WeatherHumidity = "0";
+String WeatherPrecip = "0";
+String WeatherUV = "0";
+String WeatherCode = "0";
+String WeatherType = "Not Updated";
+String WeatherWind = "0";
+String WeatherWinddir = "0";
+String WeatherLoc = "Not Set";
 
 void ParseGB(char *Message)
 {
@@ -59,6 +72,8 @@ void ParseGB(char *Message)
 
   //  if (strcmp(NotifType, "musicstate") != 0)
   // lv_label_set_text(ui_Now_Playing_Label, Message);
+
+  Serial.println(Message);
 
   if (strcmp(NotifType, "notify") == 0)
   {
@@ -100,8 +115,9 @@ void ParseGB(char *Message)
     {
       if (NotificationList[i].id == NotifID)
       {
-        // popnotification(i + 1);
-        lv_label_set_text_fmt(ui_Now_Playing_Label, "%i", i);
+        popnotification(i + 1);
+        // lv_label_set_text_fmt(ui_Now_Playing_Label, "%i", i);
+        Log.verboseln("Notify: %i", i);
       }
     }
   }
@@ -146,18 +162,80 @@ void ParseGB(char *Message)
       Serial.println("Change To Pause Button");
       lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
       // lv_label_set_text(ui_Now_Playing_Label, MusicState);
+      MusicPlaying = 1;
     }
     else
     {
       Serial.println("Change To Play Button");
       lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
       // lv_label_set_text(ui_Now_Playing_Label, MusicState);
+      MusicPlaying = 0;
     }
     DrawMusicTime(nullptr);
   }
   else if (strcmp(NotifType, "is_gps_active") == 0)
   {
-    //BTsend("{\"t\":\"gps_power\", \"status\":0}");
+    // BTsend("{\"t\":\"gps_power\", \"status\":0}");
+  }
+  else if (strcmp(NotifType, "weather") == 0)
+  {
+    // t:"weather", temp,hi,lo,hum,rain,uv,code,txt,wind,wdir,loc
+    int Temp = received["temp"];
+    Temp = (Temp - 273) * 1.8 + 32; // extra math for kelvin to celcius to farenheit
+    int High = received["hi"];
+    int Low = received["lo"];
+    int Humidity = received["hum"];
+    int Precip = received["rain"];
+    int UV = received["uv"];
+    int Code = received["code"];
+    const char *Type = received["txt"];
+    int Wind = received["wind"];
+    int Winddir = received["wdir"];
+    const char *Loc = received["loc"];
+
+    Log.verboseln("%s", Message);
+
+    Log.verboseln("(Weather) Temperature: -- %i", Temp);
+    Log.verboseln("(Weather) Daily High: --- %i", High);
+    Log.verboseln("(Weather) Daily Low: ---- %i", Low);
+    Log.verboseln("(Weather) Humidity: ----- %i", Humidity);
+    Log.verboseln("(Weather) Precipitation:  %i", Precip);
+    Log.verboseln("(Weather) UV Index: ----- %i", UV);
+    Log.verboseln("(Weather) Weather Code:-- %i", Code);
+    Log.verboseln("(Weather) Weather:------- %s", Type);
+    Log.verboseln("(Weather) Wind Speed:---- %i", Wind);
+    Log.verboseln("(Weather) Wind Dir:------ %i", Winddir);
+    Log.verboseln("(Weather) Weather Loc: -- %s", Loc);
+
+    WeatherTemp = Temp;
+    WeatherHigh = High;
+    WeatherLow = Low;
+    WeatherHumidity = Humidity;
+    WeatherPrecip = Precip;
+    WeatherUV = UV;
+    WeatherCode = Code;
+    WeatherType = Type;
+    WeatherWind = Wind;
+    WeatherWinddir = Winddir;
+    WeatherLoc = Loc;
+
+    DrawWeather(nullptr);
+  }
+  else if (strcmp(NotifType, "find") == 0)
+  {
+    bool find = received["n"];
+    Serial.println(find);
+    if (find)
+    {
+      VibrateStart(100);
+      _ui_screen_change(&ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, ui_Alarm_Going_Off_screen_init);
+      lv_label_set_text(ui_Alarm_Going_Off_Name, "Find Watch");
+      lv_label_set_text(ui_Alarm_Going_Off_Time, "");
+    }
+    else
+    {
+      VibrateStop(nullptr);
+    }
   }
 }
 
@@ -190,7 +268,7 @@ void PauseMusic(lv_event_t *e)
     String pausestring = "{t:\"music\", n:\"pause\"}";
     BTsend(pausestring);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_play_button_png);
-    MusicPlaying = !MusicPlaying;
+    // MusicPlaying = !MusicPlaying;
   }
   else
   {
@@ -198,7 +276,7 @@ void PauseMusic(lv_event_t *e)
     String playstring = "{t:\"music\", n:\"play\"}";
     BTsend(playstring);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_pause_button_png);
-    MusicPlaying = !MusicPlaying;
+    // MusicPlaying = !MusicPlaying;
   }
 }
 
@@ -312,6 +390,17 @@ void pairBT(int pin)
   _ui_screen_change(&ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Alarm_Going_Off_screen_init);
   lv_label_set_text(ui_Alarm_Going_Off_Stop_Button_Text, "Ok");
   lv_label_set_text(ui_Alarm_Going_Off_Name, "Pairing Pin");
-  lv_label_set_text_fmt(ui_Alarm_Going_Off_Time, "%03i %03i", pin/1000, pin % 1000);
-  //lv_scr_load_anim(ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 0);
+  lv_label_set_text_fmt(ui_Alarm_Going_Off_Time, "%03i %03i", pin / 1000, pin % 1000);
+  // lv_scr_load_anim(ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 0);
+}
+
+void DrawWeather(lv_event_t *e)
+{
+  lv_label_set_text_fmt(ui_Temperature, "%s°", WeatherTemp.c_str());
+  lv_label_set_text(ui_High_Temp, WeatherHigh.c_str());
+  lv_label_set_text(ui_Low_Temp, WeatherLow.c_str());
+  lv_label_set_text_fmt(ui_Humidity_Label, "%s%%", WeatherHumidity.c_str());
+  lv_label_set_text_fmt(ui_Precepitation_Label, "%s%%", WeatherPrecip.c_str());
+  lv_label_set_text(ui_UV_Index_Label, WeatherUV.c_str());
+  lv_label_set_text(ui_Weather_State, WeatherType.c_str());
 }

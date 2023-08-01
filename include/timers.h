@@ -6,6 +6,8 @@ extern "C"
 void istimernegative();
 void writetimertime();
 void StopwatchHandle();
+void VibrateHandle();
+void VibrateStart(int);
 
 #ifdef __cplusplus
 } /*extern "C"*/

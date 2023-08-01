@@ -211,11 +211,17 @@ lv_obj_t *ui_Timer_Second_Plus_1;
 lv_obj_t *ui_Timer_Hours;
 lv_obj_t *ui_Timer_Minutes;
 lv_obj_t *ui_Timer_Seconds;
+void ui_event_Timer_Second_Right_Roller( lv_event_t * e);
 lv_obj_t *ui_Timer_Second_Right_Roller;
+void ui_event_Timer_Second_Left_Roller( lv_event_t * e);
 lv_obj_t *ui_Timer_Second_Left_Roller;
+void ui_event_Timer_Minute_Right_Roller( lv_event_t * e);
 lv_obj_t *ui_Timer_Minute_Right_Roller;
+void ui_event_Timer_Minute_Left_Roller( lv_event_t * e);
 lv_obj_t *ui_Timer_Minute_Left_Roller;
+void ui_event_Timer_Hour_Right_Roller( lv_event_t * e);
 lv_obj_t *ui_Timer_Hour_Right_Roller;
+void ui_event_Timer_Hour_Left_Roller( lv_event_t * e);
 lv_obj_t *ui_Timer_Hour_Left_Roller;
 lv_obj_t *ui_Timer_Colin_Right;
 lv_obj_t *ui_Timer_Colin_Left;
@@ -1013,6 +1019,7 @@ void ui_event_Alarm_Going_Off_Stop_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Clock_screen_init);
+      VibrateStop( e );
 }
 }
 void ui_event_Stopwatch( lv_event_t * e) {
@@ -1069,6 +1076,7 @@ lv_indev_wait_release(lv_indev_get_act());
 if ( event_code == LV_EVENT_SCREEN_LOADED) {
       ApplyTheme( e );
       settimerdefault( e );
+      InitTimer( e );
 }
 }
 void ui_event_Timer_Play_Pause_Button( lv_event_t * e) {
@@ -1146,6 +1154,42 @@ if ( event_code == LV_EVENT_CLICKED) {
 void ui_event_Timer_Second_Plus_1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
+      timeradjust( e );
+}
+}
+void ui_event_Timer_Second_Right_Roller( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      timeradjust( e );
+}
+}
+void ui_event_Timer_Second_Left_Roller( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      timeradjust( e );
+}
+}
+void ui_event_Timer_Minute_Right_Roller( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      timeradjust( e );
+}
+}
+void ui_event_Timer_Minute_Left_Roller( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      timeradjust( e );
+}
+}
+void ui_event_Timer_Hour_Right_Roller( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      timeradjust( e );
+}
+}
+void ui_event_Timer_Hour_Left_Roller( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
       timeradjust( e );
 }
 }
@@ -1324,6 +1368,15 @@ lv_indev_wait_release(lv_indev_get_act());
 if ( event_code == LV_EVENT_SCREEN_LOADED) {
       DrawMusicInfo( e );
       DrawMusicTime( e );
+      SetMusicDeafault( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Weather, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Weather_screen_init);
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Weather, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, &ui_Weather_screen_init);
 }
 }
 void ui_event_Music_Play_Button( lv_event_t * e) {
@@ -1349,6 +1402,18 @@ void ui_event_Weather( lv_event_t * e) {
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, &ui_Clock_screen_init);
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Music, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, &ui_Music_screen_init);
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Music, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Music_screen_init);
+}
+if ( event_code == LV_EVENT_SCREEN_LOADED) {
+      DrawWeather( e );
+      SetWeatherDeafault( e );
 }
 }
 

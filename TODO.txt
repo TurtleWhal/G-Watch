@@ -19,12 +19,20 @@ notification images
 
 Float based calculator only does two decimal places
 
-Weather
-
 Increase LVGL Buffer Size
 
 alarms
-timers
-vibrate pattern
 
 buttons wierd?
+
+Find phone from watch
+
+SET TIME
+
+fix timer and stopwatch instability
+
+redraw steps and battery on wakeup
+
+send battery percentage and steps in sleep
+
+stopwatch resets at 4:15

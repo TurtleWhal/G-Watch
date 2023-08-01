@@ -23,8 +23,10 @@ void togglealarm3(lv_event_t * e);
 void togglealarm4(lv_event_t * e);
 void toggleampm(lv_event_t * e);
 void setalarm(lv_event_t * e);
+void VibrateStop(lv_event_t * e);
 void resetstopwatch(lv_event_t * e);
 void ToggleStopwatch(lv_event_t * e);
+void InitTimer(lv_event_t * e);
 void ToggleTimer(lv_event_t * e);
 void timeradjust(lv_event_t * e);
 void loadsettings(lv_event_t * e);
@@ -41,9 +43,12 @@ void CalcHandle(lv_event_t * e);
 void ToggleFlashlight(lv_event_t * e);
 void DrawMusicInfo(lv_event_t * e);
 void DrawMusicTime(lv_event_t * e);
+void SetMusicDeafault(lv_event_t * e);
 void PauseMusic(lv_event_t * e);
 void MusicSkipForward(lv_event_t * e);
 void MusicSkipBackward(lv_event_t * e);
+void DrawWeather(lv_event_t * e);
+void SetWeatherDeafault(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/
