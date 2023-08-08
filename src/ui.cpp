@@ -215,7 +215,7 @@ void setup()
   timerAlarmEnable(timer2);
 
   //////////////////////////Fake Notifications///////////
-  FakeNotes();
+  // FakeNotes();
 
   ////////////////////////////OTA
   if (useOTA)

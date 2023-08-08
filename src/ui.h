@@ -85,8 +85,8 @@ void ui_event_Notifications( lv_event_t * e);
 extern lv_obj_t *ui_Notifications;
 extern lv_obj_t *ui_Notifications_Label_Underline;
 extern lv_obj_t *ui_Notifications_Label;
-extern lv_obj_t *ui_Notification_Panel;
 extern lv_obj_t *ui_No_New_Notifications_Label;
+extern lv_obj_t *ui_Notification_Panel;
 extern lv_obj_t *ui_Notification_Widget2;
 extern lv_obj_t *ui_Notifications_Gesture_Panel;
 // SCREEN: ui_Alarms
@@ -391,13 +391,13 @@ LV_IMG_DECLARE( ui_img_snow_rain_png);   // assets/Snow Rain.png
 LV_IMG_DECLARE( ui_img_mostly_sunny_png);   // assets/Mostly Sunny.png
 LV_IMG_DECLARE( ui_img_4809254_png);   // assets/4809254.png
 
+LV_FONT_DECLARE( ui_font_Comfortaa_10);
 LV_FONT_DECLARE( ui_font_Comfortaa_12);
 LV_FONT_DECLARE( ui_font_Comfortaa_16);
 LV_FONT_DECLARE( ui_font_Comfortaa_26);
 LV_FONT_DECLARE( ui_font_Comfortaa_30);
 LV_FONT_DECLARE( ui_font_Monoton_48);
 LV_FONT_DECLARE( ui_font_Music_14);
-LV_FONT_DECLARE( ui_font_Comfortaa_10);
 
 void ui_init(void);
 

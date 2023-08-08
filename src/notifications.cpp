@@ -50,6 +50,12 @@ void shownotification(String Title, String Text, String Source, int id, bool Sto
     NotificationList[10].id = id;
     pushnotification(1);
   }
+
+  if (lv_scr_act() == ui_Notifications)
+  {
+    lv_obj_clean(ui_Notification_Panel);
+    drawnotifications(nullptr);
+  }
 }
 
 void drawnotifications(lv_event_t *e)
@@ -114,9 +120,9 @@ void popnotification(int index)
   Log.verboseln("Popnotification: %i", index);
   if (!NotificationCount)
     return;
-  char temp[30];
-  sprintf(temp, "{t:\"notify-\", id:%i}", NotificationList[index - 1].id);
-  BTsend(temp);
+  /*char temp[50];
+  sprintf(temp, "{\"t\":\"notify\",\"id\":%i,\"n\":\"DISMISS\"}", NotificationList[index - 1].id);
+  BTsend(temp);*/
   int i;
   for (i = index; i < NotificationCount; i++)
   {

@@ -49,29 +49,29 @@ lv_obj_set_align( cui_Notification_Widget_Visible, LV_ALIGN_CENTER );
 lv_obj_clear_flag( cui_Notification_Widget_Visible, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(cui_Notification_Widget_Visible, 30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-lv_obj_t *cui_Notification_Title;
-cui_Notification_Title = lv_label_create(cui_Notification_Widget_Visible);
-lv_obj_set_width( cui_Notification_Title, 112);
-lv_obj_set_height( cui_Notification_Title, 10);
-lv_obj_set_x( cui_Notification_Title, 10 );
-lv_obj_set_y( cui_Notification_Title, -13 );
-lv_obj_set_align( cui_Notification_Title, LV_ALIGN_TOP_RIGHT );
-lv_label_set_long_mode(cui_Notification_Title,LV_LABEL_LONG_DOT);
-lv_label_set_text(cui_Notification_Title,"Dad");
-lv_obj_clear_flag( cui_Notification_Title, LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
-lv_obj_set_style_text_font(cui_Notification_Title, &ui_font_Music_14, LV_PART_MAIN| LV_STATE_DEFAULT);
-
 lv_obj_t *cui_Notification_Text;
 cui_Notification_Text = lv_label_create(cui_Notification_Widget_Visible);
-lv_obj_set_width( cui_Notification_Text, 112);
+lv_obj_set_width( cui_Notification_Text, 110);
 lv_obj_set_height( cui_Notification_Text, 35);
-lv_obj_set_x( cui_Notification_Text, 10 );
-lv_obj_set_y( cui_Notification_Text, 2 );
+lv_obj_set_x( cui_Notification_Text, 8 );
+lv_obj_set_y( cui_Notification_Text, 3 );
 lv_obj_set_align( cui_Notification_Text, LV_ALIGN_TOP_RIGHT );
 lv_label_set_long_mode(cui_Notification_Text,LV_LABEL_LONG_DOT);
 lv_label_set_text(cui_Notification_Text,"Daddddddddddddddddddddddddddddddddddddddddddddddd");
 lv_obj_clear_flag( cui_Notification_Text, LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
 lv_obj_set_style_text_font(cui_Notification_Text, &lv_font_montserrat_10, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_t *cui_Notification_Title;
+cui_Notification_Title = lv_label_create(cui_Notification_Widget_Visible);
+lv_obj_set_width( cui_Notification_Title, 112);
+lv_obj_set_height( cui_Notification_Title, 10);
+lv_obj_set_x( cui_Notification_Title, 10 );
+lv_obj_set_y( cui_Notification_Title, -14 );
+lv_obj_set_align( cui_Notification_Title, LV_ALIGN_TOP_RIGHT );
+lv_label_set_long_mode(cui_Notification_Title,LV_LABEL_LONG_DOT);
+lv_label_set_text(cui_Notification_Title,"Dad");
+lv_obj_clear_flag( cui_Notification_Title, LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
+lv_obj_set_style_text_font(cui_Notification_Title, &ui_font_Music_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_t *cui_Notification_Image_Panel;
 cui_Notification_Image_Panel = lv_obj_create(cui_Notification_Widget_Visible);
@@ -100,8 +100,8 @@ lv_obj_t ** children = lv_mem_alloc(sizeof(lv_obj_t *) * _UI_COMP_NOTIFICATION_W
 children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET] = cui_Notification_Widget;
 children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE] = cui_Notification_Source;
 children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE] = cui_Notification_Widget_Visible;
-children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE] = cui_Notification_Title;
 children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT] = cui_Notification_Text;
+children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE] = cui_Notification_Title;
 children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL] = cui_Notification_Image_Panel;
 children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL_NOTIFICATION_IMAGE] = cui_Notification_Image;
 lv_obj_add_event_cb(cui_Notification_Widget, get_component_child_event_cb, LV_EVENT_GET_COMP_CHILD, children);

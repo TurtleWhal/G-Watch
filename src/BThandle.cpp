@@ -78,9 +78,9 @@ void ParseGB(char *Message)
   if (strcmp(NotifType, "notify") == 0)
   {
 
-    const char *NotifText = "";  //This doesn't initialize enought space
-    const char *NotifTitle = ""; //This doesn't initialize enought space
-    const char *NotifSource = "Undefined"; //This may not initialize enough space
+    const char *NotifText = "";            // This doesn't initialize enought space
+    const char *NotifTitle = "";           // This doesn't initialize enought space
+    const char *NotifSource = "Undefined"; // This may not initialize enough space
     int NotifID;
 
     if (received.containsKey("title"))
@@ -175,7 +175,7 @@ void ParseGB(char *Message)
   }
   else if (strcmp(NotifType, "is_gps_active") == 0)
   {
-    // BTsend("{\"t\":\"gps_power\", \"status\":0}");
+    BTsend("{\"t\":\"gps_power\",\"status\":1}");
   }
   else if (strcmp(NotifType, "weather") == 0)
   {
@@ -396,11 +396,14 @@ void pairBT(int pin)
 
 void DrawWeather(lv_event_t *e)
 {
-  lv_label_set_text_fmt(ui_Temperature, "%s°", WeatherTemp.c_str());
-  lv_label_set_text(ui_High_Temp, WeatherHigh.c_str());
-  lv_label_set_text(ui_Low_Temp, WeatherLow.c_str());
-  lv_label_set_text_fmt(ui_Humidity_Label, "%s%%", WeatherHumidity.c_str());
-  lv_label_set_text_fmt(ui_Precepitation_Label, "%s%%", WeatherPrecip.c_str());
-  lv_label_set_text(ui_UV_Index_Label, WeatherUV.c_str());
-  lv_label_set_text(ui_Weather_State, WeatherType.c_str());
+  if (ui_Weather != NULL)
+  {
+    lv_label_set_text_fmt(ui_Temperature, "%s°", WeatherTemp.c_str());
+    lv_label_set_text(ui_High_Temp, WeatherHigh.c_str());
+    lv_label_set_text(ui_Low_Temp, WeatherLow.c_str());
+    lv_label_set_text_fmt(ui_Humidity_Label, "%s%%", WeatherHumidity.c_str());
+    lv_label_set_text_fmt(ui_Precepitation_Label, "%s%%", WeatherPrecip.c_str());
+    lv_label_set_text(ui_UV_Index_Label, WeatherUV.c_str());
+    lv_label_set_text(ui_Weather_State, WeatherType.c_str());
+  }
 }

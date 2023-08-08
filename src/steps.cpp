@@ -6,6 +6,7 @@
 #include "notifications.h"
 #include "ArduinoJson.h"
 #include "BThandle.h"
+#include "ArduinoLog.h"
 
 void BTsendSteps();
 
@@ -18,25 +19,28 @@ void StepHandle()
   static uint16_t StepDay;
   static uint16_t LastSteps = UINT16_MAX;
   static uint16_t StepOffset = UINT16_MAX;
+  int GetStep = twatch->bma423_get_step();
+
+  Log.verboseln("BMA423: %i", GetStep);
+  Log.verboseln("Storage: %i", Storage.getUShort("Steps"));
 
   if (StepOffset == UINT16_MAX)
   {
+    twatch->bma423_reset();
     if (Storage.getUShort("StepDay") == GetDay())
+    {
       StepOffset = Storage.getUShort("Steps");
+    }
     else
       StepOffset = 0;
   }
-
-  int GetStep = twatch->bma423_get_step();
 
   if (LastSteps != GetStep)
   {
     LastSteps = GetStep;
     Steps = GetStep + StepOffset;
-#ifdef UPDATE_ELEMENTS
-    lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Steps);
-    lv_arc_set_value(ui_Arc_Right, ((float)Steps / Storage.getUShort("StepGoal")) * 250);
-#endif
+
+    DrawSteps();
 
     if (Steps >= Storage.getUShort("StepGoal") and !Storage.getBool("StepReach"))
     {
@@ -70,6 +74,14 @@ void StepHandle()
 int getSteps()
 {
   return Steps;
+}
+
+void DrawSteps()
+{
+#ifdef UPDATE_ELEMENTS
+  lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Steps);
+  lv_arc_set_value(ui_Arc_Right, ((float)Steps / Storage.getUShort("StepGoal")) * 250);
+#endif
 }
 
 void BTsendSteps()

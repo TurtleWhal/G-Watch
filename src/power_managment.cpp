@@ -8,6 +8,7 @@
 #include "esp_pm.h"
 #include "ArduinoJson.h"
 #include "BThandle.h"
+#include "steps.h"
 
 extern TWatchClass *twatch;
 esp_pm_config_esp32_t pm_config;
@@ -63,12 +64,18 @@ void Wakeup(String Wakeup_reason)
   if (Sleeping)
   {
     setCpuFrequencyMhz(240);
-    twatch->hal_auto_update(true, 1);
+    // twatch->hal_auto_update(true, 1);
     //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
-    // generictoclock(nullptr);
-    // lv_timer_handler();
+    //  generictoclock(nullptr);
+    //  lv_timer_handler();
     WriteTime();
-    // Log.verboseln("IM AWAKE!");
+
+    DrawPower();
+
+    StepHandle();
+    DrawSteps();
+
+    Log.verboseln("IM AWAKE!");
     //  dad hid this comment here because I'm like that.
     //  A few moments later...
     //  Garrett found this comment because dad didn't go to a different line
@@ -98,7 +105,7 @@ void Sleep()
     Sleeping = 1;
     // setCpuFrequencyMhz(10); // 10 is lowest can go with 40 MHz Crystal
     SleepSpeed();
-    twatch->hal_auto_update(false, 1);
+    // twatch->hal_auto_update(false, 1);
   }
 }
 
