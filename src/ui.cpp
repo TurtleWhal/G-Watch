@@ -270,6 +270,7 @@ void setup()
   BT_on();
 #if defined(CONFIG_BMA423_LATER)
   twatch->bma423_begin(); // This takes 2 seconds
+  //twatch->bma423_reset();
 #endif
   twatch->hal_auto_update(true, 1);
 

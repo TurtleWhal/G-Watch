@@ -26,7 +26,7 @@ void StepHandle()
 
   if (StepOffset == UINT16_MAX)
   {
-    twatch->bma423_reset();
+    //twatch->bma423_reset();
     if (Storage.getUShort("StepDay") == GetDay())
     {
       StepOffset = Storage.getUShort("Steps");
