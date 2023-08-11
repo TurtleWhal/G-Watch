@@ -6,7 +6,9 @@
 #include "ArduinoLog.h"
 
 struct tm t_tm;
+struct timeval val;
 lv_obj_t *tick_index[62];
+extern TWatchClass *twatch;
 
 void WriteTime()
 {
@@ -16,7 +18,6 @@ void WriteTime()
     static int lastsecangle;
 
     char time[11];
-    struct timeval val;
 
     gettimeofday(&val, NULL);
     int second = (val.tv_sec % 60);
@@ -36,10 +37,10 @@ void WriteTime()
 #ifdef UPDATE_ELEMENTS
         ColorTicks(second);
         lv_img_set_angle(ui_Minute_Hand, (t_tm.tm_min * 60) + (second));
-          /*if (lv_scr_act() == ui_Timers){
-            lv_roller_set_selected(ui_Timer_Second_Right_Roller, t_tm.tm_sec % 10, LV_ANIM_ON);
-            lv_roller_set_selected(ui_Timer_Second_Left_Roller, t_tm.tm_sec / 10 , LV_ANIM_ON);
-            }*/
+        /*if (lv_scr_act() == ui_Timers){
+          lv_roller_set_selected(ui_Timer_Second_Right_Roller, t_tm.tm_sec % 10, LV_ANIM_ON);
+          lv_roller_set_selected(ui_Timer_Second_Left_Roller, t_tm.tm_sec / 10 , LV_ANIM_ON);
+          }*/
 #endif
 
         if (t_tm.tm_min != lastmin)
@@ -101,7 +102,7 @@ void InitTicks()
     lv_obj_set_style_img_recolor(tick_index[60], lv_color_hex(0xFFD600), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor(tick_index[61], lv_color_hex(0xFFD600), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_swap(tick_index[0], tick_index[60]);
-    lv_obj_swap(tick_index[1],tick_index[61]);
+    lv_obj_swap(tick_index[1], tick_index[61]);
 }
 
 void ColorTicks(int i)
@@ -119,4 +120,16 @@ void ColorTicks(int i)
         lv_obj_set_x(tick_index[60], 0);
         lv_img_set_angle(tick_index[60], i * 60);
     }
+}
+
+void SetTime(ulong newtime, short timezone)
+{
+    newtime = newtime + (timezone * 60 * 60);
+    gettimeofday(&val, NULL);
+    val.tv_sec = newtime;
+    val.tv_usec = 0;
+    settimeofday(&val, NULL);
+    gettimeofday(&val, NULL);
+    getLocalTime(&t_tm);
+    twatch->rtc_set_time(t_tm.tm_year + 1900, t_tm.tm_mon + 1, t_tm.tm_mday, t_tm.tm_hour, t_tm.tm_min, t_tm.tm_sec);
 }

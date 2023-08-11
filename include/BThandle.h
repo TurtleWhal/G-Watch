@@ -4,7 +4,7 @@ extern "C"
 #endif
 
 void BTHandle();
-void ParseGB(char *);
+void ParseBLE(char *);
 void BTmsgloop();
 void BTsend(String);
 //bool readStringUntil(String &input, size_t char_limit);

@@ -6,6 +6,7 @@ void WriteTime();
 int GetDay();
 void InitTicks();
 void ColorTicks(int);
+void SetTime(ulong, short);
 
 #ifdef __cplusplus
 } /*extern "C"*/

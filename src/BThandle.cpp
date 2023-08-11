@@ -13,6 +13,7 @@
 #include "hardware/ble/gadgetbridge.h"
 #include "ArduinoJson.h"
 #include "timers.h"
+#include "timestuff.h"
 
 extern TWatchClass *twatch;
 extern Notification NotificationList[11];
@@ -45,6 +46,39 @@ String WeatherWind = "0";
 String WeatherWinddir = "0";
 String WeatherLoc = "Not Set";
 
+void ParseGB(char *Message);
+
+void ParseBLE(char *Message)
+{
+  Serial.println(Message);
+  struct timeval val;
+  char *settime_str = NULL;
+  ulong timevalue;
+  short timezone;
+  settime_str = strstr(Message, "setTime(");
+
+  if (settime_str)
+  {
+    /* code */
+    // Serial.println("GOT TIME!");
+    settime_str = settime_str + 8;
+    timevalue = atol(settime_str);
+    // Serial.println(settime_str);
+    Serial.println(settime_str);
+
+    settime_str = strstr(Message, "setTimeZone(");
+    settime_str = settime_str + 12;
+    Serial.println(settime_str);
+    timezone = atol(settime_str);
+
+    Serial.println(timezone);
+
+    SetTime(timevalue, timezone);
+  }
+  else
+    ParseGB(Message);
+}
+
 void ParseGB(char *Message)
 {
   // int MusicLength = 600;
@@ -73,7 +107,7 @@ void ParseGB(char *Message)
   //  if (strcmp(NotifType, "musicstate") != 0)
   // lv_label_set_text(ui_Now_Playing_Label, Message);
 
-  Serial.println(Message);
+  // Serial.println(Message);
 
   if (strcmp(NotifType, "notify") == 0)
   {
