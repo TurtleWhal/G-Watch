@@ -11,393 +11,393 @@ extern "C" {
 #endif
 
 #if defined __has_include
-  #if __has_include("lvgl.h")
-    #include "lvgl.h"
-  #elif __has_include("lvgl/lvgl.h")
-    #include "lvgl/lvgl.h"
-  #else
-    #include "lvgl.h"
-  #endif
+#if __has_include("lvgl.h")
+#include "lvgl.h"
+#elif __has_include("lvgl/lvgl.h")
+#include "lvgl/lvgl.h"
 #else
-  #include "lvgl.h"
+#include "lvgl.h"
+#endif
+#else
+#include "lvgl.h"
 #endif
 
 #include "ui_helpers.h"
 #include "components/ui_comp.h"
 #include "components/ui_comp_hook.h"
 #include "ui_events.h"
-void Seconds_Animation( lv_obj_t *TargetObject, int delay);
-void Minutes_Animation( lv_obj_t *TargetObject, int delay);
-void Hours_Animation( lv_obj_t *TargetObject, int delay);
-void keyboardup_Animation( lv_obj_t *TargetObject, int delay);
-void keyboarddown_Animation( lv_obj_t *TargetObject, int delay);
-void NotificationShow_Animation( lv_obj_t *TargetObject, int delay);
-void NotificationHide_Animation( lv_obj_t *TargetObject, int delay);
-void NotificationDismiss_Animation( lv_obj_t *TargetObject, int delay);
-void NumpadUp_Animation( lv_obj_t *TargetObject, int delay);
-void resetstopwatch_Animation( lv_obj_t *TargetObject, int delay);
-void StopwatchClear_Animation( lv_obj_t *TargetObject, int delay);
-void PlayToPause_Animation( lv_obj_t *TargetObject, int delay);
-void PauseToPlay_Animation( lv_obj_t *TargetObject, int delay);
-void notificationstack_Animation( lv_obj_t *TargetObject, int delay);
-void CompassArrowWiggle_Animation( lv_obj_t *TargetObject, int delay);
-void CalculatorEquationFocus_Animation( lv_obj_t *TargetObject, int delay);
-void ThemeSettingExpand_Animation( lv_obj_t *TargetObject, int delay);
-void ThemeSettingShrink_Animation( lv_obj_t *TargetObject, int delay);
+void Seconds_Animation(lv_obj_t * TargetObject, int delay);
+void Minutes_Animation(lv_obj_t * TargetObject, int delay);
+void Hours_Animation(lv_obj_t * TargetObject, int delay);
+void keyboardup_Animation(lv_obj_t * TargetObject, int delay);
+void keyboarddown_Animation(lv_obj_t * TargetObject, int delay);
+void NotificationShow_Animation(lv_obj_t * TargetObject, int delay);
+void NotificationHide_Animation(lv_obj_t * TargetObject, int delay);
+void NotificationDismiss_Animation(lv_obj_t * TargetObject, int delay);
+void NumpadUp_Animation(lv_obj_t * TargetObject, int delay);
+void resetstopwatch_Animation(lv_obj_t * TargetObject, int delay);
+void StopwatchClear_Animation(lv_obj_t * TargetObject, int delay);
+void PlayToPause_Animation(lv_obj_t * TargetObject, int delay);
+void PauseToPlay_Animation(lv_obj_t * TargetObject, int delay);
+void notificationstack_Animation(lv_obj_t * TargetObject, int delay);
+void CompassArrowWiggle_Animation(lv_obj_t * TargetObject, int delay);
+void CalculatorEquationFocus_Animation(lv_obj_t * TargetObject, int delay);
+void ThemeSettingExpand_Animation(lv_obj_t * TargetObject, int delay);
+void ThemeSettingShrink_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Clock
 void ui_Clock_screen_init(void);
-void ui_event_Clock( lv_event_t * e);
-extern lv_obj_t *ui_Clock;
-extern lv_obj_t *ui_Time;
-extern lv_obj_t *ui_Date_Numerical;
-extern lv_obj_t *ui_Arc_Battery;
-extern lv_obj_t *ui_Arc_Right;
-extern lv_obj_t *ui_Tick_Dashes;
-extern lv_obj_t *ui_Tick_Dots;
-extern lv_obj_t *ui_Now_Playing_Label;
-extern lv_obj_t *ui_Steps_Panel;
-extern lv_obj_t *ui_Steps_Image;
-extern lv_obj_t *ui_Step_Counter_Text;
-extern lv_obj_t *ui_Minute_Hand;
-extern lv_obj_t *ui_Hour_Hand;
-extern lv_obj_t *ui_Second_Hand;
-extern lv_obj_t *ui_Center_dot;
-extern lv_obj_t *ui_Date;
-extern lv_obj_t *ui_Battery_Percentage;
-extern lv_obj_t *ui_Bluetooth_Indicator;
-extern lv_obj_t *ui_Notification_Amount_Image;
-extern lv_obj_t *ui_Notification_Amount_Number;
-void ui_event_Notification_Popup( lv_event_t * e);
-extern lv_obj_t *ui_Notification_Popup;
-extern lv_obj_t *ui_Notification_Timer;
-extern lv_obj_t *ui_Notification_Source;
-void ui_event_Notification_Popup_Mask( lv_event_t * e);
-extern lv_obj_t *ui_Notification_Popup_Mask;
-extern lv_obj_t *ui_Notification_Text;
-extern lv_obj_t *ui_Notification_Title;
-extern lv_obj_t *ui_Notification_Image_Panel;
-extern lv_obj_t *ui_Notification_Image;
-extern lv_obj_t *ui_Second_Dash_Include;
-extern lv_obj_t *ui_Second_Dot_Include;
+void ui_event_Clock(lv_event_t * e);
+extern lv_obj_t * ui_Clock;
+extern lv_obj_t * ui_Time;
+extern lv_obj_t * ui_Date_Numerical;
+extern lv_obj_t * ui_Arc_Battery;
+extern lv_obj_t * ui_Arc_Right;
+extern lv_obj_t * ui_Tick_Dashes;
+extern lv_obj_t * ui_Tick_Dots;
+extern lv_obj_t * ui_Now_Playing_Label;
+extern lv_obj_t * ui_Steps_Panel;
+extern lv_obj_t * ui_Steps_Image;
+extern lv_obj_t * ui_Step_Counter_Text;
+extern lv_obj_t * ui_Minute_Hand;
+extern lv_obj_t * ui_Hour_Hand;
+extern lv_obj_t * ui_Second_Hand;
+extern lv_obj_t * ui_Center_dot;
+extern lv_obj_t * ui_Date;
+extern lv_obj_t * ui_Battery_Percentage;
+extern lv_obj_t * ui_Bluetooth_Indicator;
+extern lv_obj_t * ui_Notification_Amount_Image;
+extern lv_obj_t * ui_Notification_Amount_Number;
+void ui_event_Notification_Popup(lv_event_t * e);
+extern lv_obj_t * ui_Notification_Popup;
+extern lv_obj_t * ui_Notification_Timer;
+extern lv_obj_t * ui_Notification_Source;
+void ui_event_Notification_Popup_Mask(lv_event_t * e);
+extern lv_obj_t * ui_Notification_Popup_Mask;
+extern lv_obj_t * ui_Notification_Text;
+extern lv_obj_t * ui_Notification_Title;
+extern lv_obj_t * ui_Notification_Image_Panel;
+extern lv_obj_t * ui_Notification_Image;
+extern lv_obj_t * ui_Second_Dash_Include;
+extern lv_obj_t * ui_Second_Dot_Include;
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);
-void ui_event_Notifications( lv_event_t * e);
-extern lv_obj_t *ui_Notifications;
-extern lv_obj_t *ui_Notifications_Label_Underline;
-extern lv_obj_t *ui_Notifications_Label;
-extern lv_obj_t *ui_No_New_Notifications_Label;
-extern lv_obj_t *ui_Notification_Panel;
-extern lv_obj_t *ui_Notification_Widget2;
-extern lv_obj_t *ui_Notifications_Gesture_Panel;
+void ui_event_Notifications(lv_event_t * e);
+extern lv_obj_t * ui_Notifications;
+extern lv_obj_t * ui_Notifications_Label_Underline;
+extern lv_obj_t * ui_Notifications_Label;
+extern lv_obj_t * ui_Notification_Panel;
+extern lv_obj_t * ui_No_New_Notifications_Label;
+extern lv_obj_t * ui_Notification_Widget2;
+extern lv_obj_t * ui_Notifications_Gesture_Panel;
 // SCREEN: ui_Alarms
 void ui_Alarms_screen_init(void);
-void ui_event_Alarms( lv_event_t * e);
-extern lv_obj_t *ui_Alarms;
-extern lv_obj_t *ui_Alarms_Label;
-extern lv_obj_t *ui_Alarms_Label_Underline;
-void ui_event_Alarm_1( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_1;
-void ui_event_Alarm_1_Switch( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_1_Switch;
-extern lv_obj_t *ui_Alarm_1_Name;
-extern lv_obj_t *ui_Alarm_1_Hour;
-extern lv_obj_t *ui_Alarm_1_Colin;
-extern lv_obj_t *ui_Alarm_1_Minute;
-extern lv_obj_t *ui_Alarm_1_AMPM;
-void ui_event_Alarm_2( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_2;
-void ui_event_Alarm_2_Switch( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_2_Switch;
-extern lv_obj_t *ui_Alarm_2_Name;
-extern lv_obj_t *ui_Alarm_2_Hour;
-extern lv_obj_t *ui_Alarm_2_Colin;
-extern lv_obj_t *ui_Alarm_2_Minute;
-extern lv_obj_t *ui_Alarm_2_AMPM;
-void ui_event_Alarm_3( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_3;
-void ui_event_Alarm_3_Switch( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_3_Switch;
-extern lv_obj_t *ui_Alarm_3_Name;
-extern lv_obj_t *ui_Alarm_3_Hour;
-extern lv_obj_t *ui_Alarm_3_Colin;
-extern lv_obj_t *ui_Alarm_3_Minute;
-extern lv_obj_t *ui_Alarm_3_AMPM;
-void ui_event_Alarm_4( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_4;
-void ui_event_Alarm_4_Switch( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_4_Switch;
-extern lv_obj_t *ui_Alarm_4_Name;
-extern lv_obj_t *ui_Alarm_4_Hour;
-extern lv_obj_t *ui_Alarm_4_Colin;
-extern lv_obj_t *ui_Alarm_4_Minute;
-extern lv_obj_t *ui_Alarm_4_AMPM;
+void ui_event_Alarms(lv_event_t * e);
+extern lv_obj_t * ui_Alarms;
+extern lv_obj_t * ui_Alarms_Label;
+extern lv_obj_t * ui_Alarms_Label_Underline;
+void ui_event_Alarm_1(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_1;
+void ui_event_Alarm_1_Switch(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_1_Switch;
+extern lv_obj_t * ui_Alarm_1_Name;
+extern lv_obj_t * ui_Alarm_1_Hour;
+extern lv_obj_t * ui_Alarm_1_Colin;
+extern lv_obj_t * ui_Alarm_1_Minute;
+extern lv_obj_t * ui_Alarm_1_AMPM;
+void ui_event_Alarm_2(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_2;
+void ui_event_Alarm_2_Switch(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_2_Switch;
+extern lv_obj_t * ui_Alarm_2_Name;
+extern lv_obj_t * ui_Alarm_2_Hour;
+extern lv_obj_t * ui_Alarm_2_Colin;
+extern lv_obj_t * ui_Alarm_2_Minute;
+extern lv_obj_t * ui_Alarm_2_AMPM;
+void ui_event_Alarm_3(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_3;
+void ui_event_Alarm_3_Switch(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_3_Switch;
+extern lv_obj_t * ui_Alarm_3_Name;
+extern lv_obj_t * ui_Alarm_3_Hour;
+extern lv_obj_t * ui_Alarm_3_Colin;
+extern lv_obj_t * ui_Alarm_3_Minute;
+extern lv_obj_t * ui_Alarm_3_AMPM;
+void ui_event_Alarm_4(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_4;
+void ui_event_Alarm_4_Switch(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_4_Switch;
+extern lv_obj_t * ui_Alarm_4_Name;
+extern lv_obj_t * ui_Alarm_4_Hour;
+extern lv_obj_t * ui_Alarm_4_Colin;
+extern lv_obj_t * ui_Alarm_4_Minute;
+extern lv_obj_t * ui_Alarm_4_AMPM;
 // SCREEN: ui_Set_Alarm
 void ui_Set_Alarm_screen_init(void);
-void ui_event_Set_Alarm( lv_event_t * e);
-extern lv_obj_t *ui_Set_Alarm;
-extern lv_obj_t *ui_Set_Alarm_Label_Underline;
-extern lv_obj_t *ui_Alarm_set_Label;
-extern lv_obj_t *ui_Hour_Roller;
-extern lv_obj_t *ui_Minute_Roller;
-void ui_event_AMPM_Label( lv_event_t * e);
-extern lv_obj_t *ui_AMPM_Label;
-extern lv_obj_t *ui_AM;
-extern lv_obj_t *ui_PM;
-extern lv_obj_t *ui_Colon;
-void ui_event_Set_Button( lv_event_t * e);
-extern lv_obj_t *ui_Set_Button;
-extern lv_obj_t *ui_Set_Text;
-void ui_event_Alarm_Name( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_Name;
-extern lv_obj_t *ui_Alarm_Name_Keyboard;
-void ui_event_Button2( lv_event_t * e);
-extern lv_obj_t *ui_Button2;
-extern lv_obj_t *ui_Image2;
+void ui_event_Set_Alarm(lv_event_t * e);
+extern lv_obj_t * ui_Set_Alarm;
+extern lv_obj_t * ui_Set_Alarm_Label_Underline;
+extern lv_obj_t * ui_Alarm_set_Label;
+extern lv_obj_t * ui_Hour_Roller;
+extern lv_obj_t * ui_Minute_Roller;
+void ui_event_AMPM_Label(lv_event_t * e);
+extern lv_obj_t * ui_AMPM_Label;
+extern lv_obj_t * ui_AM;
+extern lv_obj_t * ui_PM;
+extern lv_obj_t * ui_Colon;
+void ui_event_Set_Button(lv_event_t * e);
+extern lv_obj_t * ui_Set_Button;
+extern lv_obj_t * ui_Set_Text;
+void ui_event_Alarm_Name(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_Name;
+extern lv_obj_t * ui_Alarm_Name_Keyboard;
+void ui_event_Button2(lv_event_t * e);
+extern lv_obj_t * ui_Button2;
+extern lv_obj_t * ui_Image2;
 // SCREEN: ui_Alarm_Going_Off
 void ui_Alarm_Going_Off_screen_init(void);
-extern lv_obj_t *ui_Alarm_Going_Off;
-extern lv_obj_t *ui_Alarm_Going_Off_Spinner;
-extern lv_obj_t *ui_Panel1;
-extern lv_obj_t *ui_Alarm_Going_Off_Bell;
-extern lv_obj_t *ui_Alarm_Going_Off_Name;
-extern lv_obj_t *ui_Alarm_Going_Off_Name_Underline;
-extern lv_obj_t *ui_Alarm_Going_Off_Time;
-void ui_event_Alarm_Going_Off_Stop_Button( lv_event_t * e);
-extern lv_obj_t *ui_Alarm_Going_Off_Stop_Button;
-extern lv_obj_t *ui_Alarm_Going_Off_Stop_Button_Text;
+extern lv_obj_t * ui_Alarm_Going_Off;
+extern lv_obj_t * ui_Alarm_Going_Off_Spinner;
+extern lv_obj_t * ui_Panel1;
+extern lv_obj_t * ui_Alarm_Going_Off_Bell;
+extern lv_obj_t * ui_Alarm_Going_Off_Name;
+extern lv_obj_t * ui_Alarm_Going_Off_Name_Underline;
+extern lv_obj_t * ui_Alarm_Going_Off_Time;
+void ui_event_Alarm_Going_Off_Stop_Button(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_Going_Off_Stop_Button;
+extern lv_obj_t * ui_Alarm_Going_Off_Stop_Button_Text;
 // SCREEN: ui_Stopwatch
 void ui_Stopwatch_screen_init(void);
-void ui_event_Stopwatch( lv_event_t * e);
-extern lv_obj_t *ui_Stopwatch;
-extern lv_obj_t *ui_Stopwatch_Label_Underline;
-extern lv_obj_t *ui_Stopwatch_Label;
-extern lv_obj_t *ui_Stopwatch_Time_Long;
-extern lv_obj_t *ui_Stopwatch_Milliseconds;
-extern lv_obj_t *ui_Stopwatch_Dot;
-extern lv_obj_t *ui_Stopwatch_Seconds;
-extern lv_obj_t *ui_Stopwatch_Colin_Right;
-extern lv_obj_t *ui_Stopwatch_Minutes;
-extern lv_obj_t *ui_Stopwatch_Colin_Left;
-extern lv_obj_t *ui_Stopwatch_Hours;
-extern lv_obj_t *ui_Stopwatch_Time_Underline;
-extern lv_obj_t *ui_Stopwatch_Time_Underline_Black;
-void ui_event_Stopwatch_Reset_Button( lv_event_t * e);
-extern lv_obj_t *ui_Stopwatch_Reset_Button;
-extern lv_obj_t *ui_Stopwatch_Reset_Image;
-void ui_event_Stopwatch_Play_Pause_Button( lv_event_t * e);
-extern lv_obj_t *ui_Stopwatch_Play_Pause_Button;
-extern lv_obj_t *ui_Stopwatch_Play_Pause_Image;
+void ui_event_Stopwatch(lv_event_t * e);
+extern lv_obj_t * ui_Stopwatch;
+extern lv_obj_t * ui_Stopwatch_Label_Underline;
+extern lv_obj_t * ui_Stopwatch_Label;
+extern lv_obj_t * ui_Stopwatch_Time_Long;
+extern lv_obj_t * ui_Stopwatch_Milliseconds;
+extern lv_obj_t * ui_Stopwatch_Dot;
+extern lv_obj_t * ui_Stopwatch_Seconds;
+extern lv_obj_t * ui_Stopwatch_Colin_Right;
+extern lv_obj_t * ui_Stopwatch_Minutes;
+extern lv_obj_t * ui_Stopwatch_Colin_Left;
+extern lv_obj_t * ui_Stopwatch_Hours;
+extern lv_obj_t * ui_Stopwatch_Time_Underline;
+extern lv_obj_t * ui_Stopwatch_Time_Underline_Black;
+void ui_event_Stopwatch_Reset_Button(lv_event_t * e);
+extern lv_obj_t * ui_Stopwatch_Reset_Button;
+extern lv_obj_t * ui_Stopwatch_Reset_Image;
+void ui_event_Stopwatch_Play_Pause_Button(lv_event_t * e);
+extern lv_obj_t * ui_Stopwatch_Play_Pause_Button;
+extern lv_obj_t * ui_Stopwatch_Play_Pause_Image;
 // SCREEN: ui_Timers
 void ui_Timers_screen_init(void);
-void ui_event_Timers( lv_event_t * e);
-extern lv_obj_t *ui_Timers;
-extern lv_obj_t *ui_Timer_Label;
-extern lv_obj_t *ui_Timer_Label_Underline;
-void ui_event_Timer_Play_Pause_Button( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Play_Pause_Button;
-extern lv_obj_t *ui_Timer_Play_Pause_Image;
-void ui_event_Timer_Hour_Minus_10( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Hour_Minus_10;
-void ui_event_Timer_Hour_Minus_1( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Hour_Minus_1;
-void ui_event_Timer_Minute_Minus_10( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Minute_Minus_10;
-void ui_event_Timer_Minute_Minus_1( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Minute_Minus_1;
-void ui_event_Timer_Second_Minus_10( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Second_Minus_10;
-void ui_event_Timer_Second_Minus_1( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Second_Minus_1;
-void ui_event_Timer_Hour_Plus_10( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Hour_Plus_10;
-void ui_event_Timer_Hour_Plus_1( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Hour_Plus_1;
-void ui_event_Timer_Minute_Plus_10( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Minute_Plus_10;
-void ui_event_Timer_Minute_Plus_1( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Minute_Plus_1;
-void ui_event_Timer_Second_Plus_10( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Second_Plus_10;
-void ui_event_Timer_Second_Plus_1( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Second_Plus_1;
-extern lv_obj_t *ui_Timer_Hours;
-extern lv_obj_t *ui_Timer_Minutes;
-extern lv_obj_t *ui_Timer_Seconds;
-void ui_event_Timer_Second_Right_Roller( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Second_Right_Roller;
-void ui_event_Timer_Second_Left_Roller( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Second_Left_Roller;
-void ui_event_Timer_Minute_Right_Roller( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Minute_Right_Roller;
-void ui_event_Timer_Minute_Left_Roller( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Minute_Left_Roller;
-void ui_event_Timer_Hour_Right_Roller( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Hour_Right_Roller;
-void ui_event_Timer_Hour_Left_Roller( lv_event_t * e);
-extern lv_obj_t *ui_Timer_Hour_Left_Roller;
-extern lv_obj_t *ui_Timer_Colin_Right;
-extern lv_obj_t *ui_Timer_Colin_Left;
-extern lv_obj_t *ui_Timer_Arc;
+void ui_event_Timers(lv_event_t * e);
+extern lv_obj_t * ui_Timers;
+extern lv_obj_t * ui_Timer_Label;
+extern lv_obj_t * ui_Timer_Label_Underline;
+void ui_event_Timer_Play_Pause_Button(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Play_Pause_Button;
+extern lv_obj_t * ui_Timer_Play_Pause_Image;
+void ui_event_Timer_Hour_Minus_10(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Hour_Minus_10;
+void ui_event_Timer_Hour_Minus_1(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Hour_Minus_1;
+void ui_event_Timer_Minute_Minus_10(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Minute_Minus_10;
+void ui_event_Timer_Minute_Minus_1(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Minute_Minus_1;
+void ui_event_Timer_Second_Minus_10(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Second_Minus_10;
+void ui_event_Timer_Second_Minus_1(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Second_Minus_1;
+void ui_event_Timer_Hour_Plus_10(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Hour_Plus_10;
+void ui_event_Timer_Hour_Plus_1(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Hour_Plus_1;
+void ui_event_Timer_Minute_Plus_10(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Minute_Plus_10;
+void ui_event_Timer_Minute_Plus_1(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Minute_Plus_1;
+void ui_event_Timer_Second_Plus_10(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Second_Plus_10;
+void ui_event_Timer_Second_Plus_1(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Second_Plus_1;
+extern lv_obj_t * ui_Timer_Hours;
+extern lv_obj_t * ui_Timer_Minutes;
+extern lv_obj_t * ui_Timer_Seconds;
+void ui_event_Timer_Second_Right_Roller(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Second_Right_Roller;
+void ui_event_Timer_Second_Left_Roller(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Second_Left_Roller;
+void ui_event_Timer_Minute_Right_Roller(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Minute_Right_Roller;
+void ui_event_Timer_Minute_Left_Roller(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Minute_Left_Roller;
+void ui_event_Timer_Hour_Right_Roller(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Hour_Right_Roller;
+void ui_event_Timer_Hour_Left_Roller(lv_event_t * e);
+extern lv_obj_t * ui_Timer_Hour_Left_Roller;
+extern lv_obj_t * ui_Timer_Colin_Right;
+extern lv_obj_t * ui_Timer_Colin_Left;
+extern lv_obj_t * ui_Timer_Arc;
 // SCREEN: ui_Settings
 void ui_Settings_screen_init(void);
-void ui_event_Settings( lv_event_t * e);
-extern lv_obj_t *ui_Settings;
-extern lv_obj_t *ui_Settings_Panel;
-void ui_event_Brightness_Slider( lv_event_t * e);
-extern lv_obj_t *ui_Brightness_Slider;
-extern lv_obj_t *ui_Settings_Buttons_Spacer_Panel;
-void ui_event_Bluetooth_Button( lv_event_t * e);
-extern lv_obj_t *ui_Bluetooth_Button;
-extern lv_obj_t *ui_Power_Button_Image;
-void ui_event_Do_Not_Disturb_Button( lv_event_t * e);
-extern lv_obj_t *ui_Do_Not_Disturb_Button;
-extern lv_obj_t *ui_Do_Not_Disturb_Button_Image;
-extern lv_obj_t *ui_Step_goal_Setting_Panel;
-void ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value( lv_event_t * e);
-extern lv_obj_t *ui_Notification_Time_Setting_Panel;
-void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e);
-extern lv_obj_t *ui_BTname_Setting_Panel;
-void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e);
-void ui_event_Theme_Setting_Panel_Setting_Panel( lv_event_t * e);
-extern lv_obj_t *ui_Theme_Setting_Panel;
-extern lv_obj_t *ui_Theme_Expand_Arrow;
-void ui_event_Theme_Colorwheel( lv_event_t * e);
-extern lv_obj_t *ui_Theme_Colorwheel;
-void ui_event_Theme_Apply_Button( lv_event_t * e);
-extern lv_obj_t *ui_Theme_Apply_Button;
-extern lv_obj_t *ui_Theme_Apply_Label;
-extern lv_obj_t *ui_Theme_Hex_Label;
-void ui_event_Power_Button1( lv_event_t * e);
-extern lv_obj_t *ui_Power_Button1;
-extern lv_obj_t *ui_Power_Button_Image1;
-extern lv_obj_t *ui_Settings_Label_Underline;
-extern lv_obj_t *ui_Settings_Label;
-void ui_event_Settings_Numberpad( lv_event_t * e);
-extern lv_obj_t *ui_Settings_Numberpad;
-void ui_event_Settings_Keyboard( lv_event_t * e);
-extern lv_obj_t *ui_Settings_Keyboard;
+void ui_event_Settings(lv_event_t * e);
+extern lv_obj_t * ui_Settings;
+extern lv_obj_t * ui_Settings_Panel;
+void ui_event_Brightness_Slider(lv_event_t * e);
+extern lv_obj_t * ui_Brightness_Slider;
+extern lv_obj_t * ui_Settings_Buttons_Spacer_Panel;
+void ui_event_Bluetooth_Button(lv_event_t * e);
+extern lv_obj_t * ui_Bluetooth_Button;
+extern lv_obj_t * ui_Power_Button_Image;
+void ui_event_Do_Not_Disturb_Button(lv_event_t * e);
+extern lv_obj_t * ui_Do_Not_Disturb_Button;
+extern lv_obj_t * ui_Do_Not_Disturb_Button_Image;
+extern lv_obj_t * ui_Step_goal_Setting_Panel;
+void ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value(lv_event_t * e);
+extern lv_obj_t * ui_Notification_Time_Setting_Panel;
+void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value(lv_event_t * e);
+extern lv_obj_t * ui_BTname_Setting_Panel;
+void ui_event_BTname_Setting_Panel_BTname_Setting_Value(lv_event_t * e);
+void ui_event_Theme_Setting_Panel_Setting_Panel(lv_event_t * e);
+extern lv_obj_t * ui_Theme_Setting_Panel;
+extern lv_obj_t * ui_Theme_Expand_Arrow;
+void ui_event_Theme_Colorwheel(lv_event_t * e);
+extern lv_obj_t * ui_Theme_Colorwheel;
+void ui_event_Theme_Apply_Button(lv_event_t * e);
+extern lv_obj_t * ui_Theme_Apply_Button;
+extern lv_obj_t * ui_Theme_Apply_Label;
+extern lv_obj_t * ui_Theme_Hex_Label;
+void ui_event_Power_Button1(lv_event_t * e);
+extern lv_obj_t * ui_Power_Button1;
+extern lv_obj_t * ui_Power_Button_Image1;
+extern lv_obj_t * ui_Settings_Label_Underline;
+extern lv_obj_t * ui_Settings_Label;
+void ui_event_Settings_Numberpad(lv_event_t * e);
+extern lv_obj_t * ui_Settings_Numberpad;
+void ui_event_Settings_Keyboard(lv_event_t * e);
+extern lv_obj_t * ui_Settings_Keyboard;
 // SCREEN: ui_Compass
 void ui_Compass_screen_init(void);
-void ui_event_Compass( lv_event_t * e);
-extern lv_obj_t *ui_Compass;
-extern lv_obj_t *ui_Compass_Arrow;
-extern lv_obj_t *ui_Compass_Deg;
-extern lv_obj_t *ui_Compass_N;
-extern lv_obj_t *ui_Compass_E;
-extern lv_obj_t *ui_Compass_S;
-extern lv_obj_t *ui_Compass_W;
-extern lv_obj_t *ui_Compass_Direction;
-extern lv_obj_t *ui_Compass_NE;
-extern lv_obj_t *ui_Compass_SE;
-extern lv_obj_t *ui_Compass_SW;
-extern lv_obj_t *ui_Compass_NW;
+void ui_event_Compass(lv_event_t * e);
+extern lv_obj_t * ui_Compass;
+extern lv_obj_t * ui_Compass_Arrow;
+extern lv_obj_t * ui_Compass_Deg;
+extern lv_obj_t * ui_Compass_N;
+extern lv_obj_t * ui_Compass_E;
+extern lv_obj_t * ui_Compass_S;
+extern lv_obj_t * ui_Compass_W;
+extern lv_obj_t * ui_Compass_Direction;
+extern lv_obj_t * ui_Compass_NE;
+extern lv_obj_t * ui_Compass_SE;
+extern lv_obj_t * ui_Compass_SW;
+extern lv_obj_t * ui_Compass_NW;
 // SCREEN: ui_Apps
 void ui_Apps_screen_init(void);
-void ui_event_Apps( lv_event_t * e);
-extern lv_obj_t *ui_Apps;
-extern lv_obj_t *ui_Apps_Panel;
-void ui_event_Calculator_App_Button_App_Button( lv_event_t * e);
-extern lv_obj_t *ui_Calculator_App_Button;
-void ui_event_Compass_App_Button_App_Button( lv_event_t * e);
-extern lv_obj_t *ui_Compass_App_Button;
-void ui_event_Settings_App_Button_App_Button( lv_event_t * e);
-extern lv_obj_t *ui_Settings_App_Button;
-void ui_event_App_Button1_App_Button( lv_event_t * e);
-extern lv_obj_t *ui_App_Button1;
-extern lv_obj_t *ui_Apps_Label_Underline;
-extern lv_obj_t *ui_Apps_Label;
+void ui_event_Apps(lv_event_t * e);
+extern lv_obj_t * ui_Apps;
+extern lv_obj_t * ui_Apps_Panel;
+void ui_event_Calculator_App_Button_App_Button(lv_event_t * e);
+extern lv_obj_t * ui_Calculator_App_Button;
+void ui_event_Compass_App_Button_App_Button(lv_event_t * e);
+extern lv_obj_t * ui_Compass_App_Button;
+void ui_event_Settings_App_Button_App_Button(lv_event_t * e);
+extern lv_obj_t * ui_Settings_App_Button;
+void ui_event_App_Button1_App_Button(lv_event_t * e);
+extern lv_obj_t * ui_App_Button1;
+extern lv_obj_t * ui_Apps_Label_Underline;
+extern lv_obj_t * ui_Apps_Label;
 // SCREEN: ui_Calculator
 void ui_Calculator_screen_init(void);
-void ui_event_Calculator( lv_event_t * e);
-extern lv_obj_t *ui_Calculator;
-void ui_event_Calculator_Keyboard( lv_event_t * e);
-extern lv_obj_t *ui_Calculator_Keyboard;
-extern lv_obj_t *ui_Calculator_textarea;
+void ui_event_Calculator(lv_event_t * e);
+extern lv_obj_t * ui_Calculator;
+void ui_event_Calculator_Keyboard(lv_event_t * e);
+extern lv_obj_t * ui_Calculator_Keyboard;
+extern lv_obj_t * ui_Calculator_textarea;
 // SCREEN: ui_Flashlight
 void ui_Flashlight_screen_init(void);
-void ui_event_Flashlight( lv_event_t * e);
-extern lv_obj_t *ui_Flashlight;
+void ui_event_Flashlight(lv_event_t * e);
+extern lv_obj_t * ui_Flashlight;
 // SCREEN: ui_Music
 void ui_Music_screen_init(void);
-void ui_event_Music( lv_event_t * e);
-extern lv_obj_t *ui_Music;
-extern lv_obj_t *ui_Cover_Art;
-extern lv_obj_t *ui_Control_Panel;
-void ui_event_Music_Play_Button( lv_event_t * e);
-extern lv_obj_t *ui_Music_Play_Button;
-extern lv_obj_t *ui_Music_Play_Button_Image;
-extern lv_obj_t *ui_Pause_Button_Include;
-void ui_event_Music_Skip_Forward_Button( lv_event_t * e);
-extern lv_obj_t *ui_Music_Skip_Forward_Button;
-extern lv_obj_t *ui_Music_Skip_Forwards_Button_img;
-extern lv_obj_t *ui_Music_Skip_Forwards_Button_Bar;
-void ui_event_Music_Skip_Backwards_Button( lv_event_t * e);
-extern lv_obj_t *ui_Music_Skip_Backwards_Button;
-extern lv_obj_t *ui_Music_Skip_Backwards_Button_img;
-extern lv_obj_t *ui_Music_Skip_Backwards_Button_Bar;
-extern lv_obj_t *ui_Music_Play_Bar;
-extern lv_obj_t *ui_Music_Artist;
-extern lv_obj_t *ui_Music_Title;
-extern lv_obj_t *ui_Music_Album;
-extern lv_obj_t *ui_Music_Time;
+void ui_event_Music(lv_event_t * e);
+extern lv_obj_t * ui_Music;
+extern lv_obj_t * ui_Cover_Art;
+extern lv_obj_t * ui_Control_Panel;
+void ui_event_Music_Play_Button(lv_event_t * e);
+extern lv_obj_t * ui_Music_Play_Button;
+extern lv_obj_t * ui_Music_Play_Button_Image;
+extern lv_obj_t * ui_Pause_Button_Include;
+void ui_event_Music_Skip_Forward_Button(lv_event_t * e);
+extern lv_obj_t * ui_Music_Skip_Forward_Button;
+extern lv_obj_t * ui_Music_Skip_Forwards_Button_img;
+extern lv_obj_t * ui_Music_Skip_Forwards_Button_Bar;
+void ui_event_Music_Skip_Backwards_Button(lv_event_t * e);
+extern lv_obj_t * ui_Music_Skip_Backwards_Button;
+extern lv_obj_t * ui_Music_Skip_Backwards_Button_img;
+extern lv_obj_t * ui_Music_Skip_Backwards_Button_Bar;
+extern lv_obj_t * ui_Music_Play_Bar;
+extern lv_obj_t * ui_Music_Artist;
+extern lv_obj_t * ui_Music_Title;
+extern lv_obj_t * ui_Music_Album;
+extern lv_obj_t * ui_Music_Time;
 // SCREEN: ui_Weather
 void ui_Weather_screen_init(void);
-void ui_event_Weather( lv_event_t * e);
-extern lv_obj_t *ui_Weather;
-extern lv_obj_t *ui_Sun_Phase_Arc;
-extern lv_obj_t *ui_Weather_Image;
-extern lv_obj_t *ui_Temperature;
-extern lv_obj_t *ui_Weather_Ground;
-extern lv_obj_t *ui_HiLo_Temp_Line;
-extern lv_obj_t *ui_High_Temp;
-extern lv_obj_t *ui_Low_Temp;
-extern lv_obj_t *ui_Weather_State;
-extern lv_obj_t *ui_Humidity_Icon;
-extern lv_obj_t *ui_Humidity_Label;
-extern lv_obj_t *ui_Precepitation_Icon;
-extern lv_obj_t *ui_Precepitation_Label;
-extern lv_obj_t *ui_UV_Index_Icon;
-extern lv_obj_t *ui_UV_Index_Label;
-extern lv_obj_t *ui____initial_actions0;
+void ui_event_Weather(lv_event_t * e);
+extern lv_obj_t * ui_Weather;
+extern lv_obj_t * ui_Sun_Phase_Arc;
+extern lv_obj_t * ui_Weather_Image;
+extern lv_obj_t * ui_Temperature;
+extern lv_obj_t * ui_Weather_Ground;
+extern lv_obj_t * ui_HiLo_Temp_Line;
+extern lv_obj_t * ui_High_Temp;
+extern lv_obj_t * ui_Low_Temp;
+extern lv_obj_t * ui_Weather_State;
+extern lv_obj_t * ui_Humidity_Icon;
+extern lv_obj_t * ui_Humidity_Label;
+extern lv_obj_t * ui_Precepitation_Icon;
+extern lv_obj_t * ui_Precepitation_Label;
+extern lv_obj_t * ui_UV_Index_Icon;
+extern lv_obj_t * ui_UV_Index_Label;
+extern lv_obj_t * ui____initial_actions0;
 
-LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
-LV_IMG_DECLARE( ui_img_tick_dots_png);   // assets/Tick Dots.png
-LV_IMG_DECLARE( ui_img_step_png);   // assets/step.png
-LV_IMG_DECLARE( ui_img_minutehandstub_png);   // assets/MinuteHandStub.png
-LV_IMG_DECLARE( ui_img_hourhandstub_png);   // assets/HourHandStub.png
-LV_IMG_DECLARE( ui_img_secondhandstub_png);   // assets/SecondHandStub.png
-LV_IMG_DECLARE( ui_img_no_bluetooth_small_png);   // assets/No Bluetooth_Small.png
-LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
-LV_IMG_DECLARE( ui_img_seconddashstub_png);   // assets/SecondDashStub.png
-LV_IMG_DECLARE( ui_img_seconddotstub_png);   // assets/SecondDotStub.png
-LV_IMG_DECLARE( ui_img_bell_png);   // assets/Bell.png
-LV_IMG_DECLARE( ui_img_restart_button_png);   // assets/Restart Button.png
-LV_IMG_DECLARE( ui_img_playpause_button_png);   // assets/PlayPause Button.png
-LV_IMG_DECLARE( ui_img_brightness_png);   // assets/brightness.png
-LV_IMG_DECLARE( ui_img_bluetooth_small_nobackground_png);   // assets/Bluetooth_Small_nobackground.png
-LV_IMG_DECLARE( ui_img_arrow_png);   // assets/Arrow.png
-LV_IMG_DECLARE( ui_img_power_icon_png);   // assets/Power Icon.png
-LV_IMG_DECLARE( ui_img_play_button_png);   // assets/Play Button.png
-LV_IMG_DECLARE( ui_img_calculator_icon_nobackground_png);   // assets/Calculator Icon nobackground.png
-LV_IMG_DECLARE( ui_img_compass_png);   // assets/Compass.png
-LV_IMG_DECLARE( ui_img_settings_gear_png);   // assets/Settings Gear.png
-LV_IMG_DECLARE( ui_img_flashlight_png);   // assets/Flashlight.png
-LV_IMG_DECLARE( ui_img_album_cover_png);   // assets/album cover.png
-LV_IMG_DECLARE( ui_img_pause_button_png);   // assets/Pause Button.png
-LV_IMG_DECLARE( ui_img_moon_png);   // assets/moon.png
-LV_IMG_DECLARE( ui_img_mostly_cloudy_png);   // assets/Mostly Cloudy.png
-LV_IMG_DECLARE( ui_img_rain_png);   // assets/rain.png
-LV_IMG_DECLARE( ui_img_snow_rain_png);   // assets/Snow Rain.png
-LV_IMG_DECLARE( ui_img_mostly_sunny_png);   // assets/Mostly Sunny.png
-LV_IMG_DECLARE( ui_img_4809254_png);   // assets/4809254.png
+LV_IMG_DECLARE(ui_img_tick_dashes_png);    // assets\Tick Dashes.png
+LV_IMG_DECLARE(ui_img_tick_dots_png);    // assets\Tick Dots.png
+LV_IMG_DECLARE(ui_img_step_png);    // assets\step.png
+LV_IMG_DECLARE(ui_img_minutehandstub_png);    // assets\MinuteHandStub.png
+LV_IMG_DECLARE(ui_img_hourhandstub_png);    // assets\HourHandStub.png
+LV_IMG_DECLARE(ui_img_secondhandstub_png);    // assets\SecondHandStub.png
+LV_IMG_DECLARE(ui_img_no_bluetooth_small_png);    // assets\No Bluetooth_Small.png
+LV_IMG_DECLARE(ui_img_bellnobackground_png);    // assets\BellNobackground.png
+LV_IMG_DECLARE(ui_img_seconddashstub_png);    // assets\SecondDashStub.png
+LV_IMG_DECLARE(ui_img_seconddotstub_png);    // assets\SecondDotStub.png
+LV_IMG_DECLARE(ui_img_bell_png);    // assets\Bell.png
+LV_IMG_DECLARE(ui_img_restart_button_png);    // assets\Restart Button.png
+LV_IMG_DECLARE(ui_img_playpause_button_png);    // assets\PlayPause Button.png
+LV_IMG_DECLARE(ui_img_brightness_png);    // assets\brightness.png
+LV_IMG_DECLARE(ui_img_bluetooth_small_nobackground_png);    // assets\Bluetooth_Small_nobackground.png
+LV_IMG_DECLARE(ui_img_arrow_png);    // assets\Arrow.png
+LV_IMG_DECLARE(ui_img_power_icon_png);    // assets\Power Icon.png
+LV_IMG_DECLARE(ui_img_play_button_png);    // assets\Play Button.png
+LV_IMG_DECLARE(ui_img_calculator_icon_nobackground_png);    // assets\Calculator Icon nobackground.png
+LV_IMG_DECLARE(ui_img_compass_png);    // assets\Compass.png
+LV_IMG_DECLARE(ui_img_settings_gear_png);    // assets\Settings Gear.png
+LV_IMG_DECLARE(ui_img_flashlight_png);    // assets\Flashlight.png
+LV_IMG_DECLARE(ui_img_album_cover_png);    // assets\album cover.png
+LV_IMG_DECLARE(ui_img_pause_button_png);    // assets\Pause Button.png
+LV_IMG_DECLARE(ui_img_moon_png);    // assets\moon.png
+LV_IMG_DECLARE(ui_img_mostly_cloudy_png);    // assets\Mostly Cloudy.png
+LV_IMG_DECLARE(ui_img_rain_png);    // assets\rain.png
+LV_IMG_DECLARE(ui_img_snow_rain_png);    // assets\Snow Rain.png
+LV_IMG_DECLARE(ui_img_mostly_sunny_png);    // assets\Mostly Sunny.png
+LV_IMG_DECLARE(ui_img_4809254_png);    // assets\4809254.png
 
-LV_FONT_DECLARE( ui_font_Comfortaa_10);
-LV_FONT_DECLARE( ui_font_Comfortaa_12);
-LV_FONT_DECLARE( ui_font_Comfortaa_16);
-LV_FONT_DECLARE( ui_font_Comfortaa_26);
-LV_FONT_DECLARE( ui_font_Comfortaa_30);
-LV_FONT_DECLARE( ui_font_Monoton_48);
-LV_FONT_DECLARE( ui_font_Music_14);
+LV_FONT_DECLARE(ui_font_Comfortaa_10);
+LV_FONT_DECLARE(ui_font_Comfortaa_12);
+LV_FONT_DECLARE(ui_font_Comfortaa_16);
+LV_FONT_DECLARE(ui_font_Comfortaa_26);
+LV_FONT_DECLARE(ui_font_Comfortaa_30);
+LV_FONT_DECLARE(ui_font_Monoton_48);
+LV_FONT_DECLARE(ui_font_Music_14);
 
 void ui_init(void);
 

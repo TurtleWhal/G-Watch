@@ -68,6 +68,7 @@ void ApplyTheme(lv_event_t * e)
     lv_obj_set_style_img_recolor(ui_Steps_Image, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Step_Counter_Text, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Date_Numerical, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_Notification_Amount_Number, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_arc_color(ui_Notification_Timer, ThemeColor, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(ui_Notification_Image_Panel, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor(tick_index[60], ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);

@@ -39,7 +39,7 @@ extern Preferences Storage;
 
 bool useOTA;
 extern bool BTon;
-bool Timer0Triggered;
+bool Timer0Triggered = 1;
 bool BTTimerTriggered;
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -261,16 +261,15 @@ void setup()
     Serial.println(WiFi.localIP());
     lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
   }
-  else
+  ////////////////////////////////////////END OTA
 
-    ////////////////////////////////////////END OTA
-
-    WriteTime();
+  WriteTime();
+  lv_label_set_text(ui_Notification_Amount_Number, "0");
   lv_timer_handler();
   BT_on();
 #if defined(CONFIG_BMA423_LATER)
   twatch->bma423_begin(); // This takes 2 seconds
-  //twatch->bma423_reset();
+  // twatch->bma423_reset();
 #endif
   twatch->hal_auto_update(true, 1);
 

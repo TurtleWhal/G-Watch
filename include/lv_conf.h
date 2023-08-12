@@ -355,7 +355,7 @@
  *https://fonts.google.com/specimen/Montserrat*/
 #define LV_FONT_MONTSERRAT_8 1
 #define LV_FONT_MONTSERRAT_10 1
-#define LV_FONT_MONTSERRAT_12 1
+#define LV_FONT_MONTSERRAT_12 0
 #define LV_FONT_MONTSERRAT_14 1
 #define LV_FONT_MONTSERRAT_16 1
 #define LV_FONT_MONTSERRAT_18 0
@@ -760,6 +760,9 @@
 #endif /*LV_CONF_H*/
 
 #endif /*End of "Content enable"*/
+
+
+
 
 
 

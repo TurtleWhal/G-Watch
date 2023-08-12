@@ -10,7 +10,7 @@ extern Preferences Storage;
 // extern int Brightness;
 
 int LastTimeScreen = 2;
-int LastDownScreen = 1;
+int LastDownScreen = 2;
 
 void stopanim(lv_event_t *e)
 {
@@ -79,6 +79,7 @@ void SetMusicDeafault(lv_event_t *e)
 
 void totimescreen(lv_event_t *e)
 {
+    if (lv_scr_act() != ui_Timers and lv_scr_act() != ui_Stopwatch and lv_scr_act() != ui_Alarms)
     switch (LastTimeScreen)
     {
     case 1:
