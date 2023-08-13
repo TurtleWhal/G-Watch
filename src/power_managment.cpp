@@ -97,7 +97,7 @@ void Sleep()
 {
   if (!Sleeping)
   {
-    // prevbrightness = twatch->backlight_get_value();
+    prevbrightness = twatch->backlight_get_value();
     if (!prevbrightness)
       prevbrightness = 1;
     twatch->backlight_set_value(0);
