@@ -1,4 +1,4 @@
-
+I'm
 Make notifications show on all screens
 
 Change to LVGL task Handler vs timers? Is this right when sleeping?
@@ -36,3 +36,11 @@ redraw steps and battery on wakeup
 send battery percentage and steps in sleep
 
 stopwatch resets at 4:15
+
+add more watch faces
+
+store notifications in flash
+
+step goal after reached
+
+notifications dismissed on main screen dissapear on notifications screen
