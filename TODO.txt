@@ -1,4 +1,3 @@
-I'm
 Make notifications show on all screens
 
 Change to LVGL task Handler vs timers? Is this right when sleeping?
@@ -44,3 +43,7 @@ store notifications in flash
 step goal after reached
 
 notifications dismissed on main screen dissapear on notifications screen
+
+smooth notification dismiss
+
+calls
