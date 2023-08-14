@@ -47,3 +47,11 @@ notifications dismissed on main screen dissapear on notifications screen
 smooth notification dismiss
 
 calls
+
+games
+
+touch experiment
+
+OS
+
+20 hr bat life
