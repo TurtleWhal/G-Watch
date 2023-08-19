@@ -2,7 +2,6 @@ Make notifications show on all screens
 
 Change to LVGL task Handler vs timers? Is this right when sleeping?
 Change to TWATCH LVGL
-Change to Arduino logging
 Get rid of char, move to strings
 
 Store bluetooth status in FLASH 
@@ -11,8 +10,6 @@ Backlight gradual on/off
 Power managment when asleep
 Improve boot upload_speed
 Move button handler to LVGL
-
-Order batteries
 
 notification images
 
@@ -25,8 +22,6 @@ alarms
 buttons wierd?
 
 Find phone from watch
-
-SET TIME
 
 fix timer and stopwatch instability
 
