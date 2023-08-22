@@ -1,0 +1,16 @@
+{
+  "codename": "Monoton_38",
+  "ttf_path": "\\assets\\Monoton-Regular.ttf",
+  "bin_path": "\\assets\\ui_font_Monoton_38.bin",
+  "c_path": "\\assets\\ui_font_Monoton_38.c",
+  "cfg_path": "\\assets\\ui_font_Monoton_38.fcfg",
+  "size": 38,
+  "bpp": 8,
+  "letters": 0,
+  "ranges": [
+    "0x20-0x7f"
+  ],
+  "symbols": "°",
+  "customparams": "--no-compress --no-prefilter",
+  "uploaded": false
+}

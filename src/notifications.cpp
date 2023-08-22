@@ -22,6 +22,11 @@ bool Donotdisturb;
 extern TWatchClass *twatch;
 extern Preferences Storage;
 
+void InitNotif()
+{
+  
+}
+
 void shownotification(String Title, String Text, String Source, int id, bool Store)
 {
   // Create the widget in the Clock screen
@@ -96,8 +101,8 @@ void deletenotification(lv_event_t *e)
 
 void notificationdismiss(lv_event_t *e)
 {
-  lv_obj_set_x(ui_Notification_Popup, 0);
-  lv_obj_set_y(ui_Notification_Popup, -60);
+  //lv_obj_set_x(ui_Notification_Popup, 0);
+  //lv_obj_set_y(ui_Notification_Popup, -60);
   NotificationDismiss_Animation(ui_Notification_Popup, 0);
   notificationtime = 0;
   notificationshowing = 0;

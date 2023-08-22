@@ -4,7 +4,6 @@
 #include "timers.h"
 #include "power_managment.h"
 
-char timertimechar[3];
 int stopwatchtime = 0;
 int stopwatchtimestarted = 0;
 int stopwatchtimestopped = 0;
@@ -15,6 +14,7 @@ char zerobuffer[3];
 int timertime;
 bool timermoving;
 int timerlasttime;
+char timertimechar[3];
 
 int vibrate;
 
@@ -92,32 +92,6 @@ void InitTimer(lv_event_t *e)
 
 void timeradjust(lv_event_t *e)
 {
-  lv_obj_t *target = lv_event_get_target(e);
-  /*if (target == ui_Timer_Hour_Plus_10)
-      timertime += 10 * 60 * 60 * 1000;
-  else if (target == ui_Timer_Hour_Minus_10)
-      timertime -= 10 * 60 * 60 * 1000;
-  else if (target == ui_Timer_Hour_Plus_1)
-      timertime += 60 * 60 * 1000;
-  else if (target == ui_Timer_Hour_Minus_1)
-      timertime -= 60 * 60 * 1000;
-  else if (target == ui_Timer_Minute_Plus_10)
-      timertime += 10 * 60 * 1000;
-  else if (target == ui_Timer_Minute_Minus_10)
-      timertime -= 10 * 60 * 1000;
-  else if (target == ui_Timer_Minute_Plus_1)
-      timertime += 60 * 1000;
-  else if (target == ui_Timer_Minute_Minus_1)
-      timertime -= 60 * 1000;
-  else if (target == ui_Timer_Second_Plus_10)
-      timertime += 10 * 1000;
-  else if (target == ui_Timer_Second_Minus_10)
-      timertime -= 10 * 1000;
-  else if (target == ui_Timer_Second_Plus_1)
-      timertime += 1000;
-  else if (target == ui_Timer_Second_Minus_1)
-      timertime -= 1000;*/
-
   timertime = ((lv_roller_get_selected(ui_Timer_Hour_Left_Roller) * 60 * 60 * 10) +
                (lv_roller_get_selected(ui_Timer_Hour_Right_Roller) * 60 * 60) +
 
@@ -126,7 +100,8 @@ void timeradjust(lv_event_t *e)
 
                (lv_roller_get_selected(ui_Timer_Second_Left_Roller) * 10) +
                (lv_roller_get_selected(ui_Timer_Second_Right_Roller))) *
-              1000;
+                  1000 +
+              500;
 
   Serial.println(timertime);
 
@@ -154,51 +129,18 @@ void istimernegative()
 
 void writetimertime()
 {
-  uint8_t timerseconds = timertime / 1000;
-  uint8_t timerminutes = timerseconds / 60;
-  uint8_t timerhours = timerminutes / 60;
-  timerseconds %= 60;
-  timerminutes %= 60;
-  timerhours %= 100;
-
-  lv_roller_set_selected(ui_Timer_Second_Right_Roller, timerseconds % 10, LV_ANIM_ON);
-  lv_roller_set_selected(ui_Timer_Second_Left_Roller, timerseconds / 10, LV_ANIM_ON);
-
-  lv_roller_set_selected(ui_Timer_Minute_Right_Roller, timerminutes % 10, LV_ANIM_ON);
-  lv_roller_set_selected(ui_Timer_Minute_Left_Roller, timerminutes / 10, LV_ANIM_ON);
-
-  lv_roller_set_selected(ui_Timer_Hour_Right_Roller, timerhours % 10, LV_ANIM_ON);
-  lv_roller_set_selected(ui_Timer_Hour_Left_Roller, timerhours / 10, LV_ANIM_ON);
-
-  /*if (timerseconds < 10)
+  if (ui_Timers != NULL)
   {
-    sprintf(timertimechar, "0%d", timerseconds);
+    uint temptime = (timertime / 1000);
+    lv_roller_set_selected(ui_Timer_Second_Left_Roller, (temptime % 60) / 10, LV_ANIM_ON);
+    lv_roller_set_selected(ui_Timer_Second_Right_Roller, (temptime % 60) % 10, LV_ANIM_ON);
+    temptime = temptime / 60;
+    lv_roller_set_selected(ui_Timer_Minute_Left_Roller, (temptime % 60) / 10, LV_ANIM_ON);
+    lv_roller_set_selected(ui_Timer_Minute_Right_Roller, (temptime % 60) % 10, LV_ANIM_ON);
+    temptime = temptime / 60;
+    lv_roller_set_selected(ui_Timer_Hour_Left_Roller, (temptime % 60) / 10, LV_ANIM_ON);
+    lv_roller_set_selected(ui_Timer_Hour_Right_Roller, (temptime % 60) % 10, LV_ANIM_ON);
   }
-  else
-  {
-    itoa(timerseconds, timertimechar, 10);
-  }
-  lv_label_set_text(ui_Timer_Seconds, timertimechar);
-
-  if (timerminutes < 10)
-  {
-    sprintf(timertimechar, "0%d", timerminutes);
-  }
-  else
-  {
-    itoa(timerminutes, timertimechar, 10);
-  }
-  lv_label_set_text(ui_Timer_Minutes, timertimechar);
-
-  if (timerhours < 10)
-  {
-    sprintf(timertimechar, "0%d", timerhours);
-  }
-  else
-  {
-    itoa(timerhours, timertimechar, 10);
-  }
-  lv_label_set_text(ui_Timer_Hours, timertimechar);*/
 }
 
 void StopwatchHandle()

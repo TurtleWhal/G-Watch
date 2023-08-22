@@ -35,4 +35,7 @@ void UpdateSettings(lv_event_t *e)
 
   Storage.putUInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);
   ApplyTheme(nullptr);
+
+  Storage.putBool("DarkMode", (lv_obj_get_state(ui_Dark_Mode_Setting_Switch) == 3) ? 1 : 0);
+  Serial.println(Storage.getBool("DarkMode"));
 }

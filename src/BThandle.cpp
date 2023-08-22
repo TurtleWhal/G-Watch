@@ -14,6 +14,7 @@
 #include "ArduinoJson.h"
 #include "timers.h"
 #include "timestuff.h"
+#include "screen_management.h"
 
 extern TWatchClass *twatch;
 extern Notification NotificationList[11];
@@ -34,19 +35,40 @@ String MusicArtist;
 String MusicAlbum;
 bool MusicPlaying;
 
-String WeatherTemp = "0";
-String WeatherHigh = "0";
-String WeatherLow = "0";
-String WeatherHumidity = "0";
-String WeatherPrecip = "0";
-String WeatherUV = "0";
-String WeatherCode = "0";
-String WeatherType = "Not Updated";
-String WeatherWind = "0";
-String WeatherWinddir = "0";
-String WeatherLoc = "Not Set";
+LV_IMG_DECLARE(ui_img_mostly_cloudy_png);          // assets\Mostly Cloudy.png
+LV_IMG_DECLARE(ui_img_snow_rain_png);              // assets\Snow Rain.png
+LV_IMG_DECLARE(ui_img_mostly_sunny_png);           // assets\Mostly Sunny.png
+LV_IMG_DECLARE(ui_img_sunny_png);                  // assets\Sunny.png
+LV_IMG_DECLARE(ui_img_partly_cloudy_png);          // assets\Partly Cloudy.png
+LV_IMG_DECLARE(ui_img_cloudy_png);                 // assets\Cloudy.png
+LV_IMG_DECLARE(ui_img_rainy_png);                  // assets\Rainy.png
+LV_IMG_DECLARE(ui_img_scattered_showers_png);      // assets\Scattered Showers.png
+LV_IMG_DECLARE(ui_img_snowing_png);                // assets\Snowing.png
+LV_IMG_DECLARE(ui_img_isolated_thunderstorms_png); // assets\Isolated Thunderstorms.png
+LV_IMG_DECLARE(ui_img_blizzard_png);               // assets\Blizzard.png
+LV_IMG_DECLARE(ui_img_fog_png);                    // assets\Fog.png
+
+typedef struct
+{
+  int Temp = 0;
+  int High = 0;
+  int Low = 0;
+  int Humidity = 0;
+  int Precip = 0;
+  int UV = 0;
+  int Code = 0;
+  lv_img_dsc_t Img = ui_img_mostly_cloudy_png;
+  String Type = "Not Updated";
+  int Wind = 0;
+  int Winddir = 0;
+  String Loc = "";
+} weather;
+
+weather Weather;
 
 void ParseGB(char *Message);
+int KelvintoF(int Kelvin);
+String DegToCompassHeading(int);
 
 void ParseBLE(char *Message)
 {
@@ -134,6 +156,11 @@ void ParseGB(char *Message)
     Serial.println(Message);
     if (strcmp(NotifSource, "Android System Intelligence") == 0)
     {
+      /*NotifTitle = "Number 179 °@#$* by dot.* and .;:' feetering !@3%6* by ksajfd";
+      char NowPlayingTitle[64];
+      char NowPlayingArtist[64];
+      sscanf(NotifTitle, "%s by %s", NowPlayingTitle, NowPlayingArtist);
+      lv_label_set_text_fmt(ui_Now_Playing_Label, "%s\n%s", NowPlayingTitle, NowPlayingArtist);*/
       lv_label_set_text_fmt(ui_Now_Playing_Label, "%s   •", NotifTitle);
       songtime = millis();
     }
@@ -183,7 +210,39 @@ void ParseGB(char *Message)
 
     // lv_label_set_text(ui_Now_Playing_Label, MusicSong);
     DrawMusicInfo(nullptr);
+    SetDownScreen(MUSIC_SCREEN);
     // twatch->motor_shake(1, 50);
+  }
+  else if (strcmp(NotifType, "call") == 0)
+  {
+    const char *CallType = received["cmd"];
+    Serial.println(CallType);
+    if (strcmp(CallType, "incoming") == 0)
+    {
+      _ui_screen_change(&ui_Call, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Call_screen_init);
+      lv_label_set_text(ui_Call_Type, "Incoming Call");
+      lv_label_set_text(ui_Caller_Name, received["name"]);
+      lv_label_set_text(ui_Caller_Number, received["number"]);
+    }
+    else if (strcmp(CallType, "outgoing") == 0)
+    {
+      _ui_screen_change(&ui_Call, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Clock_screen_init);
+      lv_label_set_text(ui_Call_Type, "Outgoing Call");
+      lv_label_set_text(ui_Caller_Name, received["name"]);
+      lv_label_set_text(ui_Caller_Number, received["number"]);
+      lv_obj_add_flag(ui_Accept_Call_Button, LV_OBJ_FLAG_HIDDEN);
+      lv_obj_set_x(ui_Reject_Call_Button, 0);
+    }
+    else if (strcmp(CallType, "start") == 0)
+    {
+      lv_label_set_text(ui_Call_Type, "Ongoing Call");
+      lv_obj_add_flag(ui_Accept_Call_Button, LV_OBJ_FLAG_HIDDEN);
+      lv_obj_set_x(ui_Reject_Call_Button, 0);
+    }
+    else if (strcmp(CallType, "end") == 0)
+    {
+      _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_FADE_OUT, 150, 0, nullptr);
+    }
   }
   else if (strcmp(NotifType, "musicstate") == 0)
   {
@@ -209,15 +268,14 @@ void ParseGB(char *Message)
   }
   else if (strcmp(NotifType, "is_gps_active") == 0)
   {
-    BTsend("{\"t\":\"gps_power\",\"status\":1}");
+    BTsend("{\"t\":\"gps_power\",\"status\":false}");
   }
   else if (strcmp(NotifType, "weather") == 0)
   {
     // t:"weather", temp,hi,lo,hum,rain,uv,code,txt,wind,wdir,loc
-    int Temp = received["temp"];
-    Temp = (Temp - 273) * 1.8 + 32; // extra math for kelvin to celcius to farenheit
-    int High = received["hi"];
-    int Low = received["lo"];
+    int Temp = KelvintoF(received["temp"]);
+    int High = KelvintoF(received["hi"]);
+    int Low = KelvintoF(received["lo"]);
     int Humidity = received["hum"];
     int Precip = received["rain"];
     int UV = received["uv"];
@@ -241,17 +299,80 @@ void ParseGB(char *Message)
     Log.verboseln("(Weather) Wind Dir:------ %i", Winddir);
     Log.verboseln("(Weather) Weather Loc: -- %s", Loc);
 
-    WeatherTemp = Temp;
-    WeatherHigh = High;
-    WeatherLow = Low;
-    WeatherHumidity = Humidity;
-    WeatherPrecip = Precip;
-    WeatherUV = UV;
-    WeatherCode = Code;
-    WeatherType = Type;
-    WeatherWind = Wind;
-    WeatherWinddir = Winddir;
-    WeatherLoc = Loc;
+    Weather.Temp = Temp;
+    Weather.High = High;
+    Weather.Low = Low;
+    Weather.Humidity = Humidity;
+    Weather.Precip = Precip;
+    Weather.UV = UV;
+    Weather.Code = Code;
+    Weather.Type = Type;
+    Weather.Wind = Wind / 1.609;
+    Weather.Winddir = Winddir;
+    Weather.Loc = Loc;
+
+    switch (Weather.Code)
+    {
+    case 200 ... 232:
+      Weather.Img = ui_img_isolated_thunderstorms_png;
+      break;
+
+    case 300 ... 321:
+    case 520 ... 531:
+      Weather.Img = ui_img_rainy_png;
+      break;
+
+    case 500:
+      Weather.Img = ui_img_scattered_showers_png;
+      break;
+
+    case 501 ... 504:
+      Weather.Img = ui_img_sunny_png;
+      break;
+
+    case 511:
+    case 612 ... 621:
+      Weather.Img = ui_img_snow_rain_png;
+      break;
+
+    case 600 ... 601:
+    case 611:
+      Weather.Img = ui_img_snowing_png;
+      break;
+
+    case 602:
+    case 622:
+      Weather.Img = ui_img_blizzard_png;
+      break;
+
+    case 701 ... 781:
+      Weather.Img = ui_img_fog_png;
+      break;
+
+    case 800:
+      Weather.Img = ui_img_sunny_png;
+      break;
+
+    case 801:
+      Weather.Img = ui_img_mostly_sunny_png;
+      break;
+
+    case 802:
+      Weather.Img = ui_img_partly_cloudy_png;
+      break;
+
+    case 803:
+      Weather.Img = ui_img_mostly_cloudy_png;
+      break;
+
+    case 804:
+      Weather.Img = ui_img_cloudy_png;
+      break;
+
+    default:
+      Weather.Img = ui_img_mostly_cloudy_png;
+      break;
+    }
 
     DrawWeather(nullptr);
   }
@@ -271,6 +392,25 @@ void ParseGB(char *Message)
       VibrateStop(nullptr);
     }
   }
+}
+
+int KelvintoF(int Kelvin)
+{
+  return ((Kelvin - 273) * 1.8 + 32);
+}
+
+String DegToCompassHeading(int degree) {
+    if (degree < 0 || degree > 360) {
+        return "Invalid degree value";
+    }
+
+    const char* directions[] = {
+        "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
+        "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"
+    };
+
+    int index = (degree + 11.25) / 22.5; // 360 degrees divided into 16 segments
+    return directions[index];
 }
 
 void DrawMusicInfo(lv_event_t *e)
@@ -300,7 +440,7 @@ void PauseMusic(lv_event_t *e)
   {
     Serial.println("Pausing");
     String pausestring = "{t:\"music\", n:\"pause\"}";
-    BTsend(pausestring);
+    BTsend(pausestring, 2);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_play_button_png);
     // MusicPlaying = !MusicPlaying;
   }
@@ -308,7 +448,7 @@ void PauseMusic(lv_event_t *e)
   {
     Serial.println("Resuming");
     String playstring = "{t:\"music\", n:\"play\"}";
-    BTsend(playstring);
+    BTsend(playstring, 2);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_pause_button_png);
     // MusicPlaying = !MusicPlaying;
   }
@@ -318,14 +458,14 @@ void MusicSkipForward(lv_event_t *e)
 {
   Serial.println("Skipping Forward");
   String skipforwardstring = "{t:\"music\", n:\"next\"}";
-  BTsend(skipforwardstring);
+  BTsend(skipforwardstring, 2);
 }
 
 void MusicSkipBackward(lv_event_t *e)
 {
   Serial.println("Skipping Backward");
   String skipbackwardstring = "{t:\"music\", n:\"previous\"}";
-  BTsend(skipbackwardstring);
+  BTsend(skipbackwardstring, 2);
 }
 
 void BTHandle()
@@ -362,11 +502,14 @@ void onBTConnect()
   BTsendpower();
 }
 
-void BTsend(String message)
+void BTsend(String message, int repeat)
 {
-  msg = msg + "\r\n" + message + "\r\n" + BTtermchar;
-  Log.verboseln("BTsend: %s", message.c_str());
-  Log.verboseln("BTsendmsg: %s", msg.c_str());
+  for (int i = repeat; i > 0; i--)
+  {
+    msg = msg + "\r\n" + message + "\r\n" + BTtermchar;
+    Log.verboseln("BTsend: %s", message.c_str());
+    Log.verboseln("BTsendmsg: %s", msg.c_str());
+  }
 }
 
 void BTmsgloop()
@@ -432,12 +575,17 @@ void DrawWeather(lv_event_t *e)
 {
   if (ui_Weather != NULL)
   {
-    lv_label_set_text_fmt(ui_Temperature, "%s°", WeatherTemp.c_str());
-    lv_label_set_text(ui_High_Temp, WeatherHigh.c_str());
-    lv_label_set_text(ui_Low_Temp, WeatherLow.c_str());
-    lv_label_set_text_fmt(ui_Humidity_Label, "%s%%", WeatherHumidity.c_str());
-    lv_label_set_text_fmt(ui_Precepitation_Label, "%s%%", WeatherPrecip.c_str());
-    lv_label_set_text(ui_UV_Index_Label, WeatherUV.c_str());
-    lv_label_set_text(ui_Weather_State, WeatherType.c_str());
+    lv_label_set_text_fmt(ui_Temperature, "%i°", Weather.Temp);
+    lv_label_set_text_fmt(ui_High_Temp, "%i°", Weather.High);
+    lv_label_set_text_fmt(ui_Low_Temp, "%i°", Weather.Low);
+    lv_label_set_text_fmt(ui_Humidity_Label, "%i%%", Weather.Humidity);
+    lv_label_set_text_fmt(ui_Precepitation_Label, "%i%%", Weather.Precip);
+    lv_label_set_text_fmt(ui_UV_Index_Label, "UV: %i", Weather.UV);
+    lv_label_set_text_fmt(ui_Wind_Info, "%i mph\n%s", Weather.Wind, DegToCompassHeading(Weather.Winddir).c_str());
+    lv_img_set_angle(ui_Wind_Image, Weather.Winddir * 10 - 900);
+    lv_label_set_text(ui_Weather_State, Weather.Type.c_str());
+    lv_label_set_text(ui_Weather_Location, Weather.Loc.c_str());
+    // lv_label_set_text_fmt(ui_Weather_Id, "%i", Weather.Code);
+    lv_img_set_src(ui_Weather_Image, &Weather.Img);
   }
 }

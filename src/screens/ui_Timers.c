@@ -347,6 +347,7 @@ void ui_Timers_screen_init(void)
     lv_obj_set_width(ui_Timer_Arc, 244);
     lv_obj_set_height(ui_Timer_Arc, 244);
     lv_obj_set_align(ui_Timer_Arc, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Timer_Arc, LV_OBJ_FLAG_HIDDEN);     /// Flags
     lv_obj_clear_flag(ui_Timer_Arc, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_GESTURE_BUBBLE);      /// Flags
     lv_arc_set_range(ui_Timer_Arc, 0, 1000);
     lv_arc_set_bg_angles(ui_Timer_Arc, 91, 90);

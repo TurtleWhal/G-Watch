@@ -37,6 +37,8 @@ void WriteTime()
 #ifdef UPDATE_ELEMENTS
         ColorTicks(second);
         lv_img_set_angle(ui_Minute_Hand, (t_tm.tm_min * 60) + (second));
+        //lv_img_set_angle(ui_Simplistic_Minute_Hand, (t_tm.tm_min * 60) + (second));
+        //lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, (t_tm.tm_min * 60) + (second));
         /*if (lv_scr_act() == ui_Timers){
           lv_roller_set_selected(ui_Timer_Second_Right_Roller, t_tm.tm_sec % 10, LV_ANIM_ON);
           lv_roller_set_selected(ui_Timer_Second_Left_Roller, t_tm.tm_sec / 10 , LV_ANIM_ON);
@@ -48,6 +50,8 @@ void WriteTime()
             lastmin = t_tm.tm_min;
 #ifdef UPDATE_ELEMENTS
             lv_img_set_angle(ui_Hour_Hand, (t_tm.tm_hour * 300) + (t_tm.tm_min * 5));
+            //lv_img_set_angle(ui_Simplistic_Hour_Hand, (t_tm.tm_hour * 300) + (t_tm.tm_min * 5));
+            //lv_img_set_angle(ui_Simplistic_Hour_Hand_Shadow, (t_tm.tm_hour * 300) + (t_tm.tm_min * 5));
 
             strftime(time, sizeof(time), "%I:%M", &t_tm);
             lv_label_set_text(ui_Time, time);

@@ -11,13 +11,29 @@ void ui_Music_screen_init(void)
     lv_obj_clear_flag(ui_Music, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_add_event_cb(ui_Music, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Music);
 
-    ui_Cover_Art = lv_img_create(ui_Music);
-    lv_img_set_src(ui_Cover_Art, &ui_img_album_cover_png);
-    lv_obj_set_width(ui_Cover_Art, LV_SIZE_CONTENT);   /// 240
-    lv_obj_set_height(ui_Cover_Art, LV_SIZE_CONTENT);    /// 240
-    lv_obj_set_align(ui_Cover_Art, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Cover_Art, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Cover_Art, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_Background_Album_Image = lv_img_create(ui_Music);
+    lv_img_set_src(ui_Background_Album_Image, &ui_img_album_cover_png);
+    lv_obj_set_width(ui_Background_Album_Image, LV_SIZE_CONTENT);   /// 60
+    lv_obj_set_height(ui_Background_Album_Image, LV_SIZE_CONTENT);    /// 60
+    lv_obj_set_align(ui_Background_Album_Image, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Background_Album_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_Background_Album_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_img_set_zoom(ui_Background_Album_Image, 1050);
+    lv_obj_set_style_img_recolor(ui_Background_Album_Image, lv_color_hex(0x2095F6), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor_opa(ui_Background_Album_Image, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Album_Image_Panel = lv_obj_create(ui_Music);
+    lv_obj_set_width(ui_Album_Image_Panel, 60);
+    lv_obj_set_height(ui_Album_Image_Panel, 60);
+    lv_obj_set_x(ui_Album_Image_Panel, 0);
+    lv_obj_set_y(ui_Album_Image_Panel, -70);
+    lv_obj_set_align(ui_Album_Image_Panel, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Album_Image_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_Album_Image_Panel, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_clip_corner(ui_Album_Image_Panel, true, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_Album_Image_Panel, &ui_img_album_cover_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_Album_Image_Panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_Album_Image_Panel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Control_Panel = lv_obj_create(ui_Music);
     lv_obj_set_width(ui_Control_Panel, 250);
@@ -168,7 +184,7 @@ void ui_Music_screen_init(void)
     ui_Music_Album = lv_label_create(ui_Music);
     lv_obj_set_width(ui_Music_Album, 155);
     lv_obj_set_height(ui_Music_Album, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Music_Album, -13);
+    lv_obj_set_x(ui_Music_Album, -10);
     lv_obj_set_y(ui_Music_Album, 28);
     lv_obj_set_align(ui_Music_Album, LV_ALIGN_RIGHT_MID);
     lv_label_set_long_mode(ui_Music_Album, LV_LABEL_LONG_SCROLL_CIRCULAR);
@@ -177,14 +193,14 @@ void ui_Music_screen_init(void)
     lv_obj_set_style_text_font(ui_Music_Album, &ui_font_Comfortaa_10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Music_Time = lv_label_create(ui_Music);
-    lv_obj_set_width(ui_Music_Time, 54);
+    lv_obj_set_width(ui_Music_Time, 57);
     lv_obj_set_height(ui_Music_Time, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Music_Time, 13);
+    lv_obj_set_x(ui_Music_Time, 12);
     lv_obj_set_y(ui_Music_Time, 28);
     lv_obj_set_align(ui_Music_Time, LV_ALIGN_LEFT_MID);
-    lv_label_set_long_mode(ui_Music_Time, LV_LABEL_LONG_SCROLL);
-    lv_label_set_text(ui_Music_Time, "1:27 / 3:12");
-    lv_obj_set_style_text_align(ui_Music_Time, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_label_set_long_mode(ui_Music_Time, LV_LABEL_LONG_CLIP);
+    lv_label_set_text(ui_Music_Time, "10:27 / 30:12");
+    lv_obj_set_style_text_align(ui_Music_Time, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Music_Time, &ui_font_Comfortaa_10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Music_Play_Button, ui_event_Music_Play_Button, LV_EVENT_ALL, NULL);

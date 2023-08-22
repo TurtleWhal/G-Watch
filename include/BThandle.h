@@ -6,7 +6,7 @@ extern "C"
 void BTHandle();
 void ParseBLE(char *);
 void BTmsgloop();
-void BTsend(String);
+void BTsend(String, int = 1);
 //bool readStringUntil(String &input, size_t char_limit);
 //void ToggleBT(lv_event_t *e);
 void BT_off();

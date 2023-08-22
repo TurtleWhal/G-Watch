@@ -6,6 +6,7 @@
 lv_disp_drv_t *disp_drv_p;
 
 void TWatchClass::lv_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p) {
+  lv_disp_flush_ready(disp);
   TFT_eSPI *screen = (TFT_eSPI *)disp->user_data;
   // if( !framebuffer_drawing )
   //         lv_disp_flush_ready( disp_drv );
@@ -21,7 +22,6 @@ void TWatchClass::lv_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_c
   screen->startWrite();
   screen->pushImageDMA(area->x1, area->y1, (area->x2 - area->x1 + 1), (area->y2 - area->y1 + 1), (uint16_t *)color_p);
   screen->endWrite();
-  lv_disp_flush_ready(disp);
 }
 #endif
 

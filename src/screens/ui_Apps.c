@@ -61,19 +61,30 @@ void ui_Apps_screen_init(void)
                    &ui_img_settings_gear_png);
     lv_img_set_zoom(ui_comp_get_child(ui_Settings_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 90);
 
-    ui_App_Button1 = ui_App_Button_create(ui_Apps_Panel);
-    lv_obj_set_x(ui_App_Button1, 0);
-    lv_obj_set_y(ui_App_Button1, 0);
+    ui_Weather_App_Button = ui_App_Button_create(ui_Apps_Panel);
+    lv_obj_set_x(ui_Weather_App_Button, 0);
+    lv_obj_set_y(ui_Weather_App_Button, 0);
 
-    lv_label_set_text(ui_comp_get_child(ui_App_Button1, UI_COMP_APP_BUTTON_APP_LABEL), "Flashlight");
+    lv_label_set_text(ui_comp_get_child(ui_Weather_App_Button, UI_COMP_APP_BUTTON_APP_LABEL), "Weather");
 
-    lv_img_set_src(ui_comp_get_child(ui_App_Button1, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), &ui_img_flashlight_png);
-    lv_img_set_angle(ui_comp_get_child(ui_App_Button1, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 400);
-    lv_img_set_zoom(ui_comp_get_child(ui_App_Button1, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 60);
-    lv_obj_set_style_img_recolor(ui_comp_get_child(ui_App_Button1, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),
+    lv_img_set_src(ui_comp_get_child(ui_Weather_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),
+                   &ui_img_mostly_cloudy_png);
+    lv_img_set_zoom(ui_comp_get_child(ui_Weather_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 80);
+
+    ui_Flashlight_App_Button = ui_App_Button_create(ui_Apps_Panel);
+    lv_obj_set_x(ui_Flashlight_App_Button, 0);
+    lv_obj_set_y(ui_Flashlight_App_Button, 0);
+
+    lv_label_set_text(ui_comp_get_child(ui_Flashlight_App_Button, UI_COMP_APP_BUTTON_APP_LABEL), "Flashlight");
+
+    lv_img_set_src(ui_comp_get_child(ui_Flashlight_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),
+                   &ui_img_flashlight_png);
+    lv_img_set_angle(ui_comp_get_child(ui_Flashlight_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 400);
+    lv_img_set_zoom(ui_comp_get_child(ui_Flashlight_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 60);
+    lv_obj_set_style_img_recolor(ui_comp_get_child(ui_Flashlight_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),
                                  lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_img_recolor_opa(ui_comp_get_child(ui_App_Button1, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 255,
-                                     LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor_opa(ui_comp_get_child(ui_Flashlight_App_Button,
+                                                       UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Apps_Label_Underline = lv_obj_create(ui_Apps);
     lv_obj_set_width(ui_Apps_Label_Underline, 100);
@@ -107,7 +118,8 @@ void ui_Apps_screen_init(void)
     lv_obj_add_event_cb(ui_Calculator_App_Button, ui_event_Calculator_App_Button_App_Button, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Compass_App_Button, ui_event_Compass_App_Button_App_Button, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Settings_App_Button, ui_event_Settings_App_Button_App_Button, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_App_Button1, ui_event_App_Button1_App_Button, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Weather_App_Button, ui_event_Weather_App_Button_App_Button, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Flashlight_App_Button, ui_event_Flashlight_App_Button_App_Button, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Apps, ui_event_Apps, LV_EVENT_ALL, NULL);
 
 }

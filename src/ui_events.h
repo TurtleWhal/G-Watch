@@ -12,9 +12,11 @@ extern "C" {
 
 void totimescreen(lv_event_t * e);
 void ClockDown(lv_event_t * e);
+void ApplyTheme(lv_event_t * e);
+void notifslideon(lv_event_t * e);
+void notifslideoff(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
 void drawnotifications(lv_event_t * e);
-void ApplyTheme(lv_event_t * e);
 void deletenotification(lv_event_t * e);
 void settimerdefault(lv_event_t * e);
 void togglealarm1(lv_event_t * e);
@@ -33,9 +35,9 @@ void loadsettings(lv_event_t * e);
 void UpdateBrightness(lv_event_t * e);
 void ToggleBT(lv_event_t * e);
 void ToggleDoNotDisturb(lv_event_t * e);
+void UpdateSettings(lv_event_t * e);
 void ToggleTheme(lv_event_t * e);
 void UpdateTestTheme(lv_event_t * e);
-void UpdateSettings(lv_event_t * e);
 void PowerOff(lv_event_t * e);
 void stopanim(lv_event_t * e);
 void loadcalc(lv_event_t * e);

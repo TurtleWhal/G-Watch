@@ -9,8 +9,20 @@ extern Preferences Storage;
 
 // extern int Brightness;
 
-int LastTimeScreen = 2;
-int LastDownScreen = 2;
+int LastTimeScreen = STOPWATCH_SCREEN;
+int LastDownScreen = WEATHER_SCREEN;
+
+lv_obj_t * ClockScreen = ui_Clock;
+
+lv_obj_t *GetClock()
+{
+    return ClockScreen;
+}
+
+void SetDownScreen(int Screen)
+{
+    LastDownScreen = Screen;
+}
 
 void stopanim(lv_event_t *e)
 {
@@ -55,26 +67,31 @@ void loadsettings(lv_event_t *e)
 
     lv_colorwheel_set_rgb(ui_Theme_Colorwheel, lv_theme_get_color_primary(ui_Clock));
     UpdateTestTheme(nullptr);
+
+    if (Storage.getBool("DarkMode"))
+    lv_obj_add_state(ui_Dark_Mode_Setting_Switch, LV_STATE_CHECKED);
+
+    ApplyTheme(nullptr);
 }
 
 void settimerdefault(lv_event_t *e)
 {
     if (lv_event_get_target(e) == ui_Timers)
-        LastTimeScreen = 1;
+        LastTimeScreen = TIMER_SCREEN;
     else if (lv_event_get_target(e) == ui_Alarms)
-        LastTimeScreen = 3;
+        LastTimeScreen = ALARMS_SCREEN;
     else
-        LastTimeScreen = 2;
+        LastTimeScreen = STOPWATCH_SCREEN;
 }
 
 void SetWeatherDeafault(lv_event_t *e)
 {
-    LastDownScreen = 1;
+    LastDownScreen = WEATHER_SCREEN;
 }
 
 void SetMusicDeafault(lv_event_t *e)
 {
-    LastDownScreen = 2;
+    LastDownScreen = MUSIC_SCREEN;
 }
 
 void totimescreen(lv_event_t *e)
@@ -82,21 +99,21 @@ void totimescreen(lv_event_t *e)
     if (lv_scr_act() != ui_Timers and lv_scr_act() != ui_Stopwatch and lv_scr_act() != ui_Alarms)
     switch (LastTimeScreen)
     {
-    case 1:
-        _ui_screen_change(&ui_Timers, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, &ui_Timers_screen_init);
+    case TIMER_SCREEN:
+        _ui_screen_change(&ui_Timers, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Timers_screen_init);
         break;
-    case 2:
-        _ui_screen_change(&ui_Stopwatch, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, &ui_Stopwatch_screen_init);
+    case STOPWATCH_SCREEN:
+        _ui_screen_change(&ui_Stopwatch, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Stopwatch_screen_init);
         break;
-    case 3:
-        _ui_screen_change(&ui_Alarms, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, &ui_Alarms_screen_init);
+    case ALARMS_SCREEN:
+        _ui_screen_change(&ui_Alarms, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Alarms_screen_init);
         break;
     }
 }
 
 void ClockDown(lv_event_t *e)
 {
-    if (LastDownScreen == 2)
+    if (LastDownScreen == MUSIC_SCREEN)
         _ui_screen_change(&ui_Music, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Music_screen_init);
     else
         _ui_screen_change(&ui_Weather, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Weather_screen_init);

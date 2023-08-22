@@ -314,3 +314,19 @@ def InitTimer(event_struct):
 def VibrateStop(event_struct):
     return
 
+
+def notifslide(event_struct):
+    return
+
+
+def notifslideon(event_struct):
+    return
+
+
+def notifslideoff(event_struct):
+    return
+
+
+def DeleteWeatherInits(event_struct):
+    return
+

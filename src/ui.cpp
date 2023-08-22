@@ -35,12 +35,18 @@ TWatchClass *twatch = nullptr;
 
 CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
 
+int xaccel;
+
 extern Preferences Storage;
 
 bool useOTA;
 extern bool BTon;
 bool Timer0Triggered = 1;
 bool BTTimerTriggered;
+
+bool touchingnotif;
+
+void notifslide(lv_event_t *e);
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -64,12 +70,32 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
     /*Set the coordinates*/
     // if (getSleepTimer() < millis() - 200)
     //{
+
+    xaccel = touch.data.x - data->point.x;
     data->point.x = touch.data.x;
     data->point.y = touch.data.y;
+
+    if (!isSleeping()) // If Awake
+    {
+      if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
+      {
+        notifslide(nullptr);
+      }
+    }
+
     //}
     Wakeup("Screen Touched");
 
-    Log.verboseln("Touch event. Data X: %i, Data Y: %i", data->point.x, data->point.y);
+    Log.verboseln("Touch event. Data X: %i, Data Y: %i, X accel: %i", data->point.x, data->point.y, xaccel);
+
+    /*
+    lv_obj_t *dot = lv_obj_create(lv_scr_act());
+    lv_obj_set_width(dot, 40);
+    lv_obj_set_height(dot, 40);
+    lv_obj_set_x(dot, touch.data.x - 20);
+    lv_obj_set_y(dot, touch.data.y - 20);
+    lv_obj_set_style_radius(dot, 20, LV_PART_MAIN);
+    */
   }
   else
   {
@@ -77,11 +103,52 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
   }
 }
 
+void notifslide(lv_event_t *e)
+{
+  if (touchingnotif)
+  {
+    // lv_obj_set_x(lv_event_get_target(e), touch.data.x - (lv_obj_get_width(lv_event_get_target(e)) * 0.65));
+    lv_obj_set_x(ui_Notification_Popup, touch.data.x - (lv_obj_get_width(ui_Notification_Popup) * 0.7));
+    if (xaccel >= 40 or xaccel <= -40) // or touch.data.x >= 230 or touch.data.x <= 30)
+    {
+      notificationdismiss(nullptr);
+      notifslideoff(nullptr);
+    }
+  }
+}
+
+void notifslideon(lv_event_t *e)
+{
+  touchingnotif = 1;
+  Serial.println("slideon");
+}
+void notifslideoff(lv_event_t *e)
+{
+  touchingnotif = 0;
+  Serial.println("slideoff");
+  CenterNotif_Animation(ui_Notification_Popup, 0);
+}
+
+void CenterNotif_Animation(lv_obj_t *TargetObject, int delay)
+{
+  lv_anim_t a;
+  lv_anim_init(&a);
+  lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)lv_obj_set_x);
+  lv_anim_set_var(&a, ui_Notification_Popup);
+  lv_anim_set_time(&a, 300);
+  lv_anim_set_values(&a, lv_obj_get_x(ui_Notification_Popup), 0);
+  lv_anim_set_path_cb(&a, lv_anim_path_overshoot);
+  lv_anim_start(&a);
+}
+
 void btn1_click(void *param)
 {
   Log.verboseln("BTN1 Click. Power Percent: %i", twatch->power_get_percent());
   // twatch->motor_shake(1, 60);
-  Wakeup("Button 1 Pressed");
+  if (isSleeping())
+    Wakeup("Button 1 Pressed");
+  else
+    Sleep();
 }
 void btn2_click(void *param)
 {
@@ -269,7 +336,6 @@ void setup()
   BT_on();
 #if defined(CONFIG_BMA423_LATER)
   twatch->bma423_begin(); // This takes 2 seconds
-  // twatch->bma423_reset();
 #endif
   twatch->hal_auto_update(true, 1);
 
@@ -293,11 +359,11 @@ void loop()
       WriteTime();
       Powerhandle();
       drawnotificationarc();
+      // notifslide(nullptr);
     }
     else
     {
       Compass();
-      StopwatchHandle();
     }
   }
   else // If Asleep
@@ -310,6 +376,7 @@ void loop()
   BTHandle();
   Sleephandle();
   VibrateHandle();
+  StopwatchHandle();
 
   // this runs every 50ms
   if (BTTimerTriggered)

@@ -62,6 +62,11 @@ void ApplyTheme(lv_event_t * e)
   //////////Apply colors to unthemed items//////////
   extern lv_obj_t *tick_index[62];
 
+  if (!Storage.getBool("DarkMode"))
+  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  else
+  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x101418), LV_PART_MAIN);
+
   // Clock Screen
 #ifdef UPDATE_ELEMENTS
     lv_obj_set_style_img_recolor(ui_Minute_Hand, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -86,6 +91,12 @@ void ApplyTheme(lv_event_t * e)
   if (ui_Calculator != NULL)
   {
     lv_obj_set_style_bg_color(ui_Calculator_Keyboard, ThemeColor, LV_PART_ITEMS | LV_STATE_CHECKED);
+  }
+
+  // Calculator Screen
+  if (ui_Music != NULL)
+  {
+    lv_obj_set_style_img_recolor(ui_Background_Album_Image, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
 
   // Alarm Set Screen

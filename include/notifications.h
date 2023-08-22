@@ -11,6 +11,7 @@ typedef struct
   int id;
 } Notification;
 
+void InitNotif();
 void shownotification(String, String, String, int, bool);
 void pushnotification(int);
 void popnotification(int);

@@ -16,6 +16,9 @@ SET(SOURCES components/ui_comp_app_button.c
     screens/ui_Flashlight.c
     screens/ui_Music.c
     screens/ui_Weather.c
+    screens/ui_SkeletonWatchFace.c
+    screens/ui_SimplisticWatchFace.c
+    screens/ui_Call.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
@@ -40,20 +43,27 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_calculator_icon_nobackground_png.c
     images/ui_img_compass_png.c
     images/ui_img_settings_gear_png.c
+    images/ui_img_mostly_cloudy_png.c
     images/ui_img_flashlight_png.c
     images/ui_img_album_cover_png.c
     images/ui_img_pause_button_png.c
     images/ui_img_moon_png.c
-    images/ui_img_mostly_cloudy_png.c
+    images/ui_img_sunny_png.c
     images/ui_img_rain_png.c
     images/ui_img_snow_rain_png.c
     images/ui_img_mostly_sunny_png.c
+    images/ui_img_wind_png.c
+    images/ui_img_skeletonminutehand_png.c
+    images/ui_img_simplisticminutehand_png.c
+    images/ui_img_simplistichourhand_png.c
+    images/ui_img_call1_png.c
     images/ui_img_4809254_png.c
     fonts/ui_font_Comfortaa_10.c
     fonts/ui_font_Comfortaa_12.c
     fonts/ui_font_Comfortaa_16.c
     fonts/ui_font_Comfortaa_26.c
     fonts/ui_font_Comfortaa_30.c
+    fonts/ui_font_Monoton_38.c
     fonts/ui_font_Monoton_48.c
     fonts/ui_font_Music_14.c)
 

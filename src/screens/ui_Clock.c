@@ -86,7 +86,7 @@ void ui_Clock_screen_init(void)
     lv_obj_set_y(ui_Now_Playing_Label, -30);
     lv_obj_set_align(ui_Now_Playing_Label, LV_ALIGN_CENTER);
     lv_label_set_long_mode(ui_Now_Playing_Label, LV_LABEL_LONG_SCROLL_CIRCULAR);
-    lv_label_set_text(ui_Now_Playing_Label, "Safe and Sound by Capitol Cities");
+    lv_label_set_text(ui_Now_Playing_Label, "Safe and Sound\nCapitol Cities");
     lv_obj_set_style_text_align(ui_Now_Playing_Label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Now_Playing_Label, &ui_font_Music_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 

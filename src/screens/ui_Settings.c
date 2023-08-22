@@ -156,6 +156,22 @@ void ui_Settings_screen_init(void)
     lv_obj_set_style_pad_bottom(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 0,
                                 LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_Dark_Mode_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
+    lv_obj_set_x(ui_Dark_Mode_Setting_Panel, 0);
+    lv_obj_set_y(ui_Dark_Mode_Setting_Panel, -10);
+
+    lv_label_set_text(ui_comp_get_child(ui_Dark_Mode_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), "Dark Mode");
+
+    lv_obj_add_flag(ui_comp_get_child(ui_Dark_Mode_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),
+                    LV_OBJ_FLAG_HIDDEN);   /// Flags
+
+    ui_Dark_Mode_Setting_Switch = lv_switch_create(ui_Dark_Mode_Setting_Panel);
+    lv_obj_set_width(ui_Dark_Mode_Setting_Switch, 57);
+    lv_obj_set_height(ui_Dark_Mode_Setting_Switch, 29);
+    lv_obj_set_x(ui_Dark_Mode_Setting_Switch, 11);
+    lv_obj_set_y(ui_Dark_Mode_Setting_Switch, 0);
+    lv_obj_set_align(ui_Dark_Mode_Setting_Switch, LV_ALIGN_RIGHT_MID);
+
     ui_Theme_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
     lv_obj_set_width(ui_Theme_Setting_Panel, 200);
     lv_obj_set_height(ui_Theme_Setting_Panel, 35);
@@ -306,6 +322,7 @@ void ui_Settings_screen_init(void)
                         ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),
                         ui_event_BTname_Setting_Panel_BTname_Setting_Value, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Dark_Mode_Setting_Switch, ui_event_Dark_Mode_Setting_Switch, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Theme_Apply_Button, ui_event_Theme_Apply_Button, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Theme_Colorwheel, ui_event_Theme_Colorwheel, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Theme_Setting_Panel, ui_event_Theme_Setting_Panel_Setting_Panel, LV_EVENT_ALL, NULL);
