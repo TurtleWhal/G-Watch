@@ -22,12 +22,9 @@ bool Donotdisturb;
 extern TWatchClass *twatch;
 extern Preferences Storage;
 
-void InitNotif()
-{
-  
-}
+int TempID;
 
-void shownotification(String Title, String Text, String Source, int id, bool Store)
+void shownotification(String Title, String Text, String Source, int id)
 {
   // Create the widget in the Clock screen
   Wakeup("Notification Received");
@@ -35,7 +32,9 @@ void shownotification(String Title, String Text, String Source, int id, bool Sto
   lv_label_set_text(ui_Notification_Title, Title.c_str());
   lv_label_set_text(ui_Notification_Text, Text.c_str());
   lv_label_set_text(ui_Notification_Source, Source.c_str());
-  lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount + 1);
+  //lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount + 1);
+
+  TempID = id;
 
   lv_obj_set_x(ui_Notification_Popup, 0);
   lv_obj_set_y(ui_Notification_Popup, -160);
@@ -47,15 +46,6 @@ void shownotification(String Title, String Text, String Source, int id, bool Sto
 
   if (!Donotdisturb)
     twatch->motor_shake(2, 30);
-
-  if (Store)
-  {
-    NotificationList[10].Title = Title;
-    NotificationList[10].Text = Text;
-    NotificationList[10].Source = Source;
-    NotificationList[10].id = id;
-    pushnotification(1);
-  }
 
   if (lv_scr_act() == ui_Notifications)
   {
@@ -101,11 +91,9 @@ void deletenotification(lv_event_t *e)
 
 void notificationdismiss(lv_event_t *e)
 {
-  //lv_obj_set_x(ui_Notification_Popup, 0);
-  //lv_obj_set_y(ui_Notification_Popup, -60);
-  NotificationDismiss_Animation(ui_Notification_Popup, 0);
-  notificationtime = 0;
   notificationshowing = 0;
+  NotificationDismiss_Animation(ui_Notification_Popup, 0);
+  NotificationHide_Animation(ui_Notification_Popup, 300);
 }
 
 void pushnotification(int index)
@@ -119,11 +107,14 @@ void pushnotification(int index)
   NotificationList[i] = NotificationList[10];
   if (NotificationCount < 10)
     NotificationCount++;
+  lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount);
+
+  Log.verboseln("Pushed Notification with id %i", index);
 }
 
 void popnotification(int index)
 {
-  Log.verboseln("Popnotification: %i", index);
+  Log.verboseln("Popped Notification with id %i", index);
   if (!NotificationCount)
     return;
   /*char temp[50];
@@ -149,6 +140,14 @@ void drawnotificationarc()
     {
       NotificationHide_Animation(ui_Notification_Popup, 0);
       notificationshowing = 0;
+
+      NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
+      NotificationList[10].Text = lv_label_get_text(ui_Notification_Text);
+      NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
+      NotificationList[10].id = TempID;
+      pushnotification(1);
+
+      Log.verboseln("Stored Notification with Title: %s, Text: %s, Source: %s, id: %i", NotificationList[10].Title, NotificationList[10].Text, NotificationList[10].Source, NotificationList[10].id);
     }
   }
 }

@@ -12,7 +12,7 @@ typedef struct
 } Notification;
 
 void InitNotif();
-void shownotification(String, String, String, int, bool);
+void shownotification(String, String, String, int);
 void pushnotification(int);
 void popnotification(int);
 void deleteNotification(lv_event_t *e);

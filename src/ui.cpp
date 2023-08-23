@@ -109,7 +109,7 @@ void notifslide(lv_event_t *e)
   {
     // lv_obj_set_x(lv_event_get_target(e), touch.data.x - (lv_obj_get_width(lv_event_get_target(e)) * 0.65));
     lv_obj_set_x(ui_Notification_Popup, touch.data.x - (lv_obj_get_width(ui_Notification_Popup) * 0.7));
-    if (xaccel >= 40 or xaccel <= -40) // or touch.data.x >= 230 or touch.data.x <= 30)
+    if (xaccel >= 40 or xaccel <= -40 or touch.data.x >= 220 or touch.data.x <= 40)
     {
       notificationdismiss(nullptr);
       notifslideoff(nullptr);
@@ -126,7 +126,8 @@ void notifslideoff(lv_event_t *e)
 {
   touchingnotif = 0;
   Serial.println("slideoff");
-  CenterNotif_Animation(ui_Notification_Popup, 0);
+  if (NotificationActive())
+    CenterNotif_Animation(ui_Notification_Popup, 0);
 }
 
 void CenterNotif_Animation(lv_obj_t *TargetObject, int delay)

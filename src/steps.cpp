@@ -50,7 +50,7 @@ void StepHandle()
       // #endif
       char StepNotif[] = "You have reached your step goal of 4294967295 Steps!";
       sprintf(StepNotif, "You have reached your step goal of %i Steps!", Storage.getUShort("StepGoal"));
-      shownotification("Step Goal Reached!", StepNotif, "local.stephandle", 0, 0);
+      shownotification("Step Goal Reached!", StepNotif, "local.stephandle", 0);
       Storage.putBool("StepReach", 1);
     }
 

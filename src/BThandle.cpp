@@ -166,7 +166,7 @@ void ParseGB(char *Message)
     }
     else
     {
-      shownotification(NotifTitle, NotifText, NotifSource, NotifID, 1);
+      shownotification(NotifTitle, NotifText, NotifSource, NotifID);
     }
   }
   else if (strcmp(NotifType, "notify-") == 0)
