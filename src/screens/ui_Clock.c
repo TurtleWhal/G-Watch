@@ -305,6 +305,8 @@ void ui_Clock_screen_init(void)
     lv_obj_set_align(ui_Notification_Image_Panel, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Notification_Image_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_radius(ui_Notification_Image_Panel, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Notification_Image_Panel, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Notification_Image_Panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Notification_Image = lv_img_create(ui_Notification_Image_Panel);
     lv_img_set_src(ui_Notification_Image, &ui_img_bellnobackground_png);

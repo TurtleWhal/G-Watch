@@ -14,7 +14,7 @@ void keyboardup_Animation(lv_obj_t * TargetObject, int delay);
 void keyboarddown_Animation(lv_obj_t * TargetObject, int delay);
 void NotificationShow_Animation(lv_obj_t * TargetObject, int delay);
 void NotificationHide_Animation(lv_obj_t * TargetObject, int delay);
-void NotificationDismiss_Animation(lv_obj_t * TargetObject, int delay);
+void NotificationDismissRight_Animation(lv_obj_t * TargetObject, int delay);
 void NumpadUp_Animation(lv_obj_t * TargetObject, int delay);
 void resetstopwatch_Animation(lv_obj_t * TargetObject, int delay);
 void StopwatchClear_Animation(lv_obj_t * TargetObject, int delay);
@@ -25,6 +25,7 @@ void CompassArrowWiggle_Animation(lv_obj_t * TargetObject, int delay);
 void CalculatorEquationFocus_Animation(lv_obj_t * TargetObject, int delay);
 void ThemeSettingExpand_Animation(lv_obj_t * TargetObject, int delay);
 void ThemeSettingShrink_Animation(lv_obj_t * TargetObject, int delay);
+void NotificationDismissLeft_Animation(lv_obj_t * TargetObject, int delay);
 
 // SCREEN: ui_Clock
 void ui_Clock_screen_init(void);
@@ -587,7 +588,7 @@ void NotificationHide_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_start(&PropertyAnimation_0);
 
 }
-void NotificationDismiss_Animation(lv_obj_t * TargetObject, int delay)
+void NotificationDismissRight_Animation(lv_obj_t * TargetObject, int delay)
 {
     ui_anim_user_data_t * PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
     PropertyAnimation_0_user_data->target = TargetObject;
@@ -600,7 +601,7 @@ void NotificationDismiss_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
     lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_x);
     lv_anim_set_values(&PropertyAnimation_0, 0, 220);
-    lv_anim_set_path_cb(&PropertyAnimation_0, lv_anim_path_ease_in);
+    lv_anim_set_path_cb(&PropertyAnimation_0, lv_anim_path_ease_out);
     lv_anim_set_delay(&PropertyAnimation_0, delay + 0);
     lv_anim_set_deleted_cb(&PropertyAnimation_0, _ui_anim_callback_free_user_data);
     lv_anim_set_playback_time(&PropertyAnimation_0, 0);
@@ -916,6 +917,31 @@ void ThemeSettingShrink_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_start(&PropertyAnimation_0);
 
 }
+void NotificationDismissLeft_Animation(lv_obj_t * TargetObject, int delay)
+{
+    ui_anim_user_data_t * PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
+    PropertyAnimation_0_user_data->target = TargetObject;
+    PropertyAnimation_0_user_data->imgset = ui_imgset_;
+    PropertyAnimation_0_user_data->imgset_size = sizeof(ui_imgset_) / (sizeof(lv_img_dsc_t *));
+    PropertyAnimation_0_user_data->val = -1;
+    lv_anim_t PropertyAnimation_0;
+    lv_anim_init(&PropertyAnimation_0);
+    lv_anim_set_time(&PropertyAnimation_0, 300);
+    lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
+    lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_x);
+    lv_anim_set_values(&PropertyAnimation_0, 0, -220);
+    lv_anim_set_path_cb(&PropertyAnimation_0, lv_anim_path_ease_out);
+    lv_anim_set_delay(&PropertyAnimation_0, delay + 0);
+    lv_anim_set_deleted_cb(&PropertyAnimation_0, _ui_anim_callback_free_user_data);
+    lv_anim_set_playback_time(&PropertyAnimation_0, 0);
+    lv_anim_set_playback_delay(&PropertyAnimation_0, 0);
+    lv_anim_set_repeat_count(&PropertyAnimation_0, 0);
+    lv_anim_set_repeat_delay(&PropertyAnimation_0, 0);
+    lv_anim_set_early_apply(&PropertyAnimation_0, false);
+    lv_anim_set_get_value_cb(&PropertyAnimation_0, &_ui_anim_callback_get_x);
+    lv_anim_start(&PropertyAnimation_0);
+
+}
 
 ///////////////////// FUNCTIONS ////////////////////
 void ui_event_Clock(lv_event_t * e)
@@ -959,7 +985,7 @@ void ui_event_Notification_Popup_Mask(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
         lv_indev_wait_release(lv_indev_get_act());
-        NotificationDismiss_Animation(ui_Notification_Popup_Mask, 0);
+        NotificationDismissRight_Animation(ui_Notification_Popup_Mask, 0);
         notificationdismiss(e);
     }
 }

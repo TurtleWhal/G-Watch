@@ -13727,7 +13727,7 @@
                 {
                   "nid": 1180491400,
                   "strtype": "IMAGE/Asset",
-                  "strval": "assets/BellNobackground.png",
+                  "strval": "assets\\BellNobackground.png",
                   "InheritedType": 5
                 },
                 {
@@ -41088,70 +41088,70 @@
     },
     {
       "disabled": false,
-      "nid": 142536394,
+      "nid": -1733791277,
       "strtype": "_event/EventHandler",
       "strval": "GESTURE_RIGHT(GESTURE)",
       "childs": [
         {
-          "nid": -1332684623,
+          "nid": -1078631518,
           "strtype": "_custom/name",
-          "strval": "dismiss",
+          "strval": "Event45",
           "InheritedType": 10
         },
         {
-          "nid": -532005590,
+          "nid": -963809658,
           "strtype": "_custom/condition_C",
           "strval": "",
           "InheritedType": 10
         },
         {
-          "nid": -1386488348,
+          "nid": -318672825,
           "strtype": "_custom/condition_P",
           "strval": "",
           "InheritedType": 10
         },
         {
-          "nid": -711865326,
+          "nid": 1953336362,
           "strtype": "_event/action",
           "strval": "PLAY ANIMATION",
           "childs": [
             {
-              "nid": -1396912076,
+              "nid": -932860417,
               "strtype": "PLAY ANIMATION/Name",
               "strval": "PLAY ANIMATION",
               "InheritedType": 10
             },
             {
-              "nid": -2029585840,
+              "nid": -377155907,
               "strtype": "PLAY ANIMATION/FunctionName",
-              "strval": "NotificationDismiss_Animation",
+              "strval": "NotificationDismissRight_Animation",
               "InheritedType": 10
             },
             {
-              "nid": 1663264748,
+              "nid": -887829482,
               "strtype": "PLAY ANIMATION/Animation",
-              "strval": "Notification Dismiss",
+              "strval": "Notification Dismiss Right",
               "InheritedType": 8
             },
             {
-              "nid": 1012882732,
+              "nid": 923314318,
               "strtype": "PLAY ANIMATION/Target",
               "strval": "GUID37332994-822175S8792178",
               "InheritedType": 9
             },
             {
-              "nid": 263618542,
+              "nid": -1416418386,
               "strtype": "PLAY ANIMATION/Delay",
               "InheritedType": 6
             },
             {
-              "nid": 966914906,
+              "nid": 797068030,
               "strtype": "PLAY ANIMATION/Call",
               "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
               "InheritedType": 10
             },
             {
-              "nid": 1217416215,
+              "nid": -24395820,
               "strtype": "PLAY ANIMATION/CallC",
               "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
               "InheritedType": 10
@@ -41160,36 +41160,150 @@
           "InheritedType": 10
         },
         {
-          "nid": -1618335780,
+          "nid": -273246913,
           "strtype": "_event/action",
           "strval": "CALL FUNCTION",
           "childs": [
             {
-              "nid": 652620103,
+              "nid": -750220054,
               "strtype": "CALL FUNCTION/Name",
               "strval": "CALL FUNCTION",
               "InheritedType": 10
             },
             {
-              "nid": 1757016976,
+              "nid": -2089155093,
               "strtype": "CALL FUNCTION/Call",
               "strval": "<{Function_name}>( event_struct )",
               "InheritedType": 10
             },
             {
-              "nid": -850941407,
+              "nid": -633816826,
               "strtype": "CALL FUNCTION/CallC",
               "strval": "<{Function_name}>( e );",
               "InheritedType": 10
             },
             {
-              "nid": 1802597726,
+              "nid": -311829053,
               "strtype": "CALL FUNCTION/Function_name",
               "strval": "deletenotification",
               "InheritedType": 10
             },
             {
-              "nid": -1199270249,
+              "nid": -1303423854,
+              "strtype": "CALL FUNCTION/Dont_export_function",
+              "strval": "True",
+              "InheritedType": 2
+            }
+          ],
+          "InheritedType": 10
+        }
+      ],
+      "InheritedType": 4
+    },
+    {
+      "disabled": false,
+      "nid": 1116791845,
+      "strtype": "_event/EventHandler",
+      "strval": "GESTURE_LEFT(GESTURE)",
+      "childs": [
+        {
+          "nid": -1360200377,
+          "strtype": "_custom/name",
+          "strval": "Event44",
+          "InheritedType": 10
+        },
+        {
+          "nid": -803018525,
+          "strtype": "_custom/condition_C",
+          "strval": "",
+          "InheritedType": 10
+        },
+        {
+          "nid": 1404078458,
+          "strtype": "_custom/condition_P",
+          "strval": "",
+          "InheritedType": 10
+        },
+        {
+          "nid": 400113969,
+          "strtype": "_event/action",
+          "strval": "PLAY ANIMATION",
+          "childs": [
+            {
+              "nid": 1934704923,
+              "strtype": "PLAY ANIMATION/Name",
+              "strval": "PLAY ANIMATION",
+              "InheritedType": 10
+            },
+            {
+              "nid": 286959550,
+              "strtype": "PLAY ANIMATION/FunctionName",
+              "strval": "NotificationDismissLeft_Animation",
+              "InheritedType": 10
+            },
+            {
+              "nid": 1394944794,
+              "strtype": "PLAY ANIMATION/Animation",
+              "strval": "Notification Dismiss Left",
+              "InheritedType": 8
+            },
+            {
+              "nid": 1052996430,
+              "strtype": "PLAY ANIMATION/Target",
+              "strval": "GUID37332994-822175S8792178",
+              "InheritedType": 9
+            },
+            {
+              "nid": 859729687,
+              "strtype": "PLAY ANIMATION/Delay",
+              "InheritedType": 6
+            },
+            {
+              "nid": 1754732279,
+              "strtype": "PLAY ANIMATION/Call",
+              "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
+              "InheritedType": 10
+            },
+            {
+              "nid": -255438747,
+              "strtype": "PLAY ANIMATION/CallC",
+              "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
+              "InheritedType": 10
+            }
+          ],
+          "InheritedType": 10
+        },
+        {
+          "nid": -1686980915,
+          "strtype": "_event/action",
+          "strval": "CALL FUNCTION",
+          "childs": [
+            {
+              "nid": 960725372,
+              "strtype": "CALL FUNCTION/Name",
+              "strval": "CALL FUNCTION",
+              "InheritedType": 10
+            },
+            {
+              "nid": -106285970,
+              "strtype": "CALL FUNCTION/Call",
+              "strval": "<{Function_name}>( event_struct )",
+              "InheritedType": 10
+            },
+            {
+              "nid": -1775188417,
+              "strtype": "CALL FUNCTION/CallC",
+              "strval": "<{Function_name}>( e );",
+              "InheritedType": 10
+            },
+            {
+              "nid": -1728771154,
+              "strtype": "CALL FUNCTION/Function_name",
+              "strval": "deletenotification",
+              "InheritedType": 10
+            },
+            {
+              "nid": 506782551,
               "strtype": "CALL FUNCTION/Dont_export_function",
               "strval": "True",
               "InheritedType": 2

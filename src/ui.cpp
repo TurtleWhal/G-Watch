@@ -45,6 +45,7 @@ bool Timer0Triggered = 1;
 bool BTTimerTriggered;
 
 bool touchingnotif;
+lv_obj_t *notiftouched;
 
 void notifslide(lv_event_t *e);
 
@@ -108,26 +109,32 @@ void notifslide(lv_event_t *e)
   if (touchingnotif)
   {
     // lv_obj_set_x(lv_event_get_target(e), touch.data.x - (lv_obj_get_width(lv_event_get_target(e)) * 0.65));
-    lv_obj_set_x(ui_Notification_Popup, touch.data.x - (lv_obj_get_width(ui_Notification_Popup) * 0.7));
+    lv_obj_set_x(notiftouched, touch.data.x - (lv_obj_get_width(notiftouched) * 0.7));
     if (xaccel >= 40 or xaccel <= -40 or touch.data.x >= 220 or touch.data.x <= 40)
     {
       notificationdismiss(nullptr);
       notifslideoff(nullptr);
+
+      if (xaccel >= 40 or touch.data.x >= 220)
+        NotificationDismissRight_Animation(notiftouched, 0);
+      else
+        NotificationDismissLeft_Animation(notiftouched, 0);
     }
   }
 }
 
 void notifslideon(lv_event_t *e)
 {
-  touchingnotif = 1;
   Serial.println("slideon");
+  touchingnotif = 1;
+  notiftouched = lv_event_get_target(e);
 }
 void notifslideoff(lv_event_t *e)
 {
   touchingnotif = 0;
   Serial.println("slideoff");
   if (NotificationActive())
-    CenterNotif_Animation(ui_Notification_Popup, 0);
+    CenterNotif_Animation(notiftouched, 0);
 }
 
 void CenterNotif_Animation(lv_obj_t *TargetObject, int delay)
@@ -135,9 +142,9 @@ void CenterNotif_Animation(lv_obj_t *TargetObject, int delay)
   lv_anim_t a;
   lv_anim_init(&a);
   lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)lv_obj_set_x);
-  lv_anim_set_var(&a, ui_Notification_Popup);
+  lv_anim_set_var(&a, TargetObject);
   lv_anim_set_time(&a, 300);
-  lv_anim_set_values(&a, lv_obj_get_x(ui_Notification_Popup), 0);
+  lv_anim_set_values(&a, lv_obj_get_x(TargetObject), 0);
   lv_anim_set_path_cb(&a, lv_anim_path_overshoot);
   lv_anim_start(&a);
 }

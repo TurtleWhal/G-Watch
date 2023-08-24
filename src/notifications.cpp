@@ -32,7 +32,7 @@ void shownotification(String Title, String Text, String Source, int id)
   lv_label_set_text(ui_Notification_Title, Title.c_str());
   lv_label_set_text(ui_Notification_Text, Text.c_str());
   lv_label_set_text(ui_Notification_Source, Source.c_str());
-  //lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount + 1);
+  // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount + 1);
 
   TempID = id;
 
@@ -92,7 +92,6 @@ void deletenotification(lv_event_t *e)
 void notificationdismiss(lv_event_t *e)
 {
   notificationshowing = 0;
-  NotificationDismiss_Animation(ui_Notification_Popup, 0);
   NotificationHide_Animation(ui_Notification_Popup, 300);
 }
 

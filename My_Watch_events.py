@@ -330,3 +330,7 @@ def notifslideoff(event_struct):
 def DeleteWeatherInits(event_struct):
     return
 
+
+def slideon(event_struct):
+    return
+

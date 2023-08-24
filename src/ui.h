@@ -33,7 +33,7 @@ void keyboardup_Animation(lv_obj_t * TargetObject, int delay);
 void keyboarddown_Animation(lv_obj_t * TargetObject, int delay);
 void NotificationShow_Animation(lv_obj_t * TargetObject, int delay);
 void NotificationHide_Animation(lv_obj_t * TargetObject, int delay);
-void NotificationDismiss_Animation(lv_obj_t * TargetObject, int delay);
+void NotificationDismissRight_Animation(lv_obj_t * TargetObject, int delay);
 void NumpadUp_Animation(lv_obj_t * TargetObject, int delay);
 void resetstopwatch_Animation(lv_obj_t * TargetObject, int delay);
 void StopwatchClear_Animation(lv_obj_t * TargetObject, int delay);
@@ -44,6 +44,7 @@ void CompassArrowWiggle_Animation(lv_obj_t * TargetObject, int delay);
 void CalculatorEquationFocus_Animation(lv_obj_t * TargetObject, int delay);
 void ThemeSettingExpand_Animation(lv_obj_t * TargetObject, int delay);
 void ThemeSettingShrink_Animation(lv_obj_t * TargetObject, int delay);
+void NotificationDismissLeft_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Clock
 void ui_Clock_screen_init(void);
 void ui_event_Clock(lv_event_t * e);
