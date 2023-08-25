@@ -415,7 +415,7 @@ LV_IMG_DECLARE(ui_img_minutehandstub_png);    // assets\MinuteHandStub.png
 LV_IMG_DECLARE(ui_img_hourhandstub_png);    // assets\HourHandStub.png
 LV_IMG_DECLARE(ui_img_secondhandstub_png);    // assets\SecondHandStub.png
 LV_IMG_DECLARE(ui_img_no_bluetooth_small_png);    // assets\No Bluetooth_Small.png
-LV_IMG_DECLARE(ui_img_bellnobackground_png);    // assets\BellNobackground.png
+LV_IMG_DECLARE(ui_img_notificationbell_png);    // assets\NotificationBell.png
 LV_IMG_DECLARE(ui_img_seconddashstub_png);    // assets\SecondDashStub.png
 LV_IMG_DECLARE(ui_img_seconddotstub_png);    // assets\SecondDotStub.png
 LV_IMG_DECLARE(ui_img_bell_png);    // assets\Bell.png
@@ -423,6 +423,7 @@ LV_IMG_DECLARE(ui_img_restart_button_png);    // assets\Restart Button.png
 LV_IMG_DECLARE(ui_img_playpause_button_png);    // assets\PlayPause Button.png
 LV_IMG_DECLARE(ui_img_brightness_png);    // assets\brightness.png
 LV_IMG_DECLARE(ui_img_bluetooth_small_nobackground_png);    // assets\Bluetooth_Small_nobackground.png
+LV_IMG_DECLARE(ui_img_bellnobackground_png);    // assets\BellNobackground.png
 LV_IMG_DECLARE(ui_img_arrow_png);    // assets\Arrow.png
 LV_IMG_DECLARE(ui_img_power_icon_png);    // assets\Power Icon.png
 LV_IMG_DECLARE(ui_img_play_button_png);    // assets\Play Button.png

@@ -207,7 +207,7 @@ void ui_Clock_screen_init(void)
     lv_img_set_zoom(ui_Bluetooth_Indicator, 140);
 
     ui_Notification_Amount_Image = lv_img_create(ui_Clock);
-    lv_img_set_src(ui_Notification_Amount_Image, &ui_img_bellnobackground_png);
+    lv_img_set_src(ui_Notification_Amount_Image, &ui_img_notificationbell_png);
     lv_obj_set_width(ui_Notification_Amount_Image, LV_SIZE_CONTENT);   /// 61
     lv_obj_set_height(ui_Notification_Amount_Image, LV_SIZE_CONTENT);    /// 64
     lv_obj_set_x(ui_Notification_Amount_Image, 35);
@@ -215,7 +215,7 @@ void ui_Clock_screen_init(void)
     lv_obj_set_align(ui_Notification_Amount_Image, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Notification_Amount_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_Notification_Amount_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_zoom(ui_Notification_Amount_Image, 75);
+    lv_img_set_zoom(ui_Notification_Amount_Image, 160);
 
     ui_Notification_Amount_Number = lv_label_create(ui_Notification_Amount_Image);
     lv_obj_set_width(ui_Notification_Amount_Number, LV_SIZE_CONTENT);   /// 1
@@ -307,17 +307,15 @@ void ui_Clock_screen_init(void)
     lv_obj_set_style_radius(ui_Notification_Image_Panel, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(ui_Notification_Image_Panel, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Notification_Image_Panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_clip_corner(ui_Notification_Image_Panel, true, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Notification_Image = lv_img_create(ui_Notification_Image_Panel);
-    lv_img_set_src(ui_Notification_Image, &ui_img_bellnobackground_png);
+    lv_img_set_src(ui_Notification_Image, &ui_img_notificationbell_png);
     lv_obj_set_width(ui_Notification_Image, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Notification_Image, LV_SIZE_CONTENT);    /// 11
-    lv_obj_set_x(ui_Notification_Image, -25);
-    lv_obj_set_y(ui_Notification_Image, -2);
-    lv_obj_set_align(ui_Notification_Image, LV_ALIGN_LEFT_MID);
+    lv_obj_set_align(ui_Notification_Image, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Notification_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_Notification_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_zoom(ui_Notification_Image, 120);
 
     ui_Second_Dash_Include = lv_img_create(ui_Clock);
     lv_img_set_src(ui_Second_Dash_Include, &ui_img_seconddashstub_png);

@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include "lvgl.h"
-// #include "ArduinoLog.h"
 #include "ui.h"
 #include "ui_helpers.h"
 #include "TWatch_hal.h"
@@ -9,6 +8,13 @@
 #include "Preferences.h"
 #include "ArduinoLog.h"
 #include "BThandle.h"
+#include "themes.h"
+
+LV_IMG_DECLARE(ui_img_discord_icon_png);
+LV_IMG_DECLARE(ui_img_youtube_icon_png);
+LV_IMG_DECLARE(ui_img_sms_icon_png);
+LV_IMG_DECLARE(ui_img_gmail_icon_png);
+LV_IMG_DECLARE(ui_img_steps_large_png); // assets\Steps Large.png
 
 Notification NotificationList[11];
 lv_obj_t *NotificationComp[10];
@@ -29,10 +35,46 @@ void shownotification(String Title, String Text, String Source, int id)
   // Create the widget in the Clock screen
   Wakeup("Notification Received");
 
+   if (notificationshowing)
+     notificationhide(LV_ANIM_OFF);
+
   lv_label_set_text(ui_Notification_Title, Title.c_str());
   lv_label_set_text(ui_Notification_Text, Text.c_str());
   lv_label_set_text(ui_Notification_Source, Source.c_str());
   // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount + 1);
+
+  if (Source == "Messages")
+  {
+    lv_img_set_src(ui_Notification_Image, &ui_img_sms_icon_png);
+  }
+  else if (Source == "Youtube")
+  {
+    lv_img_set_src(ui_Notification_Image, &ui_img_youtube_icon_png);
+  }
+  else if (Source == "Discord")
+  {
+    lv_img_set_src(ui_Notification_Image, &ui_img_discord_icon_png);
+  }
+  else if (Source == "Gmail")
+  {
+    lv_img_set_src(ui_Notification_Image, &ui_img_gmail_icon_png);
+  }
+  else if (Source == "local.stephandle")
+  {
+    lv_img_set_src(ui_Notification_Image, &ui_img_steps_large_png);
+  }
+  else
+  {
+    lv_img_set_src(ui_Notification_Image, &ui_img_notificationbell_png);
+  }
+
+  // sources : Gmail, YouTube, Messages
+
+  NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
+  NotificationList[10].Text = lv_label_get_text(ui_Notification_Text);
+  NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
+  NotificationList[10].id = TempID;
+  NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
 
   TempID = id;
 
@@ -47,22 +89,22 @@ void shownotification(String Title, String Text, String Source, int id)
   if (!Donotdisturb)
     twatch->motor_shake(2, 30);
 
-  if (lv_scr_act() == ui_Notifications)
+  /*if (lv_scr_act() == ui_Notifications)
   {
     lv_obj_clean(ui_Notification_Panel);
     drawnotifications(nullptr);
-  }
+  }*/
 }
 
 void drawnotifications(lv_event_t *e)
 {
-  if (lv_scr_act() != ui_Notifications)
+  /*if (lv_scr_act() != ui_Notifications)
   {
     // ui_Notifications_screen_init();
     //_ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
     // lv_scr_load_anim(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 0);
     //_ui_screen_change( &ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Notifications_screen_init);
-  }
+  }*/
   if (NotificationCount)
   {
     lv_obj_add_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_HIDDEN);
@@ -72,7 +114,16 @@ void drawnotifications(lv_event_t *e)
       lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[i].Title.c_str());
       lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[i].Text.c_str());
       lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[i].Source.c_str());
+      lv_obj_set_style_bg_color(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL), GetTheme(), LV_PART_MAIN);
+      lv_img_set_src(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL_NOTIFICATION_IMAGE), NotificationList[i].img);
       lv_obj_set_user_data(NotificationComp[i], (void *)i);
+
+      NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
+      NotificationList[10].Text = lv_label_get_text(ui_Notification_Text);
+      NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
+      NotificationList[10].id = TempID;
+      NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
+      // pushnotification(1);
     }
   }
   else
@@ -93,6 +144,18 @@ void notificationdismiss(lv_event_t *e)
 {
   notificationshowing = 0;
   NotificationHide_Animation(ui_Notification_Popup, 300);
+  Serial.println("Notification Dismiss");
+}
+
+void notificationhide(bool anim)
+{
+  notificationshowing = 0;
+  if (anim)
+  NotificationHide_Animation(ui_Notification_Popup, 0);
+  else
+  lv_obj_set_y(ui_Notification_Popup, -160);
+  pushnotification(1);
+  Serial.println("Notification Hide");
 }
 
 void pushnotification(int index)
@@ -104,9 +167,29 @@ void pushnotification(int index)
       NotificationList[i] = NotificationList[i - 1];
   }
   NotificationList[i] = NotificationList[10];
-  if (NotificationCount < 10)
-    NotificationCount++;
-  lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount);
+  if (NotificationCount++ < 10)
+    lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount);
+  // NotificationCount++;
+
+  if (lv_scr_act() == ui_Notifications)
+  {
+    //_ui_screen_change(&ui_Notifications, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_Notifications_screen_init);
+    for (int i = 2; i <= lv_obj_get_child_cnt(ui_Notification_Panel); i++)
+    {
+      // lv_obj_del(lv_obj_get_child(ui_Notification_Panel, i));
+      Log.verboseln("I have %i Childeren", lv_obj_get_child_cnt(ui_Notification_Panel));
+      lv_obj_t *child = lv_obj_get_child(ui_Notification_Panel, i);
+      lv_obj_del(child);
+      Log.verboseln("I just MurDeReD the %ith Child", i);
+      // szlv_obj_set_style_bg_color(child, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+      // if (lv_obj_get_user_data(child))
+      // Serial.println(lv_obj_get_child_cnt(ui_Notification_Panel));
+    }
+    Log.verboseln("Imma DrawNotifications and probably die");
+    drawnotifications(nullptr);
+
+    // drawnotifications(nullptr);
+  }
 
   Log.verboseln("Pushed Notification with id %i", index);
 }
@@ -127,7 +210,8 @@ void popnotification(int index)
     if (NotificationComp[1] != NULL)
       lv_obj_set_user_data(NotificationComp[i], (void *)i - 1);
   }
-  NotificationCount--;
+  // NotificationCount--;
+  lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", --NotificationCount);
 }
 
 void drawnotificationarc()
@@ -137,16 +221,16 @@ void drawnotificationarc()
     lv_arc_set_value(ui_Notification_Timer, ((millis() - notificationtime) / (Storage.getUInt("NotifLength") * 10)) * 10);
     if (notificationtime + (Storage.getUInt("NotifLength") * 1000) < millis())
     {
-      NotificationHide_Animation(ui_Notification_Popup, 0);
-      notificationshowing = 0;
+      notificationhide();
 
-      NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
+      /*NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
       NotificationList[10].Text = lv_label_get_text(ui_Notification_Text);
       NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
       NotificationList[10].id = TempID;
-      pushnotification(1);
+      NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
+      pushnotification(1);*/
 
-      Log.verboseln("Stored Notification with Title: %s, Text: %s, Source: %s, id: %i", NotificationList[10].Title, NotificationList[10].Text, NotificationList[10].Source, NotificationList[10].id);
+      // Log.verboseln("Stored Notification with Title: %s, Text: %s, Source: %s, id: %i", NotificationList[10].Title, NotificationList[10].Text, NotificationList[10].Source, NotificationList[10].id);
     }
   }
 }

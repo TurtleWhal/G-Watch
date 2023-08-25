@@ -34,15 +34,15 @@ void ui_Alarm_Going_Off_screen_init(void)
     lv_obj_set_style_border_opa(ui_Panel1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Alarm_Going_Off_Bell = lv_img_create(ui_Panel1);
-    lv_img_set_src(ui_Alarm_Going_Off_Bell, &ui_img_bellnobackground_png);
+    lv_img_set_src(ui_Alarm_Going_Off_Bell, &ui_img_notificationbell_png);
     lv_obj_set_width(ui_Alarm_Going_Off_Bell, LV_SIZE_CONTENT);   /// 60
     lv_obj_set_height(ui_Alarm_Going_Off_Bell, LV_SIZE_CONTENT);    /// 60
     lv_obj_set_x(ui_Alarm_Going_Off_Bell, 0);
-    lv_obj_set_y(ui_Alarm_Going_Off_Bell, -2);
+    lv_obj_set_y(ui_Alarm_Going_Off_Bell, 1);
     lv_obj_set_align(ui_Alarm_Going_Off_Bell, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Alarm_Going_Off_Bell, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_Alarm_Going_Off_Bell, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_zoom(ui_Alarm_Going_Off_Bell, 200);
+    lv_img_set_zoom(ui_Alarm_Going_Off_Bell, 440);
 
     ui_Alarm_Going_Off_Name = lv_label_create(ui_Alarm_Going_Off);
     lv_obj_set_width(ui_Alarm_Going_Off_Name, 215);

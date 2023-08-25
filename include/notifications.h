@@ -9,6 +9,7 @@ typedef struct
   String Text;
   String Source;
   int id;
+  const void *img;
 } Notification;
 
 void InitNotif();
@@ -22,6 +23,7 @@ void drawnotificationarc();
 void ToggleDoNotDisturb(lv_event_t *e);
 bool NotificationActive();
 void FakeNotes();
+void notificationhide(bool = 1);
 
 #ifdef __cplusplus
 } /*extern "C"*/

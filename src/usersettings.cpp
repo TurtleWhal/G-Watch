@@ -1,6 +1,7 @@
 #include "Preferences.h"
 #include "ui.h"
 #include "usersettings.h"
+#include "ArduinoLog.h"
 
 Preferences Storage;
 
@@ -37,5 +38,23 @@ void UpdateSettings(lv_event_t *e)
   ApplyTheme(nullptr);
 
   Storage.putBool("DarkMode", (lv_obj_get_state(ui_Dark_Mode_Setting_Switch) == 3) ? 1 : 0);
-  Serial.println(Storage.getBool("DarkMode"));
+  //Serial.println(Storage.getBool("DarkMode"));
+
+  PrintSettings();
+}
+
+void PrintSettings()
+{
+  char BTnamechar[17];
+  Storage.getBytes("BTname", BTnamechar, 17);
+
+  Log.verboseln("");
+  Log.verboseln("|-------- Stored Settings ---------");
+  Log.verboseln("|- Step Goal ------------ %i", Storage.getUShort("StepGoal"));
+  Log.verboseln("|- Notification Length -- %i", Storage.getUInt("NotifLength"));
+  Log.verboseln("|- Bluetooth Name ------- %s", BTnamechar);
+  Log.verboseln("|- Theme Color ---------- %i", Storage.getUInt("Theme"));
+  Log.verboseln("|- Dark Mode ------------ %i", Storage.getBool("DarkMode"));
+  Log.verboseln("|----------------------------------");
+  Log.verboseln("");
 }

@@ -106,3 +106,8 @@ void ApplyTheme(lv_event_t * e)
   }
   #endif
 }
+
+lv_color_t GetTheme()
+{
+  return ThemeColor;
+}

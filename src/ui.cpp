@@ -366,7 +366,6 @@ void loop()
     {
       WriteTime();
       Powerhandle();
-      drawnotificationarc();
       // notifslide(nullptr);
     }
     else
@@ -385,6 +384,7 @@ void loop()
   Sleephandle();
   VibrateHandle();
   StopwatchHandle();
+  drawnotificationarc();
 
   // this runs every 50ms
   if (BTTimerTriggered)

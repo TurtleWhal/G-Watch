@@ -1,6 +1,6 @@
 SET(SOURCES components/ui_comp_app_button.c
-    components/ui_comp_notification_widget.c
     components/ui_comp_setting_panel.c
+    components/ui_comp_notification_widget.c
     components/ui_comp.c
     screens/ui_Clock.c
     screens/ui_Notifications.c
@@ -29,7 +29,7 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_hourhandstub_png.c
     images/ui_img_secondhandstub_png.c
     images/ui_img_no_bluetooth_small_png.c
-    images/ui_img_bellnobackground_png.c
+    images/ui_img_notificationbell_png.c
     images/ui_img_seconddashstub_png.c
     images/ui_img_seconddotstub_png.c
     images/ui_img_bell_png.c
@@ -37,6 +37,7 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_playpause_button_png.c
     images/ui_img_brightness_png.c
     images/ui_img_bluetooth_small_nobackground_png.c
+    images/ui_img_bellnobackground_png.c
     images/ui_img_arrow_png.c
     images/ui_img_power_icon_png.c
     images/ui_img_play_button_png.c

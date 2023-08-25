@@ -16,6 +16,8 @@
 #include "timestuff.h"
 #include "screen_management.h"
 
+#define MUSICPOSOFFSET 2
+
 extern TWatchClass *twatch;
 extern Notification NotificationList[11];
 extern Preferences Storage;
@@ -137,36 +139,41 @@ void ParseGB(char *Message)
     const char *NotifText = "";            // This doesn't initialize enought space
     const char *NotifTitle = "";           // This doesn't initialize enought space
     const char *NotifSource = "Undefined"; // This may not initialize enough space
-    int NotifID;
+    static int NotifID;
 
-    if (received.containsKey("title"))
-      NotifTitle = received["title"];
-    else if (received.containsKey("subject"))
-      NotifTitle = received["subject"];
-
-    if (received.containsKey("body"))
-      NotifText = received["body"];
-
-    if (received.containsKey("src"))
-      NotifSource = received["src"];
-
-    if (received.containsKey("id"))
+    if (NotifID != received["id"])
+    {
       NotifID = received["id"];
 
-    Serial.println(Message);
-    if (strcmp(NotifSource, "Android System Intelligence") == 0)
-    {
-      /*NotifTitle = "Number 179 °@#$* by dot.* and .;:' feetering !@3%6* by ksajfd";
-      char NowPlayingTitle[64];
-      char NowPlayingArtist[64];
-      sscanf(NotifTitle, "%s by %s", NowPlayingTitle, NowPlayingArtist);
-      lv_label_set_text_fmt(ui_Now_Playing_Label, "%s\n%s", NowPlayingTitle, NowPlayingArtist);*/
-      lv_label_set_text_fmt(ui_Now_Playing_Label, "%s   •", NotifTitle);
-      songtime = millis();
-    }
-    else
-    {
-      shownotification(NotifTitle, NotifText, NotifSource, NotifID);
+      if (received.containsKey("title"))
+        NotifTitle = received["title"];
+      else if (received.containsKey("subject"))
+        NotifTitle = received["subject"];
+
+      if (received.containsKey("body"))
+        NotifText = received["body"];
+
+      if (received.containsKey("src"))
+        NotifSource = received["src"];
+
+      Log.verboseln("Received Notification With Title: %s, Text: %s, Source: %s, ID: %i", NotifTitle, NotifText, NotifSource, NotifID);
+
+      // Serial.println(Message);
+      if (strcmp(NotifSource, "Android System Intelligence") == 0)
+      {
+        /*NotifTitle = "Number 179 °@#$* by dot.* and .;:' feetering !@3%6* by ksajfd";
+        char NowPlayingTitle[64];
+        char NowPlayingArtist[64];
+        sscanf(NotifTitle, "%s by %s", NowPlayingTitle, NowPlayingArtist);
+        lv_label_set_text_fmt(ui_Now_Playing_Label, "%s\n%s", NowPlayingTitle, NowPlayingArtist);*/
+        lv_label_set_text_fmt(ui_Now_Playing_Label, "%s   •", NotifTitle);
+        songtime = millis();
+        Log.verboseln("Detected Now Playing: %s", NotifTitle);
+      }
+      else
+      {
+        shownotification(NotifTitle, NotifText, NotifSource, NotifID);
+      }
     }
   }
   else if (strcmp(NotifType, "notify-") == 0)
@@ -248,6 +255,7 @@ void ParseGB(char *Message)
   {
     const char *MusicState = received["state"];
     MusicPos = received["position"];
+    // MusicPos += MUSICPOSOFFSET;
     Serial.println(MusicState);
 
     if (strcmp(MusicState, "play") == 0)
@@ -399,18 +407,19 @@ int KelvintoF(int Kelvin)
   return ((Kelvin - 273) * 1.8 + 32);
 }
 
-String DegToCompassHeading(int degree) {
-    if (degree < 0 || degree > 360) {
-        return "Invalid degree value";
-    }
+String DegToCompassHeading(int degree)
+{
+  if (degree < 0 || degree > 360)
+  {
+    return "Invalid degree value";
+  }
 
-    const char* directions[] = {
-        "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
-        "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"
-    };
+  const char *directions[] = {
+      "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
+      "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"};
 
-    int index = (degree + 11.25) / 22.5; // 360 degrees divided into 16 segments
-    return directions[index];
+  int index = (degree + 11.25) / 22.5; // 360 degrees divided into 16 segments
+  return directions[index];
 }
 
 void DrawMusicInfo(lv_event_t *e)

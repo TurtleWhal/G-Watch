@@ -13507,8 +13507,8 @@
                   "flags": 17,
                   "strtype": "OBJECT/Position",
                   "intarray": [
-                    -1,
-                    -2
+                    0,
+                    0
                   ],
                   "InheritedType": 7
                 },
@@ -13727,7 +13727,7 @@
                 {
                   "nid": 1180491400,
                   "strtype": "IMAGE/Asset",
-                  "strval": "assets\\BellNobackground.png",
+                  "strval": "assets\\NotificationBell.png",
                   "InheritedType": 5
                 },
                 {
@@ -13747,7 +13747,7 @@
                 {
                   "nid": 50093005,
                   "strtype": "IMAGE/Scale",
-                  "integer": 150,
+                  "integer": 280,
                   "InheritedType": 6
                 },
                 {
@@ -17449,9 +17449,8 @@
                     },
                     {
                       "nid": 329827223,
-                      "flags": 2097152,
                       "strtype": "_style/Clip_corner",
-                      "strval": "False",
+                      "strval": "True",
                       "InheritedType": 2
                     },
                     {

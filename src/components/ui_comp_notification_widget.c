@@ -94,18 +94,17 @@ lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
     lv_obj_set_style_radius(cui_Notification_Image_Panel, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(cui_Notification_Image_Panel, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(cui_Notification_Image_Panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_clip_corner(cui_Notification_Image_Panel, true, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_t * cui_Notification_Image;
     cui_Notification_Image = lv_img_create(cui_Notification_Image_Panel);
-    lv_img_set_src(cui_Notification_Image, &ui_img_bellnobackground_png);
+    lv_img_set_src(cui_Notification_Image, &ui_img_notificationbell_png);
     lv_obj_set_width(cui_Notification_Image, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(cui_Notification_Image, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(cui_Notification_Image, -1);
-    lv_obj_set_y(cui_Notification_Image, -2);
     lv_obj_set_align(cui_Notification_Image, LV_ALIGN_CENTER);
     lv_obj_clear_flag(cui_Notification_Image,
                       LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);     /// Flags
-    lv_img_set_zoom(cui_Notification_Image, 150);
+    lv_img_set_zoom(cui_Notification_Image, 280);
 
     lv_obj_t ** children = lv_mem_alloc(sizeof(lv_obj_t *) * _UI_COMP_NOTIFICATION_WIDGET_NUM);
     children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET] = cui_Notification_Widget;
