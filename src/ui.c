@@ -26,6 +26,7 @@ void CalculatorEquationFocus_Animation(lv_obj_t * TargetObject, int delay);
 void ThemeSettingExpand_Animation(lv_obj_t * TargetObject, int delay);
 void ThemeSettingShrink_Animation(lv_obj_t * TargetObject, int delay);
 void NotificationDismissLeft_Animation(lv_obj_t * TargetObject, int delay);
+void LogoSpin_Animation(lv_obj_t * TargetObject, int delay);
 
 // SCREEN: ui_Clock
 void ui_Clock_screen_init(void);
@@ -62,6 +63,7 @@ lv_obj_t * ui_Notification_Image_Panel;
 lv_obj_t * ui_Notification_Image;
 lv_obj_t * ui_Second_Dash_Include;
 lv_obj_t * ui_Second_Dot_Include;
+lv_obj_t * ui_Logo_Arc;
 
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);
@@ -940,6 +942,10 @@ void NotificationDismissLeft_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_set_early_apply(&PropertyAnimation_0, false);
     lv_anim_set_get_value_cb(&PropertyAnimation_0, &_ui_anim_callback_get_x);
     lv_anim_start(&PropertyAnimation_0);
+
+}
+void LogoSpin_Animation(lv_obj_t * TargetObject, int delay)
+{
 
 }
 

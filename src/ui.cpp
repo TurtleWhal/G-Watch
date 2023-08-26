@@ -31,6 +31,8 @@
 const char *ssid = "ThisNetworkIsOWN3D";
 const char *password = "10244096";
 
+//#define USESPLASHSCREEN
+
 TWatchClass *twatch = nullptr;
 
 CST816S touch(26, 25, 33, 32); // sda, scl, rst, irq
@@ -48,6 +50,7 @@ bool touchingnotif;
 lv_obj_t *notiftouched;
 
 void notifslide(lv_event_t *e);
+void LogoSpin(lv_obj_t *TargetObject);
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -257,6 +260,9 @@ void setup()
   lv_obj_del(ui_Second_Dash_Include); // Only used to include files
   lv_obj_del(ui_Second_Dot_Include);
 
+#ifdef USESPLASHSCREEN
+  lv_obj_clear_flag(ui_Logo_Arc, LV_OBJ_FLAG_HIDDEN);
+#endif
   InitTicks(); // Draws the tick marks around the edge
 
   ui____initial_actions0 = lv_obj_create(NULL);
@@ -349,6 +355,10 @@ void setup()
 
   twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
+
+#ifdef USESPLASHSCREEN
+  LogoSpin(ui_Logo_Arc);
+#endif
 }
 
 void loop()
@@ -383,7 +393,7 @@ void loop()
   BTHandle();
   Sleephandle();
   VibrateHandle();
-  StopwatchHandle();
+  TimersHandle();
   drawnotificationarc();
 
   // this runs every 50ms
@@ -423,3 +433,22 @@ void ToggleFlashlight(lv_event_t *e)
   else
     twatch->backlight_set_value(GetUserBrightness());
 }
+
+#ifdef USESPLASHSCREEN
+void LogoSpin(lv_obj_t *TargetObject)
+{
+  lv_anim_t a;
+  lv_anim_init(&a);
+  // lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)lv_arc_set_value);
+  // lv_anim_set_custom_exec_cb(&a, (lv_anim_custom_exec_cb_t)lv_anim_set_user_data);
+  // Log.verboseln("Anim User Data: %i", (int)lv_anim_get_user_data(&a));
+  // lv_anim_set_get_value_cb(&a, (lv_anim_get_value_cb_t)Serial.println());
+  Serial.println(lv_anim_get_playtime(&a));
+  // lv_arc_set_value(TargetObject, lv_anim_get_playtime(&a) / 3);
+  lv_anim_set_var(&a, TargetObject);
+  lv_anim_set_time(&a, 300);
+  lv_anim_set_values(&a, 0, 100);
+  lv_anim_set_path_cb(&a, lv_anim_path_ease_in_out);
+  lv_anim_start(&a);
+}
+#endif

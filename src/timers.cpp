@@ -143,7 +143,7 @@ void writetimertime()
   }
 }
 
-void StopwatchHandle()
+void TimersHandle()
 {
   if (ui_Stopwatch != NULL and stopwatchmoving)
   {

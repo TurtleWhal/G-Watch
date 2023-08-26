@@ -5,7 +5,7 @@ extern "C"
 
 void istimernegative();
 void writetimertime();
-void StopwatchHandle();
+void TimersHandle();
 void VibrateHandle();
 void VibrateStart(int);
 

@@ -333,6 +333,23 @@ void ui_Clock_screen_init(void)
     lv_obj_add_flag(ui_Second_Dot_Include, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_Second_Dot_Include, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
+    ui_Logo_Arc = lv_arc_create(ui_Clock);
+    lv_obj_set_width(ui_Logo_Arc, 242);
+    lv_obj_set_height(ui_Logo_Arc, 242);
+    lv_obj_set_align(ui_Logo_Arc, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Logo_Arc, LV_OBJ_FLAG_HIDDEN);     /// Flags
+    lv_arc_set_value(ui_Logo_Arc, 100);
+    lv_arc_set_bg_angles(ui_Logo_Arc, 1, 0);
+    lv_arc_set_rotation(ui_Logo_Arc, 270);
+    lv_obj_set_style_arc_width(ui_Logo_Arc, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_arc_width(ui_Logo_Arc, 150, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_rounded(ui_Logo_Arc, false, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_img_src(ui_Logo_Arc, &ui_img_gwatch_logo_png, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_bg_color(ui_Logo_Arc, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Logo_Arc, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_Notification_Popup_Mask, ui_event_Notification_Popup_Mask, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Notification_Popup, ui_event_Notification_Popup, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Clock, ui_event_Clock, LV_EVENT_ALL, NULL);

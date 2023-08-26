@@ -32,6 +32,7 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_notificationbell_png.c
     images/ui_img_seconddashstub_png.c
     images/ui_img_seconddotstub_png.c
+    images/ui_img_gwatch_logo_png.c
     images/ui_img_bell_png.c
     images/ui_img_restart_button_png.c
     images/ui_img_playpause_button_png.c

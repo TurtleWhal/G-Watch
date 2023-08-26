@@ -45,6 +45,7 @@ void CalculatorEquationFocus_Animation(lv_obj_t * TargetObject, int delay);
 void ThemeSettingExpand_Animation(lv_obj_t * TargetObject, int delay);
 void ThemeSettingShrink_Animation(lv_obj_t * TargetObject, int delay);
 void NotificationDismissLeft_Animation(lv_obj_t * TargetObject, int delay);
+void LogoSpin_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Clock
 void ui_Clock_screen_init(void);
 void ui_event_Clock(lv_event_t * e);
@@ -80,6 +81,7 @@ extern lv_obj_t * ui_Notification_Image_Panel;
 extern lv_obj_t * ui_Notification_Image;
 extern lv_obj_t * ui_Second_Dash_Include;
 extern lv_obj_t * ui_Second_Dot_Include;
+extern lv_obj_t * ui_Logo_Arc;
 // SCREEN: ui_Notifications
 void ui_Notifications_screen_init(void);
 void ui_event_Notifications(lv_event_t * e);
@@ -418,6 +420,7 @@ LV_IMG_DECLARE(ui_img_no_bluetooth_small_png);    // assets\No Bluetooth_Small.p
 LV_IMG_DECLARE(ui_img_notificationbell_png);    // assets\NotificationBell.png
 LV_IMG_DECLARE(ui_img_seconddashstub_png);    // assets\SecondDashStub.png
 LV_IMG_DECLARE(ui_img_seconddotstub_png);    // assets\SecondDotStub.png
+LV_IMG_DECLARE(ui_img_gwatch_logo_png);    // assets\GWatch Logo.png
 LV_IMG_DECLARE(ui_img_bell_png);    // assets\Bell.png
 LV_IMG_DECLARE(ui_img_restart_button_png);    // assets\Restart Button.png
 LV_IMG_DECLARE(ui_img_playpause_button_png);    // assets\PlayPause Button.png
