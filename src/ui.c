@@ -406,6 +406,20 @@ lv_obj_t * ui_Reject_Call_Image;
 lv_obj_t * ui_Call_Type;
 lv_obj_t * ui_Caller_Name;
 lv_obj_t * ui_Caller_Number;
+
+// SCREEN: ui_Health
+void ui_Health_screen_init(void);
+lv_obj_t * ui_Health;
+lv_obj_t * ui_Apps_Label1;
+lv_obj_t * ui_Apps_Label_Underline1;
+lv_obj_t * ui_Chart1;
+lv_obj_t * ui_Bar1;
+lv_obj_t * ui_Button1;
+lv_obj_t * ui_Label9;
+lv_obj_t * ui_Button3;
+lv_obj_t * ui_Label10;
+lv_obj_t * ui_Label11;
+lv_obj_t * ui_Label12;
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_[1] = {&ui_img_4809254_png};
 const lv_img_dsc_t * ui_imgset_call[1] = {&ui_img_call1_png};

@@ -408,6 +408,19 @@ extern lv_obj_t * ui_Reject_Call_Image;
 extern lv_obj_t * ui_Call_Type;
 extern lv_obj_t * ui_Caller_Name;
 extern lv_obj_t * ui_Caller_Number;
+// SCREEN: ui_Health
+void ui_Health_screen_init(void);
+extern lv_obj_t * ui_Health;
+extern lv_obj_t * ui_Apps_Label1;
+extern lv_obj_t * ui_Apps_Label_Underline1;
+extern lv_obj_t * ui_Chart1;
+extern lv_obj_t * ui_Bar1;
+extern lv_obj_t * ui_Button1;
+extern lv_obj_t * ui_Label9;
+extern lv_obj_t * ui_Button3;
+extern lv_obj_t * ui_Label10;
+extern lv_obj_t * ui_Label11;
+extern lv_obj_t * ui_Label12;
 extern lv_obj_t * ui____initial_actions0;
 
 LV_IMG_DECLARE(ui_img_tick_dashes_png);    // assets\Tick Dashes.png

@@ -19,6 +19,7 @@ screens/ui_Weather.c
 screens/ui_SkeletonWatchFace.c
 screens/ui_SimplisticWatchFace.c
 screens/ui_Call.c
+screens/ui_Health.c
 ui.c
 components/ui_comp_hook.c
 ui_helpers.c

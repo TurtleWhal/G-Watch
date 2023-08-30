@@ -19,6 +19,7 @@ SET(SOURCES components/ui_comp_app_button.c
     screens/ui_SkeletonWatchFace.c
     screens/ui_SimplisticWatchFace.c
     screens/ui_Call.c
+    screens/ui_Health.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
