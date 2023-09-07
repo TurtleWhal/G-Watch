@@ -346,3 +346,7 @@ def ResetCounter(event_struct):
 def InitStepsScreen(event_struct):
     return
 
+
+def DrawSchedule(event_struct):
+    return
+

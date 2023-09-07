@@ -184,7 +184,7 @@ void screenback()
         _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, NULL);
     }
 
-    else if (lv_scr_act() == ui_Alarm_Going_Off)
+    else if (lv_scr_act() == ui_Alarm_Going_Off or lv_scr_act() == ui_Schedule)
     {
         _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, NULL);
     }

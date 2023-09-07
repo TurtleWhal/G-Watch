@@ -21,8 +21,8 @@ extern "C" {
 #define UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL 5
 #define UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL_NOTIFICATION_IMAGE 6
 #define _UI_COMP_NOTIFICATION_WIDGET_NUM 7
-lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent);
-void ui_event_comp_Notification_Widget_Notification_Widget(lv_event_t * e);
+lv_obj_t *ui_Notification_Widget_create(lv_obj_t *comp_parent);
+void ui_event_comp_Notification_Widget_Notification_Widget( lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

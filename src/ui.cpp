@@ -44,7 +44,7 @@ extern Preferences Storage;
 
 bool useOTA;
 extern bool BTon;
-bool Timer0Triggered = 1;
+bool Timer0Triggered;
 bool BTTimerTriggered;
 bool StepGraphTriggered;
 
@@ -168,7 +168,7 @@ void btn2_click(void *param)
   Log.verboseln("BTN2 Click. MilliVolts: %i", (int)twatch->power_get_volt());
   // twatch->motor_shake(1, 60);
   if (lv_scr_act() == ui_Clock)
-  _ui_screen_change(&ui_Schedule, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Schedule_screen_init);
+    _ui_screen_change(&ui_Schedule, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Schedule_screen_init);
   else if (lv_scr_act() == ui_Stopwatch)
     ToggleStopwatch(nullptr);
   else if (lv_scr_act() == ui_Timers)
@@ -365,6 +365,8 @@ void setup()
 #endif
   twatch->hal_auto_update(true, 1);
 
+  Timer0Triggered = 1;
+
   twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
 
@@ -393,7 +395,6 @@ void loop()
     else
     {
       Compass();
-      ScheduleHandle();
     }
   }
   else // If Asleep
@@ -422,6 +423,7 @@ void loop()
     Timer0Triggered = 0;
     StepHandle();
     DrawPower();
+    ScheduleHandle();
   }
 
   // This stuff runs every 1 second
