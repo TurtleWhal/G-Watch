@@ -141,6 +141,9 @@ void ParseGB(char *Message)
     const char *NotifSource = "Undefined"; // This may not initialize enough space
     static int NotifID;
 
+    // GB({t:"notify",id:1693092353,title:"",subject:"",body:"okay",sender:"Mom",tel:"+12069790102"})
+    // GB({t:"notify",id:1693092354,src:"Messages",title:"Mom",subject:"",body:"okay",sender:""})
+
     if (NotifID != received["id"])
     {
       NotifID = received["id"];
@@ -155,6 +158,14 @@ void ParseGB(char *Message)
 
       if (received.containsKey("src"))
         NotifSource = received["src"];
+      else
+        NotifSource = "SMS";
+
+      if (received.containsKey("sender"))
+      {
+        if (received["sender"] != "")
+        NotifTitle = received["sender"];
+      }
 
       Log.verboseln("Received Notification With Title: %s, Text: %s, Source: %s, ID: %i", NotifTitle, NotifText, NotifSource, NotifID);
 

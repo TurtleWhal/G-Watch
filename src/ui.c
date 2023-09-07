@@ -409,17 +409,30 @@ lv_obj_t * ui_Caller_Number;
 
 // SCREEN: ui_Health
 void ui_Health_screen_init(void);
+void ui_event_Health(lv_event_t * e);
 lv_obj_t * ui_Health;
-lv_obj_t * ui_Apps_Label1;
-lv_obj_t * ui_Apps_Label_Underline1;
-lv_obj_t * ui_Chart1;
-lv_obj_t * ui_Bar1;
-lv_obj_t * ui_Button1;
-lv_obj_t * ui_Label9;
-lv_obj_t * ui_Button3;
-lv_obj_t * ui_Label10;
-lv_obj_t * ui_Label11;
-lv_obj_t * ui_Label12;
+lv_obj_t * ui_Health_Label;
+lv_obj_t * ui_Health_Label_Underline;
+lv_obj_t * ui_Steps_Chart;
+lv_obj_t * ui_Steps_Bar;
+void ui_event_Reset_Storage_Button(lv_event_t * e);
+lv_obj_t * ui_Reset_Storage_Button;
+lv_obj_t * ui_Reset_Storage_Label;
+void ui_event_Reset_Counter_Button(lv_event_t * e);
+lv_obj_t * ui_Reset_Counter_Button;
+lv_obj_t * ui_Reset_Counter_Label;
+lv_obj_t * ui_Steps_Reset_Label;
+lv_obj_t * ui_Steps_Info;
+
+// SCREEN: ui_Schedule
+void ui_Schedule_screen_init(void);
+void ui_event_Schedule(lv_event_t * e);
+lv_obj_t * ui_Schedule;
+lv_obj_t * ui_Schedule_Bar;
+lv_obj_t * ui_Schedule_Name;
+lv_obj_t * ui_Schedule_Time_Start;
+lv_obj_t * ui_Schedule_Time_End;
+lv_obj_t * ui_Schedule_Roller;
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_[1] = {&ui_img_4809254_png};
 const lv_img_dsc_t * ui_imgset_call[1] = {&ui_img_call1_png};
@@ -1020,6 +1033,10 @@ void ui_event_Notifications(lv_event_t * e)
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         drawnotifications(e);
         ApplyTheme(e);
+    }
+    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM) {
+        lv_indev_wait_release(lv_indev_get_act());
+        _ui_screen_change(&ui_Health, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, &ui_Health_screen_init);
     }
 }
 void ui_event_Alarms(lv_event_t * e)
@@ -1675,6 +1692,43 @@ void ui_event_Weather(lv_event_t * e)
     if(event_code == LV_EVENT_SCREEN_LOADED) {
         DrawWeather(e);
         SetWeatherDeafault(e);
+    }
+}
+void ui_event_Health(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP) {
+        lv_indev_wait_release(lv_indev_get_act());
+        _ui_screen_change(&ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Notifications_screen_init);
+    }
+    if(event_code == LV_EVENT_SCREEN_LOADED) {
+        ApplyTheme(e);
+        InitStepsScreen(e);
+    }
+}
+void ui_event_Reset_Storage_Button(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        ResetStorage(e);
+    }
+}
+void ui_event_Reset_Counter_Button(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        ResetCounter(e);
+    }
+}
+void ui_event_Schedule(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_SCREEN_LOADED) {
+        DrawSchedule(e);
     }
 }
 

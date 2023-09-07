@@ -14,6 +14,7 @@ void Compass();
 void StepHandle();
 void Timer0Handle();
 void BTTimerHandle();
+void StepGraphHandle();
 void pushnotification(int);
 void DrawPower();
 //void ApplyTheme();

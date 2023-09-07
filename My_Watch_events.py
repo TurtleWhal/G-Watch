@@ -334,3 +334,15 @@ def DeleteWeatherInits(event_struct):
 def slideon(event_struct):
     return
 
+
+def ResetStorage(event_struct):
+    return
+
+
+def ResetCounter(event_struct):
+    return
+
+
+def InitStepsScreen(event_struct):
+    return
+

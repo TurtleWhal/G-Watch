@@ -12,7 +12,9 @@ void BTsendSteps();
 
 extern Preferences Storage;
 extern TWatchClass *twatch;
-int Steps;
+ushort Steps;
+
+lv_coord_t SineArray[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 void StepHandle()
 {
@@ -26,7 +28,7 @@ void StepHandle()
 
   if (StepOffset == UINT16_MAX)
   {
-    //twatch->bma423_reset();
+    // twatch->bma423_reset();
     if (Storage.getUShort("StepDay") == GetDay())
     {
       StepOffset = Storage.getUShort("Steps");
@@ -96,4 +98,45 @@ void BTsendSteps()
   laststep = getSteps();
   serializeJson(actinfo, buffer);
   BTsend(buffer);
+  SineArray[24] = getSteps();
+}
+
+void InitStepsScreen(lv_event_t *e)
+{
+  ushort TempGoal = Storage.getUShort("StepGoal");
+
+  lv_label_set_text_fmt(ui_Steps_Info, "Steps: %i\nGoal: %i", getSteps(), TempGoal);
+  lv_label_set_text_fmt(ui_Reset_Storage_Label, "Storage\n%i", Storage.getUShort("Steps"));
+  lv_label_set_text_fmt(ui_Reset_Counter_Label, "Counter\n%i", twatch->bma423_get_step());
+  lv_bar_set_range(ui_Steps_Bar, 0, TempGoal);
+  lv_bar_set_value(ui_Steps_Bar, getSteps(), LV_ANIM_OFF);
+  lv_chart_set_range(ui_Steps_Chart, LV_CHART_AXIS_PRIMARY_Y, 0, TempGoal);
+  WriteStepGraph();
+  // lv_coord_t ui_Steps_Chart_series_1_array[] = { getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps() };
+  //   lv_chart_set_ext_y_array(ui_Steps_Chart, lv_chart_get_series_next(ui_Steps_Chart, NULL), ui_Steps_Chart_series_1_array);
+}
+
+void ResetStorage(lv_event_t *e)
+{
+  Storage.putUShort("Steps", 0);
+}
+
+void ResetCounter(lv_event_t *e)
+{
+  twatch->bma423_step_reset();
+}
+
+void WriteStepGraph()
+{
+  lv_chart_set_ext_y_array(ui_Steps_Chart, lv_chart_get_series_next(ui_Steps_Chart, NULL), SineArray);
+}
+
+void AdvanceStepArray()
+{
+  SineArray[24] = getSteps();
+  for (int i = 0; i < 25; i++)
+  {
+    SineArray[i] = SineArray[i + 1];
+  }
+  SineArray[24] = getSteps();
 }

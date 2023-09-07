@@ -6,6 +6,8 @@ extern "C"
     void StepHandle();
     int getSteps();
     void DrawSteps();
+    void AdvanceStepArray();
+    void WriteStepGraph();
 
 #ifdef __cplusplus
 } /*extern "C"*/

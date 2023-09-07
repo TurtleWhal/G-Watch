@@ -77,6 +77,19 @@ int GetDay()
     getLocalTime(&t_tm);
     return (t_tm.tm_yday);
 }
+
+int GetMinute()
+{
+    getLocalTime(&t_tm);
+    return (t_tm.tm_min);
+}
+
+int GetHour()
+{
+    getLocalTime(&t_tm);
+    return (t_tm.tm_hour);
+}
+
 void InitTicks()
 {
     for (int i = 0; i < 62; i++)

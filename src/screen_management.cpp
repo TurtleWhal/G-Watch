@@ -193,4 +193,9 @@ void screenback()
     {
         _ui_screen_change(&ui_Alarms, LV_SCR_LOAD_ANIM_FADE_OUT, 150, 0, NULL);
     }
+
+    else if (lv_scr_act() == ui_Health)
+    {
+        _ui_screen_change(&ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, NULL);
+    }
 }

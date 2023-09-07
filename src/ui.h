@@ -410,17 +410,29 @@ extern lv_obj_t * ui_Caller_Name;
 extern lv_obj_t * ui_Caller_Number;
 // SCREEN: ui_Health
 void ui_Health_screen_init(void);
+void ui_event_Health(lv_event_t * e);
 extern lv_obj_t * ui_Health;
-extern lv_obj_t * ui_Apps_Label1;
-extern lv_obj_t * ui_Apps_Label_Underline1;
-extern lv_obj_t * ui_Chart1;
-extern lv_obj_t * ui_Bar1;
-extern lv_obj_t * ui_Button1;
-extern lv_obj_t * ui_Label9;
-extern lv_obj_t * ui_Button3;
-extern lv_obj_t * ui_Label10;
-extern lv_obj_t * ui_Label11;
-extern lv_obj_t * ui_Label12;
+extern lv_obj_t * ui_Health_Label;
+extern lv_obj_t * ui_Health_Label_Underline;
+extern lv_obj_t * ui_Steps_Chart;
+extern lv_obj_t * ui_Steps_Bar;
+void ui_event_Reset_Storage_Button(lv_event_t * e);
+extern lv_obj_t * ui_Reset_Storage_Button;
+extern lv_obj_t * ui_Reset_Storage_Label;
+void ui_event_Reset_Counter_Button(lv_event_t * e);
+extern lv_obj_t * ui_Reset_Counter_Button;
+extern lv_obj_t * ui_Reset_Counter_Label;
+extern lv_obj_t * ui_Steps_Reset_Label;
+extern lv_obj_t * ui_Steps_Info;
+// SCREEN: ui_Schedule
+void ui_Schedule_screen_init(void);
+void ui_event_Schedule(lv_event_t * e);
+extern lv_obj_t * ui_Schedule;
+extern lv_obj_t * ui_Schedule_Bar;
+extern lv_obj_t * ui_Schedule_Name;
+extern lv_obj_t * ui_Schedule_Time_Start;
+extern lv_obj_t * ui_Schedule_Time_End;
+extern lv_obj_t * ui_Schedule_Roller;
 extern lv_obj_t * ui____initial_actions0;
 
 LV_IMG_DECLARE(ui_img_tick_dashes_png);    // assets\Tick Dashes.png

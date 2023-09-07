@@ -51,6 +51,10 @@ void MusicSkipForward(lv_event_t * e);
 void MusicSkipBackward(lv_event_t * e);
 void DrawWeather(lv_event_t * e);
 void SetWeatherDeafault(lv_event_t * e);
+void InitStepsScreen(lv_event_t * e);
+void ResetStorage(lv_event_t * e);
+void ResetCounter(lv_event_t * e);
+void DrawSchedule(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

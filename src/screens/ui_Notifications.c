@@ -73,8 +73,8 @@ void ui_Notifications_screen_init(void)
     ui_Notifications_Gesture_Panel = lv_obj_create(ui_Notifications);
     lv_obj_set_width(ui_Notifications_Gesture_Panel, 267);
     lv_obj_set_height(ui_Notifications_Gesture_Panel, 50);
-    lv_obj_set_x(ui_Notifications_Gesture_Panel, -1);
-    lv_obj_set_y(ui_Notifications_Gesture_Panel, 93);
+    lv_obj_set_x(ui_Notifications_Gesture_Panel, 0);
+    lv_obj_set_y(ui_Notifications_Gesture_Panel, 95);
     lv_obj_set_align(ui_Notifications_Gesture_Panel, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Notifications_Gesture_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_Notifications_Gesture_Panel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);

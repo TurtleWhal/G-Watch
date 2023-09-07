@@ -4,6 +4,8 @@ extern "C" {
 
 void WriteTime();
 int GetDay();
+int GetMinute();
+int GetHour();
 void InitTicks();
 void ColorTicks(int);
 void SetTime(ulong, short);

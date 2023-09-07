@@ -104,6 +104,12 @@ void ApplyTheme(lv_event_t * e)
   {
     lv_obj_set_style_text_color(ui_AM, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
   }
+
+  // Health Screen
+  if (ui_Health != NULL)
+  {
+    lv_chart_set_series_color(ui_Steps_Chart, lv_chart_get_series_next(ui_Steps_Chart, NULL), ThemeColor);
+  }
   #endif
 }
 

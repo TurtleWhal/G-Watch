@@ -20,6 +20,7 @@
 #include "compass.h"
 #include "usersettings.h"
 #include "steps.h"
+#include "schedule.h"
 
 #include "Preferences.h"
 #include "ArduinoLog.h"
@@ -31,7 +32,7 @@
 const char *ssid = "ThisNetworkIsOWN3D";
 const char *password = "10244096";
 
-//#define USESPLASHSCREEN
+// #define USESPLASHSCREEN
 
 TWatchClass *twatch = nullptr;
 
@@ -45,6 +46,7 @@ bool useOTA;
 extern bool BTon;
 bool Timer0Triggered = 1;
 bool BTTimerTriggered;
+bool StepGraphTriggered;
 
 bool touchingnotif;
 lv_obj_t *notiftouched;
@@ -165,10 +167,13 @@ void btn2_click(void *param)
 {
   Log.verboseln("BTN2 Click. MilliVolts: %i", (int)twatch->power_get_volt());
   // twatch->motor_shake(1, 60);
-  if (lv_scr_act() == ui_Stopwatch)
+  if (lv_scr_act() == ui_Clock)
+  _ui_screen_change(&ui_Schedule, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Schedule_screen_init);
+  else if (lv_scr_act() == ui_Stopwatch)
     ToggleStopwatch(nullptr);
-  if (lv_scr_act() == ui_Timers)
+  else if (lv_scr_act() == ui_Timers)
     ToggleTimer(nullptr);
+
   Wakeup("Button 2 Pressed");
 }
 void btn3_click(void *param)
@@ -295,6 +300,13 @@ void setup()
   timerAlarmWrite(timer2, BLECTL_CHUNKDELAY * 1000, true);
   timerAlarmEnable(timer2);
 
+  // Steps Graph 10m timer
+  hw_timer_t *timer3 = NULL;
+  timer3 = timerBegin(2, 80, true);
+  timerAttachInterrupt(timer3, StepGraphHandle, true);
+  timerAlarmWrite(timer3, 600000 * 1000, true);
+  timerAlarmEnable(timer3);
+
   //////////////////////////Fake Notifications///////////
   // FakeNotes();
 
@@ -381,6 +393,7 @@ void loop()
     else
     {
       Compass();
+      ScheduleHandle();
     }
   }
   else // If Asleep
@@ -403,12 +416,24 @@ void loop()
     BTTimerTriggered = 0;
   }
 
-  // This stuff runs every X seconds
+  // This stuff runs every 10 seconds
   if (Timer0Triggered)
   {
     Timer0Triggered = 0;
     StepHandle();
     DrawPower();
+  }
+
+  // This stuff runs every 1 second
+  if (StepGraphTriggered)
+  {
+    StepGraphTriggered = 0;
+
+    AdvanceStepArray();
+    if (lv_scr_act() == ui_Health)
+    {
+      WriteStepGraph();
+    }
   }
 }
 
@@ -421,6 +446,11 @@ void Timer0Handle()
 void BTTimerHandle()
 {
   BTTimerTriggered = 1;
+}
+
+void StepGraphHandle()
+{
+  StepGraphTriggered = 1;
 }
 
 void ToggleFlashlight(lv_event_t *e)
