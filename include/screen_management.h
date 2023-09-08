@@ -15,9 +15,9 @@ enum {
 };
 
 void buttontoclock();
-void screenback();
 lv_obj_t *GetClock();
 void SetDownScreen(int Screen);
+bool isClockScreen();
 
 #ifdef __cplusplus
 } /*extern "C"*/

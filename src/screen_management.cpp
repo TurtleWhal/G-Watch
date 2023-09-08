@@ -12,11 +12,24 @@ extern Preferences Storage;
 int LastTimeScreen = STOPWATCH_SCREEN;
 int LastDownScreen = WEATHER_SCREEN;
 
-lv_obj_t * ClockScreen = ui_Clock;
+// extern "C" lv_obj_t *ClockScreen = ui_SimplisticWatchFace;
+auto *ClockScreen = &ui_SimplisticWatchFace;
 
-lv_obj_t *GetClock()
+// extern "C" lv_obj_t **ClockScreenChange = &ClockScreen;
+
+auto ClockScreenInit = ui_SimplisticWatchFace_screen_init;
+
+extern "C" lv_obj_t *GetClock()
 {
-    return ClockScreen;
+    // return ClockScreen;
+}
+
+bool isClockScreen()
+{
+    /*if (lv_scr_act() == ClockScreen)
+        return 1;
+    else*/
+    return 0;
 }
 
 void SetDownScreen(int Screen)
@@ -69,7 +82,7 @@ void loadsettings(lv_event_t *e)
     UpdateTestTheme(nullptr);
 
     if (Storage.getBool("DarkMode"))
-    lv_obj_add_state(ui_Dark_Mode_Setting_Switch, LV_STATE_CHECKED);
+        lv_obj_add_state(ui_Dark_Mode_Setting_Switch, LV_STATE_CHECKED);
 
     ApplyTheme(nullptr);
 }
@@ -94,21 +107,21 @@ void SetMusicDeafault(lv_event_t *e)
     LastDownScreen = MUSIC_SCREEN;
 }
 
-void totimescreen(lv_event_t *e)
+void ClockRight(lv_event_t *e)
 {
     if (lv_scr_act() != ui_Timers and lv_scr_act() != ui_Stopwatch and lv_scr_act() != ui_Alarms)
-    switch (LastTimeScreen)
-    {
-    case TIMER_SCREEN:
-        _ui_screen_change(&ui_Timers, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Timers_screen_init);
-        break;
-    case STOPWATCH_SCREEN:
-        _ui_screen_change(&ui_Stopwatch, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Stopwatch_screen_init);
-        break;
-    case ALARMS_SCREEN:
-        _ui_screen_change(&ui_Alarms, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Alarms_screen_init);
-        break;
-    }
+        switch (LastTimeScreen)
+        {
+        case TIMER_SCREEN:
+            _ui_screen_change(&ui_Timers, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Timers_screen_init);
+            break;
+        case STOPWATCH_SCREEN:
+            _ui_screen_change(&ui_Stopwatch, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Stopwatch_screen_init);
+            break;
+        case ALARMS_SCREEN:
+            _ui_screen_change(&ui_Alarms, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Alarms_screen_init);
+            break;
+        }
 }
 
 void ClockDown(lv_event_t *e)
@@ -117,6 +130,16 @@ void ClockDown(lv_event_t *e)
         _ui_screen_change(&ui_Music, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Music_screen_init);
     else
         _ui_screen_change(&ui_Weather, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Weather_screen_init);
+}
+
+void ClockUpwards(lv_event_t *e)
+{
+    _ui_screen_change(&ui_Notifications, LV_SCR_LOAD_ANIM_OVER_BOTTOM, 150, 0, &ui_Notifications_screen_init);
+}
+
+void ClockLeft(lv_event_t *e)
+{
+    _ui_screen_change(&ui_Apps, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Apps_screen_init);
 }
 
 void generictoclock(lv_event_t *e)
@@ -157,11 +180,11 @@ void buttontoclock()
     }
 }
 
-void screenback()
+void screenback(lv_event_t *e)
 {
     if (lv_scr_act() == ui_Apps)
     {
-        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, NULL);
+        _ui_screen_change(ClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, ClockScreenInit);
     }
 
     else if (lv_scr_act() == ui_Calculator or lv_scr_act() == ui_Compass or lv_scr_act() == ui_Settings or lv_scr_act() == ui_Flashlight)
@@ -171,22 +194,22 @@ void screenback()
 
     else if (lv_scr_act() == ui_Notifications)
     {
-        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, NULL);
+        _ui_screen_change(ClockScreen, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, ClockScreenInit);
     }
 
     else if (lv_scr_act() == ui_Music or lv_scr_act() == ui_Weather)
     {
-        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, NULL);
+        _ui_screen_change(ClockScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, ClockScreenInit);
     }
 
     else if (lv_scr_act() == ui_Timers or lv_scr_act() == ui_Stopwatch or lv_scr_act() == ui_Alarms)
     {
-        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, NULL);
+        _ui_screen_change(ClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, ClockScreenInit);
     }
 
     else if (lv_scr_act() == ui_Alarm_Going_Off or lv_scr_act() == ui_Schedule)
     {
-        _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, NULL);
+        _ui_screen_change(ClockScreen, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, ClockScreenInit);
     }
 
     else if (lv_scr_act() == ui_Set_Alarm)

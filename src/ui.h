@@ -393,6 +393,7 @@ extern lv_obj_t *ui_Image4;
 extern lv_obj_t *ui_Lighting;
 // SCREEN: ui_SimplisticWatchFace
 void ui_SimplisticWatchFace_screen_init(void);
+void ui_event_SimplisticWatchFace( lv_event_t * e);
 extern lv_obj_t *ui_SimplisticWatchFace;
 extern lv_obj_t *ui_Simplistic_Minute_Hand_Shadow;
 extern lv_obj_t *ui_Simplistic_Minute_Hand;

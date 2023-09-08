@@ -350,3 +350,19 @@ def InitStepsScreen(event_struct):
 def DrawSchedule(event_struct):
     return
 
+
+def screenback(event_struct):
+    return
+
+
+def ClockLeft(event_struct):
+    return
+
+
+def ClockUpwards(event_struct):
+    return
+
+
+def ClockRight(event_struct):
+    return
+

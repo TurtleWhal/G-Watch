@@ -83,7 +83,7 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 
     if (!isSleeping()) // If Awake
     {
-      if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
+      if (isClockScreen) // Only run this if on the main screen
       {
         notifslide(nullptr);
       }
@@ -167,7 +167,7 @@ void btn2_click(void *param)
 {
   Log.verboseln("BTN2 Click. MilliVolts: %i", (int)twatch->power_get_volt());
   // twatch->motor_shake(1, 60);
-  if (lv_scr_act() == ui_Clock)
+  if (isClockScreen)
     _ui_screen_change(&ui_Schedule, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Schedule_screen_init);
   else if (lv_scr_act() == ui_Stopwatch)
     ToggleStopwatch(nullptr);
@@ -180,14 +180,14 @@ void btn3_click(void *param)
 {
   Log.verboseln("BTN3 Click");
   Wakeup("Button 3 Pressed");
-  if (lv_scr_act() == ui_Clock)
+  if (isClockScreen)
   {
     if (NotificationActive())
       notificationdismiss(nullptr);
     // pairBT(random( 0,999999 ));
   }
   else
-    screenback();
+    screenback(nullptr);
 }
 void btn1_held(void *param)
 {
@@ -211,7 +211,7 @@ void btn3_held(void *param)
 {
   Log.verboseln("BTN3 Held");
   Wakeup("Button 3 Held");
-  totimescreen(nullptr);
+  ClockRight(nullptr);
   twatch->motor_shake(1, 30);
 }
 

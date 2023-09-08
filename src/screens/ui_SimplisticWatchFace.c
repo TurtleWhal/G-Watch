@@ -68,4 +68,6 @@ lv_img_set_pivot(ui_Simplistic_Hour_Hand,12,104);
 lv_img_set_angle(ui_Simplistic_Hour_Hand,1200);
 lv_img_set_zoom(ui_Simplistic_Hour_Hand,200);
 
+lv_obj_add_event_cb(ui_SimplisticWatchFace, ui_event_SimplisticWatchFace, LV_EVENT_ALL, NULL);
+
 }
