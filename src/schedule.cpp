@@ -37,7 +37,7 @@ int ScheduleTimes[SCHEDULE_ENTRIES][2] = {
     {850, 940},
     {1000, 1050},
     {1110, 1200},
-    {1200, 145},
+    {1200, 1245},
     {1245, 1335},
     {1345, 1435}};
 
@@ -166,6 +166,7 @@ void DrawSchedule(lv_event_t *e)
     {
         lv_label_set_text(ui_Schedule_Name, "Nothing Scheduled");
         lv_bar_set_value(ui_Schedule_Bar, 0, LV_ANIM_OFF);
+        lv_roller_set_options(ui_Schedule_Roller, "----------", LV_ROLLER_MODE_NORMAL);
         lv_label_set_text(ui_Schedule_Time_Start, "N/A");
         lv_label_set_text(ui_Schedule_Time_End, "N/A");
     }
