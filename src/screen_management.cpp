@@ -7,7 +7,12 @@
 
 extern Preferences Storage;
 
+ClockInfo info;
+
 // extern int Brightness;
+
+void DefaultClockHandle();
+void SimplisticWatchFaceHandle();
 
 int LastTimeScreen = STOPWATCH_SCREEN;
 int LastDownScreen = WEATHER_SCREEN;
@@ -15,13 +20,35 @@ int LastDownScreen = WEATHER_SCREEN;
 // extern "C" lv_obj_t *ClockScreen = ui_SimplisticWatchFace;
 auto *ClockScreen = &ui_SimplisticWatchFace;
 
+lv_obj_t *Screen = ui_SimplisticWatchFace;
+
+auto ClockHandler = SimplisticWatchFaceHandle;
+
 // extern "C" lv_obj_t **ClockScreenChange = &ClockScreen;
 
 auto ClockScreenInit = ui_SimplisticWatchFace_screen_init;
 
-extern "C" lv_obj_t *GetClock()
+lv_obj_t *GetClockScreen()
 {
-    // return ClockScreen;
+    return Screen;
+}
+
+void SetClockScreen(lv_obj_t *screen)
+{
+
+    ClockScreen = &screen;
+    Screen = screen;
+
+    if (screen = ui_Clock)
+    {
+        ClockScreenInit = ui_Clock_screen_init;
+        ClockHandler = DefaultClockHandle;
+    }
+    else if (screen = ui_SimplisticWatchFace)
+    {
+        ClockScreenInit = ui_SimplisticWatchFace_screen_init;
+        ClockHandler = SimplisticWatchFaceHandle;
+    }
 }
 
 bool isClockScreen()
@@ -31,6 +58,31 @@ bool isClockScreen()
     else*/
     return 0;
 }
+
+void ScreenHandleHandle()
+{
+    ClockHandler();
+}
+
+////////////////////// Watch Screen Handlers ///////////////////////
+
+void DefaultClockHandle()
+{
+}
+
+void SimplisticWatchFaceHandle()
+{
+    if (lv_scr_act() == ui_SimplisticWatchFace)
+    {
+        lv_img_set_angle(ui_Simplistic_Hour_Hand, (info.time.hours * 300) + (info.time.minutes * 5));
+        lv_img_set_angle(ui_Simplistic_Hour_Hand_Shadow, (info.time.hours * 300) + (info.time.minutes * 5));
+
+        lv_img_set_angle(ui_Simplistic_Minute_Hand, (info.time.minutes * 60) + (info.time.seconds));
+        lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, (info.time.minutes * 60) + (info.time.seconds));
+    }
+}
+
+////////////////////////////////////////////////////////////////////
 
 void SetDownScreen(int Screen)
 {

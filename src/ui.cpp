@@ -257,7 +257,7 @@ void setup()
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
 
   ui_Clock_screen_init();
-  ui_Music_screen_init();
+  //ui_Music_screen_init();
 
   lv_obj_del(ui_Tick_Dots); // Only used For visual purposes in Squareline Studio
   lv_obj_del(ui_Tick_Dashes);
@@ -271,6 +271,9 @@ void setup()
   InitTicks(); // Draws the tick marks around the edge
 
   ui____initial_actions0 = lv_obj_create(NULL);
+
+  //SetClockScreen(ui_SimplisticWatchFace);
+  //lv_disp_load_scr(GetClockScreen());
   lv_disp_load_scr(ui_Clock);
 
   twatch->backlight_set_value(100);
@@ -386,10 +389,11 @@ void loop()
     // delay(5);
     // delay(lv_timer_handler());
 
-    if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
+    if (isClockScreen) // Only run this if on the main screen
     {
       WriteTime();
       Powerhandle();
+      ScreenHandleHandle();
       // notifslide(nullptr);
     }
     else
