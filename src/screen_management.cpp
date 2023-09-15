@@ -123,6 +123,7 @@ void loadsettings(lv_event_t *e)
     char BTnamechar[17];
     Storage.getBytes("BTname", BTnamechar, 17);
     lv_textarea_set_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), BTnamechar);
+    info.bt.name = BTnamechar;
 
     char NotificationLengthChar[4];
     sprintf(NotificationLengthChar, "%i", Storage.getUInt("NotifLength"));

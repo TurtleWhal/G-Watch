@@ -44,6 +44,34 @@ extern "C"
         } BluetoothInfo;
         BluetoothInfo bt;
 
+        typedef struct
+        {
+            int position;
+            int length;
+            String song;
+            String artist;
+            String album;
+            bool isplaying;
+        } MusicInfo;
+        MusicInfo music;
+
+        typedef struct
+        {
+            int Temp = 0;
+            int High = 0;
+            int Low = 0;
+            int Humidity = 0;
+            int Precip = 0;
+            int UV = 0;
+            int Code = 0;
+            lv_img_dsc_t Img = ui_img_mostly_cloudy_png;
+            String Type = "Not Updated";
+            int Wind = 0;
+            int Winddir = 0;
+            String Loc = "";
+        } WeatherInfo;
+        WeatherInfo weather;
+
     } ClockInfo;
 
     enum

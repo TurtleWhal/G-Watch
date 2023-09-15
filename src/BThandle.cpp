@@ -21,6 +21,7 @@
 extern TWatchClass *twatch;
 extern Notification NotificationList[11];
 extern Preferences Storage;
+extern ClockInfo info;
 extern int notificationid;
 lv_obj_t *ui_Notification_Widgets[1];
 LV_IMG_DECLARE(ui_img_bluetooth_small_png);
@@ -29,13 +30,6 @@ bool BTon;
 bool BTconnected;
 int songtime;
 static String msg;
-
-int MusicPos;
-int MusicLength;
-String MusicSong;
-String MusicArtist;
-String MusicAlbum;
-bool MusicPlaying;
 
 LV_IMG_DECLARE(ui_img_mostly_cloudy_png);          // assets\Mostly Cloudy.png
 LV_IMG_DECLARE(ui_img_snow_rain_png);              // assets\Snow Rain.png
@@ -105,7 +99,7 @@ void ParseBLE(char *Message)
 
 void ParseGB(char *Message)
 {
-  // int MusicLength = 600;
+  // int info.music.length = 600;
   //  GB({t:"notify",id:1689704373,src:"Gadgetbridge",title:"",subject:"Testgh",body:"Testgh",sender:"Testgh",tel:"Testgh"})
 
   StaticJsonDocument<2048> received;
@@ -164,7 +158,7 @@ void ParseGB(char *Message)
       if (received.containsKey("sender"))
       {
         if (received["sender"] != "")
-        NotifTitle = received["sender"];
+          NotifTitle = received["sender"];
       }
 
       Log.verboseln("Received Notification With Title: %s, Text: %s, Source: %s, ID: %i", NotifTitle, NotifText, NotifSource, NotifID);
@@ -202,31 +196,31 @@ void ParseGB(char *Message)
   }
   else if (strcmp(NotifType, "musicinfo") == 0)
   {
-    // const char *MusicArtist = "artist";
-    // const char *MusicSong = "song";
-    // const char *MusicAlbum = "album";
+    // const char *info.music.artist = "artist";
+    // const char *info.music.song = "song";
+    // const char *info.music.album = "album";
 
     // if (received.containsKey("artist"))
-    const char *localMusicArtist = received["artist"];
+    const char *localmusicartist = received["artist"];
     // if (received.containsKey("track"))
-    const char *localMusicSong = received["track"];
+    const char *localmusicsong = received["track"];
     // if (received.containsKey("dur"))
-    MusicLength = received["dur"];
+    info.music.length = received["dur"];
     // if (received.containsKey("album"))
-    const char *localMusicAlbum = received["album"];
+    const char *localmusicalbum = received["album"];
 
-    Serial.println(localMusicArtist);
-    Serial.println(localMusicSong);
-    Serial.println(MusicLength);
-    Serial.println(localMusicAlbum);
+    Serial.println(info.music.artist);
+    Serial.println(info.music.song);
+    Serial.println(info.music.length);
+    Serial.println(info.music.album);
 
-    MusicSong = localMusicSong;
-    MusicArtist = localMusicArtist;
-    MusicAlbum = localMusicAlbum;
+    info.music.song = localmusicartist;
+    info.music.artist = localmusicsong;
+    info.music.album = localmusicalbum;
 
     // ui_Music_screen_init();
 
-    // lv_label_set_text(ui_Now_Playing_Label, MusicSong);
+    // lv_label_set_text(ui_Now_Playing_Label, info.music.song);
     DrawMusicInfo(nullptr);
     SetDownScreen(MUSIC_SCREEN);
     // twatch->motor_shake(1, 50);
@@ -265,8 +259,8 @@ void ParseGB(char *Message)
   else if (strcmp(NotifType, "musicstate") == 0)
   {
     const char *MusicState = received["state"];
-    MusicPos = received["position"];
-    // MusicPos += MUSICPOSOFFSET;
+    info.music.position = received["position"];
+    // info.music.position += info.music.positionOFFSET;
     Serial.println(MusicState);
 
     if (strcmp(MusicState, "play") == 0)
@@ -274,14 +268,14 @@ void ParseGB(char *Message)
       Serial.println("Change To Pause Button");
       lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
       // lv_label_set_text(ui_Now_Playing_Label, MusicState);
-      MusicPlaying = 1;
+      info.music.isplaying = 1;
     }
     else
     {
       Serial.println("Change To Play Button");
       lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
       // lv_label_set_text(ui_Now_Playing_Label, MusicState);
-      MusicPlaying = 0;
+      info.music.isplaying = 0;
     }
     DrawMusicTime(nullptr);
   }
@@ -437,9 +431,9 @@ void DrawMusicInfo(lv_event_t *e)
 {
   if (lv_scr_act() == ui_Music)
   {
-    lv_label_set_text(ui_Music_Artist, MusicArtist.c_str());
-    lv_label_set_text(ui_Music_Title, MusicSong.c_str());
-    lv_label_set_text(ui_Music_Album, MusicAlbum.c_str());
+    lv_label_set_text(ui_Music_Artist, info.music.artist.c_str());
+    lv_label_set_text(ui_Music_Title, info.music.song.c_str());
+    lv_label_set_text(ui_Music_Album, info.music.album.c_str());
   }
 }
 
@@ -447,22 +441,22 @@ void DrawMusicTime(lv_event_t *e)
 {
   if (lv_scr_act() == ui_Music)
   {
-    lv_label_set_text_fmt(ui_Music_Time, "%i:%02i / %i:%02i", (int)(MusicPos / 60), MusicPos % 60, (int)(MusicLength / 60), MusicLength % 60);
-    if (MusicLength)
-      lv_slider_set_range(ui_Music_Play_Bar, 0, MusicLength);
-    lv_slider_set_value(ui_Music_Play_Bar, MusicPos, LV_ANIM_ON);
+    lv_label_set_text_fmt(ui_Music_Time, "%i:%02i / %i:%02i", (int)(info.music.position / 60), info.music.position % 60, (int)(info.music.length / 60), info.music.length % 60);
+    if (info.music.length)
+      lv_slider_set_range(ui_Music_Play_Bar, 0, info.music.length);
+    lv_slider_set_value(ui_Music_Play_Bar, info.music.position, LV_ANIM_ON);
   }
 }
 
 void PauseMusic(lv_event_t *e)
 {
-  if (MusicPlaying)
+  if (info.music.isplaying)
   {
     Serial.println("Pausing");
     String pausestring = "{t:\"music\", n:\"pause\"}";
     BTsend(pausestring, 2);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_play_button_png);
-    // MusicPlaying = !MusicPlaying;
+    // info.music.isplaying = !info.music.isplaying;
   }
   else
   {
@@ -470,7 +464,7 @@ void PauseMusic(lv_event_t *e)
     String playstring = "{t:\"music\", n:\"play\"}";
     BTsend(playstring, 2);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_pause_button_png);
-    // MusicPlaying = !MusicPlaying;
+    // info.music.isplaying = !info.music.isplaying;
   }
 }
 
@@ -556,21 +550,23 @@ void BTmsgloop()
   if (BTon and blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT)) // can't call get event unless BTon = true
   {
     BTconnected = true;
-    if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
-      lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
+    // if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
+    //   lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
+    info.bt.status = 1;
   }
   else
   {
     BTconnected = false;
-    if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
-      lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
+    // if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
+    //   lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
+    info.bt.status = 0;
   }
 
   if (lasttime < millis() - 1000)
   {
-    if (MusicPlaying)
+    if (info.music.isplaying)
     {
-      MusicPos++;
+      info.music.position++;
       DrawMusicTime(nullptr);
     }
     lasttime = millis();
