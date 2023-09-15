@@ -196,6 +196,6 @@ void screenback()
 
     else if (lv_scr_act() == ui_Health)
     {
-        _ui_screen_change(&ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, NULL);
+        _ui_screen_change(&ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, ui_Notifications_screen_init);
     }
 }
