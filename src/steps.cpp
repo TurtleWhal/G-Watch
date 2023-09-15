@@ -7,6 +7,7 @@
 #include "ArduinoJson.h"
 #include "BThandle.h"
 #include "ArduinoLog.h"
+#include "schedule.h"
 
 void BTsendSteps();
 
@@ -23,8 +24,8 @@ void StepHandle()
   static uint16_t StepOffset = UINT16_MAX;
   int GetStep = twatch->bma423_get_step();
 
-  Log.verboseln("BMA423: %i", GetStep);
-  Log.verboseln("Storage: %i", Storage.getUShort("Steps"));
+  // Log.verboseln("BMA423: %i", GetStep);
+  // Log.verboseln("Storage: %i", Storage.getUShort("Steps"));
 
   if (StepOffset == UINT16_MAX)
   {
@@ -82,7 +83,11 @@ void DrawSteps()
 {
 #ifdef UPDATE_ELEMENTS
   lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Steps);
-  lv_arc_set_value(ui_Arc_Right, ((float)Steps / Storage.getUShort("StepGoal")) * 250);
+  if (!HasScheduleEvent)
+  {
+    lv_arc_set_range(ui_Arc_Right, 0, Storage.getUShort("StepGoal"));
+    lv_arc_set_value(ui_Arc_Right, Steps);
+  }
 #endif
 }
 

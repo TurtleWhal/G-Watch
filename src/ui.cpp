@@ -31,6 +31,8 @@
 
 const char *ssid = "ThisNetworkIsOWN3D";
 const char *password = "10244096";
+const char *ssid2 = "IT-Test";
+const char *password2 = "";
 
 // #define USESPLASHSCREEN
 
@@ -313,6 +315,7 @@ void setup()
   ////////////////////////////OTA
   if (useOTA)
   {
+
     lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
     WiFi.mode(WIFI_STA);
     WiFi.setHostname("ESP-Watch");
@@ -320,6 +323,9 @@ void setup()
     while (WiFi.waitForConnectResult() != WL_CONNECTED)
     {
       Serial.println("Connection Failed! Rebooting...");
+      delay(2000);
+      WiFi.disconnect();
+      WiFi.begin(ssid2, password2);
       delay(5000);
       ESP.restart();
     }

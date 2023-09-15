@@ -4,169 +4,194 @@
 #include "Arduino.h"
 #include "timestuff.h"
 
-/*#define SCHEDULE_ENTRIES 10
+#define SCHEDULE_SHOWINFO
 
-int ScheduleTimes[SCHEDULE_ENTRIES][2] = {
-    {750, 820},
-    {750, 820},
-    {750, 2115},
-    {2150, 2200},
-    {750, 820},
-    {1200, 1700},
-    {845, 1955},
-    {2000, 2007},
-    {2008, 2010},
-    {830, 900}};
+struct Schedule
+{
+    // Number of Schedule times
+    uint8_t Entries;
+    // [Start Time], [End Time]
+    uint16_t Times[16][2];
+    // [Event Name], [Parenthesis enclosed optional modifier]
+    String Names[16][2];
+};
 
-String ScheduleNames[SCHEDULE_ENTRIES] = {
-    {"Period 1"},
-    {"Period 2"},
-    {"Period 3"},
-    {"Period 4"},
-    {"Period 5"},
-    {"Period 6"},
-    {"Period 7"},
-    {"Period 8"},
-    {"Period 9"},
-    {"Period 10"}};*/
+Schedule ODay = {.Entries = 5, .Times = {{750, 930}, {940, 1015}, {1030, 1210}, {1210, 1245}, {1255, 1445}}, .Names = {{"Band", "T121"}, {"HiHo", "344"}, {"Algebra II", "307"}, {"Lunch", "Yum"}, {"French", "229"}}};
+Schedule EDay = {.Entries = 5, .Times = {{750, 930}, {940, 1015}, {1030, 1210}, {1210, 1245}, {1255, 1445}}, .Names = {{"Robotics", "180"}, {"HiHo", "344"}, {"English", "351"}, {"Lunch", "Yum"}, {"Biology", "313"}}};
+Schedule ADay = {.Entries = 7, .Times = {{750, 825}, {830, 905}, {925, 1010}, {1020, 1055}, {1105, 1130}, {1140, 1215}, {1220, 1255}}, .Names = {{"Band", "T121"}, {"Robotics", "180"}, {"Algebra II", "307"}, {"English", "351"}, {"Lunch", "Yum"}, {"French", "229"}, {"Biology", "313"}}};
+Schedule None;
+// sun, mon, tue, wed, thu, fri, sat
+Schedule *WeeklySchedule[] = {&None, &ODay, &EDay, &ADay, &ODay, &EDay, &None};
 
-#define SCHEDULE_ENTRIES 7
+Schedule CurrentSchedule;
 
-int ScheduleTimes[SCHEDULE_ENTRIES][2] = {
-    {750, 840},
-    {850, 940},
-    {1000, 1050},
-    {1110, 1200},
-    {1200, 1245},
-    {1245, 1335},
-    {1345, 1435}};
+uint16_t StartTime = 0;
+uint16_t EndTime = 2400;
+uint8_t entry = UINT8_MAX;
+String options = "";
+bool passing;
+uint16_t numtime;
 
-String ScheduleNames[SCHEDULE_ENTRIES] = {
-    {"Band (T121)"},
-    {"Robotics (180)"},
-    {"Algebra (307)"},
-    {"English (351)"},
-    {"Lunch"},
-    {"French (229)"},
-    {"Biology (344)"}};
-
-// void DrawSchedule();
+bool HasScheduleEvent()
+{
+    if (StartTime == UINT16_MAX)
+        return 0;
+    return 1;
+}
 
 void ScheduleHandle()
 {
-    if (lv_scr_act() == ui_Schedule)
-    {
-        DrawSchedule(nullptr);
-    }
-}
+    CurrentSchedule = *WeeklySchedule[GetDayOfWeek()];
+    StartTime = 0;
+    EndTime = 2400;
+    entry = UINT8_MAX;
+    options = "";
+    passing = 0;
+    numtime = 0;
 
-void DrawSchedule(lv_event_t *e)
-{
-    int numtime = (GetHour() * 100) + GetMinute();
-    bool passing;
+    numtime = (GetHour() * 100) + GetMinute();
+    Serial.print("hour: ");
     Serial.println(GetHour());
+    Serial.print("minute: ");
     Serial.println(GetMinute());
-    uint8_t entry = UINT8_MAX;
-    String options = "";
 
+    Serial.print("Time: ");
     Serial.println(numtime);
-    for (int i = 0; i < SCHEDULE_ENTRIES; i++)
+    for (int i = 0; i < CurrentSchedule.Entries; i++)
     {
-        if (ScheduleTimes[i][0] <= numtime and ScheduleTimes[i][1] >= numtime)
+        if (CurrentSchedule.Times[i][0] <= numtime and CurrentSchedule.Times[i][1] >= numtime)
         {
             entry = i;
-            passing = 1;
+            passing = 0;
             Serial.print("Entry : ");
+            Serial.println(entry);
         }
-        else
-            Serial.print("LoopED: ");
-        Serial.print(i);
-        Serial.print(" : ");
-        Serial.print(ScheduleTimes[i][0]);
-        Serial.print(" : ");
-        Serial.print(ScheduleTimes[i][1]);
-        Serial.print(" : ");
-        Serial.println(ScheduleNames[i]);
-        options = options + ScheduleNames[i] + "\n";
+/*else
+   Serial.print("LoopED: ");
+Serial.print(i);
+Serial.print(" : ");
+Serial.print(CurrentSchedule.Times[i][0]);
+Serial.print(" : ");
+Serial.print(CurrentSchedule.Times[i][1]);
+Serial.print(" : ");
+Serial.println(CurrentSchedule.Names[i]);*/
+#ifdef SCHEDULE_SHOWINFO
+        options = options + CurrentSchedule.Names[i][0] + " (" + CurrentSchedule.Names[i][1] + ")" + "\n";
+#else
+        options = options + CurrentSchedule.Names[i][0] + "\n";
+#endif
     }
-    Serial.println(entry);
+
     if (entry == UINT8_MAX)
     {
-        for (int i = 0; i < SCHEDULE_ENTRIES - 1; i++)
+        for (int i = 0; i < CurrentSchedule.Entries - 1; i++)
         {
-            if (ScheduleTimes[i][1] <= numtime and ScheduleTimes[i + 1][0] >= numtime)
+            if (CurrentSchedule.Times[i][1] <= numtime and CurrentSchedule.Times[i + 1][0] >= numtime)
             {
                 entry = i;
                 passing = 1;
                 Serial.print("Passed: ");
+                Serial.println(i);
             }
-            else
+            /*else
                 Serial.print("LoppEd: ");
             Serial.print(i);
             Serial.print(" : ");
-            Serial.print(ScheduleTimes[i][1]);
+            Serial.print(CurrentSchedule.Times[i][1]);
             Serial.print(" : ");
-            Serial.println(ScheduleTimes[i + 1][0]);
+            Serial.println(CurrentSchedule.Times[i + 1][0]);*/
         }
     }
     // Serial.println(options);
     Serial.println(entry);
     if (entry != UINT8_MAX)
     {
-        lv_roller_set_options(ui_Schedule_Roller, options.c_str(), LV_ROLLER_MODE_NORMAL);
-        lv_roller_set_selected(ui_Schedule_Roller, entry - 1, LV_ANIM_OFF);
 
         if (!passing)
         {
-            int temptime = ScheduleTimes[entry][0];
+            int temptime = CurrentSchedule.Times[entry][0];
 
             if (temptime > 1259)
                 temptime -= 1200;
             Serial.println(temptime);
+            StartTime = temptime;
 
-            lv_label_set_text_fmt(ui_Schedule_Time_Start, "%i:%02i", temptime / 100, temptime % 100);
-
-            temptime = ScheduleTimes[entry][1];
+            temptime = CurrentSchedule.Times[entry][1];
 
             if (temptime > 1259)
                 temptime -= 1200;
             Serial.println(temptime);
-
-            lv_label_set_text_fmt(ui_Schedule_Time_End, "%i:%02i", temptime / 100, temptime % 100);
-
-            lv_bar_set_range(ui_Schedule_Bar, ScheduleTimes[entry][0], ScheduleTimes[entry][1]);
-            lv_bar_set_value(ui_Schedule_Bar, numtime, LV_ANIM_OFF);
-
-            lv_label_set_text(ui_Schedule_Name, (ScheduleNames[entry]).c_str());
+            EndTime = temptime;
         }
         else
         {
-            int temptime = ScheduleTimes[entry][1];
-
-            if (temptime > 1259)
-                temptime -= 1200;
-            Serial.println(temptime);
-            lv_label_set_text_fmt(ui_Schedule_Time_Start, "%i:%02i", temptime / 100, temptime % 100);
-
-            temptime = ScheduleTimes[entry + 1][0];
+            int temptime = CurrentSchedule.Times[entry][1];
 
             if (temptime > 1259)
                 temptime -= 1200;
             Serial.println(temptime);
 
-            lv_label_set_text_fmt(ui_Schedule_Time_End, "%i:%02i", temptime / 100, temptime % 100);
+            StartTime = temptime;
 
-            lv_bar_set_range(ui_Schedule_Bar, ScheduleTimes[entry][1], ScheduleTimes[entry + 1][0]);
-            lv_bar_set_value(ui_Schedule_Bar, numtime, LV_ANIM_OFF);
+            temptime = CurrentSchedule.Times[entry + 1][0];
 
-            lv_label_set_text(ui_Schedule_Name, "Passing Period");
+            if (temptime > 1259)
+                temptime -= 1200;
+            Serial.println(temptime);
+            EndTime = temptime;
         }
     }
     else
     {
-        lv_label_set_text(ui_Schedule_Name, "Nothing Scheduled");
-        lv_bar_set_value(ui_Schedule_Bar, 0, LV_ANIM_OFF);
+        StartTime = UINT16_MAX;
+    }
+
+    Serial.print("StartTime = ");
+    Serial.println(StartTime);
+
+    Serial.print("EndTime = ");
+    Serial.println(EndTime);
+
+    Serial.print("Entry = ");
+    Serial.println(entry);
+
+    if (lv_scr_act() == ui_Schedule)
+    {
+        DrawSchedule(nullptr);
+    }
+
+    lv_arc_set_range(ui_Arc_Right, StartTime, EndTime);
+    lv_arc_set_value(ui_Arc_Right, numtime);
+}
+
+void DrawSchedule(lv_event_t *e)
+{
+    lv_label_set_text_fmt(ui_Schedule_Time_Start, "%i:%02i", StartTime / 100, StartTime % 100);
+    lv_label_set_text_fmt(ui_Schedule_Time_End, "%i:%02i", EndTime / 100, EndTime % 100);
+
+    lv_bar_set_range(ui_Schedule_Bar, StartTime, EndTime);
+    lv_bar_set_value(ui_Schedule_Bar, numtime, LV_ANIM_ON);
+
+    lv_roller_set_options(ui_Schedule_Roller, options.c_str(), LV_ROLLER_MODE_NORMAL);
+
+    if (!passing)
+    {
+        lv_roller_set_selected(ui_Schedule_Roller, entry, LV_ANIM_OFF);
+#ifdef SCHEDULE_SHOWINFO
+        lv_label_set_text(ui_Schedule_Name, (CurrentSchedule.Names[entry][0] + " (" + CurrentSchedule.Names[entry][1] + ")").c_str());
+#else
+        lv_label_set_text(ui_Schedule_Name, (CurrentSchedule.Names[entry][0]).c_str());
+#endif
+    }
+    else
+    {
+        lv_roller_set_selected(ui_Schedule_Roller, entry + 1, LV_ANIM_OFF);
+        lv_label_set_text(ui_Schedule_Name, "Passing Period");
+    }
+    if (entry == UINT8_MAX)
+    {
         lv_roller_set_options(ui_Schedule_Roller, "----------", LV_ROLLER_MODE_NORMAL);
+        lv_label_set_text(ui_Schedule_Name, "Nothing Scheduled");
         lv_label_set_text(ui_Schedule_Time_Start, "N/A");
         lv_label_set_text(ui_Schedule_Time_End, "N/A");
     }

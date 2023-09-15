@@ -90,6 +90,12 @@ int GetHour()
     return (t_tm.tm_hour);
 }
 
+int GetDayOfWeek()
+{
+    getLocalTime(&t_tm);
+    return (t_tm.tm_wday);
+}
+
 void InitTicks()
 {
     for (int i = 0; i < 62; i++)
