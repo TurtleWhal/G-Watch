@@ -312,78 +312,78 @@ void ParseGB(char *Message)
     Log.verboseln("(Weather) Wind Dir:------ %i", Winddir);
     Log.verboseln("(Weather) Weather Loc: -- %s", Loc);
 
-    Weather.Temp = Temp;
-    Weather.High = High;
-    Weather.Low = Low;
-    Weather.Humidity = Humidity;
-    Weather.Precip = Precip;
-    Weather.UV = UV;
-    Weather.Code = Code;
-    Weather.Type = Type;
-    Weather.Wind = Wind / 1.609;
-    Weather.Winddir = Winddir;
-    Weather.Loc = Loc;
+    info.weather.temp = Temp;
+    info.weather.high = High;
+    info.weather.low = Low;
+    info.weather.humidity = Humidity;
+    info.weather.precip = Precip;
+    info.weather.uv = UV;
+    info.weather.code = Code;
+    info.weather.type = Type;
+    info.weather.wind = Wind / 1.609;
+    info.weather.winddir = Winddir;
+    info.weather.location = Loc;
 
-    switch (Weather.Code)
+    switch (info.weather.code)
     {
     case 200 ... 232:
-      Weather.Img = ui_img_isolated_thunderstorms_png;
+      info.weather.img = ui_img_isolated_thunderstorms_png;
       break;
 
     case 300 ... 321:
     case 520 ... 531:
-      Weather.Img = ui_img_rainy_png;
+      info.weather.img = ui_img_rainy_png;
       break;
 
     case 500:
-      Weather.Img = ui_img_scattered_showers_png;
+      info.weather.img = ui_img_scattered_showers_png;
       break;
 
     case 501 ... 504:
-      Weather.Img = ui_img_sunny_png;
+      info.weather.img = ui_img_sunny_png;
       break;
 
     case 511:
     case 612 ... 621:
-      Weather.Img = ui_img_snow_rain_png;
+      info.weather.img = ui_img_snow_rain_png;
       break;
 
     case 600 ... 601:
     case 611:
-      Weather.Img = ui_img_snowing_png;
+      info.weather.img = ui_img_snowing_png;
       break;
 
     case 602:
     case 622:
-      Weather.Img = ui_img_blizzard_png;
+      info.weather.img = ui_img_blizzard_png;
       break;
 
     case 701 ... 781:
-      Weather.Img = ui_img_fog_png;
+      info.weather.img = ui_img_fog_png;
       break;
 
     case 800:
-      Weather.Img = ui_img_sunny_png;
+      info.weather.img = ui_img_sunny_png;
       break;
 
     case 801:
-      Weather.Img = ui_img_mostly_sunny_png;
+      info.weather.img = ui_img_mostly_sunny_png;
       break;
 
     case 802:
-      Weather.Img = ui_img_partly_cloudy_png;
+      info.weather.img = ui_img_partly_cloudy_png;
       break;
 
     case 803:
-      Weather.Img = ui_img_mostly_cloudy_png;
+      info.weather.img = ui_img_mostly_cloudy_png;
       break;
 
     case 804:
-      Weather.Img = ui_img_cloudy_png;
+      info.weather.img = ui_img_cloudy_png;
       break;
 
     default:
-      Weather.Img = ui_img_mostly_cloudy_png;
+      info.weather.img = ui_img_mostly_cloudy_png;
       break;
     }
 
@@ -591,17 +591,17 @@ void DrawWeather(lv_event_t *e)
 {
   if (ui_Weather != NULL)
   {
-    lv_label_set_text_fmt(ui_Temperature, "%i°", Weather.Temp);
-    lv_label_set_text_fmt(ui_High_Temp, "%i°", Weather.High);
-    lv_label_set_text_fmt(ui_Low_Temp, "%i°", Weather.Low);
-    lv_label_set_text_fmt(ui_Humidity_Label, "%i%%", Weather.Humidity);
-    lv_label_set_text_fmt(ui_Precepitation_Label, "%i%%", Weather.Precip);
-    lv_label_set_text_fmt(ui_UV_Index_Label, "UV: %i", Weather.UV);
-    lv_label_set_text_fmt(ui_Wind_Info, "%i mph\n%s", Weather.Wind, DegToCompassHeading(Weather.Winddir).c_str());
-    lv_img_set_angle(ui_Wind_Image, Weather.Winddir * 10 - 900);
-    lv_label_set_text(ui_Weather_State, Weather.Type.c_str());
-    lv_label_set_text(ui_Weather_Location, Weather.Loc.c_str());
-    // lv_label_set_text_fmt(ui_Weather_Id, "%i", Weather.Code);
-    lv_img_set_src(ui_Weather_Image, &Weather.Img);
+    lv_label_set_text_fmt(ui_Temperature, "%i°", info.weather.temp);
+    lv_label_set_text_fmt(ui_High_Temp, "%i°", info.weather.high);
+    lv_label_set_text_fmt(ui_Low_Temp, "%i°", info.weather.low);
+    lv_label_set_text_fmt(ui_Humidity_Label, "%i%%", info.weather.humidity);
+    lv_label_set_text_fmt(ui_Precepitation_Label, "%i%%", info.weather.precip);
+    lv_label_set_text_fmt(ui_UV_Index_Label, "UV: %i", info.weather.uv);
+    lv_label_set_text_fmt(ui_Wind_Info, "%i mph\n%s", info.weather.wind, DegToCompassHeading(info.weather.winddir).c_str());
+    lv_img_set_angle(ui_Wind_Image, info.weather.winddir * 10 - 900);
+    lv_label_set_text(ui_Weather_State, info.weather.type.c_str());
+    lv_label_set_text(ui_Weather_Location, info.weather.location.c_str());
+    // lv_label_set_text_fmt(ui_Weather_Id, "%i", info.weather.code);
+    lv_img_set_src(ui_Weather_Image, &info.weather.img);
   }
 }

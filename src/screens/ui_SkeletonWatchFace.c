@@ -9,6 +9,7 @@ void ui_SkeletonWatchFace_screen_init(void)
 {
 ui_SkeletonWatchFace = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_SkeletonWatchFace, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_SkeletonWatchFace, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_SkeletonWatchFace);
 lv_obj_set_style_bg_color(ui_SkeletonWatchFace, lv_color_hex(0x999999), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_SkeletonWatchFace, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 

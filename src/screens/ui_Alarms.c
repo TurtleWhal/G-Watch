@@ -9,6 +9,7 @@ void ui_Alarms_screen_init(void)
 {
 ui_Alarms = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Alarms, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Alarms, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Alarms);
 
 ui_Alarms_Label = lv_label_create(ui_Alarms);
 lv_obj_set_width( ui_Alarms_Label, LV_SIZE_CONTENT);  /// 1

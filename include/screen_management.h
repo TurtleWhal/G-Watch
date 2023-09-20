@@ -57,18 +57,18 @@ extern "C"
 
         typedef struct
         {
-            int Temp = 0;
-            int High = 0;
-            int Low = 0;
-            int Humidity = 0;
-            int Precip = 0;
-            int UV = 0;
-            int Code = 0;
-            lv_img_dsc_t Img = ui_img_mostly_cloudy_png;
-            String Type = "Not Updated";
-            int Wind = 0;
-            int Winddir = 0;
-            String Loc = "";
+            int temp = 0;
+            int high = 0;
+            int low = 0;
+            int humidity = 0;
+            int precip = 0;
+            int uv = 0;
+            int code = 0;
+            lv_img_dsc_t img = ui_img_mostly_cloudy_png;
+            String type = "Not Updated";
+            int wind = 0;
+            int winddir = 0;
+            String location = "";
         } WeatherInfo;
         WeatherInfo weather;
 
@@ -93,6 +93,7 @@ extern "C"
     bool isClockScreen();
     void ScreenHandleHandle();
     void SetClockScreen(lv_obj_t *screen);
+    void InitClockScreen();
 
 #ifdef __cplusplus
 } /*extern "C"*/

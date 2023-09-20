@@ -257,7 +257,10 @@ void setup()
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
 
   ui_Clock_screen_init();
-  //ui_Music_screen_init();
+  // ui_SimplisticWatchFace_screen_init();
+
+  InitClockScreen();
+  SetClockScreen(ui_SimplisticWatchFace);
 
   lv_obj_del(ui_Tick_Dots); // Only used For visual purposes in Squareline Studio
   lv_obj_del(ui_Tick_Dashes);
@@ -272,15 +275,15 @@ void setup()
 
   ui____initial_actions0 = lv_obj_create(NULL);
 
-  //SetClockScreen(ui_SimplisticWatchFace);
-  //lv_disp_load_scr(GetClockScreen());
-  lv_disp_load_scr(ui_Clock);
+  lv_disp_load_scr(GetClockScreen());
+  // lv_disp_load_scr(ui_SimplisticWatchFace);
+  // lv_disp_load_scr(ui_Clock);
 
   twatch->backlight_set_value(100);
   // twatch->backlight_gradual_light(255,1000);
 
 #ifdef UPDATE_ELEMENTS
-  lv_label_set_text(ui_Now_Playing_Label, "");
+  // lv_label_set_text(ui_Now_Playing_Label, "");
 #endif
 
   // InitPercent(); // Battery Percent
@@ -359,8 +362,8 @@ void setup()
   }
   ////////////////////////////////////////END OTA
 
-  WriteTime();
-  lv_label_set_text(ui_Notification_Amount_Number, "0");
+  // WriteTime();
+  // lv_label_set_text(ui_Notification_Amount_Number, "0");
   lv_timer_handler();
   BT_on();
 #if defined(CONFIG_BMA423_LATER)

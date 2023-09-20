@@ -51,12 +51,18 @@ void SetClockScreen(lv_obj_t *screen)
     }
 }
 
+void InitClockScreen()
+{
+    ClockScreenInit();
+    // ui_SimplisticWatchFace_screen_init();
+}
+
 bool isClockScreen()
 {
-    /*if (lv_scr_act() == ClockScreen)
+    if (lv_scr_act() == Screen)
         return 1;
-    else*/
-    return 0;
+    else
+        return 0;
 }
 
 void ScreenHandleHandle()
