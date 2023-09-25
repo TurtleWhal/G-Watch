@@ -36,18 +36,21 @@ lv_obj_t *GetClockScreen()
 void SetClockScreen(lv_obj_t *screen)
 {
 
-    ClockScreen = &screen;
+    Serial.print("Set Clock Screen to: ");
     Screen = screen;
+    ClockScreen = &screen;
 
-    if (screen = ui_Clock)
+    if (Screen == ui_Default_Clock)
     {
-        ClockScreenInit = ui_Clock_screen_init;
+        ClockScreenInit = ui_Default_Clock_screen_init;
         ClockHandler = DefaultClockHandle;
+        Serial.println("ui_Default_Clock");
     }
-    else if (screen = ui_SimplisticWatchFace)
+    else if (Screen == ui_SimplisticWatchFace)
     {
         ClockScreenInit = ui_SimplisticWatchFace_screen_init;
         ClockHandler = SimplisticWatchFaceHandle;
+        Serial.println("ui_SimplisticWatchFace");
     }
 }
 
@@ -137,7 +140,7 @@ void loadsettings(lv_event_t *e)
 
     lv_slider_set_value(ui_Brightness_Slider, GetUserBrightness(), LV_ANIM_OFF);
 
-    lv_colorwheel_set_rgb(ui_Theme_Colorwheel, lv_theme_get_color_primary(ui_Clock));
+    lv_colorwheel_set_rgb(ui_Theme_Colorwheel, lv_theme_get_color_primary(ui_Settings));
     UpdateTestTheme(nullptr);
 
     if (Storage.getBool("DarkMode"))
@@ -203,7 +206,7 @@ void ClockLeft(lv_event_t *e)
 
 void generictoclock(lv_event_t *e)
 {
-    if (lv_scr_act() != ui_Clock)
+    if (!isClockScreen)
     {
         ApplyTheme(nullptr);
         lv_anim_del_all();
@@ -211,19 +214,19 @@ void generictoclock(lv_event_t *e)
         switch (dir)
         {
         case LV_DIR_LEFT:
-            lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 1);
+            lv_scr_load_anim((lv_obj_t *)GetClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 150, 0, 1);
             break;
         case LV_DIR_RIGHT:
-            lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, 1);
+            lv_scr_load_anim((lv_obj_t *)GetClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, 1);
             break;
         case LV_DIR_TOP:
-            lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, 1);
+            lv_scr_load_anim((lv_obj_t *)GetClockScreen, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, 1);
             break;
         case LV_DIR_BOTTOM:
-            lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 1);
+            lv_scr_load_anim((lv_obj_t *)GetClockScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 1);
             break;
         default:
-            lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
+            lv_scr_load_anim((lv_obj_t *)GetClockScreen, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
             break;
         }
     }
@@ -231,11 +234,11 @@ void generictoclock(lv_event_t *e)
 
 void buttontoclock()
 {
-    if (lv_scr_act() != ui_Clock)
+    if (!isClockScreen)
     {
         lv_anim_del_all();
         ApplyTheme(nullptr);
-        lv_scr_load_anim(ui_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
+        lv_scr_load_anim((lv_obj_t *)GetClockScreen, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
     }
 }
 

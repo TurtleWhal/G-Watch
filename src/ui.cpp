@@ -256,27 +256,31 @@ void setup()
   //////////Initalize UI//////////
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
 
-  ui_Clock_screen_init();
-  // ui_SimplisticWatchFace_screen_init();
+  // ui_Clock_screen_init();
+  ui_SimplisticWatchFace_screen_init();
 
-  InitClockScreen();
   SetClockScreen(ui_SimplisticWatchFace);
+  InitClockScreen();
 
-  lv_obj_del(ui_Tick_Dots); // Only used For visual purposes in Squareline Studio
-  lv_obj_del(ui_Tick_Dashes);
+  Log.verboseln("Init clock Screen");
+
+  /*lv_obj_del(ui_Default_Clock_Tick_Dots); // Only used For visual purposes in Squareline Studio
+  lv_obj_del(ui_Default_Clock_Tick_Dashes);
 
   lv_obj_del(ui_Second_Dash_Include); // Only used to include files
-  lv_obj_del(ui_Second_Dot_Include);
+  lv_obj_del(ui_Second_Dot_Include);*/
 
 #ifdef USESPLASHSCREEN
   lv_obj_clear_flag(ui_Logo_Arc, LV_OBJ_FLAG_HIDDEN);
 #endif
-  InitTicks(); // Draws the tick marks around the edge
+  // InitTicks(); // Draws the tick marks around the edge
 
   ui____initial_actions0 = lv_obj_create(NULL);
+  Log.verboseln("ui____initial_actions0");
 
   lv_disp_load_scr(GetClockScreen());
   // lv_disp_load_scr(ui_SimplisticWatchFace);
+  Log.verboseln("lv_disp_load_scr");
   // lv_disp_load_scr(ui_Clock);
 
   twatch->backlight_set_value(100);
@@ -290,8 +294,8 @@ void setup()
 
   InitUserSettings();
 
-  ApplyTheme(nullptr);
-  // lv_timer_handler();
+  // ApplyTheme(nullptr);
+  //  lv_timer_handler();
 
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
@@ -319,7 +323,7 @@ void setup()
   ////////////////////////////OTA
   if (useOTA)
   {
-    lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
+    // lv_label_set_text(ui_Default_Clock_Now_Playing_Label, "WiFi OTA");
     WiFi.mode(WIFI_STA);
     WiFi.setHostname("ESP-Watch");
     WiFi.begin(ssid, password);
@@ -358,17 +362,21 @@ void setup()
     Serial.println("Ready");
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
-    lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
+    // lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
   }
   ////////////////////////////////////////END OTA
 
   // WriteTime();
   // lv_label_set_text(ui_Notification_Amount_Number, "0");
+  Serial.println("Lv Timer");
   lv_timer_handler();
+  Serial.println("BT on");
   BT_on();
 #if defined(CONFIG_BMA423_LATER)
+  Serial.println("Bma423 begin");
   twatch->bma423_begin(); // This takes 2 seconds
 #endif
+  Serial.println("hal Update");
   twatch->hal_auto_update(true, 1);
 
   Timer0Triggered = 1;

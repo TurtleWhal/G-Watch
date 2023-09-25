@@ -171,7 +171,8 @@ void ParseGB(char *Message)
         char NowPlayingArtist[64];
         sscanf(NotifTitle, "%s by %s", NowPlayingTitle, NowPlayingArtist);
         lv_label_set_text_fmt(ui_Now_Playing_Label, "%s\n%s", NowPlayingTitle, NowPlayingArtist);*/
-        lv_label_set_text_fmt(ui_Now_Playing_Label, "%s   •", NotifTitle);
+        //lv_label_set_text_fmt(ui_Now_Playing_Label, "%s   •", NotifTitle);
+        info.music.nowplaying = NotifTitle;
         songtime = millis();
         Log.verboseln("Detected Now Playing: %s", NotifTitle);
       }
@@ -238,7 +239,7 @@ void ParseGB(char *Message)
     }
     else if (strcmp(CallType, "outgoing") == 0)
     {
-      _ui_screen_change(&ui_Call, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Clock_screen_init);
+      _ui_screen_change(&ui_Call, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, ui_Call_screen_init);
       lv_label_set_text(ui_Call_Type, "Outgoing Call");
       lv_label_set_text(ui_Caller_Name, received["name"]);
       lv_label_set_text(ui_Caller_Number, received["number"]);
@@ -253,7 +254,8 @@ void ParseGB(char *Message)
     }
     else if (strcmp(CallType, "end") == 0)
     {
-      _ui_screen_change(&ui_Clock, LV_SCR_LOAD_ANIM_FADE_OUT, 150, 0, nullptr);
+      lv_obj_t *tempclock = GetClockScreen();
+      _ui_screen_change(&tempclock, LV_SCR_LOAD_ANIM_FADE_OUT, 150, 0, nullptr);
     }
   }
   else if (strcmp(NotifType, "musicstate") == 0)
@@ -484,11 +486,11 @@ void MusicSkipBackward(lv_event_t *e)
 
 void BTHandle()
 {
-  if (songtime and songtime < (millis() - 70000))
+  /*if (songtime and songtime < (millis() - 70000))
   {
     songtime = 0;
     lv_label_set_text(ui_Now_Playing_Label, "");
-  }
+  }*/
 }
 
 void ToggleBT(lv_event_t *e)

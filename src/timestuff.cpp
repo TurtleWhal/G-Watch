@@ -45,14 +45,15 @@ void WriteTime()
         lastsec = second;
         getLocalTime(&t_tm);
 #ifdef UPDATE_ELEMENTS
-        ColorTicks(second);
-        // lv_img_set_angle(ui_Minute_Hand, (t_tm.tm_min * 60) + (second));
-        // lv_img_set_angle(ui_Simplistic_Minute_Hand, (t_tm.tm_min * 60) + (second));
-        // lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, (t_tm.tm_min * 60) + (second));
-        /*if (lv_scr_act() == ui_Timers){
-          lv_roller_set_selected(ui_Timer_Second_Right_Roller, t_tm.tm_sec % 10, LV_ANIM_ON);
-          lv_roller_set_selected(ui_Timer_Second_Left_Roller, t_tm.tm_sec / 10 , LV_ANIM_ON);
-          }*/
+        if (lv_scr_act() == ui_Default_Clock)
+            ColorTicks(second);
+            // lv_img_set_angle(ui_Minute_Hand, (t_tm.tm_min * 60) + (second));
+            // lv_img_set_angle(ui_Simplistic_Minute_Hand, (t_tm.tm_min * 60) + (second));
+            // lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, (t_tm.tm_min * 60) + (second));
+            /*if (lv_scr_act() == ui_Timers){
+              lv_roller_set_selected(ui_Timer_Second_Right_Roller, t_tm.tm_sec % 10, LV_ANIM_ON);
+              lv_roller_set_selected(ui_Timer_Second_Left_Roller, t_tm.tm_sec / 10 , LV_ANIM_ON);
+              }*/
 #endif
 
         if (t_tm.tm_min != lastmin)
@@ -73,9 +74,11 @@ void WriteTime()
 
                 strftime(time, sizeof(time), "%a %b %e", &t_tm);
 #ifdef UPDATE_ELEMENTS
-                lv_label_set_text(ui_Date, time);
+                // lv_label_set_text(ui_Date, time);
+                info.time.date = time;
                 strftime(time, sizeof(time), "%D", &t_tm);
-                lv_label_set_text(ui_Date_Numerical, time);
+                info.time.date = time;
+                // lv_label_set_text(ui_Date_Numerical, time);
 #endif
             }
         }
@@ -104,7 +107,7 @@ void InitTicks()
 {
     for (int i = 0; i < 62; i++)
     {
-        tick_index[i] = lv_img_create(ui_Clock);
+        tick_index[i] = lv_img_create(ui_Default_Clock);
 
         if (i % 5) // Minor second ticks
         {

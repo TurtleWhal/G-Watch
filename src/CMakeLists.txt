@@ -2,7 +2,7 @@ SET(SOURCES components/ui_comp_app_button.c
     components/ui_comp_notification_widget.c
     components/ui_comp_setting_panel.c
     components/ui_comp.c
-    screens/ui_Clock.c
+    screens/ui_Default_Clock.c
     screens/ui_Notifications.c
     screens/ui_Alarms.c
     screens/ui_Set_Alarm.c

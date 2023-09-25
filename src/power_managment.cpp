@@ -12,6 +12,7 @@
 
 extern TWatchClass *twatch;
 esp_pm_config_esp32_t pm_config;
+extern ClockInfo info;
 
 // #define SleepWhenPluggedIn
 #define Sleeptimeout 30000 // time until watch goes to sleep in mS
@@ -156,16 +157,17 @@ void DrawPower()
   if (lastpercent != twatch->power_get_percent())
   {
 #ifdef UPDATE_ELEMENTS
-    lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", twatch->power_get_percent());
-    lv_arc_set_value(ui_Arc_Battery, twatch->power_get_percent());
+    //lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", twatch->power_get_percent());
+    //lv_arc_set_value(ui_Arc_Battery, twatch->power_get_percent());
+    info.battery.percentage = twatch->power_get_percent();
 #endif
     lastpercent = twatch->power_get_percent();
 
 #ifdef UPDATE_ELEMENTS
-    if (charging)
+    /*if (charging)
       lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     else
-      lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+      lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);*/
 #endif
 
     BTsendpower();

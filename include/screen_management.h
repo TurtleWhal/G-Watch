@@ -12,13 +12,15 @@ extern "C"
             uint8_t seconds;
             uint8_t valsec;
             int valusec;
+            String date;
+            String numdate;
         } TimeInfo;
         TimeInfo time;
 
         typedef struct
         {
             uint16_t steps;
-            uint16_t stegoal;
+            uint16_t stepgoal;
         } HealthInfo;
         HealthInfo health;
 
@@ -52,6 +54,7 @@ extern "C"
             String artist;
             String album;
             bool isplaying;
+            String nowplaying;
         } MusicInfo;
         MusicInfo music;
 
@@ -71,6 +74,23 @@ extern "C"
             String location = "";
         } WeatherInfo;
         WeatherInfo weather;
+
+        typedef struct
+        {
+            String lasttitle;
+            String lasttext;
+            const void *lastimg;
+            uint8_t count;
+        } NotificationInfo;
+        NotificationInfo notification;
+
+        typedef struct
+        {
+            uint8_t percentage;
+            uint8_t voltage;
+            bool ischarging;
+        } PowerInfo;
+        PowerInfo battery;
 
     } ClockInfo;
 
