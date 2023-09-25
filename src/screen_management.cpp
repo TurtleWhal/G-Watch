@@ -50,6 +50,7 @@ void SetClockScreen(lv_obj_t *screen)
     {
         ClockScreenInit = ui_SimplisticWatchFace_screen_init;
         ClockHandler = SimplisticWatchFaceHandle;
+        ClockScreen = &ui_SimplisticWatchFace;
         Serial.println("ui_SimplisticWatchFace");
     }
 }
