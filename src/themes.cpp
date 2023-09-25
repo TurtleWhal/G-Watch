@@ -40,7 +40,7 @@ void ToggleTheme(lv_event_t *e)
   }
 }
 
-void ApplyTheme(lv_event_t * e)
+void ApplyTheme(lv_event_t *e)
 {
   lv_disp_t *dispp = lv_disp_get_default();
   if (Storage.isKey("Theme"))
@@ -63,12 +63,14 @@ void ApplyTheme(lv_event_t * e)
   extern lv_obj_t *tick_index[62];
 
   if (!Storage.getBool("DarkMode"))
-  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xFFFFFF), LV_PART_MAIN);
   else
-  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x101418), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x101418), LV_PART_MAIN);
 
-  // Clock Screen
+    // Clock Screen
 #ifdef UPDATE_ELEMENTS
+  if (ui_Default_Clock != NULL)
+  {
     lv_obj_set_style_img_recolor(ui_Default_Clock_Minute_Hand, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor(ui_Default_Clock_Steps_Image, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_Default_Clock_Step_Counter_Text, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -78,6 +80,7 @@ void ApplyTheme(lv_event_t * e)
     lv_obj_set_style_bg_color(ui_Notification_Image_Panel, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor(tick_index[60], ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_img_recolor(tick_index[61], ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
 
   // Compass Screen
   if (ui_Compass != NULL)
@@ -110,7 +113,7 @@ void ApplyTheme(lv_event_t * e)
   {
     lv_chart_set_series_color(ui_Steps_Chart, lv_chart_get_series_next(ui_Steps_Chart, NULL), ThemeColor);
   }
-  #endif
+#endif
 }
 
 lv_color_t GetTheme()

@@ -294,7 +294,7 @@ void setup()
 
   InitUserSettings();
 
-  // ApplyTheme(nullptr);
+  ApplyTheme(nullptr);
   //  lv_timer_handler();
 
   hw_timer_t *timer = NULL;
