@@ -29,9 +29,9 @@ void WriteTime()
     info.time.valsec = val.tv_sec;
     info.time.valusec = val.tv_usec;
 
-    info.time.hours = t_tm.tm_hour;
-    info.time.minutes = t_tm.tm_min;
-    info.time.seconds = t_tm.tm_sec;
+    info.time.hour = t_tm.tm_hour;
+    info.time.minute = t_tm.tm_min;
+    info.time.second = t_tm.tm_sec;
 
 #ifdef UPDATE_ELEMENTS
     // if (secangle != lastsecangle)

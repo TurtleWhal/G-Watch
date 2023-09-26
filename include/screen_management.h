@@ -1,16 +1,21 @@
+#include "Arduino.h"
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+
     typedef struct
     {
         typedef struct
         {
-            uint8_t hours;
-            uint8_t minutes;
-            uint8_t seconds;
+            uint8_t hour;
+            uint8_t minute;
+            uint8_t second;
+            // seconds lined up with valusec
             uint8_t valsec;
+            // microseconds from last second
             int valusec;
             String date;
             String numdate;

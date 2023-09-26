@@ -4,6 +4,7 @@
 #include "Functions.h"
 #include "screen_management.h"
 #include "power_managment.h"
+#include "ClockHandlers.h"
 
 extern Preferences Storage;
 
@@ -44,6 +45,7 @@ void SetClockScreen(lv_obj_t *screen)
     {
         ClockScreenInit = ui_Default_Clock_screen_init;
         ClockHandler = DefaultClockHandle;
+        ClockScreen = &ui_SimplisticWatchFace;
         Serial.println("ui_Default_Clock");
     }
     else if (Screen == ui_SimplisticWatchFace)
@@ -73,26 +75,6 @@ void ScreenHandleHandle()
 {
     ClockHandler();
 }
-
-////////////////////// Watch Screen Handlers ///////////////////////
-
-void DefaultClockHandle()
-{
-}
-
-void SimplisticWatchFaceHandle()
-{
-    if (lv_scr_act() == ui_SimplisticWatchFace)
-    {
-        lv_img_set_angle(ui_Simplistic_Hour_Hand, (info.time.hours * 300) + (info.time.minutes * 5));
-        lv_img_set_angle(ui_Simplistic_Hour_Hand_Shadow, (info.time.hours * 300) + (info.time.minutes * 5));
-
-        lv_img_set_angle(ui_Simplistic_Minute_Hand, (info.time.minutes * 60) + (info.time.seconds));
-        lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, (info.time.minutes * 60) + (info.time.seconds));
-    }
-}
-
-////////////////////////////////////////////////////////////////////
 
 void SetDownScreen(int Screen)
 {
