@@ -259,7 +259,7 @@ void setup()
   // ui_Clock_screen_init();
   ui_SimplisticWatchFace_screen_init();
 
-  SetClockScreen(ui_SimplisticWatchFace);
+  SetClockScreen(ui_Default_Clock);
   InitClockScreen();
 
   Log.verboseln("Init clock Screen");
@@ -278,10 +278,10 @@ void setup()
   ui____initial_actions0 = lv_obj_create(NULL);
   Log.verboseln("ui____initial_actions0");
 
-  lv_disp_load_scr(GetClockScreen());
+  //lv_disp_load_scr(GetClockScreen());
   // lv_disp_load_scr(ui_SimplisticWatchFace);
+  lv_disp_load_scr(ui_Default_Clock);
   Log.verboseln("lv_disp_load_scr");
-  // lv_disp_load_scr(ui_Clock);
 
   twatch->backlight_set_value(100);
   // twatch->backlight_gradual_light(255,1000);

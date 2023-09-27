@@ -23,63 +23,31 @@ void WriteTime()
     char time[11];
 
     gettimeofday(&val, NULL);
-    int second = (val.tv_sec % 60);
-    int secangle = (val.tv_usec / 100000);
 
-    info.time.valsec = val.tv_sec;
+    info.time.valsec = val.tv_sec % 60;
     info.time.valusec = val.tv_usec;
 
     info.time.hour = t_tm.tm_hour;
     info.time.minute = t_tm.tm_min;
     info.time.second = t_tm.tm_sec;
 
-#ifdef UPDATE_ELEMENTS
-    // if (secangle != lastsecangle)
-    // lv_img_set_angle(ui_Second_Hand, secangle * 6 + second * 60); // Rounds uSec to 0-12, changes to 0,5,10,15,20.., then adds seconds
-    lastsecangle = secangle;
-#endif
-
-    if (second != lastsec)
+    if (info.time.second != lastsec)
     {
         Log.verboseln("Writetime sec");
-        lastsec = second;
+        lastsec = info.time.second;
         getLocalTime(&t_tm);
-#ifdef UPDATE_ELEMENTS
-        if (lv_scr_act() == ui_Default_Clock)
-            ColorTicks(second);
-            // lv_img_set_angle(ui_Minute_Hand, (t_tm.tm_min * 60) + (second));
-            // lv_img_set_angle(ui_Simplistic_Minute_Hand, (t_tm.tm_min * 60) + (second));
-            // lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, (t_tm.tm_min * 60) + (second));
-            /*if (lv_scr_act() == ui_Timers){
-              lv_roller_set_selected(ui_Timer_Second_Right_Roller, t_tm.tm_sec % 10, LV_ANIM_ON);
-              lv_roller_set_selected(ui_Timer_Second_Left_Roller, t_tm.tm_sec / 10 , LV_ANIM_ON);
-              }*/
-#endif
 
         if (t_tm.tm_min != lastmin)
         {
             lastmin = t_tm.tm_min;
-#ifdef UPDATE_ELEMENTS
-            // lv_img_set_angle(ui_Hour_Hand, (t_tm.tm_hour * 300) + (t_tm.tm_min * 5));
-            // lv_img_set_angle(ui_Simplistic_Hour_Hand, (t_tm.tm_hour * 300) + (t_tm.tm_min * 5));
-            // lv_img_set_angle(ui_Simplistic_Hour_Hand_Shadow, (t_tm.tm_hour * 300) + (t_tm.tm_min * 5));
-
-            // strftime(time, sizeof(time), "%I:%M", &t_tm);
-            // lv_label_set_text(ui_Time, time);
-#endif
 
             if (t_tm.tm_hour != lasthour)
             {
                 lasthour = t_tm.tm_hour;
-
                 strftime(time, sizeof(time), "%a %b %e", &t_tm);
-#ifdef UPDATE_ELEMENTS
-                // lv_label_set_text(ui_Date, time);
                 info.time.date = time;
                 strftime(time, sizeof(time), "%D", &t_tm);
                 info.time.date = time;
-                // lv_label_set_text(ui_Date_Numerical, time);
-#endif
             }
         }
     }

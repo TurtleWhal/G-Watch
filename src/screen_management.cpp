@@ -5,6 +5,7 @@
 #include "screen_management.h"
 #include "power_managment.h"
 #include "ClockHandlers.h"
+#include "timestuff.h"
 
 extern Preferences Storage;
 
@@ -45,7 +46,7 @@ void SetClockScreen(lv_obj_t *screen)
     {
         ClockScreenInit = ui_Default_Clock_screen_init;
         ClockHandler = DefaultClockHandle;
-        ClockScreen = &ui_SimplisticWatchFace;
+        ClockScreen = &ui_Default_Clock;
         Serial.println("ui_Default_Clock");
     }
     else if (Screen == ui_SimplisticWatchFace)
@@ -60,7 +61,20 @@ void SetClockScreen(lv_obj_t *screen)
 void InitClockScreen()
 {
     ClockScreenInit();
-    // ui_SimplisticWatchFace_screen_init();
+
+    if (ClockScreenInit == ui_Default_Clock_screen_init)
+    {
+        Serial.println("Init Default clock");
+        lv_label_set_text(ui_Default_Clock_Now_Playing_Label, "");
+
+        lv_obj_del(ui_Default_Clock_Tick_Dots); // Only used For visual purposes in Squareline Studio
+        lv_obj_del(ui_Default_Clock_Tick_Dashes);
+
+        lv_obj_del(ui_Second_Dash_Include); // Only used to include files
+        lv_obj_del(ui_Second_Dot_Include);
+
+        InitTicks(); // Draws the tick marks around the edge
+    }
 }
 
 bool isClockScreen()
