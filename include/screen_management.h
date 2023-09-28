@@ -5,22 +5,35 @@ extern "C"
 {
 #endif
 
-
     typedef struct
     {
         typedef struct
         {
+            // 24 hour hour
             uint8_t hour;
+            // 12 hour hour
+            uint8_t hour12;
             uint8_t minute;
             uint8_t second;
             // seconds lined up with valusec
             uint8_t valsec;
-            // microseconds from last second
+            // microseconds since second changed (0 - 1,000,000)
             int valusec;
+            // Formatted Mon Jan 1
             String date;
+            // Formatted M/DD/YY
             String numdate;
         } TimeInfo;
         TimeInfo time;
+
+        typedef struct
+        {
+            bool secondchanged = 1;
+            bool minutechanged = 1;
+            bool hourchanged = 1;
+            bool refresh;
+        } FlagInfo;
+        FlagInfo flag;
 
         typedef struct
         {
@@ -40,13 +53,16 @@ extern "C"
         typedef struct
         {
             uint16_t degrees;
+            // NNE, N, SSW
             char heading[3];
         } CompassInfo;
         CompassInfo compass;
 
+        // Bluetooth
         typedef struct
         {
             String name;
+            // is connected
             bool status;
         } BluetoothInfo;
         BluetoothInfo bt;
@@ -59,6 +75,7 @@ extern "C"
             String artist;
             String album;
             bool isplaying;
+            // song recognized by pixel phones
             String nowplaying;
         } MusicInfo;
         MusicInfo music;
@@ -70,11 +87,14 @@ extern "C"
             int low = 0;
             int humidity = 0;
             int precip = 0;
+            // UV index
             int uv = 0;
             int code = 0;
             lv_img_dsc_t img = ui_img_mostly_cloudy_png;
             String type = "Not Updated";
+            // Wind Speed
             int wind = 0;
+            // Wind Direction
             int winddir = 0;
             String location = "";
         } WeatherInfo;
@@ -82,9 +102,13 @@ extern "C"
 
         typedef struct
         {
+            // Last received notification title
             String lasttitle;
+            // Last received notification text
             String lasttext;
+            // Last received notification image
             const void *lastimg;
+            // Number of notifications
             uint8_t count;
         } NotificationInfo;
         NotificationInfo notification;

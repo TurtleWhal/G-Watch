@@ -24,7 +24,6 @@ extern Preferences Storage;
 extern ClockInfo info;
 extern int notificationid;
 lv_obj_t *ui_Notification_Widgets[1];
-LV_IMG_DECLARE(ui_img_bluetooth_small_png);
 // LV_IMG_DECLARE(ui_img_pause_button_png);
 bool BTon;
 bool BTconnected;
@@ -552,15 +551,11 @@ void BTmsgloop()
   if (BTon and blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT)) // can't call get event unless BTon = true
   {
     BTconnected = true;
-    // if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
-    //   lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_bluetooth_small_png);
     info.bt.status = 1;
   }
   else
   {
     BTconnected = false;
-    // if (lv_img_get_src(ui_Bluetooth_Indicator) != &ui_img_no_bluetooth_small_png)
-    //   lv_img_set_src(ui_Bluetooth_Indicator, &ui_img_no_bluetooth_small_png);
     info.bt.status = 0;
   }
 

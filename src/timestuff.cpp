@@ -20,14 +20,22 @@ void WriteTime()
     static uint8_t lasthour = 61;
     static int lastsecangle;
 
+    info.flag.secondchanged = 0;
+    info.flag.minutechanged = 0;
+    info.flag.hourchanged = 0;
+
     char time[11];
 
     gettimeofday(&val, NULL);
+    getLocalTime(&t_tm);
 
     info.time.valsec = val.tv_sec % 60;
     info.time.valusec = val.tv_usec;
 
     info.time.hour = t_tm.tm_hour;
+    info.time.hour12 = t_tm.tm_hour;
+    if (info.time.hour12 > 12)
+        info.time.hour12 -= 12;
     info.time.minute = t_tm.tm_min;
     info.time.second = t_tm.tm_sec;
 
@@ -35,19 +43,21 @@ void WriteTime()
     {
         Log.verboseln("Writetime sec");
         lastsec = info.time.second;
-        getLocalTime(&t_tm);
+        info.flag.secondchanged = 1;
 
         if (t_tm.tm_min != lastmin)
         {
             lastmin = t_tm.tm_min;
+            info.flag.minutechanged = 1;
 
             if (t_tm.tm_hour != lasthour)
             {
                 lasthour = t_tm.tm_hour;
+                info.flag.hourchanged = 1;
                 strftime(time, sizeof(time), "%a %b %e", &t_tm);
                 info.time.date = time;
                 strftime(time, sizeof(time), "%D", &t_tm);
-                info.time.date = time;
+                info.time.numdate = time;
             }
         }
     }

@@ -42,6 +42,8 @@ int xaccel;
 
 extern Preferences Storage;
 
+extern ClockInfo info;
+
 bool useOTA;
 extern bool BTon;
 bool Timer0Triggered;
@@ -180,11 +182,11 @@ void btn3_click(void *param)
 {
   Log.verboseln("BTN3 Click");
   Wakeup("Button 3 Pressed");
-  if (isClockScreen)
+  Serial.println(isClockScreen());
+  if (isClockScreen())
   {
     if (NotificationActive())
       notificationdismiss(nullptr);
-    // pairBT(random( 0,999999 ));
   }
   else
     screenback(nullptr);
@@ -278,8 +280,8 @@ void setup()
   ui____initial_actions0 = lv_obj_create(NULL);
   Log.verboseln("ui____initial_actions0");
 
-  //lv_disp_load_scr(GetClockScreen());
-  // lv_disp_load_scr(ui_SimplisticWatchFace);
+  // lv_disp_load_scr(GetClockScreen());
+  //  lv_disp_load_scr(ui_SimplisticWatchFace);
   lv_disp_load_scr(ui_Default_Clock);
   Log.verboseln("lv_disp_load_scr");
 
@@ -402,9 +404,9 @@ void loop()
 
     if (isClockScreen) // Only run this if on the main screen
     {
+      ScreenHandleHandle();
       WriteTime();
       Powerhandle();
-      ScreenHandleHandle();
       // notifslide(nullptr);
     }
     else
