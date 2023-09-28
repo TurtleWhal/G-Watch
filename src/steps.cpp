@@ -84,8 +84,8 @@ int getSteps()
 void DrawSteps()
 {
 #ifdef UPDATE_ELEMENTS
-  lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Steps);
-  lv_arc_set_value(ui_Arc_Right, ((float)Steps / Storage.getUShort("StepGoal")) * 250);
+  lv_label_set_text_fmt(ui_Default_Clock_Step_Counter_Text, "%i", Steps);
+  lv_arc_set_value(ui_Default_Clock_Arc_Right, ((float)Steps / Storage.getUShort("StepGoal")) * 250);
 #endif
 }
 

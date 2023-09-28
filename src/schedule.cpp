@@ -160,8 +160,8 @@ Serial.println(CurrentSchedule.Names[i]);*/
         DrawSchedule(nullptr);
     }
 
-    lv_arc_set_range(ui_Arc_Right, StartTime, EndTime);
-    lv_arc_set_value(ui_Arc_Right, numtime);
+    lv_arc_set_range(ui_Default_Clock_Arc_Right, StartTime, EndTime);
+    lv_arc_set_value(ui_Default_Clock_Arc_Right, numtime);
 }
 
 void DrawSchedule(lv_event_t *e)

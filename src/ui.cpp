@@ -328,7 +328,7 @@ void setup()
   if (useOTA)
   {
 
-    lv_label_set_text(ui_Now_Playing_Label, "WiFi OTA");
+    lv_label_set_text(ui_Default_Clock_Now_Playing_Label, "WiFi OTA");
     WiFi.mode(WIFI_STA);
     WiFi.setHostname("ESP-Watch");
     WiFi.begin(ssid, password);
