@@ -44,6 +44,8 @@ int xaccel;
 
 extern Preferences Storage;
 
+extern ClockInfo info;
+
 bool useOTA;
 extern bool BTon;
 bool Timer0Triggered;
@@ -85,7 +87,7 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 
     if (!isSleeping()) // If Awake
     {
-      if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
+      if (isClockScreen) // Only run this if on the main screen
       {
         notifslide(nullptr);
       }
@@ -169,7 +171,7 @@ void btn2_click(void *param)
 {
   Log.verboseln("BTN2 Click. MilliVolts: %i", (int)twatch->power_get_volt());
   // twatch->motor_shake(1, 60);
-  if (lv_scr_act() == ui_Clock)
+  if (isClockScreen)
     _ui_screen_change(&ui_Schedule, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Schedule_screen_init);
   else if (lv_scr_act() == ui_Stopwatch)
     ToggleStopwatch(nullptr);
@@ -182,14 +184,14 @@ void btn3_click(void *param)
 {
   Log.verboseln("BTN3 Click");
   Wakeup("Button 3 Pressed");
-  if (lv_scr_act() == ui_Clock)
+  Serial.println(isClockScreen());
+  if (isClockScreen())
   {
     if (NotificationActive())
       notificationdismiss(nullptr);
-    // pairBT(random( 0,999999 ));
   }
   else
-    screenback();
+    screenback(nullptr);
 }
 void btn1_held(void *param)
 {
@@ -213,7 +215,7 @@ void btn3_held(void *param)
 {
   Log.verboseln("BTN3 Held");
   Wakeup("Button 3 Held");
-  totimescreen(nullptr);
+  ClockRight(nullptr);
   twatch->motor_shake(1, 30);
 }
 
@@ -258,28 +260,38 @@ void setup()
   //////////Initalize UI//////////
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
 
-  ui_Clock_screen_init();
-  ui_Music_screen_init();
+  // ui_Clock_screen_init();
+  ui_SimplisticWatchFace_screen_init();
 
-  lv_obj_del(ui_Tick_Dots); // Only used For visual purposes in Squareline Studio
-  lv_obj_del(ui_Tick_Dashes);
+  SetClockScreen(ui_Default_Clock);
+  InitClockScreen();
+
+  Log.verboseln("Init clock Screen");
+
+  /*lv_obj_del(ui_Default_Clock_Tick_Dots); // Only used For visual purposes in Squareline Studio
+  lv_obj_del(ui_Default_Clock_Tick_Dashes);
 
   lv_obj_del(ui_Second_Dash_Include); // Only used to include files
-  lv_obj_del(ui_Second_Dot_Include);
+  lv_obj_del(ui_Second_Dot_Include);*/
 
 #ifdef USESPLASHSCREEN
   lv_obj_clear_flag(ui_Logo_Arc, LV_OBJ_FLAG_HIDDEN);
 #endif
-  InitTicks(); // Draws the tick marks around the edge
+  // InitTicks(); // Draws the tick marks around the edge
 
   ui____initial_actions0 = lv_obj_create(NULL);
-  lv_disp_load_scr(ui_Clock);
+  Log.verboseln("ui____initial_actions0");
+
+  // lv_disp_load_scr(GetClockScreen());
+  //  lv_disp_load_scr(ui_SimplisticWatchFace);
+  lv_disp_load_scr(ui_Default_Clock);
+  Log.verboseln("lv_disp_load_scr");
 
   twatch->backlight_set_value(100);
   // twatch->backlight_gradual_light(255,1000);
 
 #ifdef UPDATE_ELEMENTS
-  lv_label_set_text(ui_Now_Playing_Label, "");
+  // lv_label_set_text(ui_Now_Playing_Label, "");
 #endif
 
   // InitPercent(); // Battery Percent
@@ -287,7 +299,7 @@ void setup()
   InitUserSettings();
 
   ApplyTheme(nullptr);
-  // lv_timer_handler();
+  //  lv_timer_handler();
 
   hw_timer_t *timer = NULL;
   timer = timerBegin(0, 80, true);
@@ -358,17 +370,21 @@ void setup()
     Serial.println("Ready");
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
-    lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
+    // lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
   }
   ////////////////////////////////////////END OTA
 
-  WriteTime();
-  lv_label_set_text(ui_Notification_Amount_Number, "0");
+  // WriteTime();
+  // lv_label_set_text(ui_Notification_Amount_Number, "0");
+  Serial.println("Lv Timer");
   lv_timer_handler();
+  Serial.println("BT on");
   BT_on();
 #if defined(CONFIG_BMA423_LATER)
+  Serial.println("Bma423 begin");
   twatch->bma423_begin(); // This takes 2 seconds
 #endif
+  Serial.println("hal Update");
   twatch->hal_auto_update(true, 1);
 
   Timer0Triggered = 1;
@@ -392,8 +408,9 @@ void loop()
     // delay(5);
     // delay(lv_timer_handler());
 
-    if (lv_scr_act() == ui_Clock) // Only run this if on the main screen
+    if (isClockScreen) // Only run this if on the main screen
     {
+      ScreenHandleHandle();
       WriteTime();
       Powerhandle();
       // notifslide(nullptr);

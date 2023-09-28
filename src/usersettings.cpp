@@ -2,8 +2,10 @@
 #include "ui.h"
 #include "usersettings.h"
 #include "ArduinoLog.h"
+#include "screen_management.h"
 
 Preferences Storage;
+extern ClockInfo info;
 
 #define defaultnotificationlength 10
 #define defaultStepgoal 10000
@@ -31,7 +33,9 @@ void UpdateSettings(lv_event_t *e)
 
   Storage.putUInt("NotifLength", atoi(lv_textarea_get_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL))));
 
-  Storage.putBytes("BTname", lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)), 17);
+  String BTnametemp = lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL));
+  Storage.putBytes("BTname", BTnametemp.c_str(), 17);
+  info.bt.name = BTnametemp;
   // Serial.println(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
 
   Storage.putUInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);

@@ -8,12 +8,14 @@
 #include "BThandle.h"
 #include "ArduinoLog.h"
 #include "schedule.h"
+#include "screen_management.h"
 
 void BTsendSteps();
 
 extern Preferences Storage;
 extern TWatchClass *twatch;
 ushort Steps;
+extern ClockInfo info;
 
 lv_coord_t SineArray[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -83,11 +85,7 @@ void DrawSteps()
 {
 #ifdef UPDATE_ELEMENTS
   lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Steps);
-  if (!HasScheduleEvent)
-  {
-    lv_arc_set_range(ui_Arc_Right, 0, Storage.getUShort("StepGoal"));
-    lv_arc_set_value(ui_Arc_Right, Steps);
-  }
+  lv_arc_set_value(ui_Arc_Right, ((float)Steps / Storage.getUShort("StepGoal")) * 250);
 #endif
 }
 

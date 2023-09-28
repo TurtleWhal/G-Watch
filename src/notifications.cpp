@@ -9,13 +9,16 @@
 #include "ArduinoLog.h"
 #include "BThandle.h"
 #include "themes.h"
+#include "screen_management.h"
+
+extern ClockInfo info;
 
 LV_IMG_DECLARE(ui_img_discord_icon_png);
 LV_IMG_DECLARE(ui_img_youtube_icon_png);
 LV_IMG_DECLARE(ui_img_sms_icon_png);
 LV_IMG_DECLARE(ui_img_gmail_icon_png);
-LV_IMG_DECLARE(ui_img_steps_large_png); // assets\Steps Large.png
-LV_IMG_DECLARE(ui_img_messages_icon_png);    // assets\Messages Icon.png
+LV_IMG_DECLARE(ui_img_steps_large_png);   // assets\Steps Large.png
+LV_IMG_DECLARE(ui_img_messages_icon_png); // assets\Messages Icon.png
 
 Notification NotificationList[11];
 lv_obj_t *NotificationComp[10];
@@ -43,7 +46,6 @@ void shownotification(String Title, String Text, String Source, int id)
   lv_label_set_text(ui_Notification_Text, Text.c_str());
   lv_label_set_text(ui_Notification_Source, Source.c_str());
   // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount + 1);
-
 
   if (Source == "Messages")
   {
@@ -81,6 +83,10 @@ void shownotification(String Title, String Text, String Source, int id)
   NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
   NotificationList[10].id = TempID;
   NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
+
+  info.notification.lasttitle = NotificationList[10].Title;
+  info.notification.lasttext = NotificationList[10].Text;
+  info.notification.lastimg = NotificationList[10].img;
 
   TempID = id;
 
@@ -175,7 +181,8 @@ void pushnotification(int index)
   }
   NotificationList[i] = NotificationList[10];
   if (NotificationCount++ < 10)
-    lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount);
+    info.notification.count = NotificationCount;
+  // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount);
   // NotificationCount++;
 
   if (lv_scr_act() == ui_Notifications)
@@ -218,7 +225,8 @@ void popnotification(int index)
       lv_obj_set_user_data(NotificationComp[i], (void *)i - 1);
   }
   // NotificationCount--;
-  lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", --NotificationCount);
+  //lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", --NotificationCount);
+  info.notification.count = --NotificationCount;
 }
 
 void drawnotificationarc()

@@ -10,12 +10,13 @@
 extern "C" {
 #endif
 
-void totimescreen(lv_event_t * e);
+void ClockRight(lv_event_t * e);
 void ClockDown(lv_event_t * e);
 void ApplyTheme(lv_event_t * e);
 void notifslideon(lv_event_t * e);
 void notifslideoff(lv_event_t * e);
 void notificationdismiss(lv_event_t * e);
+void screenback(lv_event_t * e);
 void drawnotifications(lv_event_t * e);
 void deletenotification(lv_event_t * e);
 void settimerdefault(lv_event_t * e);
@@ -51,6 +52,8 @@ void MusicSkipForward(lv_event_t * e);
 void MusicSkipBackward(lv_event_t * e);
 void DrawWeather(lv_event_t * e);
 void SetWeatherDeafault(lv_event_t * e);
+void ClockUpwards(lv_event_t * e);
+void ClockLeft(lv_event_t * e);
 void InitStepsScreen(lv_event_t * e);
 void ResetStorage(lv_event_t * e);
 void ResetCounter(lv_event_t * e);
