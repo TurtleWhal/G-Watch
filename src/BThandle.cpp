@@ -170,7 +170,7 @@ void ParseGB(char *Message)
         char NowPlayingArtist[64];
         sscanf(NotifTitle, "%s by %s", NowPlayingTitle, NowPlayingArtist);
         lv_label_set_text_fmt(ui_Now_Playing_Label, "%s\n%s", NowPlayingTitle, NowPlayingArtist);*/
-        //lv_label_set_text_fmt(ui_Now_Playing_Label, "%s   •", NotifTitle);
+        // lv_label_set_text_fmt(ui_Now_Playing_Label, "%s   •", NotifTitle);
         info.music.nowplaying = NotifTitle;
         songtime = millis();
         Log.verboseln("Detected Now Playing: %s", NotifTitle);
@@ -214,8 +214,8 @@ void ParseGB(char *Message)
     Serial.println(info.music.length);
     Serial.println(info.music.album);
 
-    info.music.song = localmusicartist;
-    info.music.artist = localmusicsong;
+    info.music.song = localmusicsong;
+    info.music.artist = localmusicartist;
     info.music.album = localmusicalbum;
 
     // ui_Music_screen_init();
@@ -224,6 +224,29 @@ void ParseGB(char *Message)
     DrawMusicInfo(nullptr);
     SetDownScreen(MUSIC_SCREEN);
     // twatch->motor_shake(1, 50);
+  }
+  else if (strcmp(NotifType, "musicstate") == 0)
+  {
+    const char *MusicState = received["state"];
+    info.music.position = received["position"];
+    // info.music.position += info.music.positionOFFSET;
+    Serial.println(MusicState);
+
+    if (strcmp(MusicState, "play") == 0)
+    {
+      Serial.println("Change To Pause Button");
+      // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
+      //  lv_label_set_text(ui_Now_Playing_Label, MusicState);
+      info.music.isplaying = 1;
+    }
+    else
+    {
+      Serial.println("Change To Play Button");
+      // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
+      //  lv_label_set_text(ui_Now_Playing_Label, MusicState);
+      info.music.isplaying = 0;
+    }
+    DrawMusicTime(nullptr);
   }
   else if (strcmp(NotifType, "call") == 0)
   {
@@ -256,29 +279,6 @@ void ParseGB(char *Message)
       lv_obj_t *tempclock = GetClockScreen();
       _ui_screen_change(&tempclock, LV_SCR_LOAD_ANIM_FADE_OUT, 150, 0, nullptr);
     }
-  }
-  else if (strcmp(NotifType, "musicstate") == 0)
-  {
-    const char *MusicState = received["state"];
-    info.music.position = received["position"];
-    // info.music.position += info.music.positionOFFSET;
-    Serial.println(MusicState);
-
-    if (strcmp(MusicState, "play") == 0)
-    {
-      Serial.println("Change To Pause Button");
-      lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
-      // lv_label_set_text(ui_Now_Playing_Label, MusicState);
-      info.music.isplaying = 1;
-    }
-    else
-    {
-      Serial.println("Change To Play Button");
-      lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
-      // lv_label_set_text(ui_Now_Playing_Label, MusicState);
-      info.music.isplaying = 0;
-    }
-    DrawMusicTime(nullptr);
   }
   else if (strcmp(NotifType, "is_gps_active") == 0)
   {
@@ -442,10 +442,19 @@ void DrawMusicTime(lv_event_t *e)
 {
   if (lv_scr_act() == ui_Music)
   {
-    lv_label_set_text_fmt(ui_Music_Time, "%i:%02i / %i:%02i", (int)(info.music.position / 60), info.music.position % 60, (int)(info.music.length / 60), info.music.length % 60);
     if (info.music.length)
       lv_slider_set_range(ui_Music_Play_Bar, 0, info.music.length);
     lv_slider_set_value(ui_Music_Play_Bar, info.music.position, LV_ANIM_ON);
+    lv_label_set_text_fmt(ui_Music_Time, "%i:%02i / %i:%02i", (int)(info.music.position / 60), info.music.position % 60, (int)(info.music.length / 60), info.music.length % 60);
+
+    if (info.music.isplaying)
+    {
+      lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
+    }
+    else
+    {
+      lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
+    }
   }
 }
 
@@ -473,14 +482,14 @@ void MusicSkipForward(lv_event_t *e)
 {
   Serial.println("Skipping Forward");
   String skipforwardstring = "{t:\"music\", n:\"next\"}";
-  BTsend(skipforwardstring, 2);
+  BTsend(skipforwardstring);
 }
 
 void MusicSkipBackward(lv_event_t *e)
 {
   Serial.println("Skipping Backward");
   String skipbackwardstring = "{t:\"music\", n:\"previous\"}";
-  BTsend(skipbackwardstring, 2);
+  BTsend(skipbackwardstring);
 }
 
 void BTHandle()
