@@ -32,7 +32,7 @@ void StepHandle()
   if (StepOffset == UINT16_MAX)
   {
     // twatch->bma423_reset();
-    if (Storage.getUShort("StepDay") == GetDay())
+    if (Storage.getUShort("StepDay") == getDay())
     {
       StepOffset = Storage.getUShort("Steps");
     }
@@ -60,15 +60,15 @@ void StepHandle()
     }
 
     Storage.putUShort("Steps", Steps);
-    StepDay = GetDay();
+    StepDay = getDay();
     Storage.putUShort("StepsDay", StepDay);
 
     BTsendSteps();
   }
 
-  if (Storage.getUShort("StepDay") != GetDay())
+  if (Storage.getUShort("StepDay") != getDay())
   {
-    Storage.putUShort("StepDay", GetDay());
+    Storage.putUShort("StepDay", getDay());
     Storage.putBool("StepReach", 0);
     StepOffset = 0;
     Storage.putUShort("Steps", 0);

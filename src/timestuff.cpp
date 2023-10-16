@@ -13,7 +13,7 @@ extern TWatchClass *twatch;
 
 extern ClockInfo info;
 
-void WriteTime()
+void writeTime()
 {
     static uint8_t lastsec = 61;
     static uint8_t lastmin = 61;
@@ -63,31 +63,19 @@ void WriteTime()
     }
 }
 
-int GetDay()
+int getDay()
 {
     getLocalTime(&t_tm);
     return (t_tm.tm_yday);
 }
 
-int GetMinute()
-{
-    getLocalTime(&t_tm);
-    return (t_tm.tm_min);
-}
-
-int GetHour()
-{
-    getLocalTime(&t_tm);
-    return (t_tm.tm_hour);
-}
-
-int GetDayOfWeek()
+int getDayOfWeek()
 {
     getLocalTime(&t_tm);
     return (t_tm.tm_wday);
 }
 
-void InitTicks()
+void initTicks()
 {
     Serial.println("InitTicks");
     for (int i = 0; i < 62; i++)
@@ -125,7 +113,7 @@ void InitTicks()
     lv_obj_swap(tick_index[1], tick_index[61]);
 }
 
-void ColorTicks(int i)
+void colorTicks(int i)
 {
 
     if (i % 5) // Minor second ticks
@@ -142,7 +130,7 @@ void ColorTicks(int i)
     }
 }
 
-void SetTime(ulong newtime, short timezone)
+void setTime(ulong newtime, short timezone)
 {
     newtime = newtime + (timezone * 60 * 60);
     gettimeofday(&val, NULL);

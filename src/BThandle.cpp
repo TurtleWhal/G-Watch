@@ -90,7 +90,7 @@ void ParseBLE(char *Message)
 
     Serial.println(timezone);
 
-    SetTime(timevalue, timezone);
+    setTime(timevalue, timezone);
   }
   else
     ParseGB(Message);

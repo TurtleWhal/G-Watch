@@ -69,7 +69,7 @@ void Wakeup(String Wakeup_reason)
     //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
     //  generictoclock(nullptr);
     //  lv_timer_handler();
-    WriteTime();
+    writeTime();
 
     DrawPower();
 

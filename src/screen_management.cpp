@@ -85,7 +85,7 @@ void InitClockScreen()
         lv_obj_del(ui_Second_Dash_Include); // Only used to include files
         lv_obj_del(ui_Second_Dot_Include);
 
-        InitTicks(); // Draws the tick marks around the edge
+        initTicks(); // Draws the tick marks around the edge
 
         info.flag.refresh = 1;
     }

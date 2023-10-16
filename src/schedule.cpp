@@ -46,7 +46,7 @@ bool HasScheduleEvent()
 
 void ScheduleHandle()
 {
-    CurrentSchedule = *WeeklySchedule[GetDayOfWeek()];
+    CurrentSchedule = *WeeklySchedule[getDayOfWeek()];
     StartTime = 0;
     EndTime = 2400;
     entry = UINT8_MAX;
@@ -54,17 +54,18 @@ void ScheduleHandle()
     passing = 0;
     numtime = 0;
 
-    numtime = (GetHour() * 100) + GetMinute();
+    numtime = (info.time.hour * 100) + info.time.minute;
     Serial.print("hour: ");
-    Serial.println(GetHour());
+    Serial.println(info.time.hour);
     Serial.print("minute: ");
-    Serial.println(GetMinute());
+    Serial.println(info.time.minute);
 
     Serial.print("Time: ");
     Serial.println(numtime);
+
     for (int i = 0; i < CurrentSchedule.Entries; i++)
     {
-        if (CurrentSchedule.Times[i][0] <= numtime and CurrentSchedule.Times[i][1] >= numtime)
+        if (CurrentSchedule.Times[i][0] <= numtime and CurrentSchedule.Times[i][1] > numtime)
         {
             entry = i;
             passing = 0;
@@ -81,7 +82,10 @@ Serial.print(CurrentSchedule.Times[i][1]);
 Serial.print(" : ");
 Serial.println(CurrentSchedule.Names[i]);*/
 #ifdef SCHEDULE_SHOWINFO
+        if (CurrentSchedule.Names[i][1] != "")
         options = options + CurrentSchedule.Names[i][0] + " (" + CurrentSchedule.Names[i][1] + ")" + "\n";
+        else
+        options = options + CurrentSchedule.Names[i][0] + "\n";
 #else
         options = options + CurrentSchedule.Names[i][0] + "\n";
 #endif

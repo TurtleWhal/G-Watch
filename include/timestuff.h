@@ -2,14 +2,12 @@
 extern "C" {
 #endif
 
-void WriteTime();
-int GetDay();
-int GetMinute();
-int GetHour();
-int GetDayOfWeek();
-void InitTicks();
-void ColorTicks(int);
-void SetTime(ulong, short);
+void writeTime();
+int getDay();
+int getDayOfWeek();
+void initTicks();
+void colorTicks(int);
+void setTime(ulong, short);
 
 #ifdef __cplusplus
 } /*extern "C"*/

@@ -395,7 +395,7 @@ void loop()
     if (isClockScreen) // Only run this if on the main screen
     {
       ScreenHandleHandle();
-      WriteTime();
+      writeTime();
       Powerhandle();
       // notifslide(nullptr);
     }
