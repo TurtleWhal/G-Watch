@@ -6,10 +6,13 @@
 #include "power_managment.h"
 #include "ClockHandlers.h"
 #include "timestuff.h"
+#include "TWatch_hal.h"
 
 extern Preferences Storage;
 
 ClockInfo info;
+
+extern TWatchClass *twatch;
 
 // extern int Brightness;
 
@@ -22,7 +25,7 @@ int LastDownScreen = WEATHER_SCREEN;
 // extern "C" lv_obj_t *ClockScreen = ui_SimplisticWatchFace;
 auto *ClockScreen = &ui_SimplisticWatchFace;
 
-lv_obj_t *Screen = ui_SimplisticWatchFace;
+extern "C" lv_obj_t *Screen = ui_SimplisticWatchFace;
 
 auto ClockHandler = SimplisticWatchFaceHandle;
 
@@ -37,12 +40,11 @@ lv_obj_t *GetClockScreen()
 
 void SetClockScreen(lv_obj_t *screen)
 {
-
     Serial.print("Set Clock Screen to: ");
     Screen = screen;
     ClockScreen = &screen;
 
-    if (Screen == ui_Default_Clock)
+    if (screen == ui_Default_Clock)
     {
         ClockScreenInit = ui_Default_Clock_screen_init;
         ClockHandler = DefaultClockHandle;
@@ -50,13 +52,21 @@ void SetClockScreen(lv_obj_t *screen)
         Screen = ui_Default_Clock;
         Serial.println("ui_Default_Clock");
     }
-    else if (Screen == ui_SimplisticWatchFace)
+    else if (screen == ui_SimplisticWatchFace)
     {
         ClockScreenInit = ui_SimplisticWatchFace_screen_init;
         ClockHandler = SimplisticWatchFaceHandle;
         ClockScreen = &ui_SimplisticWatchFace;
         Screen = ui_SimplisticWatchFace;
         Serial.println("ui_SimplisticWatchFace");
+    }
+    else if (screen == ui_SkeletonWatchFace)
+    {
+        ClockScreenInit = ui_SkeletonWatchFace_screen_init;
+        ClockHandler = SkeletonWatchFaceHandle;
+        ClockScreen = &ui_SkeletonWatchFace;
+        Screen = ui_SkeletonWatchFace;
+        Serial.println("ui_SkeletonWatchFace");
     }
 }
 
@@ -241,6 +251,23 @@ void buttontoclock()
         ApplyTheme(nullptr);
         lv_scr_load_anim((lv_obj_t *)GetClockScreen, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, 1);
     }
+}
+
+void DispLoadClockScreen()
+{
+    // Not atcually using disp load because it dosen't work and it just calls ui screen change
+    _ui_screen_change(ClockScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, nullptr);
+}
+
+void ToggleFlashlight(lv_event_t *e)
+{
+  if (lv_event_get_code(e) == LV_EVENT_SCREEN_UNLOADED)
+    twatch->backlight_set_value(GetUserBrightness());
+
+  if ((int)lv_obj_get_style_bg_color(ui_Flashlight, LV_PART_MAIN).full == (int)lv_color_hex(0xFFFFFF).full)
+    twatch->backlight_set_value(100);
+  else
+    twatch->backlight_set_value(GetUserBrightness());
 }
 
 void screenback(lv_event_t *e)

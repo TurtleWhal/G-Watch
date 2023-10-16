@@ -397,10 +397,10 @@ lv_obj_t *ui_Label6;
 lv_obj_t *ui_Panel7;
 lv_obj_t *ui_Label7;
 lv_obj_t *ui_Label8;
-lv_obj_t *ui_Image3;
-lv_obj_t *ui_Image1;
-lv_obj_t *ui_Image5;
-lv_obj_t *ui_Image4;
+lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand_Shadow;
+lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand;
+lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand_Shadow;
+lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand;
 lv_obj_t *ui_Lighting;
 
 

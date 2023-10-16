@@ -7,18 +7,19 @@
 Preferences Storage;
 extern ClockInfo info;
 
-#define defaultnotificationlength 10
-#define defaultStepgoal 10000
+#define DEFAULTNOTIFICATIONLENGTH 10
+#define DEFAULTSTEPGOAL 10000
 
 void InitUserSettings()
 {
   Storage.begin("Settings");
   if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
-    Storage.putUInt("NotifLength", defaultnotificationlength);
+    Storage.putUInt("NotifLength", DEFAULTNOTIFICATIONLENGTH);
 
   // lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Storage.getUInt("StepGoal"));
   if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
-    Storage.putUInt("StepGoal", defaultStepgoal);
+    Storage.putUInt("StepGoal", DEFAULTSTEPGOAL);
+  info.health.stepgoal = Storage.getUInt("StepGoal");
 
   // lv_label_set_text_fmt(ui_Step_Counter_Text, "%s", Storage.isKey("StepGoal") ? "TRUE":"FALSE");
 }
@@ -59,6 +60,6 @@ void PrintSettings()
   Log.verboseln("|- Bluetooth Name ------- %s", BTnamechar);
   Log.verboseln("|- Theme Color ---------- %i", Storage.getUInt("Theme"));
   Log.verboseln("|- Dark Mode ------------ %i", Storage.getBool("DarkMode"));
-  Log.verboseln("|----------------------------------");
+  Log.verboseln("-----------------------------------");
   Log.verboseln("");
 }

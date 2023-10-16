@@ -144,61 +144,61 @@ lv_obj_set_align( ui_Label8, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Label8,"VI");
 lv_obj_set_style_text_font(ui_Label8, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Image3 = lv_img_create(ui_SkeletonWatchFace);
-lv_img_set_src(ui_Image3, &ui_img_skeletonminutehand_png);
-lv_obj_set_width( ui_Image3, LV_SIZE_CONTENT);  /// 19
-lv_obj_set_height( ui_Image3, LV_SIZE_CONTENT);   /// 150
-lv_obj_set_x( ui_Image3, 1 );
-lv_obj_set_y( ui_Image3, -44 );
-lv_obj_set_align( ui_Image3, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Image3, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Image3, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_pivot(ui_Image3,9,120);
-lv_img_set_zoom(ui_Image3,250);
-lv_obj_set_style_img_recolor(ui_Image3, lv_color_hex(0x1A1A1A), LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_img_recolor_opa(ui_Image3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Watch_Face_Minute_Hand_Shadow = lv_img_create(ui_SkeletonWatchFace);
+lv_img_set_src(ui_Skeleton_Watch_Face_Minute_Hand_Shadow, &ui_img_skeletonminutehand_png);
+lv_obj_set_width( ui_Skeleton_Watch_Face_Minute_Hand_Shadow, LV_SIZE_CONTENT);  /// 19
+lv_obj_set_height( ui_Skeleton_Watch_Face_Minute_Hand_Shadow, LV_SIZE_CONTENT);   /// 150
+lv_obj_set_x( ui_Skeleton_Watch_Face_Minute_Hand_Shadow, 1 );
+lv_obj_set_y( ui_Skeleton_Watch_Face_Minute_Hand_Shadow, -44 );
+lv_obj_set_align( ui_Skeleton_Watch_Face_Minute_Hand_Shadow, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Skeleton_Watch_Face_Minute_Hand_Shadow, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Skeleton_Watch_Face_Minute_Hand_Shadow, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_pivot(ui_Skeleton_Watch_Face_Minute_Hand_Shadow,9,120);
+lv_img_set_zoom(ui_Skeleton_Watch_Face_Minute_Hand_Shadow,250);
+lv_obj_set_style_img_recolor(ui_Skeleton_Watch_Face_Minute_Hand_Shadow, lv_color_hex(0x1A1A1A), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_img_recolor_opa(ui_Skeleton_Watch_Face_Minute_Hand_Shadow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Image1 = lv_img_create(ui_SkeletonWatchFace);
-lv_img_set_src(ui_Image1, &ui_img_skeletonminutehand_png);
-lv_obj_set_width( ui_Image1, LV_SIZE_CONTENT);  /// 19
-lv_obj_set_height( ui_Image1, LV_SIZE_CONTENT);   /// 150
-lv_obj_set_x( ui_Image1, 0 );
-lv_obj_set_y( ui_Image1, -45 );
-lv_obj_set_align( ui_Image1, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Image1, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Image1, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_pivot(ui_Image1,9,120);
-lv_img_set_zoom(ui_Image1,250);
-lv_obj_set_style_img_recolor(ui_Image1, lv_color_hex(0xB2B2B2), LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_img_recolor_opa(ui_Image1, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Watch_Face_Minute_Hand = lv_img_create(ui_SkeletonWatchFace);
+lv_img_set_src(ui_Skeleton_Watch_Face_Minute_Hand, &ui_img_skeletonminutehand_png);
+lv_obj_set_width( ui_Skeleton_Watch_Face_Minute_Hand, LV_SIZE_CONTENT);  /// 19
+lv_obj_set_height( ui_Skeleton_Watch_Face_Minute_Hand, LV_SIZE_CONTENT);   /// 150
+lv_obj_set_x( ui_Skeleton_Watch_Face_Minute_Hand, 0 );
+lv_obj_set_y( ui_Skeleton_Watch_Face_Minute_Hand, -45 );
+lv_obj_set_align( ui_Skeleton_Watch_Face_Minute_Hand, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Skeleton_Watch_Face_Minute_Hand, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Skeleton_Watch_Face_Minute_Hand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_pivot(ui_Skeleton_Watch_Face_Minute_Hand,9,120);
+lv_img_set_zoom(ui_Skeleton_Watch_Face_Minute_Hand,250);
+lv_obj_set_style_img_recolor(ui_Skeleton_Watch_Face_Minute_Hand, lv_color_hex(0xB2B2B2), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_img_recolor_opa(ui_Skeleton_Watch_Face_Minute_Hand, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Image5 = lv_img_create(ui_SkeletonWatchFace);
-lv_img_set_src(ui_Image5, &ui_img_skeletonminutehand_png);
-lv_obj_set_width( ui_Image5, LV_SIZE_CONTENT);  /// 19
-lv_obj_set_height( ui_Image5, LV_SIZE_CONTENT);   /// 150
-lv_obj_set_x( ui_Image5, 1 );
-lv_obj_set_y( ui_Image5, -44 );
-lv_obj_set_align( ui_Image5, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Image5, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Image5, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_pivot(ui_Image5,9,120);
-lv_img_set_zoom(ui_Image5,150);
-lv_obj_set_style_img_recolor(ui_Image5, lv_color_hex(0x1A1A1A), LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_img_recolor_opa(ui_Image5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Watch_Face_Hour_Hand_Shadow = lv_img_create(ui_SkeletonWatchFace);
+lv_img_set_src(ui_Skeleton_Watch_Face_Hour_Hand_Shadow, &ui_img_skeletonminutehand_png);
+lv_obj_set_width( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, LV_SIZE_CONTENT);  /// 19
+lv_obj_set_height( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, LV_SIZE_CONTENT);   /// 150
+lv_obj_set_x( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, 1 );
+lv_obj_set_y( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, -44 );
+lv_obj_set_align( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_pivot(ui_Skeleton_Watch_Face_Hour_Hand_Shadow,9,120);
+lv_img_set_zoom(ui_Skeleton_Watch_Face_Hour_Hand_Shadow,150);
+lv_obj_set_style_img_recolor(ui_Skeleton_Watch_Face_Hour_Hand_Shadow, lv_color_hex(0x1A1A1A), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_img_recolor_opa(ui_Skeleton_Watch_Face_Hour_Hand_Shadow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Image4 = lv_img_create(ui_SkeletonWatchFace);
-lv_img_set_src(ui_Image4, &ui_img_skeletonminutehand_png);
-lv_obj_set_width( ui_Image4, LV_SIZE_CONTENT);  /// 19
-lv_obj_set_height( ui_Image4, LV_SIZE_CONTENT);   /// 150
-lv_obj_set_x( ui_Image4, 0 );
-lv_obj_set_y( ui_Image4, -45 );
-lv_obj_set_align( ui_Image4, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Image4, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Image4, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_pivot(ui_Image4,9,120);
-lv_img_set_zoom(ui_Image4,150);
-lv_obj_set_style_img_recolor(ui_Image4, lv_color_hex(0xB2B2B2), LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_img_recolor_opa(ui_Image4, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Watch_Face_Hour_Hand = lv_img_create(ui_SkeletonWatchFace);
+lv_img_set_src(ui_Skeleton_Watch_Face_Hour_Hand, &ui_img_skeletonminutehand_png);
+lv_obj_set_width( ui_Skeleton_Watch_Face_Hour_Hand, LV_SIZE_CONTENT);  /// 19
+lv_obj_set_height( ui_Skeleton_Watch_Face_Hour_Hand, LV_SIZE_CONTENT);   /// 150
+lv_obj_set_x( ui_Skeleton_Watch_Face_Hour_Hand, 0 );
+lv_obj_set_y( ui_Skeleton_Watch_Face_Hour_Hand, -45 );
+lv_obj_set_align( ui_Skeleton_Watch_Face_Hour_Hand, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Skeleton_Watch_Face_Hour_Hand, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Skeleton_Watch_Face_Hour_Hand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_pivot(ui_Skeleton_Watch_Face_Hour_Hand,9,120);
+lv_img_set_zoom(ui_Skeleton_Watch_Face_Hour_Hand,150);
+lv_obj_set_style_img_recolor(ui_Skeleton_Watch_Face_Hour_Hand, lv_color_hex(0xB2B2B2), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_img_recolor_opa(ui_Skeleton_Watch_Face_Hour_Hand, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Lighting = lv_obj_create(ui_SkeletonWatchFace);
 lv_obj_set_width( ui_Lighting, 1);

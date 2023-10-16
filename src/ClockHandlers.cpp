@@ -60,7 +60,30 @@ void DefaultClockHandle()
                 lv_img_set_angle(ui_Default_Clock_Hour_Hand, (info.time.hour * 300) + (info.time.minute * 5));
 
                 lv_label_set_text_fmt(ui_Default_Clock_Step_Counter_Text, "%i", info.health.steps);
+
                 lv_label_set_text_fmt(ui_Default_Clock_Battery_Percentage, "%i%%", info.battery.percentage);
+                lv_arc_set_value(ui_Default_Clock_Arc_Battery, info.battery.percentage);
+                if (info.battery.ischarging)
+                    lv_obj_set_style_text_color(ui_Default_Clock_Battery_Percentage, lv_color_hex(0x00FF00), LV_STYLE_TEXT_COLOR);
+                else
+                    lv_obj_remove_local_style_prop(ui_Default_Clock_Battery_Percentage, LV_STYLE_TEXT_COLOR, LV_PART_MAIN);
+
+                if (info.schedule.currenttime)
+                {
+                    lv_arc_set_range(ui_Default_Clock_Arc_Right, info.schedule.starttime, info.schedule.endtime);
+                    lv_arc_set_value(ui_Default_Clock_Arc_Right, info.schedule.currenttime);
+                    lv_obj_set_style_arc_color(ui_Default_Clock_Arc_Right, lv_color_hex(0x00DFFF), LV_PART_INDICATOR);
+                }
+                else
+                {
+                    Serial.println("stepgoal");
+                    Serial.println(info.health.stepgoal);
+                    Serial.println("steps");
+                    Serial.println(info.health.steps);
+                    lv_obj_remove_local_style_prop(ui_Default_Clock_Arc_Right, LV_STYLE_ARC_COLOR, LV_PART_INDICATOR);
+                    lv_arc_set_range(ui_Default_Clock_Arc_Right, 0, info.health.stepgoal);
+                    lv_arc_set_value(ui_Default_Clock_Arc_Right, info.health.steps);
+                }
 
                 if (info.flag.hourchanged or info.flag.refresh)
                 {
@@ -68,6 +91,14 @@ void DefaultClockHandle()
                     lv_label_set_text(ui_Default_Clock_Date_Numerical, info.time.numdate.c_str());
                 }
             }
+
+            if (info.music.nowplayingtimer < 80)
+            {
+                if (info.music.nowplayingtimer < 2)
+                    info.music.nowplayingtimer++;
+            }
+            else if (info.music.nowplayingtimer >= 81)
+                lv_label_set_text(ui_Default_Clock_Now_Playing_Label, "");
         }
         if (info.flag.refresh)
             info.flag.refresh = 0;
@@ -78,10 +109,43 @@ void SimplisticWatchFaceHandle()
 {
     if (lv_scr_act() == ui_SimplisticWatchFace)
     {
-        lv_img_set_angle(ui_Simplistic_Hour_Hand, (info.time.hour * 300) + (info.time.minute * 5));
-        lv_img_set_angle(ui_Simplistic_Hour_Hand_Shadow, (info.time.hour * 300) + (info.time.minute * 5));
+        if (info.flag.secondchanged or info.flag.refresh)
+        {
+            lv_img_set_angle(ui_Simplistic_Hour_Hand, (info.time.hour * 300) + (info.time.minute * 5));
+            lv_img_set_angle(ui_Simplistic_Hour_Hand_Shadow, (info.time.hour * 300) + (info.time.minute * 5));
 
-        lv_img_set_angle(ui_Simplistic_Minute_Hand, (info.time.minute * 60) + (info.time.second));
-        lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, (info.time.minute * 60) + (info.time.second));
+            if (info.flag.minutechanged or info.flag.refresh)
+            {
+                lv_img_set_angle(ui_Simplistic_Minute_Hand, (info.time.minute * 60) + (info.time.second));
+                lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, (info.time.minute * 60) + (info.time.second));
+
+                if (info.flag.hourchanged or info.flag.refresh)
+                {
+                }
+            }
+        }
+    }
+}
+
+void SkeletonWatchFaceHandle()
+{
+    if (lv_scr_act() == ui_SkeletonWatchFace)
+    {
+
+        if (info.flag.secondchanged or info.flag.refresh)
+        {
+            lv_img_set_angle(ui_Skeleton_Watch_Face_Minute_Hand, (info.time.hour * 300) + (info.time.minute * 5));
+            lv_img_set_angle(ui_Skeleton_Watch_Face_Minute_Hand_Shadow, (info.time.hour * 300) + (info.time.minute * 5));
+
+            if (info.flag.minutechanged or info.flag.refresh)
+            {
+                lv_img_set_angle(ui_Skeleton_Watch_Face_Hour_Hand, (info.time.minute * 60) + (info.time.second));
+                lv_img_set_angle(ui_Skeleton_Watch_Face_Hour_Hand_Shadow, (info.time.minute * 60) + (info.time.second));
+
+                if (info.flag.hourchanged or info.flag.refresh)
+                {
+                }
+            }
+        }
     }
 }

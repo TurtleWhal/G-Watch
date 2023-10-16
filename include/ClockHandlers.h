@@ -5,6 +5,7 @@ extern "C"
 
     void DefaultClockHandle();
     void SimplisticWatchFaceHandle();
+    void SkeletonWatchFaceHandle();
 
 #ifdef __cplusplus
 } /*extern "C"*/

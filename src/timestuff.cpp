@@ -89,6 +89,7 @@ int GetDayOfWeek()
 
 void InitTicks()
 {
+    Serial.println("InitTicks");
     for (int i = 0; i < 62; i++)
     {
         tick_index[i] = lv_img_create(ui_Default_Clock);
@@ -103,7 +104,12 @@ void InitTicks()
         {
             lv_img_set_src(tick_index[i], &ui_img_seconddashstub_png);
             lv_obj_set_y(tick_index[i], -91);
-            lv_obj_set_style_img_recolor(tick_index[i], lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+
+            Serial.println(info.theme.darkmode);
+            if (info.theme.darkmode or 1)
+                lv_obj_set_style_img_recolor(tick_index[i], lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            else
+                lv_obj_set_style_img_recolor(tick_index[i], lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
         }
 
         lv_obj_set_x(tick_index[i], 0);

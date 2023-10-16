@@ -28,10 +28,10 @@ extern "C"
 
         typedef struct
         {
-            bool secondchanged = 1;
-            bool minutechanged = 1;
-            bool hourchanged = 1;
-            bool refresh;
+            bool secondchanged;
+            bool minutechanged;
+            bool hourchanged;
+            bool refresh = 1;
         } FlagInfo;
         FlagInfo flag;
 
@@ -77,6 +77,7 @@ extern "C"
             bool isplaying;
             // song recognized by pixel phones
             String nowplaying;
+            uint8_t nowplayingtimer;
         } MusicInfo;
         MusicInfo music;
 
@@ -121,6 +122,13 @@ extern "C"
         } PowerInfo;
         PowerInfo battery;
 
+        typedef struct
+        {
+            lv_color16_t color;
+            bool darkmode;
+        } ThemeInfo;
+        ThemeInfo theme;
+
     } ClockInfo;
 
     enum
@@ -143,6 +151,7 @@ extern "C"
     void ScreenHandleHandle();
     void SetClockScreen(lv_obj_t *screen);
     void InitClockScreen();
+    void DispLoadClockScreen();
 
 #ifdef __cplusplus
 } /*extern "C"*/

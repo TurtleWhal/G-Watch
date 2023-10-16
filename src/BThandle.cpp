@@ -172,7 +172,7 @@ void ParseGB(char *Message)
         lv_label_set_text_fmt(ui_Now_Playing_Label, "%s\n%s", NowPlayingTitle, NowPlayingArtist);*/
         // lv_label_set_text_fmt(ui_Now_Playing_Label, "%s   •", NotifTitle);
         info.music.nowplaying = NotifTitle;
-        songtime = millis();
+        info.music.nowplayingtimer = 0;
         Log.verboseln("Detected Now Playing: %s", NotifTitle);
       }
       else

@@ -386,10 +386,10 @@ extern lv_obj_t *ui_Label6;
 extern lv_obj_t *ui_Panel7;
 extern lv_obj_t *ui_Label7;
 extern lv_obj_t *ui_Label8;
-extern lv_obj_t *ui_Image3;
-extern lv_obj_t *ui_Image1;
-extern lv_obj_t *ui_Image5;
-extern lv_obj_t *ui_Image4;
+extern lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand_Shadow;
+extern lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand;
+extern lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand_Shadow;
+extern lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand;
 extern lv_obj_t *ui_Lighting;
 // SCREEN: ui_SimplisticWatchFace
 void ui_SimplisticWatchFace_screen_init(void);
