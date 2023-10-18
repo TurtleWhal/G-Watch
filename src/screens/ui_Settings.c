@@ -114,7 +114,7 @@ ui_Notification_Time_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
 lv_obj_set_x( ui_Notification_Time_Setting_Panel, 200 );
 lv_obj_set_y( ui_Notification_Time_Setting_Panel, 35 );
 
-lv_label_set_text(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Notification\nTime (Seconds)");
+lv_label_set_text(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Notification\nTimer");
 lv_obj_set_style_text_font(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_textarea_set_max_length(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),3);
@@ -257,8 +257,6 @@ lv_obj_set_style_bg_color(ui_Settings_Label_Underline, lv_color_hex(0xFFFFFF), L
 lv_obj_set_style_bg_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_color(ui_Settings_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_color(ui_Settings_Label_Underline, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_shadow_opa(ui_Settings_Label_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_width(ui_Settings_Label_Underline, 20, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_Settings_Label_Underline, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -275,24 +273,6 @@ lv_obj_set_style_text_color(ui_Settings_Label, lv_color_hex(0xFFFFFF), LV_PART_M
 lv_obj_set_style_text_opa(ui_Settings_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Settings_Label, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Settings_Numberpad = lv_keyboard_create(ui_Settings);
-lv_keyboard_set_mode(ui_Settings_Numberpad,LV_KEYBOARD_MODE_NUMBER);
-lv_obj_set_width( ui_Settings_Numberpad, 165);
-lv_obj_set_height( ui_Settings_Numberpad, 120);
-lv_obj_set_x( ui_Settings_Numberpad, 0 );
-lv_obj_set_y( ui_Settings_Numberpad, 33 );
-lv_obj_set_align( ui_Settings_Numberpad, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Settings_Numberpad, LV_OBJ_FLAG_HIDDEN );   /// Flags
-lv_obj_set_style_radius(ui_Settings_Numberpad, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_color(ui_Settings_Numberpad, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_shadow_opa(ui_Settings_Numberpad, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_width(ui_Settings_Numberpad, 20, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_spread(ui_Settings_Numberpad, 7, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-lv_obj_set_style_radius(ui_Settings_Numberpad, 10, LV_PART_ITEMS| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Settings_Numberpad, lv_color_hex(0xFF7D00), LV_PART_ITEMS | LV_STATE_PRESSED );
-lv_obj_set_style_bg_opa(ui_Settings_Numberpad, 255, LV_PART_ITEMS| LV_STATE_PRESSED);
-
 ui_Settings_Keyboard = lv_keyboard_create(ui_Settings);
 lv_keyboard_set_mode(ui_Settings_Keyboard,LV_KEYBOARD_MODE_TEXT_UPPER);
 lv_obj_set_width( ui_Settings_Keyboard, 243);
@@ -302,6 +282,38 @@ lv_obj_add_flag( ui_Settings_Keyboard, LV_OBJ_FLAG_HIDDEN );   /// Flags
 
 lv_obj_set_style_bg_color(ui_Settings_Keyboard, lv_color_hex(0xFF7D00), LV_PART_ITEMS | LV_STATE_PRESSED );
 lv_obj_set_style_bg_opa(ui_Settings_Keyboard, 255, LV_PART_ITEMS| LV_STATE_PRESSED);
+
+ui_Numberpad_Panel = lv_obj_create(ui_Settings);
+lv_obj_set_width( ui_Numberpad_Panel, 207);
+lv_obj_set_height( ui_Numberpad_Panel, 191);
+lv_obj_set_x( ui_Numberpad_Panel, 0 );
+lv_obj_set_y( ui_Numberpad_Panel, -1 );
+lv_obj_set_align( ui_Numberpad_Panel, LV_ALIGN_BOTTOM_MID );
+lv_obj_add_flag( ui_Numberpad_Panel, LV_OBJ_FLAG_HIDDEN );   /// Flags
+lv_obj_clear_flag( ui_Numberpad_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Numberpad_Panel, 20, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_Numberpad_Panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Numberpad_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Keyboard_Setting_panel = ui_Setting_Panel_create(ui_Numberpad_Panel);
+lv_obj_set_x( ui_Keyboard_Setting_panel, 0 );
+lv_obj_set_y( ui_Keyboard_Setting_panel, -10 );
+lv_obj_set_align( ui_Keyboard_Setting_panel, LV_ALIGN_TOP_MID );
+
+
+
+
+
+ui_Settings_Numberpad = lv_keyboard_create(ui_Numberpad_Panel);
+lv_keyboard_set_mode(ui_Settings_Numberpad,LV_KEYBOARD_MODE_NUMBER);
+lv_obj_set_width( ui_Settings_Numberpad, 195);
+lv_obj_set_height( ui_Settings_Numberpad, 144);
+lv_obj_set_x( ui_Settings_Numberpad, 0 );
+lv_obj_set_y( ui_Settings_Numberpad, 10 );
+lv_obj_set_align( ui_Settings_Numberpad, LV_ALIGN_BOTTOM_MID );
+lv_obj_set_style_radius(ui_Settings_Numberpad, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_style_radius(ui_Settings_Numberpad, 10, LV_PART_ITEMS| LV_STATE_DEFAULT);
 
 lv_obj_add_event_cb(ui_Brightness_Slider, ui_event_Brightness_Slider, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Bluetooth_Button, ui_event_Bluetooth_Button, LV_EVENT_ALL, NULL);
@@ -314,9 +326,9 @@ lv_obj_add_event_cb(ui_Theme_Apply_Button, ui_event_Theme_Apply_Button, LV_EVENT
 lv_obj_add_event_cb(ui_Theme_Colorwheel, ui_event_Theme_Colorwheel, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Theme_Setting_Panel, ui_event_Theme_Setting_Panel_Setting_Panel, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Power_Button1, ui_event_Power_Button1, LV_EVENT_ALL, NULL);
-lv_keyboard_set_textarea(ui_Settings_Numberpad,ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE));
-lv_obj_add_event_cb(ui_Settings_Numberpad, ui_event_Settings_Numberpad, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Settings_Keyboard, ui_event_Settings_Keyboard, LV_EVENT_ALL, NULL);
+lv_keyboard_set_textarea(ui_Settings_Numberpad,ui_comp_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_VALUE));
+lv_obj_add_event_cb(ui_Settings_Numberpad, ui_event_Settings_Numberpad, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Settings, ui_event_Settings, LV_EVENT_ALL, NULL);
 
 }

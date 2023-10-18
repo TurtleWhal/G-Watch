@@ -10,6 +10,8 @@ extern ClockInfo info;
 #define DEFAULTNOTIFICATIONLENGTH 10
 #define DEFAULTSTEPGOAL 10000
 
+lv_obj_t *typingPointer;
+
 void InitUserSettings()
 {
   Storage.begin("Settings");
@@ -42,7 +44,7 @@ void UpdateSettings(lv_event_t *e)
   Storage.putUInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);
   ApplyTheme(nullptr);
 
-  Storage.putBool("DarkMode", (lv_obj_get_state(ui_Dark_Mode_Setting_Switch) == 3) ? 1 : 0);
+  Storage.putBool("DarkMode", lv_obj_has_state(ui_Dark_Mode_Setting_Switch, LV_STATE_CHECKED));
   //Serial.println(Storage.getBool("DarkMode"));
 
   PrintSettings();
@@ -62,4 +64,21 @@ void PrintSettings()
   Log.verboseln("|- Dark Mode ------------ %i", Storage.getBool("DarkMode"));
   Log.verboseln("-----------------------------------");
   Log.verboseln("");
+}
+
+void editSetting(lv_event_t *e)
+{
+  typingPointer = lv_event_get_target(e);
+  lv_obj_clear_flag(ui_Numberpad_Panel, LV_OBJ_FLAG_HIDDEN);
+  //lv_label_set_text(lv_obj_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), lv_textarea_get_text(lv_obj_get_child(lv_obj_get_parent(typingPointer), UI_COMP_SETTING_PANEL_SETTING_LABEL)));
+  lv_textarea_set_text(lv_obj_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), lv_textarea_get_text(typingPointer));
+  lv_label_set_text(lv_obj_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_PANEL), lv_label_get_text(lv_obj_get_child(lv_obj_get_parent(typingPointer), UI_COMP_SETTING_PANEL_SETTING_PANEL)));
+
+  }
+
+void applyKeyboardValue(lv_event_t *e)
+{
+  lv_textarea_set_text(typingPointer, lv_textarea_get_text(lv_obj_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
+  lv_obj_add_flag(ui_Numberpad_Panel, LV_OBJ_FLAG_HIDDEN);
+  UpdateSettings(nullptr);
 }

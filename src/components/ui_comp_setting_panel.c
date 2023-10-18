@@ -14,8 +14,8 @@ lv_obj_t *cui_Setting_Panel;
 cui_Setting_Panel = lv_obj_create(comp_parent);
 lv_obj_set_width( cui_Setting_Panel, 200);
 lv_obj_set_height( cui_Setting_Panel, 35);
-lv_obj_set_x( cui_Setting_Panel, 0 );
-lv_obj_set_y( cui_Setting_Panel, -10 );
+lv_obj_set_x( cui_Setting_Panel, 200 );
+lv_obj_set_y( cui_Setting_Panel, 35 );
 lv_obj_set_align( cui_Setting_Panel, LV_ALIGN_CENTER );
 lv_obj_clear_flag( cui_Setting_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(cui_Setting_Panel, 17, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -41,6 +41,8 @@ lv_textarea_set_max_length(cui_Setting_Value,5);
 lv_textarea_set_placeholder_text(cui_Setting_Value,"66666");
 lv_textarea_set_one_line(cui_Setting_Value,true);
 lv_obj_clear_flag( cui_Setting_Value, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_text_color(cui_Setting_Value, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(cui_Setting_Value, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_align(cui_Setting_Value, LV_TEXT_ALIGN_AUTO, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(cui_Setting_Value, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_radius(cui_Setting_Value, 50, LV_PART_MAIN| LV_STATE_DEFAULT);

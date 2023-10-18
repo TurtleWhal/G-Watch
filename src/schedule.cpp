@@ -5,8 +5,6 @@
 #include "timestuff.h"
 #include "screen_management.h"
 
-#define SCHEDULE_SHOWINFO
-
 extern ClockInfo info;
 
 struct Schedule
@@ -72,23 +70,20 @@ void ScheduleHandle()
             Serial.print("Entry : ");
             Serial.println(entry);
         }
-/*else
-   Serial.print("LoopED: ");
-Serial.print(i);
-Serial.print(" : ");
-Serial.print(CurrentSchedule.Times[i][0]);
-Serial.print(" : ");
-Serial.print(CurrentSchedule.Times[i][1]);
-Serial.print(" : ");
-Serial.println(CurrentSchedule.Names[i]);*/
-#ifdef SCHEDULE_SHOWINFO
+        /*else
+           Serial.print("LoopED: ");
+        Serial.print(i);
+        Serial.print(" : ");
+        Serial.print(CurrentSchedule.Times[i][0]);
+        Serial.print(" : ");
+        Serial.print(CurrentSchedule.Times[i][1]);
+        Serial.print(" : ");
+        Serial.println(CurrentSchedule.Names[i]);*/
+        
         if (CurrentSchedule.Names[i][1] != "")
-        options = options + CurrentSchedule.Names[i][0] + " (" + CurrentSchedule.Names[i][1] + ")" + "\n";
+            options = options + CurrentSchedule.Names[i][0] + " (" + CurrentSchedule.Names[i][1] + ")" + "\n";
         else
-        options = options + CurrentSchedule.Names[i][0] + "\n";
-#else
-        options = options + CurrentSchedule.Names[i][0] + "\n";
-#endif
+            options = options + CurrentSchedule.Names[i][0] + "\n";
     }
 
     if (entry == UINT8_MAX)

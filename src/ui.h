@@ -278,10 +278,12 @@ extern lv_obj_t *ui_Power_Button1;
 extern lv_obj_t *ui_Power_Button_Image1;
 extern lv_obj_t *ui_Settings_Label_Underline;
 extern lv_obj_t *ui_Settings_Label;
-void ui_event_Settings_Numberpad( lv_event_t * e);
-extern lv_obj_t *ui_Settings_Numberpad;
 void ui_event_Settings_Keyboard( lv_event_t * e);
 extern lv_obj_t *ui_Settings_Keyboard;
+extern lv_obj_t *ui_Numberpad_Panel;
+extern lv_obj_t *ui_Keyboard_Setting_panel;
+void ui_event_Settings_Numberpad( lv_event_t * e);
+extern lv_obj_t *ui_Settings_Numberpad;
 // SCREEN: ui_Compass
 void ui_Compass_screen_init(void);
 void ui_event_Compass( lv_event_t * e);

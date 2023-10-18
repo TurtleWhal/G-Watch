@@ -275,10 +275,12 @@ lv_obj_t *ui_Power_Button1;
 lv_obj_t *ui_Power_Button_Image1;
 lv_obj_t *ui_Settings_Label_Underline;
 lv_obj_t *ui_Settings_Label;
-void ui_event_Settings_Numberpad( lv_event_t * e);
-lv_obj_t *ui_Settings_Numberpad;
 void ui_event_Settings_Keyboard( lv_event_t * e);
 lv_obj_t *ui_Settings_Keyboard;
+lv_obj_t *ui_Numberpad_Panel;
+lv_obj_t *ui_Keyboard_Setting_panel;
+void ui_event_Settings_Numberpad( lv_event_t * e);
+lv_obj_t *ui_Settings_Numberpad;
 
 
 // SCREEN: ui_Compass
@@ -1364,15 +1366,13 @@ if ( event_code == LV_EVENT_CLICKED) {
 void ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      _ui_flag_modify( ui_Settings_Numberpad, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-      _ui_keyboard_set_target(ui_Settings_Numberpad,  ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE));
+      editSetting( e );
 }
 }
 void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      _ui_keyboard_set_target(ui_Settings_Numberpad,  ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE));
-      _ui_flag_modify( ui_Settings_Numberpad, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      editSetting( e );
 }
 }
 void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e) {
@@ -1413,18 +1413,17 @@ if ( event_code == LV_EVENT_CLICKED) {
       PowerOff( e );
 }
 }
-void ui_event_Settings_Numberpad( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_READY) {
-      _ui_flag_modify( ui_Settings_Numberpad, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-      UpdateSettings( e );
-}
-}
 void ui_event_Settings_Keyboard( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_READY) {
       _ui_flag_modify( ui_Settings_Keyboard, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
       UpdateSettings( e );
+}
+}
+void ui_event_Settings_Numberpad( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_READY) {
+      applyKeyboardValue( e );
 }
 }
 void ui_event_Compass( lv_event_t * e) {

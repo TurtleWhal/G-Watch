@@ -366,3 +366,11 @@ def ClockUpwards(event_struct):
 def ClockRight(event_struct):
     return
 
+
+def editSetting(event_struct):
+    return
+
+
+def applyKeyboardValue(event_struct):
+    return
+
