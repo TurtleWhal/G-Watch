@@ -93,7 +93,8 @@ void InitClockScreen()
 
 bool isClockScreen()
 {
-    if (lv_scr_act() == Screen)
+    //if (lv_scr_act() == Screen)////////////////////////////////PLEASE FIX oR ELSEEEEE//////////////////
+    if (lv_scr_act() == ui_Default_Clock)
         return 1;
     else
         return 0;
