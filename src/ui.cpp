@@ -392,10 +392,10 @@ void loop()
     // delay(5);
     // delay(lv_timer_handler());
 
-    if (isClockScreen) // Only run this if on the main screen
+    if (isClockScreen or 1) // Only run this if on the main screen////////////////////////////////////////////////////////////////////////////////////////
     {
-      ScreenHandleHandle();
       writeTime();
+      ScreenHandleHandle();
       Powerhandle();
       // notifslide(nullptr);
     }

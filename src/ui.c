@@ -455,6 +455,21 @@ lv_obj_t *ui_Schedule_Name;
 lv_obj_t *ui_Schedule_Time_Start;
 lv_obj_t *ui_Schedule_Time_End;
 lv_obj_t *ui_Schedule_Roller;
+
+
+// SCREEN: ui_Blocky_Clock
+void ui_Blocky_Clock_screen_init(void);
+void ui_event_Blocky_Clock( lv_event_t * e);
+lv_obj_t *ui_Blocky_Clock;
+lv_obj_t *ui_Blocky_Clock_Clock_Panel;
+lv_obj_t *ui_Blocky_Clock_Clock_Layer_1;
+lv_obj_t *ui_Blocky_Clock_Clock_Layer_2;
+lv_obj_t *ui_Blocky_Clock_Clock_Layer_3;
+lv_obj_t *ui_Blocky_Clock_Clock_Layer_4;
+lv_obj_t *ui_Blocky_Clock_Clock_Layer_5;
+lv_obj_t *ui_Blocky_Clock_Clock_Layer_6;
+lv_obj_t *ui_Blocky_Clock_Battery_Contact;
+lv_obj_t *ui_Blocky_Clock_Battery_Bar;
 lv_obj_t *ui____initial_actions0;
 const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_4809254_png};
 const lv_img_dsc_t *ui_imgset_call[1] = {&ui_img_call1_png};
@@ -1618,6 +1633,28 @@ if ( event_code == LV_EVENT_SCREEN_LOADED) {
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Default_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Default_Clock_screen_init);
+}
+}
+void ui_event_Blocky_Clock( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      ClockUpwards( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      ClockDown( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      ClockRight( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      ClockLeft( e );
+}
+if ( event_code == LV_EVENT_SCREEN_LOADED) {
+      ApplyTheme( e );
 }
 }
 

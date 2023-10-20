@@ -53,13 +53,13 @@ void ScheduleHandle()
     numtime = 0;
 
     numtime = (info.time.hour * 100) + info.time.minute;
-    Serial.print("hour: ");
-    Serial.println(info.time.hour);
-    Serial.print("minute: ");
-    Serial.println(info.time.minute);
+    ////Serial.print("hour: ");
+    ////Serial.println(info.time.hour);
+    ////Serial.print("minute: ");
+    ////Serial.println(info.time.minute);
 
-    Serial.print("Time: ");
-    Serial.println(numtime);
+    ////Serial.print("Time: ");
+    ////Serial.println(numtime);
 
     for (int i = 0; i < CurrentSchedule.Entries; i++)
     {
@@ -67,19 +67,19 @@ void ScheduleHandle()
         {
             entry = i;
             passing = 0;
-            Serial.print("Entry : ");
-            Serial.println(entry);
+            ////Serial.print("Entry : ");
+            ////Serial.println(entry);
         }
         /*else
-           Serial.print("LoopED: ");
-        Serial.print(i);
-        Serial.print(" : ");
-        Serial.print(CurrentSchedule.Times[i][0]);
-        Serial.print(" : ");
-        Serial.print(CurrentSchedule.Times[i][1]);
-        Serial.print(" : ");
-        Serial.println(CurrentSchedule.Names[i]);*/
-        
+           //Serial.print("LoopED: ");
+        //Serial.print(i);
+        //Serial.print(" : ");
+        //Serial.print(CurrentSchedule.Times[i][0]);
+        //Serial.print(" : ");
+        //Serial.print(CurrentSchedule.Times[i][1]);
+        //Serial.print(" : ");
+        //Serial.println(CurrentSchedule.Names[i]);*/
+
         if (CurrentSchedule.Names[i][1] != "")
             options = options + CurrentSchedule.Names[i][0] + " (" + CurrentSchedule.Names[i][1] + ")" + "\n";
         else
@@ -94,20 +94,20 @@ void ScheduleHandle()
             {
                 entry = i;
                 passing = 1;
-                Serial.print("Passed: ");
-                Serial.println(i);
+                ////Serial.print("Passed: ");
+                ////Serial.println(i);
             }
             /*else
-                Serial.print("LoppEd: ");
-            Serial.print(i);
-            Serial.print(" : ");
-            Serial.print(CurrentSchedule.Times[i][1]);
-            Serial.print(" : ");
-            Serial.println(CurrentSchedule.Times[i + 1][0]);*/
+                //Serial.print("LoppEd: ");
+            //Serial.print(i);
+            //Serial.print(" : ");
+            //Serial.print(CurrentSchedule.Times[i][1]);
+            //Serial.print(" : ");
+            //Serial.println(CurrentSchedule.Times[i + 1][0]);*/
         }
     }
-    // Serial.println(options);
-    Serial.println(entry);
+    // //Serial.println(options);
+    ////Serial.println(entry);
     if (entry != UINT8_MAX)
     {
 
@@ -117,14 +117,14 @@ void ScheduleHandle()
 
             if (temptime > 1259)
                 temptime -= 1200;
-            Serial.println(temptime);
+            //Serial.println(temptime);
             StartTime = temptime;
 
             temptime = CurrentSchedule.Times[entry][1];
 
             if (temptime > 1259)
                 temptime -= 1200;
-            Serial.println(temptime);
+            //Serial.println(temptime);
             EndTime = temptime;
         }
         else
@@ -133,7 +133,7 @@ void ScheduleHandle()
 
             if (temptime > 1259)
                 temptime -= 1200;
-            Serial.println(temptime);
+            //Serial.println(temptime);
 
             StartTime = temptime;
 
@@ -141,7 +141,7 @@ void ScheduleHandle()
 
             if (temptime > 1259)
                 temptime -= 1200;
-            Serial.println(temptime);
+            //Serial.println(temptime);
             EndTime = temptime;
         }
 
@@ -157,14 +157,14 @@ void ScheduleHandle()
         info.schedule.endtime = NULL;
     }
 
-    Serial.print("StartTime = ");
-    Serial.println(StartTime);
+    //Serial.print("StartTime = ");
+    //Serial.println(StartTime);
 
-    Serial.print("EndTime = ");
-    Serial.println(EndTime);
+    //Serial.print("EndTime = ");
+    //Serial.println(EndTime);
 
-    Serial.print("Entry = ");
-    Serial.println(entry);
+    //Serial.print("Entry = ");
+    //Serial.println(entry);
 
     if (lv_scr_act() == ui_Schedule)
     {

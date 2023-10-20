@@ -52,6 +52,14 @@ void SetClockScreen(lv_obj_t *screen)
         Screen = ui_Default_Clock;
         Serial.println("ui_Default_Clock");
     }
+    else if (screen == ui_Blocky_Clock)
+    {
+        ClockScreenInit = ui_Blocky_Clock_screen_init;
+        ClockHandler = BlockyClockHandle;
+        ClockScreen = &ui_Blocky_Clock;
+        Screen = ui_Blocky_Clock;
+        Serial.println("ui_Blocky_Clock");
+    }
     else if (screen == ui_SimplisticWatchFace)
     {
         ClockScreenInit = ui_SimplisticWatchFace_screen_init;
@@ -86,15 +94,13 @@ void InitClockScreen()
         lv_obj_del(ui_Second_Dot_Include);
 
         initTicks(); // Draws the tick marks around the edge
-
-        info.flag.refresh = 1;
     }
+    info.flag.refresh = 1;
 }
 
 bool isClockScreen()
 {
-    //if (lv_scr_act() == Screen)////////////////////////////////PLEASE FIX oR ELSEEEEE//////////////////
-    if (lv_scr_act() == ui_Default_Clock)
+    if (lv_scr_act() == Screen)
         return 1;
     else
         return 0;
@@ -262,13 +268,13 @@ void DispLoadClockScreen()
 
 void ToggleFlashlight(lv_event_t *e)
 {
-  if (lv_event_get_code(e) == LV_EVENT_SCREEN_UNLOADED)
-    twatch->backlight_set_value(GetUserBrightness());
+    if (lv_event_get_code(e) == LV_EVENT_SCREEN_UNLOADED)
+        twatch->backlight_set_value(GetUserBrightness());
 
-  if ((int)lv_obj_get_style_bg_color(ui_Flashlight, LV_PART_MAIN).full == (int)lv_color_hex(0xFFFFFF).full)
-    twatch->backlight_set_value(100);
-  else
-    twatch->backlight_set_value(GetUserBrightness());
+    if ((int)lv_obj_get_style_bg_color(ui_Flashlight, LV_PART_MAIN).full == (int)lv_color_hex(0xFFFFFF).full)
+        twatch->backlight_set_value(100);
+    else
+        twatch->backlight_set_value(GetUserBrightness());
 }
 
 void screenback(lv_event_t *e)

@@ -41,17 +41,19 @@ void writeTime()
 
     if (info.time.second != lastsec)
     {
-        Log.verboseln("Writetime sec");
+        Log.verboseln("WriteTime sec");
         lastsec = info.time.second;
         info.flag.secondchanged = 1;
 
         if (t_tm.tm_min != lastmin)
         {
+            Serial.println("WriteTime min");
             lastmin = t_tm.tm_min;
             info.flag.minutechanged = 1;
 
             if (t_tm.tm_hour != lasthour)
             {
+                Serial.println("WriteTime hour");
                 lasthour = t_tm.tm_hour;
                 info.flag.hourchanged = 1;
                 strftime(time, sizeof(time), "%a %b %e", &t_tm);

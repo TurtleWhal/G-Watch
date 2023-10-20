@@ -95,7 +95,8 @@ void DefaultClockHandle()
             if (info.music.nowplayingtimer < 80)
             {
                 if (info.music.nowplayingtimer < 2)
-                    info.music.nowplayingtimer++;
+                    lv_label_set_text(ui_Default_Clock_Now_Playing_Label, info.music.nowplaying.c_str());
+                info.music.nowplayingtimer++;
             }
             else if (info.music.nowplayingtimer >= 81)
                 lv_label_set_text(ui_Default_Clock_Now_Playing_Label, "");
@@ -144,6 +145,51 @@ void SkeletonWatchFaceHandle()
 
                 if (info.flag.hourchanged or info.flag.refresh)
                 {
+                }
+            }
+        }
+    }
+}
+
+void WriteBlockyTime(uint8_t min, uint8_t hour)
+{
+    // Serial.println(min);
+    // Serial.println(hour);
+    char CharTime[5];
+    sprintf(CharTime, "%i:%02i", hour, min);
+    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_1, CharTime);
+    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_2, CharTime);
+    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_3, CharTime);
+    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_4, CharTime);
+    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_5, CharTime);
+    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_6, CharTime);
+}
+
+void BlockyClockHandle()
+{
+    if (lv_scr_act() == ui_Blocky_Clock)
+    {
+
+        if (info.flag.secondchanged or info.flag.refresh)
+        {
+
+            if (info.flag.minutechanged or info.flag.refresh)
+            {
+                WriteBlockyTime(info.time.minute, info.time.hour12);
+                lv_bar_set_value(ui_Blocky_Clock_Battery_Bar, info.battery.percentage, LV_ANIM_OFF);
+                if (info.battery.ischarging)
+                {
+                    lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0x00FF00), LV_PART_INDICATOR);
+                }
+                else
+                {
+                    lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Bar, info.theme.color, LV_PART_INDICATOR);
+                }
+
+                if (info.flag.hourchanged or info.flag.refresh)
+                {
+
+                    info.flag.refresh = 0;
                 }
             }
         }

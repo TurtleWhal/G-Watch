@@ -436,6 +436,19 @@ extern lv_obj_t *ui_Schedule_Name;
 extern lv_obj_t *ui_Schedule_Time_Start;
 extern lv_obj_t *ui_Schedule_Time_End;
 extern lv_obj_t *ui_Schedule_Roller;
+// SCREEN: ui_Blocky_Clock
+void ui_Blocky_Clock_screen_init(void);
+void ui_event_Blocky_Clock( lv_event_t * e);
+extern lv_obj_t *ui_Blocky_Clock;
+extern lv_obj_t *ui_Blocky_Clock_Clock_Panel;
+extern lv_obj_t *ui_Blocky_Clock_Clock_Layer_1;
+extern lv_obj_t *ui_Blocky_Clock_Clock_Layer_2;
+extern lv_obj_t *ui_Blocky_Clock_Clock_Layer_3;
+extern lv_obj_t *ui_Blocky_Clock_Clock_Layer_4;
+extern lv_obj_t *ui_Blocky_Clock_Clock_Layer_5;
+extern lv_obj_t *ui_Blocky_Clock_Clock_Layer_6;
+extern lv_obj_t *ui_Blocky_Clock_Battery_Contact;
+extern lv_obj_t *ui_Blocky_Clock_Battery_Bar;
 extern lv_obj_t *ui____initial_actions0;
 
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
@@ -485,6 +498,7 @@ LV_FONT_DECLARE( ui_font_Comfortaa_30);
 LV_FONT_DECLARE( ui_font_Monoton_38);
 LV_FONT_DECLARE( ui_font_Monoton_48);
 LV_FONT_DECLARE( ui_font_Music_14);
+LV_FONT_DECLARE( ui_font_Blocky_48);
 
 void ui_init(void);
 

@@ -109,6 +109,20 @@ void ApplyTheme(lv_event_t *e)
     }
   }
 
+  if (ui_Blocky_Clock != nullptr)
+  {
+    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_1, ThemeColor, LV_PART_MAIN);
+    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_2, ThemeColor, LV_PART_MAIN);
+    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_3, ThemeColor, LV_PART_MAIN);
+    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_4, ThemeColor, LV_PART_MAIN);
+    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_5, ThemeColor, LV_PART_MAIN);
+
+    lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, ThemeColor, LV_PART_MAIN);
+    //lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, ThemeColor, LV_PART_INDICATOR);
+
+    lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Contact, ThemeColor, LV_PART_MAIN);
+  }
+
   // Compass Screen
   if (ui_Compass != NULL)
   {
@@ -133,6 +147,15 @@ void ApplyTheme(lv_event_t *e)
   if (ui_Set_Alarm != NULL)
   {
     lv_obj_set_style_text_color(ui_AM, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+
+  // Stopwatch Screen
+  if (ui_Stopwatch != NULL)
+  {
+    if (!info.theme.darkmode) // if light mode, fix the black box under the stopwatch time
+    lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    //else
+    //lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
   }
 
   // Health Screen
