@@ -5,6 +5,8 @@
 #include "timestuff.h"
 #include "ArduinoLog.h"
 
+#include <cstdarg>
+
 extern ClockInfo info;
 
 LV_IMG_DECLARE(ui_img_bluetooth_small_png);
@@ -151,18 +153,15 @@ void SkeletonWatchFaceHandle()
     }
 }
 
-void WriteBlockyTime(uint8_t min, uint8_t hour)
+void WriteBlockyText(const char *text, uint8_t arg_count, ...)
 {
-    // Serial.println(min);
-    // Serial.println(hour);
-    char CharTime[5];
-    sprintf(CharTime, "%i:%02i", hour, min);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_1, CharTime);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_2, CharTime);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_3, CharTime);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_4, CharTime);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_5, CharTime);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_6, CharTime);
+    va_list arg_ptr;
+    va_start(arg_ptr, arg_count);
+
+    for (uint8_t i = 0; i < arg_count; i++)
+    {
+        lv_label_set_text(va_arg(arg_ptr, lv_obj_t *), text);
+    }
 }
 
 void BlockyClockHandle()
@@ -175,7 +174,18 @@ void BlockyClockHandle()
 
             if (info.flag.minutechanged or info.flag.refresh)
             {
-                WriteBlockyTime(info.time.minute, info.time.hour12);
+                char timechar[] = "12:00";
+                sprintf(timechar, "%i:%02i", info.time.hour12, info.time.minute);
+                WriteBlockyText(timechar, 6,
+                                ui_Blocky_Clock_Clock_Layer_1,
+                                ui_Blocky_Clock_Clock_Layer_2,
+                                ui_Blocky_Clock_Clock_Layer_3,
+                                ui_Blocky_Clock_Clock_Layer_4,
+                                ui_Blocky_Clock_Clock_Layer_5,
+                                ui_Blocky_Clock_Clock_Layer_6);
+
+                WriteBlockyText(info.time.numdate.c_str(), 2, ui_Blocky_Clock_Date_Layer_1, ui_Blocky_Clock_Date_Layer_2);
+
                 lv_bar_set_value(ui_Blocky_Clock_Battery_Bar, info.battery.percentage, LV_ANIM_OFF);
                 if (info.battery.ischarging)
                 {

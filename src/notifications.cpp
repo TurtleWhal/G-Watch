@@ -38,74 +38,76 @@ void shownotification(String Title, String Text, String Source, int id)
 {
   // Create the widget in the Clock screen
   Wakeup("Notification Received");
-
-  if (notificationshowing)
-    notificationhide(LV_ANIM_OFF);
-
-  lv_label_set_text(ui_Notification_Title, Title.c_str());
-  lv_label_set_text(ui_Notification_Text, Text.c_str());
-  lv_label_set_text(ui_Notification_Source, Source.c_str());
-  // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount + 1);
-
-  if (Source == "Messages")
+  if (lv_scr_act() == ui_Default_Clock)
   {
-    lv_img_set_src(ui_Notification_Image, &ui_img_messages_icon_png);
-  }
-  else if (Source == "SMS")
-  {
-    lv_img_set_src(ui_Notification_Image, &ui_img_sms_icon_png);
-  }
-  else if (Source == "YouTube")
-  {
-    lv_img_set_src(ui_Notification_Image, &ui_img_youtube_icon_png);
-  }
-  else if (Source == "Discord")
-  {
-    lv_img_set_src(ui_Notification_Image, &ui_img_discord_icon_png);
-  }
-  else if (Source == "Gmail")
-  {
-    lv_img_set_src(ui_Notification_Image, &ui_img_gmail_icon_png);
-  }
-  else if (Source == "local.stephandle")
-  {
-    lv_img_set_src(ui_Notification_Image, &ui_img_steps_large_png);
-  }
-  else
-  {
-    lv_img_set_src(ui_Notification_Image, &ui_img_notificationbell_png);
-  }
+    if (notificationshowing)
+      notificationhide(LV_ANIM_OFF);
 
-  // sources : Gmail, YouTube, Messages
+    lv_label_set_text(ui_Notification_Title, Title.c_str());
+    lv_label_set_text(ui_Notification_Text, Text.c_str());
+    lv_label_set_text(ui_Notification_Source, Source.c_str());
+    // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount + 1);
 
-  NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
-  NotificationList[10].Text = lv_label_get_text(ui_Notification_Text);
-  NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
-  NotificationList[10].id = TempID;
-  NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
+    if (Source == "Messages")
+    {
+      lv_img_set_src(ui_Notification_Image, &ui_img_messages_icon_png);
+    }
+    else if (Source == "SMS")
+    {
+      lv_img_set_src(ui_Notification_Image, &ui_img_sms_icon_png);
+    }
+    else if (Source == "YouTube")
+    {
+      lv_img_set_src(ui_Notification_Image, &ui_img_youtube_icon_png);
+    }
+    else if (Source == "Discord")
+    {
+      lv_img_set_src(ui_Notification_Image, &ui_img_discord_icon_png);
+    }
+    else if (Source == "Gmail")
+    {
+      lv_img_set_src(ui_Notification_Image, &ui_img_gmail_icon_png);
+    }
+    else if (Source == "local.stephandle")
+    {
+      lv_img_set_src(ui_Notification_Image, &ui_img_steps_large_png);
+    }
+    else
+    {
+      lv_img_set_src(ui_Notification_Image, &ui_img_notificationbell_png);
+    }
 
-  info.notification.lasttitle = NotificationList[10].Title;
-  info.notification.lasttext = NotificationList[10].Text;
-  info.notification.lastimg = NotificationList[10].img;
+    // sources : Gmail, YouTube, Messages
 
-  TempID = id;
+    NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
+    NotificationList[10].Text = lv_label_get_text(ui_Notification_Text);
+    NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
+    NotificationList[10].id = TempID;
+    NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
 
-  lv_obj_set_x(ui_Notification_Popup, 0);
-  lv_obj_set_y(ui_Notification_Popup, -160);
+    info.notification.lasttitle = NotificationList[10].Title;
+    info.notification.lasttext = NotificationList[10].Text;
+    info.notification.lastimg = NotificationList[10].img;
 
-  NotificationShow_Animation(ui_Notification_Popup, 0);
+    TempID = id;
 
-  notificationtime = millis();
-  notificationshowing = 1;
+    lv_obj_set_x(ui_Notification_Popup, 0);
+    lv_obj_set_y(ui_Notification_Popup, -160);
 
-  if (!Donotdisturb)
-    twatch->motor_shake(2, 30);
+    NotificationShow_Animation(ui_Notification_Popup, 0);
 
-  if (lv_scr_act() == ui_Notifications)
-  {
-    // lv_obj_clean(ui_Notification_Panel);
-    // drawnotifications(nullptr);
-    ui_Notifications_screen_init();
+    notificationtime = millis();
+    notificationshowing = 1;
+
+    if (!Donotdisturb)
+      twatch->motor_shake(2, 30);
+
+    if (lv_scr_act() == ui_Notifications)
+    {
+      // lv_obj_clean(ui_Notification_Panel);
+      // drawnotifications(nullptr);
+      ui_Notifications_screen_init();
+    }
   }
 }
 
@@ -225,7 +227,7 @@ void popnotification(int index)
       lv_obj_set_user_data(NotificationComp[i], (void *)i - 1);
   }
   // NotificationCount--;
-  //lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", --NotificationCount);
+  // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", --NotificationCount);
   info.notification.count = --NotificationCount;
 }
 

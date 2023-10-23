@@ -44,21 +44,21 @@ void SetClockScreen(lv_obj_t *screen)
     Screen = screen;
     ClockScreen = &screen;
 
-    if (screen == ui_Default_Clock)
-    {
-        ClockScreenInit = ui_Default_Clock_screen_init;
-        ClockHandler = DefaultClockHandle;
-        ClockScreen = &ui_Default_Clock;
-        Screen = ui_Default_Clock;
-        Serial.println("ui_Default_Clock");
-    }
-    else if (screen == ui_Blocky_Clock)
+    if (screen == ui_Blocky_Clock)
     {
         ClockScreenInit = ui_Blocky_Clock_screen_init;
         ClockHandler = BlockyClockHandle;
         ClockScreen = &ui_Blocky_Clock;
         Screen = ui_Blocky_Clock;
         Serial.println("ui_Blocky_Clock");
+    }
+    else if (screen == ui_Default_Clock)
+    {
+        ClockScreenInit = ui_Default_Clock_screen_init;
+        ClockHandler = DefaultClockHandle;
+        ClockScreen = &ui_Default_Clock;
+        Screen = ui_Default_Clock;
+        Serial.println("ui_Default_Clock");
     }
     else if (screen == ui_SimplisticWatchFace)
     {

@@ -16,12 +16,26 @@ void InitUserSettings()
 {
   Storage.begin("Settings");
   if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
+  {
     Storage.putUInt("NotifLength", DEFAULTNOTIFICATIONLENGTH);
+    Log.verboseln("WARNING: STORED NOTIFLENGTH UNDEFINED, DEFAULT TO %i", DEFAULTNOTIFICATIONLENGTH);
+  }
 
   // lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Storage.getUInt("StepGoal"));
   if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
+  {
     Storage.putUInt("StepGoal", DEFAULTSTEPGOAL);
+    Log.verboseln("WARNING: STORED STEPGOAL UNDEFINED, DEFAULT TO %i", DEFAULTSTEPGOAL);
+  }
   info.health.stepgoal = Storage.getUInt("StepGoal");
+
+  if (!Storage.isKey("Steps") or Storage.getUInt("Steps") < 1)
+  {
+    Storage.putUInt("Steps", 0);
+    Log.verboseln("WARNING: STORED STEPS UNDEFINED, DEFAULT TO %i", 0);
+  }
+
+  PrintSettings();
 
   // lv_label_set_text_fmt(ui_Step_Counter_Text, "%s", Storage.isKey("StepGoal") ? "TRUE":"FALSE");
 }
@@ -45,7 +59,7 @@ void UpdateSettings(lv_event_t *e)
   ApplyTheme(nullptr);
 
   Storage.putBool("DarkMode", lv_obj_has_state(ui_Dark_Mode_Setting_Switch, LV_STATE_CHECKED));
-  //Serial.println(Storage.getBool("DarkMode"));
+  // Serial.println(Storage.getBool("DarkMode"));
 
   PrintSettings();
 }
@@ -70,11 +84,10 @@ void editSetting(lv_event_t *e)
 {
   typingPointer = lv_event_get_target(e);
   lv_obj_clear_flag(ui_Numberpad_Panel, LV_OBJ_FLAG_HIDDEN);
-  //lv_label_set_text(lv_obj_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), lv_textarea_get_text(lv_obj_get_child(lv_obj_get_parent(typingPointer), UI_COMP_SETTING_PANEL_SETTING_LABEL)));
+  // lv_label_set_text(lv_obj_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), lv_textarea_get_text(lv_obj_get_child(lv_obj_get_parent(typingPointer), UI_COMP_SETTING_PANEL_SETTING_LABEL)));
   lv_textarea_set_text(lv_obj_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), lv_textarea_get_text(typingPointer));
   lv_label_set_text(lv_obj_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_PANEL), lv_label_get_text(lv_obj_get_child(lv_obj_get_parent(typingPointer), UI_COMP_SETTING_PANEL_SETTING_PANEL)));
-
-  }
+}
 
 void applyKeyboardValue(lv_event_t *e)
 {

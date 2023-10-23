@@ -449,6 +449,9 @@ extern lv_obj_t *ui_Blocky_Clock_Clock_Layer_5;
 extern lv_obj_t *ui_Blocky_Clock_Clock_Layer_6;
 extern lv_obj_t *ui_Blocky_Clock_Battery_Contact;
 extern lv_obj_t *ui_Blocky_Clock_Battery_Bar;
+extern lv_obj_t *ui_Blocky_Clock_Clock_Panel1;
+extern lv_obj_t *ui_Blocky_Clock_Date_Layer_1;
+extern lv_obj_t *ui_Blocky_Clock_Date_Layer_2;
 extern lv_obj_t *ui____initial_actions0;
 
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
@@ -490,6 +493,8 @@ LV_IMG_DECLARE( ui_img_simplistichourhand_png);   // assets/SimplisticHourHand.p
 LV_IMG_DECLARE( ui_img_call1_png);   // assets/call1.png
 LV_IMG_DECLARE( ui_img_4809254_png);   // assets/4809254.png
 
+LV_FONT_DECLARE( ui_font_Blocky_16);
+LV_FONT_DECLARE( ui_font_Blocky_48);
 LV_FONT_DECLARE( ui_font_Comfortaa_10);
 LV_FONT_DECLARE( ui_font_Comfortaa_12);
 LV_FONT_DECLARE( ui_font_Comfortaa_16);
@@ -498,7 +503,6 @@ LV_FONT_DECLARE( ui_font_Comfortaa_30);
 LV_FONT_DECLARE( ui_font_Monoton_38);
 LV_FONT_DECLARE( ui_font_Monoton_48);
 LV_FONT_DECLARE( ui_font_Music_14);
-LV_FONT_DECLARE( ui_font_Blocky_48);
 
 void ui_init(void);
 
