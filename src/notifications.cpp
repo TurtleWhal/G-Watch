@@ -11,6 +11,9 @@
 #include "themes.h"
 #include "screen_management.h"
 
+#define NOTIFPOPUP_IMAGE ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL_NOTIFICATION_IMAGE)
+#define NOTIFPOPUP_MAIN ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET)
+
 extern ClockInfo info;
 
 LV_IMG_DECLARE(ui_img_discord_icon_png);
@@ -34,81 +37,85 @@ extern Preferences Storage;
 
 int TempID;
 
+lv_obj_t *NotifPopup;
+
 void shownotification(String Title, String Text, String Source, int id)
 {
   // Create the widget in the Clock screen
   Wakeup("Notification Received");
-  if (lv_scr_act() == ui_Default_Clock)
+  if (notificationshowing)
+    notificationhide(LV_ANIM_OFF);
+
+  NotifPopup = ui_Notification_Widget_create(lv_scr_act());
+  lv_obj_set_x(NOTIFPOPUP_MAIN, 0);
+  lv_obj_set_y(NOTIFPOPUP_MAIN, -160);
+
+  // lv_label_set_text(ui_Notification_Title, Title.c_str());
+  // lv_label_set_text(ui_Notification_Text, Text.c_str());
+  // lv_label_set_text(ui_Notification_Source, Source.c_str());
+
+  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), Title.c_str());
+  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), Text.c_str());
+  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), Source.c_str());
+  lv_obj_set_style_bg_color(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL), info.theme.color, LV_PART_MAIN);
+
+  if (Source == "Messages")
   {
-    if (notificationshowing)
-      notificationhide(LV_ANIM_OFF);
-
-    lv_label_set_text(ui_Notification_Title, Title.c_str());
-    lv_label_set_text(ui_Notification_Text, Text.c_str());
-    lv_label_set_text(ui_Notification_Source, Source.c_str());
-    // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount + 1);
-
-    if (Source == "Messages")
-    {
-      lv_img_set_src(ui_Notification_Image, &ui_img_messages_icon_png);
-    }
-    else if (Source == "SMS")
-    {
-      lv_img_set_src(ui_Notification_Image, &ui_img_sms_icon_png);
-    }
-    else if (Source == "YouTube")
-    {
-      lv_img_set_src(ui_Notification_Image, &ui_img_youtube_icon_png);
-    }
-    else if (Source == "Discord")
-    {
-      lv_img_set_src(ui_Notification_Image, &ui_img_discord_icon_png);
-    }
-    else if (Source == "Gmail")
-    {
-      lv_img_set_src(ui_Notification_Image, &ui_img_gmail_icon_png);
-    }
-    else if (Source == "local.stephandle")
-    {
-      lv_img_set_src(ui_Notification_Image, &ui_img_steps_large_png);
-    }
-    else
-    {
-      lv_img_set_src(ui_Notification_Image, &ui_img_notificationbell_png);
-    }
-
-    // sources : Gmail, YouTube, Messages
-
-    NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
-    NotificationList[10].Text = lv_label_get_text(ui_Notification_Text);
-    NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
-    NotificationList[10].id = TempID;
-    NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
-
-    info.notification.lasttitle = NotificationList[10].Title;
-    info.notification.lasttext = NotificationList[10].Text;
-    info.notification.lastimg = NotificationList[10].img;
-
-    TempID = id;
-
-    lv_obj_set_x(ui_Notification_Popup, 0);
-    lv_obj_set_y(ui_Notification_Popup, -160);
-
-    NotificationShow_Animation(ui_Notification_Popup, 0);
-
-    notificationtime = millis();
-    notificationshowing = 1;
-
-    if (!Donotdisturb)
-      twatch->motor_shake(2, 30);
-
-    if (lv_scr_act() == ui_Notifications)
-    {
-      // lv_obj_clean(ui_Notification_Panel);
-      // drawnotifications(nullptr);
-      ui_Notifications_screen_init();
-    }
+    lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_messages_icon_png);
   }
+  else if (Source == "SMS")
+  {
+    lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_sms_icon_png);
+  }
+  else if (Source == "YouTube")
+  {
+    lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_youtube_icon_png);
+  }
+  else if (Source == "Discord")
+  {
+    lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_discord_icon_png);
+  }
+  else if (Source == "Gmail")
+  {
+    lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_gmail_icon_png);
+  }
+  else if (Source == "local.stephandle")
+  {
+    lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_steps_large_png);
+  }
+  else
+  {
+    lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_notificationbell_png);
+  }
+
+  // sources : Gmail, YouTube, Messages
+
+  NotificationList[10].Title = Title;
+  NotificationList[10].Text = Text;
+  NotificationList[10].Source = Source;
+  NotificationList[10].id = TempID;
+  NotificationList[10].img = lv_img_get_src(NOTIFPOPUP_IMAGE);
+
+  info.notification.lasttitle = NotificationList[10].Title;
+  info.notification.lasttext = NotificationList[10].Text;
+  info.notification.lastimg = NotificationList[10].img;
+
+  TempID = id;
+
+  NotificationShow_Animation(NOTIFPOPUP_MAIN, 0);
+
+  notificationtime = millis();
+  notificationshowing = 1;
+
+  if (!Donotdisturb)
+    twatch->motor_shake(2, 30);
+
+  /*if (lv_scr_act() == ui_Notifications)
+  {
+    // lv_obj_clean(ui_Notification_Panel);
+    // drawnotifications(nullptr);
+    ui_Notifications_screen_init();
+  }*/
 }
 
 void drawnotifications(lv_event_t *e)
@@ -166,9 +173,10 @@ void notificationhide(bool anim)
 {
   notificationshowing = 0;
   if (anim)
-    NotificationHide_Animation(ui_Notification_Popup, 0);
+    NotificationHide_Animation(NOTIFPOPUP_MAIN, 0);
   else
-    lv_obj_set_y(ui_Notification_Popup, -160);
+    lv_obj_set_y(NOTIFPOPUP_MAIN, -160);
+  lv_obj_del_delayed(NotifPopup, 350);
   pushnotification(1);
   Serial.println("Notification Hide");
 }
@@ -235,7 +243,7 @@ void drawnotificationarc()
 {
   if (notificationshowing)
   {
-    lv_arc_set_value(ui_Notification_Timer, ((millis() - notificationtime) / (Storage.getUInt("NotifLength") * 10)) * 10);
+    // lv_arc_set_value(ui_Notification_Timer, ((millis() - notificationtime) / (Storage.getUInt("NotifLength") * 10)) * 10);
     if (notificationtime + (Storage.getUInt("NotifLength") * 1000) < millis())
     {
       notificationhide();
