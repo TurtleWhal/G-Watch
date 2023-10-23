@@ -11,17 +11,15 @@ extern ClockInfo info;
 
 void UpdateTestTheme(lv_event_t *e)
 {
-  lv_obj_set_style_bg_color(ui_Theme_Apply_Button, lv_colorwheel_get_rgb(ui_Theme_Colorwheel), LV_PART_MAIN);
-  // char color[32];
-  // sprintf(color, "Hex: #%i", lv_color_hex(lv_colorwheel_get_hsv(ui_Theme_Colorwheel)));
-  // sprintf(color, "Hex: #%X%X%X", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.red, lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.green_h, lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.blue);
-  /*Serial.print(lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.red);
-  Serial.print(", ");
-  Serial.print(lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.green_l);
-  Serial.print(", ");
-  Serial.println(lv_colorwheel_get_rgb(ui_Theme_Colorwheel).ch.blue);*/
-  // lv_label_set_text(ui_Theme_Hex_Label, color);
-  lv_label_set_text(ui_Theme_Hex_Label, "Hex Code");
+  lv_color_t TempTheme = lv_colorwheel_get_rgb(ui_Theme_Colorwheel);
+  lv_obj_set_style_bg_color(ui_Theme_Apply_Button, TempTheme, LV_PART_MAIN);
+  lv_label_set_text_fmt(ui_Theme_Hex_Label, "#%02X%02X%02X", TempTheme.ch.red, TempTheme.ch.green, TempTheme.ch.blue);
+  Serial.print("Red:");
+  Serial.println(TempTheme.ch.red);
+  Serial.print("Green:");
+  Serial.println(TempTheme.ch.green);
+  Serial.print("Blue:");
+  Serial.println(TempTheme.ch.blue);
 }
 
 void ToggleTheme(lv_event_t *e)
