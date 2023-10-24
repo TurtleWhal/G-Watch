@@ -124,6 +124,10 @@ lv_obj_set_style_outline_pad(ui_Blocky_Clock_Battery_Bar, 1, LV_PART_MAIN| LV_ST
 lv_obj_set_style_radius(ui_Blocky_Clock_Battery_Bar, 0, LV_PART_INDICATOR| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Blocky_Clock_Battery_Bar, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+lv_obj_set_style_outline_opa(ui_Blocky_Clock_Battery_Bar, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_width(ui_Blocky_Clock_Battery_Bar, 1, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_pad(ui_Blocky_Clock_Battery_Bar, 0, LV_PART_INDICATOR| LV_STATE_DEFAULT);
 
 ui_Blocky_Clock_Clock_Panel1 = lv_obj_create(ui_Blocky_Clock);
 lv_obj_set_width( ui_Blocky_Clock_Clock_Panel1, 180);

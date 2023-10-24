@@ -13,7 +13,7 @@ void UpdateTestTheme(lv_event_t *e)
 {
   lv_color_t TempTheme = lv_colorwheel_get_rgb(ui_Theme_Colorwheel);
   lv_obj_set_style_bg_color(ui_Theme_Apply_Button, TempTheme, LV_PART_MAIN);
-  lv_label_set_text_fmt(ui_Theme_Hex_Label, "#%02X%02X%02X", TempTheme.ch.red, TempTheme.ch.green, TempTheme.ch.blue);
+  lv_label_set_text_fmt(ui_Theme_Hex_Label, "#%02X%02X%02X", TempTheme.ch.red * 255 / 31, TempTheme.ch.green * 255 / 63, TempTheme.ch.blue * 255 / 31);
   Serial.print("Red:");
   Serial.println(TempTheme.ch.red);
   Serial.print("Green:");
@@ -116,7 +116,7 @@ void ApplyTheme(lv_event_t *e)
     lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_5, ThemeColor, LV_PART_MAIN);
 
     lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, ThemeColor, LV_PART_MAIN);
-    //lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, ThemeColor, LV_PART_INDICATOR);
+    lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, ThemeColor, LV_PART_INDICATOR);
 
     lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Contact, ThemeColor, LV_PART_MAIN);
   }
@@ -151,9 +151,9 @@ void ApplyTheme(lv_event_t *e)
   if (ui_Stopwatch != NULL)
   {
     if (!info.theme.darkmode) // if light mode, fix the black box under the stopwatch time
-    lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-    //else
-    //lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+      lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    // else
+    // lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
   }
 
   // Health Screen
