@@ -374,3 +374,7 @@ def editSetting(event_struct):
 def applyKeyboardValue(event_struct):
     return
 
+
+def ScreenBack(event_struct):
+    return
+

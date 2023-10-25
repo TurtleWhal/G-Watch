@@ -14,12 +14,12 @@ void UpdateTestTheme(lv_event_t *e)
   lv_color_t TempTheme = lv_colorwheel_get_rgb(ui_Theme_Colorwheel);
   lv_obj_set_style_bg_color(ui_Theme_Apply_Button, TempTheme, LV_PART_MAIN);
   lv_label_set_text_fmt(ui_Theme_Hex_Label, "#%02X%02X%02X", TempTheme.ch.red * 255 / 31, TempTheme.ch.green * 255 / 63, TempTheme.ch.blue * 255 / 31);
-  Serial.print("Red:");
+  /*Serial.print("Red:");
   Serial.println(TempTheme.ch.red);
   Serial.print("Green:");
   Serial.println(TempTheme.ch.green);
   Serial.print("Blue:");
-  Serial.println(TempTheme.ch.blue);
+  Serial.println(TempTheme.ch.blue);*/
 }
 
 void ToggleTheme(lv_event_t *e)
