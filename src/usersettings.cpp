@@ -9,6 +9,10 @@ extern ClockInfo info;
 
 #define DEFAULTNOTIFICATIONLENGTH 10
 #define DEFAULTSTEPGOAL 10000
+#define DEFAULTBTNAME "Unnamed Twatch"
+#define DEFAULTDARKMODE 1
+#define DEFAULTTHEMECOLOR 0xFF7900
+#define DEFAULTTHEME lv_color_hex(DEFAULTTHEMECOLOR).full
 
 lv_obj_t *typingPointer;
 
@@ -18,21 +22,39 @@ void InitUserSettings()
   if (!Storage.isKey("NotifLength") or Storage.getUInt("NotifLength") < 1)
   {
     Storage.putUInt("NotifLength", DEFAULTNOTIFICATIONLENGTH);
-    Log.verboseln("WARNING: STORED NOTIFLENGTH UNDEFINED, DEFAULT TO %i", DEFAULTNOTIFICATIONLENGTH);
+    Log.verboseln("WARNING: STORED NOTIFLENGTH UNDEFINED, DEFAULTED TO %i", DEFAULTNOTIFICATIONLENGTH);
   }
 
   // lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Storage.getUInt("StepGoal"));
   if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
   {
     Storage.putUInt("StepGoal", DEFAULTSTEPGOAL);
-    Log.verboseln("WARNING: STORED STEPGOAL UNDEFINED, DEFAULT TO %i", DEFAULTSTEPGOAL);
+    Log.verboseln("WARNING: STORED STEPGOAL UNDEFINED, DEFAULTED TO %i", DEFAULTSTEPGOAL);
   }
   info.health.stepgoal = Storage.getUInt("StepGoal");
 
-  if (!Storage.isKey("Steps") or Storage.getUInt("Steps") < 1)
+  if (!Storage.isKey("Steps") or Storage.getUInt("Steps") < 0)
   {
     Storage.putUInt("Steps", 0);
-    Log.verboseln("WARNING: STORED STEPS UNDEFINED, DEFAULT TO %i", 0);
+    Log.verboseln("WARNING: STORED STEPS UNDEFINED, DEFAULTED TO %i", 0);
+  }
+
+  if (!Storage.isKey("BTname"))
+  {
+    Storage.putBytes("BTname", DEFAULTBTNAME, 17);
+    Log.verboseln("WARNING: STORED BLUETOOTH NAME UNDEFINED, DEFAULTED TO %s", DEFAULTBTNAME);
+  }
+
+  if (!Storage.isKey("DarkMode"))
+  {
+    Storage.putBool("BTname", DEFAULTDARKMODE);
+    Log.verboseln("WARNING: STORED DARKMODE UNDEFINED, DEFAULTED TO %i", DEFAULTDARKMODE);
+  }
+
+  if (!Storage.isKey("Theme"))
+  {
+    Storage.putUInt("Theme", DEFAULTTHEME);
+    Log.verboseln("WARNING: STORED THEME UNDEFINED, DEFAULTED TO %i", DEFAULTTHEME);
   }
 
   PrintSettings();

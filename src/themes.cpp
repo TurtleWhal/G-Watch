@@ -139,6 +139,11 @@ void ApplyTheme(lv_event_t *e)
   if (ui_Music != NULL)
   {
     lv_obj_set_style_img_recolor(ui_Background_Album_Image, ThemeColor, LV_PART_MAIN | LV_STATE_DEFAULT);
+    if (!info.theme.darkmode)
+    {
+      lv_obj_set_style_bg_color(ui_Control_Panel, lv_color_white(), LV_PART_MAIN);
+      lv_obj_set_style_shadow_color(ui_Control_Panel, lv_color_white(), LV_PART_MAIN);
+    }
   }
 
   // Alarm Set Screen
