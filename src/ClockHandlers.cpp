@@ -94,13 +94,13 @@ void DefaultClockHandle()
                 }
             }
 
-            if (info.music.nowplayingtimer < 80)
+            if (info.music.nowplayingtimer <= 80)
             {
                 if (info.music.nowplayingtimer < 2)
                     lv_label_set_text(ui_Default_Clock_Now_Playing_Label, info.music.nowplaying.c_str());
                 info.music.nowplayingtimer++;
             }
-            else if (info.music.nowplayingtimer >= 81)
+            else if (info.music.nowplayingtimer >= 80)
                 lv_label_set_text(ui_Default_Clock_Now_Playing_Label, "");
         }
         if (info.flag.refresh)

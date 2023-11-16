@@ -112,8 +112,6 @@ void InitStepsScreen(lv_event_t *e)
   lv_bar_set_value(ui_Steps_Bar, getSteps(), LV_ANIM_OFF);
   lv_chart_set_range(ui_Steps_Chart, LV_CHART_AXIS_PRIMARY_Y, 0, TempGoal);
   WriteStepGraph();
-  // lv_coord_t ui_Steps_Chart_series_1_array[] = { getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps(), getSteps() };
-  //   lv_chart_set_ext_y_array(ui_Steps_Chart, lv_chart_get_series_next(ui_Steps_Chart, NULL), ui_Steps_Chart_series_1_array);
 }
 
 void ResetStorage(lv_event_t *e)

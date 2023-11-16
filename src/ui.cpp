@@ -171,7 +171,7 @@ void btn2_click(void *param)
 {
   Log.verboseln("BTN2 Click. MilliVolts: %i", (int)twatch->power_get_volt());
   // twatch->motor_shake(1, 60);
-  if (isClockScreen())
+  if (isClockScreen() or lv_scr_act() == ui_Default_Clock)
     _ui_screen_change(&ui_Schedule, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Schedule_screen_init);
   else if (lv_scr_act() == ui_Stopwatch)
     ToggleStopwatch(nullptr);
@@ -305,7 +305,7 @@ void setup()
   //////////////////////////Fake Notifications///////////
   // FakeNotes();
 
-  ////////////////////////////OTA
+  ////////////////////////////////////////OTA
   if (useOTA)
   {
 
@@ -375,6 +375,10 @@ void setup()
 
   twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
+  Log.verboseln("Total PSRAM: %d", ESP.getPsramSize());
+  Log.verboseln("Free PSRAM: %d", ESP.getFreePsram());
+
+  info.flag.refresh = 1;
 
 #ifdef USESPLASHSCREEN
   LogoSpin(ui_Logo_Arc);
@@ -431,6 +435,11 @@ void loop()
     StepHandle();
     DrawPower();
     ScheduleHandle();
+
+    if (millis() < 20000)
+    {
+      info.flag.refresh = 1;
+    }
   }
 
   // This stuff runs every 1 second

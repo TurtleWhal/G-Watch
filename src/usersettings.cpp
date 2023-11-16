@@ -25,13 +25,12 @@ void InitUserSettings()
     Log.verboseln("WARNING: STORED NOTIFLENGTH UNDEFINED, DEFAULTED TO %i", DEFAULTNOTIFICATIONLENGTH);
   }
 
-  // lv_label_set_text_fmt(ui_Step_Counter_Text, "%i", Storage.getUInt("StepGoal"));
-  if (!Storage.isKey("StepGoal") or Storage.getUInt("StepGoal") < 1)
+  if (!Storage.isKey("StepGoal") or Storage.getUShort("StepGoal") < 1)
   {
-    Storage.putUInt("StepGoal", DEFAULTSTEPGOAL);
+    Storage.putUShort("StepGoal", DEFAULTSTEPGOAL);
     Log.verboseln("WARNING: STORED STEPGOAL UNDEFINED, DEFAULTED TO %i", DEFAULTSTEPGOAL);
   }
-  info.health.stepgoal = Storage.getUInt("StepGoal");
+  info.health.stepgoal = Storage.getUShort("StepGoal");
 
   if (!Storage.isKey("Steps") or Storage.getUInt("Steps") < 0)
   {
@@ -58,8 +57,6 @@ void InitUserSettings()
   }
 
   PrintSettings();
-
-  // lv_label_set_text_fmt(ui_Step_Counter_Text, "%s", Storage.isKey("StepGoal") ? "TRUE":"FALSE");
 }
 
 void UpdateSettings(lv_event_t *e)

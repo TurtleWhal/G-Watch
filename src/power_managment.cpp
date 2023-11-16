@@ -82,6 +82,8 @@ void Wakeup(String Wakeup_reason)
     //  Garrett found this comment because dad didn't go to a different line
     sleeptimer = millis();
     Sleeping = 0;
+
+    info.flag.refresh = 1;
     // lv_label_set_text_fmt(ui_Battery_Percentage, "%i", prevbrightness);
     twatch->backlight_set_value(prevbrightness);
     // twatch->backlight_set_value(100);
@@ -125,7 +127,7 @@ bool isSleeping()
 void Powerhandle()
 {
   twatch->power_updata(millis(), 1000);
-  if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)
+  if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000) // is charging
   {
     if (!charging)
     {
@@ -139,6 +141,18 @@ void Powerhandle()
     {
       charging = 0;
       DrawPower();
+    }
+
+    if ((twatch->power_get_percent() < 20) and (millis() > 2000))
+    { // turn on power saving mode
+
+      BT_off();                        // turn off bluetooth
+      twatch->backlight_set_value(50); // lower brightness
+
+      if (twatch->power_get_percent() < 5) // turn off to protect the battery
+      {
+        PowerOff(nullptr);
+      }
     }
   }
 }
@@ -157,8 +171,8 @@ void DrawPower()
   if (lastpercent != twatch->power_get_percent())
   {
 #ifdef UPDATE_ELEMENTS
-    //lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", twatch->power_get_percent());
-    //lv_arc_set_value(ui_Arc_Battery, twatch->power_get_percent());
+    // lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", twatch->power_get_percent());
+    // lv_arc_set_value(ui_Arc_Battery, twatch->power_get_percent());
     info.battery.percentage = twatch->power_get_percent();
 #endif
     lastpercent = twatch->power_get_percent();

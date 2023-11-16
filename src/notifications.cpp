@@ -179,8 +179,8 @@ void notificationhide(bool anim)
     NotificationHide_Animation(NOTIFPOPUP_MAIN, 0);
   else
     lv_obj_set_y(NOTIFPOPUP_MAIN, -160);
-  lv_obj_del_delayed(NotifPopup, 350);
   pushnotification(1);
+  lv_obj_del_delayed(NotifPopup, 1000);
   Serial.println("Notification Hide");
 }
 

@@ -44,21 +44,21 @@ void SetClockScreen(lv_obj_t *screen)
     Screen = screen;
     ClockScreen = &screen;
 
-    if (screen == ui_Blocky_Clock)
-    {
-        ClockScreenInit = ui_Blocky_Clock_screen_init;
-        ClockHandler = BlockyClockHandle;
-        ClockScreen = &ui_Blocky_Clock;
-        Screen = ui_Blocky_Clock;
-        Serial.println("ui_Blocky_Clock");
-    }
-    else if (screen == ui_Default_Clock)
+    if (screen == ui_Default_Clock)
     {
         ClockScreenInit = ui_Default_Clock_screen_init;
         ClockHandler = DefaultClockHandle;
         ClockScreen = &ui_Default_Clock;
         Screen = ui_Default_Clock;
         Serial.println("ui_Default_Clock");
+    }
+    else if (screen == ui_Blocky_Clock)
+    {
+        ClockScreenInit = ui_Blocky_Clock_screen_init;
+        ClockHandler = BlockyClockHandle;
+        ClockScreen = &ui_Blocky_Clock;
+        Screen = ui_Blocky_Clock;
+        Serial.println("ui_Blocky_Clock");
     }
     else if (screen == ui_SimplisticWatchFace)
     {
@@ -144,7 +144,7 @@ void loadcalc(lv_event_t *e)
 void loadsettings(lv_event_t *e)
 {
     char StepGoalChar[6];
-    sprintf(StepGoalChar, "%i", Storage.getUInt("StepGoal"));
+    sprintf(StepGoalChar, "%i", Storage.getUShort("StepGoal"));
     lv_textarea_set_text(lv_obj_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), StepGoalChar);
 
     char BTnamechar[17];
