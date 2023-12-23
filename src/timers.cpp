@@ -4,7 +4,7 @@
 #include "timers.h"
 #include "power_managment.h"
 
-int stopwatchtime = 0;
+int stopwatchtimems = 0;
 int stopwatchtimestarted = 0;
 int stopwatchtimestopped = 0;
 bool stopwatchmoving = 0;
@@ -55,7 +55,7 @@ void resetstopwatch(lv_event_t *e)
   PauseToPlay_Animation(ui_Stopwatch_Play_Pause_Image, 0);
 
   stopwatchtimestarted = 0;
-  stopwatchtime = 0;
+  stopwatchtimems = 0;
   lv_label_set_text(ui_Stopwatch_Milliseconds, "00");
   lv_label_set_text(ui_Stopwatch_Seconds, "00");
   lv_label_set_text(ui_Stopwatch_Minutes, "00");
@@ -170,12 +170,14 @@ void TimersHandle()
 
 void DrawStopwatch()
 {
-  stopwatchtime = (millis() - stopwatchtimestarted);
-  uint8_t stopwatchmilliseconds = stopwatchtime / 10;
-  uint8_t stopwatchseconds = stopwatchtime / 1000;
+  stopwatchtimems = (millis() - stopwatchtimestarted);
+  
+  int stopwatchhundredths = stopwatchtimems / 10;
+  uint16_t stopwatchseconds = stopwatchtimems / 1000;
   uint8_t stopwatchminutes = stopwatchseconds / 60;
   uint8_t stopwatchhours = stopwatchminutes / 60;
-  stopwatchmilliseconds %= 100;
+
+  stopwatchhundredths %= 100;
   stopwatchseconds %= 60;
   stopwatchminutes %= 60;
   stopwatchhours %= 99;
@@ -185,10 +187,10 @@ void DrawStopwatch()
   static uint8_t lastminutes;
   static uint8_t lasthours;
 
-  if (lastmilliseconds != stopwatchmilliseconds)
+  if (lastmilliseconds != stopwatchhundredths)
   {
-    lv_label_set_text_fmt(ui_Stopwatch_Milliseconds, "%02d", stopwatchmilliseconds);
-    lastmilliseconds = stopwatchmilliseconds;
+    lv_label_set_text_fmt(ui_Stopwatch_Milliseconds, "%02d", stopwatchhundredths);
+    lastmilliseconds = stopwatchhundredths;
   }
 
   if (lastseconds != stopwatchseconds)
@@ -208,7 +210,7 @@ void DrawStopwatch()
     lv_label_set_text_fmt(ui_Stopwatch_Hours, "%02d", stopwatchhours);
     lasthours = stopwatchhours;
   }
-  // lv_label_set_text_fmt(ui_Stopwatch_Time_Long, "%02d:%02d:%02d.%02d", stopwatchhours, stopwatchminutes, stopwatchseconds, stopwatchmilliseconds);
+  // lv_label_set_text_fmt(ui_Stopwatch_Time_Long, "%02d:%02d:%02d.%02d", stopwatchhours, stopwatchminutes, stopwatchseconds, stopwatchhundredths);
 }
 
 void VibrateHandle()

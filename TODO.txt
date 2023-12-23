@@ -25,12 +25,6 @@ Find phone from watch
 
 fix timer and stopwatch instability
 
-redraw steps and battery on wakeup
-
-send battery percentage and steps in sleep
-
-stopwatch resets at 4:15
-
 add more watch faces
 
 store notifications in flash
