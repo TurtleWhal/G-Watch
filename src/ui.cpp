@@ -368,7 +368,7 @@ void setup()
   twatch->bma423_begin(); // This takes 2 seconds
 #endif
 
-  Serial.println("hal Update");
+  Serial.println("HAL Update");
   twatch->hal_auto_update(true, 1);
 
   Timer0Triggered = 1;
@@ -420,6 +420,7 @@ void loop()
   VibrateHandle();
   TimersHandle();
   drawnotificationarc();
+  //Serial.println(twatch->power_get_volt());
 
   // this runs every 50ms
   if (BTTimerTriggered)

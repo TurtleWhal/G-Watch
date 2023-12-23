@@ -78,10 +78,6 @@ void DefaultClockHandle()
                 }
                 else
                 {
-                    Serial.println("stepgoal");
-                    Serial.println(info.health.stepgoal);
-                    Serial.println("steps");
-                    Serial.println(info.health.steps);
                     lv_obj_remove_local_style_prop(ui_Default_Clock_Arc_Right, LV_STYLE_ARC_COLOR, LV_PART_INDICATOR);
                     lv_arc_set_range(ui_Default_Clock_Arc_Right, 0, info.health.stepgoal);
                     lv_arc_set_value(ui_Default_Clock_Arc_Right, info.health.steps);

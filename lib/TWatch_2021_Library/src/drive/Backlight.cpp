@@ -8,7 +8,7 @@ void TWatchClass::backlight_init() {
   ledcAttachPin(TWATCH_TFT_BL, 0);
   ledcWrite(0, 0);
 }
-/* param:@in :0-100 */
+/*Enter Value 0 - 100*/
 void TWatchClass::backlight_set_value(int16_t val) {
 
   if (val < 100) {
@@ -19,7 +19,7 @@ void TWatchClass::backlight_set_value(int16_t val) {
     Value = 100;
   }
 
-  Serial.println((uint32_t)((val * val * 0.8192) + 0.5));
+  Serial.printf("Backlight Set to %i/%i\n", (uint32_t)((val * val * 0.8192) + 0.5), 8192);
 }
 
 int16_t TWatchClass::backlight_get_value() {

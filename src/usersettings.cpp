@@ -32,9 +32,9 @@ void InitUserSettings()
   }
   info.health.stepgoal = Storage.getUShort("StepGoal");
 
-  if (!Storage.isKey("Steps") or Storage.getUInt("Steps") < 0)
+  if (!Storage.isKey("Steps") or Storage.getUShort("Steps") < 0)
   {
-    Storage.putUInt("Steps", 0);
+    Storage.putUShort("Steps", 0);
     Log.verboseln("WARNING: STORED STEPS UNDEFINED, DEFAULTED TO %i", 0);
   }
 

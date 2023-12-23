@@ -76,6 +76,8 @@ int TWatchClass::power_get_percent() {
 
   return (int)_pow_percent + 0.5;
 }
+
+// battery voltage in millivolts 0 - 4200
 float TWatchClass::power_get_volt() {
   return constrain(_pow_cur_vol, 0, 4200);
 }

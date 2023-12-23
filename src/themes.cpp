@@ -18,12 +18,6 @@ void UpdateTestTheme(lv_event_t *e)
   lv_color_t TempTheme = lv_colorwheel_get_rgb(ui_Theme_Colorwheel);
   lv_obj_set_style_bg_color(ui_Theme_Apply_Button, TempTheme, LV_PART_MAIN);
   lv_label_set_text_fmt(ui_Theme_Hex_Label, "#%02X%02X%02X", TempTheme.ch.red * 255 / 31, TempTheme.ch.green * 255 / 63, TempTheme.ch.blue * 255 / 31);
-  /*Serial.print("Red:");
-  Serial.println(TempTheme.ch.red);
-  Serial.print("Green:");
-  Serial.println(TempTheme.ch.green);
-  Serial.print("Blue:");
-  Serial.println(TempTheme.ch.blue);*/
 }
 
 void ToggleTheme(lv_event_t *e)
@@ -91,7 +85,7 @@ void ApplyTheme(lv_event_t *e)
 
     if (!info.theme.darkmode)
     {
-      Serial.println("Light Mode Applytheme");
+      //Serial.println("Light Mode Applytheme");
       lv_obj_set_style_arc_color(ui_Default_Clock_Arc_Battery, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor(ui_Default_Clock_Hour_Hand, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor_opa(ui_Default_Clock_Hour_Hand, LV_OPA_100, LV_PART_MAIN);
@@ -101,7 +95,7 @@ void ApplyTheme(lv_event_t *e)
     }
     else
     {
-      Serial.println("Dark Mode Applytheme");
+      //Serial.println("Dark Mode Applytheme");
       lv_obj_set_style_arc_color(ui_Default_Clock_Arc_Battery, lv_color_hex(0xFFFFFF), LV_PART_INDICATOR | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor(ui_Default_Clock_Hour_Hand, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor_opa(ui_Default_Clock_Hour_Hand, LV_OPA_100, LV_PART_MAIN);
@@ -231,5 +225,16 @@ lv_color_t GetTheme()
 {
   return ThemeColor;
 }
+
+// takes in a 16-bit lv_color_t variable and converts it to a 32-bit hex string EX: #FFFFFF
+/*auto ColorToHexString(lv_color_t color) {
+
+  Log.verboseln("ColorToHexString R:%i, G:%i, B:%i", color.ch.red, color.ch.green, color.ch.blue);
+  char output[100];
+  //sprintf(output, "#%02X%02X%02X", color.ch.red * 255 / 31, color.ch.green * 255 / 63, color.ch.blue * 255 / 31);
+  sprintf(output, "#rgb", color.ch.red, color.ch.green, color.ch.blue);
+  String outputString = output;
+  return outputString;
+}*/
 
 // 89504e47da1aa000d494844520003c0003c82000b59e4e2500184694343504943432070726f66696c650028917d913d48c3401cc55f3fa4522a1dec202218a13ad945451cb5a45a8106a85561d4c2efd8226d498a8ba3e05a70f063b1eae0e2acab83ab2087e80b8ba3829ba4889ff4ba2d623c38eec7bb7b8fbb7780bf5965aa199c554cd3232a9a490cbafaa15784318c2846109498a9cf89621a9ee3eb1e3ebede257896f7b93f479f523019e0138867996e58c41bc4d39b96ce799f38c6ca92427c4e3c6ed05891fb92ebbfcc6b9e4b09f67c68c6c669e38462c94ba58ee62563654e229e2b8a26a94efcfb9ac70dee2ac56ebac7d4ffec248415b59e63acd21a4b08825881020a38eaaab090a05523c54486f6931efe41c72f924b265758c1cba84185e4f8c1ffe077b7667172c24d8a24819e17dbfe18542bb40ab61dbdfc7b6dd3a12cfc095d6f1d79ac0cc27e98d8e163f2a2dbc0c5754793f780cb1d60e04997cc991234fdc522f07e46df947fa6f81f09adb5b7b1fa7f4096ba4adf0787c05889b2d73ddedddbdddbbf67dafdfd0841572adbe7f784000970485973002e23002e23178a53f76000774494d457e7a1ff23d4e1b92130001974455874436f6d6d656e7404372656174656420776974682047494d505781e17004c64944415468ded59a3d6ee33c1086475917bd212ec45f4c1c556ba33152e7292142e84f0eaa5c18e145c45840d77011e02be8a586c39921a524bb6b55712c53f47f3f3ce48d64c7fcabc31fcdbd9fbbeb7f8c4ffe86ea23fe8afc165fcbdc7b0f83977eca47b37c7b977f1d7eccee415ab178901d923dc4c5d9f58fc67e27834a26d527bc3504659656fe33dbec4fe9b685db231068a5becbfc1e11d7d1e19eeee34af82b60eed92ac65670f1d1ca10967287cd38385cafbdf7fd8cbd96d7318188135f3ef58d6ad5b2be11e186b0a88d27106ef7fc4aadfbf41f3e19ef191f64f384caef923d342cf4f71fcbc2d4d84362f5eb39b69743f0318f60bca67d5b71af2183ed7765fe3683cd4a845ee4debb89fc27b72e68fdce5fa1d9ef2274c8861b08653ae7ce71a5fba66421b2875ae8b97bf9edd393e4f784bba37f5b462f6cf455d0a9f12612f5127a19372db4f5293f8035a31f9d252c969e5cd8bee5a6e5a5ca21bec619292c0223c829dc65abb4a1a81d4cb4a7bb718975edef61137bfc09271c73af9c1e162556cfdd4ac4122e9b43ae95f29d7d31d49d20cfaddbecddf0b9ecdf3eeee068f9b842ea43c2e3a6945c091649f1c2b6024c149a5e14ae526143b1745cb1e6cfd057da23ef38f2de84c4226554f75d65cf73b07d2e89c2bad8bac1547e67228dd47de839a49ca775af48e44749d0b01047e3c9e2e1237b4b71e6ee92fc96fefc8a725e2cbd9115d4f4a6334b3e28e9f9e559b50db5427d624dedfc91e9284f8b7f3f4ad116b2347e6f0e6f29c6a9f9cdf992f94330f4b8b140dae3da47d0d683c4f857c049d42e6438f01a2e8d5fb97565bc7a32c649539c31f3aca421f8d6f92f2f361ffb66fae588a73629c55497f99731f8ddf284d4987878b628d8488c4f970273b26c1d7cb5ddec70b874f99d593bd7abc08dbe3a45ab1f1bad3dc2883983c2d679f92014485914148c3d2a296f5cd1a8ae3ad6e3f295b885af3fbad35cedc50a31ab64223bb5c854c1ef8ca9cb25ee1d837d7eaa9547a5692c762ae3f9998a6e9ac568de14ceabd692aeeac55b8d9e746c177f76e924a5a65a8e0944c430de977dda3e39c2adcc8770a81d6cfe9b0aa32a6f1dcf33e9dc754d4dc552ea45ea3ffd363795a42fa8cc17e287be02110996bad535f75a24443572393b7ca1269f9fe796e6d1f3be19cbb1780699d68197a3c70c31ec5eb6f374c434b6d2821693997445967d4a5ca8ac4c63f86675add69ce155fa1b844facb190c03d58d8a6a1776b63de9532dcdee8cd2c7d7b393bf7206cebc1aea484fa51e2136fe519f4660d76fdd5ab294329f8c717ef5a89fa3102f7ef8be88a2da321ef311c9be57e83f3b2fbec9f9747b1b984b4c4f9fd3d30494d965f3d7e6c8e63ae28bb9ba248c74be31c44c450fca83485eef935c6436c2b236ecdd39fb0ed46f94138358f6bf7fc1a4a17fb3e181ce5aee4928ab5dc443029b8c5765f2a875185726f554c581253368d0c11f84e7652f4a8baf7431ac84d86f7abfe560d34024eefb96d69e9f2dbb8dbe45e78f175bc98b928430d689fd916fb94572b4ec91cb513d46bfb430294fd11ba55bf13bc3bbc41f7f2a4036d0d63a713d68e96519a6d0947a8f2a2649b6bab643458c14a86911f37a4ee75f3afee7f7d50d61fa02c8adc000049454e44ae426082

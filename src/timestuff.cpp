@@ -47,13 +47,13 @@ void writeTime()
 
         if (t_tm.tm_min != lastmin)
         {
-            Serial.println("WriteTime min");
+            Log.verboseln("WriteTime min");
             lastmin = t_tm.tm_min;
             info.flag.minutechanged = 1;
 
             if (t_tm.tm_hour != lasthour)
             {
-                Serial.println("WriteTime hour");
+                Log.verboseln("WriteTime hour");
                 lasthour = t_tm.tm_hour;
                 info.flag.hourchanged = 1;
                 strftime(time, sizeof(time), "%a %b %e", &t_tm);
@@ -95,7 +95,6 @@ void initTicks()
             lv_img_set_src(tick_index[i], &ui_img_seconddashstub_png);
             lv_obj_set_y(tick_index[i], -91);
 
-            Serial.println(info.theme.darkmode);
             if (info.theme.darkmode or 1)
                 lv_obj_set_style_img_recolor(tick_index[i], lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
             else

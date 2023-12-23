@@ -93,7 +93,6 @@ void BTsendSteps()
   // t:"act", hrm:int, stp:int, time:int
   StaticJsonDocument<200> actinfo;
   actinfo["t"] = "act";
-  // actinfo["stp"] = Storage.getInt("Steps");
   actinfo["stp"] = getSteps() - laststep;
   laststep = getSteps();
   serializeJson(actinfo, buffer);

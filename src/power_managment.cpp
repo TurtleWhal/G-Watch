@@ -143,14 +143,16 @@ void Powerhandle()
       DrawPower();
     }
 
-    if ((twatch->power_get_percent() < 20) and (millis() > 2000))
+    if ((twatch->power_get_percent() < 20) and (millis() > 10000))
     { // turn on power saving mode
 
+      Log.verboseln("Power Saving Mode Acitvated");
       BT_off();                        // turn off bluetooth
       twatch->backlight_set_value(50); // lower brightness
 
-      if (twatch->power_get_percent() < 5) // turn off to protect the battery
+      if (twatch->power_get_volt() < 3000) // turn off to protect the battery
       {
+        Log.verboseln("Powering off due to low battery");
         PowerOff(nullptr);
       }
     }
