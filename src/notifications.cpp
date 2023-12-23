@@ -39,12 +39,12 @@ int TempID;
 
 lv_obj_t *NotifPopup;
 
-void shownotification(String Title, String Text, String Source, int id)
+void ShowNotification(String Title, String Text, String Source, int id)
 {
   // Create the widget in the Clock screen
   Wakeup("Notification Received");
   if (notificationshowing)
-    notificationhide(LV_ANIM_OFF);
+    NotificationHide(LV_ANIM_OFF);
 
   NotifPopup = ui_Notification_Widget_create(lv_scr_act());
   lv_obj_set_x(NOTIFPOPUP_MAIN, 0);
@@ -113,12 +113,12 @@ void shownotification(String Title, String Text, String Source, int id)
   /*if (lv_scr_act() == ui_Notifications)
   {
     // lv_obj_clean(ui_Notification_Panel);
-    // drawnotifications(nullptr);
+    // DrawNotifications(nullptr);
     ui_Notifications_screen_init();
   }*/
 }
 
-void drawnotifications(lv_event_t *e)
+void DrawNotifications(lv_event_t *e)
 {
   /*if (lv_scr_act() != ui_Notifications)
   {
@@ -145,19 +145,19 @@ void drawnotifications(lv_event_t *e)
       NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
       NotificationList[10].id = TempID;
       NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
-      // pushnotification(1);
+      // PushNotification(1);
     }
   }
   else
     lv_obj_clear_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_HIDDEN);
 }
 
-void deletenotification(lv_event_t *e)
+void DeleteNotification(lv_event_t *e)
 {
   if (lv_scr_act() == ui_Notifications)
   {
     int index = (int)lv_obj_get_user_data(lv_event_get_target(e));
-    popnotification(index + 1);
+    PopNotification(index + 1);
     lv_obj_del_delayed(lv_event_get_target(e), 350);
 
     if (!NotificationCount)
@@ -165,26 +165,26 @@ void deletenotification(lv_event_t *e)
   }
 }
 
-void notificationdismiss(lv_event_t *e)
+void NotificationDismiss(lv_event_t *e)
 {
   notificationshowing = 0;
   NotificationHide_Animation(ui_Notification_Popup, 300);
   Serial.println("Notification Dismiss");
 }
 
-void notificationhide(bool anim)
+void NotificationHide(bool anim)
 {
   notificationshowing = 0;
   if (anim)
     NotificationHide_Animation(NOTIFPOPUP_MAIN, 0);
   else
     lv_obj_set_y(NOTIFPOPUP_MAIN, -160);
-  pushnotification(1);
+  PushNotification(1);
   lv_obj_del_delayed(NotifPopup, 1000);
   Serial.println("Notification Hide");
 }
 
-void pushnotification(int index)
+void PushNotification(int index)
 {
   int i;
   for (i = NotificationCount; index <= i; i--)
@@ -213,15 +213,15 @@ void pushnotification(int index)
       // Serial.println(lv_obj_get_child_cnt(ui_Notification_Panel));
     }
     Log.verboseln("Imma DrawNotifications and probably die");
-    drawnotifications(nullptr);
+    DrawNotifications(nullptr);
 
-    // drawnotifications(nullptr);
+    // DrawNotifications(nullptr);
   }
 
   Log.verboseln("Pushed Notification with id %i", index);
 }
 
-void popnotification(int index)
+void PopNotification(int index)
 {
   Log.verboseln("Popped Notification with id %i", index);
   if (!NotificationCount)
@@ -242,42 +242,15 @@ void popnotification(int index)
   info.notification.count = --NotificationCount;
 }
 
-void drawnotificationarc()
+void NotificationHandle()
 {
-  if (notificationshowing)
-  {
-    // lv_arc_set_value(ui_Notification_Timer, ((millis() - notificationtime) / (Storage.getUInt("NotifLength") * 10)) * 10);
-    if (notificationtime + (Storage.getUInt("NotifLength") * 1000) < millis())
-    {
-      notificationhide();
-
-      /*NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
-      NotificationList[10].Text = lv_label_get_text(ui_Notification_Text);
-      NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
-      NotificationList[10].id = TempID;
-      NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
-      pushnotification(1);*/
-
-      // Log.verboseln("Stored Notification with Title: %s, Text: %s, Source: %s, id: %i", NotificationList[10].Title, NotificationList[10].Text, NotificationList[10].Source, NotificationList[10].id);
-    }
-  }
+  if ((notificationtime + (Storage.getUInt("NotifLength") * 1000) < millis()) and notificationshowing)
+    NotificationHide();
 }
 
 void ToggleDoNotDisturb(lv_event_t *e)
 {
-  /*if (!Donotdisturb)
-  {
-    Donotdisturb = 1;
-    // lv_obj_set_style_bg_color(ui_Do_Not_Disturb_Button, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  if (Donotdisturb)
-  {
-    Donotdisturb = 0;
-    // lv_obj_set_style_bg_color(ui_Do_Not_Disturb_Button, lv_color_hex(0x2095F6), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }*/
-
   Donotdisturb = !Donotdisturb;
-  // erial.println(Donotdisturb);
 }
 
 bool NotificationActive()
@@ -285,7 +258,7 @@ bool NotificationActive()
   return notificationshowing;
 }
 
-void FakeNotes()
+void AddFakeNotifications()
 {
   for (int i = 1; i < 7; i++)
   {
@@ -299,6 +272,6 @@ void FakeNotes()
     temp = "Source: ";
     temp += i;
     NotificationList[10].Source = temp;
-    pushnotification(1);
+    PushNotification(1);
   }
 }

@@ -78,16 +78,16 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
   {
     data->state = LV_INDEV_STATE_PR;
     /*Set the coordinates*/
-    // if (getSleepTimer() < millis() - 200)
+    // if (GetSleepTimer() < millis() - 200)
     //{
 
     xaccel = touch.data.x - data->point.x;
     data->point.x = touch.data.x;
     data->point.y = touch.data.y;
 
-    if (!isSleeping()) // If Awake
+    if (!IsSleeping()) // If Awake
     {
-      if (isClockScreen) // Only run this if on the main screen
+      if (IsClockScreen) // Only run this if on the main screen
       {
         notifslide(nullptr);
       }
@@ -121,7 +121,7 @@ void notifslide(lv_event_t *e)
     lv_obj_set_x(notiftouched, touch.data.x - (lv_obj_get_width(notiftouched) * 0.7));
     if (xaccel >= 40 or xaccel <= -40 or touch.data.x >= 220 or touch.data.x <= 40)
     {
-      notificationdismiss(nullptr);
+      NotificationDismiss(nullptr);
       notifslideoff(nullptr);
 
       if (xaccel >= 40 or touch.data.x >= 220)
@@ -162,7 +162,7 @@ void btn1_click(void *param)
 {
   Log.verboseln("BTN1 Click. Power Percent: %i", twatch->power_get_percent());
   // twatch->motor_shake(1, 60);
-  if (isSleeping())
+  if (IsSleeping())
     Wakeup("Button 1 Pressed");
   else
     Sleep();
@@ -171,7 +171,7 @@ void btn2_click(void *param)
 {
   Log.verboseln("BTN2 Click. MilliVolts: %i", (int)twatch->power_get_volt());
   // twatch->motor_shake(1, 60);
-  if (isClockScreen() or lv_scr_act() == ui_Default_Clock)
+  if (IsClockScreen() or lv_scr_act() == ui_Default_Clock)
     _ui_screen_change(&ui_Schedule, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Schedule_screen_init);
   else if (lv_scr_act() == ui_Stopwatch)
     ToggleStopwatch(nullptr);
@@ -184,14 +184,14 @@ void btn3_click(void *param)
 {
   Log.verboseln("BTN3 Click");
   Wakeup("Button 3 Pressed");
-  Serial.println(isClockScreen());
-  if (isClockScreen())
+  Serial.println(IsClockScreen());
+  if (IsClockScreen())
   {
     if (NotificationActive())
-      notificationdismiss(nullptr);
+      NotificationDismiss(nullptr);
   }
   else
-    screenback(nullptr);
+    ScreenBack(nullptr);
 }
 void btn1_held(void *param)
 {
@@ -303,7 +303,7 @@ void setup()
   timerAlarmEnable(timer3);
 
   //////////////////////////Fake Notifications///////////
-  // FakeNotes();
+  // AddFakeNotifications();
 
   ////////////////////////////////////////OTA
   if (useOTA)
@@ -390,16 +390,17 @@ void loop()
   if (useOTA)
     ArduinoOTA.handle();
   // Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
-  if (!isSleeping()) // If Awake
+  if (!IsSleeping()) // If Awake
   {
     // lv_timer_handler(); /* let the GUI do its work */
     // delay(5);
     // delay(lv_timer_handler());
 
-    if (isClockScreen or 1) // Only run this if on the main screen////////////////////////////////////////////////////////////////////////////////////////
+    if (IsClockScreen or 1) // Only run this if on the main screen////////////////////////////////////////////////////////////////////////////////////////
     {
-      writeTime();
+      UpdateTime();
       ScreenHandleHandle();
+      UpdateTime();
       Powerhandle();
       // notifslide(nullptr);
     }
@@ -419,7 +420,7 @@ void loop()
   Sleephandle();
   VibrateHandle();
   TimersHandle();
-  drawnotificationarc();
+  NotificationHandle();
   //Serial.println(twatch->power_get_volt());
 
   // this runs every 50ms
@@ -434,7 +435,7 @@ void loop()
   {
     Timer0Triggered = 0;
     StepHandle();
-    DrawPower();
+    UpdatePower();
     ScheduleHandle();
 
     if (millis() < 20000)

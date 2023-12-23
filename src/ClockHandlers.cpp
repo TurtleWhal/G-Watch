@@ -1,7 +1,7 @@
 #include "ui.h"
 #include "lvgl.h"
 #include "screen_management.h"
-#include "ClockHandlers.h"
+#include "clockhandlers.h"
 #include "timestuff.h"
 #include "ArduinoLog.h"
 
@@ -41,7 +41,7 @@ void DefaultClockHandle()
 
         if (info.flag.secondchanged or info.flag.refresh)
         {
-            colorTicks(info.time.valsec);
+            ColorTicks(info.time.valsec);
             lv_img_set_angle(ui_Default_Clock_Minute_Hand, (info.time.minute * 60) + (info.time.second));
             lv_label_set_text_fmt(ui_Default_Clock_Notification_Amount_Number, "%i", info.notification.count);
 

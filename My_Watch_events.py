@@ -378,3 +378,39 @@ def applyKeyboardValue(event_struct):
 def ScreenBack(event_struct):
     return
 
+
+def ResetStopwatch(event_struct):
+    return
+
+
+def TimerAdjust(event_struct):
+    return
+
+
+def NotificationDismiss(event_struct):
+    return
+
+
+def DrawNotifications(event_struct):
+    return
+
+
+def SetTimerDefault(event_struct):
+    return
+
+
+def LoadSettings(event_struct):
+    return
+
+
+def StopAnim(event_struct):
+    return
+
+
+def LoadCalc(event_struct):
+    return
+
+
+def DeleteNotification(event_struct):
+    return
+

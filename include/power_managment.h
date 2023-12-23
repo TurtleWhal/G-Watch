@@ -7,16 +7,15 @@ extern "C"
   void Sleep();
   void Sleephandle();
   void Ticklesleep();
-  bool isSleeping();
+  bool IsSleeping();
   void Powerhandle();
-  void DrawPower();
+  void UpdatePower();
   void PowerOff(lv_event_t *e);
   void UpdateBrightness(lv_event_t *e);
   int GetUserBrightness();
   void FullSpeed();
   void SleepSpeed();
-  bool isCharging();
-  int getSleepTimer();
+  int GetSleepTimer();
   void BTsendpower();
 
 #ifdef __cplusplus

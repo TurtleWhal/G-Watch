@@ -9,5 +9,5 @@
         "functional": "cpp",
         "cmath": "cpp"
     },
-    "cmake.sourceDirectory": "/Users/gj0987888/Documents/GitHub/TWatch-2021/.pio/libdeps/esp32dev/TFT_eSPI"
+    "cmake.sourceDirectory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src"
 }

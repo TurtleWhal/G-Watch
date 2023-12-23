@@ -3,11 +3,10 @@ extern "C"
 {
 #endif
 
-void writetimertime();
-//void notificationdismiss();
+void WriteTimerTime();
 void alarmhandle();
 void BThandle();
-void istimernegative();
+void IsTimerNegative();
 void Powerhandle();
 void Sleephandle();
 void Compass();
@@ -15,10 +14,9 @@ void StepHandle();
 void Timer0Handle();
 void BTTimerHandle();
 void StepGraphHandle();
-void pushnotification(int);
-void DrawPower();
-//void ApplyTheme();
-void popnotification(int);
+void PushNotification(int);
+void UpdatePower();
+void PopNotification(int);
 void CenterNotif_Animation(lv_obj_t *TargetObject, int delay);
 
 #ifdef __cplusplus

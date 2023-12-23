@@ -3,8 +3,8 @@ extern "C"
 {
 #endif
 
-void istimernegative();
-void writetimertime();
+void IsTimerNegative();
+void WriteTimerTime();
 void TimersHandle();
 void VibrateHandle();
 void VibrateStart(int);

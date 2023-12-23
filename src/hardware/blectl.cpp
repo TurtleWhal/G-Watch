@@ -70,7 +70,7 @@ static bool blectl_powermgm_event_cb( EventBits_t event, void *arg );
             char pin[16]="";
             snprintf( pin, sizeof( pin ), "%06d", pass_key );
             Log.verboseln("BLECTL pairing request, PIN: %s", pin );
-            pairBT(pass_key);
+            PairBT(pass_key);
 
             blectl_set_event( BLECTL_PIN_AUTH );
             blectl_send_event_cb( BLECTL_PIN_AUTH, (void *)pin );
@@ -130,7 +130,7 @@ static bool blectl_powermgm_event_cb( EventBits_t event, void *arg );
                     blectl_clear_event( BLECTL_AUTHWAIT | BLECTL_DISCONNECT );
                     blectl_set_event( BLECTL_CONNECT );
                     blectl_send_event_cb( BLECTL_CONNECT, (void *) "connected" );
-                    onBTConnect();
+                    OnBTConnect();
                     return;
                 }
             }

@@ -41184,7 +41184,7 @@
             {
               "nid": -311829053,
               "strtype": "CALL FUNCTION/Function_name",
-              "strval": "deletenotification",
+              "strval": "DeleteNotification",
               "InheritedType": 10
             },
             {
@@ -41298,7 +41298,7 @@
             {
               "nid": -1728771154,
               "strtype": "CALL FUNCTION/Function_name",
-              "strval": "deletenotification",
+              "strval": "DeleteNotification",
               "InheritedType": 10
             },
             {

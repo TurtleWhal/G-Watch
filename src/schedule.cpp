@@ -44,7 +44,7 @@ bool HasScheduleEvent()
 
 void ScheduleHandle()
 {
-    CurrentSchedule = *WeeklySchedule[getDayOfWeek()];
+    CurrentSchedule = *WeeklySchedule[GetDayOfWeek()];
     StartTime = 0;
     EndTime = 2400;
     entry = UINT8_MAX;
@@ -57,6 +57,11 @@ void ScheduleHandle()
     ////Serial.println(info.time.hour);
     ////Serial.print("minute: ");
     ////Serial.println(info.time.minute);
+    numtime = (info.time.hour * 100) + info.time.minute;
+    // Serial.print("hour: ");
+    // Serial.println(GetHour());
+    // Serial.print("minute: ");
+    // Serial.println(GetMinute());
 
     ////Serial.print("Time: ");
     ////Serial.println(numtime);

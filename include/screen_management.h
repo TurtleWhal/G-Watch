@@ -144,10 +144,10 @@ extern "C"
         ALARMS_SCREEN
     };
 
-    void buttontoclock();
+    void ButtonToClock();
     lv_obj_t *GetClockScreen();
     void SetDownScreen(int Screen);
-    bool isClockScreen();
+    bool IsClockScreen();
     void ScreenHandleHandle();
     void SetClockScreen(lv_obj_t *screen);
     void InitClockScreen();

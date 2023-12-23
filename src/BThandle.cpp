@@ -45,26 +45,8 @@ LV_IMG_DECLARE(ui_img_isolated_thunderstorms_png); // assets\Isolated Thundersto
 LV_IMG_DECLARE(ui_img_blizzard_png);               // assets\Blizzard.png
 LV_IMG_DECLARE(ui_img_fog_png);                    // assets\Fog.png
 
-typedef struct
-{
-  int Temp = 0;
-  int High = 0;
-  int Low = 0;
-  int Humidity = 0;
-  int Precip = 0;
-  int UV = 0;
-  int Code = 0;
-  lv_img_dsc_t Img = ui_img_mostly_cloudy_png;
-  String Type = "Not Updated";
-  int Wind = 0;
-  int Winddir = 0;
-  String Loc = "";
-} weather;
-
-weather Weather;
-
 void ParseGB(char *Message);
-int KelvintoF(int Kelvin);
+int KelvinToF(int Kelvin);
 String DegToCompassHeading(int);
 
 void ParseBLE(char *Message)
@@ -92,7 +74,7 @@ void ParseBLE(char *Message)
 
     Serial.println(timezone);
 
-    setTime(timevalue, timezone);
+    SetTime(timevalue, timezone);
   }
   else
     ParseGB(Message);
@@ -179,7 +161,7 @@ void ParseGB(char *Message)
       }
       else
       {
-        shownotification(NotifTitle, NotifText, NotifSource, NotifID);
+        ShowNotification(NotifTitle, NotifText, NotifSource, NotifID);
       }
     }
   }
@@ -190,7 +172,7 @@ void ParseGB(char *Message)
     {
       if (NotificationList[i].id == NotifID)
       {
-        popnotification(i + 1);
+        PopNotification(i + 1);
         // lv_label_set_text_fmt(ui_Now_Playing_Label, "%i", i);
         Log.verboseln("Notify: %i", i);
       }
@@ -300,9 +282,9 @@ void ParseGB(char *Message)
   else if (strcmp(NotifType, "weather") == 0)
   {
     // t:"weather", temp,hi,lo,hum,rain,uv,code,txt,wind,wdir,loc
-    int Temp = KelvintoF(received["temp"]);
-    int High = KelvintoF(received["hi"]);
-    int Low = KelvintoF(received["lo"]);
+    int Temp = KelvinToF(received["temp"]);
+    int High = KelvinToF(received["hi"]);
+    int Low = KelvinToF(received["lo"]);
     int Humidity = received["hum"];
     int Precip = received["rain"];
     float UV = received["uv"];
@@ -418,12 +400,12 @@ void ParseGB(char *Message)
     {
       VibrateStop(nullptr);
       if (lv_scr_act() == ui_Alarm_Going_Off)
-        screenback(nullptr);
+        ScreenBack(nullptr);
     }
   }
 }
 
-int KelvintoF(int Kelvin)
+int KelvinToF(int Kelvin)
 {
   return ((Kelvin - 273) * 1.8 + 32);
 }
@@ -536,7 +518,7 @@ void BT_off()
   blectl_off();
 }
 
-void onBTConnect()
+void OnBTConnect()
 {
   BTsendpower();
 }
@@ -594,12 +576,7 @@ void BTmsgloop()
   }
 }
 
-bool isBTconnected()
-{
-  return BTconnected;
-}
-
-void pairBT(int pin)
+void PairBT(int pin)
 {
   _ui_screen_change(&ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Alarm_Going_Off_screen_init);
   lv_label_set_text(ui_Alarm_Going_Off_Stop_Button_Text, "Ok");

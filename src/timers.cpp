@@ -49,7 +49,7 @@ void ToggleStopwatch(lv_event_t *e)
   twatch->motor_shake(1, 50);
 }
 
-void resetstopwatch(lv_event_t *e)
+void ResetStopwatch(lv_event_t *e)
 {
   stopwatchmoving = 0;
   PauseToPlay_Animation(ui_Stopwatch_Play_Pause_Image, 0);
@@ -83,14 +83,14 @@ void ToggleTimer(lv_event_t *e)
 
 void InitTimer(lv_event_t *e)
 {
-  writetimertime();
+  WriteTimerTime();
   if (timermoving)
   {
     lv_obj_set_y(ui_Timer_Play_Pause_Image, 34);
   }
 }
 
-void timeradjust(lv_event_t *e)
+void TimerAdjust(lv_event_t *e)
 {
   timertime = ((lv_roller_get_selected(ui_Timer_Hour_Left_Roller) * 60 * 60 * 10) +
                (lv_roller_get_selected(ui_Timer_Hour_Right_Roller) * 60 * 60) +
@@ -105,11 +105,11 @@ void timeradjust(lv_event_t *e)
 
   Serial.println(timertime);
 
-  istimernegative();
-  writetimertime();
+  IsTimerNegative();
+  WriteTimerTime();
 }
 
-void istimernegative()
+void IsTimerNegative()
 {
   if (timertime <= 0)
   {
@@ -127,7 +127,7 @@ void istimernegative()
   }
 }
 
-void writetimertime()
+void WriteTimerTime()
 {
   if (ui_Timers != NULL)
   {
@@ -161,8 +161,8 @@ void TimersHandle()
     if (lasttime < millis() - 500)
     {
       Serial.println(timertime);
-      writetimertime();
-      istimernegative();
+      WriteTimerTime();
+      IsTimerNegative();
       lasttime = millis();
     }
   }

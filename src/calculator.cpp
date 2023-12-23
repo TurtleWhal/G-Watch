@@ -20,13 +20,13 @@ void CalcHandle(lv_event_t *e)
         if (calcbutton == "=")
         {
             String expr = lv_textarea_get_text(ui_Calculator_textarea);
-            lv_textarea_set_text(ui_Calculator_textarea, String(calculateExpression(expr)).c_str());
+            lv_textarea_set_text(ui_Calculator_textarea, String(CalculateExpression(expr)).c_str());
             lv_btnmatrix_set_selected_btn(ui_Calculator_Keyboard, 16);
         }
     }
 }
 
-float calculateExpression(String expression) {
+float CalculateExpression(String expression) {
   float num1 = 0;
   float num2 = 0;
   char operatorChar = '+';

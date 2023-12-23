@@ -67,14 +67,13 @@ void Wakeup(String Wakeup_reason)
     setCpuFrequencyMhz(240);
     // twatch->hal_auto_update(true, 1);
     //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
-    //  generictoclock(nullptr);
+    //  GenericToClock(nullptr);
     //  lv_timer_handler();
-    writeTime();
+    UpdateTime();
 
-    DrawPower();
+    UpdatePower();
 
     StepHandle();
-    DrawSteps();
 
     Log.verboseln("IM AWAKE!");
     //  dad hid this comment here because I'm like that.
@@ -119,7 +118,7 @@ void Ticklesleep()
   //   twatch->backlight_set_value(prevbrightness * 3);
 }
 
-bool isSleeping()
+bool IsSleeping()
 {
   return Sleeping;
 }
@@ -132,7 +131,7 @@ void Powerhandle()
     if (!charging)
     {
       charging = 1;
-      DrawPower();
+      UpdatePower();
     }
   }
   else
@@ -140,7 +139,7 @@ void Powerhandle()
     if (charging)
     {
       charging = 0;
-      DrawPower();
+      UpdatePower();
     }
 
     if ((twatch->power_get_percent() < 20) and (millis() > 10000))
@@ -167,7 +166,7 @@ void Powerhandle()
     lastpercent = 100;
 }*/
 
-void DrawPower()
+void UpdatePower()
 {
   static int lastpercent = 200;
   if (lastpercent != twatch->power_get_percent())
@@ -241,12 +240,7 @@ void SleepSpeed()
   // esp_light_sleep_start();
 }
 
-bool isCharging()
-{
-  return charging;
-}
-
-int getSleepTimer()
+int GetSleepTimer()
 {
   return sleeptimer;
 }
@@ -258,7 +252,7 @@ void BTsendpower()
   batinfo["t"] = "status";
   batinfo["bat"] = twatch->power_get_percent();
   // batinfo["volt"] = (float)twatch->power_get_volt()/1000;
-  batinfo["chg"] = isCharging() ? 1 : 0;
+  batinfo["chg"] = info.battery.ischarging ? 1 : 0;
   serializeJson(batinfo, buffer);
   BTsend(buffer);
 }

@@ -4,7 +4,7 @@
 #include "Functions.h"
 #include "screen_management.h"
 #include "power_managment.h"
-#include "ClockHandlers.h"
+#include "clockhandlers.h"
 #include "timestuff.h"
 #include "TWatch_hal.h"
 
@@ -93,12 +93,12 @@ void InitClockScreen()
         lv_obj_del(ui_Second_Dash_Include); // Only used to include files
         lv_obj_del(ui_Second_Dot_Include);
 
-        initTicks(); // Draws the tick marks around the edge
+        InitTicks(); // Draws the tick marks around the edge
     }
     info.flag.refresh = 1;
 }
 
-bool isClockScreen()
+bool IsClockScreen()
 {
     if (lv_scr_act() == Screen)
         return 1;
@@ -116,12 +116,12 @@ void SetDownScreen(int Screen)
     LastDownScreen = Screen;
 }
 
-void stopanim(lv_event_t *e)
+void StopAnim(lv_event_t *e)
 {
     lv_anim_del_all();
 }
 
-void loadcalc(lv_event_t *e)
+void LoadCalc(lv_event_t *e)
 {
     /*Create an Calculator keyboard map*/
     static const char *kb_map[] = {"C", LV_SYMBOL_BACKSPACE, "\n",
@@ -141,7 +141,7 @@ void loadcalc(lv_event_t *e)
     lv_keyboard_set_mode(ui_Calculator_Keyboard, LV_KEYBOARD_MODE_USER_1);
 }
 
-void loadsettings(lv_event_t *e)
+void LoadSettings(lv_event_t *e)
 {
     char StepGoalChar[6];
     sprintf(StepGoalChar, "%i", Storage.getUShort("StepGoal"));
@@ -167,7 +167,7 @@ void loadsettings(lv_event_t *e)
     ApplyTheme(nullptr);
 }
 
-void settimerdefault(lv_event_t *e)
+void SetTimerDefault(lv_event_t *e)
 {
     if (lv_event_get_target(e) == ui_Timers)
         LastTimeScreen = TIMER_SCREEN;
@@ -222,9 +222,9 @@ void ClockLeft(lv_event_t *e)
     _ui_screen_change(&ui_Apps, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Apps_screen_init);
 }
 
-void generictoclock(lv_event_t *e)
+void GenericToClock(lv_event_t *e)
 {
-    if (!isClockScreen)
+    if (!IsClockScreen)
     {
         ApplyTheme(nullptr);
         lv_anim_del_all();
@@ -250,9 +250,9 @@ void generictoclock(lv_event_t *e)
     }
 }
 
-void buttontoclock()
+void ButtonToClock()
 {
-    if (!isClockScreen)
+    if (!IsClockScreen)
     {
         lv_anim_del_all();
         ApplyTheme(nullptr);
@@ -277,7 +277,7 @@ void ToggleFlashlight(lv_event_t *e)
         twatch->backlight_set_value(GetUserBrightness());
 }
 
-void screenback(lv_event_t *e)
+void ScreenBack(lv_event_t *e)
 {
     if (lv_scr_act() == ui_Apps)
     {

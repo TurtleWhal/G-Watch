@@ -1,4 +1,4 @@
-Make notifications show on all screens
+bugfix notifications show on all screens
 
 Change to LVGL task Handler vs timers? Is this right when sleeping?
 Change to TWATCH LVGL
@@ -11,35 +11,23 @@ Power managment when asleep
 Improve boot upload_speed
 Move button handler to LVGL
 
-notification images
-
 Float based calculator only does two decimal places
 
 Increase LVGL Buffer Size
 
 alarms
 
-buttons wierd?
-
 Find phone from watch
 
 fix timer and stopwatch instability
-
-add more watch faces
 
 store notifications in flash
 
 step goal after reached
 
-notifications dismissed on main screen dissapear on notifications screen
-
-smooth notification dismiss
-
 calls
 
 games
-
-touch experiment
 
 OS
 

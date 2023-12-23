@@ -10,7 +10,7 @@
 #include "schedule.h"
 #include "screen_management.h"
 
-void BTsendSteps();
+void BTSendSteps();
 
 extern Preferences Storage;
 extern TWatchClass *twatch;
@@ -32,7 +32,7 @@ void StepHandle()
   if (StepOffset == UINT16_MAX)
   {
     // twatch->bma423_reset();
-    if (Storage.getUShort("StepDay") == getDay())
+    if (Storage.getUShort("StepDay") == GetDayOfYear())
     {
       StepOffset = Storage.getUShort("Steps");
     }
@@ -45,8 +45,6 @@ void StepHandle()
     LastSteps = GetStep;
     Steps = GetStep + StepOffset;
 
-    DrawSteps();
-
     if (Steps >= Storage.getUShort("StepGoal") and !Storage.getBool("StepReach"))
     {
       // #ifdef UPDATE_ELEMENTS
@@ -55,20 +53,20 @@ void StepHandle()
       // #endif
       char StepNotif[] = "You have reached your step goal of 4294967295 Steps!";
       sprintf(StepNotif, "You have reached your step goal of %i Steps!", Storage.getUShort("StepGoal"));
-      shownotification("Step Goal Reached!", StepNotif, "local.stephandle", 0);
+      ShowNotification("Step Goal Reached!", StepNotif, "local.stephandle", 0);
       Storage.putBool("StepReach", 1);
     }
 
     Storage.putUShort("Steps", Steps);
-    StepDay = getDay();
+    StepDay = GetDayOfYear();
     Storage.putUShort("StepsDay", StepDay);
 
-    BTsendSteps();
+    BTSendSteps();
   }
 
-  if (Storage.getUShort("StepDay") != getDay())
+  if (Storage.getUShort("StepDay") != GetDayOfYear())
   {
-    Storage.putUShort("StepDay", getDay());
+    Storage.putUShort("StepDay", GetDayOfYear());
     Storage.putBool("StepReach", 0);
     StepOffset = 0;
     Storage.putUShort("Steps", 0);
@@ -76,39 +74,34 @@ void StepHandle()
   }
 }
 
-int getSteps()
-{
-  return Steps;
-}
-
 void DrawSteps()
 {
 info.health.steps = Steps;
 }
 
-void BTsendSteps()
+void BTSendSteps()
 {
-  static int laststep = getSteps();
+  static int laststep = info.health.steps;
   String buffer;
   // t:"act", hrm:int, stp:int, time:int
   StaticJsonDocument<200> actinfo;
   actinfo["t"] = "act";
-  actinfo["stp"] = getSteps() - laststep;
-  laststep = getSteps();
+  actinfo["stp"] = info.health.steps - laststep;
+  laststep = info.health.steps;
   serializeJson(actinfo, buffer);
   BTsend(buffer);
-  SineArray[24] = getSteps();
+  SineArray[24] = info.health.steps;
 }
 
 void InitStepsScreen(lv_event_t *e)
 {
   ushort TempGoal = Storage.getUShort("StepGoal");
 
-  lv_label_set_text_fmt(ui_Steps_Info, "Steps: %i\nGoal: %i", getSteps(), TempGoal);
+  lv_label_set_text_fmt(ui_Steps_Info, "Steps: %i\nGoal: %i", info.health.steps, TempGoal);
   lv_label_set_text_fmt(ui_Reset_Storage_Label, "Storage\n%i", Storage.getUShort("Steps"));
   lv_label_set_text_fmt(ui_Reset_Counter_Label, "Counter\n%i", twatch->bma423_get_step());
   lv_bar_set_range(ui_Steps_Bar, 0, TempGoal);
-  lv_bar_set_value(ui_Steps_Bar, getSteps(), LV_ANIM_OFF);
+  lv_bar_set_value(ui_Steps_Bar, info.health.steps, LV_ANIM_OFF);
   lv_chart_set_range(ui_Steps_Chart, LV_CHART_AXIS_PRIMARY_Y, 0, TempGoal);
   WriteStepGraph();
 }
@@ -130,10 +123,10 @@ void WriteStepGraph()
 
 void AdvanceStepArray()
 {
-  SineArray[24] = getSteps();
-  for (int i = 0; i < 25; i++)
+  SineArray[24] = info.health.steps;
+  for (int i = 0; i < 24; i++)
   {
     SineArray[i] = SineArray[i + 1];
   }
-  SineArray[24] = getSteps();
+  SineArray[24] = info.health.steps;
 }
