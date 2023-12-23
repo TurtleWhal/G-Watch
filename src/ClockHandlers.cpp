@@ -92,12 +92,19 @@ void DefaultClockHandle()
 
             if (info.music.nowplayingtimer <= 80)
             {
+                if (info.OTA.useOTA)
+                    lv_label_set_text_fmt(ui_Default_Clock_Now_Playing_Label, "OTA IP: %s", info.OTA.ip);
+
                 if (info.music.nowplayingtimer < 2)
                     lv_label_set_text(ui_Default_Clock_Now_Playing_Label, info.music.nowplaying.c_str());
                 info.music.nowplayingtimer++;
             }
             else if (info.music.nowplayingtimer >= 80)
+            {
                 lv_label_set_text(ui_Default_Clock_Now_Playing_Label, "");
+                if (info.OTA.useOTA)
+                    lv_label_set_text_fmt(ui_Default_Clock_Now_Playing_Label, "OTA IP: %s", info.OTA.ip);
+            }
         }
         if (info.flag.refresh)
             info.flag.refresh = 0;

@@ -85,7 +85,7 @@ void ApplyTheme(lv_event_t *e)
 
     if (!info.theme.darkmode)
     {
-      //Serial.println("Light Mode Applytheme");
+      // Serial.println("Light Mode Applytheme");
       lv_obj_set_style_arc_color(ui_Default_Clock_Arc_Battery, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor(ui_Default_Clock_Hour_Hand, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor_opa(ui_Default_Clock_Hour_Hand, LV_OPA_100, LV_PART_MAIN);
@@ -95,7 +95,7 @@ void ApplyTheme(lv_event_t *e)
     }
     else
     {
-      //Serial.println("Dark Mode Applytheme");
+      // Serial.println("Dark Mode Applytheme");
       lv_obj_set_style_arc_color(ui_Default_Clock_Arc_Battery, lv_color_hex(0xFFFFFF), LV_PART_INDICATOR | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor(ui_Default_Clock_Hour_Hand, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor_opa(ui_Default_Clock_Hour_Hand, LV_OPA_100, LV_PART_MAIN);
@@ -185,17 +185,15 @@ void ApplyTheme(lv_event_t *e)
 
     // array size is 5978
 
+    /*lv_img_dsc_t img;
+        img.header.always_zero = 0;
+        img.header.w = 60;
+        img.header.h = 60;
+        img.data_size = 60 * 60 * LV_COLOR_DEPTH / 8;
+        img.header.cf = LV_IMG_CF_TRUE_COLOR_ALPHA;
+        img.data = Untitled;*/
 
-/*lv_img_dsc_t img;
-    img.header.always_zero = 0;
-    img.header.w = 60;
-    img.header.h = 60;
-    img.data_size = 60 * 60 * LV_COLOR_DEPTH / 8;
-    img.header.cf = LV_IMG_CF_TRUE_COLOR_ALPHA;
-    img.data = Untitled;*/
-
-    //lv_obj_set_style_bg_img_src(ui_Album_Image_Panel, &Untitled_map, LV_PART_MAIN);
-
+    // lv_obj_set_style_bg_img_src(ui_Album_Image_Panel, &Untitled_map, LV_PART_MAIN);
   }
 
   // Alarm Set Screen

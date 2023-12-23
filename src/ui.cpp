@@ -219,6 +219,68 @@ void btn3_held(void *param)
   twatch->motor_shake(1, 30);
 }
 
+void InitOTA()
+{
+  WiFi.mode(WIFI_STA);
+  WiFi.setHostname("ESP-Watch");
+  WiFi.begin(ssid, password);
+  while (WiFi.waitForConnectResult() != WL_CONNECTED)
+  {
+    Serial.println("Connection Failed! Rebooting...");
+    delay(2000);
+    WiFi.disconnect();
+    WiFi.begin(ssid2, password2);
+    delay(5000);
+    ESP.restart();
+  }
+
+  ArduinoOTA.onStart([]()
+                     {
+      String type;
+      if (ArduinoOTA.getCommand() == U_FLASH)
+        type = "sketch";
+      else // U_SPIFFS
+        type = "filesystem";
+
+      // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
+      Serial.println("Start updating " + type); 
+      
+      _ui_screen_change(&ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Alarm_Going_Off_screen_init);
+      lv_label_set_text(ui_Alarm_Going_Off_Name, "OTA Uploading");
+      lv_obj_set_style_text_font(ui_Alarm_Going_Off_Name, &ui_font_Comfortaa_26, LV_PART_MAIN);
+      lv_label_set_text(ui_Alarm_Going_Off_Time, "Starting");
+      lv_obj_del(ui_Alarm_Going_Off_Stop_Button);
+      Wakeup("Ota Begin Upload");
+      twatch->motor_shake(1, 50); })
+      .onEnd([]()
+             { Serial.println("\nEnd"); })
+      .onProgress([](unsigned int progress, unsigned int total)
+                  { Serial.printf("Progress: %u%%\r", (progress / (total / 100))); })
+      .onError([](ota_error_t error)
+               {
+      Serial.printf("Error[%u]: ", error);
+      if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
+      else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
+      else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
+      else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
+      else if (error == OTA_END_ERROR) Serial.println("End Failed"); });
+
+  ArduinoOTA.begin();
+
+  Serial.println("Ready");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  info.OTA.useOTA = true;
+  info.OTA.ip = WiFi.localIP().toString();
+
+  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total)
+                        { uint8_t percent = (progress / (total / 100));
+                          Serial.printf("Progress: %u%%\r", percent); 
+                          lv_label_set_text_fmt(ui_Alarm_Going_Off_Time, "%i%%", percent);
+                          TickleSleep(); });
+}
+
 void setup()
 {
   // setCpuFrequencyMhz(240);
@@ -256,6 +318,10 @@ void setup()
   indev_drv.type = LV_INDEV_TYPE_POINTER;
   indev_drv.read_cb = my_touchpad_read;
   lv_indev_drv_register(&indev_drv);
+
+  // initialize ArduinoOTA
+  if (useOTA)
+    InitOTA();
 
   //////////Initalize UI//////////
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
@@ -305,55 +371,6 @@ void setup()
   //////////////////////////Fake Notifications///////////
   // AddFakeNotifications();
 
-  ////////////////////////////////////////OTA
-  if (useOTA)
-  {
-
-    lv_label_set_text(ui_Default_Clock_Now_Playing_Label, "WiFi OTA");
-    WiFi.mode(WIFI_STA);
-    WiFi.setHostname("ESP-Watch");
-    WiFi.begin(ssid, password);
-    while (WiFi.waitForConnectResult() != WL_CONNECTED)
-    {
-      Serial.println("Connection Failed! Rebooting...");
-      delay(2000);
-      WiFi.disconnect();
-      WiFi.begin(ssid2, password2);
-      delay(5000);
-      ESP.restart();
-    }
-
-    ArduinoOTA.onStart([]()
-                       {
-      String type;
-      if (ArduinoOTA.getCommand() == U_FLASH)
-        type = "sketch";
-      else // U_SPIFFS
-        type = "filesystem";
-
-      // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
-      Serial.println("Start updating " + type); })
-        .onEnd([]()
-               { Serial.println("\nEnd"); })
-        .onProgress([](unsigned int progress, unsigned int total)
-                    { Serial.printf("Progress: %u%%\r", (progress / (total / 100))); })
-        .onError([](ota_error_t error)
-                 {
-      Serial.printf("Error[%u]: ", error);
-      if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
-      else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
-      else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
-      else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
-      else if (error == OTA_END_ERROR) Serial.println("End Failed"); });
-
-    ArduinoOTA.begin();
-
-    Serial.println("Ready");
-    Serial.print("IP address: ");
-    Serial.println(WiFi.localIP());
-    // lv_label_set_text(ui_Now_Playing_Label, WiFi.localIP().toString().c_str());
-  }
-  ////////////////////////////////////////END OTA
 
   // WriteTime();
   // lv_label_set_text(ui_Notification_Amount_Number, "0");
@@ -421,7 +438,7 @@ void loop()
   VibrateHandle();
   TimersHandle();
   NotificationHandle();
-  //Serial.println(twatch->power_get_volt());
+  // Serial.println(twatch->power_get_volt());
 
   // this runs every 50ms
   if (BTTimerTriggered)

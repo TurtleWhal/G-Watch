@@ -6,7 +6,7 @@
 typedef struct
 {
   bool state;
-  bool am=1;
+  bool am = 1;
   uint8_t hour;
   uint8_t minute;
   char *hourtext;

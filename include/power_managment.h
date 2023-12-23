@@ -6,7 +6,7 @@ extern "C"
   void Wakeup(String);
   void Sleep();
   void Sleephandle();
-  void Ticklesleep();
+  void TickleSleep();
   bool IsSleeping();
   void Powerhandle();
   void UpdatePower();

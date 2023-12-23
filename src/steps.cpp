@@ -61,6 +61,8 @@ void StepHandle()
     StepDay = GetDayOfYear();
     Storage.putUShort("StepsDay", StepDay);
 
+    info.health.steps = Steps;
+
     BTSendSteps();
   }
 
@@ -72,11 +74,6 @@ void StepHandle()
     Storage.putUShort("Steps", 0);
     twatch->bma423_step_reset();
   }
-}
-
-void DrawSteps()
-{
-info.health.steps = Steps;
 }
 
 void BTSendSteps()

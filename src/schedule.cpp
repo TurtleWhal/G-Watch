@@ -122,14 +122,14 @@ void ScheduleHandle()
 
             if (temptime > 1259)
                 temptime -= 1200;
-            //Serial.println(temptime);
+            // Serial.println(temptime);
             StartTime = temptime;
 
             temptime = CurrentSchedule.Times[entry][1];
 
             if (temptime > 1259)
                 temptime -= 1200;
-            //Serial.println(temptime);
+            // Serial.println(temptime);
             EndTime = temptime;
         }
         else
@@ -138,7 +138,7 @@ void ScheduleHandle()
 
             if (temptime > 1259)
                 temptime -= 1200;
-            //Serial.println(temptime);
+            // Serial.println(temptime);
 
             StartTime = temptime;
 
@@ -146,7 +146,7 @@ void ScheduleHandle()
 
             if (temptime > 1259)
                 temptime -= 1200;
-            //Serial.println(temptime);
+            // Serial.println(temptime);
             EndTime = temptime;
         }
 
@@ -162,14 +162,14 @@ void ScheduleHandle()
         info.schedule.endtime = NULL;
     }
 
-    //Serial.print("StartTime = ");
-    //Serial.println(StartTime);
+    // Serial.print("StartTime = ");
+    // Serial.println(StartTime);
 
-    //Serial.print("EndTime = ");
-    //Serial.println(EndTime);
+    // Serial.print("EndTime = ");
+    // Serial.println(EndTime);
 
-    //Serial.print("Entry = ");
-    //Serial.println(entry);
+    // Serial.print("Entry = ");
+    // Serial.println(entry);
 
     if (lv_scr_act() == ui_Schedule)
     {

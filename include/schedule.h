@@ -1,7 +1,7 @@
 #ifdef __cplusplus
 extern "C"
 {
-#endif    
+#endif
 
     void ScheduleHandle();
     bool HasScheduleEvent();

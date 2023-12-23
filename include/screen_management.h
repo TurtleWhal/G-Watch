@@ -129,6 +129,13 @@ extern "C"
         } ThemeInfo;
         ThemeInfo theme;
 
+        typedef struct
+        {
+            String ip;
+            bool useOTA;
+        } OTAInfo;
+        OTAInfo OTA;
+
     } ClockInfo;
 
     enum

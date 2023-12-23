@@ -3,7 +3,7 @@ extern "C"
 {
 #endif
 
-void Compass();
+    void Compass();
 
 #ifdef __cplusplus
 } /*extern "C"*/

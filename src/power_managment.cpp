@@ -53,7 +53,7 @@ void Sleephandle()
   }
   else
   {
-    Ticklesleep();
+    TickleSleep();
     if (Sleeping)
       Wakeup("Plugged In");
     // Serial.println(BMA423_WRIST_WEAR);
@@ -91,7 +91,7 @@ void Wakeup(String Wakeup_reason)
     Log.verboseln("Wakeup Reason: %s", Wakeup_reason);
   }
   else
-    Ticklesleep();
+    TickleSleep();
   FullSpeed();
 }
 
@@ -111,7 +111,7 @@ void Sleep()
   }
 }
 
-void Ticklesleep()
+void TickleSleep()
 {
   sleeptimer = millis();
   // if (twatch->backlight_get_value() != prevbrightness)

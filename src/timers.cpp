@@ -171,7 +171,7 @@ void TimersHandle()
 void DrawStopwatch()
 {
   stopwatchtimems = (millis() - stopwatchtimestarted);
-  
+
   uint32_t stopwatchhundredths = stopwatchtimems / 10;
   uint16_t stopwatchseconds = stopwatchtimems / 1000;
   uint8_t stopwatchminutes = stopwatchseconds / 60;
