@@ -4,9 +4,9 @@
 #include "timers.h"
 #include "power_managment.h"
 
-int stopwatchtimems = 0;
-int stopwatchtimestarted = 0;
-int stopwatchtimestopped = 0;
+uint32_t stopwatchtimems = 0;
+uint32_t stopwatchtimestarted = 0;
+uint32_t stopwatchtimestopped = 0;
 bool stopwatchmoving = 0;
 char stopwatchtimechar[3];
 char zerobuffer[3];
@@ -172,7 +172,7 @@ void DrawStopwatch()
 {
   stopwatchtimems = (millis() - stopwatchtimestarted);
   
-  int stopwatchhundredths = stopwatchtimems / 10;
+  uint32_t stopwatchhundredths = stopwatchtimems / 10;
   uint16_t stopwatchseconds = stopwatchtimems / 1000;
   uint8_t stopwatchminutes = stopwatchseconds / 60;
   uint8_t stopwatchhours = stopwatchminutes / 60;
@@ -182,8 +182,8 @@ void DrawStopwatch()
   stopwatchminutes %= 60;
   stopwatchhours %= 99;
 
-  static uint8_t lastmilliseconds;
-  static uint8_t lastseconds;
+  static uint32_t lastmilliseconds;
+  static uint16_t lastseconds;
   static uint8_t lastminutes;
   static uint8_t lasthours;
 
@@ -216,7 +216,7 @@ void DrawStopwatch()
 void VibrateHandle()
 {
   static int lasttime;
-  if (lasttime < millis() - 4000)
+  if (lasttime < millis() - 2800)
   {
     lasttime = millis();
     Vibrate();

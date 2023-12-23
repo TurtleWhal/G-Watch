@@ -417,6 +417,8 @@ void ParseGB(char *Message)
     else
     {
       VibrateStop(nullptr);
+      if (lv_scr_act() == ui_Alarm_Going_Off)
+        screenback(nullptr);
     }
   }
 }
