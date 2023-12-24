@@ -163,6 +163,12 @@ void DeleteNotification(lv_event_t *e)
     if (!NotificationCount)
       lv_obj_clear_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_HIDDEN);
   }
+  else
+  {
+    notificationshowing = 0;
+    lv_obj_del_delayed(lv_event_get_target(e), 350);
+    Serial.println("Notification Dismiss");
+  }
 }
 
 void NotificationDismiss(lv_event_t *e)
@@ -180,7 +186,8 @@ void NotificationHide(bool anim)
   else
     lv_obj_set_y(NOTIFPOPUP_MAIN, -160);
   PushNotification(1);
-  lv_obj_del_delayed(NotifPopup, 1000);
+  lv_obj_del_delayed(NotifPopup, 350);
+  //lv_obj_del_async(NotifPopup);
   Serial.println("Notification Hide");
 }
 
@@ -244,8 +251,9 @@ void PopNotification(int index)
 
 void NotificationHandle()
 {
-  if ((notificationtime + (Storage.getUInt("NotifLength") * 1000) < millis()) and notificationshowing)
-    NotificationHide();
+  if (notificationtime + (Storage.getUInt("NotifLength") * 1000) < millis())
+    if (notificationshowing)
+      NotificationHide();
 }
 
 void ToggleDoNotDisturb(lv_event_t *e)
