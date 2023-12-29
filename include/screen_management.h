@@ -89,7 +89,7 @@ extern "C"
             int humidity = 0;
             int precip = 0;
             // UV index
-            int uv = 0;
+            double uv = 0;
             int code = 0;
             lv_img_dsc_t img = ui_img_mostly_cloudy_png;
             String type = "Not Updated";

@@ -287,26 +287,26 @@ void ParseGB(char *Message)
     int Low = KelvinToF(received["lo"]);
     int Humidity = received["hum"];
     int Precip = received["rain"];
-    float UV = received["uv"];
+    double UV = 0.0 + (double)(received["uv"]);
     int Code = received["code"];
     const char *Type = received["txt"];
     int Wind = received["wind"];
     int Winddir = received["wdir"];
     const char *Loc = received["loc"];
 
-    Log.verboseln("%s", Message);
-
-    Log.verboseln("(Weather) Temperature: -- %i", Temp);
-    Log.verboseln("(Weather) Daily High: --- %i", High);
-    Log.verboseln("(Weather) Daily Low: ---- %i", Low);
-    Log.verboseln("(Weather) Humidity: ----- %i", Humidity);
-    Log.verboseln("(Weather) Precipitation:  %i", Precip);
-    Log.verboseln("(Weather) UV Index: ----- %f", UV);
-    Log.verboseln("(Weather) Weather Code:-- %i", Code);
-    Log.verboseln("(Weather) Weather:------- %s", Type);
-    Log.verboseln("(Weather) Wind Speed:---- %i", Wind);
-    Log.verboseln("(Weather) Wind Dir:------ %i", Winddir);
-    Log.verboseln("(Weather) Weather Loc: -- %s", Loc);
+    Serial.printf("Weather Info Received\n");
+    Serial.printf("├– Msg: %s\n", Message);
+    Serial.printf("├– Temperature: --- %i\n", Temp);
+    Serial.printf("├– Daily High: ---- %i\n", High);
+    Serial.printf("├– Daily Low: ----- %i\n", Low);
+    Serial.printf("├– Humidity: ------ %i\n", Humidity);
+    Serial.printf("├– Precipitation: - %i\n", Precip);
+    Serial.printf("├– UV Index: ------ %01.2f\n", UV);
+    Serial.printf("├– Weather Code:--- %i\n", Code);
+    Serial.printf("├– Weather:-------- %s\n", Type);
+    Serial.printf("├– Wind Speed:----- %i\n", Wind);
+    Serial.printf("├– Wind Dir:------- %i\n", Winddir);
+    Serial.printf("└– Weather Loc: --- %s\n", Loc);
 
     info.weather.temp = Temp;
     info.weather.high = High;
@@ -594,7 +594,8 @@ void DrawWeather(lv_event_t *e)
     lv_label_set_text_fmt(ui_Low_Temp, "%i°", info.weather.low);
     lv_label_set_text_fmt(ui_Humidity_Label, "%i%%", info.weather.humidity);
     lv_label_set_text_fmt(ui_Precepitation_Label, "%i%%", info.weather.precip);
-    lv_label_set_text_fmt(ui_UV_Index_Label, "UV: %f", info.weather.uv);
+    //lv_label_set_text_fmt(ui_UV_Index_Label, "UV: %01.2f", info.weather.uv);
+    lv_label_set_text_fmt(ui_UV_Index_Label, "UV: --");
     lv_label_set_text_fmt(ui_Wind_Info, "%i mph\n%s", info.weather.wind, DegToCompassHeading(info.weather.winddir).c_str());
     lv_img_set_angle(ui_Wind_Image, info.weather.winddir * 10 - 900);
     lv_label_set_text(ui_Weather_State, info.weather.type.c_str());
