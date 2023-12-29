@@ -403,6 +403,12 @@ void ParseGB(char *Message)
         ScreenBack(nullptr);
     }
   }
+  else if (strcmp(NotifType, "reboot") == 0)
+  {
+    //Serial.println("Rebooting due to gadgetbridge button");
+    Serial.println("( ¯˘¯)/ Cya latr!");
+    ESP.restart();
+  }
 }
 
 int KelvinToF(int Kelvin)
@@ -594,7 +600,7 @@ void DrawWeather(lv_event_t *e)
     lv_label_set_text_fmt(ui_Low_Temp, "%i°", info.weather.low);
     lv_label_set_text_fmt(ui_Humidity_Label, "%i%%", info.weather.humidity);
     lv_label_set_text_fmt(ui_Precepitation_Label, "%i%%", info.weather.precip);
-    //lv_label_set_text_fmt(ui_UV_Index_Label, "UV: %01.2f", info.weather.uv);
+    // lv_label_set_text_fmt(ui_UV_Index_Label, "UV: %01.2f", info.weather.uv);
     lv_label_set_text_fmt(ui_UV_Index_Label, "UV: --");
     lv_label_set_text_fmt(ui_Wind_Info, "%i mph\n%s", info.weather.wind, DegToCompassHeading(info.weather.winddir).c_str());
     lv_img_set_angle(ui_Wind_Image, info.weather.winddir * 10 - 900);

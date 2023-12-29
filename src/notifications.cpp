@@ -181,13 +181,17 @@ void NotificationDismiss(lv_event_t *e)
 void NotificationHide(bool anim)
 {
   notificationshowing = 0;
-  if (anim)
-    NotificationHide_Animation(NOTIFPOPUP_MAIN, 0);
-  else
-    lv_obj_set_y(NOTIFPOPUP_MAIN, -160);
+  if (NotifPopup != NULL)
+  {
+    if (anim)
+      NotificationHide_Animation(NOTIFPOPUP_MAIN, 0);
+    else
+      lv_obj_set_y(NOTIFPOPUP_MAIN, -160);
+  }
+
   PushNotification(1);
-  lv_obj_del_delayed(NotifPopup, 350);
-  //lv_obj_del_async(NotifPopup);
+  // lv_obj_del_delayed(NotifPopup, 350);
+  // lv_obj_del_async(NotifPopup);
   Serial.println("Notification Hide");
 }
 
