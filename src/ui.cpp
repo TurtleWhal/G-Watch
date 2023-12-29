@@ -342,9 +342,6 @@ void setup()
   DispLoadClockScreen();
   Log.verboseln("lv_disp_load_scr");
 
-  twatch->backlight_set_value(100);
-  // twatch->backlight_gradual_light(255,1000);
-
   InitUserSettings();
 
   ApplyTheme(nullptr);
@@ -391,6 +388,8 @@ void setup()
 
   Serial.println("HAL Update");
   twatch->hal_auto_update(true, 1);
+
+  twatch->backlight_gradual_light(100, 2000);
 
   Timer0Triggered = 1;
 

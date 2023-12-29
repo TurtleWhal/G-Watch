@@ -19,12 +19,11 @@ extern ClockInfo info;
 #define Sleeptimeout 30000 // time until watch goes to sleep in milliseconds
 int sleeptimer;
 bool Sleeping;
+bool dimSleeping;
 int prevbrightness = 100;
 String Wakeup_reason;
 bool charging;
-// int lastpercent;
 int Brightness = 100;
-// bool setCpuFrequencyMhz(uint32_t cpu_freq_mhz);
 
 void Sleephandle()
 {
@@ -34,23 +33,34 @@ void Sleephandle()
   if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 4000) // TWATCH_CHARGING is inverted logic
 #endif
   {
-    /*
-    twatch->bma423_feature_int(BMA423_WRIST_WEAR, 1);
-    if (BMA423_WRIST_WEAR)
-    {
-      Wakeup("Shook");
-      sleeptimer = millis();
-      Log.verboseln("Im Shooken!");
-    }
-    */
-    /*if ((millis() - sleeptimer) >= Sleeptimeout * 0.7 and prevbrightness != twatch->backlight_get_value())
-    {
-      prevbrightness = twatch->backlight_get_value();
-      twatch->backlight_set_value(prevbrightness / 3);
-    }*/
 
     if ((millis() - sleeptimer) >= Sleeptimeout)
+    {
       Sleep();
+    }
+
+    if ((millis() - sleeptimer) >= Sleeptimeout * 0.6)
+    {
+      if (!dimSleeping)
+      {
+        prevbrightness = twatch->backlight_get_value();
+        if (!prevbrightness)
+          prevbrightness = 1;
+
+        twatch->backlight_gradual_light(prevbrightness * 0.3, 500);
+        dimSleeping = true;
+        twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, true);
+      }
+    }
+    else
+    {
+      if (dimSleeping)
+      {
+        twatch->backlight_gradual_light(prevbrightness, 500);
+        dimSleeping = false;
+        twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, false);
+      }
+    }
   }
   else
   {
@@ -65,11 +75,9 @@ void Wakeup(String Wakeup_reason)
 {
   if (Sleeping)
   {
-    setCpuFrequencyMhz(240);
-    // twatch->hal_auto_update(true, 1);
-    //_ui_screen_change(ui_Clock, LV_SCR_LOAD_ANIM_NONE, 150, 0);
-    //  GenericToClock(nullptr);
-    //  lv_timer_handler();
+    // setCpuFrequencyMhz(240);
+    //  twatch->hal_auto_update(true, 1);
+
     UpdateTime();
 
     UpdatePower();
@@ -88,12 +96,13 @@ void Wakeup(String Wakeup_reason)
 
     info.flag.refresh = 1;
 
-    twatch->backlight_gradual_light(prevbrightness, 1000);
+    twatch->backlight_gradual_light(prevbrightness, 300);
 
     Log.verboseln("Wakeup Reason: %s", Wakeup_reason);
   }
   else
     TickleSleep();
+
   FullSpeed();
 }
 
@@ -101,9 +110,6 @@ void Sleep()
 {
   if (!Sleeping)
   {
-    prevbrightness = twatch->backlight_get_value();
-    if (!prevbrightness)
-      prevbrightness = 1;
 
     twatch->backlight_gradual_light(0, 1000);
 
@@ -112,7 +118,6 @@ void Sleep()
 
     Log.verboseln("Go To Sleep");
     Sleeping = 1;
-    // setCpuFrequencyMhz(10); // 10 is lowest can go with 40 MHz Crystal
     SleepSpeed();
     // twatch->hal_auto_update(false, 1);
   }
@@ -121,8 +126,6 @@ void Sleep()
 void TickleSleep()
 {
   sleeptimer = millis();
-  // if (twatch->backlight_get_value() != prevbrightness)
-  //   twatch->backlight_set_value(prevbrightness * 3);
 }
 
 bool IsSleeping()
@@ -154,7 +157,7 @@ void Powerhandle()
 
       Log.verboseln("Power Saving Mode Acitvated");
       BT_off();                        // turn off bluetooth
-      twatch->backlight_set_value(50); // lower brightness
+      twatch->backlight_gradual_light(prevbrightness / 2, 500); // lower brightness
 
       if (twatch->power_get_volt() < 3000) // turn off to protect the battery
       {

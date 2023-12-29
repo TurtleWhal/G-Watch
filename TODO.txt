@@ -6,7 +6,6 @@ Get rid of char, move to strings
 
 Store bluetooth status in FLASH 
 
-Backlight gradual on/off
 Power managment when asleep
 Improve boot upload_speed
 Move button handler to LVGL
