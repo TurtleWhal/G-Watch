@@ -38,27 +38,9 @@ void TWatchClass::backlight_gradual_light(int16_t val, uint32_t ms) {
   _k = (float)((temp1 * 1.0) / ms);
 
   DEBUGF("Backlight_Gradually Val:%d,ms:%d,k:%f\n", val, ms, _k);
-  Serial.printf("Backlight_Gradually Val:%d,ms:%d,k:%f\n", val, ms, _k);
+  Serial.printf("Backlight Gradual | Val: %d | Length: %d | Step: %f/ms\n", val, ms, _k);
 
   _adjust = true;
-
-  /*int _old_Backlight = backlight_get_value();
-
-  // double step = (((int)(val) - (int)(oldval)) / (int)(ms)) * 100;
-  _k = (int)(val)-_old_Backlight;
-  _k = _k / ms;
-  //_k = _k * 100;
-
-  target = val;
-
-  Serial.printf("Backlight Grad Begin | val: %i | ms: %i | step: %f | oldval: %i\n", val, ms, _k, _old_Backlight);*/
-
-  /*while (backlight_get_value() != val) {
-    //Serial.printf("Backlight Grad | value: %i", backlight_get_value());
-    // val += step;
-    backlight_set_value(backlight_get_value() + _k);
-    delay(ms / 100);
-  }*/
 }
 
 void TWatchClass::backlight_updata(uint32_t millis, uint32_t time_ms) {
@@ -70,23 +52,13 @@ void TWatchClass::backlight_updata(uint32_t millis, uint32_t time_ms) {
     if (millis - Millis > time_ms) {
       duration = millis - starttime;
       backlight_set_value((uint16_t)((_k * duration) + _old_Backlight));
-      Serial.printf("K: %f duration: %d old: %d current: %d\n", _k, duration, _old_Backlight, backlight_get_value());
+      // Serial.printf("K: %f duration: %d old: %d current: %d\n", _k, duration, _old_Backlight, backlight_get_value());
 
       if (Millis > _endtime) {
         _adjust = false;
       }
 
       Millis = millis;
-
-      /*Serial.printf("K: %f tempval: %f old: %d current: %d target: %d\n", _k, tempval, _old_Backlight, backlight_get_value(), target);
-
-      tempval = backlight_get_value() + _k;
-      backlight_set_value(tempval);
-
-      if ((_k >= 0 && backlight_get_value() >= target) || (_k <= 0 && backlight_get_value() <= target))
-        _adjust = false;
-
-      Millis = millis;*/
     }
   }
 }

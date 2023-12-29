@@ -372,7 +372,6 @@ void setup()
   //////////////////////////Fake Notifications///////////
   // AddFakeNotifications();
 
-
   // WriteTime();
   // lv_label_set_text(ui_Notification_Amount_Number, "0");
   Serial.println("Lv Timer");
@@ -384,6 +383,10 @@ void setup()
 #if defined(CONFIG_BMA423_LATER)
   Serial.println("Bma423 begin");
   twatch->bma423_begin(); // This takes 2 seconds
+
+  // enable the wrist tilt interrupt
+  twatch->bma423_feature(BMA423_WRIST_WEAR, true);
+  twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, false);
 #endif
 
   Serial.println("HAL Update");

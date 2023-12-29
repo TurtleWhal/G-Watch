@@ -143,10 +143,6 @@ void TWatchClass::bma423_begin() {
     // AccSensor_Feature(BMA423_WRIST_WEAR | BMA423_SINGLE_TAP | BMA423_DOUBLE_TAP | BMA423_STEP_CNTR, true);
     // AccSensor_Feature_Int(BMA423_WRIST_WEAR_INT | BMA423_STEP_CNTR_INT | BMA423_SINGLE_TAP_INT | BMA423_DOUBLE_TAP_INT, true);
 
-    // enable the wrist tilt interrupt
-    bma423_feature(BMA423_WRIST_WEAR, true);
-    bma423_feature_int(BMA423_WRIST_WEAR_INT, true);
-
     bma423_feature(BMA423_STEP_CNTR, true);
     bma423_feature_int(BMA423_STEP_CNTR_INT, false);
 

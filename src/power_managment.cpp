@@ -83,15 +83,13 @@ void Wakeup(String Wakeup_reason)
     sleeptimer = millis();
     Sleeping = 0;
 
-    info.flag.refresh = 1;
-    // lv_label_set_text_fmt(ui_Battery_Percentage, "%i", prevbrightness);
-    // twatch->backlight_set_value(prevbrightness);
-    twatch->backlight_gradual_light(prevbrightness, 1000);
-    // twatch->backlight_gradual_light(100, 2000);
+    // disable the wrist tilt interrupt to not reset timer while awake
+    twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, false);
 
-    // twatch->backlight_set_value(100);
-    //  Serial.println(prevbrightness);
-    //   twatch->backlight_gradual_light(prevbrightness, 1000);
+    info.flag.refresh = 1;
+
+    twatch->backlight_gradual_light(prevbrightness, 1000);
+
     Log.verboseln("Wakeup Reason: %s", Wakeup_reason);
   }
   else
@@ -106,8 +104,12 @@ void Sleep()
     prevbrightness = twatch->backlight_get_value();
     if (!prevbrightness)
       prevbrightness = 1;
-    // twatch->backlight_set_value(0);
+
     twatch->backlight_gradual_light(0, 1000);
+
+    // enable the wrist tilt interrupt
+    twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, true);
+
     Log.verboseln("Go To Sleep");
     Sleeping = 1;
     // setCpuFrequencyMhz(10); // 10 is lowest can go with 40 MHz Crystal
