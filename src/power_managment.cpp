@@ -10,12 +10,13 @@
 #include "BThandle.h"
 #include "steps.h"
 
+#define SLEEP_WHEN_CHARGING
+
 extern TWatchClass *twatch;
 esp_pm_config_esp32_t pm_config;
 extern ClockInfo info;
 
-// #define SleepWhenPluggedIn
-#define Sleeptimeout 30000 // time until watch goes to sleep in mS
+#define Sleeptimeout 30000 // time until watch goes to sleep in milliseconds
 int sleeptimer;
 bool Sleeping;
 int prevbrightness = 100;
@@ -27,7 +28,7 @@ int Brightness = 100;
 
 void Sleephandle()
 {
-#ifdef SleepWhenPluggedIn
+#ifdef SLEEP_WHEN_CHARGING
   if (1)
 #else
   if (digitalRead(TWATCH_CHARGING) and twatch->power_get_volt() < 4000) // TWATCH_CHARGING is inverted logic
@@ -84,7 +85,10 @@ void Wakeup(String Wakeup_reason)
 
     info.flag.refresh = 1;
     // lv_label_set_text_fmt(ui_Battery_Percentage, "%i", prevbrightness);
-    twatch->backlight_set_value(prevbrightness);
+    // twatch->backlight_set_value(prevbrightness);
+    twatch->backlight_gradual_light(prevbrightness, 1000);
+    // twatch->backlight_gradual_light(100, 2000);
+
     // twatch->backlight_set_value(100);
     //  Serial.println(prevbrightness);
     //   twatch->backlight_gradual_light(prevbrightness, 1000);
@@ -102,7 +106,8 @@ void Sleep()
     prevbrightness = twatch->backlight_get_value();
     if (!prevbrightness)
       prevbrightness = 1;
-    twatch->backlight_set_value(0);
+    // twatch->backlight_set_value(0);
+    twatch->backlight_gradual_light(0, 1000);
     Log.verboseln("Go To Sleep");
     Sleeping = 1;
     // setCpuFrequencyMhz(10); // 10 is lowest can go with 40 MHz Crystal
