@@ -285,6 +285,7 @@ void setup()
 {
   // setCpuFrequencyMhz(240);
 
+  // need to change uart_config.source_clk to UART_SCLK_REF_TICK in esp32-hal-uart.c in arduino framework https://github.com/espressif/arduino-esp32/issues/8122
   Serial.begin(115200); /* prepare for possible serial debug */
   Log.begin(LOG_LEVEL_VERBOSE, &Serial);
 
