@@ -405,7 +405,7 @@ void ParseGB(char *Message)
   }
   else if (strcmp(NotifType, "reboot") == 0)
   {
-    //Serial.println("Rebooting due to gadgetbridge button");
+    // Serial.println("Rebooting due to gadgetbridge button");
     Serial.println("( ¯˘¯)/ Cya latr!");
     ESP.restart();
   }
@@ -506,7 +506,7 @@ void BTHandle()
 
 void ToggleBT(lv_event_t *e)
 {
-  if (BTon)
+  if (lv_obj_has_state(ui_Bluetooth_Button, LV_STATE_CHECKED))
     BT_off();
   else
     BT_on();
@@ -515,12 +515,14 @@ void ToggleBT(lv_event_t *e)
 void BT_on()
 {
   BTon = 1;
+  info.bt.ison = 1;
   blectl_setup();
 }
 
 void BT_off()
 {
   BTon = 0;
+  info.bt.ison = 0;
   blectl_off();
 }
 
@@ -563,12 +565,12 @@ void BTmsgloop()
   if (BTon and blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT)) // can't call get event unless BTon = true
   {
     BTconnected = true;
-    info.bt.status = 1;
+    info.bt.isconnected = 1;
   }
   else
   {
     BTconnected = false;
-    info.bt.status = 0;
+    info.bt.isconnected = 0;
   }
 
   if (lasttime < millis() - 1000)

@@ -96,9 +96,9 @@ void Wakeup(String Wakeup_reason)
 
     info.flag.refresh = 1;
 
-    twatch->backlight_gradual_light(prevbrightness, 300);
+    twatch->backlight_gradual_light(prevbrightness, 100);
 
-    Log.verboseln("Wakeup Reason: %s", Wakeup_reason);
+    Log.verboseln("Wakeup Reason: %s", Wakeup_reason.c_str());
   }
   else
     TickleSleep();

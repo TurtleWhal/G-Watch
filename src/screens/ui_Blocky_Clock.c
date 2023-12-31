@@ -7,164 +7,163 @@
 
 void ui_Blocky_Clock_screen_init(void)
 {
-    ui_Blocky_Clock = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_Blocky_Clock, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_add_event_cb(ui_Blocky_Clock, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Blocky_Clock);
+ui_Blocky_Clock = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_Blocky_Clock, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Blocky_Clock, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Blocky_Clock);
 
-    ui_Blocky_Clock_Clock_Panel = lv_obj_create(ui_Blocky_Clock);
-    lv_obj_set_width(ui_Blocky_Clock_Clock_Panel, 180);
-    lv_obj_set_height(ui_Blocky_Clock_Clock_Panel, 100);
-    lv_obj_set_x(ui_Blocky_Clock_Clock_Panel, -30);
-    lv_obj_set_y(ui_Blocky_Clock_Clock_Panel, 30);
-    lv_obj_set_align(ui_Blocky_Clock_Clock_Panel, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Blocky_Clock_Clock_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Blocky_Clock_Clock_Panel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Blocky_Clock_Clock_Panel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_color(ui_Blocky_Clock_Clock_Panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(ui_Blocky_Clock_Clock_Panel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Clock_Panel = lv_obj_create(ui_Blocky_Clock);
+lv_obj_set_width( ui_Blocky_Clock_Clock_Panel, 180);
+lv_obj_set_height( ui_Blocky_Clock_Clock_Panel, 100);
+lv_obj_set_x( ui_Blocky_Clock_Clock_Panel, -30 );
+lv_obj_set_y( ui_Blocky_Clock_Clock_Panel, 30 );
+lv_obj_set_align( ui_Blocky_Clock_Clock_Panel, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Blocky_Clock_Clock_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_bg_color(ui_Blocky_Clock_Clock_Panel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Blocky_Clock_Clock_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_Blocky_Clock_Clock_Panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Blocky_Clock_Clock_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Clock_Layer_1 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
-    lv_obj_set_width(ui_Blocky_Clock_Clock_Layer_1, 150);
-    lv_obj_set_height(ui_Blocky_Clock_Clock_Layer_1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Blocky_Clock_Clock_Layer_1, 5);
-    lv_obj_set_y(ui_Blocky_Clock_Clock_Layer_1, 5);
-    lv_obj_set_align(ui_Blocky_Clock_Clock_Layer_1, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_1, LV_LABEL_LONG_CLIP);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_1, "12:34");
-    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_1, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_1, &ui_font_Blocky_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Clock_Layer_1 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
+lv_obj_set_width( ui_Blocky_Clock_Clock_Layer_1, 150);
+lv_obj_set_height( ui_Blocky_Clock_Clock_Layer_1, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Blocky_Clock_Clock_Layer_1, 5 );
+lv_obj_set_y( ui_Blocky_Clock_Clock_Layer_1, 5 );
+lv_obj_set_align( ui_Blocky_Clock_Clock_Layer_1, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_1,LV_LABEL_LONG_CLIP);
+lv_label_set_text(ui_Blocky_Clock_Clock_Layer_1,"12:34");
+lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_1, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_1, &ui_font_Blocky_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Clock_Layer_2 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
-    lv_obj_set_width(ui_Blocky_Clock_Clock_Layer_2, 150);
-    lv_obj_set_height(ui_Blocky_Clock_Clock_Layer_2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Blocky_Clock_Clock_Layer_2, 4);
-    lv_obj_set_y(ui_Blocky_Clock_Clock_Layer_2, 4);
-    lv_obj_set_align(ui_Blocky_Clock_Clock_Layer_2, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_2, LV_LABEL_LONG_CLIP);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_2, "12:34");
-    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_2, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_2, &ui_font_Blocky_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Clock_Layer_2 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
+lv_obj_set_width( ui_Blocky_Clock_Clock_Layer_2, 150);
+lv_obj_set_height( ui_Blocky_Clock_Clock_Layer_2, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Blocky_Clock_Clock_Layer_2, 4 );
+lv_obj_set_y( ui_Blocky_Clock_Clock_Layer_2, 4 );
+lv_obj_set_align( ui_Blocky_Clock_Clock_Layer_2, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_2,LV_LABEL_LONG_CLIP);
+lv_label_set_text(ui_Blocky_Clock_Clock_Layer_2,"12:34");
+lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_2, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_2, &ui_font_Blocky_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Clock_Layer_3 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
-    lv_obj_set_width(ui_Blocky_Clock_Clock_Layer_3, 150);
-    lv_obj_set_height(ui_Blocky_Clock_Clock_Layer_3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Blocky_Clock_Clock_Layer_3, 3);
-    lv_obj_set_y(ui_Blocky_Clock_Clock_Layer_3, 3);
-    lv_obj_set_align(ui_Blocky_Clock_Clock_Layer_3, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_3, LV_LABEL_LONG_CLIP);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_3, "12:34");
-    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_3, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_3, &ui_font_Blocky_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Clock_Layer_3 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
+lv_obj_set_width( ui_Blocky_Clock_Clock_Layer_3, 150);
+lv_obj_set_height( ui_Blocky_Clock_Clock_Layer_3, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Blocky_Clock_Clock_Layer_3, 3 );
+lv_obj_set_y( ui_Blocky_Clock_Clock_Layer_3, 3 );
+lv_obj_set_align( ui_Blocky_Clock_Clock_Layer_3, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_3,LV_LABEL_LONG_CLIP);
+lv_label_set_text(ui_Blocky_Clock_Clock_Layer_3,"12:34");
+lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_3, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_3, &ui_font_Blocky_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Clock_Layer_4 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
-    lv_obj_set_width(ui_Blocky_Clock_Clock_Layer_4, 150);
-    lv_obj_set_height(ui_Blocky_Clock_Clock_Layer_4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Blocky_Clock_Clock_Layer_4, 2);
-    lv_obj_set_y(ui_Blocky_Clock_Clock_Layer_4, 2);
-    lv_obj_set_align(ui_Blocky_Clock_Clock_Layer_4, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_4, LV_LABEL_LONG_CLIP);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_4, "12:34");
-    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_4, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_4, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_4, &ui_font_Blocky_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Clock_Layer_4 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
+lv_obj_set_width( ui_Blocky_Clock_Clock_Layer_4, 150);
+lv_obj_set_height( ui_Blocky_Clock_Clock_Layer_4, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Blocky_Clock_Clock_Layer_4, 2 );
+lv_obj_set_y( ui_Blocky_Clock_Clock_Layer_4, 2 );
+lv_obj_set_align( ui_Blocky_Clock_Clock_Layer_4, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_4,LV_LABEL_LONG_CLIP);
+lv_label_set_text(ui_Blocky_Clock_Clock_Layer_4,"12:34");
+lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_4, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_4, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_4, &ui_font_Blocky_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Clock_Layer_5 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
-    lv_obj_set_width(ui_Blocky_Clock_Clock_Layer_5, 150);
-    lv_obj_set_height(ui_Blocky_Clock_Clock_Layer_5, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Blocky_Clock_Clock_Layer_5, 1);
-    lv_obj_set_y(ui_Blocky_Clock_Clock_Layer_5, 1);
-    lv_obj_set_align(ui_Blocky_Clock_Clock_Layer_5, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_5, LV_LABEL_LONG_CLIP);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_5, "12:34");
-    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_5, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_5, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_5, &ui_font_Blocky_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Clock_Layer_5 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
+lv_obj_set_width( ui_Blocky_Clock_Clock_Layer_5, 150);
+lv_obj_set_height( ui_Blocky_Clock_Clock_Layer_5, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Blocky_Clock_Clock_Layer_5, 1 );
+lv_obj_set_y( ui_Blocky_Clock_Clock_Layer_5, 1 );
+lv_obj_set_align( ui_Blocky_Clock_Clock_Layer_5, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_5,LV_LABEL_LONG_CLIP);
+lv_label_set_text(ui_Blocky_Clock_Clock_Layer_5,"12:34");
+lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_5, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_5, &ui_font_Blocky_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Clock_Layer_6 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
-    lv_obj_set_width(ui_Blocky_Clock_Clock_Layer_6, 150);
-    lv_obj_set_height(ui_Blocky_Clock_Clock_Layer_6, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Blocky_Clock_Clock_Layer_6, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_6, LV_LABEL_LONG_CLIP);
-    lv_label_set_text(ui_Blocky_Clock_Clock_Layer_6, "12:34");
-    lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_6, lv_color_hex(0x383838), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_6, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_6, &ui_font_Blocky_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Clock_Layer_6 = lv_label_create(ui_Blocky_Clock_Clock_Panel);
+lv_obj_set_width( ui_Blocky_Clock_Clock_Layer_6, 150);
+lv_obj_set_height( ui_Blocky_Clock_Clock_Layer_6, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Blocky_Clock_Clock_Layer_6, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_Blocky_Clock_Clock_Layer_6,LV_LABEL_LONG_CLIP);
+lv_label_set_text(ui_Blocky_Clock_Clock_Layer_6,"12:34");
+lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_6, lv_color_hex(0x383838), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Blocky_Clock_Clock_Layer_6, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Blocky_Clock_Clock_Layer_6, &ui_font_Blocky_48, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Battery_Contact = lv_obj_create(ui_Blocky_Clock);
-    lv_obj_set_width(ui_Blocky_Clock_Battery_Contact, 4);
-    lv_obj_set_height(ui_Blocky_Clock_Battery_Contact, 8);
-    lv_obj_set_x(ui_Blocky_Clock_Battery_Contact, 17);
-    lv_obj_set_y(ui_Blocky_Clock_Battery_Contact, 6);
-    lv_obj_set_align(ui_Blocky_Clock_Battery_Contact, LV_ALIGN_TOP_MID);
-    lv_obj_clear_flag(ui_Blocky_Clock_Battery_Contact, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_radius(ui_Blocky_Clock_Battery_Contact, 2, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Contact, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Blocky_Clock_Battery_Contact, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_color(ui_Blocky_Clock_Battery_Contact, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(ui_Blocky_Clock_Battery_Contact, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Battery_Contact = lv_obj_create(ui_Blocky_Clock);
+lv_obj_set_width( ui_Blocky_Clock_Battery_Contact, 4);
+lv_obj_set_height( ui_Blocky_Clock_Battery_Contact, 8);
+lv_obj_set_x( ui_Blocky_Clock_Battery_Contact, 17 );
+lv_obj_set_y( ui_Blocky_Clock_Battery_Contact, 6 );
+lv_obj_set_align( ui_Blocky_Clock_Battery_Contact, LV_ALIGN_TOP_MID );
+lv_obj_clear_flag( ui_Blocky_Clock_Battery_Contact, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Blocky_Clock_Battery_Contact, 2, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Contact, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Blocky_Clock_Battery_Contact, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_Blocky_Clock_Battery_Contact, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Blocky_Clock_Battery_Contact, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Battery_Bar = lv_bar_create(ui_Blocky_Clock);
-    lv_bar_set_value(ui_Blocky_Clock_Battery_Bar, 50, LV_ANIM_OFF);
-    lv_bar_set_start_value(ui_Blocky_Clock_Battery_Bar, 0, LV_ANIM_OFF);
-    lv_obj_set_width(ui_Blocky_Clock_Battery_Bar, 28);
-    lv_obj_set_height(ui_Blocky_Clock_Battery_Bar, 11);
-    lv_obj_set_x(ui_Blocky_Clock_Battery_Bar, 0);
-    lv_obj_set_y(ui_Blocky_Clock_Battery_Bar, 5);
-    lv_obj_set_align(ui_Blocky_Clock_Battery_Bar, LV_ALIGN_TOP_MID);
-    lv_obj_set_style_radius(ui_Blocky_Clock_Battery_Bar, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Blocky_Clock_Battery_Bar, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_opa(ui_Blocky_Clock_Battery_Bar, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_width(ui_Blocky_Clock_Battery_Bar, 2, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_pad(ui_Blocky_Clock_Battery_Bar, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Battery_Bar = lv_bar_create(ui_Blocky_Clock);
+lv_bar_set_value(ui_Blocky_Clock_Battery_Bar,50,LV_ANIM_OFF);
+lv_bar_set_start_value(ui_Blocky_Clock_Battery_Bar, 0, LV_ANIM_OFF);
+lv_obj_set_width( ui_Blocky_Clock_Battery_Bar, 28);
+lv_obj_set_height( ui_Blocky_Clock_Battery_Bar, 11);
+lv_obj_set_x( ui_Blocky_Clock_Battery_Bar, 0 );
+lv_obj_set_y( ui_Blocky_Clock_Battery_Bar, 5 );
+lv_obj_set_align( ui_Blocky_Clock_Battery_Bar, LV_ALIGN_TOP_MID );
+lv_obj_set_style_radius(ui_Blocky_Clock_Battery_Bar, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Blocky_Clock_Battery_Bar, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_outline_opa(ui_Blocky_Clock_Battery_Bar, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_width(ui_Blocky_Clock_Battery_Bar, 2, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_pad(ui_Blocky_Clock_Battery_Bar, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    lv_obj_set_style_radius(ui_Blocky_Clock_Battery_Bar, 0, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Blocky_Clock_Battery_Bar, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0xFF7D00),
-                                   LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_opa(ui_Blocky_Clock_Battery_Bar, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_width(ui_Blocky_Clock_Battery_Bar, 1, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_pad(ui_Blocky_Clock_Battery_Bar, 0, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+lv_obj_set_style_radius(ui_Blocky_Clock_Battery_Bar, 0, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Blocky_Clock_Battery_Bar, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, lv_color_hex(0xFF7D00), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+lv_obj_set_style_outline_opa(ui_Blocky_Clock_Battery_Bar, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_width(ui_Blocky_Clock_Battery_Bar, 1, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_pad(ui_Blocky_Clock_Battery_Bar, 0, LV_PART_INDICATOR| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Clock_Panel1 = lv_obj_create(ui_Blocky_Clock);
-    lv_obj_set_width(ui_Blocky_Clock_Clock_Panel1, 180);
-    lv_obj_set_height(ui_Blocky_Clock_Clock_Panel1, 100);
-    lv_obj_set_x(ui_Blocky_Clock_Clock_Panel1, 13);
-    lv_obj_set_y(ui_Blocky_Clock_Clock_Panel1, 77);
-    lv_obj_set_align(ui_Blocky_Clock_Clock_Panel1, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Blocky_Clock_Clock_Panel1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Blocky_Clock_Clock_Panel1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Blocky_Clock_Clock_Panel1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_color(ui_Blocky_Clock_Clock_Panel1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(ui_Blocky_Clock_Clock_Panel1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Clock_Panel1 = lv_obj_create(ui_Blocky_Clock);
+lv_obj_set_width( ui_Blocky_Clock_Clock_Panel1, 180);
+lv_obj_set_height( ui_Blocky_Clock_Clock_Panel1, 100);
+lv_obj_set_x( ui_Blocky_Clock_Clock_Panel1, 13 );
+lv_obj_set_y( ui_Blocky_Clock_Clock_Panel1, 77 );
+lv_obj_set_align( ui_Blocky_Clock_Clock_Panel1, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Blocky_Clock_Clock_Panel1, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_bg_color(ui_Blocky_Clock_Clock_Panel1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Blocky_Clock_Clock_Panel1, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_Blocky_Clock_Clock_Panel1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Blocky_Clock_Clock_Panel1, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Date_Layer_1 = lv_label_create(ui_Blocky_Clock_Clock_Panel1);
-    lv_obj_set_width(ui_Blocky_Clock_Date_Layer_1, 150);
-    lv_obj_set_height(ui_Blocky_Clock_Date_Layer_1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Blocky_Clock_Date_Layer_1, 1);
-    lv_obj_set_y(ui_Blocky_Clock_Date_Layer_1, 2);
-    lv_obj_set_align(ui_Blocky_Clock_Date_Layer_1, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Blocky_Clock_Date_Layer_1, LV_LABEL_LONG_CLIP);
-    lv_label_set_text(ui_Blocky_Clock_Date_Layer_1, "1/1/70");
-    lv_obj_set_style_text_color(ui_Blocky_Clock_Date_Layer_1, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Blocky_Clock_Date_Layer_1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Blocky_Clock_Date_Layer_1, &ui_font_Blocky_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Date_Layer_1 = lv_label_create(ui_Blocky_Clock_Clock_Panel1);
+lv_obj_set_width( ui_Blocky_Clock_Date_Layer_1, 150);
+lv_obj_set_height( ui_Blocky_Clock_Date_Layer_1, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Blocky_Clock_Date_Layer_1, 1 );
+lv_obj_set_y( ui_Blocky_Clock_Date_Layer_1, 2 );
+lv_obj_set_align( ui_Blocky_Clock_Date_Layer_1, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_Blocky_Clock_Date_Layer_1,LV_LABEL_LONG_CLIP);
+lv_label_set_text(ui_Blocky_Clock_Date_Layer_1,"1/1/70");
+lv_obj_set_style_text_color(ui_Blocky_Clock_Date_Layer_1, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Blocky_Clock_Date_Layer_1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Blocky_Clock_Date_Layer_1, &ui_font_Blocky_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Blocky_Clock_Date_Layer_2 = lv_label_create(ui_Blocky_Clock_Clock_Panel1);
-    lv_obj_set_width(ui_Blocky_Clock_Date_Layer_2, 150);
-    lv_obj_set_height(ui_Blocky_Clock_Date_Layer_2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Blocky_Clock_Date_Layer_2, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Blocky_Clock_Date_Layer_2, LV_LABEL_LONG_CLIP);
-    lv_label_set_text(ui_Blocky_Clock_Date_Layer_2, "1/1/70");
-    lv_obj_set_style_text_color(ui_Blocky_Clock_Date_Layer_2, lv_color_hex(0x383838), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Blocky_Clock_Date_Layer_2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Blocky_Clock_Date_Layer_2, &ui_font_Blocky_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Blocky_Clock_Date_Layer_2 = lv_label_create(ui_Blocky_Clock_Clock_Panel1);
+lv_obj_set_width( ui_Blocky_Clock_Date_Layer_2, 150);
+lv_obj_set_height( ui_Blocky_Clock_Date_Layer_2, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Blocky_Clock_Date_Layer_2, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_Blocky_Clock_Date_Layer_2,LV_LABEL_LONG_CLIP);
+lv_label_set_text(ui_Blocky_Clock_Date_Layer_2,"1/1/70");
+lv_obj_set_style_text_color(ui_Blocky_Clock_Date_Layer_2, lv_color_hex(0x383838), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Blocky_Clock_Date_Layer_2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Blocky_Clock_Date_Layer_2, &ui_font_Blocky_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    lv_obj_add_event_cb(ui_Blocky_Clock, ui_event_Blocky_Clock, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Blocky_Clock, ui_event_Blocky_Clock, LV_EVENT_ALL, NULL);
 
 }

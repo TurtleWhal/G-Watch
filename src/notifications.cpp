@@ -62,10 +62,20 @@ void ShowNotification(String Title, String Text, String Source, int id)
   if (Source == "Messages")
   {
     lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_messages_icon_png);
+
+    // char msg[120];
+    // sprintf(msg, "{t:\"notify\", id:%i, n:\"REPLY\", msg:\"Garrett's Watch Is Replying To You!\"}", id);
+    // Serial.println(msg);
+    // BTsend(String(msg));
   }
   else if (Source == "SMS")
   {
     lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_sms_icon_png);
+
+    // char msg[120];
+    // sprintf(msg, "{t:\"notify\", id:%i, n:\"REPLY\", msg:\"Garrett's Watch Is Replying To You!\"}", id);
+    // Serial.println(msg);
+    // BTsend(String(msg));
   }
   else if (Source == "YouTube")
   {
@@ -127,6 +137,19 @@ void DrawNotifications(lv_event_t *e)
     // lv_scr_load_anim(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 0);
     //_ui_screen_change( &ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Notifications_screen_init);
   }*/
+  
+  lv_slider_set_value(ui_Brightness_Slider, GetUserBrightness(), LV_ANIM_OFF);
+
+  if (!info.bt.ison)
+  {
+    lv_obj_add_state(ui_Bluetooth_Button, LV_STATE_CHECKED);
+  }
+
+  if (info.notification.donotdisturb)
+  {
+    lv_obj_add_state(ui_Do_Not_Disturb_Button, LV_STATE_CHECKED);
+  }
+
   if (NotificationCount)
   {
     lv_obj_add_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_HIDDEN);
@@ -166,7 +189,7 @@ void DeleteNotification(lv_event_t *e)
   else
   {
     notificationshowing = 0;
-    lv_obj_del_delayed(lv_event_get_target(e), 350);
+    // NotificationHide_Animation(NOTIFPOPUP_MAIN, 300);
     Serial.println("Notification Dismiss");
   }
 }
@@ -263,6 +286,7 @@ void NotificationHandle()
 void ToggleDoNotDisturb(lv_event_t *e)
 {
   Donotdisturb = !Donotdisturb;
+  info.notification.donotdisturb = Donotdisturb;
 }
 
 bool NotificationActive()

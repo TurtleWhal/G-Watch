@@ -45,7 +45,7 @@ void DefaultClockHandle()
             lv_img_set_angle(ui_Default_Clock_Minute_Hand, (info.time.minute * 60) + (info.time.second));
             lv_label_set_text_fmt(ui_Default_Clock_Notification_Amount_Number, "%i", info.notification.count);
 
-            if (info.bt.status)
+            if (info.bt.isconnected)
             {
                 if (lv_img_get_src(ui_Default_Clock_Bluetooth_Indicator) != &ui_img_bluetooth_small_png)
                     lv_img_set_src(ui_Default_Clock_Bluetooth_Indicator, &ui_img_bluetooth_small_png);

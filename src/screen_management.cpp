@@ -156,8 +156,6 @@ void LoadSettings(lv_event_t *e)
     sprintf(NotificationLengthChar, "%i", Storage.getUInt("NotifLength"));
     lv_textarea_set_text(lv_obj_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), NotificationLengthChar);
 
-    lv_slider_set_value(ui_Brightness_Slider, GetUserBrightness(), LV_ANIM_OFF);
-
     lv_colorwheel_set_rgb(ui_Theme_Colorwheel, lv_theme_get_color_primary(ui_Settings));
     UpdateTestTheme(nullptr);
 

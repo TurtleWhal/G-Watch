@@ -76,25 +76,24 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 {
   if (touch.available())
   {
-    data->state = LV_INDEV_STATE_PR;
-    /*Set the coordinates*/
-    // if (GetSleepTimer() < millis() - 200)
-    //{
+    if (IsSleeping()) // If sleeping
+    {
+      if (touch.data.x == 0 && touch.data.y == 0)
+        Wakeup("Tilted Wrist");
+      else
+        Wakeup("Screen Touched");
 
+      return;
+    }
+
+    TickleSleep();
+
+    data->state = LV_INDEV_STATE_PR;
+
+    /*Set the coordinates*/
     xaccel = touch.data.x - data->point.x;
     data->point.x = touch.data.x;
     data->point.y = touch.data.y;
-
-    if (!IsSleeping()) // If Awake
-    {
-      if (IsClockScreen) // Only run this if on the main screen
-      {
-        notifslide(nullptr);
-      }
-    }
-
-    //}
-    Wakeup("Screen Touched");
 
     Log.verboseln("Touch event. Data X: %i, Data Y: %i, X accel: %i", data->point.x, data->point.y, xaccel);
 

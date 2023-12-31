@@ -62,8 +62,8 @@ extern "C"
         typedef struct
         {
             String name;
-            // is connected
-            bool status;
+            bool ison;
+            bool isconnected = 1;
         } BluetoothInfo;
         BluetoothInfo bt;
 
@@ -111,6 +111,7 @@ extern "C"
             const void *lastimg;
             // Number of notifications
             uint8_t count;
+            bool donotdisturb;
         } NotificationInfo;
         NotificationInfo notification;
 
