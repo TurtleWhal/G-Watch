@@ -11,7 +11,7 @@
 #include "themes.h"
 #include "screen_management.h"
 
-#define NOTIFPOPUP_IMAGE ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL_NOTIFICATION_IMAGE)
+#define NOTIFPOPUP_IMAGE ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE)
 #define NOTIFPOPUP_MAIN ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET)
 
 extern ClockInfo info;
@@ -50,14 +50,16 @@ void ShowNotification(String Title, String Text, String Source, int id)
   lv_obj_set_x(NOTIFPOPUP_MAIN, 0);
   lv_obj_set_y(NOTIFPOPUP_MAIN, -160);
 
-  // lv_label_set_text(ui_Notification_Title, Title.c_str());
-  // lv_label_set_text(ui_Notification_Text, Text.c_str());
-  // lv_label_set_text(ui_Notification_Source, Source.c_str());
+  lv_obj_set_height(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN), 52);
+  // lv_obj_set_height(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_WIDGET), 52);
 
-  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), Title.c_str());
-  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), Text.c_str());
-  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), Source.c_str());
-  lv_obj_set_style_bg_color(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL), info.theme.color, LV_PART_MAIN);
+  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE), Title.c_str());
+  lv_label_set_long_mode(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE), LV_LABEL_LONG_CLIP);
+  // lv_label_set_long_mode(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), LV_LABEL_LONG_DOT);
+
+  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT), Text.c_str());
+  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_SOURCE), Source.c_str());
+  lv_obj_set_style_bg_color(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL), info.theme.color, LV_PART_MAIN);
 
   if (Source == "Messages")
   {
@@ -137,7 +139,7 @@ void DrawNotifications(lv_event_t *e)
     // lv_scr_load_anim(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 0);
     //_ui_screen_change( &ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Notifications_screen_init);
   }*/
-  
+
   lv_slider_set_value(ui_Brightness_Slider, GetUserBrightness(), LV_ANIM_OFF);
 
   if (!info.bt.ison)
@@ -156,11 +158,11 @@ void DrawNotifications(lv_event_t *e)
     for (int i = 0; i < NotificationCount; i++)
     {
       NotificationComp[i] = ui_Notification_Widget_create(ui_Notification_Panel);
-      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), NotificationList[i].Title.c_str());
-      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TEXT), NotificationList[i].Text.c_str());
-      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_SOURCE), NotificationList[i].Source.c_str());
-      lv_obj_set_style_bg_color(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL), GetTheme(), LV_PART_MAIN);
-      lv_img_set_src(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_IMAGE_PANEL_NOTIFICATION_IMAGE), NotificationList[i].img);
+      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE), NotificationList[i].Title.c_str());
+      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT), NotificationList[i].Text.c_str());
+      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_SOURCE), NotificationList[i].Source.c_str());
+      lv_obj_set_style_bg_color(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL), GetTheme(), LV_PART_MAIN);
+      lv_img_set_src(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE), NotificationList[i].img);
       lv_obj_set_user_data(NotificationComp[i], (void *)i);
 
       NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
@@ -177,6 +179,27 @@ void DrawNotifications(lv_event_t *e)
 
 void DeleteNotification(lv_event_t *e)
 {
+  lv_event_code_t event_code = lv_event_get_code(e);
+  lv_obj_t *target = lv_event_get_target(e);
+
+  if (event_code == LV_EVENT_GESTURE)
+  {
+    lv_indev_wait_release(lv_indev_get_act());
+
+    if (lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
+      NotificationDismissRight_Animation(target, 0);
+
+    if (lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
+      NotificationDismissLeft_Animation(target, 0);
+
+    if (lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP)
+    {
+      if (lv_scr_act() != ui_Notifications)
+        NotificationHide(true);
+      return;
+    }
+  }
+
   if (lv_scr_act() == ui_Notifications)
   {
     int index = (int)lv_obj_get_user_data(lv_event_get_target(e));

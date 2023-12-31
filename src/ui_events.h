@@ -21,7 +21,6 @@ void DrawNotifications(lv_event_t * e);
 void UpdateBrightness(lv_event_t * e);
 void ToggleBT(lv_event_t * e);
 void ToggleDoNotDisturb(lv_event_t * e);
-void DeleteNotification(lv_event_t * e);
 void SetTimerDefault(lv_event_t * e);
 void togglealarm1(lv_event_t * e);
 void togglealarm2(lv_event_t * e);
@@ -60,6 +59,7 @@ void InitStepsScreen(lv_event_t * e);
 void ResetStorage(lv_event_t * e);
 void ResetCounter(lv_event_t * e);
 void DrawSchedule(lv_event_t * e);
+void DeleteNotification(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

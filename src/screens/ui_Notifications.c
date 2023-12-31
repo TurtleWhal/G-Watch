@@ -29,13 +29,15 @@ lv_obj_set_height( ui_Notifications_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Notifications_Label, 0 );
 lv_obj_set_y( ui_Notifications_Label, 12 );
 lv_obj_set_align( ui_Notifications_Label, LV_ALIGN_TOP_MID );
-lv_label_set_text(ui_Notifications_Label,"Notifications");
+lv_label_set_text(ui_Notifications_Label,"Quick Access");
 lv_obj_set_style_text_font(ui_Notifications_Label, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Notification_Panel = lv_obj_create(ui_Notifications);
-lv_obj_set_width( ui_Notification_Panel, 206);
-lv_obj_set_height( ui_Notification_Panel, 175);
-lv_obj_set_align( ui_Notification_Panel, LV_ALIGN_CENTER );
+lv_obj_set_width( ui_Notification_Panel, 240);
+lv_obj_set_height( ui_Notification_Panel, 220);
+lv_obj_set_x( ui_Notification_Panel, 0 );
+lv_obj_set_y( ui_Notification_Panel, 36 );
+lv_obj_set_align( ui_Notification_Panel, LV_ALIGN_TOP_MID );
 lv_obj_set_flex_flow(ui_Notification_Panel,LV_FLEX_FLOW_COLUMN);
 lv_obj_set_flex_align(ui_Notification_Panel, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 lv_obj_clear_flag( ui_Notification_Panel, LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
@@ -46,6 +48,10 @@ lv_obj_set_style_bg_color(ui_Notification_Panel, lv_color_hex(0x292831), LV_PART
 lv_obj_set_style_bg_opa(ui_Notification_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_clip_corner(ui_Notification_Panel, true, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_side(ui_Notification_Panel, LV_BORDER_SIDE_NONE, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_left(ui_Notification_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(ui_Notification_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(ui_Notification_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(ui_Notification_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_set_style_bg_color(ui_Notification_Panel, lv_color_hex(0xFFFFFF), LV_PART_SCROLLBAR | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Notification_Panel, 0, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
@@ -124,27 +130,17 @@ lv_obj_add_flag( ui_Do_Not_Disturb_Button_Image, LV_OBJ_FLAG_ADV_HITTEST );   //
 lv_obj_clear_flag( ui_Do_Not_Disturb_Button_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_img_set_zoom(ui_Do_Not_Disturb_Button_Image,220);
 
-ui_Notification_Widget2 = ui_Notification_Widget_create(ui_Notification_Panel);
-lv_obj_set_x( ui_Notification_Widget2, 0 );
-lv_obj_set_y( ui_Notification_Widget2, -43 );
-lv_obj_add_flag( ui_Notification_Widget2, LV_OBJ_FLAG_HIDDEN );   /// Flags
-
-
-
-
-
-
-
 ui_No_New_Notifications_Label = lv_label_create(ui_Notification_Panel);
 lv_obj_set_width( ui_No_New_Notifications_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_No_New_Notifications_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_No_New_Notifications_Label, 0 );
-lv_obj_set_y( ui_No_New_Notifications_Label, -63 );
+lv_obj_set_y( ui_No_New_Notifications_Label, -25 );
 lv_obj_set_align( ui_No_New_Notifications_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_No_New_Notifications_Label,"No New Notifications");
+lv_obj_add_flag( ui_No_New_Notifications_Label, LV_OBJ_FLAG_IGNORE_LAYOUT );   /// Flags
 lv_obj_set_style_text_color(ui_No_New_Notifications_Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_No_New_Notifications_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_No_New_Notifications_Label, &ui_font_Music_14, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_No_New_Notifications_Label, &lv_font_montserrat_12, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Notifications_Gesture_Panel = lv_obj_create(ui_Notifications);
 lv_obj_set_width( ui_Notifications_Gesture_Panel, 267);

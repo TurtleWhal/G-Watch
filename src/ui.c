@@ -83,7 +83,6 @@ lv_obj_t *ui_Power_Button_Image;
 void ui_event_Do_Not_Disturb_Button( lv_event_t * e);
 lv_obj_t *ui_Do_Not_Disturb_Button;
 lv_obj_t *ui_Do_Not_Disturb_Button_Image;
-lv_obj_t *ui_Notification_Widget2;
 lv_obj_t *ui_No_New_Notifications_Label;
 lv_obj_t *ui_Notifications_Gesture_Panel;
 
