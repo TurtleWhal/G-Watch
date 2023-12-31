@@ -60,6 +60,7 @@ void ResetStorage(lv_event_t * e);
 void ResetCounter(lv_event_t * e);
 void DrawSchedule(lv_event_t * e);
 void DeleteNotification(lv_event_t * e);
+void NotificationExpand(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

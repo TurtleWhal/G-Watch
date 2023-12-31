@@ -21,6 +21,9 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       DeleteNotification( e );
 }
+if ( event_code == LV_EVENT_CLICKED) {
+      NotificationExpand( e );
+}
 }
 
 // COMPONENT Notification Widget
@@ -37,14 +40,6 @@ lv_obj_set_y( cui_Notification_Widget, 46 );
 lv_obj_set_align( cui_Notification_Widget, LV_ALIGN_CENTER );
 lv_obj_clear_flag( cui_Notification_Widget, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-lv_obj_t *cui_Source;
-cui_Source = lv_label_create(cui_Notification_Widget);
-lv_obj_set_width( cui_Source, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( cui_Source, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( cui_Source, LV_ALIGN_CENTER );
-lv_label_set_text(cui_Source,"undefined source");
-lv_obj_add_flag( cui_Source, LV_OBJ_FLAG_HIDDEN );   /// Flags
-
 lv_obj_t *cui_Main;
 cui_Main = lv_obj_create(cui_Notification_Widget);
 lv_obj_set_width( cui_Main, 180);
@@ -59,6 +54,14 @@ lv_obj_set_style_pad_left(cui_Main, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_pad_right(cui_Main, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_pad_top(cui_Main, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_pad_bottom(cui_Main, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_t *cui_Source;
+cui_Source = lv_label_create(cui_Main);
+lv_obj_set_width( cui_Source, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( cui_Source, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( cui_Source, LV_ALIGN_CENTER );
+lv_label_set_text(cui_Source,"undefined source");
+lv_obj_add_flag( cui_Source, LV_OBJ_FLAG_HIDDEN );   /// Flags
 
 lv_obj_t *cui_Image_Panel;
 cui_Image_Panel = lv_obj_create(cui_Main);
@@ -79,6 +82,7 @@ lv_obj_set_height( cui_Image, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( cui_Image, LV_ALIGN_CENTER );
 lv_obj_add_flag( cui_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
 lv_obj_clear_flag( cui_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_zoom(cui_Image,290);
 
 lv_obj_t *cui_Title;
 cui_Title = lv_label_create(cui_Main);
@@ -107,8 +111,8 @@ lv_obj_set_style_pad_bottom(cui_Text, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_t ** children = lv_mem_alloc(sizeof(lv_obj_t *) * _UI_COMP_NOTIFICATION_WIDGET_NUM);
 children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET] = cui_Notification_Widget;
-children[UI_COMP_NOTIFICATION_WIDGET_SOURCE] = cui_Source;
 children[UI_COMP_NOTIFICATION_WIDGET_MAIN] = cui_Main;
+children[UI_COMP_NOTIFICATION_WIDGET_MAIN_SOURCE] = cui_Source;
 children[UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL] = cui_Image_Panel;
 children[UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE] = cui_Image;
 children[UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE] = cui_Title;

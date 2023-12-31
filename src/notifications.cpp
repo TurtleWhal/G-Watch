@@ -17,6 +17,7 @@
 extern ClockInfo info;
 
 LV_IMG_DECLARE(ui_img_discord_icon_png);
+LV_IMG_DECLARE(ui_img_gadgetbridge_icon_png);
 LV_IMG_DECLARE(ui_img_youtube_icon_png);
 LV_IMG_DECLARE(ui_img_sms_icon_png);
 LV_IMG_DECLARE(ui_img_gmail_icon_png);
@@ -58,7 +59,7 @@ void ShowNotification(String Title, String Text, String Source, int id)
   // lv_label_set_long_mode(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), LV_LABEL_LONG_DOT);
 
   lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT), Text.c_str());
-  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_SOURCE), Source.c_str());
+  lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_SOURCE), Source.c_str());
   lv_obj_set_style_bg_color(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL), info.theme.color, LV_PART_MAIN);
 
   if (Source == "Messages")
@@ -78,6 +79,10 @@ void ShowNotification(String Title, String Text, String Source, int id)
     // sprintf(msg, "{t:\"notify\", id:%i, n:\"REPLY\", msg:\"Garrett's Watch Is Replying To You!\"}", id);
     // Serial.println(msg);
     // BTsend(String(msg));
+  }
+  else if (Source == "Gadgetbridge")
+  {
+    lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_gadgetbridge_icon_png);
   }
   else if (Source == "YouTube")
   {
@@ -160,7 +165,7 @@ void DrawNotifications(lv_event_t *e)
       NotificationComp[i] = ui_Notification_Widget_create(ui_Notification_Panel);
       lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE), NotificationList[i].Title.c_str());
       lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT), NotificationList[i].Text.c_str());
-      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_SOURCE), NotificationList[i].Source.c_str());
+      lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_SOURCE), NotificationList[i].Source.c_str());
       lv_obj_set_style_bg_color(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL), GetTheme(), LV_PART_MAIN);
       lv_img_set_src(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE), NotificationList[i].img);
       lv_obj_set_user_data(NotificationComp[i], (void *)i);
@@ -226,6 +231,9 @@ void NotificationDismiss(lv_event_t *e)
 
 void NotificationHide(bool anim)
 {
+  if (!notificationshowing)
+    return;
+
   notificationshowing = 0;
   if (NotifPopup != NULL)
   {
@@ -239,6 +247,19 @@ void NotificationHide(bool anim)
   // lv_obj_del_delayed(NotifPopup, 350);
   // lv_obj_del_async(NotifPopup);
   Serial.println("Notification Hide");
+}
+
+void NotificationExpand(lv_event_t *e)
+{
+  NotificationHide(false);
+
+  _ui_screen_change(&ui_Notification_Expand, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, ui_Notification_Expand_screen_init);
+
+  // lv_obj_t *target = lv_event_get_target(e);
+
+  // lv_label_set_text(ui_Notification_Expand_Title,
+  //                   lv_label_get_text(
+  //                       ui_comp_get_child(target, UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE)));
 }
 
 void PushNotification(int index)

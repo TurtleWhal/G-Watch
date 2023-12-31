@@ -87,6 +87,19 @@ lv_obj_t *ui_No_New_Notifications_Label;
 lv_obj_t *ui_Notifications_Gesture_Panel;
 
 
+// SCREEN: ui_Notification_Expand
+void ui_Notification_Expand_screen_init(void);
+void ui_event_Notification_Expand( lv_event_t * e);
+lv_obj_t *ui_Notification_Expand;
+lv_obj_t *ui_Notification_Expand_Source;
+lv_obj_t *ui_Notification_Expand_Text_Box;
+lv_obj_t *ui_Notification_Expand_Title;
+lv_obj_t *ui_Notification_Expand_Text_Divider;
+lv_obj_t *ui_Notification_Expand_Text;
+lv_obj_t *ui_Panel2;
+lv_obj_t *ui_Image1;
+
+
 // SCREEN: ui_Alarms
 void ui_Alarms_screen_init(void);
 void ui_event_Alarms( lv_event_t * e);
@@ -1086,6 +1099,16 @@ void ui_event_Do_Not_Disturb_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       ToggleDoNotDisturb( e );
+}
+}
+void ui_event_Notification_Expand( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_SCREEN_LOADED) {
+      ApplyTheme( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( &ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Notifications_screen_init);
 }
 }
 void ui_event_Alarms( lv_event_t * e) {

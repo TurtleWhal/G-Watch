@@ -4,6 +4,7 @@ SET(SOURCES components/ui_comp_app_button.c
     components/ui_comp.c
     screens/ui_Default_Clock.c
     screens/ui_Notifications.c
+    screens/ui_Notification_Expand.c
     screens/ui_Alarms.c
     screens/ui_Set_Alarm.c
     screens/ui_Alarm_Going_Off.c
