@@ -20,7 +20,10 @@ void CalcHandle(lv_event_t *e)
     if (calcbutton == "=")
     {
       String expr = lv_textarea_get_text(ui_Calculator_textarea);
-      lv_textarea_set_text(ui_Calculator_textarea, String(CalculateExpression(expr)).c_str());
+      char buffer[64];
+      sprintf(buffer, "%.g", CalculateExpression(expr));
+      Log.verboseln("Calculating Expression: %s %s", expr, buffer);
+      lv_textarea_set_text(ui_Calculator_textarea, buffer);
       lv_btnmatrix_set_selected_btn(ui_Calculator_Keyboard, 16);
     }
   }

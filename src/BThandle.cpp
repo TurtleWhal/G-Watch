@@ -406,7 +406,7 @@ void ParseGB(char *Message)
   else if (strcmp(NotifType, "reboot") == 0)
   {
     // Serial.println("Rebooting due to gadgetbridge button");
-    Serial.println("( ¯˘¯)/ Cya latr!");
+    Serial.println("( ¯˘¯)/ Cya latr!\n");
     ESP.restart();
   }
 }
