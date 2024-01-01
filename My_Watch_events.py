@@ -414,3 +414,7 @@ def LoadCalc(event_struct):
 def DeleteNotification(event_struct):
     return
 
+
+def SetDeafaultDown(event_struct):
+    return
+

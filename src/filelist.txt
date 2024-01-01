@@ -17,11 +17,11 @@ screens/ui_Compass.c
 screens/ui_Flashlight.c
 screens/ui_Music.c
 screens/ui_Weather.c
+screens/ui_Health.c
+screens/ui_Call.c
+screens/ui_Schedule.c
 screens/ui_SkeletonWatchFace.c
 screens/ui_SimplisticWatchFace.c
-screens/ui_Call.c
-screens/ui_Health.c
-screens/ui_Schedule.c
 screens/ui_Blocky_Clock.c
 ui.c
 components/ui_comp_hook.c
@@ -59,10 +59,10 @@ images/ui_img_rain_png.c
 images/ui_img_snow_rain_png.c
 images/ui_img_mostly_sunny_png.c
 images/ui_img_wind_png.c
+images/ui_img_call1_png.c
 images/ui_img_skeletonminutehand_png.c
 images/ui_img_simplisticminutehand_png.c
 images/ui_img_simplistichourhand_png.c
-images/ui_img_call1_png.c
 images/ui_img_4809254_png.c
 fonts/ui_font_Blocky_16.c
 fonts/ui_font_Blocky_48.c

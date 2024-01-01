@@ -175,14 +175,16 @@ void SetTimerDefault(lv_event_t *e)
         LastTimeScreen = STOPWATCH_SCREEN;
 }
 
-void SetWeatherDeafault(lv_event_t *e)
+void SetDeafaultDown(lv_event_t *e)
 {
-    LastDownScreen = WEATHER_SCREEN;
-}
+    if (lv_scr_act() == ui_Weather)
+        LastDownScreen = WEATHER_SCREEN;
 
-void SetMusicDeafault(lv_event_t *e)
-{
-    LastDownScreen = MUSIC_SCREEN;
+    else if (lv_scr_act() == ui_Music)
+        LastDownScreen = MUSIC_SCREEN;
+
+    else if (lv_scr_act() == ui_Health)
+        LastDownScreen = HEALTH_SCREEN;
 }
 
 void ClockRight(lv_event_t *e)
@@ -204,10 +206,20 @@ void ClockRight(lv_event_t *e)
 
 void ClockDown(lv_event_t *e)
 {
-    if (LastDownScreen == MUSIC_SCREEN)
+    switch (LastDownScreen)
+    {
+    case MUSIC_SCREEN:
         _ui_screen_change(&ui_Music, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Music_screen_init);
-    else
+        break;
+
+    case HEALTH_SCREEN:
+        _ui_screen_change(&ui_Health, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Health_screen_init);
+        break;
+
+    default:
         _ui_screen_change(&ui_Weather, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Weather_screen_init);
+        break;
+    }
 }
 
 void ClockUpwards(lv_event_t *e)
@@ -292,7 +304,7 @@ void ScreenBack(lv_event_t *e)
         _ui_screen_change(ClockScreen, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, InitClockScreen);
     }
 
-    else if (lv_scr_act() == ui_Music or lv_scr_act() == ui_Weather)
+    else if (lv_scr_act() == ui_Music or lv_scr_act() == ui_Weather or lv_scr_act() == ui_Health)
     {
         _ui_screen_change(ClockScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, InitClockScreen);
     }
@@ -310,10 +322,5 @@ void ScreenBack(lv_event_t *e)
     else if (lv_scr_act() == ui_Set_Alarm)
     {
         _ui_screen_change(&ui_Alarms, LV_SCR_LOAD_ANIM_FADE_OUT, 150, 0, NULL);
-    }
-
-    else if (lv_scr_act() == ui_Health)
-    {
-        _ui_screen_change(&ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, ui_Notifications_screen_init);
     }
 }

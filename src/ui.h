@@ -381,6 +381,41 @@ extern lv_obj_t *ui_UV_Index_Label;
 extern lv_obj_t *ui_Weather_Location;
 extern lv_obj_t *ui_Wind_Image;
 extern lv_obj_t *ui_Wind_Info;
+// SCREEN: ui_Health
+void ui_Health_screen_init(void);
+void ui_event_Health( lv_event_t * e);
+extern lv_obj_t *ui_Health;
+extern lv_obj_t *ui_Health_Label;
+extern lv_obj_t *ui_Health_Label_Underline;
+extern lv_obj_t *ui_Steps_Chart;
+extern lv_obj_t *ui_Steps_Bar;
+void ui_event_Reset_Storage_Button( lv_event_t * e);
+extern lv_obj_t *ui_Reset_Storage_Button;
+extern lv_obj_t *ui_Reset_Storage_Label;
+void ui_event_Reset_Counter_Button( lv_event_t * e);
+extern lv_obj_t *ui_Reset_Counter_Button;
+extern lv_obj_t *ui_Reset_Counter_Label;
+extern lv_obj_t *ui_Steps_Reset_Label;
+extern lv_obj_t *ui_Steps_Info;
+// SCREEN: ui_Call
+void ui_Call_screen_init(void);
+extern lv_obj_t *ui_Call;
+extern lv_obj_t *ui_Accept_Call_Button;
+extern lv_obj_t *ui_Accept_Call_Image;
+extern lv_obj_t *ui_Reject_Call_Button;
+extern lv_obj_t *ui_Reject_Call_Image;
+extern lv_obj_t *ui_Call_Type;
+extern lv_obj_t *ui_Caller_Name;
+extern lv_obj_t *ui_Caller_Number;
+// SCREEN: ui_Schedule
+void ui_Schedule_screen_init(void);
+void ui_event_Schedule( lv_event_t * e);
+extern lv_obj_t *ui_Schedule;
+extern lv_obj_t *ui_Schedule_Bar;
+extern lv_obj_t *ui_Schedule_Name;
+extern lv_obj_t *ui_Schedule_Time_Start;
+extern lv_obj_t *ui_Schedule_Time_End;
+extern lv_obj_t *ui_Schedule_Roller;
 // SCREEN: ui_SkeletonWatchFace
 void ui_SkeletonWatchFace_screen_init(void);
 extern lv_obj_t *ui_SkeletonWatchFace;
@@ -410,41 +445,6 @@ extern lv_obj_t *ui_Simplistic_Minute_Hand_Shadow;
 extern lv_obj_t *ui_Simplistic_Minute_Hand;
 extern lv_obj_t *ui_Simplistic_Hour_Hand_Shadow;
 extern lv_obj_t *ui_Simplistic_Hour_Hand;
-// SCREEN: ui_Call
-void ui_Call_screen_init(void);
-extern lv_obj_t *ui_Call;
-extern lv_obj_t *ui_Accept_Call_Button;
-extern lv_obj_t *ui_Accept_Call_Image;
-extern lv_obj_t *ui_Reject_Call_Button;
-extern lv_obj_t *ui_Reject_Call_Image;
-extern lv_obj_t *ui_Call_Type;
-extern lv_obj_t *ui_Caller_Name;
-extern lv_obj_t *ui_Caller_Number;
-// SCREEN: ui_Health
-void ui_Health_screen_init(void);
-void ui_event_Health( lv_event_t * e);
-extern lv_obj_t *ui_Health;
-extern lv_obj_t *ui_Health_Label;
-extern lv_obj_t *ui_Health_Label_Underline;
-extern lv_obj_t *ui_Steps_Chart;
-extern lv_obj_t *ui_Steps_Bar;
-void ui_event_Reset_Storage_Button( lv_event_t * e);
-extern lv_obj_t *ui_Reset_Storage_Button;
-extern lv_obj_t *ui_Reset_Storage_Label;
-void ui_event_Reset_Counter_Button( lv_event_t * e);
-extern lv_obj_t *ui_Reset_Counter_Button;
-extern lv_obj_t *ui_Reset_Counter_Label;
-extern lv_obj_t *ui_Steps_Reset_Label;
-extern lv_obj_t *ui_Steps_Info;
-// SCREEN: ui_Schedule
-void ui_Schedule_screen_init(void);
-void ui_event_Schedule( lv_event_t * e);
-extern lv_obj_t *ui_Schedule;
-extern lv_obj_t *ui_Schedule_Bar;
-extern lv_obj_t *ui_Schedule_Name;
-extern lv_obj_t *ui_Schedule_Time_Start;
-extern lv_obj_t *ui_Schedule_Time_End;
-extern lv_obj_t *ui_Schedule_Roller;
 // SCREEN: ui_Blocky_Clock
 void ui_Blocky_Clock_screen_init(void);
 void ui_event_Blocky_Clock( lv_event_t * e);
@@ -495,10 +495,10 @@ LV_IMG_DECLARE( ui_img_rain_png);   // assets/rain.png
 LV_IMG_DECLARE( ui_img_snow_rain_png);   // assets/Snow Rain.png
 LV_IMG_DECLARE( ui_img_mostly_sunny_png);   // assets/Mostly Sunny.png
 LV_IMG_DECLARE( ui_img_wind_png);   // assets/wind.png
+LV_IMG_DECLARE( ui_img_call1_png);   // assets/call1.png
 LV_IMG_DECLARE( ui_img_skeletonminutehand_png);   // assets/SkeletonMinuteHand.png
 LV_IMG_DECLARE( ui_img_simplisticminutehand_png);   // assets/SimplisticMinuteHand.png
 LV_IMG_DECLARE( ui_img_simplistichourhand_png);   // assets/SimplisticHourHand.png
-LV_IMG_DECLARE( ui_img_call1_png);   // assets/call1.png
 LV_IMG_DECLARE( ui_img_4809254_png);   // assets/4809254.png
 
 LV_FONT_DECLARE( ui_font_Blocky_16);

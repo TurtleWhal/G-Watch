@@ -142,7 +142,8 @@ extern "C"
     enum
     {
         WEATHER_SCREEN,
-        MUSIC_SCREEN
+        MUSIC_SCREEN,
+        HEALTH_SCREEN
     };
 
     enum
