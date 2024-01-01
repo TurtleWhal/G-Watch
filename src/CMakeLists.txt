@@ -41,7 +41,6 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_brightness_png.c
     images/ui_img_bluetooth_small_nobackground_png.c
     images/ui_img_bellnobackground_png.c
-    images/ui_img_bell_png.c
     images/ui_img_restart_button_png.c
     images/ui_img_playpause_button_png.c
     images/ui_img_arrow_png.c

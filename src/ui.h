@@ -109,8 +109,8 @@ extern lv_obj_t *ui_Notification_Expand_Text_Box;
 extern lv_obj_t *ui_Notification_Expand_Title;
 extern lv_obj_t *ui_Notification_Expand_Text_Divider;
 extern lv_obj_t *ui_Notification_Expand_Text;
-extern lv_obj_t *ui_Panel2;
-extern lv_obj_t *ui_Image1;
+extern lv_obj_t *ui_Notification_Expand_Image_Panel;
+extern lv_obj_t *ui_Notification_Expand_Image;
 // SCREEN: ui_Alarms
 void ui_Alarms_screen_init(void);
 void ui_event_Alarms( lv_event_t * e);
@@ -174,7 +174,6 @@ extern lv_obj_t *ui_Alarm_Name;
 extern lv_obj_t *ui_Alarm_Name_Keyboard;
 void ui_event_Button2( lv_event_t * e);
 extern lv_obj_t *ui_Button2;
-extern lv_obj_t *ui_Image2;
 // SCREEN: ui_Alarm_Going_Off
 void ui_Alarm_Going_Off_screen_init(void);
 extern lv_obj_t *ui_Alarm_Going_Off;
@@ -478,7 +477,6 @@ LV_IMG_DECLARE( ui_img_gwatch_logo_png);   // assets/GWatch Logo.png
 LV_IMG_DECLARE( ui_img_brightness_png);   // assets/brightness.png
 LV_IMG_DECLARE( ui_img_bluetooth_small_nobackground_png);   // assets/Bluetooth_Small_nobackground.png
 LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
-LV_IMG_DECLARE( ui_img_bell_png);   // assets/Bell.png
 LV_IMG_DECLARE( ui_img_restart_button_png);   // assets/Restart Button.png
 LV_IMG_DECLARE( ui_img_playpause_button_png);   // assets/PlayPause Button.png
 LV_IMG_DECLARE( ui_img_arrow_png);   // assets/Arrow.png

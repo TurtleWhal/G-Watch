@@ -394,8 +394,8 @@ void setup()
 
   twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
-  Log.verboseln("Total PSRAM: %d", ESP.getPsramSize());
-  Log.verboseln("Free PSRAM: %d", ESP.getFreePsram());
+  // Log.verboseln("Total PSRAM: %d", ESP.getPsramSize());
+  // Log.verboseln("Free PSRAM: %d", ESP.getFreePsram());
 
   info.flag.refresh = 1;
 
@@ -411,7 +411,7 @@ void loop()
   // Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
   if (!IsSleeping()) // If Awake
   {
-    // lv_timer_handler(); /* let the GUI do its work */
+    lv_timer_handler(); /* let the GUI do its work */
     // delay(5);
     // delay(lv_timer_handler());
 

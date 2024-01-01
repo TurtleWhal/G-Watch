@@ -37,8 +37,8 @@ ui_Alarm_Going_Off_Bell = lv_img_create(ui_Panel1);
 lv_img_set_src(ui_Alarm_Going_Off_Bell, &ui_img_notificationbell_png);
 lv_obj_set_width( ui_Alarm_Going_Off_Bell, LV_SIZE_CONTENT);  /// 60
 lv_obj_set_height( ui_Alarm_Going_Off_Bell, LV_SIZE_CONTENT);   /// 60
-lv_obj_set_x( ui_Alarm_Going_Off_Bell, 0 );
-lv_obj_set_y( ui_Alarm_Going_Off_Bell, 1 );
+lv_obj_set_x( ui_Alarm_Going_Off_Bell, 1 );
+lv_obj_set_y( ui_Alarm_Going_Off_Bell, 0 );
 lv_obj_set_align( ui_Alarm_Going_Off_Bell, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Alarm_Going_Off_Bell, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
 lv_obj_clear_flag( ui_Alarm_Going_Off_Bell, LV_OBJ_FLAG_SCROLLABLE );    /// Flags

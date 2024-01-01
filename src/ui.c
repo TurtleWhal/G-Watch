@@ -96,8 +96,8 @@ lv_obj_t *ui_Notification_Expand_Text_Box;
 lv_obj_t *ui_Notification_Expand_Title;
 lv_obj_t *ui_Notification_Expand_Text_Divider;
 lv_obj_t *ui_Notification_Expand_Text;
-lv_obj_t *ui_Panel2;
-lv_obj_t *ui_Image1;
+lv_obj_t *ui_Notification_Expand_Image_Panel;
+lv_obj_t *ui_Notification_Expand_Image;
 
 
 // SCREEN: ui_Alarms
@@ -165,7 +165,6 @@ lv_obj_t *ui_Alarm_Name;
 lv_obj_t *ui_Alarm_Name_Keyboard;
 void ui_event_Button2( lv_event_t * e);
 lv_obj_t *ui_Button2;
-lv_obj_t *ui_Image2;
 
 
 // SCREEN: ui_Alarm_Going_Off

@@ -541,6 +541,20 @@ void BTsend(String message, int repeat)
   }
 }
 
+void BTsendf(const char *fmt, ...)
+{
+  char msg[256];
+
+  va_list args;
+  va_start(args, fmt);
+
+  vsprintf(msg, fmt, args);
+
+  va_end(args);
+
+  BTsend(msg);
+}
+
 void BTmsgloop()
 {
   static int lasttime;

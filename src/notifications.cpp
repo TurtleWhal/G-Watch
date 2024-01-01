@@ -105,7 +105,7 @@ void ShowNotification(String Title, String Text, String Source, int id)
     lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_notificationbell_png);
   }
 
-  // sources : Gmail, YouTube, Messages
+  TempID = id;
 
   NotificationList[10].Title = Title;
   NotificationList[10].Text = Text;
@@ -116,8 +116,6 @@ void ShowNotification(String Title, String Text, String Source, int id)
   info.notification.lasttitle = NotificationList[10].Title;
   info.notification.lasttext = NotificationList[10].Text;
   info.notification.lastimg = NotificationList[10].img;
-
-  TempID = id;
 
   NotificationShow_Animation(NOTIFPOPUP_MAIN, 0);
 
@@ -211,6 +209,9 @@ void DeleteNotification(lv_event_t *e)
     PopNotification(index + 1);
     lv_obj_del_delayed(lv_event_get_target(e), 350);
 
+    BTsendf("{t:\"notify\", id:%i, n:\"DISMISS\"}",
+            NotificationList[(int)lv_obj_get_user_data(lv_event_get_target(e))].id);
+
     if (!NotificationCount)
       lv_obj_clear_flag(ui_No_New_Notifications_Label, LV_OBJ_FLAG_HIDDEN);
   }
@@ -219,6 +220,7 @@ void DeleteNotification(lv_event_t *e)
     notificationshowing = 0;
     // NotificationHide_Animation(NOTIFPOPUP_MAIN, 300);
     Serial.println("Notification Dismiss");
+    BTsendf("{t:\"notify\", id:%i, n:\"DISMISS\"}", NotificationList[10].id);
   }
 }
 
@@ -251,15 +253,47 @@ void NotificationHide(bool anim)
 
 void NotificationExpand(lv_event_t *e)
 {
+  lv_obj_t *target = lv_event_get_target(e);
+
+  lv_obj_t *parent = lv_obj_get_parent(target);
+
+  int index = (int)lv_obj_get_user_data(parent);
+
+  if (index == NULL)
+    index = 10;
+
+  int id = NotificationList[index].id;
+
+  BTsendf("{t:\"notify\", id:%i, n:\"OPEN\"}", id);
+  // Serial.println(id);
+
+  ui_Notification_Expand_screen_init();
+
+  lv_label_set_text_fmt(ui_Notification_Expand_Title, "%s\n",
+                        lv_label_get_text(
+                            ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE)));
+
+  lv_label_set_text(ui_Notification_Expand_Text,
+                    lv_label_get_text(
+                        ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT)));
+
+  lv_img_set_src(ui_Notification_Expand_Image,
+                 lv_img_get_src(
+                     ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE)));
+
+  String time = String(info.time.hour12) + ":" + String(info.time.minute) + " ";
+  if (info.time.hour > 12)
+    time += "pm";
+  else
+    time += "am";
+
+  lv_label_set_text_fmt(ui_Notification_Expand_Source, "%s\n%s",
+                        lv_label_get_text(
+                            ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_SOURCE)),
+                        time);
+
   NotificationHide(false);
-
-  _ui_screen_change(&ui_Notification_Expand, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, ui_Notification_Expand_screen_init);
-
-  // lv_obj_t *target = lv_event_get_target(e);
-
-  // lv_label_set_text(ui_Notification_Expand_Title,
-  //                   lv_label_get_text(
-  //                       ui_comp_get_child(target, UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE)));
+  _ui_screen_change(&ui_Notification_Expand, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, nullptr);
 }
 
 void PushNotification(int index)

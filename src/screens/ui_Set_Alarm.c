@@ -155,17 +155,6 @@ lv_obj_clear_flag( ui_Button2, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_Button2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Button2, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Image2 = lv_img_create(ui_Set_Alarm);
-lv_img_set_src(ui_Image2, &ui_img_bell_png);
-lv_obj_set_width( ui_Image2, LV_SIZE_CONTENT);  /// 75
-lv_obj_set_height( ui_Image2, LV_SIZE_CONTENT);   /// 75
-lv_obj_set_x( ui_Image2, 0 );
-lv_obj_set_y( ui_Image2, -90 );
-lv_obj_set_align( ui_Image2, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Image2, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Image2, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_zoom(ui_Image2,0);
-
 lv_obj_add_event_cb(ui_AMPM_Label, ui_event_AMPM_Label, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Set_Button, ui_event_Set_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Alarm_Name, ui_event_Alarm_Name, LV_EVENT_ALL, NULL);

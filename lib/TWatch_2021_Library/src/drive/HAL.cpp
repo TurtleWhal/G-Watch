@@ -135,7 +135,7 @@ void TWatchClass::hal_update_task(void *param) {
     _ttgo->backlight_updata(ms, 1);
 #endif
 #if defined(CONFIG_TWATCH_HAS_DISPLAY) && CONFIG_TWATCH_APP_LVGL
-    lv_timer_handler();
+    //lv_timer_handler();
 #endif
 #if defined(CONFIG_TWATCH_HAS_PCF8563)
     _ttgo->rtc_updata(ms, 1000);
