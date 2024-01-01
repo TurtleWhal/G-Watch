@@ -9,7 +9,7 @@ extern "C"
   void TickleSleep();
   bool IsSleeping();
   void Powerhandle();
-  void UpdatePower();
+  void UpdatePower(bool = false);
   void PowerOff(lv_event_t *e);
   void UpdateBrightness(lv_event_t *e);
   int GetUserBrightness();

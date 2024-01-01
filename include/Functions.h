@@ -15,7 +15,6 @@ extern "C"
     void BTTimerHandle();
     void StepGraphHandle();
     void PushNotification(int);
-    void UpdatePower();
     void PopNotification(int);
     void CenterNotif_Animation(lv_obj_t *TargetObject, int delay);
 

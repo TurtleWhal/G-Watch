@@ -138,25 +138,35 @@ void Powerhandle()
   twatch->power_updata(millis(), 1000);
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000) // is charging
   {
-    if (!charging)
+    if (!charging) // plugged in
     {
       charging = 1;
-      UpdatePower();
+      info.battery.ischarging = 1;
+      UpdatePower(true);
+      info.flag.refresh = 1;
+
+      if (millis() > 2000)
+      {
+        twatch->motor_shake(1, 30);
+        Wakeup("Plugged In");
+      }
     }
   }
   else
   {
-    if (charging)
+    if (charging) // unplugged
     {
       charging = 0;
-      UpdatePower();
+      info.battery.ischarging = 0;
+      UpdatePower(true);
+      info.flag.refresh = 1;
     }
 
     if ((twatch->power_get_percent() < 20) and (millis() > 10000))
     { // turn on power saving mode
 
       Log.verboseln("Power Saving Mode Acitvated");
-      BT_off();                        // turn off bluetooth
+      BT_off();                                                 // turn off bluetooth
       twatch->backlight_gradual_light(prevbrightness / 2, 500); // lower brightness
 
       if (twatch->power_get_volt() < 3000) // turn off to protect the battery
@@ -176,24 +186,15 @@ void Powerhandle()
     lastpercent = 100;
 }*/
 
-void UpdatePower()
+void UpdatePower(bool force)
 {
-  static int lastpercent = 200;
-  if (lastpercent != twatch->power_get_percent())
+  static uint8_t lastpercent = 200;
+  if (lastpercent != twatch->power_get_percent() or force)
   {
-#ifdef UPDATE_ELEMENTS
-    // lv_label_set_text_fmt(ui_Battery_Percentage, "%i%%", twatch->power_get_percent());
-    // lv_arc_set_value(ui_Arc_Battery, twatch->power_get_percent());
-    info.battery.percentage = twatch->power_get_percent();
-#endif
-    lastpercent = twatch->power_get_percent();
 
-#ifdef UPDATE_ELEMENTS
-    /*if (charging)
-      lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    else
-      lv_obj_set_style_text_color(ui_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);*/
-#endif
+    info.battery.percentage = twatch->power_get_percent();
+    info.battery.voltage = twatch->power_get_volt();
+    lastpercent = twatch->power_get_percent();
 
     BTsendpower();
   }

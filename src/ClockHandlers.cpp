@@ -66,9 +66,9 @@ void DefaultClockHandle()
                 lv_label_set_text_fmt(ui_Default_Clock_Battery_Percentage, "%i%%", info.battery.percentage);
                 lv_arc_set_value(ui_Default_Clock_Arc_Battery, info.battery.percentage);
                 if (info.battery.ischarging)
-                    lv_obj_set_style_text_color(ui_Default_Clock_Battery_Percentage, lv_color_hex(0x00FF00), LV_STYLE_TEXT_COLOR);
+                    lv_obj_set_style_text_color(ui_Default_Clock_Battery_Percentage, lv_color_hex(0x00FF00), LV_PART_MAIN);
                 else
-                    lv_obj_remove_local_style_prop(ui_Default_Clock_Battery_Percentage, LV_STYLE_TEXT_COLOR, LV_PART_MAIN);
+                    lv_obj_set_style_text_color(ui_Default_Clock_Battery_Percentage, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
 
                 if (info.schedule.currenttime)
                 {
