@@ -51,7 +51,7 @@ lv_obj_set_style_border_side(ui_Notification_Panel, LV_BORDER_SIDE_NONE, LV_PART
 lv_obj_set_style_pad_left(ui_Notification_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_pad_right(ui_Notification_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_pad_top(ui_Notification_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_pad_bottom(ui_Notification_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(ui_Notification_Panel, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_set_style_bg_color(ui_Notification_Panel, lv_color_hex(0xFFFFFF), LV_PART_SCROLLBAR | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Notification_Panel, 0, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
@@ -133,8 +133,6 @@ lv_img_set_zoom(ui_Do_Not_Disturb_Button_Image,220);
 ui_No_New_Notifications_Label = lv_label_create(ui_Notification_Panel);
 lv_obj_set_width( ui_No_New_Notifications_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_No_New_Notifications_Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_No_New_Notifications_Label, 0 );
-lv_obj_set_y( ui_No_New_Notifications_Label, -25 );
 lv_obj_set_align( ui_No_New_Notifications_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_No_New_Notifications_Label,"No New Notifications");
 lv_obj_add_flag( ui_No_New_Notifications_Label, LV_OBJ_FLAG_IGNORE_LAYOUT );   /// Flags

@@ -12788,7 +12788,7 @@
                     "strtype": "OBJECT/Position",
                     "intarray": [
                       0,
-                      -25
+                      0
                     ],
                     "InheritedType": 7
                   },
@@ -13352,7 +13352,7 @@
                           0,
                           0,
                           0,
-                          0
+                          50
                         ],
                         "InheritedType": 7
                       }
@@ -83226,7 +83226,6 @@
                   },
                   {
                     "nid": -550582850,
-                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -83263,7 +83262,7 @@
                   {
                     "nid": -3785604,
                     "strtype": "OBJECT/Adv_hittest",
-                    "strval": "False",
+                    "strval": "True",
                     "InheritedType": 2
                   },
                   {
@@ -84174,7 +84173,6 @@
                   },
                   {
                     "nid": 1674773467,
-                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -84211,7 +84209,7 @@
                   {
                     "nid": -282603388,
                     "strtype": "OBJECT/Adv_hittest",
-                    "strval": "False",
+                    "strval": "True",
                     "InheritedType": 2
                   },
                   {
@@ -85124,7 +85122,6 @@
                   },
                   {
                     "nid": -1022285198,
-                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -85161,7 +85158,7 @@
                   {
                     "nid": -1148775509,
                     "strtype": "OBJECT/Adv_hittest",
-                    "strval": "False",
+                    "strval": "True",
                     "InheritedType": 2
                   },
                   {
@@ -85739,8 +85736,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID42214241-781382S5122199",
@@ -85804,7 +85800,6 @@
               },
               {
                 "nid": 1993434401,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -85817,7 +85812,7 @@
               {
                 "nid": 2109001266,
                 "strtype": "OBJECT/Clickable",
-                "strval": "True",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -117762,7 +117757,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "/Users/gj0987888/Documents/GitHub/TWatch-2021/src",
     "projectExportFolderPath": "/Users/gj0987888/Documents/GitHub/TWatch-2021",
-    "backup_cnt": 2726,
+    "backup_cnt": 2740,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "CPP_FILE",

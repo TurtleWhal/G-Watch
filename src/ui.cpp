@@ -343,6 +343,8 @@ void setup()
 
   InitUserSettings();
 
+  InitNotifications();
+
   ApplyTheme(nullptr);
 
   hw_timer_t *timer = NULL;

@@ -12,6 +12,7 @@ extern "C"
     const void *img;
   } Notification;
 
+  void InitNotifications();
   void ShowNotification(String, String, String, int);
   void PushNotification(int);
   void PopNotification(int);

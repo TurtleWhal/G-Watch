@@ -17,7 +17,7 @@ extern TWatchClass *twatch;
 ushort Steps;
 extern ClockInfo info;
 
-lv_coord_t SineArray[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+lv_coord_t StepArray[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 void StepHandle()
 {
@@ -87,11 +87,12 @@ void BTSendSteps()
   laststep = info.health.steps;
   serializeJson(actinfo, buffer);
   BTsend(buffer);
-  SineArray[24] = info.health.steps;
+  StepArray[24] = info.health.steps;
 }
 
 void InitStepsScreen(lv_event_t *e)
 {
+  Storage.getBytes("StepArray", &StepArray, sizeof(StepArray));
   ushort TempGoal = Storage.getUShort("StepGoal");
 
   lv_label_set_text_fmt(ui_Steps_Info, "Steps: %i\nGoal: %i", info.health.steps, TempGoal);
@@ -115,15 +116,17 @@ void ResetCounter(lv_event_t *e)
 
 void WriteStepGraph()
 {
-  lv_chart_set_ext_y_array(ui_Steps_Chart, lv_chart_get_series_next(ui_Steps_Chart, NULL), SineArray);
+  lv_chart_set_ext_y_array(ui_Steps_Chart, lv_chart_get_series_next(ui_Steps_Chart, NULL), StepArray);
 }
 
 void AdvanceStepArray()
 {
-  SineArray[24] = info.health.steps;
+  StepArray[24] = info.health.steps;
   for (int i = 0; i < 24; i++)
   {
-    SineArray[i] = SineArray[i + 1];
+    StepArray[i] = StepArray[i + 1];
   }
-  SineArray[24] = info.health.steps;
+  StepArray[24] = info.health.steps;
+
+  Storage.putBytes("StepArray", &StepArray, sizeof(StepArray));
 }

@@ -24,6 +24,9 @@ LV_IMG_DECLARE(ui_img_gmail_icon_png);
 LV_IMG_DECLARE(ui_img_steps_large_png);   // assets\Steps Large.png
 LV_IMG_DECLARE(ui_img_messages_icon_png); // assets\Messages Icon.png
 
+void StoreNotifications();
+void PullNotifications();
+
 Notification NotificationList[11];
 lv_obj_t *NotificationComp[10];
 
@@ -39,6 +42,11 @@ extern Preferences Storage;
 int TempID;
 
 lv_obj_t *NotifPopup;
+
+void InitNotifications()
+{
+  PullNotifications();
+}
 
 void ShowNotification(String Title, String Text, String Source, int id)
 {
@@ -326,10 +334,9 @@ void PushNotification(int index)
     }
     Log.verboseln("Imma DrawNotifications and probably die");
     DrawNotifications(nullptr);
-
-    // DrawNotifications(nullptr);
   }
 
+  StoreNotifications();
   Log.verboseln("Pushed Notification with id %i", index);
 }
 
@@ -352,6 +359,8 @@ void PopNotification(int index)
   // NotificationCount--;
   // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", --NotificationCount);
   info.notification.count = --NotificationCount;
+
+  StoreNotifications();
 }
 
 void NotificationHandle()
@@ -388,4 +397,27 @@ void AddFakeNotifications()
     NotificationList[10].Source = temp;
     PushNotification(1);
   }
+}
+
+void StoreNotifications()
+{
+  Serial.println("Storing Notifications");
+  Storage.putBytes("Notifications", &NotificationList, sizeof(NotificationList));
+  Storage.putInt("NotifCount", NotificationCount);
+}
+
+void PullNotifications()
+{
+  Serial.println("Pulling Notifications");
+  NotificationCount = Storage.getInt("NotifCount");
+  info.notification.count = NotificationCount;
+  
+  if (NotificationCount)
+    Storage.getBytes("Notifications", &NotificationList, sizeof(NotificationList));
+
+  Serial.println(NotificationCount);
+  Serial.println(NotificationList[0].Title);
+  Serial.println(NotificationList[0].Text);
+  Serial.println(NotificationList[0].Source);
+  Serial.println(NotificationList[0].id);
 }
