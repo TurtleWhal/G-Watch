@@ -145,7 +145,7 @@ void Powerhandle()
       UpdatePower(true);
       info.flag.refresh = 1;
 
-      if (millis() > 2000)
+      if (millis() > 4000)
       {
         twatch->motor_shake(1, 30);
         Wakeup("Plugged In");
@@ -258,12 +258,14 @@ int GetSleepTimer()
 
 void BTsendpower()
 {
-  String buffer;
+  /*String buffer;
   StaticJsonDocument<200> batinfo;
   batinfo["t"] = "status";
   batinfo["bat"] = twatch->power_get_percent();
   // batinfo["volt"] = (float)twatch->power_get_volt()/1000;
   batinfo["chg"] = info.battery.ischarging ? 1 : 0;
   serializeJson(batinfo, buffer);
-  BTsend(buffer);
+  BTsend(buffer);*/
+
+  BTsendf("{t:\"status\", bat:%i, chg:%i, volt:%f}", twatch->power_get_percent(), info.battery.ischarging ? 1 : 0, twatch->power_get_volt() / 1000);
 }

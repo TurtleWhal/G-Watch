@@ -217,7 +217,7 @@ void DeleteNotification(lv_event_t *e)
     PopNotification(index + 1);
     lv_obj_del_delayed(lv_event_get_target(e), 350);
 
-    BTsendf("{t:\"notify\", id:%i, n:\"DISMISS\"}",
+    BTsendf("{t:\"notify\", id:\"%i\", n:\"DISMISS\"}",
             NotificationList[(int)lv_obj_get_user_data(lv_event_get_target(e))].id);
 
     if (!NotificationCount)
@@ -228,7 +228,7 @@ void DeleteNotification(lv_event_t *e)
     notificationshowing = 0;
     // NotificationHide_Animation(NOTIFPOPUP_MAIN, 300);
     Serial.println("Notification Dismiss");
-    BTsendf("{t:\"notify\", id:%i, n:\"DISMISS\"}", NotificationList[10].id);
+    BTsendf("{t:\"notify\", id:\"%i\", n:\"DISMISS\"}", NotificationList[10].id);
   }
 }
 
@@ -272,8 +272,8 @@ void NotificationExpand(lv_event_t *e)
 
   int id = NotificationList[index].id;
 
-  BTsendf("{t:\"notify\", id:%i, n:\"OPEN\"}", id);
-  // Serial.println(id);
+  //BTsendf("{t:\"notify\", id:\"%i\", n:\"OPEN\"}", id);
+  BTsendf("{t:\"notify\", n:\"REPLY\", msg:\"G-Watch\", id:\"%i\"}", id);
 
   ui_Notification_Expand_screen_init();
 

@@ -277,7 +277,7 @@ void ParseGB(char *Message)
   }
   else if (strcmp(NotifType, "is_gps_active") == 0)
   {
-    BTsend("{\"t\":\"gps_power\",\"status\":false}");
+    BTsend("{t:\"gps_power\",status:false}");
   }
   else if (strcmp(NotifType, "weather") == 0)
   {

@@ -43,6 +43,7 @@ lv_obj_set_height( ui_Notification_Expand_Title, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( ui_Notification_Expand_Title, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Notification_Expand_Title,"Eden Jordan - Gmail calendar event\n");
 lv_obj_set_style_text_align(ui_Notification_Expand_Title, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Notification_Expand_Title, &ui_font_Music_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Notification_Expand_Text_Divider = lv_obj_create(ui_Notification_Expand_Text_Box);
 lv_obj_set_height( ui_Notification_Expand_Text_Divider, 10);
@@ -58,10 +59,11 @@ lv_obj_set_style_pad_bottom(ui_Notification_Expand_Text_Divider, 10, LV_PART_MAI
 ui_Notification_Expand_Text = lv_label_create(ui_Notification_Expand_Text_Box);
 lv_obj_set_width( ui_Notification_Expand_Text, lv_pct(100));
 lv_obj_set_height( ui_Notification_Expand_Text, LV_SIZE_CONTENT);   /// 100
-lv_label_set_text(ui_Notification_Expand_Text,"New event at poasdjfhopaisdfj wjhrjlj hforuwhaf uhasoidfhoai wrojfao a jfhjiHA SDFUHAIA FIJEALJ aeuwhfai rjifna ariufah arfarfnarf narinva\n\nstill me,\neden");
+lv_label_set_text(ui_Notification_Expand_Text,"\"Writings not that easy, but Grammarly can help. This sentence is grammatically correct but its wordy and hard to read, it undermines the writer’s message and the word choice is bland. Grammarly’s cutting edge technology helps you craft compelling understandable that makes an impact on your reader. Much better.”");
 lv_obj_add_flag( ui_Notification_Expand_Text, LV_OBJ_FLAG_CLICKABLE );   /// Flags
 lv_obj_clear_flag( ui_Notification_Expand_Text, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_text_align(ui_Notification_Expand_Text, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Notification_Expand_Text, &ui_font_Music_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Notification_Expand_Image_Panel = lv_obj_create(ui_Notification_Expand);
 lv_obj_set_width( ui_Notification_Expand_Image_Panel, 40);

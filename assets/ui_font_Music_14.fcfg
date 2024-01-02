@@ -1,16 +1,16 @@
 {
   "codename": "Music_14",
-  "ttf_path": "\\assets\\ZenMaruGothic-Medium.ttf",
-  "bin_path": "\\assets\\ui_font_Music_14.bin",
-  "c_path": "\\assets\\ui_font_Music_14.c",
-  "cfg_path": "\\assets\\ui_font_Music_14.fcfg",
+  "ttf_path": "/assets/ZenMaruGothic-Medium.ttf",
+  "bin_path": "/assets/ui_font_Music_14.bin",
+  "c_path": "/assets/ui_font_Music_14.c",
+  "cfg_path": "/assets/ui_font_Music_14.fcfg",
   "size": 16,
   "bpp": 8,
-  "letters": 0,
+  "letters": 3,
   "ranges": [
-    "0x20-0x7f"
+    "0x20-0xff"
   ],
-  "symbols": "♪⋅∘•",
+  "symbols": "♪⋅∘•’”",
   "customparams": "--no-compress --no-prefilter",
   "uploaded": false
 }

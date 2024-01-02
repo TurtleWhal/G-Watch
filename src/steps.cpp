@@ -79,7 +79,7 @@ void StepHandle()
 void BTSendSteps()
 {
   static int laststep = info.health.steps;
-  String buffer;
+  /*String buffer;
   // t:"act", hrm:int, stp:int, time:int
   StaticJsonDocument<200> actinfo;
   actinfo["t"] = "act";
@@ -87,7 +87,9 @@ void BTSendSteps()
   laststep = info.health.steps;
   serializeJson(actinfo, buffer);
   BTsend(buffer);
-  StepArray[24] = info.health.steps;
+  StepArray[24] = info.health.steps;*/
+
+  BTsendf("{t:\"act\", stp:%i}", info.health.steps - laststep);
 }
 
 void InitStepsScreen(lv_event_t *e)
