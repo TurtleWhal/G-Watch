@@ -222,7 +222,6 @@ void DeleteNotification(lv_event_t *e)
   else
   {
     notificationshowing = 0;
-    // NotificationHide_Animation(NOTIFPOPUP_MAIN, 300);
     Serial.println("Notification Dismiss");
     BTsendf("{t:\"notify\", id:\"%i\", n:\"DISMISS\"}", NotificationList[10].id);
   }
@@ -259,7 +258,7 @@ void NotificationExpand(lv_event_t *e)
   if (index == NULL)
     index = 10;
 
-  int SelectedID = NotificationList[index].id;
+  SelectedID = NotificationList[index].id;
 
   ui_Notification_Expand_screen_init();
 
@@ -269,27 +268,23 @@ void NotificationExpand(lv_event_t *e)
                         lv_label_get_text(
                             ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE)));
 
-  lv_label_set_text(ui_Notification_Expand_Text,
-                    lv_label_get_text(
-                        ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT)));
+  lv_label_set_text_fmt(ui_Notification_Expand_Text, "%s\n",
+                        lv_label_get_text(
+                            ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT)));
 
   lv_img_set_src(ui_Notification_Expand_Image,
                  lv_img_get_src(
                      ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE)));
 
-  String time = String(info.time.hour12) + ":" + String(info.time.minute) + " ";
-  if (info.time.hour > 12)
-    time += "pm";
-  else
-    time += "am";
-
-  lv_label_set_text_fmt(ui_Notification_Expand_Source, "%s\n%s",
+  lv_label_set_text_fmt(ui_Notification_Expand_Source, "%s\n%i:%02i %s",
                         lv_label_get_text(
                             ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_SOURCE)),
-                        time);
+                        info.time.hour12, info.time.minute, (info.time.hour > 12) ? "pm" : "am");
 
   NotificationHide(false);
-  _ui_screen_change(&ui_Notification_Expand, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, nullptr);
+  _ui_screen_change(&ui_Notification_Expand, LV_SCR_LOAD_ANIM_FADE_IN, 150, 0, nullptr);
+
+  Log.verboseln("Expanded Notification With ID: %i", SelectedID);
 }
 
 void NotificationReply(lv_event_t *e)
@@ -301,6 +296,11 @@ void NotificationReply(lv_event_t *e)
     text = lv_textarea_get_text(ui_Notification_Reply_Textarea);
 
   BTsendf("{t:\"notify\", n:\"REPLY\", msg:\"%s\", id:\"%i\"}", text, SelectedID);
+  BTsend("");
+
+  Log.verboseln("Replied to Notification With ID: %i and Payload: %s", SelectedID, text);
+
+  _ui_screen_change(&ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 150, &ui_Notifications_screen_init);
 }
 
 void PushNotification(int index)

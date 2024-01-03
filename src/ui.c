@@ -105,6 +105,7 @@ lv_obj_t *ui_Notification_Expand_Reply_Label3;
 lv_obj_t *ui_Notification_Expand_Image_Panel;
 lv_obj_t *ui_Notification_Expand_Image;
 lv_obj_t *ui_Notification_Reply_Panel;
+void ui_event_Notification_Reply_Textarea( lv_event_t * e);
 lv_obj_t *ui_Notification_Reply_Textarea;
 lv_obj_t *ui_Notification_Reply_Keyboard;
 void ui_event_Notification_Reply_Send_Button( lv_event_t * e);
@@ -1135,6 +1136,12 @@ void ui_event_Notification_Expand_Reply_Label3( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       NotificationReply( e );
+}
+}
+void ui_event_Notification_Reply_Textarea( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CANCEL) {
+      keyboarddown_Animation(ui_Notification_Reply_Panel, 0);
 }
 }
 void ui_event_Notification_Reply_Send_Button( lv_event_t * e) {

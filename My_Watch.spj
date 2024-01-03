@@ -17003,6 +17003,82 @@
                     "strtype": "TEXTAREA/Max_text_length",
                     "integer": 7,
                     "InheritedType": 6
+                  },
+                  {
+                    "disabled": false,
+                    "nid": -1140422352,
+                    "strtype": "TEXTAREA/EventHandler",
+                    "strval": "CANCEL",
+                    "childs": [
+                      {
+                        "nid": 1024675417,
+                        "strtype": "_custom/name",
+                        "strval": "Event39",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 884588099,
+                        "strtype": "_custom/condition_C",
+                        "strval": "",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -311622166,
+                        "strtype": "_custom/condition_P",
+                        "strval": "",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1570010504,
+                        "strtype": "_custom/action",
+                        "strval": "PLAY ANIMATION",
+                        "childs": [
+                          {
+                            "nid": 880155729,
+                            "strtype": "PLAY ANIMATION/Name",
+                            "strval": "PLAY ANIMATION",
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": -1036150495,
+                            "strtype": "PLAY ANIMATION/FunctionName",
+                            "strval": "keyboarddown_Animation",
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1332930462,
+                            "strtype": "PLAY ANIMATION/Animation",
+                            "strval": "keyboard down",
+                            "InheritedType": 8
+                          },
+                          {
+                            "nid": -1009141934,
+                            "strtype": "PLAY ANIMATION/Target",
+                            "strval": "GUID82656756-149522S51432",
+                            "InheritedType": 9
+                          },
+                          {
+                            "nid": 1325261209,
+                            "strtype": "PLAY ANIMATION/Delay",
+                            "InheritedType": 6
+                          },
+                          {
+                            "nid": -1806756444,
+                            "strtype": "PLAY ANIMATION/Call",
+                            "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": -1135634158,
+                            "strtype": "PLAY ANIMATION/CallC",
+                            "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
+                            "InheritedType": 10
+                          }
+                        ],
+                        "InheritedType": 10
+                      }
+                    ],
+                    "InheritedType": 4
                   }
                 ],
                 "saved_objtypeKey": "TEXTAREA"
@@ -119811,7 +119887,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "/Users/gj0987888/Documents/GitHub/TWatch-2021/src",
     "projectExportFolderPath": "/Users/gj0987888/Documents/GitHub/TWatch-2021",
-    "backup_cnt": 2792,
+    "backup_cnt": 2799,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "CPP_FILE",

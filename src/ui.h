@@ -118,6 +118,7 @@ extern lv_obj_t *ui_Notification_Expand_Reply_Label3;
 extern lv_obj_t *ui_Notification_Expand_Image_Panel;
 extern lv_obj_t *ui_Notification_Expand_Image;
 extern lv_obj_t *ui_Notification_Reply_Panel;
+void ui_event_Notification_Reply_Textarea( lv_event_t * e);
 extern lv_obj_t *ui_Notification_Reply_Textarea;
 extern lv_obj_t *ui_Notification_Reply_Keyboard;
 void ui_event_Notification_Reply_Send_Button( lv_event_t * e);
