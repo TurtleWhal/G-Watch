@@ -263,6 +263,8 @@ void NotificationExpand(lv_event_t *e)
 
   ui_Notification_Expand_screen_init();
 
+  SetKeyboardRound(ui_Notification_Reply_Keyboard);
+
   lv_label_set_text_fmt(ui_Notification_Expand_Title, "%s\n",
                         lv_label_get_text(
                             ui_comp_get_child(parent, UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE)));

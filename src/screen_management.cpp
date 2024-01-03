@@ -141,6 +141,46 @@ void LoadCalc(lv_event_t *e)
     lv_keyboard_set_mode(ui_Calculator_Keyboard, LV_KEYBOARD_MODE_USER_1);
 }
 
+void SetKeyboardRound(lv_obj_t *keyboard)
+{
+    /*Set the relative width of the buttons and other controls*/
+    static const lv_btnmatrix_ctrl_t kb_ctrl[] = {LV_BTNMATRIX_CTRL_CHECKED | 1, LV_BTNMATRIX_CTRL_CHECKED | 1, LV_BTNMATRIX_CTRL_CHECKED | 2, LV_BTNMATRIX_CTRL_CHECKED | 2, LV_BTNMATRIX_CTRL_CHECKED | 2,
+                                                  1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                                  LV_BTNMATRIX_CTRL_HIDDEN | 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, LV_BTNMATRIX_CTRL_HIDDEN | 1,
+                                                  LV_BTNMATRIX_CTRL_HIDDEN | 3, 2, 2, 2, 2, 2, 2, 2, LV_BTNMATRIX_CTRL_HIDDEN | 3,
+                                                  LV_BTNMATRIX_CTRL_HIDDEN | 1, 2, LV_BTNMATRIX_CTRL_HIDDEN | 1};
+
+    /*Create an Calculator keyboard map*/
+    static const char *kb_map_lower[] = {"ABC", "1#", LV_SYMBOL_CLOSE, LV_SYMBOL_NEW_LINE, LV_SYMBOL_BACKSPACE, "\n",
+                                   "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "\n",
+                                   " ", "a", "s", "d", "f", "g", "h", "j", "k", "l", " ", "\n",
+                                   " ", "z", "x", "c", "v", "b", "n", "m", " ", "\n",
+                                   " ", "", " ", NULL};
+    lv_keyboard_set_map(keyboard, LV_KEYBOARD_MODE_TEXT_LOWER, kb_map_lower, kb_ctrl);
+
+    /*Create an Calculator keyboard map*/
+    static const char *kb_map_upper[] = {"abc", "1#", LV_SYMBOL_CLOSE, LV_SYMBOL_NEW_LINE, LV_SYMBOL_BACKSPACE, "\n",
+                                   "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "\n",
+                                   " ", "A", "S", "D", "F", "G", "H", "J", "K", "L", " ", "\n",
+                                   " ", "Z", "X", "C", "V", "B", "N", "M", " ", "\n",
+                                   " ", " ", " ", NULL};
+    lv_keyboard_set_map(keyboard, LV_KEYBOARD_MODE_TEXT_UPPER, kb_map_upper, kb_ctrl);
+
+    /*Create an Calculator keyboard map*/
+    static const char *kb_map_special[] = {"abc", "ABC", LV_SYMBOL_CLOSE, LV_SYMBOL_NEW_LINE, LV_SYMBOL_BACKSPACE, "\n",
+                                   "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "\n",
+                                   " ", "+", "-", "*", "/", "=", ":", ";", "\"", "'", " ", "\n",
+                                   " ", "#", "$", "%", "!", "?", "(", ")", " ", "\n",
+                                   " ", " ", " ", NULL};
+    lv_keyboard_set_map(keyboard, LV_KEYBOARD_MODE_SPECIAL, kb_map_special, kb_ctrl);
+
+    //lv_keyboard_set_mode(keyboard, LV_KEYBOARD_MODE_TEXT_UPPER);
+    lv_keyboard_set_popovers(keyboard, true);
+
+    lv_obj_set_style_bg_color(keyboard, info.theme.color, LV_PART_ITEMS | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_color(keyboard, lv_color_change_lightness(info.theme.color, 150), LV_PART_ITEMS | LV_STATE_PRESSED);
+}
+
 void LoadSettings(lv_event_t *e)
 {
     char StepGoalChar[6];

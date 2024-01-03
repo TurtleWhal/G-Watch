@@ -17047,7 +17047,7 @@
                     "strtype": "OBJECT/Position",
                     "intarray": [
                       0,
-                      10
+                      50
                     ],
                     "InheritedType": 7
                   },
@@ -17618,7 +17618,7 @@
                     "strtype": "OBJECT/Position",
                     "intarray": [
                       0,
-                      90
+                      -30
                     ],
                     "InheritedType": 7
                   },
@@ -119811,7 +119811,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "/Users/gj0987888/Documents/GitHub/TWatch-2021/src",
     "projectExportFolderPath": "/Users/gj0987888/Documents/GitHub/TWatch-2021",
-    "backup_cnt": 2775,
+    "backup_cnt": 2792,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "CPP_FILE",

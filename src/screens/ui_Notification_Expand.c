@@ -180,14 +180,14 @@ lv_keyboard_set_mode(ui_Notification_Reply_Keyboard,LV_KEYBOARD_MODE_TEXT_UPPER)
 lv_obj_set_width( ui_Notification_Reply_Keyboard, 240);
 lv_obj_set_height( ui_Notification_Reply_Keyboard, 120);
 lv_obj_set_x( ui_Notification_Reply_Keyboard, 0 );
-lv_obj_set_y( ui_Notification_Reply_Keyboard, 10 );
+lv_obj_set_y( ui_Notification_Reply_Keyboard, 50 );
 lv_obj_set_align( ui_Notification_Reply_Keyboard, LV_ALIGN_CENTER );
 
 ui_Notification_Reply_Send_Button = lv_btn_create(ui_Notification_Reply_Panel);
 lv_obj_set_width( ui_Notification_Reply_Send_Button, 100);
 lv_obj_set_height( ui_Notification_Reply_Send_Button, 30);
 lv_obj_set_x( ui_Notification_Reply_Send_Button, 0 );
-lv_obj_set_y( ui_Notification_Reply_Send_Button, 90 );
+lv_obj_set_y( ui_Notification_Reply_Send_Button, -30 );
 lv_obj_set_align( ui_Notification_Reply_Send_Button, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Notification_Reply_Send_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_Notification_Reply_Send_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags

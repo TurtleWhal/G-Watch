@@ -162,6 +162,8 @@ extern "C"
     void InitClockScreen();
     void DispLoadClockScreen();
 
+    void SetKeyboardRound(lv_obj_t *keyboard);
+
 #ifdef __cplusplus
 } /*extern "C"*/
 #endif
