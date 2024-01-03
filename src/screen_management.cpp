@@ -152,29 +152,29 @@ void SetKeyboardRound(lv_obj_t *keyboard)
 
     /*Create an Calculator keyboard map*/
     static const char *kb_map_lower[] = {"ABC", "1#", LV_SYMBOL_CLOSE, LV_SYMBOL_NEW_LINE, LV_SYMBOL_BACKSPACE, "\n",
-                                   "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "\n",
-                                   " ", "a", "s", "d", "f", "g", "h", "j", "k", "l", " ", "\n",
-                                   " ", "z", "x", "c", "v", "b", "n", "m", " ", "\n",
-                                   " ", "", " ", NULL};
+                                         "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "\n",
+                                         " ", "a", "s", "d", "f", "g", "h", "j", "k", "l", " ", "\n",
+                                         " ", "z", "x", "c", "v", "b", "n", "m", " ", "\n",
+                                         " ", "", " ", NULL};
     lv_keyboard_set_map(keyboard, LV_KEYBOARD_MODE_TEXT_LOWER, kb_map_lower, kb_ctrl);
 
     /*Create an Calculator keyboard map*/
     static const char *kb_map_upper[] = {"abc", "1#", LV_SYMBOL_CLOSE, LV_SYMBOL_NEW_LINE, LV_SYMBOL_BACKSPACE, "\n",
-                                   "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "\n",
-                                   " ", "A", "S", "D", "F", "G", "H", "J", "K", "L", " ", "\n",
-                                   " ", "Z", "X", "C", "V", "B", "N", "M", " ", "\n",
-                                   " ", " ", " ", NULL};
+                                         "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "\n",
+                                         " ", "A", "S", "D", "F", "G", "H", "J", "K", "L", " ", "\n",
+                                         " ", "Z", "X", "C", "V", "B", "N", "M", " ", "\n",
+                                         " ", " ", " ", NULL};
     lv_keyboard_set_map(keyboard, LV_KEYBOARD_MODE_TEXT_UPPER, kb_map_upper, kb_ctrl);
 
     /*Create an Calculator keyboard map*/
     static const char *kb_map_special[] = {"abc", "ABC", LV_SYMBOL_CLOSE, LV_SYMBOL_NEW_LINE, LV_SYMBOL_BACKSPACE, "\n",
-                                   "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "\n",
-                                   " ", "+", "-", "*", "/", "=", ":", ";", "\"", "'", " ", "\n",
-                                   " ", "#", "$", "%", "!", "?", "(", ")", " ", "\n",
-                                   " ", " ", " ", NULL};
+                                           "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "\n",
+                                           " ", "+", "-", "*", "/", "=", ":", ";", "\"", "'", " ", "\n",
+                                           " ", "#", "$", "%", "!", "?", "(", ")", " ", "\n",
+                                           " ", " ", " ", NULL};
     lv_keyboard_set_map(keyboard, LV_KEYBOARD_MODE_SPECIAL, kb_map_special, kb_ctrl);
 
-    //lv_keyboard_set_mode(keyboard, LV_KEYBOARD_MODE_TEXT_UPPER);
+    // lv_keyboard_set_mode(keyboard, LV_KEYBOARD_MODE_TEXT_UPPER);
     lv_keyboard_set_popovers(keyboard, true);
 
     lv_obj_set_style_bg_color(keyboard, info.theme.color, LV_PART_ITEMS | LV_STATE_CHECKED);
