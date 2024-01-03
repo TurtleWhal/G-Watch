@@ -63,11 +63,9 @@ void ShowNotification(String Title, String Text, String Source, int id)
   lv_obj_set_y(NOTIFPOPUP_MAIN, -160);
 
   lv_obj_set_height(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN), 52);
-  // lv_obj_set_height(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_WIDGET), 52);
 
   lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE), Title.c_str());
   lv_label_set_long_mode(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE), LV_LABEL_LONG_CLIP);
-  // lv_label_set_long_mode(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET_VISIBLE_NOTIFICATION_TITLE), LV_LABEL_LONG_DOT);
 
   lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT), Text.c_str());
   lv_label_set_text(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_SOURCE), Source.c_str());
@@ -76,20 +74,10 @@ void ShowNotification(String Title, String Text, String Source, int id)
   if (Source == "Messages")
   {
     lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_messages_icon_png);
-
-    // char msg[120];
-    // sprintf(msg, "{t:\"notify\", id:%i, n:\"REPLY\", msg:\"Garrett's Watch Is Replying To You!\"}", id);
-    // Serial.println(msg);
-    // BTsend(String(msg));
   }
   else if (Source == "SMS")
   {
     lv_img_set_src(NOTIFPOPUP_IMAGE, &ui_img_sms_icon_png);
-
-    // char msg[120];
-    // sprintf(msg, "{t:\"notify\", id:%i, n:\"REPLY\", msg:\"Garrett's Watch Is Replying To You!\"}", id);
-    // Serial.println(msg);
-    // BTsend(String(msg));
   }
   else if (Source == "Gadgetbridge")
   {
@@ -128,32 +116,17 @@ void ShowNotification(String Title, String Text, String Source, int id)
   info.notification.lasttext = NotificationList[10].Text;
   info.notification.lastimg = NotificationList[10].img;
 
-  NotificationShow_Animation(NOTIFPOPUP_MAIN, 0);
+    NotificationShow_Animation(NOTIFPOPUP_MAIN, 0);
 
   notificationtime = millis();
   notificationshowing = 1;
 
   if (!Donotdisturb)
     twatch->motor_shake(2, 30);
-
-  /*if (lv_scr_act() == ui_Notifications)
-  {
-    // lv_obj_clean(ui_Notification_Panel);
-    // DrawNotifications(nullptr);
-    ui_Notifications_screen_init();
-  }*/
 }
 
 void DrawNotifications(lv_event_t *e)
 {
-  /*if (lv_scr_act() != ui_Notifications)
-  {
-    // ui_Notifications_screen_init();
-    //_ui_screen_change(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0);
-    // lv_scr_load_anim(ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, 0);
-    //_ui_screen_change( &ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Notifications_screen_init);
-  }*/
-
   lv_slider_set_value(ui_Brightness_Slider, GetUserBrightness(), LV_ANIM_OFF);
 
   if (!info.bt.ison)
@@ -176,6 +149,7 @@ void DrawNotifications(lv_event_t *e)
       lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT), NotificationList[i].Text.c_str());
       lv_label_set_text(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_SOURCE), NotificationList[i].Source.c_str());
       lv_obj_set_style_bg_color(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL), GetTheme(), LV_PART_MAIN);
+      // lv_obj_set_style_max_height(ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN), 100, LV_PART_MAIN);
       lv_img_set_src(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE), NotificationList[i].img);
       lv_obj_set_user_data(NotificationComp[i], (void *)i);
     }
@@ -314,26 +288,6 @@ void PushNotification(int index)
   NotificationList[i] = NotificationList[10];
   if (NotificationCount++ < 10)
     info.notification.count = NotificationCount;
-  // lv_label_set_text_fmt(ui_Notification_Amount_Number, "%i", NotificationCount);
-  // NotificationCount++;
-
-  if (lv_scr_act() == ui_Notifications)
-  {
-    //_ui_screen_change(&ui_Notifications, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_Notifications_screen_init);
-    for (int i = 2; i <= lv_obj_get_child_cnt(ui_Notification_Panel); i++)
-    {
-      // lv_obj_del(lv_obj_get_child(ui_Notification_Panel, i));
-      Log.verboseln("I have %i Childeren", lv_obj_get_child_cnt(ui_Notification_Panel));
-      lv_obj_t *child = lv_obj_get_child(ui_Notification_Panel, i);
-      lv_obj_del(child);
-      Log.verboseln("I just MurDeReD the %ith Child", i);
-      // szlv_obj_set_style_bg_color(child, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-      // if (lv_obj_get_user_data(child))
-      // Serial.println(lv_obj_get_child_cnt(ui_Notification_Panel));
-    }
-    Log.verboseln("Imma DrawNotifications and probably die");
-    DrawNotifications(nullptr);
-  }
 
   StoreNotifications();
   Log.verboseln("Pushed Notification with id %i", index);
