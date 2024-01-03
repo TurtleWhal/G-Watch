@@ -14,6 +14,8 @@
 #define NOTIFPOPUP_IMAGE ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE)
 #define NOTIFPOPUP_MAIN ui_comp_get_child(NotifPopup, UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET)
 
+//#define STORE_NOTIFICATIONS
+
 extern ClockInfo info;
 
 LV_IMG_DECLARE(ui_img_discord_icon_png);
@@ -40,6 +42,7 @@ extern TWatchClass *twatch;
 extern Preferences Storage;
 
 int TempID;
+int SelectedID;
 
 lv_obj_t *NotifPopup;
 
@@ -175,13 +178,6 @@ void DrawNotifications(lv_event_t *e)
       lv_obj_set_style_bg_color(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL), GetTheme(), LV_PART_MAIN);
       lv_img_set_src(ui_comp_get_child(NotificationComp[i], UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE), NotificationList[i].img);
       lv_obj_set_user_data(NotificationComp[i], (void *)i);
-
-      NotificationList[10].Title = lv_label_get_text(ui_Notification_Title);
-      NotificationList[10].Text = lv_label_get_text(ui_Notification_Text);
-      NotificationList[10].Source = lv_label_get_text(ui_Notification_Source);
-      NotificationList[10].id = TempID;
-      NotificationList[10].img = lv_img_get_src(ui_Notification_Image);
-      // PushNotification(1);
     }
   }
   else
@@ -232,13 +228,6 @@ void DeleteNotification(lv_event_t *e)
   }
 }
 
-void NotificationDismiss(lv_event_t *e)
-{
-  notificationshowing = 0;
-  NotificationHide_Animation(ui_Notification_Popup, 300);
-  Serial.println("Notification Dismiss");
-}
-
 void NotificationHide(bool anim)
 {
   if (!notificationshowing)
@@ -270,10 +259,7 @@ void NotificationExpand(lv_event_t *e)
   if (index == NULL)
     index = 10;
 
-  int id = NotificationList[index].id;
-
-  //BTsendf("{t:\"notify\", id:\"%i\", n:\"OPEN\"}", id);
-  BTsendf("{t:\"notify\", n:\"REPLY\", msg:\"G-Watch\", id:\"%i\"}", id);
+  int SelectedID = NotificationList[index].id;
 
   ui_Notification_Expand_screen_init();
 
@@ -302,6 +288,17 @@ void NotificationExpand(lv_event_t *e)
 
   NotificationHide(false);
   _ui_screen_change(&ui_Notification_Expand, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, nullptr);
+}
+
+void NotificationReply(lv_event_t *e)
+{
+  lv_obj_t *target = lv_event_get_target(e);
+  String text = lv_label_get_text(lv_obj_get_child(target, 0));
+
+  if (text == "Send")
+    text = lv_textarea_get_text(ui_Notification_Reply_Textarea);
+
+  BTsendf("{t:\"notify\", n:\"REPLY\", msg:\"%s\", id:\"%i\"}", text, SelectedID);
 }
 
 void PushNotification(int index)
@@ -401,17 +398,20 @@ void AddFakeNotifications()
 
 void StoreNotifications()
 {
+#ifdef STORE_NOTIFICATIONS
   Serial.println("Storing Notifications");
   Storage.putBytes("Notifications", &NotificationList, sizeof(NotificationList));
   Storage.putInt("NotifCount", NotificationCount);
+#endif
 }
 
 void PullNotifications()
 {
+#ifdef STORE_NOTIFICATIONS
   Serial.println("Pulling Notifications");
   NotificationCount = Storage.getInt("NotifCount");
   info.notification.count = NotificationCount;
-  
+
   if (NotificationCount)
     Storage.getBytes("Notifications", &NotificationList, sizeof(NotificationList));
 
@@ -420,4 +420,5 @@ void PullNotifications()
   Serial.println(NotificationList[0].Text);
   Serial.println(NotificationList[0].Source);
   Serial.println(NotificationList[0].id);
+#endif
 }

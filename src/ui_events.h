@@ -13,14 +13,12 @@ extern "C" {
 void ClockRight(lv_event_t * e);
 void ClockDown(lv_event_t * e);
 void ApplyTheme(lv_event_t * e);
-void notifslideon(lv_event_t * e);
-void notifslideoff(lv_event_t * e);
-void NotificationDismiss(lv_event_t * e);
 void ScreenBack(lv_event_t * e);
 void DrawNotifications(lv_event_t * e);
 void UpdateBrightness(lv_event_t * e);
 void ToggleBT(lv_event_t * e);
 void ToggleDoNotDisturb(lv_event_t * e);
+void NotificationReply(lv_event_t * e);
 void SetTimerDefault(lv_event_t * e);
 void togglealarm1(lv_event_t * e);
 void togglealarm2(lv_event_t * e);

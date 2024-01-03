@@ -52,16 +52,6 @@ lv_obj_t *ui_Default_Clock_Battery_Percentage;
 lv_obj_t *ui_Default_Clock_Bluetooth_Indicator;
 lv_obj_t *ui_Default_Clock_Notification_Amount_Image;
 lv_obj_t *ui_Default_Clock_Notification_Amount_Number;
-void ui_event_Notification_Popup( lv_event_t * e);
-lv_obj_t *ui_Notification_Popup;
-lv_obj_t *ui_Notification_Timer;
-lv_obj_t *ui_Notification_Source;
-void ui_event_Notification_Popup_Mask( lv_event_t * e);
-lv_obj_t *ui_Notification_Popup_Mask;
-lv_obj_t *ui_Notification_Text;
-lv_obj_t *ui_Notification_Title;
-lv_obj_t *ui_Notification_Image_Panel;
-lv_obj_t *ui_Notification_Image;
 lv_obj_t *ui_Second_Dash_Include;
 lv_obj_t *ui_Second_Dot_Include;
 lv_obj_t *ui_Logo_Arc;
@@ -96,8 +86,30 @@ lv_obj_t *ui_Notification_Expand_Text_Box;
 lv_obj_t *ui_Notification_Expand_Title;
 lv_obj_t *ui_Notification_Expand_Text_Divider;
 lv_obj_t *ui_Notification_Expand_Text;
+void ui_event_Notification_Expand_Reply_Button( lv_event_t * e);
+lv_obj_t *ui_Notification_Expand_Reply_Button;
+lv_obj_t *ui_Notification_Expand_Reply_Label;
+lv_obj_t *ui_Container2;
+lv_obj_t *ui_Notification_Reply_Quick_Reply_Container;
+void ui_event_Notification_Expand_Quick_Reply_1( lv_event_t * e);
+lv_obj_t *ui_Notification_Expand_Quick_Reply_1;
+lv_obj_t *ui_Notification_Expand_Reply_Label1;
+void ui_event_Notification_Expand_Quick_Reply_2( lv_event_t * e);
+lv_obj_t *ui_Notification_Expand_Quick_Reply_2;
+void ui_event_Notification_Expand_Reply_Label2( lv_event_t * e);
+lv_obj_t *ui_Notification_Expand_Reply_Label2;
+void ui_event_Notification_Expand_Quick_Reply_3( lv_event_t * e);
+lv_obj_t *ui_Notification_Expand_Quick_Reply_3;
+void ui_event_Notification_Expand_Reply_Label3( lv_event_t * e);
+lv_obj_t *ui_Notification_Expand_Reply_Label3;
 lv_obj_t *ui_Notification_Expand_Image_Panel;
 lv_obj_t *ui_Notification_Expand_Image;
+lv_obj_t *ui_Notification_Reply_Panel;
+lv_obj_t *ui_Notification_Reply_Textarea;
+lv_obj_t *ui_Notification_Reply_Keyboard;
+void ui_event_Notification_Reply_Send_Button( lv_event_t * e);
+lv_obj_t *ui_Notification_Reply_Send_Button;
+lv_obj_t *ui_Notification_Reply_Send_Label;
 
 
 // SCREEN: ui_Alarms
@@ -584,7 +596,7 @@ lv_anim_init(&PropertyAnimation_0);
 lv_anim_set_time(&PropertyAnimation_0, 150);
 lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
 lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_y );
-lv_anim_set_values(&PropertyAnimation_0, 170, 0 );
+lv_anim_set_values(&PropertyAnimation_0, 200, 0 );
 lv_anim_set_path_cb( &PropertyAnimation_0, lv_anim_path_overshoot);
 lv_anim_set_delay( &PropertyAnimation_0, delay + 0 );
 lv_anim_set_deleted_cb( &PropertyAnimation_0, _ui_anim_callback_free_user_data );
@@ -608,7 +620,7 @@ lv_anim_init(&PropertyAnimation_0);
 lv_anim_set_time(&PropertyAnimation_0, 150);
 lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
 lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_y );
-lv_anim_set_values(&PropertyAnimation_0, 0, 170 );
+lv_anim_set_values(&PropertyAnimation_0, 0, 250 );
 lv_anim_set_path_cb( &PropertyAnimation_0, lv_anim_path_ease_in);
 lv_anim_set_delay( &PropertyAnimation_0, delay + 0 );
 lv_anim_set_deleted_cb( &PropertyAnimation_0, _ui_anim_callback_free_user_data );
@@ -1050,23 +1062,6 @@ if ( event_code == LV_EVENT_SCREEN_LOADED) {
       ApplyTheme( e );
 }
 }
-void ui_event_Notification_Popup( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_PRESSED) {
-      notifslideon( e );
-}
-if ( event_code == LV_EVENT_RELEASED) {
-      notifslideoff( e );
-}
-}
-void ui_event_Notification_Popup_Mask( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
-lv_indev_wait_release(lv_indev_get_act());
-      NotificationDismissRight_Animation(ui_Notification_Popup_Mask, 0);
-      NotificationDismiss( e );
-}
-}
 void ui_event_Notifications( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
@@ -1104,6 +1099,49 @@ if ( event_code == LV_EVENT_SCREEN_LOADED) {
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Notifications, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Notifications_screen_init);
+}
+}
+void ui_event_Notification_Expand_Reply_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      keyboardup_Animation(ui_Notification_Reply_Panel, 0);
+}
+}
+void ui_event_Notification_Expand_Quick_Reply_1( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      NotificationReply( e );
+}
+}
+void ui_event_Notification_Expand_Quick_Reply_2( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      NotificationReply( e );
+}
+}
+void ui_event_Notification_Expand_Reply_Label2( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      NotificationReply( e );
+}
+}
+void ui_event_Notification_Expand_Quick_Reply_3( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      NotificationReply( e );
+}
+}
+void ui_event_Notification_Expand_Reply_Label3( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      NotificationReply( e );
+}
+}
+void ui_event_Notification_Reply_Send_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      NotificationReply( e );
+      keyboarddown_Animation(ui_Notification_Reply_Panel, 0);
 }
 }
 void ui_event_Alarms( lv_event_t * e) {

@@ -418,3 +418,7 @@ def DeleteNotification(event_struct):
 def SetDeafaultDown(event_struct):
     return
 
+
+def NotificationReply(event_struct):
+    return
+

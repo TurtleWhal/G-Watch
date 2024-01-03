@@ -27,7 +27,10 @@
 #include "ArduinoOTA.h"
 #include "hardware/ble/gadgetbridge.h"
 
+#include "mutex"
+
 #include "ArduinoJson.h"
+#include <thread>
 
 const char *ssid = "ThisNetworkIsOWN3D";
 const char *password = "10244096";
@@ -52,10 +55,6 @@ bool Timer0Triggered;
 bool BTTimerTriggered;
 bool StepGraphTriggered;
 
-bool touchingnotif;
-lv_obj_t *notiftouched;
-
-void notifslide(lv_event_t *e);
 void LogoSpin(lv_obj_t *TargetObject);
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -112,51 +111,6 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
   }
 }
 
-void notifslide(lv_event_t *e)
-{
-  if (touchingnotif)
-  {
-    // lv_obj_set_x(lv_event_get_target(e), touch.data.x - (lv_obj_get_width(lv_event_get_target(e)) * 0.65));
-    lv_obj_set_x(notiftouched, touch.data.x - (lv_obj_get_width(notiftouched) * 0.7));
-    if (xaccel >= 40 or xaccel <= -40 or touch.data.x >= 220 or touch.data.x <= 40)
-    {
-      NotificationDismiss(nullptr);
-      notifslideoff(nullptr);
-
-      if (xaccel >= 40 or touch.data.x >= 220)
-        NotificationDismissRight_Animation(notiftouched, 0);
-      else
-        NotificationDismissLeft_Animation(notiftouched, 0);
-    }
-  }
-}
-
-void notifslideon(lv_event_t *e)
-{
-  Serial.println("slideon");
-  touchingnotif = 1;
-  notiftouched = lv_event_get_target(e);
-}
-void notifslideoff(lv_event_t *e)
-{
-  touchingnotif = 0;
-  Serial.println("slideoff");
-  if (NotificationActive())
-    CenterNotif_Animation(notiftouched, 0);
-}
-
-void CenterNotif_Animation(lv_obj_t *TargetObject, int delay)
-{
-  lv_anim_t a;
-  lv_anim_init(&a);
-  lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)lv_obj_set_x);
-  lv_anim_set_var(&a, TargetObject);
-  lv_anim_set_time(&a, 300);
-  lv_anim_set_values(&a, lv_obj_get_x(TargetObject), 0);
-  lv_anim_set_path_cb(&a, lv_anim_path_overshoot);
-  lv_anim_start(&a);
-}
-
 void btn1_click(void *param)
 {
   Log.verboseln("BTN1 Click. Power Percent: %i", twatch->power_get_percent());
@@ -186,8 +140,8 @@ void btn3_click(void *param)
   Serial.println(IsClockScreen());
   if (IsClockScreen())
   {
-    if (NotificationActive())
-      NotificationDismiss(nullptr);
+    // if (NotificationActive())
+    //   NotificationDismiss(nullptr);
   }
   else
     ScreenBack(nullptr);
@@ -414,7 +368,7 @@ void loop()
   if (!IsSleeping()) // If Awake
   {
     lv_timer_handler(); /* let the GUI do its work */
-    // delay(5);
+    // delay(2);
     // delay(lv_timer_handler());
 
     if (IsClockScreen or 1) // Only run this if on the main screen////////////////////////////////////////////////////////////////////////////////////////
