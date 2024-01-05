@@ -1,0 +1,3 @@
+C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build/CMakeFiles/ui.dir
+C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build/CMakeFiles/edit_cache.dir
+C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build/CMakeFiles/rebuild_cache.dir

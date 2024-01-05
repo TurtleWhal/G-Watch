@@ -1,0 +1,452 @@
+[
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\components\\ui_comp_app_button.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\components\\ui_comp_app_button.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/components/ui_comp_app_button.c",
+  "output": "CMakeFiles/ui.dir/components/ui_comp_app_button.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\components\\ui_comp_notification_widget.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\components\\ui_comp_notification_widget.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/components/ui_comp_notification_widget.c",
+  "output": "CMakeFiles/ui.dir/components/ui_comp_notification_widget.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\components\\ui_comp_setting_panel.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\components\\ui_comp_setting_panel.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/components/ui_comp_setting_panel.c",
+  "output": "CMakeFiles/ui.dir/components/ui_comp_setting_panel.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\components\\ui_comp.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\components\\ui_comp.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/components/ui_comp.c",
+  "output": "CMakeFiles/ui.dir/components/ui_comp.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Default_Clock.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Default_Clock.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Default_Clock.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Default_Clock.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Notifications.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Notifications.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Notifications.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Notifications.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Notification_Expand.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Notification_Expand.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Notification_Expand.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Notification_Expand.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Alarms.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Alarms.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Alarms.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Alarms.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Set_Alarm.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Set_Alarm.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Set_Alarm.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Set_Alarm.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Alarm_Going_Off.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Alarm_Going_Off.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Alarm_Going_Off.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Alarm_Going_Off.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Stopwatch.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Stopwatch.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Stopwatch.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Stopwatch.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Timers.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Timers.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Timers.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Timers.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Settings.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Settings.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Settings.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Settings.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Apps.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Apps.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Apps.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Apps.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Calculator.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Calculator.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Calculator.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Calculator.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Compass.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Compass.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Compass.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Compass.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Flashlight.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Flashlight.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Flashlight.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Flashlight.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Music.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Music.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Music.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Music.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Weather.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Weather.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Weather.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Weather.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Health.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Health.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Health.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Health.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Call.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Call.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Call.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Call.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Schedule.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Schedule.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Schedule.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Schedule.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_SkeletonWatchFace.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_SkeletonWatchFace.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_SkeletonWatchFace.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_SkeletonWatchFace.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_SimplisticWatchFace.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_SimplisticWatchFace.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_SimplisticWatchFace.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_SimplisticWatchFace.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\screens\\ui_Blocky_Clock.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\screens\\ui_Blocky_Clock.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/screens/ui_Blocky_Clock.c",
+  "output": "CMakeFiles/ui.dir/screens/ui_Blocky_Clock.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\ui.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\ui.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/ui.c",
+  "output": "CMakeFiles/ui.dir/ui.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\components\\ui_comp_hook.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\components\\ui_comp_hook.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/components/ui_comp_hook.c",
+  "output": "CMakeFiles/ui.dir/components/ui_comp_hook.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\ui_helpers.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\ui_helpers.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/ui_helpers.c",
+  "output": "CMakeFiles/ui.dir/ui_helpers.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_tick_dashes_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_tick_dashes_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_tick_dashes_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_tick_dashes_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_tick_dots_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_tick_dots_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_tick_dots_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_tick_dots_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_step_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_step_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_step_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_step_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_minutehandstub_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_minutehandstub_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_minutehandstub_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_minutehandstub_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_hourhandstub_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_hourhandstub_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_hourhandstub_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_hourhandstub_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_secondhandstub_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_secondhandstub_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_secondhandstub_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_secondhandstub_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_no_bluetooth_small_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_no_bluetooth_small_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_no_bluetooth_small_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_no_bluetooth_small_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_notificationbell_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_notificationbell_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_notificationbell_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_notificationbell_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_seconddashstub_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_seconddashstub_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_seconddashstub_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_seconddashstub_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_seconddotstub_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_seconddotstub_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_seconddotstub_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_seconddotstub_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_gwatch_logo_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_gwatch_logo_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_gwatch_logo_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_gwatch_logo_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_brightness_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_brightness_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_brightness_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_brightness_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_bluetooth_small_nobackground_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_bluetooth_small_nobackground_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_bluetooth_small_nobackground_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_bluetooth_small_nobackground_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_bellnobackground_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_bellnobackground_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_bellnobackground_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_bellnobackground_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_restart_button_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_restart_button_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_restart_button_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_restart_button_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_playpause_button_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_playpause_button_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_playpause_button_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_playpause_button_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_arrow_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_arrow_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_arrow_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_arrow_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_power_icon_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_power_icon_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_power_icon_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_power_icon_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_calculator_icon_nobackground_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_calculator_icon_nobackground_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_calculator_icon_nobackground_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_calculator_icon_nobackground_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_compass_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_compass_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_compass_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_compass_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_settings_gear_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_settings_gear_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_settings_gear_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_settings_gear_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_mostly_cloudy_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_mostly_cloudy_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_mostly_cloudy_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_mostly_cloudy_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_flashlight_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_flashlight_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_flashlight_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_flashlight_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_play_button_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_play_button_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_play_button_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_play_button_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_album_cover_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_album_cover_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_album_cover_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_album_cover_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_pause_button_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_pause_button_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_pause_button_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_pause_button_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_moon_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_moon_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_moon_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_moon_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_sunny_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_sunny_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_sunny_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_sunny_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_rain_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_rain_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_rain_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_rain_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_snow_rain_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_snow_rain_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_snow_rain_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_snow_rain_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_mostly_sunny_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_mostly_sunny_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_mostly_sunny_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_mostly_sunny_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_wind_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_wind_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_wind_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_wind_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_call1_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_call1_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_call1_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_call1_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_skeletonminutehand_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_skeletonminutehand_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_skeletonminutehand_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_skeletonminutehand_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_simplisticminutehand_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_simplisticminutehand_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_simplisticminutehand_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_simplisticminutehand_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_simplistichourhand_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_simplistichourhand_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_simplistichourhand_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_simplistichourhand_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\images\\ui_img_4809254_png.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\images\\ui_img_4809254_png.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/images/ui_img_4809254_png.c",
+  "output": "CMakeFiles/ui.dir/images/ui_img_4809254_png.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Blocky_16.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Blocky_16.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Blocky_16.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Blocky_16.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Blocky_48.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Blocky_48.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Blocky_48.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Blocky_48.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Comfortaa_10.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Comfortaa_10.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Comfortaa_10.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Comfortaa_10.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Comfortaa_12.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Comfortaa_12.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Comfortaa_12.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Comfortaa_12.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Comfortaa_16.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Comfortaa_16.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Comfortaa_16.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Comfortaa_16.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Comfortaa_26.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Comfortaa_26.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Comfortaa_26.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Comfortaa_26.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Comfortaa_30.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Comfortaa_30.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Comfortaa_30.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Comfortaa_30.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Monoton_38.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Monoton_38.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Monoton_38.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Monoton_38.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Monoton_48.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Monoton_48.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Monoton_48.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Monoton_48.c.obj"
+},
+{
+  "directory": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe   -g -o CMakeFiles\\ui.dir\\fonts\\ui_font_Music_14.c.obj -c \"C:\\Users\\garre\\OneDrive\\Documents\\PlatformIO\\Projects\\My_Watch 1.3\\src\\fonts\\ui_font_Music_14.c\"",
+  "file": "C:/Users/garre/OneDrive/Documents/PlatformIO/Projects/My_Watch 1.3/src/fonts/ui_font_Music_14.c",
+  "output": "CMakeFiles/ui.dir/fonts/ui_font_Music_14.c.obj"
+}
+]
