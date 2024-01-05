@@ -288,7 +288,7 @@ Serial.println("       _\\//\\\\\\\\\\\\\\\\\\\\\\\\/____________________\\//\\\
 Serial.println("        __\\////////////_______________________\\///____\\///_______\\///________\\///________\\///______________\\/////////__\\///________\\///__");
 Serial.println("");
 Serial.println("Ascii art made using: https://patorjk.com/software/taag/#p=display&f=Slant%20Relief&t=G-WATCH");
-Serial.println("Project made by: Garrett Jordan (https://github.com/TurtleWhal/TWatch-2021, https://garrettjordan.xyz/projects.html#watch)");
+Serial.println("Project made by: Garrett Jordan (https://github.com/TurtleWhal/G-Watch, https://garrettjordan.xyz/projects.html#watch)");
 Serial.println("");
 
   twatch = TWatchClass::getWatch(); // Does HALinit for us
