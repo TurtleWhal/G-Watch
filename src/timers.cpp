@@ -3,6 +3,7 @@
 #include "TWatch_hal.h"
 #include "timers.h"
 #include "power_managment.h"
+#include "ArduinoLog.h"
 
 uint32_t stopwatchtimems = 0;
 uint32_t stopwatchtimestarted = 0;
@@ -103,7 +104,7 @@ void TimerAdjust(lv_event_t *e)
                   1000 +
               500;
 
-  Serial.println(timertime);
+  Log.verboseln("TimerTime: %i", timertime);
 
   IsTimerNegative();
   WriteTimerTime();
@@ -145,7 +146,7 @@ void WriteTimerTime()
 
 void TimersHandle()
 {
-  if (ui_Stopwatch != NULL and stopwatchmoving)
+  if (stopwatchmoving and ui_Stopwatch != NULL)
   {
     DrawStopwatch();
   }
@@ -160,7 +161,7 @@ void TimersHandle()
     }
     if (lasttime < millis() - 500)
     {
-      Serial.println(timertime);
+      Log.verboseln("TimerTime: %i", timertime);
       WriteTimerTime();
       IsTimerNegative();
       lasttime = millis();

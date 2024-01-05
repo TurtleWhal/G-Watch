@@ -1,5 +1,3 @@
-reply to notifications
-
 Change to LVGL task Handler vs timers? Is this right when sleeping?
 Change to TWATCH LVGL
 Get rid of char, move to strings
@@ -8,7 +6,6 @@ Store bluetooth status in FLASH
 
 Power managment when asleep
 Improve boot upload_speed
-Move button handler to LVGL
 
 Increase LVGL Buffer Size
 

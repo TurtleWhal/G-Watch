@@ -41,7 +41,7 @@ void ToggleTheme(lv_event_t *e)
 
 void ApplyTheme(lv_event_t *e)
 {
-  Serial.println("ApplyTheme");
+  Log.verboseln("ApplyTheme");
   
   lv_disp_t *dispp = lv_disp_get_default();
 
@@ -85,7 +85,7 @@ void ApplyTheme(lv_event_t *e)
 
     if (!info.theme.darkmode)
     {
-      // Serial.println("Light Mode Applytheme");
+      // Log.verboseln("Light Mode Applytheme");
       lv_obj_set_style_arc_color(ui_Default_Clock_Arc_Battery, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor(ui_Default_Clock_Hour_Hand, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor_opa(ui_Default_Clock_Hour_Hand, LV_OPA_100, LV_PART_MAIN);
@@ -95,7 +95,7 @@ void ApplyTheme(lv_event_t *e)
     }
     else
     {
-      // Serial.println("Dark Mode Applytheme");
+      // Log.verboseln("Dark Mode Applytheme");
       lv_obj_set_style_arc_color(ui_Default_Clock_Arc_Battery, lv_color_hex(0xFFFFFF), LV_PART_INDICATOR | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor(ui_Default_Clock_Hour_Hand, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_set_style_img_recolor_opa(ui_Default_Clock_Hour_Hand, LV_OPA_100, LV_PART_MAIN);
@@ -152,7 +152,7 @@ void ApplyTheme(lv_event_t *e)
 
     LV_ATTRIBUTE_MEM_ALIGN uint8_t imgData[binary_length] = {};
 
-    //Serial.println(binary_length);
+    //Log.verboseln(binary_length);
 
     //printf("[");
     for (int i = 0; i < binary_length; i++)
@@ -177,7 +177,7 @@ void ApplyTheme(lv_event_t *e)
     /*if (res == LV_RES_OK)
     {
       lv_img_decoder_close(&dsc);
-      Serial.println("closed decoder");
+      Log.verboseln("closed decoder");
       lv_obj_set_style_bg_img_src(ui_Album_Image_Panel, &img, LV_PART_MAIN);
       //lv_img_set_src(ui_Album_Image_Panel, &img);
       //Log.verboseln("%i", img.data);

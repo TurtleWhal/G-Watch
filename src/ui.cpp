@@ -65,7 +65,7 @@ void LogoSpin(lv_obj_t *TargetObject);
 /* Serial debugging */
 void my_print(const char *buf)
 {
-  Serial.printf(buf);
+  Log.verbose(buf);
   Serial.flush();
 }
 #endif
@@ -75,15 +75,6 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 {
   if (touch.available())
   {
-    if (IsSleeping()) // If sleeping
-    {
-      if (touch.data.x == 0 && touch.data.y == 0)
-        Wakeup("Tilted Wrist");
-      else
-        Wakeup("Screen Touched");
-
-      return;
-    }
 
     TickleSleep();
 
@@ -137,7 +128,6 @@ void btn3_click(void *param)
 {
   Log.verboseln("BTN3 Click");
   Wakeup("Button 3 Pressed");
-  Serial.println(IsClockScreen());
   if (IsClockScreen())
   {
     // if (NotificationActive())
@@ -179,7 +169,7 @@ void InitOTA()
   WiFi.begin(ssid, password);
   while (WiFi.waitForConnectResult() != WL_CONNECTED)
   {
-    Serial.println("Connection Failed! Rebooting...");
+    Log.verboseln("Connection Failed! Rebooting...");
     delay(2000);
     WiFi.disconnect();
     WiFi.begin(ssid2, password2);
@@ -196,7 +186,7 @@ void InitOTA()
         type = "filesystem";
 
       // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
-      Serial.println("Start updating " + type); 
+      Log.verboseln("Start updating %s", type); 
       
       _ui_screen_change(&ui_Alarm_Going_Off, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Alarm_Going_Off_screen_init);
       lv_label_set_text(ui_Alarm_Going_Off_Name, "OTA Uploading");
@@ -206,30 +196,30 @@ void InitOTA()
       Wakeup("Ota Begin Upload");
       twatch->motor_shake(1, 50); })
       .onEnd([]()
-             { Serial.println("\nEnd"); })
+             { Log.verboseln("\nEnd"); })
       .onProgress([](unsigned int progress, unsigned int total)
-                  { Serial.printf("Progress: %u%%\r", (progress / (total / 100))); })
+                  { Log.verbose("Progress: %u%%\r", (progress / (total / 100))); })
       .onError([](ota_error_t error)
                {
-      Serial.printf("Error[%u]: ", error);
-      if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
-      else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
-      else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
-      else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
-      else if (error == OTA_END_ERROR) Serial.println("End Failed"); });
+      Log.verboseln("Error[%u]: ", error);
+      if (error == OTA_AUTH_ERROR) Log.verboseln("Auth Failed");
+      else if (error == OTA_BEGIN_ERROR) Log.verboseln("Begin Failed");
+      else if (error == OTA_CONNECT_ERROR) Log.verboseln("Connect Failed");
+      else if (error == OTA_RECEIVE_ERROR) Log.verboseln("Receive Failed");
+      else if (error == OTA_END_ERROR) Log.verboseln("End Failed"); });
 
   ArduinoOTA.begin();
 
-  Serial.println("Ready");
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
+  Log.verboseln("Ready");
+  Log.verbose("IP address: ");
+  Log.verboseln(WiFi.localIP());
 
   info.OTA.useOTA = true;
   info.OTA.ip = WiFi.localIP().toString();
 
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total)
                         { uint8_t percent = (progress / (total / 100));
-                          Serial.printf("Progress: %u%%\r", percent); 
+                          Log.verboseln("Progress: %u%%", percent); 
                           lv_label_set_text_fmt(ui_Alarm_Going_Off_Time, "%i%%", percent);
                           TickleSleep(); });
 }
@@ -261,35 +251,34 @@ void setup()
     }
   }
 
-  Serial.println(output);
-  Serial.println(str8);
-  Serial.println("");*/
+  Log.verboseln(output);
+  Log.verboseln(str8);
+  Log.verboseln("");*/
 
+  //  _____/\\\\\\\\\\\\________________/\\\______________/\\\_____/\\\\\\\\\_____/\\\\\\\\\\\\\\\________/\\\\\\\\\__/\\\________/\\\_
+  //   ___/\\\//////////________________\/\\\_____________\/\\\___/\\\\\\\\\\\\\__\///////\\\/////______/\\\////////__\/\\\_______\/\\\_
+  //    __/\\\___________________________\/\\\_____________\/\\\__/\\\/////////\\\_______\/\\\_________/\\\/___________\/\\\_______\/\\\_
+  //     _\/\\\____/\\\\\\\__/\\\\\\\\\\\_\//\\\____/\\\____/\\\__\/\\\_______\/\\\_______\/\\\________/\\\_____________\/\\\\\\\\\\\\\\\_
+  //      _\/\\\___\/////\\\_\///////////___\//\\\__/\\\\\__/\\\___\/\\\\\\\\\\\\\\\_______\/\\\_______\/\\\_____________\/\\\/////////\\\_
+  //       _\/\\\_______\/\\\_________________\//\\\/\\\/\\\/\\\____\/\\\/////////\\\_______\/\\\_______\//\\\____________\/\\\_______\/\\\_
+  //        _\/\\\_______\/\\\__________________\//\\\\\\//\\\\\_____\/\\\_______\/\\\_______\/\\\________\///\\\__________\/\\\_______\/\\\_
+  //         _\//\\\\\\\\\\\\/____________________\//\\\__\//\\\______\/\\\_______\/\\\_______\/\\\__________\////\\\\\\\\\_\/\\\_______\/\\\_
+  //          __\////////////_______________________\///____\///_______\///________\///________\///______________\/////////__\///________\///__
 
-//  _____/\\\\\\\\\\\\________________/\\\______________/\\\_____/\\\\\\\\\_____/\\\\\\\\\\\\\\\________/\\\\\\\\\__/\\\________/\\\_        
-//   ___/\\\//////////________________\/\\\_____________\/\\\___/\\\\\\\\\\\\\__\///////\\\/////______/\\\////////__\/\\\_______\/\\\_       
-//    __/\\\___________________________\/\\\_____________\/\\\__/\\\/////////\\\_______\/\\\_________/\\\/___________\/\\\_______\/\\\_      
-//     _\/\\\____/\\\\\\\__/\\\\\\\\\\\_\//\\\____/\\\____/\\\__\/\\\_______\/\\\_______\/\\\________/\\\_____________\/\\\\\\\\\\\\\\\_     
-//      _\/\\\___\/////\\\_\///////////___\//\\\__/\\\\\__/\\\___\/\\\\\\\\\\\\\\\_______\/\\\_______\/\\\_____________\/\\\/////////\\\_    
-//       _\/\\\_______\/\\\_________________\//\\\/\\\/\\\/\\\____\/\\\/////////\\\_______\/\\\_______\//\\\____________\/\\\_______\/\\\_   
-//        _\/\\\_______\/\\\__________________\//\\\\\\//\\\\\_____\/\\\_______\/\\\_______\/\\\________\///\\\__________\/\\\_______\/\\\_  
-//         _\//\\\\\\\\\\\\/____________________\//\\\__\//\\\______\/\\\_______\/\\\_______\/\\\__________\////\\\\\\\\\_\/\\\_______\/\\\_ 
-//          __\////////////_______________________\///____\///_______\///________\///________\///______________\/////////__\///________\///__
-
-Serial.println("");
-Serial.println("_____/\\\\\\\\\\\\\\\\\\\\\\\\________________/\\\\\\______________/\\\\\\_____/\\\\\\\\\\\\\\\\\\_____/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\________/\\\\\\\\\\\\\\\\\\__/\\\\\\________/\\\\\\_        ");
-Serial.println(" ___/\\\\\\//////////________________\\/\\\\\\_____________\\/\\\\\\___/\\\\\\\\\\\\\\\\\\\\\\\\\\__\\///////\\\\\\/////______/\\\\\\////////__\\/\\\\\\_______\\/\\\\\\_       ");
-Serial.println("  __/\\\\\\___________________________\\/\\\\\\_____________\\/\\\\\\__/\\\\\\/////////\\\\\\_______\\/\\\\\\_________/\\\\\\/___________\\/\\\\\\_______\\/\\\\\\_      ");
-Serial.println("   _\\/\\\\\\____/\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\_\\//\\\\\\____/\\\\\\____/\\\\\\__\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\________/\\\\\\_____________\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_     ");
-Serial.println("    _\\/\\\\\\___\\/////\\\\\\_\\///////////___\\//\\\\\\__/\\\\\\\\\\__/\\\\\\___\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_______\\/\\\\\\_______\\/\\\\\\_____________\\/\\\\\\/////////\\\\\\_    ");
-Serial.println("     _\\/\\\\\\_______\\/\\\\\\_________________\\//\\\\\\/\\\\\\/\\\\\\/\\\\\\____\\/\\\\\\/////////\\\\\\_______\\/\\\\\\_______\\//\\\\\\____________\\/\\\\\\_______\\/\\\\\\_   ");
-Serial.println("      _\\/\\\\\\_______\\/\\\\\\__________________\\//\\\\\\\\\\\\//\\\\\\\\\\_____\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\________\\///\\\\\\__________\\/\\\\\\_______\\/\\\\\\_  ");
-Serial.println("       _\\//\\\\\\\\\\\\\\\\\\\\\\\\/____________________\\//\\\\\\__\\//\\\\\\______\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\__________\\////\\\\\\\\\\\\\\\\\\_\\/\\\\\\_______\\/\\\\\\_ ");
-Serial.println("        __\\////////////_______________________\\///____\\///_______\\///________\\///________\\///______________\\/////////__\\///________\\///__");
-Serial.println("");
-Serial.println("Ascii art made using: https://patorjk.com/software/taag/#p=display&f=Slant%20Relief&t=G-WATCH");
-Serial.println("Project made by: Garrett Jordan (https://github.com/TurtleWhal/G-Watch, https://garrettjordan.xyz/projects.html#watch)");
-Serial.println("");
+  Log.verboseln("");
+  Log.verboseln("_____/\\\\\\\\\\\\\\\\\\\\\\\\________________/\\\\\\______________/\\\\\\_____/\\\\\\\\\\\\\\\\\\_____/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\________/\\\\\\\\\\\\\\\\\\__/\\\\\\________/\\\\\\_        ");
+  Log.verboseln(" ___/\\\\\\//////////________________\\/\\\\\\_____________\\/\\\\\\___/\\\\\\\\\\\\\\\\\\\\\\\\\\__\\///////\\\\\\/////______/\\\\\\////////__\\/\\\\\\_______\\/\\\\\\_       ");
+  Log.verboseln("  __/\\\\\\___________________________\\/\\\\\\_____________\\/\\\\\\__/\\\\\\/////////\\\\\\_______\\/\\\\\\_________/\\\\\\/___________\\/\\\\\\_______\\/\\\\\\_      ");
+  Log.verboseln("   _\\/\\\\\\____/\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\_\\//\\\\\\____/\\\\\\____/\\\\\\__\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\________/\\\\\\_____________\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_     ");
+  Log.verboseln("    _\\/\\\\\\___\\/////\\\\\\_\\///////////___\\//\\\\\\__/\\\\\\\\\\__/\\\\\\___\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_______\\/\\\\\\_______\\/\\\\\\_____________\\/\\\\\\/////////\\\\\\_    ");
+  Log.verboseln("     _\\/\\\\\\_______\\/\\\\\\_________________\\//\\\\\\/\\\\\\/\\\\\\/\\\\\\____\\/\\\\\\/////////\\\\\\_______\\/\\\\\\_______\\//\\\\\\____________\\/\\\\\\_______\\/\\\\\\_   ");
+  Log.verboseln("      _\\/\\\\\\_______\\/\\\\\\__________________\\//\\\\\\\\\\\\//\\\\\\\\\\_____\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\________\\///\\\\\\__________\\/\\\\\\_______\\/\\\\\\_  ");
+  Log.verboseln("       _\\//\\\\\\\\\\\\\\\\\\\\\\\\/____________________\\//\\\\\\__\\//\\\\\\______\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\__________\\////\\\\\\\\\\\\\\\\\\_\\/\\\\\\_______\\/\\\\\\_ ");
+  Log.verboseln("        __\\////////////_______________________\\///____\\///_______\\///________\\///________\\///______________\\/////////__\\///________\\///__");
+  Log.verboseln("");
+  Log.verboseln("Ascii art made using: https://patorjk.com/software/taag/#p=display&f=Slant%20Relief&t=G-WATCH");
+  Log.verboseln("Project made by: Garrett Jordan (https://github.com/TurtleWhal/G-Watch, https://garrettjordan.xyz/projects.html#watch)");
+  Log.verboseln("");
 
   twatch = TWatchClass::getWatch(); // Does HALinit for us
   pinMode(TWATCH_CHARGING, INPUT_PULLUP);
@@ -333,10 +322,6 @@ Serial.println("");
 
   Log.verboseln("Init clock Screen");
 
-#ifdef USESPLASHSCREEN
-  lv_obj_clear_flag(ui_Logo_Arc, LV_OBJ_FLAG_HIDDEN);
-#endif
-
   ui____initial_actions0 = lv_obj_create(NULL);
   Log.verboseln("ui____initial_actions0");
 
@@ -372,16 +357,14 @@ Serial.println("");
   //////////////////////////Fake Notifications///////////
   // AddFakeNotifications();
 
-  // WriteTime();
-  // lv_label_set_text(ui_Notification_Amount_Number, "0");
-  Serial.println("Lv Timer");
+  Log.verboseln("Lv Timer");
   lv_timer_handler();
 
-  Serial.println("BT on");
+  Log.verboseln("BT on");
   BT_on();
 
 #if defined(CONFIG_BMA423_LATER)
-  Serial.println("Bma423 begin");
+  Log.verboseln("Bma423 begin");
   twatch->bma423_begin(); // This takes 2 seconds
 
   // enable the wrist tilt interrupt
@@ -389,7 +372,7 @@ Serial.println("");
   twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, false);
 #endif
 
-  Serial.println("HAL Update");
+  Log.verboseln("HAL Update");
   twatch->hal_auto_update(true, 1);
 
   twatch->backlight_gradual_light(100, 2000);
@@ -402,22 +385,15 @@ Serial.println("");
   // Log.verboseln("Free PSRAM: %d", ESP.getFreePsram());
 
   info.flag.refresh = 1;
-
-#ifdef USESPLASHSCREEN
-  LogoSpin(ui_Logo_Arc);
-#endif
 }
 
 void loop()
 {
   if (useOTA)
     ArduinoOTA.handle();
-  // Log.verboseln("%i%% CPU",100 - lv_timer_get_idle());
   if (!IsSleeping()) // If Awake
   {
     lv_timer_handler(); /* let the GUI do its work */
-    // delay(2);
-    // delay(lv_timer_handler());
 
     if (IsClockScreen or 1) // Only run this if on the main screen////////////////////////////////////////////////////////////////////////////////////////
     {
@@ -425,7 +401,6 @@ void loop()
       ScreenHandleHandle();
       UpdateTime();
       Powerhandle();
-      // notifslide(nullptr);
     }
     else
     {
@@ -434,17 +409,22 @@ void loop()
   }
   else // If Asleep
   {
-    if (touch.available()) // Normally handled by lv_timer_handler
-      Wakeup("Screen Touched");
+    if (touch.available())
+    { // Normally handled by lv_timer_handler
+      if (touch.data.x == 0 && touch.data.y == 0)
+        Wakeup("Tilted Wrist");
+      else
+        Wakeup("Screen Touched");
+    }
+
     delay(100);
   }
-  // alarmhandle();
-  BTHandle();
+
   Sleephandle();
+  BTHandle();
   VibrateHandle();
   TimersHandle();
   NotificationHandle();
-  // Serial.println(twatch->power_get_volt());
 
   // this runs every 50ms
   if (BTTimerTriggered)
@@ -456,6 +436,7 @@ void loop()
   // This stuff runs every 10 seconds
   if (Timer0Triggered)
   {
+    Log.verboseln("Timer 0 Fired");
     Timer0Triggered = 0;
     StepHandle();
     UpdatePower();
@@ -482,7 +463,6 @@ void loop()
 
 void Timer0Handle()
 {
-  Log.verboseln("Timer 0 Fired");
   Timer0Triggered = 1;
 }
 
@@ -495,29 +475,3 @@ void StepGraphHandle()
 {
   StepGraphTriggered = 1;
 }
-
-void ResetFlags()
-{
-  info.flag.hourchanged = 0;
-  info.flag.minutechanged = 0;
-  info.flag.secondchanged = 0;
-}
-
-#ifdef USESPLASHSCREEN
-void LogoSpin(lv_obj_t *TargetObject)
-{
-  lv_anim_t a;
-  lv_anim_init(&a);
-  // lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)lv_arc_set_value);
-  // lv_anim_set_custom_exec_cb(&a, (lv_anim_custom_exec_cb_t)lv_anim_set_user_data);
-  // Log.verboseln("Anim User Data: %i", (int)lv_anim_get_user_data(&a));
-  // lv_anim_set_get_value_cb(&a, (lv_anim_get_value_cb_t)Serial.println());
-  Serial.println(lv_anim_get_playtime(&a));
-  // lv_arc_set_value(TargetObject, lv_anim_get_playtime(&a) / 3);
-  lv_anim_set_var(&a, TargetObject);
-  lv_anim_set_time(&a, 300);
-  lv_anim_set_values(&a, 0, 100);
-  lv_anim_set_path_cb(&a, lv_anim_path_ease_in_out);
-  lv_anim_start(&a);
-}
-#endif

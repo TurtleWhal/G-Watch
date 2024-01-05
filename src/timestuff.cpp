@@ -79,7 +79,7 @@ int GetDayOfWeek()
 
 void InitTicks()
 {
-    Serial.println("InitTicks");
+    Log.verboseln("InitTicks");
     for (int i = 0; i < 62; i++)
     {
         tick_index[i] = lv_img_create(ui_Default_Clock);

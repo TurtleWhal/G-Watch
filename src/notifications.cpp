@@ -196,7 +196,7 @@ void DeleteNotification(lv_event_t *e)
   else
   {
     notificationshowing = 0;
-    Serial.println("Notification Dismiss");
+    Log.verboseln("Notification Dismiss");
     BTsendf("{t:\"notify\", id:\"%i\", n:\"DISMISS\"}", NotificationList[10].id);
   }
 }
@@ -218,7 +218,7 @@ void NotificationHide(bool anim)
   PushNotification(1);
   // lv_obj_del_delayed(NotifPopup, 350);
   // lv_obj_del_async(NotifPopup);
-  Serial.println("Notification Hide");
+  Log.verboseln("Notification Hide");
 }
 
 void NotificationExpand(lv_event_t *e)
@@ -355,7 +355,7 @@ void AddFakeNotifications()
 void StoreNotifications()
 {
 #ifdef STORE_NOTIFICATIONS
-  Serial.println("Storing Notifications");
+  Log.verboseln("Storing Notifications");
   Storage.putBytes("Notifications", &NotificationList, sizeof(NotificationList));
   Storage.putInt("NotifCount", NotificationCount);
 #endif
@@ -364,17 +364,17 @@ void StoreNotifications()
 void PullNotifications()
 {
 #ifdef STORE_NOTIFICATIONS
-  Serial.println("Pulling Notifications");
+  Log.verboseln("Pulling Notifications");
   NotificationCount = Storage.getInt("NotifCount");
   info.notification.count = NotificationCount;
 
   if (NotificationCount)
     Storage.getBytes("Notifications", &NotificationList, sizeof(NotificationList));
 
-  Serial.println(NotificationCount);
-  Serial.println(NotificationList[0].Title);
-  Serial.println(NotificationList[0].Text);
-  Serial.println(NotificationList[0].Source);
-  Serial.println(NotificationList[0].id);
+  Log.verboseln(NotificationCount);
+  Log.verboseln(NotificationList[0].Title);
+  Log.verboseln(NotificationList[0].Text);
+  Log.verboseln(NotificationList[0].Source);
+  Log.verboseln(NotificationList[0].id);
 #endif
 }

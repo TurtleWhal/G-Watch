@@ -51,7 +51,7 @@ String DegToCompassHeading(int);
 
 void ParseBLE(char *Message)
 {
-  Serial.println(Message);
+  Log.verboseln(Message);
   struct timeval val;
   char *settime_str = NULL;
   ulong timevalue;
@@ -61,18 +61,18 @@ void ParseBLE(char *Message)
   if (settime_str)
   {
     /* code */
-    // Serial.println("GOT TIME!");
+    // Log.verboseln("GOT TIME!");
     settime_str = settime_str + 8;
     timevalue = atol(settime_str);
-    // Serial.println(settime_str);
-    Serial.println(settime_str);
+    // Log.verboseln(settime_str);
+    Log.verboseln(settime_str);
 
     settime_str = strstr(Message, "setTimeZone(");
     settime_str = settime_str + 12;
-    Serial.println(settime_str);
+    Log.verboseln(settime_str);
     timezone = atol(settime_str);
 
-    Serial.println(timezone);
+    Log.verboseln("%i", timezone);
 
     SetTime(timevalue, timezone);
   }
@@ -108,7 +108,7 @@ void ParseGB(char *Message)
   //  if (strcmp(NotifType, "musicstate") != 0)
   // lv_label_set_text(ui_Now_Playing_Label, Message);
 
-  // Serial.println(Message);
+  // Log.verboseln(Message);
 
   if (strcmp(NotifType, "notify") == 0)
   {
@@ -146,7 +146,7 @@ void ParseGB(char *Message)
 
       Log.verboseln("Received Notification With Title: %s, Text: %s, Source: %s, ID: %i", NotifTitle, NotifText, NotifSource, NotifID);
 
-      // Serial.println(Message);
+      // Log.verboseln(Message);
       if (strcmp(NotifSource, "Android System Intelligence") == 0)
       {
         /*NotifTitle = "Number 179 °@#$* by dot.* and .;:' feetering !@3%6* by ksajfd";
@@ -198,16 +198,16 @@ void ParseGB(char *Message)
 
     unsigned char *decoded = base64_decode((const unsigned char *)encodedImage, strlen(encodedImage), &outputLength);
 
-    Serial.print("Length of decoded message: ");
-    Serial.println(outputLength);
+    Log.verbose("Length of decoded message: ");
+    Log.verboseln(outputLength);
 
-    Serial.printf("%.*s", outputLength, decoded);
+    Log.verboseln("%.*s", outputLength, decoded);
     free(decoded);*/
 
-    Serial.println(info.music.artist);
-    Serial.println(info.music.song);
-    Serial.println(info.music.length);
-    Serial.println(info.music.album);
+    //Log.verboseln(info.music.artist);
+    //Log.verboseln(info.music.song);
+    //Log.verboseln("%i", info.music.length);
+    //Log.verboseln(info.music.album);
 
     info.music.song = localmusicsong;
     info.music.artist = localmusicartist;
@@ -225,18 +225,18 @@ void ParseGB(char *Message)
     const char *MusicState = received["state"];
     info.music.position = received["position"];
     // info.music.position += info.music.positionOFFSET;
-    Serial.println(MusicState);
+    Log.verboseln(MusicState);
 
     if (strcmp(MusicState, "play") == 0)
     {
-      Serial.println("Change To Pause Button");
+      Log.verboseln("Change To Pause Button");
       // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_pause_button_png);
       //  lv_label_set_text(ui_Now_Playing_Label, MusicState);
       info.music.isplaying = 1;
     }
     else
     {
-      Serial.println("Change To Play Button");
+      Log.verboseln("Change To Play Button");
       // lv_img_set_src(ui_Music_Play_Button_Image, &ui_img_play_button_png);
       //  lv_label_set_text(ui_Now_Playing_Label, MusicState);
       info.music.isplaying = 0;
@@ -246,7 +246,7 @@ void ParseGB(char *Message)
   else if (strcmp(NotifType, "call") == 0)
   {
     const char *CallType = received["cmd"];
-    Serial.println(CallType);
+    Log.verboseln(CallType);
     if (strcmp(CallType, "incoming") == 0)
     {
       _ui_screen_change(&ui_Call, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Call_screen_init);
@@ -294,19 +294,21 @@ void ParseGB(char *Message)
     int Winddir = received["wdir"];
     const char *Loc = received["loc"];
 
-    Serial.printf("Weather Info Received\n");
-    Serial.printf("├– Msg: %s\n", Message);
-    Serial.printf("├– Temperature: --- %i\n", Temp);
-    Serial.printf("├– Daily High: ---- %i\n", High);
-    Serial.printf("├– Daily Low: ----- %i\n", Low);
-    Serial.printf("├– Humidity: ------ %i\n", Humidity);
-    Serial.printf("├– Precipitation: - %i\n", Precip);
-    Serial.printf("├– UV Index: ------ %01.2f\n", UV);
-    Serial.printf("├– Weather Code:--- %i\n", Code);
-    Serial.printf("├– Weather:-------- %s\n", Type);
-    Serial.printf("├– Wind Speed:----- %i\n", Wind);
-    Serial.printf("├– Wind Dir:------- %i\n", Winddir);
-    Serial.printf("└– Weather Loc: --- %s\n", Loc);
+    Log.verboseln("");
+    Log.verbose("Weather Info Received\n");
+    Log.verbose("├─ Msg: %s\n", Message);
+    Log.verbose("├─ Temperature: ─── %i\n", Temp);
+    Log.verbose("├─ Daily High: ──── %i\n", High);
+    Log.verbose("├─ Daily Low: ───── %i\n", Low);
+    Log.verbose("├─ Humidity: ────── %i\n", Humidity);
+    Log.verbose("├─ Precipitation: ─ %i\n", Precip);
+    Log.verbose("├─ UV Index: ────── %01.2f\n", UV);
+    Log.verbose("├─ Weather Code: ── %i\n", Code);
+    Log.verbose("├─ Weather: ─────── %s\n", Type);
+    Log.verbose("├─ Wind Speed: ──── %i\n", Wind);
+    Log.verbose("├─ Wind Dir: ────── %i\n", Winddir);
+    Log.verbose("└─ Weather Loc: ─── %s\n", Loc);
+    Log.verboseln("");
 
     info.weather.temp = Temp;
     info.weather.high = High;
@@ -388,7 +390,7 @@ void ParseGB(char *Message)
   else if (strcmp(NotifType, "find") == 0)
   {
     bool find = received["n"];
-    Serial.println(find);
+    //Log.verboseln(find);
     if (find)
     {
       VibrateStart(100);
@@ -405,8 +407,8 @@ void ParseGB(char *Message)
   }
   else if (strcmp(NotifType, "reboot") == 0)
   {
-    // Serial.println("Rebooting due to gadgetbridge button");
-    Serial.println("( ¯˘¯)/ Cya latr!\n");
+    // Log.verboseln("Rebooting due to gadgetbridge button");
+    Log.verboseln("( ¯˘¯)/ Cya latr!\n");
     ESP.restart();
   }
 }
@@ -465,7 +467,7 @@ void PauseMusic(lv_event_t *e)
 {
   if (info.music.isplaying)
   {
-    Serial.println("Pausing");
+    Log.verboseln("Pausing");
     String pausestring = "{t:\"music\", n:\"pause\"}";
     BTsend(pausestring, 2);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_play_button_png);
@@ -473,7 +475,7 @@ void PauseMusic(lv_event_t *e)
   }
   else
   {
-    Serial.println("Resuming");
+    Log.verboseln("Resuming");
     String playstring = "{t:\"music\", n:\"play\"}";
     BTsend(playstring, 2);
     // lv_img_set_src(ui_Music_Play_Button, &ui_img_pause_button_png);
@@ -483,25 +485,16 @@ void PauseMusic(lv_event_t *e)
 
 void MusicSkipForward(lv_event_t *e)
 {
-  Serial.println("Skipping Forward");
+  Log.verboseln("Skipping Forward");
   String skipforwardstring = "{t:\"music\", n:\"next\"}";
   BTsend(skipforwardstring);
 }
 
 void MusicSkipBackward(lv_event_t *e)
 {
-  Serial.println("Skipping Backward");
+  Log.verboseln("Skipping Backward");
   String skipbackwardstring = "{t:\"music\", n:\"previous\"}";
   BTsend(skipbackwardstring);
-}
-
-void BTHandle()
-{
-  /*if (songtime and songtime < (millis() - 70000))
-  {
-    songtime = 0;
-    lv_label_set_text(ui_Now_Playing_Label, "");
-  }*/
 }
 
 void ToggleBT(lv_event_t *e)
@@ -537,7 +530,6 @@ void BTsend(String message, int repeat)
   {
     msg = msg + "\r\n" + message + "\r\n" + BTtermchar;
     Log.verboseln("BTsend: %s", message.c_str());
-    Log.verboseln("BTsendmsg: %s", msg.c_str());
   }
 }
 
@@ -557,7 +549,6 @@ void BTsendf(const char *fmt, ...)
 
 void BTmsgloop()
 {
-  static int lasttime;
   unsigned char tempmsg[BLECTL_CHUNKSIZE + 1];
   if (msg.length() and BTon)
   {
@@ -573,8 +564,13 @@ void BTmsgloop()
       gadgetbridge_send_chunk(tempmsg, msg.indexOf(BTtermchar) - 1);
       msg.remove(0, msg.indexOf(BTtermchar) + 1);
     }
-    // Serial.println(msg);
+    // Log.verboseln(msg);
   }
+}
+
+void BTHandle()
+{
+  static int lasttime;
 
   if (BTon and blectl_get_event(BLECTL_CONNECT | BLECTL_AUTHWAIT)) // can't call get event unless BTon = true
   {
@@ -587,14 +583,17 @@ void BTmsgloop()
     info.bt.isconnected = 0;
   }
 
-  if (lasttime < millis() - 1000)
+  if (!IsSleeping())
   {
-    if (info.music.isplaying)
+    if (lasttime < millis() - 1000)
     {
-      info.music.position++;
-      DrawMusicTime(nullptr);
+      if (info.music.isplaying)
+      {
+        info.music.position++;
+        DrawMusicTime(nullptr);
+      }
+      lasttime = millis();
     }
-    lasttime = millis();
   }
 }
 

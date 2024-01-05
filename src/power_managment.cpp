@@ -34,32 +34,37 @@ void Sleephandle()
 #endif
   {
 
-    if ((millis() - sleeptimer) >= Sleeptimeout)
+    if (!Sleeping)
     {
-      Sleep();
-    }
 
-    if ((millis() - sleeptimer) >= Sleeptimeout * 0.6)
-    {
-      if (!dimSleeping)
+      if ((millis() - sleeptimer) >= Sleeptimeout)
       {
-        prevbrightness = twatch->backlight_get_value();
-        if (!prevbrightness)
-          prevbrightness = 1;
+        Sleep();
+      }
 
-        twatch->backlight_gradual_light(prevbrightness * 0.3, 500);
-        dimSleeping = true;
-        twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, true);
-      }
-    }
-    else
-    {
-      if (dimSleeping)
+      if ((millis() - sleeptimer) >= Sleeptimeout * 0.6)
       {
-        twatch->backlight_gradual_light(prevbrightness, 500);
-        dimSleeping = false;
-        twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, false);
+        if (!dimSleeping)
+        {
+          prevbrightness = twatch->backlight_get_value();
+          if (!prevbrightness)
+            prevbrightness = 1;
+
+          twatch->backlight_gradual_light(prevbrightness * 0.3, 500);
+          dimSleeping = true;
+          twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, true);
+        }
       }
+      else
+      {
+        if (dimSleeping)
+        {
+          twatch->backlight_gradual_light(prevbrightness, 500);
+          dimSleeping = false;
+          twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, false);
+        }
+      }
+
     }
   }
   else
@@ -67,7 +72,7 @@ void Sleephandle()
     TickleSleep();
     if (Sleeping)
       Wakeup("Plugged In");
-    // Serial.println(BMA423_WRIST_WEAR);
+    // Log.verboseln(BMA423_WRIST_WEAR);
   }
 }
 
@@ -222,7 +227,7 @@ void UpdateBrightness(lv_event_t *e)
   Brightness = lv_slider_get_value(ui_Brightness_Slider);
   twatch->backlight_set_value(Brightness);
   Log.verboseln("Brightness: %i", Brightness);
-  // Serial.println(twatch->backlight_get_value);
+  // Log.verboseln(twatch->backlight_get_value);
 }
 
 int GetUserBrightness()

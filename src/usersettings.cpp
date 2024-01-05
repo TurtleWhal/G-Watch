@@ -72,13 +72,13 @@ void UpdateSettings(lv_event_t *e)
   String BTnametemp = lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL));
   Storage.putBytes("BTname", BTnametemp.c_str(), 17);
   info.bt.name = BTnametemp;
-  // Serial.println(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
+  // Log.verboseln(lv_textarea_get_text(lv_obj_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL)));
 
   Storage.putUInt("Theme", lv_colorwheel_get_rgb(ui_Theme_Colorwheel).full);
   ApplyTheme(nullptr);
 
   Storage.putBool("DarkMode", lv_obj_has_state(ui_Dark_Mode_Setting_Switch, LV_STATE_CHECKED));
-  // Serial.println(Storage.getBool("DarkMode"));
+  // Log.verboseln(Storage.getBool("DarkMode"));
 
   PrintSettings();
 }
@@ -89,13 +89,12 @@ void PrintSettings()
   Storage.getBytes("BTname", BTnamechar, 17);
 
   Log.verboseln("");
-  Log.verboseln("|-------- Stored Settings ---------");
-  Log.verboseln("|- Step Goal ------------ %i", Storage.getUShort("StepGoal"));
-  Log.verboseln("|- Notification Length -- %i", Storage.getUInt("NotifLength"));
-  Log.verboseln("|- Bluetooth Name ------- %s", BTnamechar);
-  Log.verboseln("|- Theme Color ---------- %i", Storage.getUInt("Theme"));
-  Log.verboseln("|- Dark Mode ------------ %i", Storage.getBool("DarkMode"));
-  Log.verboseln("-----------------------------------");
+  Log.verboseln("Stored Settings");
+  Log.verboseln("├─ Step Goal ------------ %i", Storage.getUShort("StepGoal"));
+  Log.verboseln("├─ Notification Length -- %i", Storage.getUInt("NotifLength"));
+  Log.verboseln("├─ Bluetooth Name ------- %s", BTnamechar);
+  Log.verboseln("├─ Theme Color ---------- %i", Storage.getUInt("Theme"));
+  Log.verboseln("└─ Dark Mode ------------ %i", Storage.getBool("DarkMode"));
   Log.verboseln("");
 }
 
