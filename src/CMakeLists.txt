@@ -26,6 +26,7 @@ SET(SOURCES components/ui_comp_app_button.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
+    ui_events.cpp
     images/ui_img_tick_dashes_png.c
     images/ui_img_tick_dots_png.c
     images/ui_img_step_png.c
