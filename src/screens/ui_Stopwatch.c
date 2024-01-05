@@ -7,172 +7,173 @@
 
 void ui_Stopwatch_screen_init(void)
 {
-ui_Stopwatch = lv_obj_create(NULL);
-lv_obj_clear_flag( ui_Stopwatch, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_add_event_cb(ui_Stopwatch, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Stopwatch);
+    ui_Stopwatch = lv_obj_create(NULL);
+    lv_obj_clear_flag(ui_Stopwatch, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_add_event_cb(ui_Stopwatch, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Stopwatch);
 
-ui_Stopwatch_Label_Underline = lv_obj_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Label_Underline, 128);
-lv_obj_set_height( ui_Stopwatch_Label_Underline, 3);
-lv_obj_set_x( ui_Stopwatch_Label_Underline, 0 );
-lv_obj_set_y( ui_Stopwatch_Label_Underline, -90 );
-lv_obj_set_align( ui_Stopwatch_Label_Underline, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Stopwatch_Label_Underline, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_bg_color(ui_Stopwatch_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Stopwatch_Label_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_Stopwatch_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_border_opa(ui_Stopwatch_Label_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Label_Underline = lv_obj_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Label_Underline, 128);
+    lv_obj_set_height(ui_Stopwatch_Label_Underline, 3);
+    lv_obj_set_x(ui_Stopwatch_Label_Underline, 0);
+    lv_obj_set_y(ui_Stopwatch_Label_Underline, -90);
+    lv_obj_set_align(ui_Stopwatch_Label_Underline, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Stopwatch_Label_Underline, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_Stopwatch_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Stopwatch_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_Stopwatch_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_Stopwatch_Label_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Label = lv_label_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Label, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Label, 0 );
-lv_obj_set_y( ui_Stopwatch_Label, 8 );
-lv_obj_set_align( ui_Stopwatch_Label, LV_ALIGN_TOP_MID );
-lv_label_set_text(ui_Stopwatch_Label,"Stopwatch");
-lv_obj_set_style_text_font(ui_Stopwatch_Label, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Label = lv_label_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Label, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Label, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Label, 0);
+    lv_obj_set_y(ui_Stopwatch_Label, 8);
+    lv_obj_set_align(ui_Stopwatch_Label, LV_ALIGN_TOP_MID);
+    lv_label_set_text(ui_Stopwatch_Label, "Stopwatch");
+    lv_obj_set_style_text_font(ui_Stopwatch_Label, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Time_Long = lv_label_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Time_Long, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Time_Long, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Time_Long, 0 );
-lv_obj_set_y( ui_Stopwatch_Time_Long, -30 );
-lv_obj_set_align( ui_Stopwatch_Time_Long, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Stopwatch_Time_Long,"00:00:00.00");
-lv_obj_add_flag( ui_Stopwatch_Time_Long, LV_OBJ_FLAG_HIDDEN );   /// Flags
-lv_obj_set_style_text_font(ui_Stopwatch_Time_Long, &lv_font_montserrat_38, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Time_Long = lv_label_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Time_Long, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Time_Long, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Time_Long, 0);
+    lv_obj_set_y(ui_Stopwatch_Time_Long, -30);
+    lv_obj_set_align(ui_Stopwatch_Time_Long, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Stopwatch_Time_Long, "00:00:00.00");
+    lv_obj_add_flag(ui_Stopwatch_Time_Long, LV_OBJ_FLAG_HIDDEN);     /// Flags
+    lv_obj_set_style_text_font(ui_Stopwatch_Time_Long, &lv_font_montserrat_38, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Milliseconds = lv_label_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Milliseconds, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Milliseconds, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Milliseconds, 88 );
-lv_obj_set_y( ui_Stopwatch_Milliseconds, -30 );
-lv_obj_set_align( ui_Stopwatch_Milliseconds, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Stopwatch_Milliseconds,"00");
-lv_obj_set_style_text_font(ui_Stopwatch_Milliseconds, &lv_font_montserrat_40, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Milliseconds = lv_label_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Milliseconds, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Milliseconds, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Milliseconds, 88);
+    lv_obj_set_y(ui_Stopwatch_Milliseconds, -30);
+    lv_obj_set_align(ui_Stopwatch_Milliseconds, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Stopwatch_Milliseconds, "00");
+    lv_obj_set_style_text_font(ui_Stopwatch_Milliseconds, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Dot = lv_label_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Dot, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Dot, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Dot, 59 );
-lv_obj_set_y( ui_Stopwatch_Dot, -30 );
-lv_obj_set_align( ui_Stopwatch_Dot, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Stopwatch_Dot,".");
-lv_obj_set_style_text_font(ui_Stopwatch_Dot, &lv_font_montserrat_40, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Dot = lv_label_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Dot, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Dot, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Dot, 59);
+    lv_obj_set_y(ui_Stopwatch_Dot, -30);
+    lv_obj_set_align(ui_Stopwatch_Dot, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Stopwatch_Dot, ".");
+    lv_obj_set_style_text_font(ui_Stopwatch_Dot, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Seconds = lv_label_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Seconds, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Seconds, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Seconds, 30 );
-lv_obj_set_y( ui_Stopwatch_Seconds, -30 );
-lv_obj_set_align( ui_Stopwatch_Seconds, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Stopwatch_Seconds,"00");
-lv_obj_set_style_text_font(ui_Stopwatch_Seconds, &lv_font_montserrat_40, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Seconds = lv_label_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Seconds, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Seconds, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Seconds, 30);
+    lv_obj_set_y(ui_Stopwatch_Seconds, -30);
+    lv_obj_set_align(ui_Stopwatch_Seconds, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Stopwatch_Seconds, "00");
+    lv_obj_set_style_text_font(ui_Stopwatch_Seconds, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Colin_Right = lv_label_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Colin_Right, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Colin_Right, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Colin_Right, 0 );
-lv_obj_set_y( ui_Stopwatch_Colin_Right, -30 );
-lv_obj_set_align( ui_Stopwatch_Colin_Right, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Stopwatch_Colin_Right,":");
-lv_obj_set_style_text_font(ui_Stopwatch_Colin_Right, &lv_font_montserrat_40, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Colin_Right = lv_label_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Colin_Right, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Colin_Right, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Colin_Right, 0);
+    lv_obj_set_y(ui_Stopwatch_Colin_Right, -30);
+    lv_obj_set_align(ui_Stopwatch_Colin_Right, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Stopwatch_Colin_Right, ":");
+    lv_obj_set_style_text_font(ui_Stopwatch_Colin_Right, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Minutes = lv_label_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Minutes, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Minutes, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Minutes, -29 );
-lv_obj_set_y( ui_Stopwatch_Minutes, -30 );
-lv_obj_set_align( ui_Stopwatch_Minutes, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Stopwatch_Minutes,"00");
-lv_obj_set_style_text_font(ui_Stopwatch_Minutes, &lv_font_montserrat_40, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Minutes = lv_label_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Minutes, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Minutes, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Minutes, -29);
+    lv_obj_set_y(ui_Stopwatch_Minutes, -30);
+    lv_obj_set_align(ui_Stopwatch_Minutes, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Stopwatch_Minutes, "00");
+    lv_obj_set_style_text_font(ui_Stopwatch_Minutes, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Colin_Left = lv_label_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Colin_Left, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Colin_Left, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Colin_Left, -59 );
-lv_obj_set_y( ui_Stopwatch_Colin_Left, -30 );
-lv_obj_set_align( ui_Stopwatch_Colin_Left, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Stopwatch_Colin_Left,":");
-lv_obj_set_style_text_font(ui_Stopwatch_Colin_Left, &lv_font_montserrat_40, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Colin_Left = lv_label_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Colin_Left, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Colin_Left, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Colin_Left, -59);
+    lv_obj_set_y(ui_Stopwatch_Colin_Left, -30);
+    lv_obj_set_align(ui_Stopwatch_Colin_Left, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Stopwatch_Colin_Left, ":");
+    lv_obj_set_style_text_font(ui_Stopwatch_Colin_Left, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Hours = lv_label_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Hours, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Hours, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Hours, -88 );
-lv_obj_set_y( ui_Stopwatch_Hours, -30 );
-lv_obj_set_align( ui_Stopwatch_Hours, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Stopwatch_Hours,"00");
-lv_obj_set_style_text_font(ui_Stopwatch_Hours, &lv_font_montserrat_40, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Hours = lv_label_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Hours, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Hours, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Hours, -88);
+    lv_obj_set_y(ui_Stopwatch_Hours, -30);
+    lv_obj_set_align(ui_Stopwatch_Hours, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Stopwatch_Hours, "00");
+    lv_obj_set_style_text_font(ui_Stopwatch_Hours, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Time_Underline = lv_obj_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Time_Underline, 226);
-lv_obj_set_height( ui_Stopwatch_Time_Underline, 40);
-lv_obj_set_x( ui_Stopwatch_Time_Underline, 0 );
-lv_obj_set_y( ui_Stopwatch_Time_Underline, 13 );
-lv_obj_set_align( ui_Stopwatch_Time_Underline, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Stopwatch_Time_Underline, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(ui_Stopwatch_Time_Underline, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Stopwatch_Time_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_Stopwatch_Time_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_border_opa(ui_Stopwatch_Time_Underline, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_outline_color(ui_Stopwatch_Time_Underline, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_outline_opa(ui_Stopwatch_Time_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Time_Underline = lv_obj_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Time_Underline, 226);
+    lv_obj_set_height(ui_Stopwatch_Time_Underline, 40);
+    lv_obj_set_x(ui_Stopwatch_Time_Underline, 0);
+    lv_obj_set_y(ui_Stopwatch_Time_Underline, 13);
+    lv_obj_set_align(ui_Stopwatch_Time_Underline, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Stopwatch_Time_Underline, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_Stopwatch_Time_Underline, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Stopwatch_Time_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_Stopwatch_Time_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_Stopwatch_Time_Underline, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_outline_color(ui_Stopwatch_Time_Underline, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_outline_opa(ui_Stopwatch_Time_Underline, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Time_Underline_Black = lv_obj_create(ui_Stopwatch_Time_Underline);
-lv_obj_set_width( ui_Stopwatch_Time_Underline_Black, 250);
-lv_obj_set_height( ui_Stopwatch_Time_Underline_Black, 50);
-lv_obj_set_x( ui_Stopwatch_Time_Underline_Black, 0 );
-lv_obj_set_y( ui_Stopwatch_Time_Underline_Black, 8 );
-lv_obj_set_align( ui_Stopwatch_Time_Underline_Black, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Stopwatch_Time_Underline_Black, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Stopwatch_Time_Underline_Black, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_border_opa(ui_Stopwatch_Time_Underline_Black, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+    ui_Stopwatch_Time_Underline_Black = lv_obj_create(ui_Stopwatch_Time_Underline);
+    lv_obj_set_width(ui_Stopwatch_Time_Underline_Black, 250);
+    lv_obj_set_height(ui_Stopwatch_Time_Underline_Black, 50);
+    lv_obj_set_x(ui_Stopwatch_Time_Underline_Black, 0);
+    lv_obj_set_y(ui_Stopwatch_Time_Underline_Black, 8);
+    lv_obj_set_align(ui_Stopwatch_Time_Underline_Black, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Stopwatch_Time_Underline_Black, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Stopwatch_Time_Underline_Black, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0x000000),
+                                  LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_Stopwatch_Time_Underline_Black, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-ui_Stopwatch_Reset_Button = lv_btn_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Reset_Button, 40);
-lv_obj_set_height( ui_Stopwatch_Reset_Button, 42);
-lv_obj_set_x( ui_Stopwatch_Reset_Button, 40 );
-lv_obj_set_y( ui_Stopwatch_Reset_Button, 30 );
-lv_obj_set_align( ui_Stopwatch_Reset_Button, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Stopwatch_Reset_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
-lv_obj_clear_flag( ui_Stopwatch_Reset_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    ui_Stopwatch_Reset_Button = lv_btn_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Reset_Button, 40);
+    lv_obj_set_height(ui_Stopwatch_Reset_Button, 42);
+    lv_obj_set_x(ui_Stopwatch_Reset_Button, 40);
+    lv_obj_set_y(ui_Stopwatch_Reset_Button, 30);
+    lv_obj_set_align(ui_Stopwatch_Reset_Button, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Stopwatch_Reset_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_Stopwatch_Reset_Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-ui_Stopwatch_Reset_Image = lv_img_create(ui_Stopwatch_Reset_Button);
-lv_img_set_src(ui_Stopwatch_Reset_Image, &ui_img_restart_button_png);
-lv_obj_set_width( ui_Stopwatch_Reset_Image, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Reset_Image, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Stopwatch_Reset_Image, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Stopwatch_Reset_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Stopwatch_Reset_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_angle(ui_Stopwatch_Reset_Image,900);
-lv_img_set_zoom(ui_Stopwatch_Reset_Image,90);
+    ui_Stopwatch_Reset_Image = lv_img_create(ui_Stopwatch_Reset_Button);
+    lv_img_set_src(ui_Stopwatch_Reset_Image, &ui_img_restart_button_png);
+    lv_obj_set_width(ui_Stopwatch_Reset_Image, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Reset_Image, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_Stopwatch_Reset_Image, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Stopwatch_Reset_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_Stopwatch_Reset_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_img_set_angle(ui_Stopwatch_Reset_Image, 900);
+    lv_img_set_zoom(ui_Stopwatch_Reset_Image, 90);
 
-ui_Stopwatch_Play_Pause_Button = lv_btn_create(ui_Stopwatch);
-lv_obj_set_width( ui_Stopwatch_Play_Pause_Button, 80);
-lv_obj_set_height( ui_Stopwatch_Play_Pause_Button, 42);
-lv_obj_set_x( ui_Stopwatch_Play_Pause_Button, -30 );
-lv_obj_set_y( ui_Stopwatch_Play_Pause_Button, 30 );
-lv_obj_set_align( ui_Stopwatch_Play_Pause_Button, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Stopwatch_Play_Pause_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
-lv_obj_clear_flag( ui_Stopwatch_Play_Pause_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    ui_Stopwatch_Play_Pause_Button = lv_btn_create(ui_Stopwatch);
+    lv_obj_set_width(ui_Stopwatch_Play_Pause_Button, 80);
+    lv_obj_set_height(ui_Stopwatch_Play_Pause_Button, 42);
+    lv_obj_set_x(ui_Stopwatch_Play_Pause_Button, -30);
+    lv_obj_set_y(ui_Stopwatch_Play_Pause_Button, 30);
+    lv_obj_set_align(ui_Stopwatch_Play_Pause_Button, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Stopwatch_Play_Pause_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_Stopwatch_Play_Pause_Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-ui_Stopwatch_Play_Pause_Image = lv_img_create(ui_Stopwatch_Play_Pause_Button);
-lv_img_set_src(ui_Stopwatch_Play_Pause_Image, &ui_img_playpause_button_png);
-lv_obj_set_width( ui_Stopwatch_Play_Pause_Image, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Stopwatch_Play_Pause_Image, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Stopwatch_Play_Pause_Image, 0 );
-lv_obj_set_y( ui_Stopwatch_Play_Pause_Image, -34 );
-lv_obj_set_align( ui_Stopwatch_Play_Pause_Image, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Stopwatch_Play_Pause_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Stopwatch_Play_Pause_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_zoom(ui_Stopwatch_Play_Pause_Image,130);
+    ui_Stopwatch_Play_Pause_Image = lv_img_create(ui_Stopwatch_Play_Pause_Button);
+    lv_img_set_src(ui_Stopwatch_Play_Pause_Image, &ui_img_playpause_button_png);
+    lv_obj_set_width(ui_Stopwatch_Play_Pause_Image, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Stopwatch_Play_Pause_Image, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Stopwatch_Play_Pause_Image, 0);
+    lv_obj_set_y(ui_Stopwatch_Play_Pause_Image, -34);
+    lv_obj_set_align(ui_Stopwatch_Play_Pause_Image, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Stopwatch_Play_Pause_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_Stopwatch_Play_Pause_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_img_set_zoom(ui_Stopwatch_Play_Pause_Image, 130);
 
-lv_obj_add_event_cb(ui_Stopwatch_Reset_Button, ui_event_Stopwatch_Reset_Button, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Stopwatch_Play_Pause_Button, ui_event_Stopwatch_Play_Pause_Button, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Stopwatch, ui_event_Stopwatch, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Stopwatch_Reset_Button, ui_event_Stopwatch_Reset_Button, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Stopwatch_Play_Pause_Button, ui_event_Stopwatch_Play_Pause_Button, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Stopwatch, ui_event_Stopwatch, LV_EVENT_ALL, NULL);
 
 }

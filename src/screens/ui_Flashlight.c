@@ -7,16 +7,16 @@
 
 void ui_Flashlight_screen_init(void)
 {
-ui_Flashlight = lv_obj_create(NULL);
-lv_obj_add_flag( ui_Flashlight, LV_OBJ_FLAG_CHECKABLE );   /// Flags
-lv_obj_clear_flag( ui_Flashlight, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_add_event_cb(ui_Flashlight, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Flashlight);
-lv_obj_set_style_bg_img_src( ui_Flashlight, &ui_img_flashlight_png, LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_img_recolor(ui_Flashlight, lv_color_hex(0xFFFFFF), LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_recolor_opa(ui_Flashlight, 220, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Flashlight, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_CHECKED );
-lv_obj_set_style_bg_opa(ui_Flashlight, 255, LV_PART_MAIN| LV_STATE_CHECKED);
+    ui_Flashlight = lv_obj_create(NULL);
+    lv_obj_add_flag(ui_Flashlight, LV_OBJ_FLAG_CHECKABLE);     /// Flags
+    lv_obj_clear_flag(ui_Flashlight, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_add_event_cb(ui_Flashlight, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Flashlight);
+    lv_obj_set_style_bg_img_src(ui_Flashlight, &ui_img_flashlight_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_recolor(ui_Flashlight, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_recolor_opa(ui_Flashlight, 220, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Flashlight, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_Flashlight, 255, LV_PART_MAIN | LV_STATE_CHECKED);
 
-lv_obj_add_event_cb(ui_Flashlight, ui_event_Flashlight, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Flashlight, ui_event_Flashlight, LV_EVENT_ALL, NULL);
 
 }

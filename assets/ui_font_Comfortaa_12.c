@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 12 px
  * Bpp: 4
- * Opts: --bpp 4 --size 12 --font /Users/gj0987888/Documents/GitHub/TWatch-2021/assets/Comfortaa-Bold.ttf -o /Users/gj0987888/Documents/GitHub/TWatch-2021/assets/ui_font_Comfortaa_12.c --format lvgl -r 0x20-0x7f --no-compress --no-prefilter
+ * Opts: --bpp 4 --size 12 --font C:\Users\garre\OneDrive\Documents\PlatformIO\Projects\My_Watch 1.3\assets\Comfortaa-Bold.ttf -o C:\Users\garre\OneDrive\Documents\PlatformIO\Projects\My_Watch 1.3\assets\ui_font_Comfortaa_12.c --format lvgl -r 0x20-0x7f --symbols ’” --no-compress --no-prefilter
  ******************************************************************************/
 
 #include "../ui.h"
@@ -619,7 +619,14 @@ static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
 
     /* U+007E "~" */
     0x2c, 0xc2, 0x31, 0x65, 0x5e, 0xf2, 0x0, 0x0,
-    0x0
+    0x0,
+
+    /* U+2019 "’" */
+    0xb, 0x70, 0xb9, 0xd, 0x30, 0x50,
+
+    /* U+201D "”" */
+    0x5, 0x14, 0x0, 0xc4, 0xe1, 0xb, 0x9f, 0x60,
+    0xb8, 0xe4
 };
 
 
@@ -723,14 +730,18 @@ static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
     {.bitmap_index = 2842, .adv_w = 75, .box_w = 5, .box_h = 13, .ofs_x = 0, .ofs_y = -3},
     {.bitmap_index = 2875, .adv_w = 75, .box_w = 2, .box_h = 13, .ofs_x = 1, .ofs_y = -3},
     {.bitmap_index = 2888, .adv_w = 75, .box_w = 5, .box_h = 13, .ofs_x = 0, .ofs_y = -3},
-    {.bitmap_index = 2921, .adv_w = 90, .box_w = 6, .box_h = 3, .ofs_x = 0, .ofs_y = 3}
+    {.bitmap_index = 2921, .adv_w = 90, .box_w = 6, .box_h = 3, .ofs_x = 0, .ofs_y = 3},
+    {.bitmap_index = 2930, .adv_w = 36, .box_w = 3, .box_h = 4, .ofs_x = -1, .ofs_y = 6},
+    {.bitmap_index = 2936, .adv_w = 55, .box_w = 5, .box_h = 4, .ofs_x = -1, .ofs_y = 7}
 };
 
 /*---------------------
  *  CHARACTER MAPPING
  *--------------------*/
 
-
+static const uint16_t unicode_list_1[] = {
+    0x0, 0x4
+};
 
 /*Collect the unicode lists and glyph_id offsets*/
 static const lv_font_fmt_txt_cmap_t cmaps[] =
@@ -738,6 +749,10 @@ static const lv_font_fmt_txt_cmap_t cmaps[] =
     {
         .range_start = 32, .range_length = 95, .glyph_id_start = 1,
         .unicode_list = NULL, .glyph_id_ofs_list = NULL, .list_length = 0, .type = LV_FONT_FMT_TXT_CMAP_FORMAT0_TINY
+    },
+    {
+        .range_start = 8217, .range_length = 5, .glyph_id_start = 96,
+        .unicode_list = unicode_list_1, .glyph_id_ofs_list = NULL, .list_length = 2, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
     }
 };
 
@@ -1498,7 +1513,7 @@ static lv_font_fmt_txt_dsc_t font_dsc = {
     .cmaps = cmaps,
     .kern_dsc = &kern_pairs,
     .kern_scale = 16,
-    .cmap_num = 1,
+    .cmap_num = 2,
     .bpp = 4,
     .kern_classes = 0,
     .bitmap_format = 0,

@@ -17,7 +17,7 @@ extern "C" {
 #define UI_COMP_SETTING_PANEL_SETTING_LABEL 1
 #define UI_COMP_SETTING_PANEL_SETTING_VALUE 2
 #define _UI_COMP_SETTING_PANEL_NUM 3
-lv_obj_t *ui_Setting_Panel_create(lv_obj_t *comp_parent);
+lv_obj_t * ui_Setting_Panel_create(lv_obj_t * comp_parent);
 
 #ifdef __cplusplus
 } /*extern "C"*/
