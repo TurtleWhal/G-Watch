@@ -475,3 +475,24 @@ void StepGraphHandle()
 {
   StepGraphTriggered = 1;
 }
+
+void testbutton1(lv_event_t *e)
+{
+  Log.verboseln("test1");
+  // BTsendf("{t:\"notify\", tel:\"%s\", n:\"REPLY\", msg:\"Testmsg\"}", "+12069790103");
+}
+
+void testbutton2(lv_event_t *e)
+{
+  Log.verboseln("test2");
+}
+
+void testbutton3(lv_event_t *e)
+{
+  Log.verboseln("test3");
+}
+
+void testbutton4(lv_event_t *e)
+{
+  Log.verboseln("test4");
+}

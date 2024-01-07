@@ -311,12 +311,16 @@ void ui_Debug_screen_init(void);
 void ui_event_Debug( lv_event_t * e);
 extern lv_obj_t *ui_Debug;
 extern lv_obj_t *ui_Container1;
+void ui_event_Debug_Button_1( lv_event_t * e);
 extern lv_obj_t *ui_Debug_Button_1;
 extern lv_obj_t *ui_Debug_Button_Label_1;
+void ui_event_Debug_Button_2( lv_event_t * e);
 extern lv_obj_t *ui_Debug_Button_2;
 extern lv_obj_t *ui_Debug_Button_Label_2;
+void ui_event_Debug_Button_3( lv_event_t * e);
 extern lv_obj_t *ui_Debug_Button_3;
 extern lv_obj_t *ui_Debug_Button_Label_3;
+void ui_event_Debug_Button_4( lv_event_t * e);
 extern lv_obj_t *ui_Debug_Button_4;
 extern lv_obj_t *ui_Debug_Button_Label_4;
 // SCREEN: ui_Apps

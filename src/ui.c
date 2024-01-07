@@ -312,12 +312,16 @@ void ui_Debug_screen_init(void);
 void ui_event_Debug( lv_event_t * e);
 lv_obj_t *ui_Debug;
 lv_obj_t *ui_Container1;
+void ui_event_Debug_Button_1( lv_event_t * e);
 lv_obj_t *ui_Debug_Button_1;
 lv_obj_t *ui_Debug_Button_Label_1;
+void ui_event_Debug_Button_2( lv_event_t * e);
 lv_obj_t *ui_Debug_Button_2;
 lv_obj_t *ui_Debug_Button_Label_2;
+void ui_event_Debug_Button_3( lv_event_t * e);
 lv_obj_t *ui_Debug_Button_3;
 lv_obj_t *ui_Debug_Button_Label_3;
+void ui_event_Debug_Button_4( lv_event_t * e);
 lv_obj_t *ui_Debug_Button_4;
 lv_obj_t *ui_Debug_Button_Label_4;
 
@@ -1528,6 +1532,30 @@ void ui_event_Debug( lv_event_t * e) {
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Apps, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Apps_screen_init);
+}
+}
+void ui_event_Debug_Button_1( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      testbutton1( e );
+}
+}
+void ui_event_Debug_Button_2( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      testbutton2( e );
+}
+}
+void ui_event_Debug_Button_3( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      testbutton3( e );
+}
+}
+void ui_event_Debug_Button_4( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      testbutton4( e );
 }
 }
 void ui_event_Apps( lv_event_t * e) {

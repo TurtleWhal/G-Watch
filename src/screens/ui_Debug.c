@@ -71,6 +71,10 @@ lv_obj_set_height( ui_Debug_Button_Label_4, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( ui_Debug_Button_Label_4, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Debug_Button_Label_4,"test 4");
 
+lv_obj_add_event_cb(ui_Debug_Button_1, ui_event_Debug_Button_1, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Debug_Button_2, ui_event_Debug_Button_2, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Debug_Button_3, ui_event_Debug_Button_3, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Debug_Button_4, ui_event_Debug_Button_4, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Debug, ui_event_Debug, LV_EVENT_ALL, NULL);
 
 }

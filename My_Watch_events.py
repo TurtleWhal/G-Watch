@@ -422,3 +422,19 @@ def SetDeafaultDown(event_struct):
 def NotificationReply(event_struct):
     return
 
+
+def test1(event_struct):
+    return
+
+
+def testbutton1(event_struct):
+    return
+
+
+def testbutton2(event_struct):
+    return
+
+
+def testbutton3(event_struct):
+    return
+
