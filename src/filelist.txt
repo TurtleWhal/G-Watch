@@ -11,6 +11,7 @@ screens/ui_Alarm_Going_Off.c
 screens/ui_Stopwatch.c
 screens/ui_Timers.c
 screens/ui_Settings.c
+screens/ui_Debug.c
 screens/ui_Apps.c
 screens/ui_Calculator.c
 screens/ui_Compass.c
@@ -46,9 +47,9 @@ images/ui_img_playpause_button_png.c
 images/ui_img_arrow_png.c
 images/ui_img_power_icon_png.c
 images/ui_img_calculator_icon_nobackground_png.c
-images/ui_img_compass_png.c
 images/ui_img_settings_gear_png.c
 images/ui_img_mostly_cloudy_png.c
+images/ui_img_compass_png.c
 images/ui_img_flashlight_png.c
 images/ui_img_play_button_png.c
 images/ui_img_album_cover_png.c

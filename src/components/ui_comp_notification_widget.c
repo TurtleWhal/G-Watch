@@ -6,123 +6,121 @@
 #include "../ui.h"
 
 
-void ui_event_comp_Notification_Widget_Main(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    lv_obj_t ** comp_Notification_Widget = lv_event_get_user_data(e);
-    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
-        lv_indev_wait_release(lv_indev_get_act());
-        DeleteNotification(e);
-    }
-    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
-        lv_indev_wait_release(lv_indev_get_act());
-        DeleteNotification(e);
-    }
-    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP) {
-        lv_indev_wait_release(lv_indev_get_act());
-        DeleteNotification(e);
-    }
-    if(event_code == LV_EVENT_CLICKED) {
-        NotificationExpand(e);
-    }
+void ui_event_comp_Notification_Widget_Main( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+lv_obj_t **comp_Notification_Widget = lv_event_get_user_data(e);
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      DeleteNotification( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      DeleteNotification( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      DeleteNotification( e );
+}
+if ( event_code == LV_EVENT_CLICKED) {
+      NotificationExpand( e );
+}
 }
 
 // COMPONENT Notification Widget
 
-lv_obj_t * ui_Notification_Widget_create(lv_obj_t * comp_parent)
-{
+lv_obj_t *ui_Notification_Widget_create(lv_obj_t *comp_parent) {
 
-    lv_obj_t * cui_Notification_Widget;
-    cui_Notification_Widget = lv_obj_create(comp_parent);
-    lv_obj_remove_style_all(cui_Notification_Widget);
-    lv_obj_set_width(cui_Notification_Widget, 200);
-    lv_obj_set_height(cui_Notification_Widget, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(cui_Notification_Widget, -8);
-    lv_obj_set_y(cui_Notification_Widget, 46);
-    lv_obj_set_align(cui_Notification_Widget, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(cui_Notification_Widget, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+lv_obj_t *cui_Notification_Widget;
+cui_Notification_Widget = lv_obj_create(comp_parent);
+lv_obj_remove_style_all(cui_Notification_Widget);
+lv_obj_set_width( cui_Notification_Widget, 200);
+lv_obj_set_height( cui_Notification_Widget, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( cui_Notification_Widget, -8 );
+lv_obj_set_y( cui_Notification_Widget, 46 );
+lv_obj_set_align( cui_Notification_Widget, LV_ALIGN_CENTER );
+lv_obj_clear_flag( cui_Notification_Widget, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-    lv_obj_t * cui_Main;
-    cui_Main = lv_obj_create(cui_Notification_Widget);
-    lv_obj_set_width(cui_Main, 180);
-    lv_obj_set_height(cui_Main, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(cui_Main, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(cui_Main, LV_FLEX_FLOW_COLUMN);
-    lv_obj_set_flex_align(cui_Main, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
-    lv_obj_clear_flag(cui_Main, LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_radius(cui_Main, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_clip_corner(cui_Main, true, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_left(cui_Main, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_right(cui_Main, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_top(cui_Main, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_bottom(cui_Main, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+lv_obj_t *cui_Main;
+cui_Main = lv_obj_create(cui_Notification_Widget);
+lv_obj_set_width( cui_Main, 180);
+lv_obj_set_height( cui_Main, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( cui_Main, LV_ALIGN_CENTER );
+lv_obj_set_flex_flow(cui_Main,LV_FLEX_FLOW_COLUMN);
+lv_obj_set_flex_align(cui_Main, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
+lv_obj_clear_flag( cui_Main, LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(cui_Main, 30, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_clip_corner(cui_Main, true, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_left(cui_Main, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(cui_Main, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(cui_Main, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(cui_Main, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    lv_obj_t * cui_Source;
-    cui_Source = lv_label_create(cui_Main);
-    lv_obj_set_width(cui_Source, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(cui_Source, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(cui_Source, LV_ALIGN_CENTER);
-    lv_label_set_text(cui_Source, "undefined source");
-    lv_obj_add_flag(cui_Source, LV_OBJ_FLAG_HIDDEN);     /// Flags
+lv_obj_t *cui_Source;
+cui_Source = lv_label_create(cui_Main);
+lv_obj_set_width( cui_Source, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( cui_Source, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( cui_Source, LV_ALIGN_CENTER );
+lv_label_set_text(cui_Source,"undefined source");
+lv_obj_add_flag( cui_Source, LV_OBJ_FLAG_HIDDEN );   /// Flags
 
-    lv_obj_t * cui_Image_Panel;
-    cui_Image_Panel = lv_obj_create(cui_Main);
-    lv_obj_set_width(cui_Image_Panel, 48);
-    lv_obj_set_height(cui_Image_Panel, 48);
-    lv_obj_set_align(cui_Image_Panel, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(cui_Image_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_radius(cui_Image_Panel, 24, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(cui_Image_Panel, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(cui_Image_Panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_clip_corner(cui_Image_Panel, true, LV_PART_MAIN | LV_STATE_DEFAULT);
+lv_obj_t *cui_Image_Panel;
+cui_Image_Panel = lv_obj_create(cui_Main);
+lv_obj_set_width( cui_Image_Panel, 48);
+lv_obj_set_height( cui_Image_Panel, 48);
+lv_obj_set_align( cui_Image_Panel, LV_ALIGN_CENTER );
+lv_obj_clear_flag( cui_Image_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(cui_Image_Panel, 24, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(cui_Image_Panel, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(cui_Image_Panel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_clip_corner(cui_Image_Panel, true, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    lv_obj_t * cui_Image;
-    cui_Image = lv_img_create(cui_Image_Panel);
-    lv_obj_set_width(cui_Image, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(cui_Image, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(cui_Image, LV_ALIGN_CENTER);
-    lv_obj_add_flag(cui_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(cui_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_zoom(cui_Image, 290);
+lv_obj_t *cui_Image;
+cui_Image = lv_img_create(cui_Image_Panel);
+lv_img_set_src(cui_Image, &ui_img_bellnobackground_png);
+lv_obj_set_width( cui_Image, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( cui_Image, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( cui_Image, LV_ALIGN_CENTER );
+lv_obj_add_flag( cui_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( cui_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_zoom(cui_Image,290);
 
-    lv_obj_t * cui_Title;
-    cui_Title = lv_label_create(cui_Main);
-    lv_obj_set_width(cui_Title, 105);
-    lv_obj_set_height(cui_Title, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(cui_Title, LV_ALIGN_CENTER);
-    lv_label_set_text(cui_Title, "Dad");
-    lv_obj_add_flag(cui_Title, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK);     /// Flags
-    lv_obj_set_style_text_font(cui_Title, &ui_font_Comfortaa_12, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_left(cui_Title, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_right(cui_Title, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_top(cui_Title, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_bottom(cui_Title, -4, LV_PART_MAIN | LV_STATE_DEFAULT);
+lv_obj_t *cui_Title;
+cui_Title = lv_label_create(cui_Main);
+lv_obj_set_width( cui_Title, 105);
+lv_obj_set_height( cui_Title, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( cui_Title, LV_ALIGN_CENTER );
+lv_label_set_text(cui_Title,"Dad");
+lv_obj_add_flag( cui_Title, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK );   /// Flags
+lv_obj_set_style_text_font(cui_Title, &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_left(cui_Title, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(cui_Title, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(cui_Title, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(cui_Title, -4, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    lv_obj_t * cui_Text;
-    cui_Text = lv_label_create(cui_Main);
-    lv_obj_set_width(cui_Text, 110);
-    lv_obj_set_height(cui_Text, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(cui_Text, LV_ALIGN_CENTER);
-    lv_label_set_text(cui_Text, "Hello!");
-    lv_obj_set_style_text_font(cui_Text, &ui_font_Comfortaa_12, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_left(cui_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_right(cui_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_top(cui_Text, -3, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_bottom(cui_Text, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+lv_obj_t *cui_Text;
+cui_Text = lv_label_create(cui_Main);
+lv_obj_set_width( cui_Text, 110);
+lv_obj_set_height( cui_Text, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( cui_Text, LV_ALIGN_CENTER );
+lv_label_set_text(cui_Text,"Hello!");
+lv_obj_set_style_text_font(cui_Text, &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_left(cui_Text, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(cui_Text, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(cui_Text, -3, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(cui_Text, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    lv_obj_t ** children = lv_mem_alloc(sizeof(lv_obj_t *) * _UI_COMP_NOTIFICATION_WIDGET_NUM);
-    children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET] = cui_Notification_Widget;
-    children[UI_COMP_NOTIFICATION_WIDGET_MAIN] = cui_Main;
-    children[UI_COMP_NOTIFICATION_WIDGET_MAIN_SOURCE] = cui_Source;
-    children[UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL] = cui_Image_Panel;
-    children[UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE] = cui_Image;
-    children[UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE] = cui_Title;
-    children[UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT] = cui_Text;
-    lv_obj_add_event_cb(cui_Notification_Widget, get_component_child_event_cb, LV_EVENT_GET_COMP_CHILD, children);
-    lv_obj_add_event_cb(cui_Notification_Widget, del_component_child_event_cb, LV_EVENT_DELETE, children);
-    lv_obj_add_event_cb(cui_Main, ui_event_comp_Notification_Widget_Main, LV_EVENT_ALL, children);
-    ui_comp_Notification_Widget_create_hook(cui_Notification_Widget);
-    return cui_Notification_Widget;
+lv_obj_t ** children = lv_mem_alloc(sizeof(lv_obj_t *) * _UI_COMP_NOTIFICATION_WIDGET_NUM);
+children[UI_COMP_NOTIFICATION_WIDGET_NOTIFICATION_WIDGET] = cui_Notification_Widget;
+children[UI_COMP_NOTIFICATION_WIDGET_MAIN] = cui_Main;
+children[UI_COMP_NOTIFICATION_WIDGET_MAIN_SOURCE] = cui_Source;
+children[UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL] = cui_Image_Panel;
+children[UI_COMP_NOTIFICATION_WIDGET_MAIN_IMAGE_PANEL_IMAGE] = cui_Image;
+children[UI_COMP_NOTIFICATION_WIDGET_MAIN_TITLE] = cui_Title;
+children[UI_COMP_NOTIFICATION_WIDGET_MAIN_TEXT] = cui_Text;
+lv_obj_add_event_cb(cui_Notification_Widget, get_component_child_event_cb, LV_EVENT_GET_COMP_CHILD, children);
+lv_obj_add_event_cb(cui_Notification_Widget, del_component_child_event_cb, LV_EVENT_DELETE, children);
+lv_obj_add_event_cb(cui_Main, ui_event_comp_Notification_Widget_Main, LV_EVENT_ALL, children);
+ui_comp_Notification_Widget_create_hook(cui_Notification_Widget);
+return cui_Notification_Widget; 
 }
 

@@ -7,67 +7,67 @@
 
 void ui_SimplisticWatchFace_screen_init(void)
 {
-    ui_SimplisticWatchFace = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_SimplisticWatchFace, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_SimplisticWatchFace, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_SimplisticWatchFace, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_SimplisticWatchFace = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_SimplisticWatchFace, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_bg_color(ui_SimplisticWatchFace, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_SimplisticWatchFace, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Simplistic_Minute_Hand_Shadow = lv_img_create(ui_SimplisticWatchFace);
-    lv_img_set_src(ui_Simplistic_Minute_Hand_Shadow, &ui_img_simplisticminutehand_png);
-    lv_obj_set_width(ui_Simplistic_Minute_Hand_Shadow, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Simplistic_Minute_Hand_Shadow, LV_SIZE_CONTENT);    /// 6
-    lv_obj_set_x(ui_Simplistic_Minute_Hand_Shadow, 2);
-    lv_obj_set_y(ui_Simplistic_Minute_Hand_Shadow, -61);
-    lv_obj_set_align(ui_Simplistic_Minute_Hand_Shadow, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Simplistic_Minute_Hand_Shadow, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Simplistic_Minute_Hand_Shadow, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_pivot(ui_Simplistic_Minute_Hand_Shadow, 12, 137);
-    lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, -300);
-    lv_img_set_zoom(ui_Simplistic_Minute_Hand_Shadow, 200);
-    lv_obj_set_style_img_recolor(ui_Simplistic_Minute_Hand_Shadow, lv_color_hex(0xC7C4C7), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_img_recolor_opa(ui_Simplistic_Minute_Hand_Shadow, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Simplistic_Minute_Hand_Shadow = lv_img_create(ui_SimplisticWatchFace);
+lv_img_set_src(ui_Simplistic_Minute_Hand_Shadow, &ui_img_simplisticminutehand_png);
+lv_obj_set_width( ui_Simplistic_Minute_Hand_Shadow, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Simplistic_Minute_Hand_Shadow, LV_SIZE_CONTENT);   /// 6
+lv_obj_set_x( ui_Simplistic_Minute_Hand_Shadow, 2 );
+lv_obj_set_y( ui_Simplistic_Minute_Hand_Shadow, -61 );
+lv_obj_set_align( ui_Simplistic_Minute_Hand_Shadow, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Simplistic_Minute_Hand_Shadow, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Simplistic_Minute_Hand_Shadow, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_pivot(ui_Simplistic_Minute_Hand_Shadow,12,137);
+lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow,-300);
+lv_img_set_zoom(ui_Simplistic_Minute_Hand_Shadow,200);
+lv_obj_set_style_img_recolor(ui_Simplistic_Minute_Hand_Shadow, lv_color_hex(0xC7C4C7), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_img_recolor_opa(ui_Simplistic_Minute_Hand_Shadow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Simplistic_Minute_Hand = lv_img_create(ui_SimplisticWatchFace);
-    lv_img_set_src(ui_Simplistic_Minute_Hand, &ui_img_simplisticminutehand_png);
-    lv_obj_set_width(ui_Simplistic_Minute_Hand, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Simplistic_Minute_Hand, LV_SIZE_CONTENT);    /// 6
-    lv_obj_set_x(ui_Simplistic_Minute_Hand, 0);
-    lv_obj_set_y(ui_Simplistic_Minute_Hand, -63);
-    lv_obj_set_align(ui_Simplistic_Minute_Hand, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Simplistic_Minute_Hand, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Simplistic_Minute_Hand, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_pivot(ui_Simplistic_Minute_Hand, 12, 137);
-    lv_img_set_angle(ui_Simplistic_Minute_Hand, -300);
-    lv_img_set_zoom(ui_Simplistic_Minute_Hand, 200);
+ui_Simplistic_Minute_Hand = lv_img_create(ui_SimplisticWatchFace);
+lv_img_set_src(ui_Simplistic_Minute_Hand, &ui_img_simplisticminutehand_png);
+lv_obj_set_width( ui_Simplistic_Minute_Hand, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Simplistic_Minute_Hand, LV_SIZE_CONTENT);   /// 6
+lv_obj_set_x( ui_Simplistic_Minute_Hand, 0 );
+lv_obj_set_y( ui_Simplistic_Minute_Hand, -63 );
+lv_obj_set_align( ui_Simplistic_Minute_Hand, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Simplistic_Minute_Hand, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Simplistic_Minute_Hand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_pivot(ui_Simplistic_Minute_Hand,12,137);
+lv_img_set_angle(ui_Simplistic_Minute_Hand,-300);
+lv_img_set_zoom(ui_Simplistic_Minute_Hand,200);
 
-    ui_Simplistic_Hour_Hand_Shadow = lv_img_create(ui_SimplisticWatchFace);
-    lv_img_set_src(ui_Simplistic_Hour_Hand_Shadow, &ui_img_simplistichourhand_png);
-    lv_obj_set_width(ui_Simplistic_Hour_Hand_Shadow, LV_SIZE_CONTENT);   /// 25
-    lv_obj_set_height(ui_Simplistic_Hour_Hand_Shadow, LV_SIZE_CONTENT);    /// 99
-    lv_obj_set_x(ui_Simplistic_Hour_Hand_Shadow, 2);
-    lv_obj_set_y(ui_Simplistic_Hour_Hand_Shadow, -43);
-    lv_obj_set_align(ui_Simplistic_Hour_Hand_Shadow, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Simplistic_Hour_Hand_Shadow, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Simplistic_Hour_Hand_Shadow, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_pivot(ui_Simplistic_Hour_Hand_Shadow, 12, 104);
-    lv_img_set_angle(ui_Simplistic_Hour_Hand_Shadow, 1200);
-    lv_img_set_zoom(ui_Simplistic_Hour_Hand_Shadow, 200);
-    lv_obj_set_style_img_recolor(ui_Simplistic_Hour_Hand_Shadow, lv_color_hex(0xC7C4C7), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_img_recolor_opa(ui_Simplistic_Hour_Hand_Shadow, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Simplistic_Hour_Hand_Shadow = lv_img_create(ui_SimplisticWatchFace);
+lv_img_set_src(ui_Simplistic_Hour_Hand_Shadow, &ui_img_simplistichourhand_png);
+lv_obj_set_width( ui_Simplistic_Hour_Hand_Shadow, LV_SIZE_CONTENT);  /// 25
+lv_obj_set_height( ui_Simplistic_Hour_Hand_Shadow, LV_SIZE_CONTENT);   /// 99
+lv_obj_set_x( ui_Simplistic_Hour_Hand_Shadow, 2 );
+lv_obj_set_y( ui_Simplistic_Hour_Hand_Shadow, -43 );
+lv_obj_set_align( ui_Simplistic_Hour_Hand_Shadow, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Simplistic_Hour_Hand_Shadow, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Simplistic_Hour_Hand_Shadow, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_pivot(ui_Simplistic_Hour_Hand_Shadow,12,104);
+lv_img_set_angle(ui_Simplistic_Hour_Hand_Shadow,1200);
+lv_img_set_zoom(ui_Simplistic_Hour_Hand_Shadow,200);
+lv_obj_set_style_img_recolor(ui_Simplistic_Hour_Hand_Shadow, lv_color_hex(0xC7C4C7), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_img_recolor_opa(ui_Simplistic_Hour_Hand_Shadow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Simplistic_Hour_Hand = lv_img_create(ui_SimplisticWatchFace);
-    lv_img_set_src(ui_Simplistic_Hour_Hand, &ui_img_simplistichourhand_png);
-    lv_obj_set_width(ui_Simplistic_Hour_Hand, LV_SIZE_CONTENT);   /// 25
-    lv_obj_set_height(ui_Simplistic_Hour_Hand, LV_SIZE_CONTENT);    /// 99
-    lv_obj_set_x(ui_Simplistic_Hour_Hand, 0);
-    lv_obj_set_y(ui_Simplistic_Hour_Hand, -45);
-    lv_obj_set_align(ui_Simplistic_Hour_Hand, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Simplistic_Hour_Hand, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Simplistic_Hour_Hand, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_pivot(ui_Simplistic_Hour_Hand, 12, 104);
-    lv_img_set_angle(ui_Simplistic_Hour_Hand, 1200);
-    lv_img_set_zoom(ui_Simplistic_Hour_Hand, 200);
+ui_Simplistic_Hour_Hand = lv_img_create(ui_SimplisticWatchFace);
+lv_img_set_src(ui_Simplistic_Hour_Hand, &ui_img_simplistichourhand_png);
+lv_obj_set_width( ui_Simplistic_Hour_Hand, LV_SIZE_CONTENT);  /// 25
+lv_obj_set_height( ui_Simplistic_Hour_Hand, LV_SIZE_CONTENT);   /// 99
+lv_obj_set_x( ui_Simplistic_Hour_Hand, 0 );
+lv_obj_set_y( ui_Simplistic_Hour_Hand, -45 );
+lv_obj_set_align( ui_Simplistic_Hour_Hand, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Simplistic_Hour_Hand, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Simplistic_Hour_Hand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_pivot(ui_Simplistic_Hour_Hand,12,104);
+lv_img_set_angle(ui_Simplistic_Hour_Hand,1200);
+lv_img_set_zoom(ui_Simplistic_Hour_Hand,200);
 
-    lv_obj_add_event_cb(ui_SimplisticWatchFace, ui_event_SimplisticWatchFace, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_SimplisticWatchFace, ui_event_SimplisticWatchFace, LV_EVENT_ALL, NULL);
 
 }

@@ -7,211 +7,206 @@
 
 void ui_Notification_Expand_screen_init(void)
 {
-    ui_Notification_Expand = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_Notification_Expand, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_add_event_cb(ui_Notification_Expand, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Notification_Expand);
+ui_Notification_Expand = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_Notification_Expand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Notification_Expand, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Notification_Expand);
 
-    ui_Notification_Expand_Source = lv_label_create(ui_Notification_Expand);
-    lv_obj_set_width(ui_Notification_Expand_Source, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Notification_Expand_Source, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Notification_Expand_Source, 0);
-    lv_obj_set_y(ui_Notification_Expand_Source, 95);
-    lv_obj_set_align(ui_Notification_Expand_Source, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Notification_Expand_Source, "Gmail\n12:34 am");
-    lv_obj_set_style_text_color(ui_Notification_Expand_Source, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Notification_Expand_Source, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_align(ui_Notification_Expand_Source, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Notification_Expand_Source, &ui_font_Comfortaa_12, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Source = lv_label_create(ui_Notification_Expand);
+lv_obj_set_width( ui_Notification_Expand_Source, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Notification_Expand_Source, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Notification_Expand_Source, 0 );
+lv_obj_set_y( ui_Notification_Expand_Source, 95 );
+lv_obj_set_align( ui_Notification_Expand_Source, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Notification_Expand_Source,"Gmail\n12:34 am");
+lv_obj_set_style_text_color(ui_Notification_Expand_Source, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Notification_Expand_Source, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_align(ui_Notification_Expand_Source, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Notification_Expand_Source, &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Expand_Text_Box = lv_obj_create(ui_Notification_Expand);
-    lv_obj_remove_style_all(ui_Notification_Expand_Text_Box);
-    lv_obj_set_width(ui_Notification_Expand_Text_Box, 184);
-    lv_obj_set_height(ui_Notification_Expand_Text_Box, 150);
-    lv_obj_set_align(ui_Notification_Expand_Text_Box, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Notification_Expand_Text_Box, LV_FLEX_FLOW_COLUMN);
-    lv_obj_set_flex_align(ui_Notification_Expand_Text_Box, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
-    lv_obj_set_scrollbar_mode(ui_Notification_Expand_Text_Box, LV_SCROLLBAR_MODE_ON);
-    lv_obj_set_scroll_dir(ui_Notification_Expand_Text_Box, LV_DIR_VER);
-    lv_obj_set_style_outline_color(ui_Notification_Expand_Text_Box, lv_color_hex(0x4C4C4C),
-                                   LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_opa(ui_Notification_Expand_Text_Box, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_width(ui_Notification_Expand_Text_Box, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_outline_pad(ui_Notification_Expand_Text_Box, 2, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Text_Box = lv_obj_create(ui_Notification_Expand);
+lv_obj_remove_style_all(ui_Notification_Expand_Text_Box);
+lv_obj_set_width( ui_Notification_Expand_Text_Box, 184);
+lv_obj_set_height( ui_Notification_Expand_Text_Box, 150);
+lv_obj_set_align( ui_Notification_Expand_Text_Box, LV_ALIGN_CENTER );
+lv_obj_set_flex_flow(ui_Notification_Expand_Text_Box,LV_FLEX_FLOW_COLUMN);
+lv_obj_set_flex_align(ui_Notification_Expand_Text_Box, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
+lv_obj_set_scrollbar_mode(ui_Notification_Expand_Text_Box, LV_SCROLLBAR_MODE_ON);
+lv_obj_set_scroll_dir(ui_Notification_Expand_Text_Box, LV_DIR_VER);
+lv_obj_set_style_outline_color(ui_Notification_Expand_Text_Box, lv_color_hex(0x4C4C4C), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_outline_opa(ui_Notification_Expand_Text_Box, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_width(ui_Notification_Expand_Text_Box, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_pad(ui_Notification_Expand_Text_Box, 2, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Expand_Title = lv_label_create(ui_Notification_Expand_Text_Box);
-    lv_obj_set_width(ui_Notification_Expand_Title, lv_pct(100));
-    lv_obj_set_height(ui_Notification_Expand_Title, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Notification_Expand_Title, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Notification_Expand_Title, "Eden Jordan - Gmail calendar event\n");
-    lv_obj_set_style_text_align(ui_Notification_Expand_Title, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Notification_Expand_Title, &ui_font_Music_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Title = lv_label_create(ui_Notification_Expand_Text_Box);
+lv_obj_set_width( ui_Notification_Expand_Title, lv_pct(100));
+lv_obj_set_height( ui_Notification_Expand_Title, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Notification_Expand_Title, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Notification_Expand_Title,"Eden Jordan - Gmail calendar event\n");
+lv_obj_set_style_text_align(ui_Notification_Expand_Title, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Notification_Expand_Title, &ui_font_Music_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Expand_Text_Divider = lv_obj_create(ui_Notification_Expand_Text_Box);
-    lv_obj_set_height(ui_Notification_Expand_Text_Divider, 10);
-    lv_obj_set_width(ui_Notification_Expand_Text_Divider, lv_pct(100));
-    lv_obj_set_align(ui_Notification_Expand_Text_Divider, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Notification_Expand_Text_Divider, LV_OBJ_FLAG_HIDDEN);     /// Flags
-    lv_obj_clear_flag(ui_Notification_Expand_Text_Divider, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_pad_left(ui_Notification_Expand_Text_Divider, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_right(ui_Notification_Expand_Text_Divider, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_top(ui_Notification_Expand_Text_Divider, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_bottom(ui_Notification_Expand_Text_Divider, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Text_Divider = lv_obj_create(ui_Notification_Expand_Text_Box);
+lv_obj_set_height( ui_Notification_Expand_Text_Divider, 10);
+lv_obj_set_width( ui_Notification_Expand_Text_Divider, lv_pct(100));
+lv_obj_set_align( ui_Notification_Expand_Text_Divider, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Notification_Expand_Text_Divider, LV_OBJ_FLAG_HIDDEN );   /// Flags
+lv_obj_clear_flag( ui_Notification_Expand_Text_Divider, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_pad_left(ui_Notification_Expand_Text_Divider, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(ui_Notification_Expand_Text_Divider, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(ui_Notification_Expand_Text_Divider, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(ui_Notification_Expand_Text_Divider, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Expand_Text = lv_label_create(ui_Notification_Expand_Text_Box);
-    lv_obj_set_width(ui_Notification_Expand_Text, lv_pct(100));
-    lv_obj_set_height(ui_Notification_Expand_Text, LV_SIZE_CONTENT);    /// 100
-    lv_label_set_text(ui_Notification_Expand_Text,
-                      "\"Writings not that easy, but Grammarly can help. This sentence is grammatically correct but its wordy and hard to read, it undermines the writer’s message and the word choice is bland. Grammarly’s cutting edge technology helps you craft compelling understandable that makes an impact on your reader. Much better.”\n");
-    lv_obj_add_flag(ui_Notification_Expand_Text, LV_OBJ_FLAG_CLICKABLE);     /// Flags
-    lv_obj_clear_flag(ui_Notification_Expand_Text, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_text_align(ui_Notification_Expand_Text, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Notification_Expand_Text, &ui_font_Music_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Text = lv_label_create(ui_Notification_Expand_Text_Box);
+lv_obj_set_width( ui_Notification_Expand_Text, lv_pct(100));
+lv_obj_set_height( ui_Notification_Expand_Text, LV_SIZE_CONTENT);   /// 100
+lv_label_set_text(ui_Notification_Expand_Text,"\"Writings not that easy, but Grammarly can help. This sentence is grammatically correct but its wordy and hard to read, it undermines the writer’s message and the word choice is bland. Grammarly’s cutting edge technology helps you craft compelling understandable that makes an impact on your reader. Much better.”\n");
+lv_obj_add_flag( ui_Notification_Expand_Text, LV_OBJ_FLAG_CLICKABLE );   /// Flags
+lv_obj_clear_flag( ui_Notification_Expand_Text, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_text_align(ui_Notification_Expand_Text, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Notification_Expand_Text, &ui_font_Music_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Expand_Reply_Button = lv_btn_create(ui_Notification_Expand_Text_Box);
-    lv_obj_set_height(ui_Notification_Expand_Reply_Button, 20);
-    lv_obj_set_width(ui_Notification_Expand_Reply_Button, lv_pct(100));
-    lv_obj_set_align(ui_Notification_Expand_Reply_Button, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Notification_Expand_Reply_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Notification_Expand_Reply_Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+ui_Notification_Expand_Reply_Button = lv_btn_create(ui_Notification_Expand_Text_Box);
+lv_obj_set_height( ui_Notification_Expand_Reply_Button, 20);
+lv_obj_set_width( ui_Notification_Expand_Reply_Button, lv_pct(100));
+lv_obj_set_align( ui_Notification_Expand_Reply_Button, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Notification_Expand_Reply_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_clear_flag( ui_Notification_Expand_Reply_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-    ui_Notification_Expand_Reply_Label = lv_label_create(ui_Notification_Expand_Reply_Button);
-    lv_obj_set_width(ui_Notification_Expand_Reply_Label, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Notification_Expand_Reply_Label, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Notification_Expand_Reply_Label, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Notification_Expand_Reply_Label, "Type a reply");
-    lv_obj_set_style_text_font(ui_Notification_Expand_Reply_Label, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Reply_Label = lv_label_create(ui_Notification_Expand_Reply_Button);
+lv_obj_set_width( ui_Notification_Expand_Reply_Label, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Notification_Expand_Reply_Label, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Notification_Expand_Reply_Label, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Notification_Expand_Reply_Label,"Type a reply");
+lv_obj_set_style_text_font(ui_Notification_Expand_Reply_Label, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Container2 = lv_obj_create(ui_Notification_Expand_Text_Box);
-    lv_obj_remove_style_all(ui_Container2);
-    lv_obj_set_height(ui_Container2, 2);
-    lv_obj_set_width(ui_Container2, lv_pct(100));
-    lv_obj_set_align(ui_Container2, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+ui_Container2 = lv_obj_create(ui_Notification_Expand_Text_Box);
+lv_obj_remove_style_all(ui_Container2);
+lv_obj_set_height( ui_Container2, 2);
+lv_obj_set_width( ui_Container2, lv_pct(100));
+lv_obj_set_align( ui_Container2, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Container2, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-    ui_Notification_Reply_Quick_Reply_Container = lv_obj_create(ui_Notification_Expand_Text_Box);
-    lv_obj_remove_style_all(ui_Notification_Reply_Quick_Reply_Container);
-    lv_obj_set_height(ui_Notification_Reply_Quick_Reply_Container, 20);
-    lv_obj_set_width(ui_Notification_Reply_Quick_Reply_Container, lv_pct(100));
-    lv_obj_set_align(ui_Notification_Reply_Quick_Reply_Container, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Notification_Reply_Quick_Reply_Container, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+ui_Notification_Reply_Quick_Reply_Container = lv_obj_create(ui_Notification_Expand_Text_Box);
+lv_obj_remove_style_all(ui_Notification_Reply_Quick_Reply_Container);
+lv_obj_set_height( ui_Notification_Reply_Quick_Reply_Container, 20);
+lv_obj_set_width( ui_Notification_Reply_Quick_Reply_Container, lv_pct(100));
+lv_obj_set_align( ui_Notification_Reply_Quick_Reply_Container, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Notification_Reply_Quick_Reply_Container, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-    ui_Notification_Expand_Quick_Reply_1 = lv_btn_create(ui_Notification_Reply_Quick_Reply_Container);
-    lv_obj_set_width(ui_Notification_Expand_Quick_Reply_1, lv_pct(33));
-    lv_obj_set_height(ui_Notification_Expand_Quick_Reply_1, lv_pct(100));
-    lv_obj_set_align(ui_Notification_Expand_Quick_Reply_1, LV_ALIGN_LEFT_MID);
-    lv_obj_add_flag(ui_Notification_Expand_Quick_Reply_1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Notification_Expand_Quick_Reply_1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+ui_Notification_Expand_Quick_Reply_1 = lv_btn_create(ui_Notification_Reply_Quick_Reply_Container);
+lv_obj_set_width( ui_Notification_Expand_Quick_Reply_1, lv_pct(33));
+lv_obj_set_height( ui_Notification_Expand_Quick_Reply_1, lv_pct(100));
+lv_obj_set_align( ui_Notification_Expand_Quick_Reply_1, LV_ALIGN_LEFT_MID );
+lv_obj_add_flag( ui_Notification_Expand_Quick_Reply_1, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_clear_flag( ui_Notification_Expand_Quick_Reply_1, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-    ui_Notification_Expand_Reply_Label1 = lv_label_create(ui_Notification_Expand_Quick_Reply_1);
-    lv_obj_set_width(ui_Notification_Expand_Reply_Label1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Notification_Expand_Reply_Label1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Notification_Expand_Reply_Label1, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Notification_Expand_Reply_Label1, "Ok");
-    lv_obj_set_style_text_font(ui_Notification_Expand_Reply_Label1, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Reply_Label1 = lv_label_create(ui_Notification_Expand_Quick_Reply_1);
+lv_obj_set_width( ui_Notification_Expand_Reply_Label1, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Notification_Expand_Reply_Label1, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Notification_Expand_Reply_Label1, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Notification_Expand_Reply_Label1,"Ok");
+lv_obj_set_style_text_font(ui_Notification_Expand_Reply_Label1, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Expand_Quick_Reply_2 = lv_btn_create(ui_Notification_Reply_Quick_Reply_Container);
-    lv_obj_set_width(ui_Notification_Expand_Quick_Reply_2, lv_pct(33));
-    lv_obj_set_height(ui_Notification_Expand_Quick_Reply_2, lv_pct(100));
-    lv_obj_set_align(ui_Notification_Expand_Quick_Reply_2, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Notification_Expand_Quick_Reply_2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Notification_Expand_Quick_Reply_2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+ui_Notification_Expand_Quick_Reply_2 = lv_btn_create(ui_Notification_Reply_Quick_Reply_Container);
+lv_obj_set_width( ui_Notification_Expand_Quick_Reply_2, lv_pct(33));
+lv_obj_set_height( ui_Notification_Expand_Quick_Reply_2, lv_pct(100));
+lv_obj_set_align( ui_Notification_Expand_Quick_Reply_2, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Notification_Expand_Quick_Reply_2, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_clear_flag( ui_Notification_Expand_Quick_Reply_2, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-    ui_Notification_Expand_Reply_Label2 = lv_label_create(ui_Notification_Expand_Quick_Reply_2);
-    lv_obj_set_width(ui_Notification_Expand_Reply_Label2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Notification_Expand_Reply_Label2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Notification_Expand_Reply_Label2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Notification_Expand_Reply_Label2, "Yes");
-    lv_obj_set_style_text_font(ui_Notification_Expand_Reply_Label2, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Reply_Label2 = lv_label_create(ui_Notification_Expand_Quick_Reply_2);
+lv_obj_set_width( ui_Notification_Expand_Reply_Label2, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Notification_Expand_Reply_Label2, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Notification_Expand_Reply_Label2, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Notification_Expand_Reply_Label2,"Yes");
+lv_obj_set_style_text_font(ui_Notification_Expand_Reply_Label2, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Expand_Quick_Reply_3 = lv_btn_create(ui_Notification_Reply_Quick_Reply_Container);
-    lv_obj_set_width(ui_Notification_Expand_Quick_Reply_3, lv_pct(33));
-    lv_obj_set_height(ui_Notification_Expand_Quick_Reply_3, lv_pct(100));
-    lv_obj_set_align(ui_Notification_Expand_Quick_Reply_3, LV_ALIGN_RIGHT_MID);
-    lv_obj_add_flag(ui_Notification_Expand_Quick_Reply_3, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Notification_Expand_Quick_Reply_3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+ui_Notification_Expand_Quick_Reply_3 = lv_btn_create(ui_Notification_Reply_Quick_Reply_Container);
+lv_obj_set_width( ui_Notification_Expand_Quick_Reply_3, lv_pct(33));
+lv_obj_set_height( ui_Notification_Expand_Quick_Reply_3, lv_pct(100));
+lv_obj_set_align( ui_Notification_Expand_Quick_Reply_3, LV_ALIGN_RIGHT_MID );
+lv_obj_add_flag( ui_Notification_Expand_Quick_Reply_3, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_clear_flag( ui_Notification_Expand_Quick_Reply_3, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-    ui_Notification_Expand_Reply_Label3 = lv_label_create(ui_Notification_Expand_Quick_Reply_3);
-    lv_obj_set_width(ui_Notification_Expand_Reply_Label3, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Notification_Expand_Reply_Label3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Notification_Expand_Reply_Label3, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Notification_Expand_Reply_Label3, "No");
-    lv_obj_set_style_text_font(ui_Notification_Expand_Reply_Label3, &ui_font_Comfortaa_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Reply_Label3 = lv_label_create(ui_Notification_Expand_Quick_Reply_3);
+lv_obj_set_width( ui_Notification_Expand_Reply_Label3, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Notification_Expand_Reply_Label3, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Notification_Expand_Reply_Label3, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Notification_Expand_Reply_Label3,"No");
+lv_obj_set_style_text_font(ui_Notification_Expand_Reply_Label3, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Expand_Image_Panel = lv_obj_create(ui_Notification_Expand);
-    lv_obj_set_width(ui_Notification_Expand_Image_Panel, 40);
-    lv_obj_set_height(ui_Notification_Expand_Image_Panel, 40);
-    lv_obj_set_x(ui_Notification_Expand_Image_Panel, -1);
-    lv_obj_set_y(ui_Notification_Expand_Image_Panel, -98);
-    lv_obj_set_align(ui_Notification_Expand_Image_Panel, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Notification_Expand_Image_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Notification_Expand_Image_Panel, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Notification_Expand_Image_Panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Expand_Image_Panel = lv_obj_create(ui_Notification_Expand);
+lv_obj_set_width( ui_Notification_Expand_Image_Panel, 40);
+lv_obj_set_height( ui_Notification_Expand_Image_Panel, 40);
+lv_obj_set_x( ui_Notification_Expand_Image_Panel, -1 );
+lv_obj_set_y( ui_Notification_Expand_Image_Panel, -98 );
+lv_obj_set_align( ui_Notification_Expand_Image_Panel, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Notification_Expand_Image_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_bg_color(ui_Notification_Expand_Image_Panel, lv_color_hex(0xFF7D00), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Notification_Expand_Image_Panel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Expand_Image = lv_img_create(ui_Notification_Expand_Image_Panel);
-    lv_img_set_src(ui_Notification_Expand_Image, &ui_img_bellnobackground_png);
-    lv_obj_set_width(ui_Notification_Expand_Image, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Notification_Expand_Image, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Notification_Expand_Image, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Notification_Expand_Image, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Notification_Expand_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_img_set_zoom(ui_Notification_Expand_Image, 230);
+ui_Notification_Expand_Image = lv_img_create(ui_Notification_Expand_Image_Panel);
+lv_img_set_src(ui_Notification_Expand_Image, &ui_img_bellnobackground_png);
+lv_obj_set_width( ui_Notification_Expand_Image, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Notification_Expand_Image, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Notification_Expand_Image, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Notification_Expand_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_Notification_Expand_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_zoom(ui_Notification_Expand_Image,230);
 
-    ui_Notification_Reply_Panel = lv_obj_create(ui_Notification_Expand);
-    lv_obj_set_width(ui_Notification_Reply_Panel, 250);
-    lv_obj_set_height(ui_Notification_Reply_Panel, 250);
-    lv_obj_set_x(ui_Notification_Reply_Panel, 0);
-    lv_obj_set_y(ui_Notification_Reply_Panel, 250);
-    lv_obj_set_align(ui_Notification_Reply_Panel, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Notification_Reply_Panel, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Notification_Reply_Panel, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Notification_Reply_Panel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+ui_Notification_Reply_Panel = lv_obj_create(ui_Notification_Expand);
+lv_obj_set_width( ui_Notification_Reply_Panel, 250);
+lv_obj_set_height( ui_Notification_Reply_Panel, 250);
+lv_obj_set_x( ui_Notification_Reply_Panel, 0 );
+lv_obj_set_y( ui_Notification_Reply_Panel, 250 );
+lv_obj_set_align( ui_Notification_Reply_Panel, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Notification_Reply_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_bg_color(ui_Notification_Reply_Panel, lv_color_hex(0x101418), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Notification_Reply_Panel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-    ui_Notification_Reply_Textarea = lv_textarea_create(ui_Notification_Reply_Panel);
-    lv_obj_set_width(ui_Notification_Reply_Textarea, 150);
-    lv_obj_set_height(ui_Notification_Reply_Textarea, 36);
-    lv_obj_set_x(ui_Notification_Reply_Textarea, 0);
-    lv_obj_set_y(ui_Notification_Reply_Textarea, -75);
-    lv_obj_set_align(ui_Notification_Reply_Textarea, LV_ALIGN_CENTER);
-    lv_textarea_set_max_length(ui_Notification_Reply_Textarea, 7);
-    lv_textarea_set_placeholder_text(ui_Notification_Reply_Textarea, "Type Your Reply");
+ui_Notification_Reply_Textarea = lv_textarea_create(ui_Notification_Reply_Panel);
+lv_obj_set_width( ui_Notification_Reply_Textarea, 150);
+lv_obj_set_height( ui_Notification_Reply_Textarea, 36);
+lv_obj_set_x( ui_Notification_Reply_Textarea, 0 );
+lv_obj_set_y( ui_Notification_Reply_Textarea, -75 );
+lv_obj_set_align( ui_Notification_Reply_Textarea, LV_ALIGN_CENTER );
+lv_textarea_set_max_length(ui_Notification_Reply_Textarea,7);
+lv_textarea_set_placeholder_text(ui_Notification_Reply_Textarea,"Type Your Reply");
 
 
 
-    ui_Notification_Reply_Keyboard = lv_keyboard_create(ui_Notification_Reply_Panel);
-    lv_keyboard_set_mode(ui_Notification_Reply_Keyboard, LV_KEYBOARD_MODE_TEXT_UPPER);
-    lv_obj_set_width(ui_Notification_Reply_Keyboard, 240);
-    lv_obj_set_height(ui_Notification_Reply_Keyboard, 120);
-    lv_obj_set_x(ui_Notification_Reply_Keyboard, 0);
-    lv_obj_set_y(ui_Notification_Reply_Keyboard, 50);
-    lv_obj_set_align(ui_Notification_Reply_Keyboard, LV_ALIGN_CENTER);
+ui_Notification_Reply_Keyboard = lv_keyboard_create(ui_Notification_Reply_Panel);
+lv_keyboard_set_mode(ui_Notification_Reply_Keyboard,LV_KEYBOARD_MODE_TEXT_UPPER);
+lv_obj_set_width( ui_Notification_Reply_Keyboard, 240);
+lv_obj_set_height( ui_Notification_Reply_Keyboard, 120);
+lv_obj_set_x( ui_Notification_Reply_Keyboard, 0 );
+lv_obj_set_y( ui_Notification_Reply_Keyboard, 50 );
+lv_obj_set_align( ui_Notification_Reply_Keyboard, LV_ALIGN_CENTER );
 
-    ui_Notification_Reply_Send_Button = lv_btn_create(ui_Notification_Reply_Panel);
-    lv_obj_set_width(ui_Notification_Reply_Send_Button, 100);
-    lv_obj_set_height(ui_Notification_Reply_Send_Button, 30);
-    lv_obj_set_x(ui_Notification_Reply_Send_Button, 0);
-    lv_obj_set_y(ui_Notification_Reply_Send_Button, -30);
-    lv_obj_set_align(ui_Notification_Reply_Send_Button, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Notification_Reply_Send_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Notification_Reply_Send_Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+ui_Notification_Reply_Send_Button = lv_btn_create(ui_Notification_Reply_Panel);
+lv_obj_set_width( ui_Notification_Reply_Send_Button, 100);
+lv_obj_set_height( ui_Notification_Reply_Send_Button, 30);
+lv_obj_set_x( ui_Notification_Reply_Send_Button, 0 );
+lv_obj_set_y( ui_Notification_Reply_Send_Button, -30 );
+lv_obj_set_align( ui_Notification_Reply_Send_Button, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Notification_Reply_Send_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_clear_flag( ui_Notification_Reply_Send_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-    ui_Notification_Reply_Send_Label = lv_label_create(ui_Notification_Reply_Send_Button);
-    lv_obj_set_width(ui_Notification_Reply_Send_Label, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Notification_Reply_Send_Label, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Notification_Reply_Send_Label, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Notification_Reply_Send_Label, "Send");
+ui_Notification_Reply_Send_Label = lv_label_create(ui_Notification_Reply_Send_Button);
+lv_obj_set_width( ui_Notification_Reply_Send_Label, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Notification_Reply_Send_Label, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Notification_Reply_Send_Label, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Notification_Reply_Send_Label,"Send");
 
-    lv_obj_add_event_cb(ui_Notification_Expand_Reply_Button, ui_event_Notification_Expand_Reply_Button, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Notification_Expand_Quick_Reply_1, ui_event_Notification_Expand_Quick_Reply_1, LV_EVENT_ALL,
-                        NULL);
-    lv_obj_add_event_cb(ui_Notification_Expand_Reply_Label2, ui_event_Notification_Expand_Reply_Label2, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Notification_Expand_Quick_Reply_2, ui_event_Notification_Expand_Quick_Reply_2, LV_EVENT_ALL,
-                        NULL);
-    lv_obj_add_event_cb(ui_Notification_Expand_Reply_Label3, ui_event_Notification_Expand_Reply_Label3, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Notification_Expand_Quick_Reply_3, ui_event_Notification_Expand_Quick_Reply_3, LV_EVENT_ALL,
-                        NULL);
-    lv_obj_add_event_cb(ui_Notification_Reply_Textarea, ui_event_Notification_Reply_Textarea, LV_EVENT_ALL, NULL);
-    lv_keyboard_set_textarea(ui_Notification_Reply_Keyboard, ui_Notification_Reply_Textarea);
-    lv_obj_add_event_cb(ui_Notification_Reply_Send_Button, ui_event_Notification_Reply_Send_Button, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Notification_Expand, ui_event_Notification_Expand, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Notification_Expand_Reply_Button, ui_event_Notification_Expand_Reply_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Notification_Expand_Quick_Reply_1, ui_event_Notification_Expand_Quick_Reply_1, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Notification_Expand_Reply_Label2, ui_event_Notification_Expand_Reply_Label2, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Notification_Expand_Quick_Reply_2, ui_event_Notification_Expand_Quick_Reply_2, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Notification_Expand_Reply_Label3, ui_event_Notification_Expand_Reply_Label3, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Notification_Expand_Quick_Reply_3, ui_event_Notification_Expand_Quick_Reply_3, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Notification_Reply_Textarea, ui_event_Notification_Reply_Textarea, LV_EVENT_ALL, NULL);
+lv_keyboard_set_textarea(ui_Notification_Reply_Keyboard,ui_Notification_Reply_Textarea);
+lv_obj_add_event_cb(ui_Notification_Reply_Send_Button, ui_event_Notification_Reply_Send_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Notification_Expand, ui_event_Notification_Expand, LV_EVENT_ALL, NULL);
 
 }
