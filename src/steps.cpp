@@ -42,15 +42,18 @@ void StepHandle()
 
   if (LastSteps != GetStep)
   {
+    if (GetStep > LastSteps + 200)
+    {
+      StepOffset = GetStep;
+      ResetCounter(nullptr);
+      return;
+    }
+
     LastSteps = GetStep;
     Steps = GetStep + StepOffset;
 
     if (Steps >= Storage.getUShort("StepGoal") and !Storage.getBool("StepReach"))
     {
-      // #ifdef UPDATE_ELEMENTS
-      //       lv_label_set_text(ui_Notification_Title, "Step Goal Reached!");
-      //       lv_label_set_text_fmt(ui_Notification_Text, "You have reached your step goal of %i Steps!", Storage.getUInt("StepGoal"));
-      // #endif
       char StepNotif[] = "You have reached your step goal of 4294967295 Steps!";
       sprintf(StepNotif, "You have reached your step goal of %i Steps!", Storage.getUShort("StepGoal"));
       ShowNotification("Step Goal Reached!", StepNotif, "local.stephandle", 0);
@@ -79,15 +82,6 @@ void StepHandle()
 void BTSendSteps()
 {
   static int laststep = info.health.steps;
-  /*String buffer;
-  // t:"act", hrm:int, stp:int, time:int
-  StaticJsonDocument<200> actinfo;
-  actinfo["t"] = "act";
-  actinfo["stp"] = info.health.steps - laststep;
-  laststep = info.health.steps;
-  serializeJson(actinfo, buffer);
-  BTsend(buffer);
-  StepArray[24] = info.health.steps;*/
 
   BTsendf("{t:\"act\", stp:%i}", info.health.steps - laststep);
 }
