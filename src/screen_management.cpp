@@ -7,6 +7,7 @@
 #include "clockhandlers.h"
 #include "timestuff.h"
 #include "TWatch_hal.h"
+#include "ArduinoLog.h"
 
 extern Preferences Storage;
 
@@ -19,13 +20,13 @@ extern TWatchClass *twatch;
 void DefaultClockHandle();
 void SimplisticWatchFaceHandle();
 
-int LastTimeScreen = STOPWATCH_SCREEN;
-int LastDownScreen = WEATHER_SCREEN;
+int LastTimeScreen = SCREEN_STOPWATCH;
+int LastDownScreen = SCREEN_WEATHER;
 
 // extern "C" lv_obj_t *ClockScreen = ui_SimplisticWatchFace;
 auto *ClockScreen = &ui_SimplisticWatchFace;
 
-extern "C" lv_obj_t *Screen = ui_SimplisticWatchFace;
+lv_obj_t *Screen;
 
 auto ClockHandler = SimplisticWatchFaceHandle;
 
@@ -38,43 +39,43 @@ lv_obj_t *GetClockScreen()
     return Screen;
 }
 
-void SetClockScreen(lv_obj_t *screen)
+void SetClockScreen(myscreen_t scr)
 {
     Serial.print("Set Clock Screen to: ");
-    Screen = screen;
-    ClockScreen = &screen;
 
-    if (screen == ui_Default_Clock)
+    switch (scr)
     {
-        ClockScreenInit = ui_Default_Clock_screen_init;
-        ClockHandler = DefaultClockHandle;
-        ClockScreen = &ui_Default_Clock;
-        Screen = ui_Default_Clock;
-        Serial.println("ui_Default_Clock");
-    }
-    else if (screen == ui_Blocky_Clock)
-    {
+    case SCREEN_CLOCK_BLOCKY:
         ClockScreenInit = ui_Blocky_Clock_screen_init;
         ClockHandler = BlockyClockHandle;
         ClockScreen = &ui_Blocky_Clock;
         Screen = ui_Blocky_Clock;
         Serial.println("ui_Blocky_Clock");
-    }
-    else if (screen == ui_SimplisticWatchFace)
-    {
+        break;
+
+    case SCREEN_CLOCK_SIMPLISTIC:
         ClockScreenInit = ui_SimplisticWatchFace_screen_init;
         ClockHandler = SimplisticWatchFaceHandle;
         ClockScreen = &ui_SimplisticWatchFace;
         Screen = ui_SimplisticWatchFace;
         Serial.println("ui_SimplisticWatchFace");
-    }
-    else if (screen == ui_SkeletonWatchFace)
-    {
+        break;
+
+    case SCREEN_CLOCK_SKELETON:
         ClockScreenInit = ui_SkeletonWatchFace_screen_init;
         ClockHandler = SkeletonWatchFaceHandle;
         ClockScreen = &ui_SkeletonWatchFace;
         Screen = ui_SkeletonWatchFace;
         Serial.println("ui_SkeletonWatchFace");
+        break;
+
+    default:
+        ClockScreenInit = ui_Default_Clock_screen_init;
+        ClockHandler = DefaultClockHandle;
+        ClockScreen = &ui_Default_Clock;
+        Screen = ui_Default_Clock;
+        Serial.println("ui_Default_Clock");
+        break;
     }
 }
 
@@ -100,7 +101,8 @@ void InitClockScreen()
 
 bool IsClockScreen()
 {
-    if (lv_scr_act() == Screen)
+    //Log.verboseln("%i | %i | %i", (lv_scr_act() == ui_Default_Clock) ? 1 : 0, (Screen == ui_Default_Clock) ? 1 : 0, (Screen == lv_scr_act()) ? 1 : 0);
+    if (lv_scr_act() == ui_Default_Clock || lv_scr_act() == ui_Blocky_Clock || lv_scr_act() == ui_SkeletonWatchFace || lv_scr_act() == ui_SimplisticWatchFace)
         return 1;
     else
         return 0;
@@ -208,23 +210,23 @@ void LoadSettings(lv_event_t *e)
 void SetTimerDefault(lv_event_t *e)
 {
     if (lv_event_get_target(e) == ui_Timers)
-        LastTimeScreen = TIMER_SCREEN;
+        LastTimeScreen = SCREEN_TIMER;
     else if (lv_event_get_target(e) == ui_Alarms)
-        LastTimeScreen = ALARMS_SCREEN;
+        LastTimeScreen = SCREEN_ALARMS;
     else
-        LastTimeScreen = STOPWATCH_SCREEN;
+        LastTimeScreen = SCREEN_STOPWATCH;
 }
 
 void SetDeafaultDown(lv_event_t *e)
 {
     if (lv_scr_act() == ui_Weather)
-        LastDownScreen = WEATHER_SCREEN;
+        LastDownScreen = SCREEN_WEATHER;
 
     else if (lv_scr_act() == ui_Music)
-        LastDownScreen = MUSIC_SCREEN;
+        LastDownScreen = SCREEN_MUSIC;
 
     else if (lv_scr_act() == ui_Health)
-        LastDownScreen = HEALTH_SCREEN;
+        LastDownScreen = SCREEN_HEALTH;
 }
 
 void ClockRight(lv_event_t *e)
@@ -232,13 +234,13 @@ void ClockRight(lv_event_t *e)
     if (lv_scr_act() != ui_Timers and lv_scr_act() != ui_Stopwatch and lv_scr_act() != ui_Alarms)
         switch (LastTimeScreen)
         {
-        case TIMER_SCREEN:
+        case SCREEN_TIMER:
             _ui_screen_change(&ui_Timers, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Timers_screen_init);
             break;
-        case STOPWATCH_SCREEN:
+        case SCREEN_STOPWATCH:
             _ui_screen_change(&ui_Stopwatch, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Stopwatch_screen_init);
             break;
-        case ALARMS_SCREEN:
+        case SCREEN_ALARMS:
             _ui_screen_change(&ui_Alarms, LV_SCR_LOAD_ANIM_OVER_LEFT, 150, 0, &ui_Alarms_screen_init);
             break;
         }
@@ -248,11 +250,11 @@ void ClockDown(lv_event_t *e)
 {
     switch (LastDownScreen)
     {
-    case MUSIC_SCREEN:
+    case SCREEN_MUSIC:
         _ui_screen_change(&ui_Music, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Music_screen_init);
         break;
 
-    case HEALTH_SCREEN:
+    case SCREEN_HEALTH:
         _ui_screen_change(&ui_Health, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Health_screen_init);
         break;
 

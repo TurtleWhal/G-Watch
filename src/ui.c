@@ -312,6 +312,9 @@ void ui_Debug_screen_init(void);
 void ui_event_Debug( lv_event_t * e);
 lv_obj_t *ui_Debug;
 lv_obj_t *ui_Container1;
+void ui_event_OTA_Start_Button( lv_event_t * e);
+lv_obj_t *ui_OTA_Start_Button;
+lv_obj_t *ui_OTA_Start_Label;
 void ui_event_Debug_Button_1( lv_event_t * e);
 lv_obj_t *ui_Debug_Button_1;
 lv_obj_t *ui_Debug_Button_Label_1;
@@ -321,9 +324,6 @@ lv_obj_t *ui_Debug_Button_Label_2;
 void ui_event_Debug_Button_3( lv_event_t * e);
 lv_obj_t *ui_Debug_Button_3;
 lv_obj_t *ui_Debug_Button_Label_3;
-void ui_event_Debug_Button_4( lv_event_t * e);
-lv_obj_t *ui_Debug_Button_4;
-lv_obj_t *ui_Debug_Button_Label_4;
 
 
 // SCREEN: ui_Apps
@@ -471,6 +471,7 @@ lv_obj_t *ui_Schedule_Roller;
 
 // SCREEN: ui_SkeletonWatchFace
 void ui_SkeletonWatchFace_screen_init(void);
+void ui_event_SkeletonWatchFace( lv_event_t * e);
 lv_obj_t *ui_SkeletonWatchFace;
 lv_obj_t *ui_Panel2;
 lv_obj_t *ui_Panel4;
@@ -1080,7 +1081,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       ClockDown( e );
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
 }
 }
@@ -1115,7 +1116,7 @@ if ( event_code == LV_EVENT_CLICKED) {
 }
 void ui_event_Notification_Expand( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
 }
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
@@ -1186,7 +1187,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Timers, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 150, 0, &ui_Timers_screen_init);
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
       SetTimerDefault( e );
 }
@@ -1245,7 +1246,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Alarms, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Alarms_screen_init);
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
 }
 }
@@ -1296,7 +1297,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       ScreenBack( e );
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
       SetTimerDefault( e );
 }
@@ -1333,7 +1334,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Alarms, LV_SCR_LOAD_ANIM_MOVE_TOP, 150, 0, &ui_Alarms_screen_init);
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
       SetTimerDefault( e );
       InitTimer( e );
@@ -1459,7 +1460,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Apps, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Apps_screen_init);
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
       LoadSettings( e );
 }
@@ -1534,6 +1535,12 @@ lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Apps, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Apps_screen_init);
 }
 }
+void ui_event_OTA_Start_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      StartOTA( e );
+}
+}
 void ui_event_Debug_Button_1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
@@ -1552,19 +1559,13 @@ if ( event_code == LV_EVENT_CLICKED) {
       testbutton3( e );
 }
 }
-void ui_event_Debug_Button_4( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_CLICKED) {
-      testbutton4( e );
-}
-}
 void ui_event_Apps( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
 lv_indev_wait_release(lv_indev_get_act());
       ScreenBack( e );
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       CompassArrowWiggle_Animation(ui_comp_get_child(ui_Compass_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), 0);
       ApplyTheme( e );
 }
@@ -1610,7 +1611,7 @@ if ( event_code == LV_EVENT_CLICKED) {
 }
 void ui_event_Calculator( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       LoadCalc( e );
       ApplyTheme( e );
 }
@@ -1627,7 +1628,7 @@ if ( event_code == LV_EVENT_CLICKED) {
 }
 void ui_event_Compass( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
 }
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
@@ -1654,7 +1655,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       ScreenBack( e );
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       DrawMusicInfo( e );
       DrawMusicTime( e );
       SetDeafaultDown( e );
@@ -1701,7 +1702,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Music, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Music_screen_init);
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       DrawWeather( e );
       SetDeafaultDown( e );
 }
@@ -1712,7 +1713,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Weather, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 150, 0, &ui_Weather_screen_init);
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
       InitStepsScreen( e );
       SetDeafaultDown( e );
@@ -1740,12 +1741,34 @@ if ( event_code == LV_EVENT_CLICKED) {
 }
 void ui_event_Schedule( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       DrawSchedule( e );
 }
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( &ui_Default_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Default_Clock_screen_init);
+}
+}
+void ui_event_SkeletonWatchFace( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
+      ApplyTheme( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      ClockLeft( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      ClockRight( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      ClockDown( e );
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      ClockUpwards( e );
 }
 }
 void ui_event_SimplisticWatchFace( lv_event_t * e) {
@@ -1766,6 +1789,9 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       ClockLeft( e );
 }
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
+      ApplyTheme( e );
+}
 }
 void ui_event_Blocky_Clock( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
@@ -1785,7 +1811,7 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       ClockLeft( e );
 }
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       ApplyTheme( e );
 }
 }
@@ -1801,8 +1827,6 @@ lv_disp_set_theme(dispp, theme);
 ui_Default_Clock_screen_init();
 ui_Alarms_screen_init();
 ui_Set_Alarm_screen_init();
-ui_SkeletonWatchFace_screen_init();
-ui_SimplisticWatchFace_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
 lv_disp_load_scr( ui_Default_Clock);
 }

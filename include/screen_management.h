@@ -139,26 +139,28 @@ extern "C"
 
     } ClockInfo;
 
-    enum
+    typedef enum
     {
-        WEATHER_SCREEN,
-        MUSIC_SCREEN,
-        HEALTH_SCREEN
-    };
+        SCREEN_WEATHER,
+        SCREEN_MUSIC,
+        SCREEN_HEALTH,
 
-    enum
-    {
-        STOPWATCH_SCREEN,
-        TIMER_SCREEN,
-        ALARMS_SCREEN
-    };
+        SCREEN_STOPWATCH,
+        SCREEN_TIMER,
+        SCREEN_ALARMS,
+
+        SCREEN_CLOCK_DEFAULT,
+        SCREEN_CLOCK_SIMPLISTIC,
+        SCREEN_CLOCK_SKELETON,
+        SCREEN_CLOCK_BLOCKY
+    } myscreen_t;
 
     void ButtonToClock();
     lv_obj_t *GetClockScreen();
     void SetDownScreen(int Screen);
     bool IsClockScreen();
     void ScreenHandleHandle();
-    void SetClockScreen(lv_obj_t *screen);
+    void SetClockScreen(myscreen_t screen);
     void InitClockScreen();
     void DispLoadClockScreen();
 

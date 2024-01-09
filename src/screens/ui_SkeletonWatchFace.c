@@ -9,6 +9,7 @@ void ui_SkeletonWatchFace_screen_init(void)
 {
 ui_SkeletonWatchFace = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_SkeletonWatchFace, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_SkeletonWatchFace, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_SkeletonWatchFace);
 lv_obj_set_style_bg_color(ui_SkeletonWatchFace, lv_color_hex(0x999999), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_SkeletonWatchFace, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -182,6 +183,7 @@ lv_obj_set_align( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
 lv_obj_clear_flag( ui_Skeleton_Watch_Face_Hour_Hand_Shadow, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_img_set_pivot(ui_Skeleton_Watch_Face_Hour_Hand_Shadow,9,120);
+lv_img_set_angle(ui_Skeleton_Watch_Face_Hour_Hand_Shadow,1200);
 lv_img_set_zoom(ui_Skeleton_Watch_Face_Hour_Hand_Shadow,150);
 lv_obj_set_style_img_recolor(ui_Skeleton_Watch_Face_Hour_Hand_Shadow, lv_color_hex(0x1A1A1A), LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_img_recolor_opa(ui_Skeleton_Watch_Face_Hour_Hand_Shadow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -196,6 +198,7 @@ lv_obj_set_align( ui_Skeleton_Watch_Face_Hour_Hand, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Skeleton_Watch_Face_Hour_Hand, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
 lv_obj_clear_flag( ui_Skeleton_Watch_Face_Hour_Hand, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_img_set_pivot(ui_Skeleton_Watch_Face_Hour_Hand,9,120);
+lv_img_set_angle(ui_Skeleton_Watch_Face_Hour_Hand,1200);
 lv_img_set_zoom(ui_Skeleton_Watch_Face_Hour_Hand,150);
 lv_obj_set_style_img_recolor(ui_Skeleton_Watch_Face_Hour_Hand, lv_color_hex(0xB2B2B2), LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_img_recolor_opa(ui_Skeleton_Watch_Face_Hour_Hand, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -216,5 +219,6 @@ lv_obj_set_style_shadow_opa(ui_Lighting, 180, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_width(ui_Lighting, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_Lighting, 110, LV_PART_MAIN| LV_STATE_DEFAULT);
 
+lv_obj_add_event_cb(ui_SkeletonWatchFace, ui_event_SkeletonWatchFace, LV_EVENT_ALL, NULL);
 
 }

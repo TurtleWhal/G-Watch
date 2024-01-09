@@ -438,3 +438,27 @@ def testbutton2(event_struct):
 def testbutton3(event_struct):
     return
 
+
+def testbutton4(event_struct):
+    return
+
+
+def ScreenLeft(event_struct):
+    return
+
+
+def ScreenRight(event_struct):
+    return
+
+
+def ScreenDown(event_struct):
+    return
+
+
+def ScreenUp(event_struct):
+    return
+
+
+def StartOTA(event_struct):
+    return
+

@@ -311,6 +311,9 @@ void ui_Debug_screen_init(void);
 void ui_event_Debug( lv_event_t * e);
 extern lv_obj_t *ui_Debug;
 extern lv_obj_t *ui_Container1;
+void ui_event_OTA_Start_Button( lv_event_t * e);
+extern lv_obj_t *ui_OTA_Start_Button;
+extern lv_obj_t *ui_OTA_Start_Label;
 void ui_event_Debug_Button_1( lv_event_t * e);
 extern lv_obj_t *ui_Debug_Button_1;
 extern lv_obj_t *ui_Debug_Button_Label_1;
@@ -320,9 +323,6 @@ extern lv_obj_t *ui_Debug_Button_Label_2;
 void ui_event_Debug_Button_3( lv_event_t * e);
 extern lv_obj_t *ui_Debug_Button_3;
 extern lv_obj_t *ui_Debug_Button_Label_3;
-void ui_event_Debug_Button_4( lv_event_t * e);
-extern lv_obj_t *ui_Debug_Button_4;
-extern lv_obj_t *ui_Debug_Button_Label_4;
 // SCREEN: ui_Apps
 void ui_Apps_screen_init(void);
 void ui_event_Apps( lv_event_t * e);
@@ -450,6 +450,7 @@ extern lv_obj_t *ui_Schedule_Time_End;
 extern lv_obj_t *ui_Schedule_Roller;
 // SCREEN: ui_SkeletonWatchFace
 void ui_SkeletonWatchFace_screen_init(void);
+void ui_event_SkeletonWatchFace( lv_event_t * e);
 extern lv_obj_t *ui_SkeletonWatchFace;
 extern lv_obj_t *ui_Panel2;
 extern lv_obj_t *ui_Panel4;

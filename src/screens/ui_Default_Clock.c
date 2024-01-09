@@ -9,6 +9,7 @@ void ui_Default_Clock_screen_init(void)
 {
 ui_Default_Clock = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Default_Clock, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_add_event_cb(ui_Default_Clock, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Default_Clock);
 
 ui_Default_Clock_Time = lv_label_create(ui_Default_Clock);
 lv_obj_set_width( ui_Default_Clock_Time, LV_SIZE_CONTENT);  /// 1

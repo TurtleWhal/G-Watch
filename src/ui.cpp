@@ -277,7 +277,7 @@ void setup()
   Log.verboseln("        __\\////////////_______________________\\///____\\///_______\\///________\\///________\\///______________\\/////////__\\///________\\///__");
   Log.verboseln("");
   Log.verboseln("Ascii art made using: https://patorjk.com/software/taag/#p=display&f=Slant%20Relief&t=G-WATCH");
-  Log.verboseln("Project made by: Garrett Jordan (https://github.com/TurtleWhal/G-Watch, https://garrettjordan.xyz/projects.html#watch)");
+  Log.verboseln("Project made by: Garrett Jordan (https://github.com/TurtleWhal/G-Watch, https://garrettjordan.xyz/projects/#watch)");
   Log.verboseln("");
 
   twatch = TWatchClass::getWatch(); // Does HALinit for us
@@ -317,7 +317,7 @@ void setup()
   //////////Initalize UI//////////
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
 
-  SetClockScreen(ui_SimplisticWatchFace);
+  SetClockScreen(SCREEN_CLOCK_DEFAULT);
   InitClockScreen();
 
   Log.verboseln("Init clock Screen");
@@ -379,7 +379,7 @@ void setup()
 
   Timer0Triggered = 1;
 
-  twatch->motor_shake(1, 100);
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
   // Log.verboseln("Total PSRAM: %d", ESP.getPsramSize());
   // Log.verboseln("Free PSRAM: %d", ESP.getFreePsram());
@@ -395,16 +395,9 @@ void loop()
   {
     lv_timer_handler(); /* let the GUI do its work */
 
-    if (IsClockScreen or 1) // Only run this if on the main screen////////////////////////////////////////////////////////////////////////////////////////
+    if (IsClockScreen()) // Only run this if on the main screen
     {
-      UpdateTime();
       ScreenHandleHandle();
-      UpdateTime();
-      Powerhandle();
-    }
-    else
-    {
-      Compass();
     }
   }
   else // If Asleep
@@ -420,11 +413,14 @@ void loop()
     delay(100);
   }
 
-  Sleephandle();
+  UpdateTime();
+
+  Powerhandle();
   BTHandle();
-  VibrateHandle();
-  TimersHandle();
+  Sleephandle();
   NotificationHandle();
+  TimersHandle();
+  VibrateHandle();
 
   // this runs every 50ms
   if (BTTimerTriggered)
@@ -492,7 +488,8 @@ void testbutton3(lv_event_t *e)
   Log.verboseln("test3");
 }
 
-void testbutton4(lv_event_t *e)
+void StartOTA(lv_event_t *e)
 {
-  Log.verboseln("test4");
+  useOTA = true;
+  InitOTA();
 }

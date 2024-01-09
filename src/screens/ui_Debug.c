@@ -19,6 +19,19 @@ lv_obj_set_height( ui_Container1, 10);
 lv_obj_set_align( ui_Container1, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Container1, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
+ui_OTA_Start_Button = lv_btn_create(ui_Debug);
+lv_obj_set_width( ui_OTA_Start_Button, 100);
+lv_obj_set_height( ui_OTA_Start_Button, 30);
+lv_obj_set_align( ui_OTA_Start_Button, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_OTA_Start_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_clear_flag( ui_OTA_Start_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_OTA_Start_Label = lv_label_create(ui_OTA_Start_Button);
+lv_obj_set_width( ui_OTA_Start_Label, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_OTA_Start_Label, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_OTA_Start_Label, LV_ALIGN_CENTER );
+lv_label_set_text(ui_OTA_Start_Label,"Start OTA");
+
 ui_Debug_Button_1 = lv_btn_create(ui_Debug);
 lv_obj_set_width( ui_Debug_Button_1, 100);
 lv_obj_set_height( ui_Debug_Button_1, 50);
@@ -58,23 +71,10 @@ lv_obj_set_height( ui_Debug_Button_Label_3, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( ui_Debug_Button_Label_3, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Debug_Button_Label_3,"test 3");
 
-ui_Debug_Button_4 = lv_btn_create(ui_Debug);
-lv_obj_set_width( ui_Debug_Button_4, 100);
-lv_obj_set_height( ui_Debug_Button_4, 50);
-lv_obj_set_align( ui_Debug_Button_4, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Debug_Button_4, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
-lv_obj_clear_flag( ui_Debug_Button_4, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-
-ui_Debug_Button_Label_4 = lv_label_create(ui_Debug_Button_4);
-lv_obj_set_width( ui_Debug_Button_Label_4, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Debug_Button_Label_4, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Debug_Button_Label_4, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Debug_Button_Label_4,"test 4");
-
+lv_obj_add_event_cb(ui_OTA_Start_Button, ui_event_OTA_Start_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Debug_Button_1, ui_event_Debug_Button_1, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Debug_Button_2, ui_event_Debug_Button_2, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Debug_Button_3, ui_event_Debug_Button_3, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Debug_Button_4, ui_event_Debug_Button_4, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Debug, ui_event_Debug, LV_EVENT_ALL, NULL);
 
 }

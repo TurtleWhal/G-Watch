@@ -332,6 +332,8 @@ lv_obj_set_x( ui_Timer_Colin_Right, 30 );
 lv_obj_set_y( ui_Timer_Colin_Right, 0 );
 lv_obj_set_align( ui_Timer_Colin_Right, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Timer_Colin_Right,":");
+lv_obj_set_style_text_color(ui_Timer_Colin_Right, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Timer_Colin_Right, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Timer_Colin_Right, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Timer_Colin_Left = lv_label_create(ui_Timers);
@@ -341,6 +343,8 @@ lv_obj_set_x( ui_Timer_Colin_Left, -30 );
 lv_obj_set_y( ui_Timer_Colin_Left, 0 );
 lv_obj_set_align( ui_Timer_Colin_Left, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Timer_Colin_Left,":");
+lv_obj_set_style_text_color(ui_Timer_Colin_Left, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Timer_Colin_Left, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Timer_Colin_Left, &ui_font_Comfortaa_26, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Timer_Arc = lv_arc_create(ui_Timers);

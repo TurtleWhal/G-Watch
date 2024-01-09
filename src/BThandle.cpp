@@ -217,7 +217,7 @@ void ParseGB(char *Message)
 
     // lv_label_set_text(ui_Now_Playing_Label, info.music.song);
     DrawMusicInfo(nullptr);
-    SetDownScreen(MUSIC_SCREEN);
+    SetDownScreen(SCREEN_MUSIC);
     // twatch->motor_shake(1, 50);
   }
   else if (strcmp(NotifType, "musicstate") == 0)
@@ -271,8 +271,7 @@ void ParseGB(char *Message)
     }
     else if (strcmp(CallType, "end") == 0)
     {
-      lv_obj_t *tempclock = GetClockScreen();
-      _ui_screen_change(&tempclock, LV_SCR_LOAD_ANIM_FADE_OUT, 150, 0, nullptr);
+      ScreenBack(nullptr);
     }
   }
   else if (strcmp(NotifType, "is_gps_active") == 0)

@@ -42,7 +42,7 @@ void ToggleTheme(lv_event_t *e)
 void ApplyTheme(lv_event_t *e)
 {
   Log.verboseln("ApplyTheme");
-  
+
   lv_disp_t *dispp = lv_disp_get_default();
 
   if (Storage.isKey("Theme"))
@@ -117,6 +117,17 @@ void ApplyTheme(lv_event_t *e)
     lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, ThemeColor, LV_PART_INDICATOR);
 
     lv_obj_set_style_bg_color(ui_Blocky_Clock_Battery_Contact, ThemeColor, LV_PART_MAIN);
+  }
+
+  if (ui_SimplisticWatchFace != nullptr)
+  {
+    if (!info.theme.darkmode)
+    {
+      lv_obj_set_style_img_recolor(ui_Simplistic_Hour_Hand, lv_color_white(), LV_PART_MAIN);
+      lv_obj_set_style_img_recolor(ui_Simplistic_Minute_Hand, lv_color_white(), LV_PART_MAIN);
+      lv_obj_set_style_img_recolor(ui_Simplistic_Hour_Hand_Shadow, lv_color_hex(0xC7C4C7), LV_PART_MAIN);
+      lv_obj_set_style_img_recolor(ui_Simplistic_Minute_Hand_Shadow, lv_color_hex(0xC7C4C7), LV_PART_MAIN);
+    }
   }
 
   // Compass Screen
@@ -206,7 +217,7 @@ void ApplyTheme(lv_event_t *e)
   if (ui_Stopwatch != NULL)
   {
     if (!info.theme.darkmode) // if light mode, fix the black box under the stopwatch time
-      lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+      lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0xF5F5F5), LV_PART_MAIN);
     // else
     // lv_obj_set_style_bg_color(ui_Stopwatch_Time_Underline_Black, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
   }
