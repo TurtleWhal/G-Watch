@@ -1,26 +1,18 @@
-Change to LVGL task Handler vs timers? Is this right when sleeping?
-Change to TWATCH LVGL
-Get rid of char, move to strings
-
-Store bluetooth status in FLASH 
-
+------------- Hard Changes -------------
 Power managment when asleep
+OS
+20 hr bat life
 Improve boot upload_speed
 
-Increase LVGL Buffer Size
-
+------------ "Easy" Changes ------------
 alarms
-
 Find phone from watch
-
 store notifications in flash
-
 step goal after reached
-
 calls
-
 games
 
-OS
-
-20 hr bat life
+------ Garrett Dosen't Understand ------
+Change to TWATCH LVGL
+Store bluetooth status in FLASH 
+Get rid of char, move to strings
