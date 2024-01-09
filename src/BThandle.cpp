@@ -144,6 +144,11 @@ void ParseGB(char *Message)
           NotifTitle = received["sender"];
       }
 
+      // NotifTitle.replace("’", "'");
+      // NotifTitle.replace("”", "\"");
+      // NotifText.replace("’", "'");
+      // NotifText.replace("”", "\"");
+
       Log.verboseln("Received Notification With Title: %s, Text: %s, Source: %s, ID: %i", NotifTitle, NotifText, NotifSource, NotifID);
 
       // Log.verboseln(Message);

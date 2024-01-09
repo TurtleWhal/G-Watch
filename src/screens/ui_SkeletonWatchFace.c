@@ -13,137 +13,137 @@ lv_obj_add_event_cb(ui_SkeletonWatchFace, scr_unloaded_delete_cb, LV_EVENT_SCREE
 lv_obj_set_style_bg_color(ui_SkeletonWatchFace, lv_color_hex(0x999999), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_SkeletonWatchFace, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Panel2 = lv_obj_create(ui_SkeletonWatchFace);
-lv_obj_set_width( ui_Panel2, 242);
-lv_obj_set_height( ui_Panel2, 242);
-lv_obj_set_align( ui_Panel2, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Panel2, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(ui_Panel2, 500, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Panel2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Panel2, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_Panel2, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_border_opa(ui_Panel2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_width(ui_Panel2, 40, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_Border = lv_obj_create(ui_SkeletonWatchFace);
+lv_obj_set_width( ui_Skeleton_Clock_Border, 242);
+lv_obj_set_height( ui_Skeleton_Clock_Border, 242);
+lv_obj_set_align( ui_Skeleton_Clock_Border, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Skeleton_Clock_Border, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Skeleton_Clock_Border, 500, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Skeleton_Clock_Border, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Skeleton_Clock_Border, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_Skeleton_Clock_Border, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Skeleton_Clock_Border, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Skeleton_Clock_Border, 40, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Panel4 = lv_obj_create(ui_SkeletonWatchFace);
-lv_obj_set_width( ui_Panel4, 50);
-lv_obj_set_height( ui_Panel4, 50);
-lv_obj_set_x( ui_Panel4, -80 );
-lv_obj_set_y( ui_Panel4, 0 );
-lv_obj_set_align( ui_Panel4, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Panel4, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(ui_Panel4, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Panel4, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Panel4, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_width(ui_Panel4, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_IX_Panel = lv_obj_create(ui_SkeletonWatchFace);
+lv_obj_set_width( ui_Skeleton_Clock_IX_Panel, 50);
+lv_obj_set_height( ui_Skeleton_Clock_IX_Panel, 50);
+lv_obj_set_x( ui_Skeleton_Clock_IX_Panel, -80 );
+lv_obj_set_y( ui_Skeleton_Clock_IX_Panel, 0 );
+lv_obj_set_align( ui_Skeleton_Clock_IX_Panel, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Skeleton_Clock_IX_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Skeleton_Clock_IX_Panel, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Skeleton_Clock_IX_Panel, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Skeleton_Clock_IX_Panel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Skeleton_Clock_IX_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Label1 = lv_label_create(ui_Panel4);
-lv_obj_set_width( ui_Label1, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Label1, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Label1, -1 );
-lv_obj_set_y( ui_Label1, 2 );
-lv_obj_set_align( ui_Label1, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Label1,"IX");
-lv_obj_set_style_text_color(ui_Label1, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_Label1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Label1, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_IX_Shadow = lv_label_create(ui_Skeleton_Clock_IX_Panel);
+lv_obj_set_width( ui_Skeleton_Clock_IX_Shadow, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Skeleton_Clock_IX_Shadow, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Skeleton_Clock_IX_Shadow, -1 );
+lv_obj_set_y( ui_Skeleton_Clock_IX_Shadow, 2 );
+lv_obj_set_align( ui_Skeleton_Clock_IX_Shadow, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Skeleton_Clock_IX_Shadow,"IX");
+lv_obj_set_style_text_color(ui_Skeleton_Clock_IX_Shadow, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Skeleton_Clock_IX_Shadow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Skeleton_Clock_IX_Shadow, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Label2 = lv_label_create(ui_Panel4);
-lv_obj_set_width( ui_Label2, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Label2, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Label2, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Label2,"IX");
-lv_obj_set_style_text_font(ui_Label2, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_IX = lv_label_create(ui_Skeleton_Clock_IX_Panel);
+lv_obj_set_width( ui_Skeleton_Clock_IX, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Skeleton_Clock_IX, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Skeleton_Clock_IX, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Skeleton_Clock_IX,"IX");
+lv_obj_set_style_text_font(ui_Skeleton_Clock_IX, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Panel5 = lv_obj_create(ui_SkeletonWatchFace);
-lv_obj_set_width( ui_Panel5, 50);
-lv_obj_set_height( ui_Panel5, 50);
-lv_obj_set_x( ui_Panel5, 0 );
-lv_obj_set_y( ui_Panel5, -80 );
-lv_obj_set_align( ui_Panel5, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Panel5, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(ui_Panel5, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Panel5, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Panel5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_width(ui_Panel5, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_XII_Panel = lv_obj_create(ui_SkeletonWatchFace);
+lv_obj_set_width( ui_Skeleton_Clock_XII_Panel, 50);
+lv_obj_set_height( ui_Skeleton_Clock_XII_Panel, 50);
+lv_obj_set_x( ui_Skeleton_Clock_XII_Panel, 0 );
+lv_obj_set_y( ui_Skeleton_Clock_XII_Panel, -80 );
+lv_obj_set_align( ui_Skeleton_Clock_XII_Panel, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Skeleton_Clock_XII_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Skeleton_Clock_XII_Panel, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Skeleton_Clock_XII_Panel, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Skeleton_Clock_XII_Panel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Skeleton_Clock_XII_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Label3 = lv_label_create(ui_Panel5);
-lv_obj_set_width( ui_Label3, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Label3, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Label3, -1 );
-lv_obj_set_y( ui_Label3, 2 );
-lv_obj_set_align( ui_Label3, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Label3,"XII");
-lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_Label3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Label3, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_XII_Shadow = lv_label_create(ui_Skeleton_Clock_XII_Panel);
+lv_obj_set_width( ui_Skeleton_Clock_XII_Shadow, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Skeleton_Clock_XII_Shadow, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Skeleton_Clock_XII_Shadow, -1 );
+lv_obj_set_y( ui_Skeleton_Clock_XII_Shadow, 2 );
+lv_obj_set_align( ui_Skeleton_Clock_XII_Shadow, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Skeleton_Clock_XII_Shadow,"XII");
+lv_obj_set_style_text_color(ui_Skeleton_Clock_XII_Shadow, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Skeleton_Clock_XII_Shadow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Skeleton_Clock_XII_Shadow, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Label4 = lv_label_create(ui_Panel5);
-lv_obj_set_width( ui_Label4, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Label4, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Label4, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Label4,"XII");
-lv_obj_set_style_text_font(ui_Label4, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_XII = lv_label_create(ui_Skeleton_Clock_XII_Panel);
+lv_obj_set_width( ui_Skeleton_Clock_XII, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Skeleton_Clock_XII, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Skeleton_Clock_XII, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Skeleton_Clock_XII,"XII");
+lv_obj_set_style_text_font(ui_Skeleton_Clock_XII, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Panel6 = lv_obj_create(ui_SkeletonWatchFace);
-lv_obj_set_width( ui_Panel6, 50);
-lv_obj_set_height( ui_Panel6, 50);
-lv_obj_set_x( ui_Panel6, 80 );
-lv_obj_set_y( ui_Panel6, 0 );
-lv_obj_set_align( ui_Panel6, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Panel6, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(ui_Panel6, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Panel6, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Panel6, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_width(ui_Panel6, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_III_Panel = lv_obj_create(ui_SkeletonWatchFace);
+lv_obj_set_width( ui_Skeleton_Clock_III_Panel, 50);
+lv_obj_set_height( ui_Skeleton_Clock_III_Panel, 50);
+lv_obj_set_x( ui_Skeleton_Clock_III_Panel, 80 );
+lv_obj_set_y( ui_Skeleton_Clock_III_Panel, 0 );
+lv_obj_set_align( ui_Skeleton_Clock_III_Panel, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Skeleton_Clock_III_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Skeleton_Clock_III_Panel, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Skeleton_Clock_III_Panel, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Skeleton_Clock_III_Panel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Skeleton_Clock_III_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Label5 = lv_label_create(ui_Panel6);
-lv_obj_set_width( ui_Label5, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Label5, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Label5, -1 );
-lv_obj_set_y( ui_Label5, 2 );
-lv_obj_set_align( ui_Label5, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Label5,"III");
-lv_obj_set_style_text_color(ui_Label5, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_Label5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Label5, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_III_Shadow = lv_label_create(ui_Skeleton_Clock_III_Panel);
+lv_obj_set_width( ui_Skeleton_Clock_III_Shadow, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Skeleton_Clock_III_Shadow, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Skeleton_Clock_III_Shadow, -1 );
+lv_obj_set_y( ui_Skeleton_Clock_III_Shadow, 2 );
+lv_obj_set_align( ui_Skeleton_Clock_III_Shadow, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Skeleton_Clock_III_Shadow,"III");
+lv_obj_set_style_text_color(ui_Skeleton_Clock_III_Shadow, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Skeleton_Clock_III_Shadow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Skeleton_Clock_III_Shadow, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Label6 = lv_label_create(ui_Panel6);
-lv_obj_set_width( ui_Label6, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Label6, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Label6, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Label6,"III");
-lv_obj_set_style_text_font(ui_Label6, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_III = lv_label_create(ui_Skeleton_Clock_III_Panel);
+lv_obj_set_width( ui_Skeleton_Clock_III, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Skeleton_Clock_III, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Skeleton_Clock_III, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Skeleton_Clock_III,"III");
+lv_obj_set_style_text_font(ui_Skeleton_Clock_III, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Panel7 = lv_obj_create(ui_SkeletonWatchFace);
-lv_obj_set_width( ui_Panel7, 50);
-lv_obj_set_height( ui_Panel7, 50);
-lv_obj_set_x( ui_Panel7, 0 );
-lv_obj_set_y( ui_Panel7, 80 );
-lv_obj_set_align( ui_Panel7, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Panel7, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(ui_Panel7, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Panel7, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Panel7, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_width(ui_Panel7, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_VI_Panel = lv_obj_create(ui_SkeletonWatchFace);
+lv_obj_set_width( ui_Skeleton_Clock_VI_Panel, 50);
+lv_obj_set_height( ui_Skeleton_Clock_VI_Panel, 50);
+lv_obj_set_x( ui_Skeleton_Clock_VI_Panel, 0 );
+lv_obj_set_y( ui_Skeleton_Clock_VI_Panel, 80 );
+lv_obj_set_align( ui_Skeleton_Clock_VI_Panel, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Skeleton_Clock_VI_Panel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Skeleton_Clock_VI_Panel, 50, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Skeleton_Clock_VI_Panel, lv_color_hex(0xD5D2D5), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Skeleton_Clock_VI_Panel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Skeleton_Clock_VI_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Label7 = lv_label_create(ui_Panel7);
-lv_obj_set_width( ui_Label7, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Label7, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Label7, -1 );
-lv_obj_set_y( ui_Label7, 2 );
-lv_obj_set_align( ui_Label7, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Label7,"VI");
-lv_obj_set_style_text_color(ui_Label7, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_Label7, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Label7, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_VI_Shadow = lv_label_create(ui_Skeleton_Clock_VI_Panel);
+lv_obj_set_width( ui_Skeleton_Clock_VI_Shadow, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Skeleton_Clock_VI_Shadow, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Skeleton_Clock_VI_Shadow, -1 );
+lv_obj_set_y( ui_Skeleton_Clock_VI_Shadow, 2 );
+lv_obj_set_align( ui_Skeleton_Clock_VI_Shadow, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Skeleton_Clock_VI_Shadow,"VI");
+lv_obj_set_style_text_color(ui_Skeleton_Clock_VI_Shadow, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Skeleton_Clock_VI_Shadow, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Skeleton_Clock_VI_Shadow, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Label8 = lv_label_create(ui_Panel7);
-lv_obj_set_width( ui_Label8, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Label8, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Label8, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Label8,"VI");
-lv_obj_set_style_text_font(ui_Label8, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_VI = lv_label_create(ui_Skeleton_Clock_VI_Panel);
+lv_obj_set_width( ui_Skeleton_Clock_VI, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Skeleton_Clock_VI, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Skeleton_Clock_VI, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Skeleton_Clock_VI,"VI");
+lv_obj_set_style_text_font(ui_Skeleton_Clock_VI, &lv_font_montserrat_22, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Skeleton_Watch_Face_Minute_Hand_Shadow = lv_img_create(ui_SkeletonWatchFace);
 lv_img_set_src(ui_Skeleton_Watch_Face_Minute_Hand_Shadow, &ui_img_skeletonminutehand_png);
@@ -203,21 +203,22 @@ lv_img_set_zoom(ui_Skeleton_Watch_Face_Hour_Hand,150);
 lv_obj_set_style_img_recolor(ui_Skeleton_Watch_Face_Hour_Hand, lv_color_hex(0xB2B2B2), LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_img_recolor_opa(ui_Skeleton_Watch_Face_Hour_Hand, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Lighting = lv_obj_create(ui_SkeletonWatchFace);
-lv_obj_set_width( ui_Lighting, 1);
-lv_obj_set_height( ui_Lighting, 1);
-lv_obj_set_x( ui_Lighting, -29 );
-lv_obj_set_y( ui_Lighting, -35 );
-lv_obj_set_align( ui_Lighting, LV_ALIGN_CENTER );
-lv_obj_clear_flag( ui_Lighting, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(ui_Lighting, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Lighting, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Lighting, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_width(ui_Lighting, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_color(ui_Lighting, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_shadow_opa(ui_Lighting, 180, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_width(ui_Lighting, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_spread(ui_Lighting, 110, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Skeleton_Clock_Lighting = lv_obj_create(ui_SkeletonWatchFace);
+lv_obj_set_width( ui_Skeleton_Clock_Lighting, 1);
+lv_obj_set_height( ui_Skeleton_Clock_Lighting, 1);
+lv_obj_set_x( ui_Skeleton_Clock_Lighting, -29 );
+lv_obj_set_y( ui_Skeleton_Clock_Lighting, -35 );
+lv_obj_set_align( ui_Skeleton_Clock_Lighting, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Skeleton_Clock_Lighting, LV_OBJ_FLAG_HIDDEN );   /// Flags
+lv_obj_clear_flag( ui_Skeleton_Clock_Lighting, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Skeleton_Clock_Lighting, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Skeleton_Clock_Lighting, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Skeleton_Clock_Lighting, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Skeleton_Clock_Lighting, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_shadow_color(ui_Skeleton_Clock_Lighting, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_shadow_opa(ui_Skeleton_Clock_Lighting, 180, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_shadow_width(ui_Skeleton_Clock_Lighting, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_shadow_spread(ui_Skeleton_Clock_Lighting, 110, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_add_event_cb(ui_SkeletonWatchFace, ui_event_SkeletonWatchFace, LV_EVENT_ALL, NULL);
 

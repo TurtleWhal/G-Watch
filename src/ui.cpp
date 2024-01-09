@@ -379,7 +379,7 @@ void setup()
 
   Timer0Triggered = 1;
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////twatch->motor_shake(1, 100);
+  twatch->motor_shake(1, 100);
   Log.verboseln("Setup done");
   // Log.verboseln("Total PSRAM: %d", ESP.getPsramSize());
   // Log.verboseln("Free PSRAM: %d", ESP.getFreePsram());

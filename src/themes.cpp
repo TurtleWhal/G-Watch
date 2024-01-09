@@ -227,6 +227,12 @@ void ApplyTheme(lv_event_t *e)
   {
     lv_chart_set_series_color(ui_Steps_Chart, lv_chart_get_series_next(ui_Steps_Chart, NULL), ThemeColor);
   }
+
+  // Settings Screen
+  if (ui_Settings != NULL)
+  {
+    SetKeyboardRound(ui_Settings_Keyboard);
+  }
 #endif
 }
 

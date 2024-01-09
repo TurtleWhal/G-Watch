@@ -285,8 +285,8 @@ void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e);
 lv_obj_t *ui_Dark_Mode_Setting_Panel;
 void ui_event_Dark_Mode_Setting_Switch( lv_event_t * e);
 lv_obj_t *ui_Dark_Mode_Setting_Switch;
-void ui_event_Theme_Setting_Panel_Setting_Panel( lv_event_t * e);
 lv_obj_t *ui_Theme_Setting_Panel;
+void ui_event_Theme_Expand_Arrow( lv_event_t * e);
 lv_obj_t *ui_Theme_Expand_Arrow;
 void ui_event_Theme_Colorwheel( lv_event_t * e);
 lv_obj_t *ui_Theme_Colorwheel;
@@ -473,24 +473,24 @@ lv_obj_t *ui_Schedule_Roller;
 void ui_SkeletonWatchFace_screen_init(void);
 void ui_event_SkeletonWatchFace( lv_event_t * e);
 lv_obj_t *ui_SkeletonWatchFace;
-lv_obj_t *ui_Panel2;
-lv_obj_t *ui_Panel4;
-lv_obj_t *ui_Label1;
-lv_obj_t *ui_Label2;
-lv_obj_t *ui_Panel5;
-lv_obj_t *ui_Label3;
-lv_obj_t *ui_Label4;
-lv_obj_t *ui_Panel6;
-lv_obj_t *ui_Label5;
-lv_obj_t *ui_Label6;
-lv_obj_t *ui_Panel7;
-lv_obj_t *ui_Label7;
-lv_obj_t *ui_Label8;
+lv_obj_t *ui_Skeleton_Clock_Border;
+lv_obj_t *ui_Skeleton_Clock_IX_Panel;
+lv_obj_t *ui_Skeleton_Clock_IX_Shadow;
+lv_obj_t *ui_Skeleton_Clock_IX;
+lv_obj_t *ui_Skeleton_Clock_XII_Panel;
+lv_obj_t *ui_Skeleton_Clock_XII_Shadow;
+lv_obj_t *ui_Skeleton_Clock_XII;
+lv_obj_t *ui_Skeleton_Clock_III_Panel;
+lv_obj_t *ui_Skeleton_Clock_III_Shadow;
+lv_obj_t *ui_Skeleton_Clock_III;
+lv_obj_t *ui_Skeleton_Clock_VI_Panel;
+lv_obj_t *ui_Skeleton_Clock_VI_Shadow;
+lv_obj_t *ui_Skeleton_Clock_VI;
 lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand_Shadow;
 lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand;
 lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand_Shadow;
 lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand;
-lv_obj_t *ui_Lighting;
+lv_obj_t *ui_Skeleton_Clock_Lighting;
 
 
 // SCREEN: ui_SimplisticWatchFace
@@ -1491,7 +1491,7 @@ if ( event_code == LV_EVENT_VALUE_CHANGED) {
       ApplyTheme( e );
 }
 }
-void ui_event_Theme_Setting_Panel_Setting_Panel( lv_event_t * e) {
+void ui_event_Theme_Expand_Arrow( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       ToggleTheme( e );

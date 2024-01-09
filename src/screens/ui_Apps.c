@@ -24,6 +24,10 @@ lv_obj_set_style_bg_color(ui_Apps_Panel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | 
 lv_obj_set_style_bg_opa(ui_Apps_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_color(ui_Apps_Panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_Apps_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_left(ui_Apps_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(ui_Apps_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(ui_Apps_Panel, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(ui_Apps_Panel, 40, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_set_style_pad_left(ui_Apps_Panel, 0, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
 lv_obj_set_style_pad_right(ui_Apps_Panel, 7, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
@@ -58,7 +62,9 @@ lv_label_set_text(ui_comp_get_child(ui_Debug_App_Button, UI_COMP_APP_BUTTON_APP_
 
 
 lv_img_set_src(ui_comp_get_child(ui_Debug_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), &ui_img_power_icon_png);
-lv_img_set_zoom(ui_comp_get_child(ui_Debug_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),100);
+lv_obj_set_x( ui_comp_get_child(ui_Debug_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), -1 );
+lv_obj_set_y( ui_comp_get_child(ui_Debug_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), -1 );
+lv_img_set_zoom(ui_comp_get_child(ui_Debug_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),96);
 
 ui_Weather_App_Button = ui_App_Button_create(ui_Apps_Panel);
 lv_obj_set_x( ui_Weather_App_Button, 0 );
