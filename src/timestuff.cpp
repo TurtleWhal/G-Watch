@@ -13,6 +13,8 @@ extern TWatchClass *twatch;
 
 extern ClockInfo info;
 
+// PCF8563_Class *rtc = twatch->rtc_get_instance();
+
 void UpdateTime()
 {
     static uint8_t lastsec = 61;
@@ -23,6 +25,10 @@ void UpdateTime()
     info.flag.secondchanged = 0;
     info.flag.minutechanged = 0;
     info.flag.hourchanged = 0;
+
+    //RTC_Date date = twatch->rtc_get_instance()->getDateTime();
+
+    //Log.verboseln("RTC time: %i:%i:%i", date.hour, date.minute, date.second);
 
     char time[11];
 

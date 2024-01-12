@@ -209,10 +209,10 @@ void ParseGB(char *Message)
     Log.verboseln("%.*s", outputLength, decoded);
     free(decoded);*/
 
-    //Log.verboseln(info.music.artist);
-    //Log.verboseln(info.music.song);
-    //Log.verboseln("%i", info.music.length);
-    //Log.verboseln(info.music.album);
+    // Log.verboseln(info.music.artist);
+    // Log.verboseln(info.music.song);
+    // Log.verboseln("%i", info.music.length);
+    // Log.verboseln(info.music.album);
 
     info.music.song = localmusicsong;
     info.music.artist = localmusicartist;
@@ -291,12 +291,13 @@ void ParseGB(char *Message)
     int Low = KelvinToF(received["lo"]);
     int Humidity = received["hum"];
     int Precip = received["rain"];
-    double UV = 0.0 + (double)(received["uv"]);
+    float UV = 0.0 + (float)(received["uv"]);
     int Code = received["code"];
     const char *Type = received["txt"];
     int Wind = received["wind"];
     int Winddir = received["wdir"];
-    const char *Loc = received["loc"];
+    char Loc[64];
+    sprintf(Loc, "%s @ %i:%02i", (const char *)received["loc"], info.time.hour12, info.time.minute);
 
     Log.verboseln("");
     Log.verbose("Weather Info Received\n");
@@ -306,7 +307,7 @@ void ParseGB(char *Message)
     Log.verbose("├─ Daily Low: ───── %i\n", Low);
     Log.verbose("├─ Humidity: ────── %i\n", Humidity);
     Log.verbose("├─ Precipitation: ─ %i\n", Precip);
-    Log.verbose("├─ UV Index: ────── %01.2f\n", UV);
+    Log.verbose("├─ UV Index: ────── %F\n", UV);
     Log.verbose("├─ Weather Code: ── %i\n", Code);
     Log.verbose("├─ Weather: ─────── %s\n", Type);
     Log.verbose("├─ Wind Speed: ──── %i\n", Wind);
@@ -394,7 +395,7 @@ void ParseGB(char *Message)
   else if (strcmp(NotifType, "find") == 0)
   {
     bool find = received["n"];
-    //Log.verboseln(find);
+    // Log.verboseln(find);
     if (find)
     {
       VibrateStart(100);
@@ -619,13 +620,11 @@ void DrawWeather(lv_event_t *e)
     lv_label_set_text_fmt(ui_Low_Temp, "%i°", info.weather.low);
     lv_label_set_text_fmt(ui_Humidity_Label, "%i%%", info.weather.humidity);
     lv_label_set_text_fmt(ui_Precepitation_Label, "%i%%", info.weather.precip);
-    // lv_label_set_text_fmt(ui_UV_Index_Label, "UV: %01.2f", info.weather.uv);
-    lv_label_set_text_fmt(ui_UV_Index_Label, "UV: --");
+    lv_label_set_text_fmt(ui_UV_Index_Label, "UV: %01.2f", info.weather.uv);
     lv_label_set_text_fmt(ui_Wind_Info, "%i mph\n%s", info.weather.wind, DegToCompassHeading(info.weather.winddir).c_str());
     lv_img_set_angle(ui_Wind_Image, info.weather.winddir * 10 - 900);
     lv_label_set_text(ui_Weather_State, info.weather.type.c_str());
-    lv_label_set_text_fmt(ui_Weather_Location, "%s @ %i:%02i", info.weather.location.c_str(), info.time.hour12, info.time.minute);
-    // lv_label_set_text_fmt(ui_Weather_Id, "%i", info.weather.code);
+    lv_label_set_text(ui_Weather_Location, info.weather.location.c_str());
     lv_img_set_src(ui_Weather_Image, &info.weather.img);
   }
 }

@@ -391,14 +391,13 @@ void loop()
 {
   if (useOTA)
     ArduinoOTA.handle();
+
   if (!IsSleeping()) // If Awake
   {
     lv_timer_handler(); /* let the GUI do its work */
 
     if (IsClockScreen()) // Only run this if on the main screen
-    {
       ScreenHandleHandle();
-    }
   }
   else // If Asleep
   {
@@ -408,6 +407,8 @@ void loop()
         Wakeup("Tilted Wrist");
       else
         Wakeup("Screen Touched");
+
+      //Log.verboseln("Touched at %i,%i", touch.data.x, touch.data.y);
     }
 
     delay(100);
@@ -422,7 +423,7 @@ void loop()
   TimersHandle();
   VibrateHandle();
 
-  // this runs every 50ms
+  // this runs every BLECTL_CHUNKDELAY ms
   if (BTTimerTriggered)
   {
     BTmsgloop();
@@ -444,7 +445,7 @@ void loop()
     }
   }
 
-  // This stuff runs every 1 second
+  // This stuff runs every 10 minutes
   if (StepGraphTriggered)
   {
     StepGraphTriggered = 0;

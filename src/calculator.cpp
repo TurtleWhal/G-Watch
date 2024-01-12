@@ -21,7 +21,11 @@ void CalcHandle(lv_event_t *e)
     {
       String expr = lv_textarea_get_text(ui_Calculator_textarea);
       char buffer[64];
-      sprintf(buffer, "%.g", CalculateExpression(expr));
+      if (CalculateExpression(expr) == NULL)
+        sprintf(buffer, "Undefined");
+      else
+        sprintf(buffer, "%1.6g", CalculateExpression(expr)); // 0.000000
+
       Log.verboseln("Calculating Expression: %s %s", expr, buffer);
       lv_textarea_set_text(ui_Calculator_textarea, buffer);
       lv_btnmatrix_set_selected_btn(ui_Calculator_Keyboard, 16);
@@ -55,7 +59,7 @@ float CalculateExpression(String expression)
     else
     {
       Log.verboseln("Error: Division by zero");
-      return 0;
+      return NULL;
     }
     break;
   default:
