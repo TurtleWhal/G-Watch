@@ -26,7 +26,7 @@ int LastDownScreen = SCREEN_WEATHER;
 // extern "C" lv_obj_t *ClockScreen = ui_SimplisticWatchFace;
 auto *ClockScreen = &ui_SimplisticWatchFace;
 
-lv_obj_t *Screen;
+myscreen_t Screen;
 
 auto ClockHandler = SimplisticWatchFaceHandle;
 
@@ -34,7 +34,7 @@ auto ClockHandler = SimplisticWatchFaceHandle;
 
 auto ClockScreenInit = ui_SimplisticWatchFace_screen_init;
 
-lv_obj_t *GetClockScreen()
+myscreen_t GetClockScreen()
 {
     return Screen;
 }
@@ -49,7 +49,7 @@ void SetClockScreen(myscreen_t scr)
         ClockScreenInit = ui_Blocky_Clock_screen_init;
         ClockHandler = BlockyClockHandle;
         ClockScreen = &ui_Blocky_Clock;
-        Screen = ui_Blocky_Clock;
+        Screen = SCREEN_CLOCK_BLOCKY;
         Serial.println("ui_Blocky_Clock");
         break;
 
@@ -57,7 +57,7 @@ void SetClockScreen(myscreen_t scr)
         ClockScreenInit = ui_SimplisticWatchFace_screen_init;
         ClockHandler = SimplisticWatchFaceHandle;
         ClockScreen = &ui_SimplisticWatchFace;
-        Screen = ui_SimplisticWatchFace;
+        Screen = SCREEN_CLOCK_SIMPLISTIC;
         Serial.println("ui_SimplisticWatchFace");
         break;
 
@@ -65,7 +65,7 @@ void SetClockScreen(myscreen_t scr)
         ClockScreenInit = ui_SkeletonWatchFace_screen_init;
         ClockHandler = SkeletonWatchFaceHandle;
         ClockScreen = &ui_SkeletonWatchFace;
-        Screen = ui_SkeletonWatchFace;
+        Screen = SCREEN_CLOCK_SKELETON;
         Serial.println("ui_SkeletonWatchFace");
         break;
 
@@ -73,7 +73,7 @@ void SetClockScreen(myscreen_t scr)
         ClockScreenInit = ui_Default_Clock_screen_init;
         ClockHandler = DefaultClockHandle;
         ClockScreen = &ui_Default_Clock;
-        Screen = ui_Default_Clock;
+        Screen = SCREEN_CLOCK_DEFAULT;
         Serial.println("ui_Default_Clock");
         break;
     }
@@ -201,6 +201,22 @@ void LoadSettings(lv_event_t *e)
 
     if (Storage.getBool("DarkMode"))
         lv_obj_add_state(ui_Dark_Mode_Setting_Switch, LV_STATE_CHECKED);
+
+    switch (Storage.getUShort("ClockScreen"))
+    {
+    default:
+        lv_dropdown_set_selected(ui_Clock_Setting_Dropdown, 0);
+        break;
+    case SCREEN_CLOCK_BLOCKY:
+        lv_dropdown_set_selected(ui_Clock_Setting_Dropdown, 1);
+        break;
+    case SCREEN_CLOCK_SIMPLISTIC:
+        lv_dropdown_set_selected(ui_Clock_Setting_Dropdown, 2);
+        break;
+    case SCREEN_CLOCK_SKELETON:
+        lv_dropdown_set_selected(ui_Clock_Setting_Dropdown, 3);
+        break;
+    }
 
     ApplyTheme(nullptr);
 }

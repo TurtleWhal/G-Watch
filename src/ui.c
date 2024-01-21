@@ -276,15 +276,14 @@ void ui_Settings_screen_init(void);
 void ui_event_Settings( lv_event_t * e);
 lv_obj_t *ui_Settings;
 lv_obj_t *ui_Settings_Panel;
-lv_obj_t *ui_Step_goal_Setting_Panel;
-void ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value( lv_event_t * e);
-lv_obj_t *ui_Notification_Time_Setting_Panel;
-void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e);
-lv_obj_t *ui_BTname_Setting_Panel;
-void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e);
 lv_obj_t *ui_Dark_Mode_Setting_Panel;
 void ui_event_Dark_Mode_Setting_Switch( lv_event_t * e);
 lv_obj_t *ui_Dark_Mode_Setting_Switch;
+lv_obj_t *ui_Step_goal_Setting_Panel;
+void ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value( lv_event_t * e);
+lv_obj_t *ui_Clock_Setting_Panel;
+void ui_event_Clock_Setting_Dropdown( lv_event_t * e);
+lv_obj_t *ui_Clock_Setting_Dropdown;
 lv_obj_t *ui_Theme_Setting_Panel;
 void ui_event_Theme_Expand_Arrow( lv_event_t * e);
 lv_obj_t *ui_Theme_Expand_Arrow;
@@ -294,6 +293,10 @@ void ui_event_Theme_Apply_Button( lv_event_t * e);
 lv_obj_t *ui_Theme_Apply_Button;
 lv_obj_t *ui_Theme_Apply_Label;
 lv_obj_t *ui_Theme_Hex_Label;
+lv_obj_t *ui_Notification_Time_Setting_Panel;
+void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e);
+lv_obj_t *ui_BTname_Setting_Panel;
+void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e);
 void ui_event_Power_Button1( lv_event_t * e);
 lv_obj_t *ui_Power_Button1;
 lv_obj_t *ui_Power_Button_Image1;
@@ -475,17 +478,17 @@ void ui_event_SkeletonWatchFace( lv_event_t * e);
 lv_obj_t *ui_SkeletonWatchFace;
 lv_obj_t *ui_Skeleton_Clock_Border;
 lv_obj_t *ui_Skeleton_Clock_IX_Panel;
-lv_obj_t *ui_Skeleton_Clock_IX_Shadow;
 lv_obj_t *ui_Skeleton_Clock_IX;
+lv_obj_t *ui_Skeleton_Clock_IX_Shadow;
 lv_obj_t *ui_Skeleton_Clock_XII_Panel;
-lv_obj_t *ui_Skeleton_Clock_XII_Shadow;
 lv_obj_t *ui_Skeleton_Clock_XII;
+lv_obj_t *ui_Skeleton_Clock_XII_Shadow;
 lv_obj_t *ui_Skeleton_Clock_III_Panel;
-lv_obj_t *ui_Skeleton_Clock_III_Shadow;
 lv_obj_t *ui_Skeleton_Clock_III;
+lv_obj_t *ui_Skeleton_Clock_III_Shadow;
 lv_obj_t *ui_Skeleton_Clock_VI_Panel;
-lv_obj_t *ui_Skeleton_Clock_VI_Shadow;
 lv_obj_t *ui_Skeleton_Clock_VI;
+lv_obj_t *ui_Skeleton_Clock_VI_Shadow;
 lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand_Shadow;
 lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand;
 lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand_Shadow;
@@ -520,8 +523,8 @@ lv_obj_t *ui_Blocky_Clock_Clock_Panel1;
 lv_obj_t *ui_Blocky_Clock_Date_Layer_1;
 lv_obj_t *ui_Blocky_Clock_Date_Layer_2;
 lv_obj_t *ui____initial_actions0;
-const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_4809254_png};
 const lv_img_dsc_t *ui_imgset_call[1] = {&ui_img_call1_png};
+const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_4809254_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -1465,30 +1468,23 @@ if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       LoadSettings( e );
 }
 }
+void ui_event_Dark_Mode_Setting_Switch( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      UpdateSettings( e );
+      ApplyTheme( e );
+}
+}
 void ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       editSetting( e );
 }
 }
-void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_CLICKED) {
-      editSetting( e );
-}
-}
-void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_CLICKED) {
-      _ui_flag_modify( ui_Settings_Keyboard, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-      _ui_keyboard_set_target(ui_Settings_Keyboard,  ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE));
-}
-}
-void ui_event_Dark_Mode_Setting_Switch( lv_event_t * e) {
+void ui_event_Clock_Setting_Dropdown( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_VALUE_CHANGED) {
       UpdateSettings( e );
-      ApplyTheme( e );
 }
 }
 void ui_event_Theme_Expand_Arrow( lv_event_t * e) {
@@ -1507,6 +1503,19 @@ void ui_event_Theme_Apply_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       UpdateSettings( e );
+}
+}
+void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      editSetting( e );
+}
+}
+void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_flag_modify( ui_Settings_Keyboard, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_keyboard_set_target(ui_Settings_Keyboard,  ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE));
 }
 }
 void ui_event_Power_Button1( lv_event_t * e) {

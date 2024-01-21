@@ -277,15 +277,14 @@ void ui_Settings_screen_init(void);
 void ui_event_Settings( lv_event_t * e);
 extern lv_obj_t *ui_Settings;
 extern lv_obj_t *ui_Settings_Panel;
-extern lv_obj_t *ui_Step_goal_Setting_Panel;
-void ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value( lv_event_t * e);
-extern lv_obj_t *ui_Notification_Time_Setting_Panel;
-void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e);
-extern lv_obj_t *ui_BTname_Setting_Panel;
-void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e);
 extern lv_obj_t *ui_Dark_Mode_Setting_Panel;
 void ui_event_Dark_Mode_Setting_Switch( lv_event_t * e);
 extern lv_obj_t *ui_Dark_Mode_Setting_Switch;
+extern lv_obj_t *ui_Step_goal_Setting_Panel;
+void ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value( lv_event_t * e);
+extern lv_obj_t *ui_Clock_Setting_Panel;
+void ui_event_Clock_Setting_Dropdown( lv_event_t * e);
+extern lv_obj_t *ui_Clock_Setting_Dropdown;
 extern lv_obj_t *ui_Theme_Setting_Panel;
 void ui_event_Theme_Expand_Arrow( lv_event_t * e);
 extern lv_obj_t *ui_Theme_Expand_Arrow;
@@ -295,6 +294,10 @@ void ui_event_Theme_Apply_Button( lv_event_t * e);
 extern lv_obj_t *ui_Theme_Apply_Button;
 extern lv_obj_t *ui_Theme_Apply_Label;
 extern lv_obj_t *ui_Theme_Hex_Label;
+extern lv_obj_t *ui_Notification_Time_Setting_Panel;
+void ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value( lv_event_t * e);
+extern lv_obj_t *ui_BTname_Setting_Panel;
+void ui_event_BTname_Setting_Panel_BTname_Setting_Value( lv_event_t * e);
 void ui_event_Power_Button1( lv_event_t * e);
 extern lv_obj_t *ui_Power_Button1;
 extern lv_obj_t *ui_Power_Button_Image1;
@@ -454,17 +457,17 @@ void ui_event_SkeletonWatchFace( lv_event_t * e);
 extern lv_obj_t *ui_SkeletonWatchFace;
 extern lv_obj_t *ui_Skeleton_Clock_Border;
 extern lv_obj_t *ui_Skeleton_Clock_IX_Panel;
-extern lv_obj_t *ui_Skeleton_Clock_IX_Shadow;
 extern lv_obj_t *ui_Skeleton_Clock_IX;
+extern lv_obj_t *ui_Skeleton_Clock_IX_Shadow;
 extern lv_obj_t *ui_Skeleton_Clock_XII_Panel;
-extern lv_obj_t *ui_Skeleton_Clock_XII_Shadow;
 extern lv_obj_t *ui_Skeleton_Clock_XII;
+extern lv_obj_t *ui_Skeleton_Clock_XII_Shadow;
 extern lv_obj_t *ui_Skeleton_Clock_III_Panel;
-extern lv_obj_t *ui_Skeleton_Clock_III_Shadow;
 extern lv_obj_t *ui_Skeleton_Clock_III;
+extern lv_obj_t *ui_Skeleton_Clock_III_Shadow;
 extern lv_obj_t *ui_Skeleton_Clock_VI_Panel;
-extern lv_obj_t *ui_Skeleton_Clock_VI_Shadow;
 extern lv_obj_t *ui_Skeleton_Clock_VI;
+extern lv_obj_t *ui_Skeleton_Clock_VI_Shadow;
 extern lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand_Shadow;
 extern lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand;
 extern lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand_Shadow;
@@ -496,53 +499,53 @@ extern lv_obj_t *ui_Blocky_Clock_Date_Layer_1;
 extern lv_obj_t *ui_Blocky_Clock_Date_Layer_2;
 extern lv_obj_t *ui____initial_actions0;
 
-LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
-LV_IMG_DECLARE( ui_img_tick_dots_png);   // assets/Tick Dots.png
-LV_IMG_DECLARE( ui_img_step_png);   // assets/step.png
-LV_IMG_DECLARE( ui_img_minutehandstub_png);   // assets/MinuteHandStub.png
-LV_IMG_DECLARE( ui_img_hourhandstub_png);   // assets/HourHandStub.png
-LV_IMG_DECLARE( ui_img_secondhandstub_png);   // assets/SecondHandStub.png
-LV_IMG_DECLARE( ui_img_no_bluetooth_small_png);   // assets/No Bluetooth_Small.png
-LV_IMG_DECLARE( ui_img_notificationbell_png);   // assets/NotificationBell.png
-LV_IMG_DECLARE( ui_img_seconddashstub_png);   // assets/SecondDashStub.png
-LV_IMG_DECLARE( ui_img_seconddotstub_png);   // assets/SecondDotStub.png
-LV_IMG_DECLARE( ui_img_gwatch_logo_png);   // assets/GWatch Logo.png
-LV_IMG_DECLARE( ui_img_brightness_png);   // assets/brightness.png
-LV_IMG_DECLARE( ui_img_bluetooth_small_nobackground_png);   // assets/Bluetooth_Small_nobackground.png
-LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets/BellNobackground.png
-LV_IMG_DECLARE( ui_img_restart_button_png);   // assets/Restart Button.png
-LV_IMG_DECLARE( ui_img_playpause_button_png);   // assets/PlayPause Button.png
-LV_IMG_DECLARE( ui_img_arrow_png);   // assets/Arrow.png
-LV_IMG_DECLARE( ui_img_power_icon_png);   // assets/Power Icon.png
-LV_IMG_DECLARE( ui_img_calculator_icon_nobackground_png);   // assets/Calculator Icon nobackground.png
-LV_IMG_DECLARE( ui_img_settings_gear_png);   // assets/Settings Gear.png
-LV_IMG_DECLARE( ui_img_mostly_cloudy_png);   // assets/Mostly Cloudy.png
-LV_IMG_DECLARE( ui_img_compass_png);   // assets/Compass.png
-LV_IMG_DECLARE( ui_img_flashlight_png);   // assets/Flashlight.png
-LV_IMG_DECLARE( ui_img_play_button_png);   // assets/Play Button.png
-LV_IMG_DECLARE( ui_img_album_cover_png);   // assets/album cover.png
-LV_IMG_DECLARE( ui_img_pause_button_png);   // assets/Pause Button.png
-LV_IMG_DECLARE( ui_img_moon_png);   // assets/moon.png
-LV_IMG_DECLARE( ui_img_sunny_png);   // assets/Sunny.png
-LV_IMG_DECLARE( ui_img_rain_png);   // assets/rain.png
-LV_IMG_DECLARE( ui_img_snow_rain_png);   // assets/Snow Rain.png
-LV_IMG_DECLARE( ui_img_mostly_sunny_png);   // assets/Mostly Sunny.png
-LV_IMG_DECLARE( ui_img_wind_png);   // assets/wind.png
-LV_IMG_DECLARE( ui_img_call1_png);   // assets/call1.png
-LV_IMG_DECLARE( ui_img_skeletonminutehand_png);   // assets/SkeletonMinuteHand.png
-LV_IMG_DECLARE( ui_img_simplisticminutehand_png);   // assets/SimplisticMinuteHand.png
-LV_IMG_DECLARE( ui_img_simplistichourhand_png);   // assets/SimplisticHourHand.png
-LV_IMG_DECLARE( ui_img_4809254_png);   // assets/4809254.png
+LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets\Tick Dashes.png
+LV_IMG_DECLARE( ui_img_tick_dots_png);   // assets\Tick Dots.png
+LV_IMG_DECLARE( ui_img_step_png);   // assets\step.png
+LV_IMG_DECLARE( ui_img_minutehandstub_png);   // assets\MinuteHandStub.png
+LV_IMG_DECLARE( ui_img_hourhandstub_png);   // assets\HourHandStub.png
+LV_IMG_DECLARE( ui_img_secondhandstub_png);   // assets\SecondHandStub.png
+LV_IMG_DECLARE( ui_img_no_bluetooth_small_png);   // assets\No Bluetooth_Small.png
+LV_IMG_DECLARE( ui_img_notificationbell_png);   // assets\NotificationBell.png
+LV_IMG_DECLARE( ui_img_seconddashstub_png);   // assets\SecondDashStub.png
+LV_IMG_DECLARE( ui_img_seconddotstub_png);   // assets\SecondDotStub.png
+LV_IMG_DECLARE( ui_img_gwatch_logo_png);   // assets\GWatch Logo.png
+LV_IMG_DECLARE( ui_img_brightness_png);   // assets\brightness.png
+LV_IMG_DECLARE( ui_img_bluetooth_small_nobackground_png);   // assets\Bluetooth_Small_nobackground.png
+LV_IMG_DECLARE( ui_img_bellnobackground_png);   // assets\BellNobackground.png
+LV_IMG_DECLARE( ui_img_restart_button_png);   // assets\Restart Button.png
+LV_IMG_DECLARE( ui_img_playpause_button_png);   // assets\PlayPause Button.png
+LV_IMG_DECLARE( ui_img_arrow_png);   // assets\Arrow.png
+LV_IMG_DECLARE( ui_img_power_icon_png);   // assets\Power Icon.png
+LV_IMG_DECLARE( ui_img_calculator_icon_nobackground_png);   // assets\Calculator Icon nobackground.png
+LV_IMG_DECLARE( ui_img_settings_gear_png);   // assets\Settings Gear.png
+LV_IMG_DECLARE( ui_img_mostly_cloudy_png);   // assets\Mostly Cloudy.png
+LV_IMG_DECLARE( ui_img_compass_png);   // assets\Compass.png
+LV_IMG_DECLARE( ui_img_flashlight_png);   // assets\Flashlight.png
+LV_IMG_DECLARE( ui_img_play_button_png);   // assets\Play Button.png
+LV_IMG_DECLARE( ui_img_album_cover_png);   // assets\album cover.png
+LV_IMG_DECLARE( ui_img_pause_button_png);   // assets\Pause Button.png
+LV_IMG_DECLARE( ui_img_moon_png);   // assets\moon.png
+LV_IMG_DECLARE( ui_img_sunny_png);   // assets\Sunny.png
+LV_IMG_DECLARE( ui_img_rain_png);   // assets\rain.png
+LV_IMG_DECLARE( ui_img_snow_rain_png);   // assets\Snow Rain.png
+LV_IMG_DECLARE( ui_img_mostly_sunny_png);   // assets\Mostly Sunny.png
+LV_IMG_DECLARE( ui_img_wind_png);   // assets\wind.png
+LV_IMG_DECLARE( ui_img_call1_png);   // assets\call1.png
+LV_IMG_DECLARE( ui_img_skeletonminutehand_png);   // assets\SkeletonMinuteHand.png
+LV_IMG_DECLARE( ui_img_simplisticminutehand_png);   // assets\SimplisticMinuteHand.png
+LV_IMG_DECLARE( ui_img_simplistichourhand_png);   // assets\SimplisticHourHand.png
+LV_IMG_DECLARE( ui_img_4809254_png);   // assets\4809254.png
 
-LV_FONT_DECLARE( ui_font_Blocky_16);
-LV_FONT_DECLARE( ui_font_Blocky_48);
-LV_FONT_DECLARE( ui_font_Comfortaa_10);
 LV_FONT_DECLARE( ui_font_Comfortaa_12);
+LV_FONT_DECLARE( ui_font_Blocky_16);
 LV_FONT_DECLARE( ui_font_Comfortaa_16);
+LV_FONT_DECLARE( ui_font_Monoton_48);
+LV_FONT_DECLARE( ui_font_Monoton_38);
 LV_FONT_DECLARE( ui_font_Comfortaa_26);
 LV_FONT_DECLARE( ui_font_Comfortaa_30);
-LV_FONT_DECLARE( ui_font_Monoton_38);
-LV_FONT_DECLARE( ui_font_Monoton_48);
+LV_FONT_DECLARE( ui_font_Blocky_48);
+LV_FONT_DECLARE( ui_font_Comfortaa_10);
 LV_FONT_DECLARE( ui_font_Music_14);
 
 void ui_init(void);

@@ -206,7 +206,8 @@ void InitOTA()
       else if (error == OTA_BEGIN_ERROR) Log.verboseln("Begin Failed");
       else if (error == OTA_CONNECT_ERROR) Log.verboseln("Connect Failed");
       else if (error == OTA_RECEIVE_ERROR) Log.verboseln("Receive Failed");
-      else if (error == OTA_END_ERROR) Log.verboseln("End Failed"); });
+      else if (error == OTA_END_ERROR) Log.verboseln("End Failed");
+      ScreenBack(nullptr); });
 
   ArduinoOTA.begin();
 
@@ -317,7 +318,9 @@ void setup()
   //////////Initalize UI//////////
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
 
-  SetClockScreen(SCREEN_CLOCK_DEFAULT);
+  InitUserSettings(); // init user settings before clock screen
+  
+  SetClockScreen(myscreen_t(Storage.getUShort("ClockScreen")));
   InitClockScreen();
 
   Log.verboseln("Init clock Screen");
@@ -328,7 +331,6 @@ void setup()
   DispLoadClockScreen();
   Log.verboseln("lv_disp_load_scr");
 
-  InitUserSettings();
 
   InitNotifications();
 
@@ -408,7 +410,7 @@ void loop()
       else
         Wakeup("Screen Touched");
 
-      //Log.verboseln("Touched at %i,%i", touch.data.x, touch.data.y);
+      // Log.verboseln("Touched at %i,%i", touch.data.x, touch.data.y);
     }
 
     delay(100);

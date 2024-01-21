@@ -156,7 +156,7 @@ extern "C"
     } myscreen_t;
 
     void ButtonToClock();
-    lv_obj_t *GetClockScreen();
+    myscreen_t GetClockScreen();
     void SetDownScreen(int Screen);
     bool IsClockScreen();
     void ScreenHandleHandle();

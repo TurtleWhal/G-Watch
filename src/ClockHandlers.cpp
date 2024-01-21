@@ -140,13 +140,13 @@ void SkeletonWatchFaceHandle()
 
         if (info.flag.secondchanged or info.flag.refresh)
         {
-            lv_img_set_angle(ui_Skeleton_Watch_Face_Minute_Hand, (info.time.hour * 300) + (info.time.minute * 5));
-            lv_img_set_angle(ui_Skeleton_Watch_Face_Minute_Hand_Shadow, (info.time.hour * 300) + (info.time.minute * 5));
+            lv_img_set_angle(ui_Skeleton_Watch_Face_Minute_Hand, (info.time.minute * 60) + (info.time.second));
+            lv_img_set_angle(ui_Skeleton_Watch_Face_Minute_Hand_Shadow, (info.time.minute * 60) + (info.time.second));
 
             if (info.flag.minutechanged or info.flag.refresh)
             {
-                lv_img_set_angle(ui_Skeleton_Watch_Face_Hour_Hand, (info.time.minute * 60) + (info.time.second));
-                lv_img_set_angle(ui_Skeleton_Watch_Face_Hour_Hand_Shadow, (info.time.minute * 60) + (info.time.second));
+                lv_img_set_angle(ui_Skeleton_Watch_Face_Hour_Hand, (info.time.hour * 300) + (info.time.minute * 5));
+                lv_img_set_angle(ui_Skeleton_Watch_Face_Hour_Hand_Shadow, (info.time.hour * 300) + (info.time.minute * 5));
 
                 if (info.flag.hourchanged or info.flag.refresh)
                 {

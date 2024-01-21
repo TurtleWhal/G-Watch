@@ -56,6 +56,12 @@ void InitUserSettings()
     Log.verboseln("WARNING: STORED THEME UNDEFINED, DEFAULTED TO %i", DEFAULTTHEME);
   }
 
+  if (!Storage.isKey("ClockScreen"))
+  {
+    Storage.putUShort("ClockScreen", SCREEN_CLOCK_DEFAULT);
+    Log.verboseln("WARNING: STORED ClockScreen UNDEFINED, DEFAULTED TO %i", SCREEN_CLOCK_DEFAULT);
+  }
+
   PrintSettings();
 }
 
@@ -79,6 +85,26 @@ void UpdateSettings(lv_event_t *e)
 
   Storage.putBool("DarkMode", lv_obj_has_state(ui_Dark_Mode_Setting_Switch, LV_STATE_CHECKED));
   // Log.verboseln(Storage.getBool("DarkMode"));
+
+  switch (lv_dropdown_get_selected(ui_Clock_Setting_Dropdown))
+  {
+  default:
+    Storage.putUShort("ClockScreen", SCREEN_CLOCK_DEFAULT);
+    break;
+
+  case 1:
+    Storage.putUShort("ClockScreen", SCREEN_CLOCK_BLOCKY);
+    break;
+
+  case 2:
+    Storage.putUShort("ClockScreen", SCREEN_CLOCK_SIMPLISTIC);
+    break;
+
+  case 3:
+    Storage.putUShort("ClockScreen", SCREEN_CLOCK_SKELETON);
+    break;
+  }
+  SetClockScreen((myscreen_t)Storage.getUShort("ClockScreen"));
 
   PrintSettings();
 }

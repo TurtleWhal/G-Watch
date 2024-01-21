@@ -76,7 +76,6 @@ lv_obj_set_style_clip_corner(cui_Image_Panel, true, LV_PART_MAIN| LV_STATE_DEFAU
 
 lv_obj_t *cui_Image;
 cui_Image = lv_img_create(cui_Image_Panel);
-lv_img_set_src(cui_Image, &ui_img_bellnobackground_png);
 lv_obj_set_width( cui_Image, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( cui_Image, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( cui_Image, LV_ALIGN_CENTER );

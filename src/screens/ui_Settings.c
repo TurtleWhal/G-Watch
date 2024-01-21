@@ -35,49 +35,6 @@ lv_obj_set_style_pad_right(ui_Settings_Panel, 7, LV_PART_SCROLLBAR| LV_STATE_DEF
 lv_obj_set_style_pad_top(ui_Settings_Panel, 45, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
 lv_obj_set_style_pad_bottom(ui_Settings_Panel, 85, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
 
-ui_Step_goal_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
-lv_obj_set_x( ui_Step_goal_Setting_Panel, 200 );
-lv_obj_set_y( ui_Step_goal_Setting_Panel, 35 );
-
-lv_label_set_text(ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Step Goal");
-
-lv_textarea_set_placeholder_text(ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),"Goal");
-
-
-
-ui_Notification_Time_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
-lv_obj_set_x( ui_Notification_Time_Setting_Panel, 200 );
-lv_obj_set_y( ui_Notification_Time_Setting_Panel, 35 );
-
-lv_label_set_text(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Notification\nTimer");
-lv_obj_set_style_text_font(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-lv_textarea_set_max_length(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),3);
-lv_textarea_set_placeholder_text(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),"Time");
-
-
-
-ui_BTname_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
-lv_obj_set_x( ui_BTname_Setting_Panel, 200 );
-lv_obj_set_y( ui_BTname_Setting_Panel, 35 );
-
-lv_label_set_text(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Bluetooth\nName");
-lv_obj_set_style_text_font(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-lv_obj_set_width( ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 115);
-lv_obj_set_height( ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), LV_SIZE_CONTENT);   /// 29
-if (""=="") lv_textarea_set_accepted_chars(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), NULL);
-else lv_textarea_set_accepted_chars(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), "");
-lv_textarea_set_max_length(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),16);
-lv_textarea_set_placeholder_text(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),"Name");
-lv_obj_set_style_text_font(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_pad_left(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 5, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_pad_right(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_pad_top(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 2, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_pad_bottom(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-
-
 ui_Dark_Mode_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
 lv_obj_set_x( ui_Dark_Mode_Setting_Panel, 0 );
 lv_obj_set_y( ui_Dark_Mode_Setting_Panel, -10 );
@@ -94,6 +51,40 @@ lv_obj_set_height( ui_Dark_Mode_Setting_Switch, 29);
 lv_obj_set_x( ui_Dark_Mode_Setting_Switch, 11 );
 lv_obj_set_y( ui_Dark_Mode_Setting_Switch, 0 );
 lv_obj_set_align( ui_Dark_Mode_Setting_Switch, LV_ALIGN_RIGHT_MID );
+
+
+ui_Step_goal_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
+lv_obj_set_x( ui_Step_goal_Setting_Panel, 200 );
+lv_obj_set_y( ui_Step_goal_Setting_Panel, 35 );
+
+lv_label_set_text(ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Step Goal");
+
+lv_textarea_set_placeholder_text(ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),"Goal");
+
+
+
+ui_Clock_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
+lv_obj_set_x( ui_Clock_Setting_Panel, 0 );
+lv_obj_set_y( ui_Clock_Setting_Panel, -10 );
+
+lv_label_set_text(ui_comp_get_child(ui_Clock_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Clock");
+
+lv_obj_add_flag( ui_comp_get_child(ui_Clock_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), LV_OBJ_FLAG_HIDDEN );   /// Flags
+
+
+
+ui_Clock_Setting_Dropdown = lv_dropdown_create(ui_Clock_Setting_Panel);
+lv_dropdown_set_options( ui_Clock_Setting_Dropdown, "Default\nBlocky\nSimple\nSkeleton" );
+lv_obj_set_width( ui_Clock_Setting_Dropdown, 130);
+lv_obj_set_height( ui_Clock_Setting_Dropdown, 29);
+lv_obj_set_x( ui_Clock_Setting_Dropdown, 11 );
+lv_obj_set_y( ui_Clock_Setting_Dropdown, 0 );
+lv_obj_set_align( ui_Clock_Setting_Dropdown, LV_ALIGN_RIGHT_MID );
+lv_obj_add_flag( ui_Clock_Setting_Dropdown, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_set_style_radius(ui_Clock_Setting_Dropdown, 15, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Clock_Setting_Dropdown, lv_color_hex(0x23262E), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Clock_Setting_Dropdown, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
 
 
 ui_Theme_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
@@ -161,6 +152,39 @@ lv_obj_set_x( ui_Theme_Hex_Label, 0 );
 lv_obj_set_y( ui_Theme_Hex_Label, -10 );
 lv_obj_set_align( ui_Theme_Hex_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Theme_Hex_Label,"Hex: #FFFFFF");
+
+ui_Notification_Time_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
+lv_obj_set_x( ui_Notification_Time_Setting_Panel, 200 );
+lv_obj_set_y( ui_Notification_Time_Setting_Panel, 35 );
+
+lv_label_set_text(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Notification\nTimer");
+lv_obj_set_style_text_font(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_textarea_set_max_length(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),3);
+lv_textarea_set_placeholder_text(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),"Time");
+
+
+
+ui_BTname_Setting_Panel = ui_Setting_Panel_create(ui_Settings_Panel);
+lv_obj_set_x( ui_BTname_Setting_Panel, 200 );
+lv_obj_set_y( ui_BTname_Setting_Panel, 35 );
+
+lv_label_set_text(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL),"Bluetooth\nName");
+lv_obj_set_style_text_font(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_LABEL), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_width( ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 115);
+lv_obj_set_height( ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), LV_SIZE_CONTENT);   /// 29
+if (""=="") lv_textarea_set_accepted_chars(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), NULL);
+else lv_textarea_set_accepted_chars(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), "");
+lv_textarea_set_max_length(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),16);
+lv_textarea_set_placeholder_text(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE),"Name");
+lv_obj_set_style_text_font(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), &ui_font_Comfortaa_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_left(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 5, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 2, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+
 
 ui_Power_Button1 = lv_btn_create(ui_Settings_Panel);
 lv_obj_set_width( ui_Power_Button1, 200);
@@ -254,13 +278,14 @@ lv_obj_set_style_radius(ui_Settings_Numberpad, 10, LV_PART_MAIN| LV_STATE_DEFAUL
 
 lv_obj_set_style_radius(ui_Settings_Numberpad, 10, LV_PART_ITEMS| LV_STATE_DEFAULT);
 
-lv_obj_add_event_cb(ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), ui_event_BTname_Setting_Panel_BTname_Setting_Value, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Dark_Mode_Setting_Switch, ui_event_Dark_Mode_Setting_Switch, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_comp_get_child(ui_Step_goal_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), ui_event_Step_goal_Setting_Panel_Step_Goal_Setting_Value, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Clock_Setting_Dropdown, ui_event_Clock_Setting_Dropdown, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Theme_Expand_Arrow, ui_event_Theme_Expand_Arrow, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Theme_Apply_Button, ui_event_Theme_Apply_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Theme_Colorwheel, ui_event_Theme_Colorwheel, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_comp_get_child(ui_Notification_Time_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), ui_event_Notification_Time_Setting_Panel_Notification_Time_Setting_Value, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_comp_get_child(ui_BTname_Setting_Panel, UI_COMP_SETTING_PANEL_SETTING_VALUE), ui_event_BTname_Setting_Panel_BTname_Setting_Value, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Power_Button1, ui_event_Power_Button1, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Settings_Keyboard, ui_event_Settings_Keyboard, LV_EVENT_ALL, NULL);
 lv_keyboard_set_textarea(ui_Settings_Numberpad,ui_comp_get_child(ui_Keyboard_Setting_panel, UI_COMP_SETTING_PANEL_SETTING_VALUE));

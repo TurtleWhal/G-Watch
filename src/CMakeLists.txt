@@ -1,6 +1,6 @@
-SET(SOURCES components/ui_comp_app_button.c
+SET(SOURCES components/ui_comp_setting_panel.c
+    components/ui_comp_app_button.c
     components/ui_comp_notification_widget.c
-    components/ui_comp_setting_panel.c
     components/ui_comp.c
     screens/ui_Default_Clock.c
     screens/ui_Notifications.c
@@ -27,6 +27,7 @@ SET(SOURCES components/ui_comp_app_button.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
+    ui_events.cpp
     images/ui_img_tick_dashes_png.c
     images/ui_img_tick_dots_png.c
     images/ui_img_step_png.c
@@ -64,15 +65,15 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_simplisticminutehand_png.c
     images/ui_img_simplistichourhand_png.c
     images/ui_img_4809254_png.c
-    fonts/ui_font_Blocky_16.c
-    fonts/ui_font_Blocky_48.c
-    fonts/ui_font_Comfortaa_10.c
     fonts/ui_font_Comfortaa_12.c
+    fonts/ui_font_Blocky_16.c
     fonts/ui_font_Comfortaa_16.c
+    fonts/ui_font_Monoton_48.c
+    fonts/ui_font_Monoton_38.c
     fonts/ui_font_Comfortaa_26.c
     fonts/ui_font_Comfortaa_30.c
-    fonts/ui_font_Monoton_38.c
-    fonts/ui_font_Monoton_48.c
+    fonts/ui_font_Blocky_48.c
+    fonts/ui_font_Comfortaa_10.c
     fonts/ui_font_Music_14.c)
 
 add_library(ui ${SOURCES})
