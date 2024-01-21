@@ -1,0 +1,16 @@
+{
+  "codename": "Dot_Numbers",
+  "ttf_path": "/assets/PerforationStrip.ttf",
+  "bin_path": "/assets/ui_font_Dot_Numbers.bin",
+  "c_path": "/assets/ui_font_Dot_Numbers.c",
+  "cfg_path": "/assets/ui_font_Dot_Numbers.fcfg",
+  "size": 32,
+  "bpp": 8,
+  "letters": 0,
+  "ranges": [
+    "0x20-0x7f"
+  ],
+  "symbols": "",
+  "customparams": "--no-compress --no-prefilter",
+  "uploaded": false
+}

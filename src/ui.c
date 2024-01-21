@@ -476,6 +476,9 @@ lv_obj_t *ui_Schedule_Roller;
 void ui_SkeletonWatchFace_screen_init(void);
 void ui_event_SkeletonWatchFace( lv_event_t * e);
 lv_obj_t *ui_SkeletonWatchFace;
+lv_obj_t *ui_Minutes_Gear;
+lv_obj_t *ui_Seconds_Gear;
+lv_obj_t *ui_Hours_Gear;
 lv_obj_t *ui_Skeleton_Clock_Border;
 lv_obj_t *ui_Skeleton_Clock_IX_Panel;
 lv_obj_t *ui_Skeleton_Clock_IX;
@@ -500,10 +503,12 @@ lv_obj_t *ui_Skeleton_Clock_Lighting;
 void ui_SimplisticWatchFace_screen_init(void);
 void ui_event_SimplisticWatchFace( lv_event_t * e);
 lv_obj_t *ui_SimplisticWatchFace;
+lv_obj_t *ui_Simplistic_Time;
 lv_obj_t *ui_Simplistic_Minute_Hand_Shadow;
 lv_obj_t *ui_Simplistic_Minute_Hand;
 lv_obj_t *ui_Simplistic_Hour_Hand_Shadow;
 lv_obj_t *ui_Simplistic_Hour_Hand;
+lv_obj_t *ui_Label1;
 
 
 // SCREEN: ui_Blocky_Clock
@@ -523,8 +528,8 @@ lv_obj_t *ui_Blocky_Clock_Clock_Panel1;
 lv_obj_t *ui_Blocky_Clock_Date_Layer_1;
 lv_obj_t *ui_Blocky_Clock_Date_Layer_2;
 lv_obj_t *ui____initial_actions0;
-const lv_img_dsc_t *ui_imgset_call[1] = {&ui_img_call1_png};
 const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_4809254_png};
+const lv_img_dsc_t *ui_imgset_call[1] = {&ui_img_call1_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16

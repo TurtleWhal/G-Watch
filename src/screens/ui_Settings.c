@@ -74,6 +74,7 @@ lv_obj_add_flag( ui_comp_get_child(ui_Clock_Setting_Panel, UI_COMP_SETTING_PANEL
 
 
 ui_Clock_Setting_Dropdown = lv_dropdown_create(ui_Clock_Setting_Panel);
+lv_dropdown_set_dir( ui_Clock_Setting_Dropdown, LV_DIR_TOP);
 lv_dropdown_set_options( ui_Clock_Setting_Dropdown, "Default\nBlocky\nSimple\nSkeleton" );
 lv_obj_set_width( ui_Clock_Setting_Dropdown, 130);
 lv_obj_set_height( ui_Clock_Setting_Dropdown, 29);
@@ -81,9 +82,15 @@ lv_obj_set_x( ui_Clock_Setting_Dropdown, 11 );
 lv_obj_set_y( ui_Clock_Setting_Dropdown, 0 );
 lv_obj_set_align( ui_Clock_Setting_Dropdown, LV_ALIGN_RIGHT_MID );
 lv_obj_add_flag( ui_Clock_Setting_Dropdown, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_set_style_text_color(ui_Clock_Setting_Dropdown, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Clock_Setting_Dropdown, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_radius(ui_Clock_Setting_Dropdown, 15, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_Clock_Setting_Dropdown, lv_color_hex(0x23262E), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Clock_Setting_Dropdown, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_left(ui_Clock_Setting_Dropdown, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(ui_Clock_Setting_Dropdown, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(ui_Clock_Setting_Dropdown, 4, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(ui_Clock_Setting_Dropdown, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 
 

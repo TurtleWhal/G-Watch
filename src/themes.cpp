@@ -123,6 +123,7 @@ void ApplyTheme(lv_event_t *e)
   {
     if (!info.theme.darkmode)
     {
+      lv_obj_set_style_text_color(ui_Simplistic_Time, lv_color_white(), LV_PART_MAIN);
       lv_obj_set_style_img_recolor(ui_Simplistic_Hour_Hand, lv_color_white(), LV_PART_MAIN);
       lv_obj_set_style_img_recolor(ui_Simplistic_Minute_Hand, lv_color_white(), LV_PART_MAIN);
       lv_obj_set_style_img_recolor(ui_Simplistic_Hour_Hand_Shadow, lv_color_hex(0xC7C4C7), LV_PART_MAIN);

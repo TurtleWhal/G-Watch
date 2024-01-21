@@ -125,6 +125,8 @@ void SimplisticWatchFaceHandle()
                 lv_img_set_angle(ui_Simplistic_Minute_Hand, (info.time.minute * 60) + (info.time.second));
                 lv_img_set_angle(ui_Simplistic_Minute_Hand_Shadow, (info.time.minute * 60) + (info.time.second));
 
+                lv_label_set_text_fmt(ui_Simplistic_Time, "%02i:%02i", info.time.hour12, info.time.minute);
+
                 if (info.flag.hourchanged or info.flag.refresh)
                 {
                 }
@@ -138,8 +140,12 @@ void SkeletonWatchFaceHandle()
     if (lv_scr_act() == ui_SkeletonWatchFace)
     {
 
+        lv_img_set_angle(ui_Minutes_Gear, (info.time.valsec * 60) + (info.time.valusec * 0.00006));
+        lv_img_set_angle(ui_Seconds_Gear, (info.time.valusec * 0.0036));
+
         if (info.flag.secondchanged or info.flag.refresh)
         {
+            lv_img_set_angle(ui_Hours_Gear, (info.time.minute * 60) + (info.time.second));
             lv_img_set_angle(ui_Skeleton_Watch_Face_Minute_Hand, (info.time.minute * 60) + (info.time.second));
             lv_img_set_angle(ui_Skeleton_Watch_Face_Minute_Hand_Shadow, (info.time.minute * 60) + (info.time.second));
 

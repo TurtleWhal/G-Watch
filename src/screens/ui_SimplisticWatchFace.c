@@ -11,6 +11,19 @@ ui_SimplisticWatchFace = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_SimplisticWatchFace, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_add_event_cb(ui_SimplisticWatchFace, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_SimplisticWatchFace);
 
+ui_Simplistic_Time = lv_label_create(ui_SimplisticWatchFace);
+lv_obj_set_width( ui_Simplistic_Time, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Simplistic_Time, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Simplistic_Time, 0 );
+lv_obj_set_y( ui_Simplistic_Time, 55 );
+lv_obj_set_align( ui_Simplistic_Time, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Simplistic_Time,"01:30");
+lv_obj_set_style_text_color(ui_Simplistic_Time, lv_color_hex(0x262626), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Simplistic_Time, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_letter_space(ui_Simplistic_Time, -6, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_line_space(ui_Simplistic_Time, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Simplistic_Time, &ui_font_Dot_Numbers, LV_PART_MAIN| LV_STATE_DEFAULT);
+
 ui_Simplistic_Minute_Hand_Shadow = lv_img_create(ui_SimplisticWatchFace);
 lv_img_set_src(ui_Simplistic_Minute_Hand_Shadow, &ui_img_simplisticminutehand_png);
 lv_obj_set_width( ui_Simplistic_Minute_Hand_Shadow, LV_SIZE_CONTENT);  /// 1
@@ -68,6 +81,12 @@ lv_img_set_angle(ui_Simplistic_Hour_Hand,1200);
 lv_img_set_zoom(ui_Simplistic_Hour_Hand,200);
 lv_obj_set_style_img_recolor(ui_Simplistic_Hour_Hand, lv_color_hex(0x000000), LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_img_recolor_opa(ui_Simplistic_Hour_Hand, 220, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Label1 = lv_label_create(ui_SimplisticWatchFace);
+lv_obj_set_width( ui_Label1, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Label1, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Label1, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Label1, LV_OBJ_FLAG_HIDDEN );   /// Flags
 
 lv_obj_add_event_cb(ui_SimplisticWatchFace, ui_event_SimplisticWatchFace, LV_EVENT_ALL, NULL);
 
