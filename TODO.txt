@@ -3,6 +3,7 @@ Power managment when asleep
 OS
 20 hr bat life
 Improve boot upload_speed
+Auto adjust battery curve
 
 ------------ "Easy" Changes ------------
 alarms
