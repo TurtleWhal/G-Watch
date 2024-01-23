@@ -411,6 +411,14 @@ lv_obj_t *ui_Music_Artist;
 lv_obj_t *ui_Music_Title;
 lv_obj_t *ui_Music_Album;
 lv_obj_t *ui_Music_Time;
+void ui_event_Music_Volume_Up_Button( lv_event_t * e);
+lv_obj_t *ui_Music_Volume_Up_Button;
+lv_obj_t *ui_Music_Volume_Up_Button_Image;
+lv_obj_t *ui_Music_Skip_Forwards_Button_Bar1;
+void ui_event_Music_Volume_Down_Button( lv_event_t * e);
+lv_obj_t *ui_Music_Volume_Down_Button;
+lv_obj_t *ui_Music_Volume_Down_Button_Img;
+lv_obj_t *ui_Music_Skip_Forwards_Button_Bar2;
 
 
 // SCREEN: ui_Weather
@@ -1711,6 +1719,18 @@ void ui_event_Music_Skip_Backwards_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       MusicSkipBackward( e );
+}
+}
+void ui_event_Music_Volume_Up_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      MusicVolumeUp( e );
+}
+}
+void ui_event_Music_Volume_Down_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      MusicVolumeDown( e );
 }
 }
 void ui_event_Weather( lv_event_t * e) {

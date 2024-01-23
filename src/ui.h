@@ -400,6 +400,14 @@ extern lv_obj_t *ui_Music_Artist;
 extern lv_obj_t *ui_Music_Title;
 extern lv_obj_t *ui_Music_Album;
 extern lv_obj_t *ui_Music_Time;
+void ui_event_Music_Volume_Up_Button( lv_event_t * e);
+extern lv_obj_t *ui_Music_Volume_Up_Button;
+extern lv_obj_t *ui_Music_Volume_Up_Button_Image;
+extern lv_obj_t *ui_Music_Skip_Forwards_Button_Bar1;
+void ui_event_Music_Volume_Down_Button( lv_event_t * e);
+extern lv_obj_t *ui_Music_Volume_Down_Button;
+extern lv_obj_t *ui_Music_Volume_Down_Button_Img;
+extern lv_obj_t *ui_Music_Skip_Forwards_Button_Bar2;
 // SCREEN: ui_Weather
 void ui_Weather_screen_init(void);
 void ui_event_Weather( lv_event_t * e);
@@ -535,6 +543,8 @@ LV_IMG_DECLARE( ui_img_flashlight_png);   // assets/Flashlight.png
 LV_IMG_DECLARE( ui_img_play_button_png);   // assets/Play Button.png
 LV_IMG_DECLARE( ui_img_album_cover_png);   // assets/album cover.png
 LV_IMG_DECLARE( ui_img_pause_button_png);   // assets/Pause Button.png
+LV_IMG_DECLARE( ui_img_volume_up_png);   // assets/Volume Up.png
+LV_IMG_DECLARE( ui_img_volume_down_png);   // assets/Volume Down.png
 LV_IMG_DECLARE( ui_img_moon_png);   // assets/moon.png
 LV_IMG_DECLARE( ui_img_sunny_png);   // assets/Sunny.png
 LV_IMG_DECLARE( ui_img_rain_png);   // assets/rain.png

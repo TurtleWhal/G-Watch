@@ -54,6 +54,8 @@ SET(SOURCES components/ui_comp_app_button.c
     images/ui_img_play_button_png.c
     images/ui_img_album_cover_png.c
     images/ui_img_pause_button_png.c
+    images/ui_img_volume_up_png.c
+    images/ui_img_volume_down_png.c
     images/ui_img_moon_png.c
     images/ui_img_sunny_png.c
     images/ui_img_rain_png.c

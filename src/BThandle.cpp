@@ -502,6 +502,20 @@ void MusicSkipBackward(lv_event_t *e)
   BTsend(skipbackwardstring);
 }
 
+void MusicVolumeUp(lv_event_t *e)
+{
+  Log.verboseln("Volume Up");
+  String skipforwardstring = "{t:\"music\", n:\"volumeup\"}";
+  BTsend(skipforwardstring);
+}
+
+void MusicVolumeDown(lv_event_t *e)
+{
+  Log.verboseln("Volume Down");
+  String skipbackwardstring = "{t:\"music\", n:\"volumedown\"}";
+  BTsend(skipbackwardstring);
+}
+
 void ToggleBT(lv_event_t *e)
 {
   if (lv_obj_has_state(ui_Bluetooth_Button, LV_STATE_CHECKED))
