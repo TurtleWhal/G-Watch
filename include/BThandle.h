@@ -12,6 +12,7 @@ extern "C"
     // void ToggleBT(lv_event_t *e);
     void BT_off();
     void BT_on();
+    void BT_Init();
     void OnBTConnect();
     void PairBT(int);
 

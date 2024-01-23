@@ -49,6 +49,8 @@ lv_obj_t *NotifPopup;
 void InitNotifications()
 {
   PullNotifications();
+  Donotdisturb = Storage.getBool("Donotdisturb");
+  info.notification.donotdisturb = Donotdisturb;
 }
 
 void ShowNotification(String Title, String Text, String Source, int id)
@@ -116,7 +118,7 @@ void ShowNotification(String Title, String Text, String Source, int id)
   info.notification.lasttext = NotificationList[10].Text;
   info.notification.lastimg = NotificationList[10].img;
 
-    NotificationShow_Animation(NOTIFPOPUP_MAIN, 0);
+  NotificationShow_Animation(NOTIFPOPUP_MAIN, 0);
 
   notificationtime = millis();
   notificationshowing = 1;
@@ -127,6 +129,10 @@ void ShowNotification(String Title, String Text, String Source, int id)
 
 void DrawNotifications(lv_event_t *e)
 {
+  lv_label_set_text_fmt(ui_Notification_Info, "%i%%    %s", info.battery.percentage, info.time.date);
+  if (Storage.getBool("Donotdisturb"))
+    lv_obj_add_state(ui_Do_Not_Disturb_Button, LV_STATE_CHECKED);
+
   lv_slider_set_value(ui_Brightness_Slider, GetUserBrightness(), LV_ANIM_OFF);
 
   if (!info.bt.ison)
@@ -327,6 +333,7 @@ void ToggleDoNotDisturb(lv_event_t *e)
 {
   Donotdisturb = !Donotdisturb;
   info.notification.donotdisturb = Donotdisturb;
+  Storage.putBool("Donotdisturb", Donotdisturb);
 }
 
 bool NotificationActive()

@@ -17,6 +17,7 @@ lv_obj_set_height( ui_Notifications_Label_Underline, 3);
 lv_obj_set_x( ui_Notifications_Label_Underline, 0 );
 lv_obj_set_y( ui_Notifications_Label_Underline, -90 );
 lv_obj_set_align( ui_Notifications_Label_Underline, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Notifications_Label_Underline, LV_OBJ_FLAG_HIDDEN );   /// Flags
 lv_obj_clear_flag( ui_Notifications_Label_Underline, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_Notifications_Label_Underline, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Notifications_Label_Underline, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -30,7 +31,16 @@ lv_obj_set_x( ui_Notifications_Label, 0 );
 lv_obj_set_y( ui_Notifications_Label, 12 );
 lv_obj_set_align( ui_Notifications_Label, LV_ALIGN_TOP_MID );
 lv_label_set_text(ui_Notifications_Label,"Quick Access");
+lv_obj_add_flag( ui_Notifications_Label, LV_OBJ_FLAG_HIDDEN );   /// Flags
 lv_obj_set_style_text_font(ui_Notifications_Label, &ui_font_Comfortaa_16, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Notification_Info = lv_label_create(ui_Notifications);
+lv_obj_set_width( ui_Notification_Info, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Notification_Info, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Notification_Info, 0 );
+lv_obj_set_y( ui_Notification_Info, 20 );
+lv_obj_set_align( ui_Notification_Info, LV_ALIGN_TOP_MID );
+lv_label_set_text(ui_Notification_Info,"98%    Mon Jan 1");
 
 ui_Notification_Panel = lv_obj_create(ui_Notifications);
 lv_obj_set_width( ui_Notification_Panel, 240);
@@ -59,7 +69,7 @@ lv_obj_set_style_pad_bottom(ui_Notification_Panel, 100, LV_PART_SCROLLBAR| LV_ST
 
 ui_Brightness_Slider = lv_slider_create(ui_Notification_Panel);
 lv_slider_set_range(ui_Brightness_Slider, -20,100);
-lv_slider_set_value( ui_Brightness_Slider, 100, LV_ANIM_OFF);
+lv_slider_set_value( ui_Brightness_Slider, 50, LV_ANIM_OFF);
 if (lv_slider_get_mode(ui_Brightness_Slider)==LV_SLIDER_MODE_RANGE ) lv_slider_set_left_value( ui_Brightness_Slider, 0, LV_ANIM_OFF);
 lv_obj_set_width( ui_Brightness_Slider, 180);
 lv_obj_set_height( ui_Brightness_Slider, 31);
@@ -94,7 +104,6 @@ lv_obj_set_height( ui_Bluetooth_Button, 30);
 lv_obj_set_x( ui_Bluetooth_Button, -15 );
 lv_obj_set_y( ui_Bluetooth_Button, 0 );
 lv_obj_set_align( ui_Bluetooth_Button, LV_ALIGN_LEFT_MID );
-lv_obj_add_state( ui_Bluetooth_Button, LV_STATE_DISABLED );     /// States
 lv_obj_add_flag( ui_Bluetooth_Button, LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_IGNORE_LAYOUT | LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_Bluetooth_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_Bluetooth_Button, 175, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -148,6 +157,20 @@ lv_obj_set_style_bg_color(ui_Notifications_Gesture_Panel, lv_color_hex(0xFFFFFF)
 lv_obj_set_style_bg_opa(ui_Notifications_Gesture_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_color(ui_Notifications_Gesture_Panel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_Notifications_Gesture_Panel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Label3 = lv_label_create(ui_Notifications);
+lv_obj_set_width( ui_Label3, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Label3, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Label3, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Label3, LV_OBJ_FLAG_HIDDEN );   /// Flags
+
+ui_Container3 = lv_obj_create(ui_Notifications);
+lv_obj_remove_style_all(ui_Container3);
+lv_obj_set_width( ui_Container3, 100);
+lv_obj_set_height( ui_Container3, 50);
+lv_obj_set_align( ui_Container3, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Container3, LV_OBJ_FLAG_HIDDEN );   /// Flags
+lv_obj_clear_flag( ui_Container3, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
 lv_obj_add_event_cb(ui_Brightness_Slider, ui_event_Brightness_Slider, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Bluetooth_Button, ui_event_Bluetooth_Button, LV_EVENT_ALL, NULL);

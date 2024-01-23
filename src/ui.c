@@ -63,6 +63,7 @@ void ui_event_Notifications( lv_event_t * e);
 lv_obj_t *ui_Notifications;
 lv_obj_t *ui_Notifications_Label_Underline;
 lv_obj_t *ui_Notifications_Label;
+lv_obj_t *ui_Notification_Info;
 lv_obj_t *ui_Notification_Panel;
 void ui_event_Brightness_Slider( lv_event_t * e);
 lv_obj_t *ui_Brightness_Slider;
@@ -75,6 +76,8 @@ lv_obj_t *ui_Do_Not_Disturb_Button;
 lv_obj_t *ui_Do_Not_Disturb_Button_Image;
 lv_obj_t *ui_No_New_Notifications_Label;
 lv_obj_t *ui_Notifications_Gesture_Panel;
+lv_obj_t *ui_Label3;
+lv_obj_t *ui_Container3;
 
 
 // SCREEN: ui_Notification_Expand
@@ -338,6 +341,8 @@ void ui_event_Calculator_App_Button_App_Button( lv_event_t * e);
 lv_obj_t *ui_Calculator_App_Button;
 void ui_event_Settings_App_Button_App_Button( lv_event_t * e);
 lv_obj_t *ui_Settings_App_Button;
+void ui_event_Schedule_App_Button_App_Button( lv_event_t * e);
+lv_obj_t *ui_Schedule_App_Button;
 void ui_event_Debug_App_Button_App_Button( lv_event_t * e);
 lv_obj_t *ui_Debug_App_Button;
 void ui_event_Weather_App_Button_App_Button( lv_event_t * e);
@@ -1597,6 +1602,12 @@ void ui_event_Settings_App_Button_App_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       _ui_screen_change( &ui_Settings, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Settings_screen_init);
+}
+}
+void ui_event_Schedule_App_Button_App_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_screen_change( &ui_Schedule, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Schedule_screen_init);
 }
 }
 void ui_event_Debug_App_Button_App_Button( lv_event_t * e) {

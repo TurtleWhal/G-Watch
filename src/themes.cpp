@@ -49,7 +49,15 @@ void ApplyTheme(lv_event_t *e)
   {
     lv_color16_t color;
     color.full = Storage.getUInt("Theme");
-    lv_theme_t *theme = lv_theme_default_init(dispp, color, lv_palette_main(LV_PALETTE_RED),
+
+    lv_color16_t secondary;
+    if ((color.ch.red > 200) and (color.ch.green < 50) and (color.ch.blue < 50)) {
+      secondary = lv_palette_main(LV_PALETTE_BLUE);
+    } else {
+      secondary = lv_palette_main(LV_PALETTE_RED);
+    }
+
+    lv_theme_t *theme = lv_theme_default_init(dispp, color, secondary,
                                               Storage.getBool("DarkMode"), LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     ThemeColor = color;

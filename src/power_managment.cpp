@@ -24,6 +24,7 @@ int prevbrightness = 100;
 String Wakeup_reason;
 bool charging;
 int Brightness = 100;
+bool powerSaving = false;
 
 void Sleephandle()
 {
@@ -64,7 +65,6 @@ void Sleephandle()
           twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, false);
         }
       }
-
     }
   }
   else
@@ -146,6 +146,7 @@ void Powerhandle()
     if (!charging) // plugged in
     {
       charging = 1;
+      DeactivatePowerSaving();
       info.battery.ischarging = 1;
       UpdatePower(true);
       info.flag.refresh = 1;
@@ -168,21 +169,33 @@ void Powerhandle()
     }
 
     if ((twatch->power_get_percent() < 20) and (millis() > 10000))
-    { // turn on power saving mode
-
-      Log.verboseln("Power Saving Mode Acitvated");
-      BT_off();                                                 // turn off bluetooth
-      twatch->backlight_gradual_light(prevbrightness / 2, 500); // lower brightness
-
-      if (twatch->power_get_volt() < 3000) // turn off to protect the battery
-      {
-        Log.verboseln("Powering off due to low battery");
-        PowerOff(nullptr);
-      }
-    }
+      ActivatePowerSaving();
   }
 }
 
+void ActivatePowerSaving()
+{
+  if (!powerSaving)
+  {
+    Log.verboseln("Power Saving Mode Acitvated");
+    BT_off();        // turn off bluetooth
+    Brightness /= 2; // lower brightness
+    twatch->backlight_gradual_light(Brightness, 500);
+    powerSaving = true;
+  }
+}
+
+void DeactivatePowerSaving()
+{
+  if (powerSaving)
+  {
+    Log.verboseln("Power Saving Mode Deactivated");
+    BT_on();
+    Brightness *= 2; // restore brightness
+    twatch->backlight_gradual_light(Brightness, 500);
+    powerSaving = false;
+  }
+}
 /*void InitPercent()
 {
   if (!digitalRead(TWATCH_CHARGING) || twatch->power_get_volt() > 4000)

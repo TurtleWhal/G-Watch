@@ -12,6 +12,7 @@ store notifications in flash
 step goal after reached
 calls
 games
+now playing timer
 
 ------ Garrett Dosen't Understand ------
 Change to TWATCH LVGL

@@ -510,18 +510,29 @@ void ToggleBT(lv_event_t *e)
     BT_on();
 }
 
+void BT_Init()
+{
+  BTon = 1;
+  info.bt.ison = BTon;
+  blectl_setup();
+  Log.verboseln("BT Init");
+}
+
 void BT_on()
 {
   BTon = 1;
-  info.bt.ison = 1;
-  blectl_setup();
+  info.bt.ison = BTon;
+  blectl_on();
+  Log.verboseln("BT on");
 }
 
 void BT_off()
 {
   BTon = 0;
-  info.bt.ison = 0;
+  info.bt.ison = BTon;
   blectl_off();
+  blectl_set_event(BLECTL_DISCONNECT);
+  Log.verboseln("BT off");
 }
 
 void OnBTConnect()

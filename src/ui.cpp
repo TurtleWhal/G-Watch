@@ -319,7 +319,7 @@ void setup()
   LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
 
   InitUserSettings(); // init user settings before clock screen
-  
+
   SetClockScreen(myscreen_t(Storage.getUShort("ClockScreen")));
   InitClockScreen();
 
@@ -330,7 +330,6 @@ void setup()
 
   DispLoadClockScreen();
   Log.verboseln("lv_disp_load_scr");
-
 
   InitNotifications();
 
@@ -362,8 +361,8 @@ void setup()
   Log.verboseln("Lv Timer");
   lv_timer_handler();
 
-  Log.verboseln("BT on");
-  BT_on();
+  Log.verboseln("BT Init");
+  BT_Init();
 
 #if defined(CONFIG_BMA423_LATER)
   Log.verboseln("Bma423 begin");
@@ -381,7 +380,9 @@ void setup()
 
   Timer0Triggered = 1;
 
-  twatch->motor_shake(1, 100);
+  if (Storage.getBool("DoNotDisturb"))
+    twatch->motor_shake(1, 100);
+
   Log.verboseln("Setup done");
   // Log.verboseln("Total PSRAM: %d", ESP.getPsramSize());
   // Log.verboseln("Free PSRAM: %d", ESP.getFreePsram());

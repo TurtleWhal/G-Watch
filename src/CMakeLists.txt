@@ -73,9 +73,9 @@ SET(SOURCES components/ui_comp_app_button.c
     fonts/ui_font_Comfortaa_16.c
     fonts/ui_font_Comfortaa_26.c
     fonts/ui_font_Comfortaa_30.c
+    fonts/ui_font_Dot_Numbers.c
     fonts/ui_font_Monoton_38.c
     fonts/ui_font_Monoton_48.c
-    fonts/ui_font_Music_14.c
-    fonts/ui_font_Dot_Numbers.c)
+    fonts/ui_font_Music_14.c)
 
 add_library(ui ${SOURCES})

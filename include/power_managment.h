@@ -17,6 +17,8 @@ extern "C"
   void SleepSpeed();
   int GetSleepTimer();
   void BTsendpower();
+  void ActivatePowerSaving();
+  void DeactivatePowerSaving();
 
 #ifdef __cplusplus
 } /*extern "C"*/

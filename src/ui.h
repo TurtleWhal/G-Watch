@@ -78,6 +78,7 @@ void ui_event_Notifications( lv_event_t * e);
 extern lv_obj_t *ui_Notifications;
 extern lv_obj_t *ui_Notifications_Label_Underline;
 extern lv_obj_t *ui_Notifications_Label;
+extern lv_obj_t *ui_Notification_Info;
 extern lv_obj_t *ui_Notification_Panel;
 void ui_event_Brightness_Slider( lv_event_t * e);
 extern lv_obj_t *ui_Brightness_Slider;
@@ -90,6 +91,8 @@ extern lv_obj_t *ui_Do_Not_Disturb_Button;
 extern lv_obj_t *ui_Do_Not_Disturb_Button_Image;
 extern lv_obj_t *ui_No_New_Notifications_Label;
 extern lv_obj_t *ui_Notifications_Gesture_Panel;
+extern lv_obj_t *ui_Label3;
+extern lv_obj_t *ui_Container3;
 // SCREEN: ui_Notification_Expand
 void ui_Notification_Expand_screen_init(void);
 void ui_event_Notification_Expand( lv_event_t * e);
@@ -335,6 +338,8 @@ void ui_event_Calculator_App_Button_App_Button( lv_event_t * e);
 extern lv_obj_t *ui_Calculator_App_Button;
 void ui_event_Settings_App_Button_App_Button( lv_event_t * e);
 extern lv_obj_t *ui_Settings_App_Button;
+void ui_event_Schedule_App_Button_App_Button( lv_event_t * e);
+extern lv_obj_t *ui_Schedule_App_Button;
 void ui_event_Debug_App_Button_App_Button( lv_event_t * e);
 extern lv_obj_t *ui_Debug_App_Button;
 void ui_event_Weather_App_Button_App_Button( lv_event_t * e);
@@ -550,10 +555,10 @@ LV_FONT_DECLARE( ui_font_Comfortaa_12);
 LV_FONT_DECLARE( ui_font_Comfortaa_16);
 LV_FONT_DECLARE( ui_font_Comfortaa_26);
 LV_FONT_DECLARE( ui_font_Comfortaa_30);
+LV_FONT_DECLARE( ui_font_Dot_Numbers);
 LV_FONT_DECLARE( ui_font_Monoton_38);
 LV_FONT_DECLARE( ui_font_Monoton_48);
 LV_FONT_DECLARE( ui_font_Music_14);
-LV_FONT_DECLARE( ui_font_Dot_Numbers);
 
 void ui_init(void);
 

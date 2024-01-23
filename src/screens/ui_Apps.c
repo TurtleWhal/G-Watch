@@ -54,6 +54,14 @@ lv_label_set_text(ui_comp_get_child(ui_Settings_App_Button, UI_COMP_APP_BUTTON_A
 lv_img_set_src(ui_comp_get_child(ui_Settings_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE), &ui_img_settings_gear_png);
 lv_img_set_zoom(ui_comp_get_child(ui_Settings_App_Button, UI_COMP_APP_BUTTON_APP_IMAGE_PANEL_APP_IMAGE),90);
 
+ui_Schedule_App_Button = ui_App_Button_create(ui_Apps_Panel);
+lv_obj_set_x( ui_Schedule_App_Button, 0 );
+lv_obj_set_y( ui_Schedule_App_Button, 0 );
+
+lv_label_set_text(ui_comp_get_child(ui_Schedule_App_Button, UI_COMP_APP_BUTTON_APP_LABEL),"Schedule");
+
+
+
 ui_Debug_App_Button = ui_App_Button_create(ui_Apps_Panel);
 lv_obj_set_x( ui_Debug_App_Button, 0 );
 lv_obj_set_y( ui_Debug_App_Button, 0 );
@@ -131,6 +139,7 @@ lv_obj_set_style_text_font(ui_Apps_Label, &ui_font_Comfortaa_16, LV_PART_MAIN| L
 
 lv_obj_add_event_cb(ui_Calculator_App_Button, ui_event_Calculator_App_Button_App_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Settings_App_Button, ui_event_Settings_App_Button_App_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Schedule_App_Button, ui_event_Schedule_App_Button_App_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Debug_App_Button, ui_event_Debug_App_Button_App_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Weather_App_Button, ui_event_Weather_App_Button_App_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Compass_App_Button, ui_event_Compass_App_Button_App_Button, LV_EVENT_ALL, NULL);
