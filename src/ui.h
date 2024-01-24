@@ -320,6 +320,7 @@ extern lv_obj_t *ui_Container1;
 void ui_event_OTA_Start_Button( lv_event_t * e);
 extern lv_obj_t *ui_OTA_Start_Button;
 extern lv_obj_t *ui_OTA_Start_Label;
+extern lv_obj_t *ui_Label2;
 void ui_event_Debug_Button_1( lv_event_t * e);
 extern lv_obj_t *ui_Debug_Button_1;
 extern lv_obj_t *ui_Debug_Button_Label_1;
@@ -329,6 +330,7 @@ extern lv_obj_t *ui_Debug_Button_Label_2;
 void ui_event_Debug_Button_3( lv_event_t * e);
 extern lv_obj_t *ui_Debug_Button_3;
 extern lv_obj_t *ui_Debug_Button_Label_3;
+extern lv_obj_t *ui_Label4;
 // SCREEN: ui_Apps
 void ui_Apps_screen_init(void);
 void ui_event_Apps( lv_event_t * e);
@@ -395,19 +397,19 @@ void ui_event_Music_Skip_Backwards_Button( lv_event_t * e);
 extern lv_obj_t *ui_Music_Skip_Backwards_Button;
 extern lv_obj_t *ui_Music_Skip_Backwards_Button_img;
 extern lv_obj_t *ui_Music_Skip_Backwards_Button_Bar;
+void ui_event_Music_Skip_Forward_Button1( lv_event_t * e);
+extern lv_obj_t *ui_Music_Skip_Forward_Button1;
+extern lv_obj_t *ui_Music_Skip_Forwards_Button_img1;
+extern lv_obj_t *ui_Music_Skip_Forwards_Button_Bar1;
+void ui_event_Music_Skip_Forward_Button2( lv_event_t * e);
+extern lv_obj_t *ui_Music_Skip_Forward_Button2;
+extern lv_obj_t *ui_Music_Skip_Forwards_Button_img2;
+extern lv_obj_t *ui_Music_Skip_Forwards_Button_Bar2;
 extern lv_obj_t *ui_Music_Play_Bar;
 extern lv_obj_t *ui_Music_Artist;
 extern lv_obj_t *ui_Music_Title;
 extern lv_obj_t *ui_Music_Album;
 extern lv_obj_t *ui_Music_Time;
-void ui_event_Music_Volume_Up_Button( lv_event_t * e);
-extern lv_obj_t *ui_Music_Volume_Up_Button;
-extern lv_obj_t *ui_Music_Volume_Up_Button_Image;
-extern lv_obj_t *ui_Music_Skip_Forwards_Button_Bar1;
-void ui_event_Music_Volume_Down_Button( lv_event_t * e);
-extern lv_obj_t *ui_Music_Volume_Down_Button;
-extern lv_obj_t *ui_Music_Volume_Down_Button_Img;
-extern lv_obj_t *ui_Music_Skip_Forwards_Button_Bar2;
 // SCREEN: ui_Weather
 void ui_Weather_screen_init(void);
 void ui_event_Weather( lv_event_t * e);
@@ -468,6 +470,8 @@ extern lv_obj_t *ui_Schedule_Roller;
 void ui_SkeletonWatchFace_screen_init(void);
 void ui_event_SkeletonWatchFace( lv_event_t * e);
 extern lv_obj_t *ui_SkeletonWatchFace;
+extern lv_obj_t *ui_Background_Gear_Left;
+extern lv_obj_t *ui_Background_Gear_Right;
 extern lv_obj_t *ui_Minutes_Gear;
 extern lv_obj_t *ui_Seconds_Gear;
 extern lv_obj_t *ui_Hours_Gear;
@@ -484,11 +488,15 @@ extern lv_obj_t *ui_Skeleton_Clock_III_Shadow;
 extern lv_obj_t *ui_Skeleton_Clock_VI_Panel;
 extern lv_obj_t *ui_Skeleton_Clock_VI;
 extern lv_obj_t *ui_Skeleton_Clock_VI_Shadow;
+extern lv_obj_t *ui_Skeleton_Clock_Seconds_Panel;
+extern lv_obj_t *ui_Skeleton_Watch_Face_Second_Hand;
 extern lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand_Shadow;
 extern lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand;
 extern lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand_Shadow;
 extern lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand;
 extern lv_obj_t *ui_Skeleton_Clock_Lighting;
+extern lv_obj_t *ui_Skeleton_Clock_VI1;
+extern lv_obj_t *ui_Skeleton_Clock_VI_Shadow1;
 // SCREEN: ui_SimplisticWatchFace
 void ui_SimplisticWatchFace_screen_init(void);
 void ui_event_SimplisticWatchFace( lv_event_t * e);
@@ -515,6 +523,10 @@ extern lv_obj_t *ui_Blocky_Clock_Battery_Bar;
 extern lv_obj_t *ui_Blocky_Clock_Clock_Panel1;
 extern lv_obj_t *ui_Blocky_Clock_Date_Layer_1;
 extern lv_obj_t *ui_Blocky_Clock_Date_Layer_2;
+// SCREEN: ui_Screen1
+void ui_Screen1_screen_init(void);
+extern lv_obj_t *ui_Screen1;
+extern lv_obj_t *ui_Calendar1;
 extern lv_obj_t *ui____initial_actions0;
 
 LV_IMG_DECLARE( ui_img_tick_dashes_png);   // assets/Tick Dashes.png
@@ -543,8 +555,6 @@ LV_IMG_DECLARE( ui_img_flashlight_png);   // assets/Flashlight.png
 LV_IMG_DECLARE( ui_img_play_button_png);   // assets/Play Button.png
 LV_IMG_DECLARE( ui_img_album_cover_png);   // assets/album cover.png
 LV_IMG_DECLARE( ui_img_pause_button_png);   // assets/Pause Button.png
-LV_IMG_DECLARE( ui_img_volume_up_png);   // assets/Volume Up.png
-LV_IMG_DECLARE( ui_img_volume_down_png);   // assets/Volume Down.png
 LV_IMG_DECLARE( ui_img_moon_png);   // assets/moon.png
 LV_IMG_DECLARE( ui_img_sunny_png);   // assets/Sunny.png
 LV_IMG_DECLARE( ui_img_rain_png);   // assets/rain.png

@@ -462,3 +462,11 @@ def ScreenUp(event_struct):
 def StartOTA(event_struct):
     return
 
+
+def MusicVolumeUp(event_struct):
+    return
+
+
+def MusicVolumeDown(event_struct):
+    return
+

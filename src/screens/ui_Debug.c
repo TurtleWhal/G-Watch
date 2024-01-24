@@ -9,8 +9,13 @@ void ui_Debug_screen_init(void)
 {
 ui_Debug = lv_obj_create(NULL);
 lv_obj_set_flex_flow(ui_Debug,LV_FLEX_FLOW_COLUMN);
-lv_obj_set_flex_align(ui_Debug, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER);
+lv_obj_set_flex_align(ui_Debug, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 lv_obj_add_event_cb(ui_Debug, scr_unloaded_delete_cb, LV_EVENT_SCREEN_UNLOADED, &ui_Debug);
+
+lv_obj_set_style_pad_left(ui_Debug, 0, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(ui_Debug, 10, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(ui_Debug, 75, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(ui_Debug, 75, LV_PART_SCROLLBAR| LV_STATE_DEFAULT);
 
 ui_Container1 = lv_obj_create(ui_Debug);
 lv_obj_remove_style_all(ui_Container1);
@@ -31,6 +36,12 @@ lv_obj_set_width( ui_OTA_Start_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_OTA_Start_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( ui_OTA_Start_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_OTA_Start_Label,"Start OTA");
+
+ui_Label2 = lv_label_create(ui_Debug);
+lv_obj_set_width( ui_Label2, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Label2, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Label2, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Label2,"Uptime 00:00");
 
 ui_Debug_Button_1 = lv_btn_create(ui_Debug);
 lv_obj_set_width( ui_Debug_Button_1, 100);
@@ -70,6 +81,12 @@ lv_obj_set_width( ui_Debug_Button_Label_3, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Debug_Button_Label_3, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( ui_Debug_Button_Label_3, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Debug_Button_Label_3,"test 3");
+
+ui_Label4 = lv_label_create(ui_Debug);
+lv_obj_set_width( ui_Label4, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Label4, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Label4, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Label4, LV_OBJ_FLAG_HIDDEN );   /// Flags
 
 lv_obj_add_event_cb(ui_OTA_Start_Button, ui_event_OTA_Start_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Debug_Button_1, ui_event_Debug_Button_1, LV_EVENT_ALL, NULL);

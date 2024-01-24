@@ -142,6 +142,7 @@ void SkeletonWatchFaceHandle()
 
         lv_img_set_angle(ui_Minutes_Gear, (info.time.valsec * 60) + (info.time.valusec * 0.00006));
         lv_img_set_angle(ui_Seconds_Gear, (info.time.valusec * 0.0036));
+        lv_img_set_angle(ui_Skeleton_Watch_Face_Second_Hand, (info.time.valsec * 60) + (info.time.valusec * 0.00006));
 
         if (info.flag.secondchanged or info.flag.refresh)
         {

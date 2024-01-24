@@ -321,6 +321,7 @@ lv_obj_t *ui_Container1;
 void ui_event_OTA_Start_Button( lv_event_t * e);
 lv_obj_t *ui_OTA_Start_Button;
 lv_obj_t *ui_OTA_Start_Label;
+lv_obj_t *ui_Label2;
 void ui_event_Debug_Button_1( lv_event_t * e);
 lv_obj_t *ui_Debug_Button_1;
 lv_obj_t *ui_Debug_Button_Label_1;
@@ -330,6 +331,7 @@ lv_obj_t *ui_Debug_Button_Label_2;
 void ui_event_Debug_Button_3( lv_event_t * e);
 lv_obj_t *ui_Debug_Button_3;
 lv_obj_t *ui_Debug_Button_Label_3;
+lv_obj_t *ui_Label4;
 
 
 // SCREEN: ui_Apps
@@ -406,19 +408,19 @@ void ui_event_Music_Skip_Backwards_Button( lv_event_t * e);
 lv_obj_t *ui_Music_Skip_Backwards_Button;
 lv_obj_t *ui_Music_Skip_Backwards_Button_img;
 lv_obj_t *ui_Music_Skip_Backwards_Button_Bar;
+void ui_event_Music_Skip_Forward_Button1( lv_event_t * e);
+lv_obj_t *ui_Music_Skip_Forward_Button1;
+lv_obj_t *ui_Music_Skip_Forwards_Button_img1;
+lv_obj_t *ui_Music_Skip_Forwards_Button_Bar1;
+void ui_event_Music_Skip_Forward_Button2( lv_event_t * e);
+lv_obj_t *ui_Music_Skip_Forward_Button2;
+lv_obj_t *ui_Music_Skip_Forwards_Button_img2;
+lv_obj_t *ui_Music_Skip_Forwards_Button_Bar2;
 lv_obj_t *ui_Music_Play_Bar;
 lv_obj_t *ui_Music_Artist;
 lv_obj_t *ui_Music_Title;
 lv_obj_t *ui_Music_Album;
 lv_obj_t *ui_Music_Time;
-void ui_event_Music_Volume_Up_Button( lv_event_t * e);
-lv_obj_t *ui_Music_Volume_Up_Button;
-lv_obj_t *ui_Music_Volume_Up_Button_Image;
-lv_obj_t *ui_Music_Skip_Forwards_Button_Bar1;
-void ui_event_Music_Volume_Down_Button( lv_event_t * e);
-lv_obj_t *ui_Music_Volume_Down_Button;
-lv_obj_t *ui_Music_Volume_Down_Button_Img;
-lv_obj_t *ui_Music_Skip_Forwards_Button_Bar2;
 
 
 // SCREEN: ui_Weather
@@ -489,6 +491,8 @@ lv_obj_t *ui_Schedule_Roller;
 void ui_SkeletonWatchFace_screen_init(void);
 void ui_event_SkeletonWatchFace( lv_event_t * e);
 lv_obj_t *ui_SkeletonWatchFace;
+lv_obj_t *ui_Background_Gear_Left;
+lv_obj_t *ui_Background_Gear_Right;
 lv_obj_t *ui_Minutes_Gear;
 lv_obj_t *ui_Seconds_Gear;
 lv_obj_t *ui_Hours_Gear;
@@ -505,11 +509,15 @@ lv_obj_t *ui_Skeleton_Clock_III_Shadow;
 lv_obj_t *ui_Skeleton_Clock_VI_Panel;
 lv_obj_t *ui_Skeleton_Clock_VI;
 lv_obj_t *ui_Skeleton_Clock_VI_Shadow;
+lv_obj_t *ui_Skeleton_Clock_Seconds_Panel;
+lv_obj_t *ui_Skeleton_Watch_Face_Second_Hand;
 lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand_Shadow;
 lv_obj_t *ui_Skeleton_Watch_Face_Minute_Hand;
 lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand_Shadow;
 lv_obj_t *ui_Skeleton_Watch_Face_Hour_Hand;
 lv_obj_t *ui_Skeleton_Clock_Lighting;
+lv_obj_t *ui_Skeleton_Clock_VI1;
+lv_obj_t *ui_Skeleton_Clock_VI_Shadow1;
 
 
 // SCREEN: ui_SimplisticWatchFace
@@ -540,6 +548,12 @@ lv_obj_t *ui_Blocky_Clock_Battery_Bar;
 lv_obj_t *ui_Blocky_Clock_Clock_Panel1;
 lv_obj_t *ui_Blocky_Clock_Date_Layer_1;
 lv_obj_t *ui_Blocky_Clock_Date_Layer_2;
+
+
+// SCREEN: ui_Screen1
+void ui_Screen1_screen_init(void);
+lv_obj_t *ui_Screen1;
+lv_obj_t *ui_Calendar1;
 lv_obj_t *ui____initial_actions0;
 const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_4809254_png};
 const lv_img_dsc_t *ui_imgset_call[1] = {&ui_img_call1_png};
@@ -1721,16 +1735,16 @@ if ( event_code == LV_EVENT_CLICKED) {
       MusicSkipBackward( e );
 }
 }
-void ui_event_Music_Volume_Up_Button( lv_event_t * e) {
+void ui_event_Music_Skip_Forward_Button1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      MusicVolumeUp( e );
+      MusicSkipForward( e );
 }
 }
-void ui_event_Music_Volume_Down_Button( lv_event_t * e) {
+void ui_event_Music_Skip_Forward_Button2( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      MusicVolumeDown( e );
+      MusicSkipForward( e );
 }
 }
 void ui_event_Weather( lv_event_t * e) {
@@ -1872,6 +1886,7 @@ lv_disp_set_theme(dispp, theme);
 ui_Default_Clock_screen_init();
 ui_Alarms_screen_init();
 ui_Set_Alarm_screen_init();
+ui_Screen1_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
 lv_disp_load_scr( ui_Default_Clock);
 }

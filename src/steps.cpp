@@ -103,6 +103,7 @@ void InitStepsScreen(lv_event_t *e)
 void ResetStorage(lv_event_t *e)
 {
   Storage.putUShort("Steps", 0);
+  esp_restart();
 }
 
 void ResetCounter(lv_event_t *e)

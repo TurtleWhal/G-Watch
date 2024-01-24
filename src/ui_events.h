@@ -53,8 +53,6 @@ void SetDeafaultDown(lv_event_t * e);
 void PauseMusic(lv_event_t * e);
 void MusicSkipForward(lv_event_t * e);
 void MusicSkipBackward(lv_event_t * e);
-void MusicVolumeUp(lv_event_t * e);
-void MusicVolumeDown(lv_event_t * e);
 void DrawWeather(lv_event_t * e);
 void InitStepsScreen(lv_event_t * e);
 void ResetStorage(lv_event_t * e);

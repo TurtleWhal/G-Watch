@@ -121,6 +121,8 @@ void ApplyTheme(lv_event_t *e)
     lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_4, ThemeColor, LV_PART_MAIN);
     lv_obj_set_style_text_color(ui_Blocky_Clock_Clock_Layer_5, ThemeColor, LV_PART_MAIN);
 
+    lv_obj_set_style_text_color(ui_Blocky_Clock_Date_Layer_1, ThemeColor, LV_PART_MAIN);
+
     lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, ThemeColor, LV_PART_MAIN);
     lv_obj_set_style_outline_color(ui_Blocky_Clock_Battery_Bar, ThemeColor, LV_PART_INDICATOR);
 
