@@ -23,7 +23,7 @@ If you don't know which one to choose, look at the silkscreen on the circuit boa
 
 #define CONFIG_TWATCH_HAS_BUTTON
 #define CONFIG_TWATCH_HAS_BMA423
-#define CONFIG_BMA423_LATER
+//#define CONFIG_BMA423_LATER
 #define CONFIG_TWATCH_HAS_QMC5883L
 #define CONFIG_TWATCH_HAS_PCF8563
 //#define CONFIG_TWATCH_HAS_CST816S

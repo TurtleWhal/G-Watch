@@ -296,6 +296,15 @@ void setup()
   twatch->button_bind_event(TWATCH_BTN_2, BUTTON_LONG_PRESS_START, btn2_held);
   twatch->button_bind_event(TWATCH_BTN_3, BUTTON_LONG_PRESS_START, btn3_held);
 
+#ifndef CONFIG_BMA423_LATER
+  Log.verboseln("Bma423 begin");
+  twatch->bma423_begin(); // This takes 2 seconds
+
+  // enable the wrist tilt interrupt
+  twatch->bma423_feature(BMA423_WRIST_WEAR, true);
+  twatch->bma423_feature_int(BMA423_WRIST_WEAR_INT, false);
+#endif
+
   touch.begin();
 
   Log.verboseln("Running LVGL V%i.%i.%i", lv_version_major(), lv_version_minor(), lv_version_patch());
@@ -364,7 +373,7 @@ void setup()
   Log.verboseln("BT Init");
   BT_Init();
 
-#if defined(CONFIG_BMA423_LATER)
+#ifdef CONFIG_BMA423_LATER
   Log.verboseln("Bma423 begin");
   twatch->bma423_begin(); // This takes 2 seconds
 
@@ -376,16 +385,18 @@ void setup()
   Log.verboseln("HAL Update");
   twatch->hal_auto_update(true, 1);
 
-  twatch->backlight_gradual_light(100, 2000);
-
   Timer0Triggered = 1;
 
-  if (Storage.getBool("DoNotDisturb"))
-    twatch->motor_shake(1, 100);
-
   Log.verboseln("Setup done");
-  // Log.verboseln("Total PSRAM: %d", ESP.getPsramSize());
-  // Log.verboseln("Free PSRAM: %d", ESP.getFreePsram());
+
+  if (!Storage.getBool("Donotdisturb"))
+    twatch->motor_shake(1, 50);
+
+  Log.verboseln("BMA423 steps: %d", twatch->bma423_get_step());
+  if (twatch->bma423_get_step() > 0) // after hal init steps should be 0, if not reset
+    ESP.restart();
+
+  twatch->backlight_gradual_light(100, 2000);
 
   info.flag.refresh = 1;
 }

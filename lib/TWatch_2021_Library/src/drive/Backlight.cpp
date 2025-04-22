@@ -1,4 +1,5 @@
 #include "./TWatch_hal.h"
+#include "ArduinoLog.h"
 
 int16_t Value;
 uint8_t target;
@@ -38,7 +39,7 @@ void TWatchClass::backlight_gradual_light(int16_t val, uint32_t ms) {
   _k = (float)((temp1 * 1.0) / ms);
 
   DEBUGF("Backlight_Gradually Val:%d,ms:%d,k:%f\n", val, ms, _k);
-  Serial.printf("Backlight Gradual | Val: %d | Length: %d | Step: %f/ms\n", val, ms, _k);
+  Log.verboseln("Backlight Gradual | Val: %d | Length: %d | Step: %f/ms", val, ms, _k);
 
   _adjust = true;
 }

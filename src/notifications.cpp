@@ -331,7 +331,7 @@ void NotificationHandle()
 
 void ToggleDoNotDisturb(lv_event_t *e)
 {
-  Donotdisturb = !Donotdisturb;
+  Donotdisturb = lv_obj_has_state(lv_event_get_target(e), LV_STATE_CHECKED);
   info.notification.donotdisturb = Donotdisturb;
   Storage.putBool("Donotdisturb", Donotdisturb);
 }
