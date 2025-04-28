@@ -1805,7 +1805,7 @@ if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
 }
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
 lv_indev_wait_release(lv_indev_get_act());
-      ScreenBack( e );
+      _ui_screen_change( &ui_Default_Clock, LV_SCR_LOAD_ANIM_FADE_ON, 150, 0, &ui_Default_Clock_screen_init);
 }
 }
 void ui_event_SkeletonWatchFace( lv_event_t * e) {

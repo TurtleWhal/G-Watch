@@ -81,12 +81,9 @@ void StepHandle()
 
 void BTSendSteps()
 {
-  static uint16_t laststep = info.health.steps;
-
-  Log.verboseln("Sending Steps: %i - %i", info.health.steps, laststep);
+  static int laststep = info.health.steps;
 
   BTsendf("{t:\"act\", stp:%i}", info.health.steps - laststep);
-  //BTsendf("{t:\"act\", stp:%i, rt:0}", info.health.steps);
 }
 
 void InitStepsScreen(lv_event_t *e)

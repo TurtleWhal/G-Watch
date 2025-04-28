@@ -19,9 +19,9 @@ struct Schedule
 
 Schedule ODay = {.Entries = 5, .Times = {{750, 930}, {940, 1015}, {1030, 1210}, {1210, 1245}, {1255, 1445}}, .Names = {{"Band", "T121"}, {"HiHo", "209"}, {"Algebra II", "307"}, {"Lunch", ""}, {"French", "229"}}};
 
-Schedule EDay = {.Entries = 5, .Times = {{750, 930}, {940, 1015}, {1030, 1210}, {1210, 1245}, {1255, 1445}}, .Names = {{"History", "346"}, {"HiHo", "209"}, {"English", "351"}, {"Lunch", ""}, {"Biology", "313"}}};
+Schedule EDay = {.Entries = 5, .Times = {{750, 930}, {940, 1015}, {1030, 1210}, {1210, 1245}, {1255, 1445}}, .Names = {{"Robotics", "180"}, {"HiHo", "209"}, {"English", "351"}, {"Lunch", ""}, {"Biology", "313"}}};
 
-Schedule ADay = {.Entries = 7, .Times = {{750, 825}, {830, 905}, {925, 1010}, {1020, 1055}, {1105, 1130}, {1140, 1215}, {1220, 1255}}, .Names = {{"Band", "T121"}, {"History", "346"}, {"Algebra II", "307"}, {"English", "351"}, {"Lunch", ""}, {"French", "229"}, {"Biology", "313"}}};
+Schedule ADay = {.Entries = 7, .Times = {{750, 825}, {830, 905}, {925, 1010}, {1020, 1055}, {1105, 1130}, {1140, 1215}, {1220, 1255}}, .Names = {{"Band", "T121"}, {"Robotics", "180"}, {"Algebra II", "307"}, {"English", "351"}, {"Lunch", ""}, {"French", "229"}, {"Biology", "313"}}};
 Schedule None;
 //               Schedule for sun,   mon,   tue,   wed,   thu,   fri,   sat
 Schedule *WeeklySchedule[] = {&None, &ODay, &EDay, &ADay, &ODay, &EDay, &None};

@@ -26,9 +26,9 @@ void UpdateTime()
     info.flag.minutechanged = 0;
     info.flag.hourchanged = 0;
 
-    // RTC_Date date = twatch->rtc_get_instance()->getDateTime();
+    //RTC_Date date = twatch->rtc_get_instance()->getDateTime();
 
-    // Log.verboseln("RTC time: %i:%i:%i", date.hour, date.minute, date.second);
+    //Log.verboseln("RTC time: %i:%i:%i", date.hour, date.minute, date.second);
 
     char time[11];
 
@@ -56,8 +56,6 @@ void UpdateTime()
             Log.verboseln("WriteTime min");
             lastmin = t_tm.tm_min;
             info.flag.minutechanged = 1;
-
-            SyncTime();
 
             if (t_tm.tm_hour != lasthour)
             {
@@ -149,16 +147,4 @@ void SetTime(ulong newtime, short timezone)
     gettimeofday(&val, NULL);
     getLocalTime(&t_tm);
     twatch->rtc_set_time(t_tm.tm_year + 1900, t_tm.tm_mon + 1, t_tm.tm_mday, t_tm.tm_hour, t_tm.tm_min, t_tm.tm_sec);
-}
-
-void SyncTime()
-{
-    RTC_Date date = twatch->rtc_get_time();
-    tm temp;
-    getLocalTime(&temp);
-
-    Log.verboseln("RTC: %i/%i/%i %i:%i:%i", date.year, date.month, date.day, date.hour, date.minute, date.second);
-    Log.verboseln("Local: %i/%i/%i %i:%i:%i", temp.tm_year + 1900, temp.tm_mon + 1, temp.tm_mday, temp.tm_hour, temp.tm_min, temp.tm_sec);
-
-    // twatch->rtc_set_time(date.year, date.month, date.day, date.hour, date.minute, date.second);
 }
